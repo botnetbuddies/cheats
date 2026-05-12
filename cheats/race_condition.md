@@ -1,0 +1,15 @@
+# Race Condition
+
+## symlink
+
+### Replace readable file
+
+Loop until a file appears readable, then replace it with a symlink.
+
+```sh title:"Replace readable file with symlink"
+while true; do target="$file_to_search"; if [[ -r "$target" ]]; then rm "$target"; ln -s "$symlink_target_file" "$target"; break; fi; done
+```
+<!-- cheat
+var file_to_search
+var symlink_target_file
+-->

