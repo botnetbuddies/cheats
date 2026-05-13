@@ -15,7 +15,7 @@ fi
 
 if $auth_method == password
 var auth_target := $domain/'$user':'$credential'@$rhost_ip
-var auth_flags :=
+var auth_flags := ''
 fi
 
 if $auth_method == kerberos
@@ -39,7 +39,7 @@ fi
 
 if $auth_method == password
 var auth_target := $domain/'$user':'$credential'
-var auth_flags :=
+var auth_flags := ''
 fi
 
 if $auth_method == kerberos

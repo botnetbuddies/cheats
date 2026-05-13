@@ -217,11 +217,11 @@ Get-DomainDNSRecord
 ```
 <!-- cheat -->
 
-### Domain object
+### Domain
 
-Return the domain object for the current (or specified) domain.
+Return the domain for the current (or specified) domain.
 
-```sh title:"Domain object for current/specified domain"
+```sh title:"Domain for current/specified domain"
 Get-Domain
 ```
 <!-- cheat -->

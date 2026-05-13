@@ -76,8 +76,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 -->
 
 ### wget download
@@ -94,8 +94,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 -->
 
 ### CertUtil download (small)
@@ -112,8 +112,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 var upload_location_template
 -->
 
@@ -131,8 +131,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 var upload_location_template
 -->
 
@@ -150,8 +150,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 var upload_location_template
 -->
 
@@ -168,8 +168,8 @@ import passwords
 import users
 import tun_ip
 import files
+import lports
 var scheme
-var port
 var upload_location_template
 -->
 
@@ -198,8 +198,8 @@ import passwords
 import users
 import tun_ip
 import files
+import lports
 var scheme
-var port
 var upload_location_template
 -->
 

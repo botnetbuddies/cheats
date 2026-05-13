@@ -293,7 +293,7 @@ var local_file_path
 var remote_file_path
 -->
 
-### Get user SIDs
+### Get user SIDs via MSSQL
 
 RID-bruteforce up to 3000 and extract only user SIDs - handy when you have SQL auth but need domain usernames for spraying.
 
@@ -426,7 +426,7 @@ import users
 import nxc_auth
 -->
 
-### Get user SIDs
+### Get user SIDs via SMB
 
 RID-brute the target over SMB and extract user SIDs only - great for populating a userlist from a single working credential.
 
@@ -566,6 +566,7 @@ import passwords
 import domain_ip
 import users
 import nxc_auth
+import tun_ip
 var lnk_name
 -->
 

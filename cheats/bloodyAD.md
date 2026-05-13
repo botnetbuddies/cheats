@@ -204,6 +204,7 @@ bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add dnsRecord $recor
 import domain_ip
 import users
 import bloody_auth
+import tun_ip
 var rhost_name
 var record_name
 -->
@@ -363,6 +364,7 @@ import passwords
 import bloody_auth
 var rhost_name
 var target_user
+var target_pass
 -->
 
 ### Change owner
@@ -512,6 +514,7 @@ import passwords
 import bloody_auth
 var rhost_name
 var target_user
+var description
 -->
 
 ### Constrained delegation target
@@ -544,6 +547,22 @@ import users
 import passwords
 import bloody_auth
 var rhost_name
+-->
+
+### Restore User
+
+Restore a deleted object by DN, SID, or unique sAMAccountName/name. Avoid sAMAccountName when duplicates exist.
+
+```sh title:"Restore deleted object by DN, SID, or unique name"
+bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set restore $target_user
+```
+<!-- cheat
+import domain_ip
+import users
+import passwords
+import bloody_auth
+var rhost_name
+var target_user
 -->
 
 ### Enable account
