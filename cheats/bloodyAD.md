@@ -549,6 +549,22 @@ import bloody_auth
 var rhost_name
 -->
 
+### Restore User
+
+Restore a deleted object by DN, SID, or unique sAMAccountName/name. Avoid sAMAccountName when duplicates exist.
+
+```sh title:"Restore deleted object by DN, SID, or unique name"
+bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set restore $target_user
+```
+<!-- cheat
+import domain_ip
+import users
+import passwords
+import bloody_auth
+var rhost_name
+var target_user
+-->
+
 ### Enable account
 
 Clear the ACCOUNTDISABLE UAC bit to re-enable a disabled account - often needed after hijacking an old/stale account.
