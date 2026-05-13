@@ -364,6 +364,7 @@ import passwords
 import bloody_auth
 var rhost_name
 var target_user
+var target_pass
 -->
 
 ### Change owner
