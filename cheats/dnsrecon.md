@@ -10,7 +10,7 @@ Run standard dnsrecon enumeration.
 dnsrecon -d "$domain"
 ```
 <!-- cheat
-var domain
+import domain_ip
 -->
 
 ### Zone transfer
@@ -21,7 +21,7 @@ Attempt zone transfers with dnsrecon.
 dnsrecon -d "$domain" -t axfr
 ```
 <!-- cheat
-var domain
+import domain_ip
 -->
 
 ### Reverse range
@@ -29,12 +29,12 @@ var domain
 Reverse lookup an explicit IP range.
 
 ```sh title:"Reverse lookup IP range with dnsrecon"
-dnsrecon -r "$start_ip-$end_ip" -n "$dns_server"
+dnsrecon -r "$start_ip-$end_ip" -n "$rhost_ip"
 ```
 <!-- cheat
 var start_ip
 var end_ip
-var dns_server
+import domain_ip
 -->
 
 ### Reverse CIDR
@@ -42,9 +42,9 @@ var dns_server
 Reverse lookup a CIDR range.
 
 ```sh title:"Reverse lookup CIDR with dnsrecon"
-dnsrecon -r "$cidr" -n "$dns_server"
+dnsrecon -r "$cidr" -n "$rhost_ip"
 ```
 <!-- cheat
 var cidr
-var dns_server
+import domain_ip
 -->
