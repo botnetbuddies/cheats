@@ -12,8 +12,8 @@ python3 -m http.server $lport $template
 <!-- cheat
 import webserver
 import passwords
+import lports
 import users
-var port
 var template
 -->
 
@@ -25,7 +25,7 @@ Serve the current directory over HTTP with Python 2.
 python -m SimpleHTTPServer $lport
 ```
 <!-- cheat
-var lport
+import lports
 -->
 
 ### FTP w/auth
@@ -33,13 +33,13 @@ var lport
 Authenticated writable FTP server via pyftpdlib. Use when you need a place to receive files from a target.
 
 ```sh title:"Authenticated writable FTP via pyftpdlib"
-python3 -m pyftpdlib -w -p $ftp_port -u $user -P $pass
+python3 -m pyftpdlib -w -p $lport -u $user -P $pass
 ```
 <!-- cheat
 import webserver
 import passwords
 import users
-var ftp_port
+import lports
 -->
 
 ### FTP anonymous
@@ -47,13 +47,13 @@ var ftp_port
 Anonymous writable FTP server. Quick exfil drop point when egress filtering is loose.
 
 ```sh title:"Anonymous writable FTP, quick exfil drop"
-python -m pyftpdlib -w -p $ftp_port $template
+python -m pyftpdlib -w -p $lport $template
 ```
 <!-- cheat
 import webserver
 import passwords
 import users
-var ftp_port
+import lports
 var template
 -->
 
@@ -70,6 +70,6 @@ php -S 0.0.0.0:$lport $template
 import webserver
 import passwords
 import users
-var port
+import lports
 var template
 -->
