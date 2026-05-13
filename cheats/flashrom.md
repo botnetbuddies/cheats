@@ -2,7 +2,7 @@
 
 ## linux spi
 
-### Read chip
+### Read chip linux_spi
 
 Read SPI flash using Linux spidev, such as on a Raspberry Pi.
 
@@ -15,7 +15,7 @@ var spispeed := 1M
 var output_file
 -->
 
-### Force read chip
+### Force read chip linux_spi
 
 Force a chip read when flashrom cannot safely auto-detect the chip.
 
@@ -31,7 +31,7 @@ var chip_name
 
 ## buspirate
 
-### Read chip
+### Read chip buspirate
 
 Read SPI flash with a Bus Pirate.
 
@@ -44,7 +44,7 @@ var spispeed := 1M
 var output_file
 -->
 
-### Force read chip
+### Force read chip buspirate
 
 Force a Bus Pirate chip read when flashrom cannot safely auto-detect the chip.
 
