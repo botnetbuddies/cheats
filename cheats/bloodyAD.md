@@ -514,6 +514,7 @@ import passwords
 import bloody_auth
 var rhost_name
 var target_user
+var description
 -->
 
 ### Constrained delegation target
