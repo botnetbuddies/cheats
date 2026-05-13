@@ -15,6 +15,7 @@ import passwords
 import domain_ip
 var group
 var rhost_name
+var target_user
 -->
 
 ### List group members
@@ -29,6 +30,7 @@ import users
 import passwords
 import domain_ip
 var group
+var rhost_name
 -->
 
 ### List group members (FQDN DC)
@@ -73,6 +75,8 @@ net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%"$pass" -S "
 import users
 import passwords
 import domain_ip
+var target_user
+var target_pass
 -->
 
 ### Change password (alt user)
@@ -86,6 +90,9 @@ net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%"$pass" -S "
 import users
 import passwords
 import domain_ip
+var rhost_name
+var target_user
+var target_pass
 -->
 
 ### Change password (FQDN DC)
@@ -100,6 +107,8 @@ import users
 import passwords
 import domain_ip
 var rhost_name
+var target_user
+var target_pass
 -->
 
 ### Edit user
@@ -114,6 +123,7 @@ import users
 import passwords
 import domain_ip
 var rhost_name
+var target_user
 -->
 
 ### Password change w/hash
@@ -128,4 +138,7 @@ import users
 import passwords
 import domain_ip
 var hash
+var rhost_name
+var target_user
+var target_pass
 -->
