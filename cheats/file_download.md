@@ -76,8 +76,8 @@ import users
 import tun_ip
 import ffuf
 import files
+import lports
 var scheme
-var port
 -->
 
 ### wget download
