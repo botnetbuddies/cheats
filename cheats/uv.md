@@ -84,3 +84,12 @@ LLMNR, NBT-NS, and MDNS poisoner. Sits on a network segment and answers broadcas
 uv tool install git+https://github.com/lgandx/Responder.git
 ```
 <!-- cheat -->
+
+### powerview.py
+
+Python port of PowerSploit's PowerView. Interactive shell for Active Directory enumeration and abuse over LDAP/LDAPS/GC/ADWS - Kerberoasting, ASREPRoasting, ACL recon, RBCD/shadow-credentials staging, DNS edits, GPO inspection, and remote SMB/RPC operations without dropping anything on Windows.
+
+```sh title:"Install powerview.py, interactive AD enumeration/abuse over LDAP"
+uv tool install git+https://github.com/aniqfakhrul/powerview.py
+```
+<!-- cheat -->
