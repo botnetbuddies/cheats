@@ -19,5 +19,5 @@ Dump temporary credentials for an IAM role from the EC2 metadata service.
 curl "http://169.254.169.254/latest/meta-data/iam/security-credentials/$aws_role_name"
 ```
 <!-- cheat
-var role_name
+var aws_role_name
 -->

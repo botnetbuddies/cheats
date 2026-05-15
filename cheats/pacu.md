@@ -223,12 +223,12 @@ var aws_role_arn
 Assume an IAM role that requires MFA.
 
 ```sh title:"Assume role from Pacu with MFA"
-assume_role "$aws_role_arn" "$aws_mfa_serial_arn" "$token_code"
+assume_role "$aws_role_arn" "$aws_mfa_serial_arn" "$aws_mfa_token_code"
 ```
 <!-- cheat
 var aws_role_arn
 var aws_mfa_serial_arn
-var token_code
+var aws_mfa_token_code
 -->
 
 ### Export active keys
@@ -1044,10 +1044,10 @@ run rds__explore_snapshots
 Stop and restart selected EC2 instances after updating user data with a supplied shell script.
 
 ```sh title:"Pacu EC2 startup shell script"
-run ec2__startup_shell_script --script "$script_file"
+run ec2__startup_shell_script --script "$aws_userdata_script_file"
 ```
 <!-- cheat
-var script_file
+var aws_userdata_script_file
 -->
 
 ### ECS backdoor task definition
@@ -1312,11 +1312,11 @@ var aws_role_names
 Attempt to subscribe an email address to an SNS topic ARN.
 
 ```sh title:"Pacu SNS subscribe"
-run sns__subscribe --topic-arn "$aws_sns_topic_arn" --email "$email"
+run sns__subscribe --topic-arn "$aws_sns_topic_arn" --email "$aws_sns_email"
 ```
 <!-- cheat
 var aws_sns_topic_arn
-var email
+var aws_sns_email
 -->
 
 ## data and output
