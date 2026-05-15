@@ -87,6 +87,44 @@ var rhost
 var rport
 -->
 
+### cefdebug discover endpoints
+
+#sh #cefdebug #devtools
+
+Discover local CEF, Electron, and Chromium DevTools endpoints.
+
+```sh title:"Discover DevTools endpoints with cefdebug"
+./cefdebug
+```
+<!-- cheat -->
+
+### cefdebug evaluate code
+
+#sh #cefdebug #devtools
+
+Evaluate a prepared expression against a DevTools WebSocket URL.
+
+```sh title:"Evaluate DevTools expression with cefdebug"
+./cefdebug --url "$websocket_url" --code "$code"
+```
+<!-- cheat
+var websocket_url
+var code
+-->
+
+### cefdebug process version
+
+#sh #cefdebug #node
+
+Evaluate `process.version` against a Node-capable inspector endpoint.
+
+```sh title:"Check Node process version with cefdebug"
+./cefdebug --url "$websocket_url" --code "process.version"
+```
+<!-- cheat
+var websocket_url
+-->
+
 ## Detection
 
 Monitor Node processes started with inspector flags, SIGUSR1 sent to Node services, and access to debug ports such as 9229 and 9222.

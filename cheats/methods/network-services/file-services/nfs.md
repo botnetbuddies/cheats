@@ -16,7 +16,6 @@ NFS enumeration identifies exported paths, mount options, and UID-trust issues.
 | Requirement | Detail |
 |-------------|--------|
 | RPC access | NFS commonly depends on rpcbind and mountd |
-| Local mount point | Mount commands assume the mount point already exists |
 | UID context | File access may depend on local numeric UID and GID |
 
 ## Linux
@@ -51,7 +50,7 @@ var rhost_ip
 
 #sh #nfs #mount
 
-Mount an NFS export locally.
+Check the mount syntax for an exposed NFS export. Operational use lives in the Linux NFS movement note.
 
 ```sh title:"Mount NFS export"
 sudo mount -t nfs "$rhost_ip:$shared_folder" "$mount_point" -o nolock
@@ -66,7 +65,7 @@ var mount_point
 
 #sh #nfs #mount
 
-Mount an export with NFSv2.
+Check the NFSv2 mount syntax for legacy exports.
 
 ```sh title:"Mount NFSv2 export"
 sudo mount -t nfs -o vers=2,nolock "$rhost_ip:$shared_folder" "$mount_point"

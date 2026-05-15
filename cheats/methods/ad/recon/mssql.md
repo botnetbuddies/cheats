@@ -126,6 +126,7 @@ Open an interactive MSSQL shell with Windows authentication.
 mssqlclient.py -windows-auth "$auth_target" $auth_flags
 ```
 <!-- cheat
-var auth_target
-var auth_flags
+import domain_ip
+import users
+import impacket_auth
 -->

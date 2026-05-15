@@ -256,33 +256,33 @@ var rhost_name
 
 ### NetExec psexec method
 
-#netexec #psexec #password
+#netexec #psexec #multi-auth
 
 Run a command through NetExec with the PsExec backend.
 
 ```sh title:"Run NetExec with PsExec method"
-nxc smb "$rhost_name" -u "$user" -p "$pass" -x "$command" --exec-method psexec
+nxc smb "$rhost_name" -u "$user" $auth_flags -x "$command" --exec-method psexec
 ```
 <!-- cheat
 var rhost_name
-var user
-var pass
+import users
+import nxc_auth
 var command
 -->
 
 ### NetExec smbexec method
 
-#netexec #smbexec #pth
+#netexec #smbexec #multi-auth
 
-Run a command through NetExec with the SMBExec backend and NT hash auth.
+Run a command through NetExec with the SMBExec backend.
 
 ```sh title:"Run NetExec with SMBExec method"
-nxc smb "$rhost_name" -u "$user" -H "$nt_hash" -x "$command" --exec-method smbexec
+nxc smb "$rhost_name" -u "$user" $auth_flags -x "$command" --exec-method smbexec
 ```
 <!-- cheat
 var rhost_name
-var user
-var nt_hash
+import users
+import nxc_auth
 var command
 -->
 

@@ -118,13 +118,12 @@ var dc_ip
 Dump AD-integrated DNS records using bloodyAD.
 
 ```sh title:"Dump ADIDNS records with bloodyAD"
-bloodyAD --host "$rhost_ip" -d "$domain" -u "$user" -p "$pass" get dnsDump
+bloodyAD --host "$rhost_ip" -d "$domain" -u "$user" $auth_flags get dnsDump
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
-var dc_ip
+import bloody_auth
 -->
 
 ### Dump DNS records with netexec
@@ -134,11 +133,10 @@ var dc_ip
 Dump Microsoft DNS records with the netexec enum_dns module when administrative access is available.
 
 ```sh title:"Dump DNS records with netexec enum_dns"
-netexec smb "$rhost_ip" -u "$user" -p "$pass" -d "$domain" -M enum_dns
+netexec smb "$rhost_ip" -u "$user" $auth_flags -d "$domain" -M enum_dns
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
-var dc_ip
+import nxc_auth
 -->

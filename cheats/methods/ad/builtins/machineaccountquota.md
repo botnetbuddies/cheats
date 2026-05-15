@@ -63,13 +63,12 @@ NetExec, addcomputer.py, bloodyAD, and ldeep all support MAQ enumeration and com
 Check the MachineAccountQuota value via the NetExec MAQ module.
 
 ```sh title:"Check MachineAccountQuota with NetExec MAQ module"
-nxc ldap "$rhost_ip" -d "$domain" -u "$user" -p "$pass" -M maq
+nxc ldap "$rhost_ip" -d "$domain" -u "$user" $auth_flags -M maq
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
-var dc_ip
+import nxc_auth
 -->
 
 ### addcomputer

@@ -138,12 +138,12 @@ var session_id
 Query remote RDP sessions over SMB with NetExec.
 
 ```sh title:"Query remote sessions with NetExec"
-nxc smb "$rhost_name" -u "$user" -p "$pass" --qwinsta
+nxc smb "$rhost_name" -u "$user" $auth_flags --qwinsta
 ```
 <!-- cheat
 var rhost_name
-var user
-var pass
+import users
+import nxc_auth
 -->
 
 ## Detection

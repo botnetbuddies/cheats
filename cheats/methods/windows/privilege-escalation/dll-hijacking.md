@@ -103,3 +103,14 @@ var service_name
 ## Linux
 
 No Linux operator command is included here. This note covers Windows DLL hijacking.
+
+## PATH DLL Hijacking Checks
+
+
+### writable PATH dirs
+
+```cmd title:"Find writable directories in %PATH% (DLL planting target)"
+for %%A in ("%path:;=";"%") do ( cmd.exe /c icacls "%%~A" 2>nul | findstr /i "(F) (M) (W) :\" | findstr /i ":\\ everyone authenticated users todos %username%" && echo. )
+```
+<!-- cheat -->
+

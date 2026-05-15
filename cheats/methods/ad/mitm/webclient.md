@@ -68,12 +68,12 @@ var rhost
 Enumerate WebClient service status across multiple targets using the NetExec webdav module.
 
 ```sh title:"Check WebClient service across targets with NetExec"
-netexec smb "$targets" -d "$domain" -u "$user" -p "$pass" -M webdav
+netexec smb "$targets" -d "$domain" -u "$user" $auth_flags -M webdav
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
+import nxc_auth
 var targets
 -->
 

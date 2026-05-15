@@ -87,6 +87,35 @@ var helper_path
 var payload_file
 -->
 
+### DDexec payload
+
+#sh #ddexec #noexec
+
+Run a prepared payload through a DDexec-style helper.
+
+```sh title:"Run DDexec payload"
+bash "$ddexec_script" "$payload_name"
+```
+<!-- cheat
+var ddexec_script
+var payload_name
+-->
+
+### DDexec with seeker
+
+#sh #ddexec #noexec
+
+Run DDexec with a selected seeker helper.
+
+```sh title:"Run DDexec with seeker"
+SEEKER="$seeker" bash "$ddexec_script" "$payload_name"
+```
+<!-- cheat
+var seeker
+var ddexec_script
+var payload_name
+-->
+
 ## Detection
 
 Monitor interpreters executing files from noexec mounts, dynamic loader invocation with unusual arguments, and memfd-backed executable mappings.

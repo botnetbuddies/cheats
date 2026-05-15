@@ -96,6 +96,46 @@ logrotate -f "/etc/logrotate.d/$rule_name"
 var rule_name
 -->
 
+### logrotten help
+
+#sh #logrotten
+
+Print logrotten usage and options.
+
+```sh title:"Print logrotten help"
+./logrotten -h
+```
+<!-- cheat -->
+
+### logrotten writable log
+
+#sh #logrotten #logrotate
+
+Run logrotten with a prepared payload script against a writable log path.
+
+```sh title:"Run logrotten against writable log"
+./logrotten -p "$payload_script" "$log_file"
+```
+<!-- cheat
+var payload_script
+var log_file
+-->
+
+### logrotten sleep window
+
+#sh #logrotten #logrotate
+
+Run logrotten with a custom sleep delay.
+
+```sh title:"Run logrotten with delay"
+./logrotten -s "$sleep_seconds" -p "$payload_script" "$log_file"
+```
+<!-- cheat
+var sleep_seconds
+var payload_script
+var log_file
+-->
+
 ## Detection
 
 Monitor `/etc/logrotate.d` writes, forced rotations, postrotate command execution, and rotated logs in writable directories.

