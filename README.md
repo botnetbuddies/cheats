@@ -63,6 +63,12 @@ A minimal, repo-local collection of [CheatMD](https://github.com/Gubarz/cheatmd)
 | `$s3_bucket_names` | Multiple S3 bucket names, formatted as the target tool expects. |
 | `$s3_bucket_file` | File containing S3 bucket names, one per line. |
 | `$s3_object_key` | S3 object key inside a bucket. |
+| `$aws_instance_id` | EC2 instance ID. |
+| `$aws_source_ip` | Source IP or CIDR to allow, whitelist, or probe from during AWS testing. |
+| `$aws_principal_arn` | AWS principal ARN used in trust, permission, or backdoor testing. |
+| `$aws_sns_topic_arn` | SNS topic ARN. |
+| `$aws_callback_url` | Operator-controlled callback URL for approved AWS testing. |
+| `$aws_policy_folder` | Folder containing exported IAM policy JSON for offline analysis. |
 
 ### Kubernetes
 
