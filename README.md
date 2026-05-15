@@ -38,10 +38,45 @@ A minimal, repo-local collection of [CheatMD](https://github.com/Gubarz/cheatmd)
 | `$rport` | Remote port. |
 | `$lport` | Local port. |
 
+### AWS
+
+| Variable | Description |
+|----------|-------------|
+| `$aws_profile` | AWS CLI profile name used for authenticated AWS API calls. |
+| `$aws_profile_file` | File containing AWS profile names, one per line. |
+| `$aws_account_id` | AWS account ID. |
+| `$aws_account_ids` | Multiple AWS account IDs, formatted as the target tool expects. |
+| `$aws_role_name` | IAM role name. |
+| `$aws_role_names` | Multiple IAM role names, formatted as the target tool expects. |
+| `$aws_role_arn` | Full IAM role ARN. |
+| `$aws_mfa_serial_arn` | MFA device serial ARN for AWS role assumption. |
+| `$aws_region` | AWS region. |
+| `$aws_region_one` | First AWS region when a command compares or combines regions. |
+| `$aws_region_two` | Second AWS region when a command compares or combines regions. |
+| `$aws_region_list` | Multiple AWS regions, formatted as the target tool expects. |
+| `$aws_access_key_id` | AWS access key ID. |
+| `$aws_secret_access_key` | AWS secret access key. |
+| `$aws_session_token` | AWS temporary session token. |
+| `$aws_iam_action` | Single IAM action name. |
+| `$aws_iam_action_query` | IAM action search pattern or list, formatted as the target tool expects. |
+| `$s3_bucket` | S3 bucket name. |
+| `$s3_bucket_names` | Multiple S3 bucket names, formatted as the target tool expects. |
+| `$s3_bucket_file` | File containing S3 bucket names, one per line. |
+| `$s3_object_key` | S3 object key inside a bucket. |
+
+### Kubernetes
+
+| Variable | Description |
+|----------|-------------|
+| `$kube_context` | Kubernetes kubeconfig context name. |
+| `$kubeconfig_file` | Explicit kubeconfig file path. |
+| `$kube_cluster_name` | Kubernetes cluster name. |
+| `$kube_results_json` | Kubernetes result export JSON file. |
+
 ## Style Guide
 
 * Use lowercase variable names: `$user`, `$rhost_ip`.
-* Follow the variable standards above for Identity & Networking variables.
+* Follow the variable standards above for Identity, Networking, AWS, and Kubernetes variables.
 * Keep commands copy-pastable and shell-safe; quote values that can contain spaces.
 * Provide short descriptions; avoid tool theory here.
 * Avoid destructive defaults. Gate destructive commands behind explicit confirmation.
