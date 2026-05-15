@@ -62,6 +62,28 @@ docker exec -it "$container_id" bash
 var container_id
 -->
 
+### Exec sh
+
+Open an interactive POSIX shell inside a container.
+
+```sh title:"Open sh in container"
+docker exec -it "$container_id" /bin/sh
+```
+<!-- cheat
+var container_id
+-->
+
+### Inspect container
+
+Inspect a container.
+
+```sh title:"Inspect Docker container"
+docker inspect "$container_id"
+```
+<!-- cheat
+var container_id
+-->
+
 ### Tail logs
 
 Print the last 100 lines from a container.

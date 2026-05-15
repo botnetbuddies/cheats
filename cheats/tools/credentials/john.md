@@ -2,56 +2,57 @@
 
 John the Ripper helper scripts (`*2john`) extract crackable hashes from various encrypted file formats. Output goes to `hash`, ready for `john hash` or `hashcat`.
 
+<!-- cheat
+export john
+var hash_file = sh -c 'printf "%s\n" "hash"; find "$PWD/" -maxdepth 1 -type f ! -name ".*" -printf "%f\n" | grep -v "^$(basename "$PWD/")$" | sort' --- --header 'Current directory files'
+import wordlist_passwords
+-->
+
 ## Crack hashes
 
 ### LM
 
 ```sh title:"Crack LM hashes with John"
-john --wordlist="$wordlist" --format=lm "$hash_file"
+john --wordlist="$wordlists" --format=lm "$hash_file"
 ```
 <!-- cheat
-var wordlist
-var hash_file
+import john
 -->
 
 ### NTLM
 
 ```sh title:"Crack NTLM hashes with John"
-john --wordlist="$wordlist" --format=nt "$hash_file"
+john --wordlist="$wordlists" --format=nt "$hash_file"
 ```
 <!-- cheat
-var wordlist
-var hash_file
+import john
 -->
 
 ### NetNTLMv1
 
 ```sh title:"Crack NetNTLMv1 hashes with John"
-john --wordlist="$wordlist" --format=netntlm "$hash_file"
+john --wordlist="$wordlists" --format=netntlm "$hash_file"
 ```
 <!-- cheat
-var wordlist
-var hash_file
+import john
 -->
 
 ### NetNTLMv2
 
 ```sh title:"Crack NetNTLMv2 hashes with John"
-john --wordlist="$wordlist" --format=netntlmv2 "$hash_file"
+john --wordlist="$wordlists" --format=netntlmv2 "$hash_file"
 ```
 <!-- cheat
-var wordlist
-var hash_file
+import john
 -->
 
 ### Raw MD5
 
 ```sh title:"Crack raw MD5 hashes with John"
-john --wordlist="$wordlist" --format=raw-md5 "$hash_file"
+john --wordlist="$wordlists" --format=raw-md5 "$hash_file"
 ```
 <!-- cheat
-var wordlist
-var hash_file
+import john
 -->
 
 ## Auth & system hashes

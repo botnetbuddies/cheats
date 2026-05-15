@@ -42,10 +42,10 @@ var rhost_ip
 Enumerate SMTP users with VRFY and a user list.
 
 ```sh title:"Enumerate SMTP users with VRFY"
-smtp-user-enum -M VRFY -U "$user_file" -t "$rhost_ip"
+smtp-user-enum -M VRFY -U "$wordlists_users" -t "$rhost_ip"
 ```
 <!-- cheat
-var user_file
+import wordlists_users
 var rhost_ip
 -->
 

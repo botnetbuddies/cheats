@@ -3,6 +3,8 @@
 <!-- cheat
 export hydra
 var scheme_hydra_protocol = printf '%s\n' ftp ssh imap pop3s mssql rdp vnc smtp mysql --- --header 'Service to bruteforce'
+import wordlist_passwords
+import wordlists_users
 -->
 
 ## hydra - brute force
@@ -15,11 +17,9 @@ Brute one user with a password list against the chosen service (FTP, SSH, IMAP, 
 hydra -l $user -P $wordlists $scheme_hydra_protocol://$domain
 ```
 <!-- cheat
-import hashcat
 import hydra
 import users
 import domain_ip
-var wordlists
 -->
 
 ### User and password lists
@@ -27,12 +27,10 @@ var wordlists
 Brute a chosen service with user and password lists.
 
 ```sh title:"User list and password list against chosen service"
-hydra -L "$user_file" -P "$pass_file" "$rhost_ip" "$scheme_hydra_protocol"
+hydra -L "$wordlists_users" -P "$wordlists" "$rhost_ip" "$scheme_hydra_protocol"
 ```
 <!-- cheat
 import hydra
-var user_file
-var pass_file
 var rhost_ip
 -->
 
@@ -54,10 +52,10 @@ var rhost_ip
 Try each username as its own password against SSH.
 
 ```sh title:"Try username as password against SSH"
-hydra -L "$user_file" -e s "$rhost_ip" ssh
+hydra -L "$wordlists_users" -e s "$rhost_ip" ssh
 ```
 <!-- cheat
-var user_file
+import hydra
 var rhost_ip
 -->
 
@@ -94,11 +92,9 @@ Brute HTTP Basic auth on the document root. Quick win against router admin pages
 hydra -l $user -P $wordlists $domain http-get
 ```
 <!-- cheat
-import hashcat
 import hydra
 import users
 import domain_ip
-var wordlists
 -->
 
 ### Brute HTTP POST form
@@ -109,9 +105,7 @@ Brute a form-based login over HTTP POST. Edit the path, parameter names, and the
 hydra -l $user -P $wordlists $domain http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
 ```
 <!-- cheat
-import hashcat
 import hydra
 import users
 import domain_ip
-var wordlists
 -->

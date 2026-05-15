@@ -245,6 +245,15 @@ List all tickets currently loaded in the session (LUID, target, encryption).
 ```
 <!-- cheat -->
 
+### Dump all accessible tickets
+
+Dump Kerberos tickets from accessible logon sessions.
+
+```cmd title:"Dump all accessible Kerberos tickets"
+.\Rubeus.exe dump
+```
+<!-- cheat -->
+
 ## Rubeus
 
 ### Dump tickets
@@ -401,4 +410,3 @@ After loading via Reflection, call into Rubeus.Program directly.
 <!-- cheat
 var rubeus_cmd
 -->
-

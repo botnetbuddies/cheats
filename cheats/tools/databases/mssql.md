@@ -78,3 +78,18 @@ var rport := 1433
 var user
 var pass
 -->
+
+## shell
+
+### Impacket Windows auth
+
+Open an interactive MSSQL shell with Windows authentication.
+
+```sh title:"Open MSSQL shell with Impacket mssqlclient"
+mssqlclient.py -windows-auth "$auth_target" $auth_flags
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_auth
+-->

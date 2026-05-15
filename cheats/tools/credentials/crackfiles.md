@@ -1,5 +1,11 @@
 # Crack Files
 
+<!-- cheat
+export crackfiles
+import wordlist_passwords
+var archive_file = sh -c 'printf "%s\n" ""; find "$PWD/" -maxdepth 1 -type f ! -name ".*" -printf "%f\n" | sort' --- --header 'Current directory files'
+-->
+
 ## zip
 
 ### fcrackzip
@@ -7,10 +13,10 @@
 Crack a ZIP file with fcrackzip.
 
 ```sh title:"Crack ZIP with fcrackzip"
-fcrackzip -u -D -p "$wordlist" "$zip_file"
+fcrackzip -u -D -p "$wordlists" "$zip_file"
 ```
 <!-- cheat
-var wordlist
+import crackfiles
 var zip_file
 -->
 
@@ -19,9 +25,10 @@ var zip_file
 Extract a ZIP hash and crack it with John.
 
 ```sh title:"Extract ZIP hash and crack with John"
-zip2john "$zip_file" > zip.john; john zip.john
+zip2john "$zip_file" > zip.john; john --wordlist "$wordlists" zip.john
 ```
 <!-- cheat
+import crackfiles
 var zip_file
 -->
 
@@ -32,10 +39,10 @@ var zip_file
 Extract a 7z hash and crack it with John.
 
 ```sh title:"Extract 7z hash and crack with John"
-7z2john "$archive_file" > 7z.john; john 7z.john
+7z2john "$archive_file" > 7z.john; john --wordlist "$wordlists" 7z.john
 ```
 <!-- cheat
-var archive_file
+import crackfiles
 -->
 
 ## pdf
@@ -45,11 +52,11 @@ var archive_file
 Crack a PDF password with pdfcrack.
 
 ```sh title:"Crack PDF with pdfcrack"
-pdfcrack "$pdf_file" -w "$wordlist"
+pdfcrack "$pdf_file" -w "$wordlists"
 ```
 <!-- cheat
+import crackfiles
 var pdf_file
-var wordlist
 -->
 
 ### qpdf decrypt
@@ -72,11 +79,11 @@ var plaintext_pdf
 Extract an Office document hash and crack it with John.
 
 ```sh title:"Extract Office hash and crack with John"
-office2john "$office_file" > office.hash; john --wordlist "$wordlist" office.hash
+office2john "$office_file" > office.hash; john --wordlist "$wordlists" office.hash
 ```
 <!-- cheat
+import crackfiles
 var office_file
-var wordlist
 -->
 
 ## keepass
@@ -86,9 +93,9 @@ var wordlist
 Extract a KeePass database hash and crack it with John.
 
 ```sh title:"Extract KeePass hash and crack with John"
-keepass2john "$kdbx_file" > keepass.hash; john --wordlist "$wordlist" keepass.hash
+keepass2john "$kdbx_file" > keepass.hash; john --wordlist "$wordlists" keepass.hash
 ```
 <!-- cheat
+import crackfiles
 var kdbx_file
-var wordlist
 -->

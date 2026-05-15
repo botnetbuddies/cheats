@@ -118,9 +118,9 @@ var rhost_ip
 Enumerate SSH usernames with Metasploit.
 
 ```sh title:"Enumerate SSH usernames with Metasploit"
-msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS $rhost_ip; set USER_FILE $user_file; set CHECK_FALSE true; run; exit"
+msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS $rhost_ip; set USER_FILE $wordlists_users; set CHECK_FALSE true; run; exit"
 ```
 <!-- cheat
+import wordlists_users
 var rhost_ip
-var user_file
 -->
