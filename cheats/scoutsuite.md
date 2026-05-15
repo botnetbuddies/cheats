@@ -72,10 +72,10 @@ scout aws --no-browser
 Run against one named AWS profile.
 
 ```sh title:"Run Scout Suite AWS with named profile"
-scout aws --profile "$profile" --no-browser
+scout aws --profile "$aws_profile" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### AWS role profile
@@ -83,10 +83,10 @@ var profile
 Run against an AWS CLI profile that assumes a role from `~/.aws/config`.
 
 ```sh title:"Run Scout Suite AWS with role-assuming profile"
-scout aws --profile "$role_profile" --no-browser
+scout aws --profile "$aws_profile" --no-browser
 ```
 <!-- cheat
-var role_profile
+var aws_profile
 -->
 
 ### AWS environment keys
@@ -94,12 +94,12 @@ var role_profile
 Run with access keys already exported in the environment.
 
 ```sh title:"Run Scout Suite AWS with environment credentials"
-AWS_ACCESS_KEY_ID="$access_key_id" AWS_SECRET_ACCESS_KEY="$secret_access_key" AWS_SESSION_TOKEN="$session_token" scout aws --no-browser
+AWS_ACCESS_KEY_ID="$aws_access_key_id" AWS_SECRET_ACCESS_KEY="$aws_secret_access_key" AWS_SESSION_TOKEN="$aws_session_token" scout aws --no-browser
 ```
 <!-- cheat
-var access_key_id
-var secret_access_key
-var session_token
+var aws_access_key_id
+var aws_secret_access_key
+var aws_session_token
 -->
 
 ### AWS access keys CLI
@@ -107,12 +107,12 @@ var session_token
 Run with access keys passed directly on the command line. Prefer profiles or environment variables when possible.
 
 ```sh title:"Run Scout Suite AWS with access keys"
-scout aws --access-keys --access-key-id "$access_key_id" --secret-access-key "$secret_access_key" --session-token "$session_token" --no-browser
+scout aws --access-keys --access-key-id "$aws_access_key_id" --secret-access-key "$aws_secret_access_key" --session-token "$aws_session_token" --no-browser
 ```
 <!-- cheat
-var access_key_id
-var secret_access_key
-var session_token
+var aws_access_key_id
+var aws_secret_access_key
+var aws_session_token
 -->
 
 ### AWS caller check
@@ -120,10 +120,10 @@ var session_token
 Confirm the identity Scout will use before launching a long run.
 
 ```sh title:"Confirm AWS caller identity before Scout Suite"
-aws --profile "$profile" sts get-caller-identity
+aws --profile "$aws_profile" sts get-caller-identity
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### AWS required policy reminder
@@ -142,10 +142,10 @@ printf '%s\n' 'ReadOnlyAccess' 'SecurityAudit'
 Run an AWS assessment for one profile and write output to an engagement directory.
 
 ```sh title:"Run Scout Suite AWS report to directory"
-scout aws --profile "$profile" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var report_dir := scoutsuite-report
 -->
 
@@ -154,10 +154,10 @@ var report_dir := scoutsuite-report
 Use a stable report name for account, role, or phase tracking.
 
 ```sh title:"Run Scout Suite AWS report with report name"
-scout aws --profile "$profile" --report-name "$report_name" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --report-name "$report_name" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var report_name
 var report_dir := scoutsuite-report
 -->
@@ -167,10 +167,10 @@ var report_dir := scoutsuite-report
 Run with debug output when credential, throttling, or API errors need triage.
 
 ```sh title:"Run Scout Suite AWS with debug output"
-scout aws --profile "$profile" --debug --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --debug --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var report_dir := scoutsuite-report
 -->
 
@@ -179,10 +179,10 @@ var report_dir := scoutsuite-report
 Load engagement trusted CIDRs so unknown security group exposure is easier to spot.
 
 ```sh title:"Run Scout Suite AWS with trusted CIDR list"
-scout aws --profile "$profile" --ip-ranges "$ip_ranges_file" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --ip-ranges "$ip_ranges_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var ip_ranges_file := trusted-cidrs.json
 var report_dir := scoutsuite-report
 -->
@@ -192,10 +192,10 @@ var report_dir := scoutsuite-report
 Use a custom display key from the trusted CIDR JSON.
 
 ```sh title:"Run Scout Suite AWS with trusted CIDR name key"
-scout aws --profile "$profile" --ip-ranges "$ip_ranges_file" --ip-ranges-name-key "$name_key" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --ip-ranges "$ip_ranges_file" --ip-ranges-name-key "$name_key" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var ip_ranges_file := trusted-cidrs.json
 var name_key := name
 var report_dir := scoutsuite-report
@@ -206,10 +206,10 @@ var report_dir := scoutsuite-report
 Run with an engagement-specific ruleset to emphasize red-team-relevant findings.
 
 ```sh title:"Run Scout Suite AWS with custom ruleset"
-scout aws --profile "$profile" --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var ruleset_file
 var report_dir := scoutsuite-report
 -->
@@ -219,10 +219,10 @@ var report_dir := scoutsuite-report
 Re-run the rule engine on previously fetched data without calling AWS APIs again.
 
 ```sh title:"Reanalyze Scout Suite AWS data locally"
-scout aws --profile "$profile" --local --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --local --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var ruleset_file
 var report_dir := scoutsuite-report
 -->
@@ -232,10 +232,10 @@ var report_dir := scoutsuite-report
 Apply exported exceptions to a previously fetched AWS report.
 
 ```sh title:"Reanalyze Scout Suite AWS data with exceptions"
-scout aws --profile "$profile" --local --exceptions "$exceptions_file" --report-dir "$report_dir" --no-browser
+scout aws --profile "$aws_profile" --local --exceptions "$exceptions_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var profile
+var aws_profile
 var exceptions_file
 var report_dir := scoutsuite-report
 -->
@@ -245,11 +245,11 @@ var report_dir := scoutsuite-report
 Open the generated AWS HTML report path for a named profile.
 
 ```sh title:"Print Scout Suite AWS HTML report path"
-find "$report_dir" -maxdepth 1 -type f -name "aws*$profile*.html" -print
+find "$report_dir" -maxdepth 1 -type f -name "aws*$aws_profile*.html" -print
 ```
 <!-- cheat
 var report_dir := scoutsuite-report
-var profile
+var aws_profile
 -->
 
 ## aws report triage
@@ -390,10 +390,10 @@ kubectl config current-context
 Switch to the engagement-approved cluster context before running Scout Suite.
 
 ```sh title:"Switch Kubernetes context"
-kubectl config use-context "$context"
+kubectl config use-context "$kube_context"
 ```
 <!-- cheat
-var context
+var kube_context
 -->
 
 ### Kube caller check
@@ -410,12 +410,12 @@ kubectl auth can-i --list
 Create or update kubeconfig for an EKS cluster before scanning Kubernetes.
 
 ```sh title:"Update kubeconfig for EKS cluster"
-aws --profile "$profile" eks update-kubeconfig --region "$region" --name "$cluster_name"
+aws --profile "$aws_profile" eks update-kubeconfig --region "$aws_region" --name "$kube_cluster_name"
 ```
 <!-- cheat
-var profile
-var region := us-east-1
-var cluster_name
+var aws_profile
+var aws_region := us-east-1
+var kube_cluster_name
 -->
 
 ## kubernetes engagement runs
@@ -436,10 +436,10 @@ var report_dir := scoutsuite-report
 Run Scout Suite against a specific kubeconfig context.
 
 ```sh title:"Run Scout Suite Kubernetes named context"
-scout kubernetes --context "$context" --report-dir "$report_dir" --no-browser
+scout kubernetes --context "$kube_context" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var context
+var kube_context
 var report_dir := scoutsuite-report
 -->
 
@@ -448,10 +448,10 @@ var report_dir := scoutsuite-report
 Run Scout Suite with an explicit kubeconfig file.
 
 ```sh title:"Run Scout Suite Kubernetes with config file"
-scout kubernetes --config-file "$kubeconfig" --report-dir "$report_dir" --no-browser
+scout kubernetes --config-file "$kubeconfig_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var kubeconfig
+var kubeconfig_file
 var report_dir := scoutsuite-report
 -->
 
@@ -460,10 +460,10 @@ var report_dir := scoutsuite-report
 Run without allowing Scout Suite to persist kubeconfig token refreshes or config changes.
 
 ```sh title:"Run Scout Suite Kubernetes without persisting config changes"
-scout kubernetes --context "$context" --do-not-persist-config --report-dir "$report_dir" --no-browser
+scout kubernetes --context "$kube_context" --do-not-persist-config --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var context
+var kube_context
 var report_dir := scoutsuite-report
 -->
 
@@ -472,10 +472,10 @@ var report_dir := scoutsuite-report
 Scan Kubernetes control plane data with AWS provider support when the cluster is AWS-hosted and the AWS identity has required permissions.
 
 ```sh title:"Run Scout Suite Kubernetes with AWS control-plane support"
-scout kubernetes -c aws --context "$context" --report-dir "$report_dir" --no-browser
+scout kubernetes -c aws --context "$kube_context" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var context
+var kube_context
 var report_dir := scoutsuite-report
 -->
 
@@ -484,10 +484,10 @@ var report_dir := scoutsuite-report
 Run Kubernetes analysis with a custom Scout Suite ruleset.
 
 ```sh title:"Run Scout Suite Kubernetes with custom ruleset"
-scout kubernetes --context "$context" --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
+scout kubernetes --context "$kube_context" --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var context
+var kube_context
 var ruleset_file
 var report_dir := scoutsuite-report
 -->
@@ -497,10 +497,10 @@ var report_dir := scoutsuite-report
 Re-run Kubernetes analysis locally after adjusting rules without fetching from the cluster again.
 
 ```sh title:"Reanalyze Scout Suite Kubernetes data locally"
-scout kubernetes --context "$context" --local --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
+scout kubernetes --context "$kube_context" --local --ruleset "$ruleset_file" --report-dir "$report_dir" --no-browser
 ```
 <!-- cheat
-var context
+var kube_context
 var ruleset_file
 var report_dir := scoutsuite-report
 -->
@@ -534,11 +534,11 @@ var report_dir := scoutsuite-report
 Strip the JavaScript variable assignment and save Kubernetes results as JSON.
 
 ```sh title:"Convert Scout Suite Kubernetes results to JSON"
-tail -n +2 "$results_js" > "$results_json"
+tail -n +2 "$results_js" > "$kube_results_json"
 ```
 <!-- cheat
 var results_js
-var results_json := scoutsuite-kubernetes-results.json
+var kube_results_json := scoutsuite-kubernetes-results.json
 -->
 
 ### Kubernetes service keys
@@ -546,10 +546,10 @@ var results_json := scoutsuite-kubernetes-results.json
 List top-level services/resources in Kubernetes Scout Suite output.
 
 ```sh title:"List Scout Suite Kubernetes services in JSON"
-jq -r '.services | keys[]' "$results_json"
+jq -r '.services | keys[]' "$kube_results_json"
 ```
 <!-- cheat
-var results_json := scoutsuite-kubernetes-results.json
+var kube_results_json := scoutsuite-kubernetes-results.json
 -->
 
 ### Kubernetes danger findings
@@ -557,10 +557,10 @@ var results_json := scoutsuite-kubernetes-results.json
 Search Kubernetes results for danger-level findings.
 
 ```sh title:"Search Scout Suite Kubernetes danger findings"
-jq '.. | objects | select(.level? == "danger")' "$results_json"
+jq '.. | objects | select(.level? == "danger")' "$kube_results_json"
 ```
 <!-- cheat
-var results_json := scoutsuite-kubernetes-results.json
+var kube_results_json := scoutsuite-kubernetes-results.json
 -->
 
 ### Kubernetes warning findings
@@ -568,10 +568,10 @@ var results_json := scoutsuite-kubernetes-results.json
 Search Kubernetes results for warning-level findings.
 
 ```sh title:"Search Scout Suite Kubernetes warning findings"
-jq '.. | objects | select(.level? == "warning")' "$results_json"
+jq '.. | objects | select(.level? == "warning")' "$kube_results_json"
 ```
 <!-- cheat
-var results_json := scoutsuite-kubernetes-results.json
+var kube_results_json := scoutsuite-kubernetes-results.json
 -->
 
 ### Kubernetes RBAC grep
@@ -612,11 +612,11 @@ cd ScoutSuite/docker && docker compose up --build
 Run Scout Suite in Docker with local AWS credentials mounted and write the report to the host.
 
 ```sh title:"Run Scout Suite Docker against AWS profile"
-docker run --rm -v "$HOME/.aws:/root/.aws:ro" -v "$(pwd)/$report_dir:/root/scout-report" scoutsuite scout aws --profile "$profile" --no-browser --report-dir /root/scout-report
+docker run --rm -v "$HOME/.aws:/root/.aws:ro" -v "$(pwd)/$report_dir:/root/scout-report" scoutsuite scout aws --profile "$aws_profile" --no-browser --report-dir /root/scout-report
 ```
 <!-- cheat
 var report_dir := scoutsuite-report
-var profile
+var aws_profile
 -->
 
 ### Docker Kubernetes context
@@ -624,9 +624,9 @@ var profile
 Run Scout Suite in Docker with local kubeconfig mounted and write the report to the host.
 
 ```sh title:"Run Scout Suite Docker against Kubernetes context"
-docker run --rm -v "$HOME/.kube:/root/.kube:ro" -v "$(pwd)/$report_dir:/root/scout-report" scoutsuite scout kubernetes --context "$context" --no-browser --report-dir /root/scout-report
+docker run --rm -v "$HOME/.kube:/root/.kube:ro" -v "$(pwd)/$report_dir:/root/scout-report" scoutsuite scout kubernetes --context "$kube_context" --no-browser --report-dir /root/scout-report
 ```
 <!-- cheat
 var report_dir := scoutsuite-report
-var context
+var kube_context
 -->

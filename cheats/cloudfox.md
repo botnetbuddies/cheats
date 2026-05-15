@@ -84,10 +84,10 @@ cloudfox azure -h
 Run most AWS checks against one profile and write table, CSV, JSON, and loot output locally.
 
 ```sh title:"Run CloudFox AWS all-checks for one profile"
-cloudfox aws --profile "$profile" all-checks
+cloudfox aws --profile "$aws_profile" all-checks
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### All checks verbose
@@ -95,10 +95,10 @@ var profile
 Run all checks with verbose output so errors and follow-up files are easier to triage live.
 
 ```sh title:"Run verbose CloudFox AWS all-checks"
-cloudfox aws --profile "$profile" -v2 all-checks
+cloudfox aws --profile "$aws_profile" -v2 all-checks
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### All profiles
@@ -115,10 +115,10 @@ cloudfox aws -a all-checks
 Run all checks against profiles listed one per line in a file.
 
 ```sh title:"Run CloudFox AWS all-checks from profile list"
-cloudfox aws -l "$profile_file" all-checks
+cloudfox aws -l "$aws_profile_file" all-checks
 ```
 <!-- cheat
-var profile_file
+var aws_profile_file
 -->
 
 ### Output folder
@@ -126,10 +126,10 @@ var profile_file
 Run all checks and write output under an engagement-specific directory.
 
 ```sh title:"Run CloudFox AWS all-checks to output folder"
-cloudfox aws --profile "$profile" --outdir "$output_dir" all-checks
+cloudfox aws --profile "$aws_profile" --outdir "$output_dir" all-checks
 ```
 <!-- cheat
-var profile
+var aws_profile
 var output_dir := cloudfox-output
 -->
 
@@ -138,10 +138,10 @@ var output_dir := cloudfox-output
 Find which supported services and regions appear active before deeper enumeration.
 
 ```sh title:"Inventory active AWS services with CloudFox"
-cloudfox aws --profile "$profile" inventory
+cloudfox aws --profile "$aws_profile" inventory
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Tags first pass
@@ -149,10 +149,10 @@ var profile
 Use tags as service-owner, environment, and application hints during scoping and target selection.
 
 ```sh title:"Enumerate AWS tags with CloudFox"
-cloudfox aws --profile "$profile" tags
+cloudfox aws --profile "$aws_profile" tags
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Output triage
@@ -160,10 +160,10 @@ var profile
 List CloudFox result and loot files for a profile after a run.
 
 ```sh title:"List CloudFox AWS output files"
-find "cloudfox-output/aws/$profile" -maxdepth 3 -type f | sort
+find "cloudfox-output/aws/$aws_profile" -maxdepth 3 -type f | sort
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Error log
@@ -182,10 +182,10 @@ tail -n 100 "$HOME/.cloudfox/cloudfox-error.log"
 List IAM users and roles for target selection and role-chaining analysis.
 
 ```sh title:"List AWS IAM principals with CloudFox"
-cloudfox aws --profile "$profile" principals
+cloudfox aws --profile "$aws_profile" principals
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Permissions
@@ -193,10 +193,10 @@ var profile
 Enumerate unique IAM permissions for users and roles.
 
 ```sh title:"Enumerate AWS IAM permissions with CloudFox"
-cloudfox aws --profile "$profile" permissions
+cloudfox aws --profile "$aws_profile" permissions
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Access keys
@@ -204,10 +204,10 @@ var profile
 Map active IAM access key IDs to users; use as seed material for repo, Slack, drive, and secret-store searches.
 
 ```sh title:"Map AWS access keys with CloudFox"
-cloudfox aws --profile "$profile" access-keys
+cloudfox aws --profile "$aws_profile" access-keys
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Find one access key
@@ -215,11 +215,11 @@ var profile
 Identify whether a discovered AWS access key ID belongs to the in-scope account.
 
 ```sh title:"Look up one AWS access key ID"
-cloudfox aws --profile "$profile" access-keys --filter "$access_key_id"
+cloudfox aws --profile "$aws_profile" access-keys --filter "$aws_access_key_id"
 ```
 <!-- cheat
-var profile
-var access_key_id
+var aws_profile
+var aws_access_key_id
 -->
 
 ### Role trusts
@@ -227,10 +227,10 @@ var access_key_id
 Enumerate roles that trust principals, services, or federated identities; review `IsAdmin?` and `CanPrivEscToAdmin?` columns.
 
 ```sh title:"Enumerate AWS role trusts with CloudFox"
-cloudfox aws --profile "$profile" role-trusts
+cloudfox aws --profile "$aws_profile" role-trusts
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Resource trusts
@@ -238,10 +238,10 @@ var profile
 Enumerate resource policies for services CloudFox prioritizes offensively, including S3, SNS, SQS, Lambda, ECR, EFS, Glue, CodeBuild, and Secrets Manager.
 
 ```sh title:"Enumerate AWS resource trusts with CloudFox"
-cloudfox aws --profile "$profile" resource-trusts
+cloudfox aws --profile "$aws_profile" resource-trusts
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Resource trusts with KMS
@@ -249,10 +249,10 @@ var profile
 Include KMS key policies in resource trust enumeration when key access is in scope.
 
 ```sh title:"Enumerate AWS resource trusts including KMS"
-cloudfox aws --profile "$profile" resource-trusts --include-kms
+cloudfox aws --profile "$aws_profile" resource-trusts --include-kms
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### IAM simulator
@@ -260,11 +260,11 @@ var profile
 Run CloudFox IAM simulator checks for high-value actions; can be slow, but produces pmapper follow-up commands.
 
 ```sh title:"Run CloudFox IAM simulator"
-cloudfox aws --profile "$profile" iam-simulator --action "$iam_action"
+cloudfox aws --profile "$aws_profile" iam-simulator --action "$aws_iam_action"
 ```
 <!-- cheat
-var profile
-var iam_action := s3:GetObject
+var aws_profile
+var aws_iam_action := s3:GetObject
 -->
 
 ### Pmapper summary
@@ -272,10 +272,10 @@ var iam_action := s3:GetObject
 Use local pmapper graph data to identify principals with admin or paths to admin.
 
 ```sh title:"Summarize pmapper paths with CloudFox"
-cloudfox aws --profile "$profile" pmapper
+cloudfox aws --profile "$aws_profile" pmapper
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Build pmapper graph
@@ -283,10 +283,10 @@ var profile
 Create pmapper graph data CloudFox can reuse for role-trusts, workloads, instances, lambdas, ECS, and CAPE analysis.
 
 ```sh title:"Build pmapper graph for one AWS profile"
-pmapper --profile "$profile" graph create
+pmapper --profile "$aws_profile" graph create
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ## aws attack surface
@@ -296,10 +296,10 @@ var profile
 Enumerate internet-facing and internal endpoints from App Runner, API Gateway, CloudFront, EKS, ELB, Lambda, MQ, OpenSearch, Redshift, RDS, and related services.
 
 ```sh title:"Enumerate AWS endpoints with CloudFox"
-cloudfox aws --profile "$profile" endpoints
+cloudfox aws --profile "$aws_profile" endpoints
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### API gateways
@@ -307,10 +307,10 @@ var profile
 Enumerate API Gateway routes and generate cURL commands for follow-up testing.
 
 ```sh title:"Enumerate AWS API Gateway routes with CloudFox"
-cloudfox aws --profile "$profile" api-gws
+cloudfox aws --profile "$aws_profile" api-gws
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Route53
@@ -318,10 +318,10 @@ var profile
 Enumerate public and private hosted zones and write A-record loot files for application discovery.
 
 ```sh title:"Enumerate Route53 records with CloudFox"
-cloudfox aws --profile "$profile" route53
+cloudfox aws --profile "$aws_profile" route53
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Network ports
@@ -329,10 +329,10 @@ var profile
 Enumerate security-group-exposed ports and produce target lists for service testing.
 
 ```sh title:"Enumerate exposed AWS network ports with CloudFox"
-cloudfox aws --profile "$profile" network-ports
+cloudfox aws --profile "$aws_profile" network-ports
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### EC2 instances
@@ -340,10 +340,10 @@ var profile
 List EC2 instances, IPs, roles, and generated public/private IP loot files.
 
 ```sh title:"Enumerate AWS EC2 instances with CloudFox"
-cloudfox aws --profile "$profile" instances
+cloudfox aws --profile "$aws_profile" instances
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Elastic network interfaces
@@ -351,10 +351,10 @@ var profile
 List ENIs and IPs for broader network mapping.
 
 ```sh title:"Enumerate AWS ENIs with CloudFox"
-cloudfox aws --profile "$profile" elastic-network-interfaces
+cloudfox aws --profile "$aws_profile" elastic-network-interfaces
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Workloads with powerful roles
@@ -362,10 +362,10 @@ var profile
 Find EC2, ECS, Lambda, and App Runner workloads with admin roles or paths to admin.
 
 ```sh title:"Find AWS workloads with admin paths"
-cloudfox aws --profile "$profile" workloads
+cloudfox aws --profile "$aws_profile" workloads
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ## aws workload loot
@@ -375,10 +375,10 @@ var profile
 Collect environment variables from App Runner, ECS, Lambda, Lightsail Containers, and SageMaker for secret hunting.
 
 ```sh title:"Collect AWS workload environment variables with CloudFox"
-cloudfox aws --profile "$profile" env-vars
+cloudfox aws --profile "$aws_profile" env-vars
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Lambda
@@ -386,10 +386,10 @@ var profile
 List Lambda functions and generate get-function commands for code retrieval.
 
 ```sh title:"Enumerate AWS Lambda functions with CloudFox"
-cloudfox aws --profile "$profile" lambda
+cloudfox aws --profile "$aws_profile" lambda
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### ECS tasks
@@ -397,10 +397,10 @@ var profile
 List ECS task definitions, roles, IPs, and useful ECS loot files.
 
 ```sh title:"Enumerate AWS ECS tasks with CloudFox"
-cloudfox aws --profile "$profile" ecs-tasks
+cloudfox aws --profile "$aws_profile" ecs-tasks
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### EKS clusters
@@ -408,10 +408,10 @@ var profile
 Enumerate EKS clusters and generate kubeconfig update commands.
 
 ```sh title:"Enumerate AWS EKS clusters with CloudFox"
-cloudfox aws --profile "$profile" eks
+cloudfox aws --profile "$aws_profile" eks
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### ECR repositories
@@ -419,10 +419,10 @@ var profile
 Enumerate ECR repos and generate docker pull/login commands.
 
 ```sh title:"Enumerate AWS ECR repositories with CloudFox"
-cloudfox aws --profile "$profile" ecr
+cloudfox aws --profile "$aws_profile" ecr
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### CodeBuild
@@ -430,10 +430,10 @@ var profile
 Enumerate CodeBuild projects/builds and review environment variables, service roles, and generated loot.
 
 ```sh title:"Enumerate AWS CodeBuild with CloudFox"
-cloudfox aws --profile "$profile" codebuild
+cloudfox aws --profile "$aws_profile" codebuild
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### CloudFormation
@@ -441,10 +441,10 @@ var profile
 List stacks and loot stack templates, parameters, and outputs; search for secrets and privileged roles.
 
 ```sh title:"Enumerate CloudFormation stacks with CloudFox"
-cloudfox aws --profile "$profile" cloudformation
+cloudfox aws --profile "$aws_profile" cloudformation
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ## aws data and exfil targets
@@ -454,10 +454,10 @@ var profile
 List S3 buckets and generate commands for selective listing or download with whichever profile later has object access.
 
 ```sh title:"Enumerate AWS S3 buckets with CloudFox"
-cloudfox aws --profile "$profile" buckets
+cloudfox aws --profile "$aws_profile" buckets
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Bucket loot commands
@@ -465,10 +465,10 @@ var profile
 Open the generated S3 follow-up command file after running `buckets`.
 
 ```sh title:"Show CloudFox bucket loot commands"
-sed -n '1,220p' "cloudfox-output/aws/$profile/loot/bucket-commands.txt"
+sed -n '1,220p' "cloudfox-output/aws/$aws_profile/loot/bucket-commands.txt"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Secrets
@@ -476,10 +476,10 @@ var profile
 List Secrets Manager and SSM Parameter Store secrets and generate pull commands for later use with stronger credentials.
 
 ```sh title:"List AWS secrets with CloudFox"
-cloudfox aws --profile "$profile" secrets
+cloudfox aws --profile "$aws_profile" secrets
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Secret loot commands
@@ -487,10 +487,10 @@ var profile
 Open the generated commands to pull specific secrets.
 
 ```sh title:"Show CloudFox secret pull commands"
-sed -n '1,220p' "cloudfox-output/aws/$profile/loot/pull-secrets-commands.txt"
+sed -n '1,220p' "cloudfox-output/aws/$aws_profile/loot/pull-secrets-commands.txt"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Databases
@@ -498,10 +498,10 @@ var profile
 Enumerate AWS database services for data target selection.
 
 ```sh title:"Enumerate AWS databases with CloudFox"
-cloudfox aws --profile "$profile" databases
+cloudfox aws --profile "$aws_profile" databases
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### File systems
@@ -509,10 +509,10 @@ var profile
 Enumerate EFS and FSx and generate mount commands for accessible file systems.
 
 ```sh title:"Enumerate AWS file systems with CloudFox"
-cloudfox aws --profile "$profile" filesystems
+cloudfox aws --profile "$aws_profile" filesystems
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### RAM shared resources
@@ -520,10 +520,10 @@ var profile
 Find inbound and outbound AWS RAM resource shares that can create cross-account attack paths.
 
 ```sh title:"Enumerate AWS RAM shares with CloudFox"
-cloudfox aws --profile "$profile" ram
+cloudfox aws --profile "$aws_profile" ram
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### SNS topics
@@ -531,10 +531,10 @@ var profile
 Enumerate SNS topics, summarize policies, and generate subscribe/publish commands where permitted.
 
 ```sh title:"Enumerate AWS SNS topics with CloudFox"
-cloudfox aws --profile "$profile" sns
+cloudfox aws --profile "$aws_profile" sns
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### SQS queues
@@ -542,10 +542,10 @@ var profile
 Enumerate SQS queues, summarize policies, and generate receive/send commands where permitted.
 
 ```sh title:"Enumerate AWS SQS queues with CloudFox"
-cloudfox aws --profile "$profile" sqs
+cloudfox aws --profile "$aws_profile" sqs
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ## aws cross-account
@@ -555,10 +555,10 @@ var profile
 Enumerate AWS Organizations accounts, management account context, OUs, and service control policy clues.
 
 ```sh title:"Enumerate AWS Organizations with CloudFox"
-cloudfox aws --profile "$profile" orgs
+cloudfox aws --profile "$aws_profile" orgs
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Outbound assumed roles
@@ -566,10 +566,10 @@ var profile
 Look for roles in other accounts that this account's principals can assume. This is intentionally excluded from all-checks because it is slow.
 
 ```sh title:"Enumerate outbound assumed roles with CloudFox"
-cloudfox aws --profile "$profile" outbound-assumed-roles
+cloudfox aws --profile "$aws_profile" outbound-assumed-roles
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### CAPE pmapper prep
@@ -577,10 +577,10 @@ var profile
 Build pmapper graphs for every in-scope profile before CAPE.
 
 ```sh title:"Build pmapper graphs from profile list"
-xargs -I{} pmapper --profile "{}" graph create < "$profile_file"
+xargs -I{} pmapper --profile "{}" graph create < "$aws_profile_file"
 ```
 <!-- cheat
-var profile_file
+var aws_profile_file
 -->
 
 ### CAPE admin paths
@@ -588,10 +588,10 @@ var profile_file
 Find cross-account privilege escalation paths that lead to admin across a profile list.
 
 ```sh title:"Find cross-account admin paths with CloudFox CAPE"
-cloudfox aws -l "$profile_file" cape --admin-only
+cloudfox aws -l "$aws_profile_file" cape --admin-only
 ```
 <!-- cheat
-var profile_file
+var aws_profile_file
 -->
 
 ### CAPE all paths
@@ -599,10 +599,10 @@ var profile_file
 Find cross-account privilege escalation paths without filtering to admin-only results. This can take hours.
 
 ```sh title:"Find all cross-account paths with CloudFox CAPE"
-cloudfox aws -l "$profile_file" cape
+cloudfox aws -l "$aws_profile_file" cape
 ```
 <!-- cheat
-var profile_file
+var aws_profile_file
 -->
 
 ### CAPE TUI
@@ -610,10 +610,10 @@ var profile_file
 Open the CloudFox terminal UI for CAPE results.
 
 ```sh title:"Open CloudFox CAPE TUI"
-cloudfox aws -l "$profile_file" cape tui --admin-only
+cloudfox aws -l "$aws_profile_file" cape tui --admin-only
 ```
 <!-- cheat
-var profile_file
+var aws_profile_file
 -->
 
 ## aws output review
@@ -623,10 +623,10 @@ var profile_file
 Search CSV output for admin, public, interesting, secret, token, and password indicators.
 
 ```sh title:"Search CloudFox CSV output for red-team leads"
-grep -RniE 'admin|CanPrivEscToAdmin|public|interesting|secret|token|password|key' "cloudfox-output/aws/$profile/csv" "cloudfox-output/aws/$profile/loot"
+grep -RniE 'admin|CanPrivEscToAdmin|public|interesting|secret|token|password|key' "cloudfox-output/aws/$aws_profile/csv" "cloudfox-output/aws/$aws_profile/loot"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Loot files
@@ -634,10 +634,10 @@ var profile
 List generated loot files, which often contain next-step AWS CLI, curl, kubectl, docker, mount, and pull commands.
 
 ```sh title:"List CloudFox loot files"
-find "cloudfox-output/aws/$profile/loot" -type f | sort
+find "cloudfox-output/aws/$aws_profile/loot" -type f | sort
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Public endpoints
@@ -645,10 +645,10 @@ var profile
 Print URL-only endpoint loot after running `endpoints`.
 
 ```sh title:"Show CloudFox endpoint URL loot"
-cat "cloudfox-output/aws/$profile/loot/endpoints-UrlsOnly.txt"
+cat "cloudfox-output/aws/$aws_profile/loot/endpoints-UrlsOnly.txt"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### IP target lists
@@ -656,10 +656,10 @@ var profile
 Print generated EC2 public IPs after running `instances`.
 
 ```sh title:"Show CloudFox EC2 public IP loot"
-cat "cloudfox-output/aws/$profile/loot/instances-ec2PublicIPs.txt"
+cat "cloudfox-output/aws/$aws_profile/loot/instances-ec2PublicIPs.txt"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ## azure quick refs

@@ -74,11 +74,11 @@ var module_name
 Create a Pacu session for one AWS account and import an AWS CLI profile into it.
 
 ```sh title:"Create Pacu session and import AWS profile"
-pacu --new-session "$session_name" --import-keys "$profile"
+pacu --new-session "$session_name" --import-keys "$aws_profile"
 ```
 <!-- cheat
 var session_name
-var profile
+var aws_profile
 -->
 
 ### Start existing session
@@ -139,10 +139,10 @@ delete_session
 Import one AWS CLI credential profile into the active Pacu session.
 
 ```sh title:"Import AWS CLI profile into Pacu"
-import_keys "$profile"
+import_keys "$aws_profile"
 ```
 <!-- cheat
-var profile
+var aws_profile
 -->
 
 ### Import all profiles
@@ -168,14 +168,14 @@ set_keys
 Add keys from the CLI. Format is alias, access key ID, secret key, and optional session token.
 
 ```sh title:"Set Pacu keys from CLI"
-pacu --session "$session_name" --set-keys "$key_alias,$access_key_id,$secret_access_key,$session_token"
+pacu --session "$session_name" --set-keys "$key_alias,$aws_access_key_id,$aws_secret_access_key,$aws_session_token"
 ```
 <!-- cheat
 var session_name
 var key_alias
-var access_key_id
-var secret_access_key
-var session_token
+var aws_access_key_id
+var aws_secret_access_key
+var aws_session_token
 -->
 
 ### Swap keys
@@ -212,10 +212,10 @@ var session_name
 Assume an IAM role from the current Pacu credentials, store the temporary credentials, and switch to them.
 
 ```sh title:"Assume role from Pacu"
-assume_role "$role_arn"
+assume_role "$aws_role_arn"
 ```
 <!-- cheat
-var role_arn
+var aws_role_arn
 -->
 
 ### Assume role with MFA
@@ -223,11 +223,11 @@ var role_arn
 Assume an IAM role that requires MFA.
 
 ```sh title:"Assume role from Pacu with MFA"
-assume_role "$role_arn" "$mfa_serial_arn" "$token_code"
+assume_role "$aws_role_arn" "$aws_mfa_serial_arn" "$token_code"
 ```
 <!-- cheat
-var role_arn
-var mfa_serial_arn
+var aws_role_arn
+var aws_mfa_serial_arn
 var token_code
 -->
 
@@ -265,11 +265,11 @@ regions
 Limit the active session to engagement-approved regions. Use `all` to reset to every supported region.
 
 ```sh title:"Set Pacu target regions"
-set_regions "$region_one" "$region_two"
+set_regions "$aws_region_one" "$aws_region_two"
 ```
 <!-- cheat
-var region_one := us-east-1
-var region_two := us-west-2
+var aws_region_one := us-east-1
+var aws_region_two := us-west-2
 -->
 
 ### Set regions from CLI
@@ -277,12 +277,12 @@ var region_two := us-west-2
 Set engagement-approved target regions from the CLI.
 
 ```sh title:"Set Pacu target regions from CLI"
-pacu --session "$session_name" --set-regions "$region_one" "$region_two"
+pacu --session "$session_name" --set-regions "$aws_region_one" "$aws_region_two"
 ```
 <!-- cheat
 var session_name
-var region_one := us-east-1
-var region_two := us-west-2
+var aws_region_one := us-east-1
+var aws_region_two := us-west-2
 -->
 
 ### Reset regions
@@ -404,11 +404,11 @@ var module_args
 Run a module against explicit comma-separated regions when the module supports `--regions`.
 
 ```sh title:"Run Pacu module in selected regions"
-run "$module_name" --regions "$region_list"
+run "$module_name" --regions "$aws_region_list"
 ```
 <!-- cheat
 var module_name
-var region_list := us-east-1,us-west-2
+var aws_region_list := us-east-1,us-west-2
 -->
 
 ### Execute module from CLI
@@ -461,10 +461,10 @@ aws sts get-caller-identity
 Use Pacu's integrated AWS CLI shell support with pipes and `jq`.
 
 ```sh title:"Run AWS CLI through Pacu and pipe to jq"
-aws iam list-attached-user-policies --user-name "$user_name" | jq '.AttachedPolicies[]?.PolicyArn'
+aws iam list-attached-user-policies --user-name "$target_user" | jq '.AttachedPolicies[]?.PolicyArn'
 ```
 <!-- cheat
-var user_name
+var target_user
 -->
 
 ## enum workflow
@@ -519,10 +519,10 @@ run iam__enum_permissions --all-users
 Query enumerated user and role permissions for action patterns.
 
 ```sh title:"Pacu query enumerated IAM actions"
-run iam__enum_action_query --query "$iam_action_query"
+run iam__enum_action_query --query "$aws_iam_action_query"
 ```
 <!-- cheat
-var iam_action_query := s3:get*,iam:create*
+var aws_iam_action_query := s3:get*,iam:create*
 -->
 
 ### IAM credential report
@@ -694,10 +694,10 @@ run vpc__enum_lateral_movement
 Decode an AWS access key ID to recover the account ID without making AWS API calls.
 
 ```sh title:"Pacu decode AWS access key ID"
-run iam__decode_accesskey_id --access-key-id "$access_key_id"
+run iam__decode_accesskey_id --access-key-id "$aws_access_key_id"
 ```
 <!-- cheat
-var access_key_id
+var aws_access_key_id
 -->
 
 ### Detect honeytoken keys
@@ -714,11 +714,11 @@ run iam__detect_honeytokens
 Enumerate IAM roles in another AWS account when you have permitted test keys with the required IAM permissions.
 
 ```sh title:"Pacu enumerate IAM roles in external account"
-run iam__enum_roles --account-id "$account_id" --role-name "$role_name"
+run iam__enum_roles --account-id "$aws_account_id" --role-name "$aws_role_name"
 ```
 <!-- cheat
-var account_id
-var role_name
+var aws_account_id
+var aws_role_name
 -->
 
 ### Enumerate external users
@@ -726,11 +726,11 @@ var role_name
 Enumerate IAM users in another AWS account when you have permitted test keys with the required IAM permissions.
 
 ```sh title:"Pacu enumerate IAM users in external account"
-run iam__enum_users --account-id "$account_id" --role-name "$role_name"
+run iam__enum_users --account-id "$aws_account_id" --role-name "$aws_role_name"
 ```
 <!-- cheat
-var account_id
-var role_name
+var aws_account_id
+var aws_role_name
 -->
 
 ### Enumerate public snapshots by keyword
@@ -749,10 +749,10 @@ var keyword
 Search public EBS snapshots associated with an AWS account ID.
 
 ```sh title:"Pacu enumerate public EBS snapshots by account"
-run ebs__enum_snapshots_unauth --account-id "$account_id"
+run ebs__enum_snapshots_unauth --account-id "$aws_account_id"
 ```
 <!-- cheat
-var account_id
+var aws_account_id
 -->
 
 ## privilege escalation
@@ -835,11 +835,11 @@ run systemsmanager__rce_ec2
 Attack Cognito user pool clients and identity pools using a test username and password.
 
 ```sh title:"Pacu attack Cognito"
-run cognito__attack --username "$username" --password "$password"
+run cognito__attack --username "$target_user" --password "$target_pass"
 ```
 <!-- cheat
-var username
-var password
+var target_user
+var target_pass
 -->
 
 ### API Gateway create keys
@@ -916,10 +916,10 @@ run s3__download_bucket --names-only
 Download object contents for selected bucket names.
 
 ```sh title:"Pacu download selected S3 buckets"
-run s3__download_bucket --dl-names "$bucket_names"
+run s3__download_bucket --dl-names "$s3_bucket_names"
 ```
 <!-- cheat
-var bucket_names
+var s3_bucket_names
 -->
 
 ### S3 download bucket workflow
@@ -1094,11 +1094,11 @@ run waf__enum
 Try to assume role names across organization member accounts when the caller has AssumeRole rights.
 
 ```sh title:"Pacu organizations assume role"
-run organizations__assume_role --accounts "$account_ids" --role-names "$role_names"
+run organizations__assume_role --accounts "$aws_account_ids" --role-names "$aws_role_names"
 ```
 <!-- cheat
-var account_ids
-var role_names
+var aws_account_ids
+var aws_role_names
 -->
 
 ### SNS subscribe
