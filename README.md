@@ -50,6 +50,7 @@ A minimal, repo-local collection of [CheatMD](https://github.com/Gubarz/cheatmd)
 | `$aws_role_names` | Multiple IAM role names, formatted as the target tool expects. |
 | `$aws_role_arn` | Full IAM role ARN. |
 | `$aws_mfa_serial_arn` | MFA device serial ARN for AWS role assumption. |
+| `$aws_mfa_token_code` | MFA token code for AWS role assumption. |
 | `$aws_region` | AWS region. |
 | `$aws_region_one` | First AWS region when a command compares or combines regions. |
 | `$aws_region_two` | Second AWS region when a command compares or combines regions. |
@@ -67,7 +68,9 @@ A minimal, repo-local collection of [CheatMD](https://github.com/Gubarz/cheatmd)
 | `$aws_source_ip` | Source IP or CIDR to allow, whitelist, or probe from during AWS testing. |
 | `$aws_principal_arn` | AWS principal ARN used in trust, permission, or backdoor testing. |
 | `$aws_sns_topic_arn` | SNS topic ARN. |
+| `$aws_sns_email` | Email address used for SNS subscription testing. |
 | `$aws_callback_url` | Operator-controlled callback URL for approved AWS testing. |
+| `$aws_userdata_script_file` | Local script file used as EC2 user data during approved AWS testing. |
 | `$aws_policy_folder` | Folder containing exported IAM policy JSON for offline analysis. |
 
 ### Kubernetes
