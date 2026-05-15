@@ -63,3 +63,31 @@ var ca_cert
 var client_cert
 var client_key
 -->
+
+## recon
+
+### Server info
+
+Read Redis server information.
+
+```sh title:"Read Redis server info"
+redis-cli -h "$rhost_ip" -p "$rport" -a "$pass" INFO
+```
+<!-- cheat
+var rhost_ip
+var rport := 6379
+var pass
+-->
+
+### Key count
+
+List database key counts.
+
+```sh title:"List Redis key counts"
+redis-cli -h "$rhost_ip" -p "$rport" -a "$pass" DBSIZE
+```
+<!-- cheat
+var rhost_ip
+var rport := 6379
+var pass
+-->

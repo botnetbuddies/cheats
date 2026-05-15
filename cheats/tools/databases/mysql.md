@@ -69,6 +69,33 @@ var rhost_ip
 var database
 -->
 
+### Remote show databases
+
+List databases visible to the authenticated remote user.
+
+```sh title:"List remote MySQL databases"
+mysql -u "$user" -p"$pass" -h "$rhost_ip" -e "show databases;"
+```
+<!-- cheat
+var user
+var pass
+var rhost_ip
+-->
+
+### Remote show tables
+
+List tables in a remote database.
+
+```sh title:"List remote MySQL tables"
+mysql -u "$user" -p"$pass" -h "$rhost_ip" -D "$database" -e "show tables;"
+```
+<!-- cheat
+var user
+var pass
+var rhost_ip
+var database
+-->
+
 ### Create database
 
 Create a UTF8MB4 database.

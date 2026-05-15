@@ -1,5 +1,10 @@
 # JwtTool
 
+<!-- cheat
+export jwttool
+import wordlist_passwords
+-->
+
 ## tests
 
 ### All tests
@@ -32,9 +37,9 @@ var jwttool_id
 Brute force a JWT signing key with a wordlist.
 
 ```sh title:"Brute force JWT signing key"
-python3 jwt_tool.py -d "$wordlist" "$jwt_token"
+python3 jwt_tool.py -d "$wordlists" "$jwt_token"
 ```
 <!-- cheat
-var wordlist
+import jwttool
 var jwt_token
 -->

