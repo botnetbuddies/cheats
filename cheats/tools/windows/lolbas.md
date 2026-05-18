@@ -4288,6 +4288,7 @@ wbadmin start recovery -version:<VERSIONIDENTIFIER> -recoverytarget:$dir -itemty
 ```
 <!-- cheat
 var dir
+var VERSIONIDENTIFIER := <VERSIONIDENTIFIER>
 -->
 
 ## wbemtest.exe
