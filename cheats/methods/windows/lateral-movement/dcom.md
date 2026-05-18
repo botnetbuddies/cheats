@@ -94,6 +94,7 @@ Instantiate the ShellBrowserWindow type returned from the remote host.
 $obj = [System.Activator]::CreateInstance($com)
 ```
 <!-- cheat
+var com := $com
 -->
 
 ### Execute through ShellBrowserWindow

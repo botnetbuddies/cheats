@@ -50,6 +50,7 @@ New-MachineAccount -MachineAccount "$computer_name" -Password $($password) -Verb
 ```
 <!-- cheat
 var computer_name
+var password := $password
 -->
 
 ## Linux

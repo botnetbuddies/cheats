@@ -71,6 +71,7 @@ $credential = New-Object System.Management.Automation.PSCredential("$domain\$use
 <!-- cheat
 import domain_ip
 import users
+var secure_password := $secure_password
 -->
 
 ### PowerShell start process
@@ -84,6 +85,7 @@ Start-Process "$process" -Credential $credential
 ```
 <!-- cheat
 var process
+var credential := $credential
 -->
 
 ### PowerView credentialed Set-DomainObject
@@ -100,6 +102,7 @@ import domain_ip
 var dc_fqdn
 var target_user
 var spn
+var credential := $credential
 -->
 
 ### SharpLdapWhoami default
