@@ -73,6 +73,7 @@ Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'Owner' 
 <!-- cheat
 var controlled_principal_sid
 var target_object_dn
+var ldap
 -->
 
 ## Linux

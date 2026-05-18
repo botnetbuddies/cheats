@@ -2511,6 +2511,7 @@ cat $tmp_file
 <!-- cheat
 var file_in
 var tmp_file
+var CONTAINER_ID
 -->
 
 ### docker file-write
@@ -2526,6 +2527,7 @@ docker cp $CONTAINER_ID $file_out
 var data
 var file_out
 var tmp_file
+var CONTAINER_ID
 -->
 
 ## dos2unix
@@ -3584,6 +3586,7 @@ It can be used to generate core dumps of running processes (`$PID`). Such files 
 gcore $PID
 ```
 <!-- cheat
+var PID
 -->
 
 ## gdb

@@ -359,7 +359,9 @@ Subtree count using a pre-set `$ou` variable.
 ```sh title:"Subtree user count using preset $ou variable"
 (Get-ADUser -SearchBase $ou -SearchScope Subtree -Filter *).Count
 ```
-<!-- cheat -->
+<!-- cheat
+var ou
+-->
 
 ### Count adminCount=1 groups
 
@@ -377,7 +379,9 @@ ASREPRoast candidates excluding Protected Users members (whose RC4 is disabled a
 ```sh title:"ASREPRoast candidates, excluding Protected Users"
 Get-ADUser -Filter * -Properties DoesNotRequirePreAuth | Where-Object { $_.DoesNotRequirePreAuth -eq $true -and $_.SamAccountName -notin $protected } | Select-Object SamAccountName
 ```
-<!-- cheat -->
+<!-- cheat
+var protected
+-->
 
 ### All SPN holders
 

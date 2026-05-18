@@ -37,6 +37,7 @@ New-MachineAccount -MachineAccount "ControlledComputer" -Password $($password) -
 import domain_ip
 var domain
 var dc_fqdn
+var password
 -->
 
 ### Step 3: Clear SPN on machine account (PowerView)

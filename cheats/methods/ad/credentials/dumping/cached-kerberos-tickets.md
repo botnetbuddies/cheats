@@ -219,7 +219,11 @@ Reconstruct a usable ccache file from the extracted KEYRING blobs by prepending 
 ```sh title:"Reconstruct ccache file from KEYRING key blobs"
 echo "${HEADER}${PRINCIPALS}${KEY}" | xxd -r -p > ticket.ccache
 ```
-<!-- cheat -->
+<!-- cheat
+var HEADER
+var PRINCIPALS
+var KEY
+-->
 
 ### ccacheExtractor (KCM storage)
 

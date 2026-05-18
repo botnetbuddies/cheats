@@ -67,6 +67,7 @@ Invoke-PassTheCert -Action AddGroupMember -LdapConnection $ldap -Identity "$targ
 <!-- cheat
 var target_user_dn
 var target_group_dn
+var ldap
 -->
 
 ## Linux

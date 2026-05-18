@@ -48,6 +48,7 @@ Set-DomainUserPassword -Identity '$target_user' -AccountPassword $new_password
 ```
 <!-- cheat
 var target_user
+var new_password
 -->
 
 ### Step 3: Import module (Invoke-PassTheCert)
@@ -86,6 +87,7 @@ Invoke-PassTheCert -Action 'UpdatePasswordOfIdentity' -LdapConnection $ldap -Ide
 <!-- cheat
 var target_user_dn
 var target_pass
+var ldap
 -->
 
 ## Linux

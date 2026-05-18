@@ -382,3 +382,5 @@ var binary_path
 sc start $service
 ```
 <!-- cheat
+var service
+-->

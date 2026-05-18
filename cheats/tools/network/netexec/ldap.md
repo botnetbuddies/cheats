@@ -69,6 +69,7 @@ import passwords
 import domain_ip
 import users
 import nxc_auth
+var users_file
 -->
 
 ### ASREPRoast authenticated

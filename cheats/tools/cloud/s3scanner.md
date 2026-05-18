@@ -524,7 +524,9 @@ providers:
       - "region1"
 YAML
 ```
-<!-- cheat -->
+<!-- cheat
+var REGION
+-->
 
 ### Database output
 

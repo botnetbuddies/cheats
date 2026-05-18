@@ -87,6 +87,7 @@ Invoke-PassTheCert -Action 'CreateInboundACE' -LdapConnection $ldap -Identity "$
 <!-- cheat
 var controlled_user_dn
 var target_object_dn
+var ldap
 -->
 
 ### Step 4: Import module for DCSync (Invoke-PassTheCert)
@@ -125,6 +126,7 @@ Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'DCSync'
 <!-- cheat
 var controlled_user_dn
 var domain_dn
+var ldap
 -->
 
 ## Linux

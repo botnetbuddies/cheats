@@ -101,6 +101,7 @@ Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'Kerbero
 <!-- cheat
 var target_user_dn
 var spn_value
+var ldap
 -->
 
 ## Linux

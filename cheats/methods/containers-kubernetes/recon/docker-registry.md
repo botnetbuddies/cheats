@@ -59,6 +59,7 @@ curl -sk -u "$username:$password" "$registry_url/v2/_catalog"
 <!-- cheat
 var username
 var registry_url
+var password
 -->
 
 ### Repository tags

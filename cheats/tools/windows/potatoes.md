@@ -24,7 +24,7 @@ var command
 
 ## GodPotato
 
-### Execute command
+### Execute command 2
 
 Execute a command as SYSTEM on targets vulnerable to the GodPotato COM/DCOM path.
 
@@ -64,7 +64,7 @@ var clsid
 
 ## RoguePotato
 
-### Execute command
+### Execute command 3
 
 Run RoguePotato with a remote OXID resolver host.
 
