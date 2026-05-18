@@ -14,6 +14,7 @@ import webserver
 import tun_ip
 import xss_quick_payloads
 var port
+var lport
 -->
 
 ## scan

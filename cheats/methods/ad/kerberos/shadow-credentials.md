@@ -73,6 +73,7 @@ Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'ShadowC
 ```
 <!-- cheat
 var target_dn
+var ldap
 -->
 
 ## Linux

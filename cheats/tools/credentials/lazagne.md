@@ -13,7 +13,7 @@ lazagne.exe all
 
 ## Linux
 
-### All modules
+### All modules 2
 
 Run all LaZagne modules on Linux.
 

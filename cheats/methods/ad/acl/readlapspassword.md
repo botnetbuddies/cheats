@@ -99,6 +99,7 @@ Invoke-PassTheCert -Action 'LDAPEnum' -LdapConnection $ldap -Enum 'LAPS' -Search
 ```
 <!-- cheat
 var domain_dn
+var ldap
 -->
 
 ## Linux

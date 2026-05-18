@@ -107,6 +107,7 @@ hashcat -m 5600 -a 1 "$hash_file" "$wordlist_a" "$wordlist_b"
 <!-- cheat
 var wordlist_a
 var wordlist_b
+var hash_file
 -->
 
 ## hashcat wordlists

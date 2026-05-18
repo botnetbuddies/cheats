@@ -54,7 +54,9 @@ Filter resolved ACLs to only those granted to a specific SID. Used after Convert
 ```sh title:"Filter ACLs to entries granted to a specific SID"
 Get-DomainObjectACL -ResolveGUIDs -Identity * | ? {$_.SecurityIdentifier -eq $sid} 
 ```
-<!-- cheat -->
+<!-- cheat
+var sid
+-->
 
 ### Object ACL
 

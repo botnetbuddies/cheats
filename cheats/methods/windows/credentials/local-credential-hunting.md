@@ -256,14 +256,14 @@ $credential = Import-Clixml -Path $cred_file; $credential.GetNetworkCredential()
 var cred_file
 -->
 
-### Wi-Fi profiles
+### Wi-Fi profiles 2
 
 ```cmd title:"List saved Wi-Fi profiles via netsh"
 netsh wlan show profile
 ```
 <!-- cheat -->
 
-### Wi-Fi password
+### Wi-Fi password 2
 
 ```cmd title:"Reveal cleartext Wi-Fi password for a specific SSID"
 netsh wlan show profile $ssid key=clear
@@ -353,7 +353,7 @@ $result = Get-WmiObject -Namespace "root\ccm\clientSDK" -Class CCM_Application -
 
 ## Files and Registry (Credentials)
 
-### PuTTY sessions
+### PuTTY sessions 2
 
 ```cmd title:"Search PuTTY session registry for credentials and proxy info"
 reg query "HKCU\Software\SimonTatham\PuTTY\Sessions" /s | findstr "HostName PortNumber UserName PublicKeyFile PortForwardings ConnectionSharing ProxyPassword ProxyUsername"

@@ -46,7 +46,7 @@ var device_id
 
 ## pywhisker
 
-### List shadow credentials
+### List shadow credentials 2
 
 List KeyCredential entries from Linux.
 
@@ -60,7 +60,7 @@ var pass
 var target_samname
 -->
 
-### Add shadow credentials
+### Add shadow credentials 2
 
 Add a KeyCredential and write the generated PFX material to a named file.
 
@@ -75,7 +75,7 @@ var target_samname
 var output_name
 -->
 
-### Remove shadow credential
+### Remove shadow credential 2
 
 Remove a KeyCredential by DeviceID.
 
@@ -206,6 +206,7 @@ Invoke-PassTheCert -Action AddGroupMember -LdapConnection $ldap -Identity "$targ
 <!-- cheat
 var target_user_dn
 var target_group_dn
+var ldap
 -->
 
 ### Grant DCSync
@@ -218,4 +219,5 @@ Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'DCSync'
 <!-- cheat
 var controlled_user_dn
 var domain_dn
+var ldap
 -->

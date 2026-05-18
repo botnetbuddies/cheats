@@ -287,6 +287,7 @@ var spn
 var rhost_name
 var group_id
 var name
+var domain_sid
 -->
 
 ## Impacket describeTicket
@@ -377,6 +378,7 @@ import domain_ip
 import users
 var nthash
 var extra_sid
+var domain_sid
 -->
 
 ## GetUserSPNs

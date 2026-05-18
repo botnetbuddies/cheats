@@ -49,7 +49,9 @@ Remove all running and stopped containers. Requires typing `YES` before it runs.
 ```sh title:"Confirm, then remove all containers"
 read -r -p "Remove all Docker containers? Type YES: " confirm; [ "$confirm" = "YES" ] && docker rm -f $(docker ps -aq)
 ```
-<!-- cheat -->
+<!-- cheat
+var confirm
+-->
 
 ### Exec bash
 

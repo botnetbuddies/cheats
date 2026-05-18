@@ -88,6 +88,7 @@ Invoke-PassTheCert -Action 'OverwriteValueInAttribute' -LdapConnection $ldap -Ob
 <!-- cheat
 var target_user_dn
 var lhost
+var ldap
 -->
 
 ### Step 4: Import module for scriptPath (Invoke-PassTheCert)
@@ -126,6 +127,7 @@ Invoke-PassTheCert -Action 'OverwriteValueInAttribute' -LdapConnection $ldap -Ob
 <!-- cheat
 var target_user_dn
 var lhost
+var ldap
 -->
 
 ## Linux

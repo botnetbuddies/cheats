@@ -107,6 +107,7 @@ Invoke-PassTheCert -Action 'LDAPEnum' -LdapConnection $ldap -Enum 'gMSA' -Object
 ```
 <!-- cheat
 var target_gmsa_dn
+var ldap
 -->
 
 ## Linux
