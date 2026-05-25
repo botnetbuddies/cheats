@@ -6,6 +6,8 @@
 
 Run local forward with Ssh.
 
+SSH local port forward: bind a local port on your box that tunnels through the SSH host to the named target/port.
+
 ```sh title:"Ssh Run Local Forward"
 ssh -L $lport:$domain:$rport $user@$domain
 ```
@@ -19,6 +21,8 @@ var rport
 ### Reverse forward
 
 Start reverse forward with Ssh.
+
+SSH reverse forward: open a port on the SSH host that tunnels back to a local port. Used to expose your listener to the target's network.
 
 ```sh title:"Ssh Start Reverse Forward"
 ssh -R $rport:localhost:$lport $user@$domain
@@ -34,6 +38,8 @@ var lport
 
 Start dynamic SOCKS proxy with Ssh.
 
+Start a dynamic SOCKS proxy through SSH.
+
 ```sh title:"Ssh Start Dynamic SOCKS Proxy"
 ssh -D "$socks_port" "$user@$rhost_ip"
 ```
@@ -46,6 +52,8 @@ var rhost_ip
 ### Local forward explicit host
 
 Run local forward explicit host with Ssh.
+
+Bind a local port that forwards through SSH to a chosen remote host and port.
 
 ```sh title:"Ssh Run Local Forward Explicit Host"
 ssh -L "$lport:$remote_host:$rport" "$user@$rhost_ip"
@@ -61,6 +69,8 @@ var rhost_ip
 ### Remote forward explicit bind
 
 Start remote forward explicit bind with Ssh.
+
+Open a remote bind address and port that forwards back to a local host and port. Requires `GatewayPorts yes` for non-loopback remote binds.
 
 ```sh title:"Ssh Start Remote Forward Explicit Bind"
 ssh -R "$remote_bind:$rport:$local_host:$lport" "$user@$rhost_ip"
@@ -80,6 +90,8 @@ var rhost_ip
 
 Start agent with Ssh.
 
+Start ssh-agent and add your default key.
+
 ```sh title:"Ssh Start Agent"
 eval "$(ssh-agent -s)"; ssh-add
 ```
@@ -88,6 +100,8 @@ eval "$(ssh-agent -s)"; ssh-add
 ### Keyscan
 
 Scan keyscan with Ssh.
+
+Fetch a server public SSH host key.
 
 ```sh title:"Ssh Scan Keyscan"
 ssh-keyscan -t rsa -p "$rport" "$rhost_ip"
@@ -103,6 +117,8 @@ var rport := 22
 
 Set old key exchange with Ssh.
 
+Connect to a legacy SSH server that only supports group1 SHA1 key exchange.
+
 ```sh title:"Ssh Set Old Key Exchange"
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 "$user@$rhost_ip"
 ```
@@ -116,6 +132,8 @@ var rhost_ip
 ### Enum users
 
 Enumerate enum users with Ssh.
+
+Enumerate SSH usernames with Metasploit.
 
 ```sh title:"Ssh Enumerate Enum Users"
 msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS $rhost_ip; set USER_FILE $wordlists_users; set CHECK_FALSE true; run; exit"

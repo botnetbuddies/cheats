@@ -6,6 +6,8 @@
 
 Show version with GPG.
 
+Print the installed GPG version and supported algorithms.
+
 ```sh title:"GPG Show Version"
 gpg --version
 ```
@@ -14,6 +16,8 @@ gpg --version
 ### Generate key
 
 Generate key with GPG.
+
+Start the interactive key generation wizard.
 
 ```sh title:"GPG Generate Key"
 gpg --gen-key
@@ -24,6 +28,8 @@ gpg --gen-key
 
 List keys with GPG.
 
+List public keys in the local keyring.
+
 ```sh title:"GPG List Keys"
 gpg --list-keys
 ```
@@ -32,6 +38,8 @@ gpg --list-keys
 ### Send public key
 
 Start send public key with GPG.
+
+Upload a public key to a keyserver.
 
 ```sh title:"GPG Start Send Public Key"
 gpg --keyserver "$key_server" --send-keys "$public_key"
@@ -45,6 +53,8 @@ var public_key
 
 Run export public key with GPG.
 
+Export a public key to a file.
+
 ```sh title:"GPG Run Export Public Key"
 gpg --output "$output_file" --export "$key_name"
 ```
@@ -56,6 +66,8 @@ var key_name
 ### Import public key
 
 Run import public key with GPG.
+
+Import a public key file into the local keyring.
 
 ```sh title:"GPG Run Import Public Key"
 gpg --import "$input_file"
@@ -70,6 +82,8 @@ var input_file
 
 Run encrypt file with GPG.
 
+Encrypt a file for a recipient key.
+
 ```sh title:"GPG Run Encrypt File"
 gpg --output "$output_file" --encrypt --recipient "$public_key" "$input_file"
 ```
@@ -82,6 +96,8 @@ var input_file
 ### Decrypt file
 
 Run decrypt file with GPG.
+
+Decrypt a GPG-encrypted file to an output path.
 
 ```sh title:"GPG Run Decrypt File"
 gpg --output "$output_file" --decrypt "$input_file"
@@ -97,6 +113,8 @@ var input_file
 
 Create sign file with GPG.
 
+Create a signed GPG message containing the file data.
+
 ```sh title:"GPG Create Sign File"
 gpg --output "$signature_file" --sign "$input_file"
 ```
@@ -108,6 +126,8 @@ var input_file
 ### Verify signed file
 
 Run verify signed file with GPG.
+
+Verify and decrypt a signed GPG message.
 
 ```sh title:"GPG Run Verify Signed File"
 gpg --output "$output_file" --decrypt "$signature_file"
@@ -121,6 +141,8 @@ var signature_file
 
 Create clearsign file with GPG.
 
+Create a cleartext signed file.
+
 ```sh title:"GPG Create Clearsign File"
 gpg --clearsign "$input_file"
 ```
@@ -131,6 +153,8 @@ var input_file
 ### Detached signature
 
 Create detached signature with GPG.
+
+Create a detached signature for a file.
 
 ```sh title:"GPG Create Detached Signature"
 gpg --output "$signature_file" --detach-sig "$input_file"
@@ -143,6 +167,8 @@ var input_file
 ### Verify detached signature
 
 Run verify detached signature with GPG.
+
+Verify a detached signature against its original file.
 
 ```sh title:"GPG Run Verify Detached Signature"
 gpg --verify "$signature_file" "$input_file"

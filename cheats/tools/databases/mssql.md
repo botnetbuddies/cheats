@@ -6,6 +6,8 @@
 
 Run sqsh with MSSQL.
 
+Connect to MSSQL with sqsh.
+
 ```sh title:"MSSQL Run Sqsh"
 sqsh -S "$rhost_ip:$rport" -U "$user" -P "$pass"
 ```
@@ -22,6 +24,8 @@ var pass
 
 Enumerate nmap enum with MSSQL.
 
+Run MSSQL nmap enumeration scripts with optional SQL credentials.
+
 ```sh title:"MSSQL Enumerate Nmap Enum"
 nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args "mssql.instance-port=$rport,mssql.username=$user,mssql.password=$pass,mssql.instance-name=$instance_name" -sV -p "$rport" "$rhost_ip"
 ```
@@ -36,6 +40,8 @@ var instance_name := MSSQLSERVER
 ### Metasploit enum
 
 Enumerate metasploit enum with MSSQL.
+
+Enumerate MSSQL configuration with Metasploit.
 
 ```sh title:"MSSQL Enumerate Metasploit Enum"
 msfconsole -x "use auxiliary/admin/mssql/mssql_enum; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; set PASSWORD $pass; run; exit"
@@ -53,6 +59,8 @@ var pass
 
 Enumerate SQL logins with MSSQL.
 
+Enumerate MSSQL logins with Metasploit and wordlists.
+
 ```sh title:"MSSQL Enumerate SQL Logins"
 msfconsole -x "use admin/mssql/mssql_enum_sql_logins; set RHOSTS $rhost_ip; set RPORT $rport; set USER_FILE $user_file; set PASS_FILE $pass_file; run; exit"
 ```
@@ -69,6 +77,8 @@ var pass_file
 
 Start link crawler with MSSQL.
 
+Run Metasploit MSSQL link crawler.
+
 ```sh title:"MSSQL Start Link Crawler"
 msfconsole -x "use exploit/windows/mssql/mssql_linkcrawler; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; set PASSWORD $pass; run; exit"
 ```
@@ -84,6 +94,8 @@ var pass
 ### Impacket Windows auth
 
 Spawn impacket windows auth with MSSQL.
+
+Open an interactive MSSQL shell with Windows authentication.
 
 ```sh title:"MSSQL Spawn Impacket Windows Auth"
 mssqlclient.py -windows-auth "$auth_target" $auth_flags

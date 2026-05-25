@@ -6,6 +6,8 @@
 
 Create rar with RAR.
 
+Create a RAR archive from a directory.
+
 ```sh title:"RAR Create Rar"
 rar a "$archive_name.rar" "$directory"
 ```
@@ -19,6 +21,8 @@ var directory
 ### Extract rar
 
 Extract rar with RAR.
+
+Extract a RAR archive with full paths.
 
 ```sh title:"RAR Extract Rar"
 unrar x "$archive_file"

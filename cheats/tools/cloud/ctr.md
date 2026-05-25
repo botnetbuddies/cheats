@@ -19,6 +19,10 @@ tags: containers containerd ctr tools
 
 Show version with ctr.
 
+#sh #ctr #containerd
+
+Print the ctr client and server version.
+
 ```sh title:"Ctr Show Version"
 ctr version
 ```
@@ -29,6 +33,10 @@ ctr version
 #sh #ctr #containerd
 
 List images with ctr.
+
+#sh #ctr #containerd
+
+List containerd images.
 
 ```sh title:"Ctr List Images"
 ctr images list
@@ -41,6 +49,10 @@ ctr images list
 
 List containers with ctr.
 
+#sh #ctr #containerd
+
+List containerd containers.
+
 ```sh title:"Ctr List Containers"
 ctr containers list
 ```
@@ -51,6 +63,10 @@ ctr containers list
 #sh #ctr #containerd
 
 List tasks with ctr.
+
+#sh #ctr #containerd
+
+List running containerd tasks.
 
 ```sh title:"Ctr List Tasks"
 ctr tasks list
@@ -63,6 +79,10 @@ ctr tasks list
 
 List kubernetes namespace images with ctr.
 
+#sh #ctr #containerd #kubernetes
+
+List images in the Kubernetes containerd namespace.
+
 ```sh title:"Ctr List Kubernetes Namespace Images"
 ctr --namespace k8s.io images list
 ```
@@ -73,6 +93,10 @@ ctr --namespace k8s.io images list
 #sh #ctr #containerd
 
 Execute host mount container with ctr.
+
+#sh #ctr #containerd
+
+Run an image with the host filesystem bind-mounted.
 
 ```sh title:"Ctr Execute Host Mount Container"
 ctr run --mount type=bind,src=/,dst=/host,options=rbind:rw -t "$image_name" "$container_name" /bin/sh

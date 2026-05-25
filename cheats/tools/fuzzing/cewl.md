@@ -6,6 +6,8 @@
 
 List scrape website with CeWL.
 
+Build a custom wordlist by scraping words from a website.
+
 ```sh title:"CeWL List Scrape Website"
 cewl -w "$output_file" -d "$depth" -m "$min_word_size" "$url"
 ```

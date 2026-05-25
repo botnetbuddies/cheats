@@ -6,6 +6,8 @@
 
 List contexts with Kubernetes.
 
+Show all kubeconfig contexts and highlight the current one.
+
 ```sh title:"Kubernetes List Contexts"
 kubectl config get-contexts
 ```
@@ -15,6 +17,8 @@ kubectl config get-contexts
 
 Run current context with Kubernetes.
 
+Print the active kubeconfig context.
+
 ```sh title:"Kubernetes Run Current Context"
 kubectl config current-context
 ```
@@ -23,6 +27,8 @@ kubectl config current-context
 ### Switch context
 
 Run switch context with Kubernetes.
+
+Set the active kubeconfig context.
 
 ```sh title:"Kubernetes Run Switch Context"
 kubectl config use-context "$context"
@@ -34,6 +40,8 @@ var context
 ### Explain resource
 
 Show explain resource with Kubernetes.
+
+Print Kubernetes API documentation for a resource type or field path.
 
 ```sh title:"Kubernetes Show Explain Resource"
 kubectl explain "$resource"
@@ -48,6 +56,8 @@ var resource
 
 Discover nodes with Kubernetes.
 
+List cluster nodes.
+
 ```sh title:"Kubernetes Discover Nodes"
 kubectl get nodes
 ```
@@ -56,6 +66,8 @@ kubectl get nodes
 ### Nodes wide
 
 Discover nodes wide with Kubernetes.
+
+List cluster nodes with IPs, OS, kernel, runtime, and other useful detail.
 
 ```sh title:"Kubernetes Discover Nodes Wide"
 kubectl get nodes -o wide
@@ -66,6 +78,8 @@ kubectl get nodes -o wide
 
 Discover namespaces with Kubernetes.
 
+List namespaces.
+
 ```sh title:"Kubernetes Discover Namespaces"
 kubectl get namespaces
 ```
@@ -74,6 +88,8 @@ kubectl get namespaces
 ### Pods in namespace
 
 Discover pods in namespace with Kubernetes.
+
+List pods in a namespace.
 
 ```sh title:"Kubernetes Discover Pods in Namespace"
 kubectl get pods -n "$namespace"
@@ -86,6 +102,8 @@ var namespace
 
 Discover pods all namespaces with Kubernetes.
 
+List pods across all namespaces.
+
 ```sh title:"Kubernetes Discover Pods All Namespaces"
 kubectl get pods --all-namespaces
 ```
@@ -94,6 +112,8 @@ kubectl get pods --all-namespaces
 ### Services in namespace
 
 Discover services in namespace with Kubernetes.
+
+List services in a namespace.
 
 ```sh title:"Kubernetes Discover Services in Namespace"
 kubectl get services -n "$namespace"
@@ -106,6 +126,8 @@ var namespace
 
 Discover deployments in namespace with Kubernetes.
 
+List deployments in a namespace.
+
 ```sh title:"Kubernetes Discover Deployments in Namespace"
 kubectl get deployments -n "$namespace"
 ```
@@ -116,6 +138,8 @@ var namespace
 ### Describe resource
 
 Discover describe resource with Kubernetes.
+
+Show details and events for a named resource in a namespace.
 
 ```sh title:"Kubernetes Discover Describe Resource"
 kubectl describe "$resource/$name" -n "$namespace"
@@ -132,6 +156,8 @@ var namespace
 
 Run follow pod logs with Kubernetes.
 
+Follow logs from a pod in a namespace.
+
 ```sh title:"Kubernetes Run Follow Pod Logs"
 kubectl logs -f "pod/$name" -n "$namespace"
 ```
@@ -143,6 +169,8 @@ var namespace
 ### Previous pod logs
 
 Start previous pod logs with Kubernetes.
+
+Print logs from the previous container instance after a restart.
 
 ```sh title:"Kubernetes Start Previous Pod Logs"
 kubectl logs "pod/$name" -n "$namespace" --previous
@@ -158,6 +186,8 @@ var namespace
 
 Run edit deployment with Kubernetes.
 
+Open a deployment in your configured editor.
+
 ```sh title:"Kubernetes Run Edit Deployment"
 kubectl edit "deployment/$name" -n "$namespace"
 ```
@@ -170,6 +200,8 @@ var namespace
 
 Start restart deployment with Kubernetes.
 
+Trigger a rolling restart of a deployment.
+
 ```sh title:"Kubernetes Start Restart Deployment"
 kubectl rollout restart "deployment/$name" -n "$namespace"
 ```
@@ -181,6 +213,8 @@ var namespace
 ### Rollout status
 
 Show rollout status with Kubernetes.
+
+Watch deployment rollout status until it completes or fails.
 
 ```sh title:"Kubernetes Show Rollout Status"
 kubectl rollout status "deployment/$name" -n "$namespace"
@@ -196,6 +230,8 @@ var namespace
 
 Run cordon node with Kubernetes.
 
+Mark a node as unschedulable.
+
 ```sh title:"Kubernetes Run Cordon Node"
 kubectl cordon "$node_name"
 ```
@@ -207,6 +243,8 @@ var node_name
 
 Run drain node with Kubernetes.
 
+Drain a node for maintenance. This evicts workloads and may disrupt service if replicas are not healthy.
+
 ```sh title:"Kubernetes Run Drain Node"
 kubectl drain "$node_name" --ignore-daemonsets --delete-emptydir-data
 ```
@@ -217,6 +255,8 @@ var node_name
 ### Uncordon node
 
 Run uncordon node with Kubernetes.
+
+Mark a node as schedulable again.
 
 ```sh title:"Kubernetes Run Uncordon Node"
 kubectl uncordon "$node_name"
@@ -231,6 +271,8 @@ var node_name
 
 Show top nodes with Kubernetes.
 
+Show node CPU and memory usage. Requires metrics-server.
+
 ```sh title:"Kubernetes Show Top Nodes"
 kubectl top nodes
 ```
@@ -239,6 +281,8 @@ kubectl top nodes
 ### Top pods
 
 Show top pods with Kubernetes.
+
+Show pod CPU and memory usage in a namespace. Requires metrics-server.
 
 ```sh title:"Kubernetes Show Top Pods"
 kubectl top pods -n "$namespace"

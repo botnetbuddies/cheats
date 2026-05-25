@@ -19,6 +19,10 @@ Nikto checks web servers for risky files, old software, dangerous methods, and c
 
 Scan basic scan with Nikto.
 
+#sh #nikto #web
+
+Run a basic Nikto scan.
+
 ```sh title:"Nikto Scan Basic Scan"
 nikto -h "$url"
 ```
@@ -32,6 +36,10 @@ var url
 
 Scan SSL scan with Nikto.
 
+#sh #nikto #web
+
+Run Nikto with SSL enabled.
+
 ```sh title:"Nikto Scan SSL Scan"
 nikto -h "$host" -ssl
 ```
@@ -44,6 +52,10 @@ var host
 #sh #nikto #web
 
 Execute custom port with Nikto.
+
+#sh #nikto #web
+
+Run Nikto against a custom port.
 
 ```sh title:"Nikto Execute Custom Port"
 nikto -h "$host" -p "$port"

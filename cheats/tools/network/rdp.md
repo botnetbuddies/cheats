@@ -6,6 +6,8 @@
 
 Enable RDP with RDP.
 
+Enable Remote Desktop connections through the registry.
+
 ```cmd title:"RDP Enable RDP"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
 ```
@@ -14,6 +16,8 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v
 ### Allow firewall
 
 Run allow firewall with RDP.
+
+Add a Windows Firewall rule for inbound RDP.
 
 ```cmd title:"RDP Run Allow Firewall"
 netsh.exe advfirewall firewall add rule name="Remote Desktop - User Mode (TCP-In)" dir=in action=allow program="%SystemRoot%\system32\svchost.exe" service="TermService" enable=yes profile=private,domain localport=3389 protocol=tcp
@@ -24,6 +28,8 @@ netsh.exe advfirewall firewall add rule name="Remote Desktop - User Mode (TCP-In
 
 Enable restricted admin with RDP.
 
+Enable Restricted Admin mode for pass-the-hash RDP.
+
 ```powershell title:"RDP Enable Restricted Admin"
 New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name DisableRestrictedAdmin -Value 0 -PropertyType DWord -Force
 ```
@@ -32,6 +38,8 @@ New-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name Disabl
 ### Disable restricted admin
 
 Disable restricted admin with RDP.
+
+Disable Restricted Admin mode.
 
 ```powershell title:"RDP Disable Restricted Admin"
 Remove-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name DisableRestrictedAdmin
@@ -43,6 +51,8 @@ Remove-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa" -Name Dis
 ### SharpRDP
 
 Execute SharpRDP with RDP.
+
+Execute a command over RDP with SharpRDP.
 
 ```cmd title:"RDP Execute SharpRDP"
 SharpRDP.exe computername="$rhost_name" command="$command" username="$domain\$user" password="$pass"

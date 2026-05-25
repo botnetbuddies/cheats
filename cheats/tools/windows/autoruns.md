@@ -16,6 +16,10 @@ Autoruns enumerates Windows autostart extension points across registry, services
 
 Scan accept EULA and scan with Autoruns.
 
+#cmd #autoruns
+
+Run Autoruns and accept the EULA.
+
 ```cmd title:"Autoruns Scan Accept EULA and Scan"
 autorunsc.exe -accepteula
 ```
@@ -26,6 +30,10 @@ autorunsc.exe -accepteula
 #cmd #autoruns
 
 Execute CSV output with Autoruns.
+
+#cmd #autoruns
+
+Write Autoruns output to CSV.
 
 ```cmd title:"Autoruns Execute CSV Output"
 autorunsc.exe -accepteula -a * -c > "$output_file"
@@ -39,6 +47,10 @@ var output_file
 #cmd #autoruns
 
 Read verify signatures with Autoruns.
+
+#cmd #autoruns
+
+Run Autoruns with signature verification.
 
 ```cmd title:"Autoruns Read Verify Signatures"
 autorunsc.exe -accepteula -v

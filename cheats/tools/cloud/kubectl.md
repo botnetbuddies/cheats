@@ -16,6 +16,10 @@ kubectl is the standard Kubernetes client for cluster discovery, workload access
 
 List contexts with kubectl.
 
+#sh #kubectl #context
+
+List kubeconfig contexts.
+
 ```sh title:"Kubectl List Contexts"
 kubectl config get-contexts
 ```
@@ -26,6 +30,10 @@ kubectl config get-contexts
 #sh #kubectl #describe
 
 Run describe resource with kubectl.
+
+#sh #kubectl #describe
+
+Describe a namespaced resource.
 
 ```sh title:"Kubectl Run Describe Resource"
 kubectl describe "$resource/$name" -n "$namespace"
@@ -42,6 +50,10 @@ var namespace
 
 Run follow logs with kubectl.
 
+#sh #kubectl #logs
+
+Follow logs from a pod.
+
 ```sh title:"Kubectl Run Follow Logs"
 kubectl logs -f "pod/$pod_name" -n "$namespace"
 ```
@@ -55,6 +67,10 @@ var namespace
 #sh #kubectl #docs
 
 Run explain resource with kubectl.
+
+#sh #kubectl #docs
+
+Show Kubernetes API documentation for a resource.
 
 ```sh title:"Kubectl Run Explain Resource"
 kubectl explain "$resource"

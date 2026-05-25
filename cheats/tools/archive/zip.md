@@ -6,6 +6,8 @@
 
 Create zip with Zip.
 
+Create a zip archive from one or more files.
+
 ```sh title:"Zip Create Zip"
 zip "$archive_name.zip" $files
 ```
@@ -18,6 +20,8 @@ var files
 
 Create current directory with Zip.
 
+Create a zip archive containing files in the current directory.
+
 ```sh title:"Zip Create Current Directory"
 zip "$archive_name.zip" *
 ```
@@ -28,6 +32,8 @@ var archive_name
 ### Zip folder
 
 Create folder with Zip.
+
+Recursively zip a folder.
 
 ```sh title:"Zip Create Folder"
 zip -r "$archive_name.zip" "$folder"
@@ -41,6 +47,8 @@ var folder
 
 Add file with Zip.
 
+Add or update a file inside an existing zip archive.
+
 ```sh title:"Zip Add File"
 zip -u "$archive_name.zip" "$file_to_add"
 ```
@@ -52,6 +60,8 @@ var file_to_add
 ### Zip symlink
 
 Create symlink with Zip.
+
+Store a symlink as a symlink instead of following it.
 
 ```sh title:"Zip Create Symlink"
 zip --symlinks "$archive_name.zip" "$symlink_file"
@@ -67,6 +77,8 @@ var symlink_file
 
 Show info with Zip.
 
+Show zip archive contents and metadata.
+
 ```sh title:"Zip Show Info"
 zipinfo "$archive_file"
 ```
@@ -77,6 +89,8 @@ var archive_file
 ### Detailed listing
 
 List detailed listing with Zip.
+
+List detailed zip archive contents.
 
 ```sh title:"Zip List Detailed Listing"
 unzip -Z "$archive_file"
@@ -91,6 +105,8 @@ var archive_file
 
 Extract unzip with Zip.
 
+Extract a zip archive into the current directory.
+
 ```sh title:"Zip Extract Unzip"
 unzip "$archive_file"
 ```
@@ -101,6 +117,8 @@ var archive_file
 ### Unzip to directory
 
 Extract unzip to directory with Zip.
+
+Extract a zip archive into a destination directory.
 
 ```sh title:"Zip Extract Unzip to Directory"
 unzip "$archive_file" -d "$destination_folder"

