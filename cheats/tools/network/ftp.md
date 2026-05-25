@@ -4,9 +4,9 @@
 
 ### Connect
 
-Connect to FTP on the default port.
+Run connect with FTP.
 
-```sh title:"Connect to FTP"
+```sh title:"FTP Run Connect"
 ftp "$rhost_ip"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var rhost_ip
 
 ### Connect port
 
-Connect to FTP on a custom port.
+Run connect port with FTP.
 
-```sh title:"Connect to FTP on custom port"
+```sh title:"FTP Run Connect Port"
 ftp "$rhost_ip" "$rport"
 ```
 <!-- cheat
@@ -29,9 +29,9 @@ var rport := 21
 
 ### Mirror anonymous
 
-Mirror an anonymous FTP server.
+Download mirror anonymous with FTP.
 
-```sh title:"Mirror anonymous FTP server"
+```sh title:"FTP Download Mirror Anonymous"
 wget -m "ftp://anonymous:anonymous@$rhost_ip"
 ```
 <!-- cheat
@@ -40,9 +40,9 @@ var rhost_ip
 
 ### Mirror anonymous active mode
 
-Mirror an anonymous FTP server without passive mode.
+Download mirror anonymous active mode with FTP.
 
-```sh title:"Mirror anonymous FTP server without passive mode"
+```sh title:"FTP Download Mirror Anonymous Active Mode"
 wget -m --no-passive "ftp://anonymous:anonymous@$rhost_ip"
 ```
 <!-- cheat
@@ -53,9 +53,9 @@ var rhost_ip
 
 ### Anonymous access
 
-Check for anonymous FTP access with nmap.
+Check anonymous access with FTP.
 
-```sh title:"Check anonymous FTP access"
+```sh title:"FTP Check Anonymous Access"
 nmap -v -p 21 --script ftp-anon "$rhost_ip"
 ```
 <!-- cheat
@@ -66,9 +66,9 @@ var rhost_ip
 
 ### Metasploit login
 
-Run Metasploit FTP login brute force with wordlists.
+Execute metasploit login with FTP.
 
-```sh title:"Run FTP login brute force with Metasploit"
+```sh title:"FTP Execute Metasploit Login"
 msfconsole -x "use auxiliary/scanner/ftp/ftp_login; set RHOSTS $rhost_ip; set USER_FILE $wordlists_users; set PASS_FILE $wordlists; run; exit"
 ```
 <!-- cheat

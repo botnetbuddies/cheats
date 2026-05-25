@@ -12,7 +12,9 @@ import wordlist_passwords
 
 ### LM
 
-```sh title:"Crack LM hashes with John"
+Crack LM hashes with John the Ripper.
+
+```sh title:"John Crack LM Hashes"
 john --wordlist="$wordlists" --format=lm "$hash_file"
 ```
 <!-- cheat
@@ -21,7 +23,9 @@ import john
 
 ### NTLM
 
-```sh title:"Crack NTLM hashes with John"
+Crack NTLM hashes with John the Ripper.
+
+```sh title:"John Crack NTLM Hashes"
 john --wordlist="$wordlists" --format=nt "$hash_file"
 ```
 <!-- cheat
@@ -30,7 +34,9 @@ import john
 
 ### NetNTLMv1
 
-```sh title:"Crack NetNTLMv1 hashes with John"
+Crack NetNTLMv1 hashes with John the Ripper.
+
+```sh title:"John Crack NetNTLMv1 Hashes"
 john --wordlist="$wordlists" --format=netntlm "$hash_file"
 ```
 <!-- cheat
@@ -39,7 +45,9 @@ import john
 
 ### NetNTLMv2
 
-```sh title:"Crack NetNTLMv2 hashes with John"
+Crack NetNTLMv2 hashes with John the Ripper.
+
+```sh title:"John Crack NetNTLMv2 Hashes"
 john --wordlist="$wordlists" --format=netntlmv2 "$hash_file"
 ```
 <!-- cheat
@@ -48,7 +56,9 @@ import john
 
 ### Raw MD5
 
-```sh title:"Crack raw MD5 hashes with John"
+Crack raw MD5 hashes with John the Ripper.
+
+```sh title:"John Crack Raw MD5 Hashes"
 john --wordlist="$wordlists" --format=raw-md5 "$hash_file"
 ```
 <!-- cheat
@@ -59,7 +69,9 @@ import john
 
 ### krb2john
 
-```sh title:"Extract crackable hash from a Kerberos .keytab / krb5cc"
+Crack krb2john hashes with John the Ripper.
+
+```sh title:"John Crack Krb2john Hashes"
 krb2john $file > hash
 ```
 <!-- cheat
@@ -68,7 +80,9 @@ var file
 
 ### kdcdump2john
 
-```sh title:"Extract hashes from an Active Directory KDC .dump file"
+Crack kdcdump2john hashes with John the Ripper.
+
+```sh title:"John Crack Kdcdump2john Hashes"
 kdcdump2john $file > hash
 ```
 <!-- cheat
@@ -77,7 +91,9 @@ var file
 
 ### kirbi2john
 
-```sh title:"Extract crackable hash from a Rubeus .kirbi Kerberos ticket"
+Crack kirbi2john hashes with John the Ripper.
+
+```sh title:"John Crack Kirbi2john Hashes"
 kirbi2john $file > hash
 ```
 <!-- cheat
@@ -86,7 +102,9 @@ var file
 
 ### ccache2john
 
-```sh title:"Extract crackable hash from an MIT Kerberos credential cache (ccache, krb5cc_*)"
+Crack ccache2john hashes with John the Ripper.
+
+```sh title:"John Crack Ccache2john Hashes"
 ccache2john $file > hash
 ```
 <!-- cheat
@@ -95,7 +113,9 @@ var file
 
 ### DPAPImk2john
 
-```sh title:"Extract crackable hash from a Windows DPAPI master key blob (under %APPDATA%\Microsoft\Protect\<SID>\)"
+Crack DPAPImk2john hashes with John the Ripper.
+
+```sh title:"John Crack DPAPImk2john Hashes"
 DPAPImk2john $file > hash
 ```
 <!-- cheat
@@ -104,7 +124,9 @@ var file
 
 ### htdigest2john
 
-```sh title:"Convert an Apache htdigest file (.htdigest) to john format"
+Crack htdigest2john hashes with John the Ripper.
+
+```sh title:"John Crack Htdigest2john Hashes"
 htdigest2john $file > hash
 ```
 <!-- cheat
@@ -113,7 +135,9 @@ var file
 
 ### radius2john
 
-```sh title:"Extract RADIUS authentication hashes from a .pcap / .pcapng"
+Crack radius2john hashes with John the Ripper.
+
+```sh title:"John Crack Radius2john Hashes"
 radius2john $file > hash
 ```
 <!-- cheat
@@ -122,7 +146,9 @@ var file
 
 ### sap2john
 
-```sh title:"Extract SAP CODVN B/F/G hashes from USR02 dump"
+Crack sap2john hashes with John the Ripper.
+
+```sh title:"John Crack Sap2john Hashes"
 sap2john $file > hash
 ```
 <!-- cheat
@@ -131,7 +157,9 @@ var file
 
 ### racf2john
 
-```sh title:"Extract IBM RACF hashes from a database export (.racf)"
+Crack racf2john hashes with John the Ripper.
+
+```sh title:"John Crack Racf2john Hashes"
 racf2john $file > hash
 ```
 <!-- cheat
@@ -140,7 +168,9 @@ var file
 
 ### cracf2john
 
-```sh title:"Extract IBM RACF KDFAES hashes (alternate .racf format)"
+Crack cracf2john hashes with John the Ripper.
+
+```sh title:"John Crack Cracf2john Hashes"
 cracf2john $file > hash
 ```
 <!-- cheat
@@ -149,7 +179,9 @@ var file
 
 ### aix2john
 
-```sh title:"Extract AIX hashes from /etc/security/passwd"
+Crack aix2john hashes with John the Ripper.
+
+```sh title:"John Crack Aix2john Hashes"
 aix2john $file > hash
 ```
 <!-- cheat
@@ -158,7 +190,9 @@ var file
 
 ### uaf2john
 
-```sh title:"Extract OpenVMS User Authorization File hashes (SYSUAF.DAT)"
+Crack uaf2john hashes with John the Ripper.
+
+```sh title:"John Crack Uaf2john Hashes"
 uaf2john $file > hash
 ```
 <!-- cheat
@@ -167,7 +201,9 @@ var file
 
 ### sspr2john
 
-```sh title:"Extract NetIQ SecureLogin / SSPR password hashes (.xml export)"
+Crack sspr2john hashes with John the Ripper.
+
+```sh title:"John Crack Sspr2john Hashes"
 sspr2john $file > hash
 ```
 <!-- cheat
@@ -176,7 +212,9 @@ var file
 
 ### ibmiscanner2john
 
-```sh title:"Extract IBM i (AS/400) password hashes from ibmiscanner output (.txt)"
+Crack ibmiscanner2john hashes with John the Ripper.
+
+```sh title:"John Crack Ibmiscanner2john Hashes"
 ibmiscanner2john $file > hash
 ```
 <!-- cheat
@@ -185,7 +223,9 @@ var file
 
 ### ldif2john
 
-```sh title:"Extract password hashes from an LDAP .ldif export"
+Crack ldif2john hashes with John the Ripper.
+
+```sh title:"John Crack Ldif2john Hashes"
 ldif2john $file > hash
 ```
 <!-- cheat
@@ -194,7 +234,9 @@ var file
 
 ### ejabberd2john
 
-```sh title:"Extract Ejabberd XMPP server hashes (ejabberd.yml / Mnesia .DCD)"
+Crack ejabberd2john hashes with John the Ripper.
+
+```sh title:"John Crack Ejabberd2john Hashes"
 ejabberd2john $file > hash
 ```
 <!-- cheat
@@ -203,7 +245,9 @@ var file
 
 ### prosody2john
 
-```sh title:"Extract Prosody XMPP server hashes (accounts/*.dat)"
+Crack prosody2john hashes with John the Ripper.
+
+```sh title:"John Crack Prosody2john Hashes"
 prosody2john $file > hash
 ```
 <!-- cheat
@@ -212,7 +256,9 @@ var file
 
 ### mosquitto2john
 
-```sh title:"Extract Mosquitto MQTT broker hashes (passwd file from mosquitto_passwd)"
+Crack mosquitto2john hashes with John the Ripper.
+
+```sh title:"John Crack Mosquitto2john Hashes"
 mosquitto2john $file > hash
 ```
 <!-- cheat
@@ -221,7 +267,9 @@ var file
 
 ### mcafee_epo2john
 
-```sh title:"Extract McAfee ePolicy Orchestrator hashes (ePO .xml dump)"
+Crack mcafee epo2john hashes with John the Ripper.
+
+```sh title:"John Crack Mcafee Epo2john Hashes"
 mcafee_epo2john $file > hash
 ```
 <!-- cheat
@@ -230,7 +278,9 @@ var file
 
 ### atmail2john
 
-```sh title:"Extract Atmail webmail hashes (mysqldump .sql)"
+Crack atmail2john hashes with John the Ripper.
+
+```sh title:"John Crack Atmail2john Hashes"
 atmail2john $file > hash
 ```
 <!-- cheat
@@ -239,7 +289,9 @@ var file
 
 ### aruba2john
 
-```sh title:"Extract Aruba network device hashes from config (.cfg)"
+Crack aruba2john hashes with John the Ripper.
+
+```sh title:"John Crack Aruba2john Hashes"
 aruba2john $file > hash
 ```
 <!-- cheat
@@ -248,7 +300,9 @@ var file
 
 ### cisco2john
 
-```sh title:"Extract Cisco IOS / ASA hashes from running-config (.cfg / .txt)"
+Crack cisco2john hashes with John the Ripper.
+
+```sh title:"John Crack Cisco2john Hashes"
 cisco2john $file > hash
 ```
 <!-- cheat
@@ -257,7 +311,9 @@ var file
 
 ### aem2john
 
-```sh title:"Extract Adobe Experience Manager hashes (rep:authorizables .xml export)"
+Crack aem2john hashes with John the Ripper.
+
+```sh title:"John Crack Aem2john Hashes"
 aem2john $file > hash
 ```
 <!-- cheat
@@ -266,7 +322,9 @@ var file
 
 ### apex2john
 
-```sh title:"Extract Oracle APEX hashes (FLOWS_FILES .sql dump)"
+Crack apex2john hashes with John the Ripper.
+
+```sh title:"John Crack Apex2john Hashes"
 apex2john $file > hash
 ```
 <!-- cheat
@@ -275,7 +333,9 @@ var file
 
 ### ps_token2john
 
-```sh title:"Convert PeopleSoft SSO PS_TOKEN cookie to crackable form"
+Crack ps token2john hashes with John the Ripper.
+
+```sh title:"John Crack Ps Token2john Hashes"
 ps_token2john $file > hash
 ```
 <!-- cheat
@@ -284,7 +344,9 @@ var file
 
 ### pse2john
 
-```sh title:"Extract SAP Personal Security Environment hashes (.pse)"
+Crack pse2john hashes with John the Ripper.
+
+```sh title:"John Crack Pse2john Hashes"
 pse2john $file > hash
 ```
 <!-- cheat
@@ -293,7 +355,9 @@ var file
 
 ### sense2john
 
-```sh title:"Extract Sense smart-home hashes (config.json)"
+Crack sense2john hashes with John the Ripper.
+
+```sh title:"John Crack Sense2john Hashes"
 sense2john $file > hash
 ```
 <!-- cheat
@@ -302,7 +366,9 @@ var file
 
 ### adxcsouf2john
 
-```sh title:"Extract AD CS unattend file hashes (.UnattendFile.xml)"
+Crack adxcsouf2john hashes with John the Ripper.
+
+```sh title:"John Crack Adxcsouf2john Hashes"
 adxcsouf2john $file > hash
 ```
 <!-- cheat
@@ -313,7 +379,9 @@ var file
 
 ### 1password2john
 
-```sh title:"Extract crackable hash from a 1Password vault (.opvault / .agilekeychain)"
+Crack 1password2john hashes with John the Ripper.
+
+```sh title:"John Crack 1password2john Hashes"
 1password2john $file > hash
 ```
 <!-- cheat
@@ -322,7 +390,9 @@ var file
 
 ### bitwarden2john
 
-```sh title:"Extract crackable hash from a Bitwarden vault (data.json)"
+Crack bitwarden2john hashes with John the Ripper.
+
+```sh title:"John Crack Bitwarden2john Hashes"
 bitwarden2john $file > hash
 ```
 <!-- cheat
@@ -331,7 +401,9 @@ var file
 
 ### dashlane2john
 
-```sh title:"Extract crackable hash from a Dashlane vault (localSettings.aes)"
+Crack dashlane2john hashes with John the Ripper.
+
+```sh title:"John Crack Dashlane2john Hashes"
 dashlane2john $file > hash
 ```
 <!-- cheat
@@ -340,7 +412,9 @@ var file
 
 ### enpass2john
 
-```sh title:"Extract crackable hash from an Enpass vault (.walletx / vault.enpassdb)"
+Crack enpass2john hashes with John the Ripper.
+
+```sh title:"John Crack Enpass2john Hashes"
 enpass2john $file > hash
 ```
 <!-- cheat
@@ -349,7 +423,9 @@ var file
 
 ### keepass2john
 
-```sh title:"Extract crackable hash from a KeePass database (.kdb / .kdbx)"
+Crack keepass2john hashes with John the Ripper.
+
+```sh title:"John Crack Keepass2john Hashes"
 keepass2john $file > hash
 ```
 <!-- cheat
@@ -358,7 +434,9 @@ var file
 
 ### kwallet2john
 
-```sh title:"Extract crackable hash from a KDE Wallet (.kwl / kdewallet)"
+Crack kwallet2john hashes with John the Ripper.
+
+```sh title:"John Crack Kwallet2john Hashes"
 kwallet2john $file > hash
 ```
 <!-- cheat
@@ -367,7 +445,9 @@ var file
 
 ### keychain2john
 
-```sh title:"Extract crackable hash from a macOS keychain (.keychain / .keychain-db)"
+Crack keychain2john hashes with John the Ripper.
+
+```sh title:"John Crack Keychain2john Hashes"
 keychain2john $file > hash
 ```
 <!-- cheat
@@ -376,7 +456,9 @@ var file
 
 ### keyring2john
 
-```sh title:"Extract crackable hash from a GNOME Keyring (.keyring / login.keyring)"
+Crack keyring2john hashes with John the Ripper.
+
+```sh title:"John Crack Keyring2john Hashes"
 keyring2john $file > hash
 ```
 <!-- cheat
@@ -385,7 +467,9 @@ var file
 
 ### lastpass2john
 
-```sh title:"Extract crackable hash from a LastPass vault (lp.suid / vault.db)"
+Crack lastpass2john hashes with John the Ripper.
+
+```sh title:"John Crack Lastpass2john Hashes"
 lastpass2john $file > hash
 ```
 <!-- cheat
@@ -394,7 +478,9 @@ var file
 
 ### padlock2john
 
-```sh title:"Extract crackable hash from a Padlock vault (.padlock / .json)"
+Crack padlock2john hashes with John the Ripper.
+
+```sh title:"John Crack Padlock2john Hashes"
 padlock2john $file > hash
 ```
 <!-- cheat
@@ -403,7 +489,9 @@ var file
 
 ### pwsafe2john
 
-```sh title:"Extract crackable hash from a Password Safe database (.psafe3)"
+Crack pwsafe2john hashes with John the Ripper.
+
+```sh title:"John Crack Pwsafe2john Hashes"
 pwsafe2john $file > hash
 ```
 <!-- cheat
@@ -412,7 +500,9 @@ var file
 
 ### mozilla2john
 
-```sh title:"Extract crackable hash from Firefox saved logins (key3.db / key4.db)"
+Crack mozilla2john hashes with John the Ripper.
+
+```sh title:"John Crack Mozilla2john Hashes"
 mozilla2john $file > hash
 ```
 <!-- cheat
@@ -421,7 +511,9 @@ var file
 
 ### applenotes2john
 
-```sh title:"Extract crackable hash from a password-protected Apple Note (NoteStore.sqlite)"
+Crack applenotes2john hashes with John the Ripper.
+
+```sh title:"John Crack Applenotes2john Hashes"
 applenotes2john $file > hash
 ```
 <!-- cheat
@@ -432,7 +524,9 @@ var file
 
 ### bitlocker2john
 
-```sh title:"Extract crackable hash from a BitLocker volume image (.vhd / raw .img)"
+Crack bitlocker2john hashes with John the Ripper.
+
+```sh title:"John Crack Bitlocker2john Hashes"
 bitlocker2john $file > hash
 ```
 <!-- cheat
@@ -441,7 +535,9 @@ var file
 
 ### luks2john
 
-```sh title:"Extract crackable hash from a LUKS volume (raw .img / dd of /dev/sdaN)"
+Crack luks2john hashes with John the Ripper.
+
+```sh title:"John Crack Luks2john Hashes"
 luks2john $file > hash
 ```
 <!-- cheat
@@ -450,7 +546,9 @@ var file
 
 ### truecrypt2john
 
-```sh title:"Extract crackable hash from a TrueCrypt / VeraCrypt container (.tc / .hc)"
+Crack truecrypt2john hashes with John the Ripper.
+
+```sh title:"John Crack Truecrypt2john Hashes"
 truecrypt2john $file > hash
 ```
 <!-- cheat
@@ -459,7 +557,9 @@ var file
 
 ### diskcryptor2john
 
-```sh title:"Extract crackable hash from a DiskCryptor volume header (.dcb)"
+Crack diskcryptor2john hashes with John the Ripper.
+
+```sh title:"John Crack Diskcryptor2john Hashes"
 diskcryptor2john $file > hash
 ```
 <!-- cheat
@@ -468,7 +568,9 @@ var file
 
 ### bestcrypt2john
 
-```sh title:"Extract crackable hash from a Jetico BestCrypt container (.jbc)"
+Crack bestcrypt2john hashes with John the Ripper.
+
+```sh title:"John Crack Bestcrypt2john Hashes"
 bestcrypt2john $file > hash
 ```
 <!-- cheat
@@ -477,7 +579,9 @@ var file
 
 ### encfs2john
 
-```sh title:"Extract crackable hash from an EncFS directory (.encfs6.xml)"
+Crack encfs2john hashes with John the Ripper.
+
+```sh title:"John Crack Encfs2john Hashes"
 encfs2john $file > hash
 ```
 <!-- cheat
@@ -486,7 +590,9 @@ var file
 
 ### ecryptfs2john
 
-```sh title:"Extract crackable hash from an eCryptfs wrapped passphrase (~/.ecryptfs/wrapped-passphrase)"
+Crack ecryptfs2john hashes with John the Ripper.
+
+```sh title:"John Crack Ecryptfs2john Hashes"
 ecryptfs2john $file > hash
 ```
 <!-- cheat
@@ -495,7 +601,9 @@ var file
 
 ### geli2john
 
-```sh title:"Extract crackable hash from a FreeBSD GELI volume (provider .eli metadata)"
+Crack geli2john hashes with John the Ripper.
+
+```sh title:"John Crack Geli2john Hashes"
 geli2john $file > hash
 ```
 <!-- cheat
@@ -504,7 +612,9 @@ var file
 
 ### openbsd_softraid2john
 
-```sh title:"Extract crackable hash from an OpenBSD softraid CRYPTO volume (raw partition image)"
+Crack openbsd softraid2john hashes with John the Ripper.
+
+```sh title:"John Crack Openbsd Softraid2john Hashes"
 openbsd_softraid2john $file > hash
 ```
 <!-- cheat
@@ -513,7 +623,9 @@ var file
 
 ### androidfde2john
 
-```sh title:"Extract crackable hash from Android FDE footer (encryptable.img / footer)"
+Crack androidfde2john hashes with John the Ripper.
+
+```sh title:"John Crack Androidfde2john Hashes"
 androidfde2john $file > hash
 ```
 <!-- cheat
@@ -522,7 +634,9 @@ var file
 
 ### dmg2john
 
-```sh title:"Extract crackable hash from an Apple disk image (.dmg)"
+Crack dmg2john hashes with John the Ripper.
+
+```sh title:"John Crack Dmg2john Hashes"
 dmg2john $file > hash
 ```
 <!-- cheat
@@ -531,7 +645,9 @@ var file
 
 ### vdi2john
 
-```sh title:"Extract crackable hash from a VirtualBox image (.vdi)"
+Crack vdi2john hashes with John the Ripper.
+
+```sh title:"John Crack Vdi2john Hashes"
 vdi2john $file > hash
 ```
 <!-- cheat
@@ -540,7 +656,9 @@ var file
 
 ### vmx2john
 
-```sh title:"Extract crackable hash from a VMware encrypted VM (.vmx / .vmdk)"
+Crack vmx2john hashes with John the Ripper.
+
+```sh title:"John Crack Vmx2john Hashes"
 vmx2john $file > hash
 ```
 <!-- cheat
@@ -549,7 +667,9 @@ var file
 
 ### pgpdisk2john
 
-```sh title:"Extract crackable hash from a PGPdisk virtual volume (.pgd)"
+Crack pgpdisk2john hashes with John the Ripper.
+
+```sh title:"John Crack Pgpdisk2john Hashes"
 pgpdisk2john $file > hash
 ```
 <!-- cheat
@@ -558,7 +678,9 @@ var file
 
 ### pgpwde2john
 
-```sh title:"Extract crackable hash from PGP Whole Disk Encryption (raw boot sectors)"
+Crack pgpwde2john hashes with John the Ripper.
+
+```sh title:"John Crack Pgpwde2john Hashes"
 pgpwde2john $file > hash
 ```
 <!-- cheat
@@ -567,7 +689,9 @@ var file
 
 ### pgpsda2john
 
-```sh title:"Extract crackable hash from a PGP Self-Decrypting Archive (.exe SDA)"
+Crack pgpsda2john hashes with John the Ripper.
+
+```sh title:"John Crack Pgpsda2john Hashes"
 pgpsda2john $file > hash
 ```
 <!-- cheat
@@ -578,7 +702,9 @@ var file
 
 ### zip2john
 
-```sh title:"Extract crackable hash from a password-protected zip (.zip)"
+Crack zip2john hashes with John the Ripper.
+
+```sh title:"John Crack Zip2john Hashes"
 zip2john $file > hash
 ```
 <!-- cheat
@@ -587,7 +713,9 @@ var file
 
 ### rar2john
 
-```sh title:"Extract crackable hash from a RAR archive (.rar)"
+Crack rar2john hashes with John the Ripper.
+
+```sh title:"John Crack Rar2john Hashes"
 rar2john $file > hash
 ```
 <!-- cheat
@@ -596,7 +724,9 @@ var file
 
 ### 7z2john
 
-```sh title:"Extract crackable hash from a 7-Zip archive (.7z)"
+Crack 7z2john hashes with John the Ripper.
+
+```sh title:"John Crack 7z2john Hashes"
 7z2john $file > hash
 ```
 <!-- cheat
@@ -605,7 +735,9 @@ var file
 
 ### androidbackup2john
 
-```sh title:"Extract crackable hash from an Android adb backup (.ab)"
+Crack androidbackup2john hashes with John the Ripper.
+
+```sh title:"John Crack Androidbackup2john Hashes"
 androidbackup2john $file > hash
 ```
 <!-- cheat
@@ -614,7 +746,9 @@ var file
 
 ### itunes_backup2john
 
-```sh title:"Extract crackable hash from an encrypted iTunes backup (Manifest.plist / Manifest.db)"
+Crack itunes backup2john hashes with John the Ripper.
+
+```sh title:"John Crack Itunes Backup2john Hashes"
 itunes_backup2john $file > hash
 ```
 <!-- cheat
@@ -623,7 +757,9 @@ var file
 
 ### restic2john
 
-```sh title:"Extract crackable hash from a restic repository (config file under repo/)"
+Crack restic2john hashes with John the Ripper.
+
+```sh title:"John Crack Restic2john Hashes"
 restic2john $file > hash
 ```
 <!-- cheat
@@ -634,7 +770,9 @@ var file
 
 ### pdf2john
 
-```sh title:"Extract crackable hash from a password-protected PDF (.pdf)"
+Crack pdf2john hashes with John the Ripper.
+
+```sh title:"John Crack Pdf2john Hashes"
 pdf2john $file > hash
 ```
 <!-- cheat
@@ -643,7 +781,9 @@ var file
 
 ### office2john
 
-```sh title:"Extract crackable hash from a password-protected MS Office doc (.doc / .docx / .xls / .xlsx / .ppt / .pptx)"
+Crack office2john hashes with John the Ripper.
+
+```sh title:"John Crack Office2john Hashes"
 office2john $file > hash
 ```
 <!-- cheat
@@ -652,7 +792,9 @@ var file
 
 ### libreoffice2john
 
-```sh title:"Extract crackable hash from a password-protected LibreOffice doc (.odt / .ods / .odp)"
+Crack libreoffice2john hashes with John the Ripper.
+
+```sh title:"John Crack Libreoffice2john Hashes"
 libreoffice2john $file > hash
 ```
 <!-- cheat
@@ -661,7 +803,9 @@ var file
 
 ### staroffice2john
 
-```sh title:"Extract crackable hash from a password-protected StarOffice doc (.sxw / .sxc / .sxi)"
+Crack staroffice2john hashes with John the Ripper.
+
+```sh title:"John Crack Staroffice2john Hashes"
 staroffice2john $file > hash
 ```
 <!-- cheat
@@ -670,7 +814,9 @@ var file
 
 ### iwork2john
 
-```sh title:"Extract crackable hash from a password-protected Apple iWork file (.pages / .numbers / .key)"
+Crack iwork2john hashes with John the Ripper.
+
+```sh title:"John Crack Iwork2john Hashes"
 iwork2john $file > hash
 ```
 <!-- cheat
@@ -679,7 +825,9 @@ var file
 
 ### lotus2john
 
-```sh title:"Extract crackable hash from a Lotus Notes ID file (user.id)"
+Crack lotus2john hashes with John the Ripper.
+
+```sh title:"John Crack Lotus2john Hashes"
 lotus2john $file > hash
 ```
 <!-- cheat
@@ -688,7 +836,9 @@ var file
 
 ### money2john
 
-```sh title:"Extract crackable hash from a Microsoft Money database (.mny)"
+Crack money2john hashes with John the Ripper.
+
+```sh title:"John Crack Money2john Hashes"
 money2john $file > hash
 ```
 <!-- cheat
@@ -697,7 +847,9 @@ var file
 
 ### lion2john
 
-```sh title:"Extract crackable hash from a macOS 10.7 Lion shadow (/var/db/dslocal/nodes/Default/users/<user>.plist)"
+Crack lion2john hashes with John the Ripper.
+
+```sh title:"John Crack Lion2john Hashes"
 lion2john $file > hash
 ```
 <!-- cheat
@@ -706,7 +858,9 @@ var file
 
 ### mac2john
 
-```sh title:"Extract crackable hash from a macOS user shadow (.plist)"
+Crack mac2john hashes with John the Ripper.
+
+```sh title:"John Crack Mac2john Hashes"
 mac2john $file > hash
 ```
 <!-- cheat
@@ -717,7 +871,9 @@ var file
 
 ### bitcoin2john
 
-```sh title:"Extract crackable hash from a Bitcoin Core wallet (wallet.dat)"
+Crack bitcoin2john hashes with John the Ripper.
+
+```sh title:"John Crack Bitcoin2john Hashes"
 bitcoin2john $file > hash
 ```
 <!-- cheat
@@ -726,7 +882,9 @@ var file
 
 ### bitshares2john
 
-```sh title:"Extract crackable hash from a BitShares wallet (.wallet / .json)"
+Crack bitshares2john hashes with John the Ripper.
+
+```sh title:"John Crack Bitshares2john Hashes"
 bitshares2john $file > hash
 ```
 <!-- cheat
@@ -735,7 +893,9 @@ var file
 
 ### blockchain2john
 
-```sh title:"Extract crackable hash from a Blockchain.com wallet backup (wallet.aes.json)"
+Crack blockchain2john hashes with John the Ripper.
+
+```sh title:"John Crack Blockchain2john Hashes"
 blockchain2john $file > hash
 ```
 <!-- cheat
@@ -744,7 +904,9 @@ var file
 
 ### electrum2john
 
-```sh title:"Extract crackable hash from an Electrum wallet (default_wallet / .wallet)"
+Crack electrum2john hashes with John the Ripper.
+
+```sh title:"John Crack Electrum2john Hashes"
 electrum2john $file > hash
 ```
 <!-- cheat
@@ -753,7 +915,9 @@ var file
 
 ### ethereum2john
 
-```sh title:"Extract crackable hash from an Ethereum wallet (UTC--*.json keystore)"
+Crack ethereum2john hashes with John the Ripper.
+
+```sh title:"John Crack Ethereum2john Hashes"
 ethereum2john $file > hash
 ```
 <!-- cheat
@@ -762,7 +926,9 @@ var file
 
 ### monero2john
 
-```sh title:"Extract crackable hash from a Monero wallet (.keys)"
+Crack monero2john hashes with John the Ripper.
+
+```sh title:"John Crack Monero2john Hashes"
 monero2john $file > hash
 ```
 <!-- cheat
@@ -771,7 +937,9 @@ var file
 
 ### multibit2john
 
-```sh title:"Extract crackable hash from a MultiBit Bitcoin wallet (.wallet / .key)"
+Crack multibit2john hashes with John the Ripper.
+
+```sh title:"John Crack Multibit2john Hashes"
 multibit2john $file > hash
 ```
 <!-- cheat
@@ -780,7 +948,9 @@ var file
 
 ### tezos2john
 
-```sh title:"Extract crackable hash from a Tezos wallet (encrypted secret key string)"
+Crack tezos2john hashes with John the Ripper.
+
+```sh title:"John Crack Tezos2john Hashes"
 tezos2john $file > hash
 ```
 <!-- cheat
@@ -789,7 +959,9 @@ var file
 
 ### neo2john
 
-```sh title:"Extract crackable hash from a NEO wallet (.json NEP-6)"
+Crack neo2john hashes with John the Ripper.
+
+```sh title:"John Crack Neo2john Hashes"
 neo2john $file > hash
 ```
 <!-- cheat
@@ -800,7 +972,9 @@ var file
 
 ### pcap2john
 
-```sh title:"Extract crackable hashes from a generic packet capture (.pcap / .pcapng)"
+Crack pcap2john hashes with John the Ripper.
+
+```sh title:"John Crack Pcap2john Hashes"
 pcap2john $file > hash
 ```
 <!-- cheat
@@ -809,7 +983,9 @@ var file
 
 ### hccap2john
 
-```sh title:"Convert an old hashcat WPA capture (.hccap) to john format"
+Crack hccap2john hashes with John the Ripper.
+
+```sh title:"John Crack Hccap2john Hashes"
 hccap2john $file > hash
 ```
 <!-- cheat
@@ -818,7 +994,9 @@ var file
 
 ### hccapx2john
 
-```sh title:"Convert a hashcat WPA capture (.hccapx) to john format"
+Crack hccapx2john hashes with John the Ripper.
+
+```sh title:"John Crack Hccapx2john Hashes"
 hccapx2john $file > hash
 ```
 <!-- cheat
@@ -827,7 +1005,9 @@ var file
 
 ### wpapcap2john
 
-```sh title:"Extract WPA/WPA2 handshake hash from a packet capture (.pcap / .pcapng)"
+Crack wpapcap2john hashes with John the Ripper.
+
+```sh title:"John Crack Wpapcap2john Hashes"
 wpapcap2john $file > hash
 ```
 <!-- cheat
@@ -836,7 +1016,9 @@ var file
 
 ### vncpcap2john
 
-```sh title:"Extract VNC challenge/response hash from a packet capture (.pcap)"
+Crack vncpcap2john hashes with John the Ripper.
+
+```sh title:"John Crack Vncpcap2john Hashes"
 vncpcap2john $file > hash
 ```
 <!-- cheat
@@ -845,7 +1027,9 @@ var file
 
 ### sipdump2john
 
-```sh title:"Extract SIP digest auth hash from a sipdump output (.txt)"
+Crack sipdump2john hashes with John the Ripper.
+
+```sh title:"John Crack Sipdump2john Hashes"
 sipdump2john $file > hash
 ```
 <!-- cheat
@@ -854,7 +1038,9 @@ var file
 
 ### ikescan2john
 
-```sh title:"Extract IKE PSK hash from ike-scan output (-A capture)"
+Crack ikescan2john hashes with John the Ripper.
+
+```sh title:"John Crack Ikescan2john Hashes"
 ikescan2john $file > hash
 ```
 <!-- cheat
@@ -863,7 +1049,9 @@ var file
 
 ### known_hosts2john
 
-```sh title:"Extract hashed entries from an SSH known_hosts file (~/.ssh/known_hosts)"
+Crack known hosts2john hashes with John the Ripper.
+
+```sh title:"John Crack Known Hosts2john Hashes"
 known_hosts2john $file > hash
 ```
 <!-- cheat
@@ -874,7 +1062,9 @@ var file
 
 ### ssh2john
 
-```sh title:"Extract crackable hash from an encrypted SSH private key (id_rsa / id_ed25519 / id_ecdsa)"
+Crack ssh2john hashes with John the Ripper.
+
+```sh title:"John Crack Ssh2john Hashes"
 ssh2john $file > hash
 ```
 <!-- cheat
@@ -883,7 +1073,9 @@ var file
 
 ### putty2john
 
-```sh title:"Extract crackable hash from a PuTTY private key (.ppk)"
+Crack putty2john hashes with John the Ripper.
+
+```sh title:"John Crack Putty2john Hashes"
 putty2john $file > hash
 ```
 <!-- cheat
@@ -892,7 +1084,9 @@ var file
 
 ### gpg2john
 
-```sh title:"Extract crackable hash from a GPG secret keyring (.gpg / secring.gpg / .asc)"
+Crack gpg2john hashes with John the Ripper.
+
+```sh title:"John Crack Gpg2john Hashes"
 gpg2john $file > hash
 ```
 <!-- cheat
@@ -901,7 +1095,9 @@ var file
 
 ### pem2john
 
-```sh title:"Extract crackable hash from an encrypted PEM private key (.pem / .key)"
+Crack pem2john hashes with John the Ripper.
+
+```sh title:"John Crack Pem2john Hashes"
 pem2john $file > hash
 ```
 <!-- cheat
@@ -910,7 +1106,9 @@ var file
 
 ### pfx2john
 
-```sh title:"Extract crackable hash from a PKCS#12 file (.pfx / .p12)"
+Crack pfx2john hashes with John the Ripper.
+
+```sh title:"John Crack Pfx2john Hashes"
 pfx2john $file > hash
 ```
 <!-- cheat
@@ -919,7 +1117,9 @@ var file
 
 ### openssl2john
 
-```sh title:"Extract crackable hash from an OpenSSL enc'd file (.enc, openssl enc -aes-256-cbc output)"
+Crack openssl2john hashes with John the Ripper.
+
+```sh title:"John Crack Openssl2john Hashes"
 openssl2john $file > hash
 ```
 <!-- cheat
@@ -928,7 +1128,9 @@ var file
 
 ### keystore2john
 
-```sh title:"Extract crackable hash from a Java keystore (.jks / .keystore)"
+Crack keystore2john hashes with John the Ripper.
+
+```sh title:"John Crack Keystore2john Hashes"
 keystore2john $file > hash
 ```
 <!-- cheat
@@ -937,7 +1139,9 @@ var file
 
 ### bks2john
 
-```sh title:"Extract crackable hash from a BouncyCastle keystore (.bks)"
+Crack bks2john hashes with John the Ripper.
+
+```sh title:"John Crack Bks2john Hashes"
 bks2john $file > hash
 ```
 <!-- cheat
@@ -946,7 +1150,9 @@ var file
 
 ### axcrypt2john
 
-```sh title:"Extract crackable hash from an AxCrypt-encrypted file (.axx)"
+Crack axcrypt2john hashes with John the Ripper.
+
+```sh title:"John Crack Axcrypt2john Hashes"
 axcrypt2john $file > hash
 ```
 <!-- cheat
@@ -955,7 +1161,9 @@ var file
 
 ### zed2john
 
-```sh title:"Extract crackable hash from a ZED!-encrypted container (.zed)"
+Crack zed2john hashes with John the Ripper.
+
+```sh title:"John Crack Zed2john Hashes"
 zed2john $file > hash
 ```
 <!-- cheat
@@ -966,7 +1174,9 @@ var file
 
 ### ansible2john
 
-```sh title:"Extract crackable hash from an ansible-vault file (.yml / vault.yml)"
+Crack ansible2john hashes with John the Ripper.
+
+```sh title:"John Crack Ansible2john Hashes"
 ansible2john $file > hash
 ```
 <!-- cheat
@@ -975,7 +1185,9 @@ var file
 
 ### filezilla2john
 
-```sh title:"Extract stored credentials from FileZilla (sitemanager.xml / recentservers.xml)"
+Crack filezilla2john hashes with John the Ripper.
+
+```sh title:"John Crack Filezilla2john Hashes"
 filezilla2john $file > hash
 ```
 <!-- cheat
@@ -984,7 +1196,9 @@ var file
 
 ### deepsound2john
 
-```sh title:"Extract crackable hash from a DeepSound stego carrier (.wav / .mp3 / .flac)"
+Crack deepsound2john hashes with John the Ripper.
+
+```sh title:"John Crack Deepsound2john Hashes"
 deepsound2john $file > hash
 ```
 <!-- cheat
@@ -993,7 +1207,9 @@ var file
 
 ### strip2john
 
-```sh title:"Extract crackable hash from a STRIP password manager backup (.strip / .csv)"
+Crack strip2john hashes with John the Ripper.
+
+```sh title:"John Crack Strip2john Hashes"
 strip2john $file > hash
 ```
 <!-- cheat
@@ -1002,7 +1218,9 @@ var file
 
 ### signal2john
 
-```sh title:"Extract crackable hash from a Signal Desktop database (config.json / db.sqlite)"
+Crack signal2john hashes with John the Ripper.
+
+```sh title:"John Crack Signal2john Hashes"
 signal2john $file > hash
 ```
 <!-- cheat
@@ -1011,7 +1229,9 @@ var file
 
 ### telegram2john
 
-```sh title:"Extract crackable hash from a Telegram local passcode (D877F783D5D3EF8C / settings file)"
+Crack telegram2john hashes with John the Ripper.
+
+```sh title:"John Crack Telegram2john Hashes"
 telegram2john $file > hash
 ```
 <!-- cheat
@@ -1020,7 +1240,9 @@ var file
 
 ### andotp2john
 
-```sh title:"Extract crackable hash from an andOTP encrypted backup (.aes / .json.aes)"
+Crack andotp2john hashes with John the Ripper.
+
+```sh title:"John Crack Andotp2john Hashes"
 andotp2john $file > hash
 ```
 <!-- cheat

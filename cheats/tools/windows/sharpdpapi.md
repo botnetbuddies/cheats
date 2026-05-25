@@ -4,27 +4,27 @@
 
 ### Triage user vaults
 
-Triage current user DPAPI vaults.
+Run triage user vaults with SharpDPAPI.
 
-```cmd title:"Triage user DPAPI vaults"
+```cmd title:"SharpDPAPI Run Triage User Vaults"
 SharpDPAPI.exe triage
 ```
 <!-- cheat -->
 
 ### Machine credentials
 
-Triage machine-level DPAPI credentials.
+Dump machine credentials with SharpDPAPI.
 
-```cmd title:"Triage machine DPAPI credentials"
+```cmd title:"SharpDPAPI Dump Machine Credentials"
 SharpDPAPI.exe machinetriage
 ```
 <!-- cheat -->
 
 ### Decrypt with masterkey
 
-Decrypt a DPAPI blob with a known masterkey.
+Run decrypt with masterkey with SharpDPAPI.
 
-```cmd title:"Decrypt DPAPI blob with masterkey"
+```cmd title:"SharpDPAPI Run Decrypt with Masterkey"
 SharpDPAPI.exe blob /target:"$blob_file" /mkfile:"$masterkey_file"
 ```
 <!-- cheat

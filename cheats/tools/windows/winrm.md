@@ -4,27 +4,27 @@
 
 ### Enable locally
 
-Enable PowerShell remoting on the local host.
+Enable locally with WinRM.
 
-```powershell title:"Enable PowerShell remoting locally"
+```powershell title:"WinRM Enable Locally"
 Enable-PSRemoting -Force
 ```
 <!-- cheat -->
 
 ### Trust all hosts
 
-Allow the local WinRM client to connect to any host.
+Enable trust all hosts with WinRM.
 
-```powershell title:"Trust all WinRM hosts"
+```powershell title:"WinRM Enable Trust All Hosts"
 Set-Item WSMan:\localhost\Client\TrustedHosts * -Force
 ```
 <!-- cheat -->
 
 ### Enable over WMIC
 
-Enable PowerShell remoting remotely through WMIC.
+Enable over WMIC with WinRM.
 
-```cmd title:"Enable PowerShell remoting over WMIC"
+```cmd title:"WinRM Enable Over WMIC"
 wmic /node:"$rhost_name" process call create "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Enable-PSRemoting -Force"
 ```
 <!-- cheat
@@ -33,9 +33,9 @@ var rhost_name
 
 ### Enable over PsExec
 
-Enable PowerShell remoting remotely through PsExec.
+Enable over PsExec with WinRM.
 
-```cmd title:"Enable PowerShell remoting over PsExec"
+```cmd title:"WinRM Enable Over PsExec"
 PsExec.exe "\\$rhost_name" -u "$domain\$user" -p "$pass" -h -d powershell.exe "Enable-PSRemoting -Force"
 ```
 <!-- cheat
@@ -49,9 +49,9 @@ var pass
 
 ### Test WSMan
 
-Test whether a host responds to WinRM.
+Spawn test WSMan with WinRM.
 
-```powershell title:"Test WinRM with Test-WSMan"
+```powershell title:"WinRM Spawn Test WSMan"
 Test-WSMan -ComputerName "$rhost_name"
 ```
 <!-- cheat
@@ -60,9 +60,9 @@ var rhost_name
 
 ### Invoke command
 
-Execute a PowerShell command on a remote host.
+Spawn invoke command with WinRM.
 
-```powershell title:"Run command over WinRM"
+```powershell title:"WinRM Spawn Invoke Command"
 Invoke-Command -ComputerName "$rhost_name" -ScriptBlock { $command } -Credential "$domain\$user"
 ```
 <!-- cheat
@@ -74,9 +74,9 @@ var user
 
 ### Invoke script
 
-Execute a local script file on a remote host.
+Spawn invoke script with WinRM.
 
-```powershell title:"Run script over WinRM"
+```powershell title:"WinRM Spawn Invoke Script"
 Invoke-Command -ComputerName "$rhost_name" -FilePath "$script_path" -Credential "$domain\$user"
 ```
 <!-- cheat
@@ -88,9 +88,9 @@ var user
 
 ### Enter session
 
-Open an interactive PowerShell remoting session.
+Spawn enter session with WinRM.
 
-```powershell title:"Open interactive WinRM session"
+```powershell title:"WinRM Spawn Enter Session"
 Enter-PSSession -ComputerName "$rhost_name" -Credential "$domain\$user"
 ```
 <!-- cheat

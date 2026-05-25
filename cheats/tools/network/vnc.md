@@ -4,9 +4,9 @@
 
 ### Nmap enum
 
-Enumerate VNC info, title, and RealVNC auth bypass.
+Enumerate nmap enum with VNC.
 
-```sh title:"Enumerate VNC with nmap"
+```sh title:"VNC Enumerate Nmap Enum"
 nmap -sV --script vnc-info,realvnc-auth-bypass,vnc-title -p "$rport" "$rhost_ip"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var rport := 5900
 
 ### No-auth check
 
-Check for VNC servers that allow no-auth access with Metasploit.
+Check no auth check with VNC.
 
-```sh title:"Check VNC no-auth access with Metasploit"
+```sh title:"VNC Check No Auth Check"
 msfconsole -x "use auxiliary/scanner/vnc/vnc_none_auth; set RHOSTS $rhost_ip; set RPORT $rport; run; exit"
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ var rport := 5900
 
 ### No password
 
-Connect to VNC without a password.
+Dump no password with VNC.
 
-```sh title:"Connect to VNC without password"
+```sh title:"VNC Dump No Password"
 vncviewer "$rhost_ip::$rport"
 ```
 <!-- cheat
@@ -42,9 +42,9 @@ var rport := 5900
 
 ### Password file
 
-Connect to VNC using a password file.
+Dump password file with VNC.
 
-```sh title:"Connect to VNC with password file"
+```sh title:"VNC Dump Password File"
 vncviewer -password "$password_file" "$rhost_ip::$rport"
 ```
 <!-- cheat
@@ -57,9 +57,9 @@ var rport := 5900
 
 ### Metasploit username
 
-Run Metasploit VNC login check with one username.
+Check metasploit username with VNC.
 
-```sh title:"Run VNC login check with one username"
+```sh title:"VNC Check Metasploit Username"
 msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; run; exit"
 ```
 <!-- cheat
@@ -70,9 +70,9 @@ var user
 
 ### Metasploit wordlists
 
-Run Metasploit VNC login brute force with user and password files.
+List metasploit wordlists with VNC.
 
-```sh title:"Run VNC login brute force with wordlists"
+```sh title:"VNC List Metasploit Wordlists"
 msfconsole -x "use auxiliary/scanner/vnc/vnc_login; set RHOSTS $rhost_ip; set RPORT $rport; set USER_FILE $wordlists_users; set PASS_FILE $wordlists; run; exit"
 ```
 <!-- cheat

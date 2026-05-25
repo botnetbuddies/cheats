@@ -4,9 +4,9 @@
 
 ### Password to NT hash
 
-Compute the NT hash of a cleartext password using openssl + iconv (UTF-16LE then MD4). No Python needed.
+Dump password to NT hash with Pythononeliners.
 
-```sh title:"NT hash of cleartext via UTF-16LE + MD4 in openssl"
+```sh title:"Pythononeliners Dump Password to NT Hash"
 printf '%s' '$pass' | iconv -t UTF-16LE | openssl dgst -md4 | awk '{print toupper($2)}'
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var pass
 
 ### Hex SID to string
 
-Decode a hex-encoded SID blob into the canonical `S-1-5-21-...` form. Useful when a tool prints the raw bytes.
+Decode hex SID to string with Pythononeliners.
 
-```sh title:"Decode hex SID blob to canonical S-1-5-... form"
+```sh title:"Pythononeliners Decode Hex SID to String"
 python3 - <<'PY'
 def dec(h):
     if h.startswith(("0x","0X")):
@@ -37,9 +37,9 @@ var hex_sid
 
 ### Stabilize Shell
 
-Upgrade a dumb reverse shell to a full PTY using Python's `pty.spawn`, then background and reset stty so tab completion and ctrl-c work.
+Spawn stabilize shell with Pythononeliners.
 
-```sh title:"Upgrade dumb shell to full PTY via pty.spawn"
+```sh title:"Pythononeliners Spawn Stabilize Shell"
 python3 -c 'import pty; pty.spawn("/bin/bash")'
 \# ^Z
 \# stty raw -echo; fg; reset

@@ -4,9 +4,9 @@
 
 ### Nmap safe scripts
 
-Run safe Telnet NSE scripts.
+Enumerate nmap safe scripts with Telnet.
 
-```sh title:"Run safe Telnet NSE scripts"
+```sh title:"Telnet Enumerate Nmap Safe Scripts"
 nmap -n -sV -Pn --script "*telnet* and safe" -p 23 "$rhost_ip"
 ```
 <!-- cheat
@@ -17,9 +17,9 @@ var rhost_ip
 
 ### Connect
 
-Connect to a Telnet service.
+Run connect with Telnet.
 
-```sh title:"Connect to Telnet"
+```sh title:"Telnet Run Connect"
 telnet "$rhost_ip" "$rport"
 ```
 <!-- cheat

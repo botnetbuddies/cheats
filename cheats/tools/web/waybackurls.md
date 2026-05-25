@@ -17,9 +17,9 @@ waybackurls collects archived URLs for a domain to seed content discovery, param
 
 #sh #waybackurls #web
 
-Collect archived URLs for a domain.
+Run domain URLs with waybackurls.
 
-```sh title:"Collect archived URLs"
+```sh title:"Waybackurls Run Domain URLs"
 waybackurls "$domain"
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ var domain
 
 #sh #waybackurls #web
 
-Collect archived URLs for a subdomain.
+Run subdomain URLs with waybackurls.
 
-```sh title:"Collect archived subdomain URLs"
+```sh title:"Waybackurls Run Subdomain URLs"
 waybackurls "$subdomain"
 ```
 <!-- cheat

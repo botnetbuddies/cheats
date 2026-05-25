@@ -4,9 +4,9 @@
 
 ### Classic
 
-Enumerate Drupal users, nodes, modules, default files, and themes.
+Enumerate classic with Drupwn.
 
-```sh title:"Enumerate Drupal with drupwn"
+```sh title:"Drupwn Enumerate Classic"
 drupwn --users --nodes --modules --dfiles --themes enum "$url"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var url
 
 ### Docker
 
-Run drupwn in Docker.
+Enumerate docker with Drupwn.
 
-```sh title:"Enumerate Drupal with drupwn Docker"
+```sh title:"Drupwn Enumerate Docker"
 sudo docker run --rm -it immunit/drupwn --users --nodes --modules --dfiles --themes enum "$url"
 ```
 <!-- cheat

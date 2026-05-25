@@ -4,9 +4,9 @@
 
 ### Reverse server
 
-Start a reverse-capable Chisel server on your machine.
+Start reverse server with Chisel.
 
-```sh title:"Start reverse-capable Chisel server"
+```sh title:"Chisel Start Reverse Server"
 ./chisel server -v -p "$server_port" --reverse
 ```
 <!-- cheat
@@ -17,9 +17,9 @@ var server_port := 8000
 
 ### Reverse port forward
 
-Expose a port from the client side on the server side.
+Start reverse port forward with Chisel.
 
-```sh title:"Expose client port on Chisel server"
+```sh title:"Chisel Start Reverse Port Forward"
 ./chisel client -v "$server_ip:$server_port" "R:$server_side_port:$client_side_host:$client_side_port"
 ```
 <!-- cheat
@@ -32,9 +32,9 @@ var client_side_port
 
 ### Forward server listener to client
 
-Expose a server-side listener to the client side.
+List forward server listener to client with Chisel.
 
-```sh title:"Forward server listener to client side"
+```sh title:"Chisel List Forward Server Listener to Client"
 ./chisel client -v "$server_ip:$server_port" "$client_side_host:$client_side_port:$server_side_host:$server_side_port"
 ```
 <!-- cheat
@@ -48,9 +48,9 @@ var server_side_port
 
 ### Reverse SOCKS
 
-Create a reverse SOCKS proxy on the Chisel server.
+Start reverse SOCKS with Chisel.
 
-```sh title:"Create reverse SOCKS proxy"
+```sh title:"Chisel Start Reverse SOCKS"
 ./chisel client "$server_ip:$server_port" R:socks
 ```
 <!-- cheat

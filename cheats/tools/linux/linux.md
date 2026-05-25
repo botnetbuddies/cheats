@@ -4,9 +4,9 @@
 
 ### Background process
 
-Run a command in the background.
+Execute background process with Linux.
 
-```sh title:"Run command in background"
+```sh title:"Linux Execute Background Process"
 $process &
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var process
 
 ### Kill by name
 
-Kill processes by name.
+Run kill by name with Linux.
 
-```sh title:"Kill processes by name"
+```sh title:"Linux Run Kill by Name"
 killall "$process_name"
 ```
 <!-- cheat
@@ -28,9 +28,9 @@ var process_name
 
 ### OpenSSL encrypt file
 
-Encrypt a file with AES-256-CBC.
+Run OpenSSL encrypt file with Linux.
 
-```sh title:"Encrypt file with OpenSSL AES-256-CBC"
+```sh title:"Linux Run OpenSSL Encrypt File"
 openssl enc -aes-256-cbc -e -in "$input_file" -out "$output_file"
 ```
 <!-- cheat
@@ -40,9 +40,9 @@ var output_file
 
 ### OpenSSL decrypt file
 
-Decrypt an AES-256-CBC file.
+Run OpenSSL decrypt file with Linux.
 
-```sh title:"Decrypt file with OpenSSL AES-256-CBC"
+```sh title:"Linux Run OpenSSL Decrypt File"
 openssl enc -aes-256-cbc -d -in "$input_file" -out "$output_file"
 ```
 <!-- cheat
@@ -54,9 +54,9 @@ var output_file
 
 ### SCP download file
 
-Copy a file from a remote server to the local host.
+Download SCP download file with Linux.
 
-```sh title:"SCP file from remote server"
+```sh title:"Linux Download SCP Download File"
 scp "$user@$rhost_ip:$remote_path" "$local_path"
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var local_path
 
 ### SCP upload file
 
-Copy a local file to a remote server.
+Start SCP upload file with Linux.
 
-```sh title:"SCP file to remote server"
+```sh title:"Linux Start SCP Upload File"
 scp "$local_path" "$user@$rhost_ip:$remote_path"
 ```
 <!-- cheat
@@ -82,9 +82,9 @@ var remote_path
 
 ### SCP download directory
 
-Recursively copy a remote directory to the local host.
+Download SCP download directory with Linux.
 
-```sh title:"SCP directory from remote server"
+```sh title:"Linux Download SCP Download Directory"
 scp -r "$user@$rhost_ip:$remote_path" "$local_path"
 ```
 <!-- cheat
@@ -98,9 +98,9 @@ var local_path
 
 ### Lines to one line
 
-Search a file and join matching lines with spaces.
+Run lines to one line with Linux.
 
-```sh title:"Join matching lines into one line"
+```sh title:"Linux Run Lines to One Line"
 grep "$pattern" "$file" | tr '\n' ' '
 ```
 <!-- cheat
@@ -110,9 +110,9 @@ var file
 
 ### Grepable nmap IPs
 
-Extract IPs matching a pattern from a grepable nmap file.
+Extract grepable nmap IPs with Linux.
 
-```sh title:"Extract matching IPs from grepable nmap output"
+```sh title:"Linux Extract Grepable Nmap IPs"
 grep "$pattern" "$gnmap_file" | cut -d ' ' -f 2 | tr '\n' ' '
 ```
 <!-- cheat
@@ -122,9 +122,9 @@ var gnmap_file
 
 ### JSON to YAML
 
-Convert JSON to YAML with Ruby.
+Convert JSON to YAML with Linux.
 
-```sh title:"Convert JSON to YAML with Ruby"
+```sh title:"Linux Convert JSON to YAML"
 ruby -ryaml -rjson -e 'puts YAML.dump(JSON.load(ARGF))' "$json_file"
 ```
 <!-- cheat
@@ -135,9 +135,9 @@ var json_file
 
 ### Identify service on port
 
-Use amap to identify a service listening on a port.
+Enumerate identify service on port with Linux.
 
-```sh title:"Identify service on host and port"
+```sh title:"Linux Enumerate Identify Service on Port"
 amap -d "$rhost_ip" "$rport"
 ```
 <!-- cheat
@@ -149,9 +149,9 @@ var rport
 
 ### QR code
 
-Create a terminal QR code from text using qrenco.de.
+Create QR code with Linux.
 
-```sh title:"Create terminal QR code from text"
+```sh title:"Linux Create QR Code"
 printf '%s\n' "$content" | curl -F-=\<- qrenco.de
 ```
 <!-- cheat

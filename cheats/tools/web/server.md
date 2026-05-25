@@ -4,9 +4,9 @@
 
 ### Python HTTP server
 
-Serve the current directory over HTTP. Standard staging server for payload delivery and file pulls.
+Start python HTTP server with Server.
 
-```sh title:"Serve cwd over HTTP for payload delivery"
+```sh title:"Server Start Python HTTP Server"
 python3 -m http.server $lport $template
 ```
 <!-- cheat
@@ -19,9 +19,9 @@ var template
 
 ### Python 2 HTTP server
 
-Serve the current directory over HTTP with Python 2.
+Start python 2 HTTP server with Server.
 
-```sh title:"Serve cwd over HTTP with Python 2"
+```sh title:"Server Start Python 2 HTTP Server"
 python -m SimpleHTTPServer $lport
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ import lports
 
 ### FTP w/auth
 
-Authenticated writable FTP server via pyftpdlib. Use when you need a place to receive files from a target.
+Read FTP w/auth with Server.
 
-```sh title:"Authenticated writable FTP via pyftpdlib"
+```sh title:"Server Read FTP W/auth"
 python3 -m pyftpdlib -w -p $lport -u $user -P $pass
 ```
 <!-- cheat
@@ -44,9 +44,9 @@ import lports
 
 ### FTP anonymous
 
-Anonymous writable FTP server. Quick exfil drop point when egress filtering is loose.
+Dump FTP anonymous with Server.
 
-```sh title:"Anonymous writable FTP, quick exfil drop"
+```sh title:"Server Dump FTP Anonymous"
 python -m pyftpdlib -w -p $lport $template
 ```
 <!-- cheat
@@ -61,9 +61,9 @@ var template
 
 ### PHP HTTP server
 
-PHP built-in server, useful when you need PHP execution (e.g. delivering a `.php` payload that should run in-place).
+Start PHP HTTP server with Server.
 
-```sh title:"PHP built-in server, runs .php payloads in place"
+```sh title:"Server Start PHP HTTP Server"
 php -S 0.0.0.0:$lport $template
 ```
 <!-- cheat

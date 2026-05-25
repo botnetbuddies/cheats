@@ -4,9 +4,9 @@
 
 ### New CSR and key
 
-Create a new private key and certificate signing request.
+Create CSR and key with OpenSSL.
 
-```sh title:"Create new private key and CSR"
+```sh title:"OpenSSL Create CSR and Key"
 openssl req -new -newkey "rsa:$rsa_bits" -nodes -out "$csr_file" -keyout "$key_file"
 ```
 <!-- cheat
@@ -17,9 +17,9 @@ var key_file
 
 ### CSR from key
 
-Create a CSR from an existing private key.
+Create CSR from key with OpenSSL.
 
-```sh title:"Create CSR from existing private key"
+```sh title:"OpenSSL Create CSR from Key"
 openssl req -out "$csr_file" -key "$key_file" -new
 ```
 <!-- cheat
@@ -29,9 +29,9 @@ var key_file
 
 ### CSR from certificate
 
-Create a CSR from an existing certificate and private key.
+Read CSR from certificate with OpenSSL.
 
-```sh title:"Create CSR from certificate and key"
+```sh title:"OpenSSL Read CSR from Certificate"
 openssl x509 -x509toreq -out "$csr_file" -in "$cert_file" -signkey "$key_file"
 ```
 <!-- cheat
@@ -44,9 +44,9 @@ var key_file
 
 ### Self-signed certificate
 
-Create a self-signed certificate and key.
+Read self signed certificate with OpenSSL.
 
-```sh title:"Create self-signed certificate and key"
+```sh title:"OpenSSL Read Self Signed Certificate"
 openssl req -x509 -sha256 -nodes -days "$days" -newkey "rsa:$rsa_bits" -out "$cert_file" -keyout "$key_file"
 ```
 <!-- cheat
@@ -58,9 +58,9 @@ var key_file
 
 ### Show certificate
 
-Print certificate details.
+Show certificate with OpenSSL.
 
-```sh title:"Show certificate details"
+```sh title:"OpenSSL Show Certificate"
 openssl x509 -in "$cert_file" -text -noout
 ```
 <!-- cheat
@@ -69,9 +69,9 @@ var cert_file
 
 ### Server certificate chain
 
-Display the remote server certificate chain.
+Read server certificate chain with OpenSSL.
 
-```sh title:"Display server certificate chain"
+```sh title:"OpenSSL Read Server Certificate Chain"
 openssl s_client -connect "$rhost_name:$rport" -showcerts
 ```
 <!-- cheat
@@ -83,9 +83,9 @@ var rport := 443
 
 ### Remove passphrase
 
-Remove a passphrase from a private key.
+Remove passphrase with OpenSSL.
 
-```sh title:"Remove passphrase from private key"
+```sh title:"OpenSSL Remove Passphrase"
 openssl rsa -in "$key_file" -out "$plaintext_key_file"
 ```
 <!-- cheat
@@ -95,9 +95,9 @@ var plaintext_key_file
 
 ### Check key
 
-Validate a private key.
+Check key with OpenSSL.
 
-```sh title:"Validate private key"
+```sh title:"OpenSSL Check Key"
 openssl rsa -in "$key_file" -check
 ```
 <!-- cheat
@@ -108,9 +108,9 @@ var key_file
 
 ### DER to PEM
 
-Convert a DER certificate to PEM.
+Read DER to PEM with OpenSSL.
 
-```sh title:"Convert DER certificate to PEM"
+```sh title:"OpenSSL Read DER to PEM"
 openssl x509 -inform der -in "$cert_file" -out "$pem_file"
 ```
 <!-- cheat
@@ -120,9 +120,9 @@ var pem_file
 
 ### PEM to DER
 
-Convert a PEM certificate to DER.
+Read PEM to DER with OpenSSL.
 
-```sh title:"Convert PEM certificate to DER"
+```sh title:"OpenSSL Read PEM to DER"
 openssl x509 -outform der -in "$pem_file" -out "$cert_file"
 ```
 <!-- cheat
@@ -132,9 +132,9 @@ var cert_file
 
 ### PKCS12 to PEM
 
-Convert a PKCS12 file to PEM.
+Convert PKCS12 to PEM with OpenSSL.
 
-```sh title:"Convert PKCS12 to PEM"
+```sh title:"OpenSSL Convert PKCS12 to PEM"
 openssl pkcs12 -in "$pkcs12_file" -out "$pem_file" -nodes
 ```
 <!-- cheat
@@ -144,9 +144,9 @@ var pem_file
 
 ### Extract PKCS12 key
 
-Extract a private key from a PKCS12 file.
+Extract PKCS12 key with OpenSSL.
 
-```sh title:"Extract private key from PKCS12"
+```sh title:"OpenSSL Extract PKCS12 Key"
 openssl pkcs12 -in "$pkcs12_file" -out "$pem_file" -nodes -nocerts
 ```
 <!-- cheat
@@ -156,9 +156,9 @@ var pem_file
 
 ### Extract PKCS12 cert
 
-Extract certificates from a PKCS12 file.
+Extract PKCS12 cert with OpenSSL.
 
-```sh title:"Extract certificates from PKCS12"
+```sh title:"OpenSSL Extract PKCS12 Cert"
 openssl pkcs12 -in "$pkcs12_file" -out "$pem_file" -nodes -nokeys
 ```
 <!-- cheat
@@ -168,9 +168,9 @@ var pem_file
 
 ### PEM to PKCS12
 
-Export a certificate and private key to PKCS12.
+Read PEM to PKCS12 with OpenSSL.
 
-```sh title:"Export certificate and key to PKCS12"
+```sh title:"OpenSSL Read PEM to PKCS12"
 openssl pkcs12 -export -out "$pkcs12_file" -inkey "$key_file" -in "$cert_file" -certfile "$cert_file"
 ```
 <!-- cheat
@@ -183,9 +183,9 @@ var cert_file
 
 ### Check CSR
 
-Validate and print a CSR.
+Check CSR with OpenSSL.
 
-```sh title:"Validate CSR"
+```sh title:"OpenSSL Check CSR"
 openssl req -text -noout -verify -in "$csr_file"
 ```
 <!-- cheat
@@ -194,9 +194,9 @@ var csr_file
 
 ### Check PKCS12
 
-Validate and inspect a PKCS12 file.
+Check PKCS12 with OpenSSL.
 
-```sh title:"Validate PKCS12 file"
+```sh title:"OpenSSL Check PKCS12"
 openssl pkcs12 -info -in "$pkcs12_file"
 ```
 <!-- cheat
@@ -205,9 +205,9 @@ var pkcs12_file
 
 ### Certificate modulus
 
-Print the certificate modulus hash for key/cert matching.
+Read certificate modulus with OpenSSL.
 
-```sh title:"Print certificate modulus hash"
+```sh title:"OpenSSL Read Certificate Modulus"
 openssl x509 -noout -modulus -in "$cert_file" | openssl md5
 ```
 <!-- cheat
@@ -216,9 +216,9 @@ var cert_file
 
 ### Key modulus
 
-Print the private key modulus hash for key/cert matching.
+Dump key modulus with OpenSSL.
 
-```sh title:"Print private key modulus hash"
+```sh title:"OpenSSL Dump Key Modulus"
 openssl rsa -noout -modulus -in "$key_file" | openssl md5
 ```
 <!-- cheat
@@ -227,9 +227,9 @@ var key_file
 
 ### CSR modulus
 
-Print the CSR modulus hash for key/cert matching.
+Dump CSR modulus with OpenSSL.
 
-```sh title:"Print CSR modulus hash"
+```sh title:"OpenSSL Dump CSR Modulus"
 openssl req -noout -modulus -in "$csr_file" | openssl md5
 ```
 <!-- cheat

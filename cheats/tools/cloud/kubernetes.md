@@ -4,27 +4,27 @@
 
 ### List contexts
 
-Show all kubeconfig contexts and highlight the current one.
+List contexts with Kubernetes.
 
-```sh title:"List kubeconfig contexts"
+```sh title:"Kubernetes List Contexts"
 kubectl config get-contexts
 ```
 <!-- cheat -->
 
 ### Current context
 
-Print the active kubeconfig context.
+Run current context with Kubernetes.
 
-```sh title:"Print current kubeconfig context"
+```sh title:"Kubernetes Run Current Context"
 kubectl config current-context
 ```
 <!-- cheat -->
 
 ### Switch context
 
-Set the active kubeconfig context.
+Run switch context with Kubernetes.
 
-```sh title:"Switch kubeconfig context"
+```sh title:"Kubernetes Run Switch Context"
 kubectl config use-context "$context"
 ```
 <!-- cheat
@@ -33,9 +33,9 @@ var context
 
 ### Explain resource
 
-Print Kubernetes API documentation for a resource type or field path.
+Show explain resource with Kubernetes.
 
-```sh title:"Show Kubernetes resource documentation"
+```sh title:"Kubernetes Show Explain Resource"
 kubectl explain "$resource"
 ```
 <!-- cheat
@@ -46,36 +46,36 @@ var resource
 
 ### Nodes
 
-List cluster nodes.
+Discover nodes with Kubernetes.
 
-```sh title:"List nodes"
+```sh title:"Kubernetes Discover Nodes"
 kubectl get nodes
 ```
 <!-- cheat -->
 
 ### Nodes wide
 
-List cluster nodes with IPs, OS, kernel, runtime, and other useful detail.
+Discover nodes wide with Kubernetes.
 
-```sh title:"List nodes with details"
+```sh title:"Kubernetes Discover Nodes Wide"
 kubectl get nodes -o wide
 ```
 <!-- cheat -->
 
 ### Namespaces
 
-List namespaces.
+Discover namespaces with Kubernetes.
 
-```sh title:"List namespaces"
+```sh title:"Kubernetes Discover Namespaces"
 kubectl get namespaces
 ```
 <!-- cheat -->
 
 ### Pods in namespace
 
-List pods in a namespace.
+Discover pods in namespace with Kubernetes.
 
-```sh title:"List pods in namespace"
+```sh title:"Kubernetes Discover Pods in Namespace"
 kubectl get pods -n "$namespace"
 ```
 <!-- cheat
@@ -84,18 +84,18 @@ var namespace
 
 ### Pods all namespaces
 
-List pods across all namespaces.
+Discover pods all namespaces with Kubernetes.
 
-```sh title:"List pods in all namespaces"
+```sh title:"Kubernetes Discover Pods All Namespaces"
 kubectl get pods --all-namespaces
 ```
 <!-- cheat -->
 
 ### Services in namespace
 
-List services in a namespace.
+Discover services in namespace with Kubernetes.
 
-```sh title:"List services in namespace"
+```sh title:"Kubernetes Discover Services in Namespace"
 kubectl get services -n "$namespace"
 ```
 <!-- cheat
@@ -104,9 +104,9 @@ var namespace
 
 ### Deployments in namespace
 
-List deployments in a namespace.
+Discover deployments in namespace with Kubernetes.
 
-```sh title:"List deployments in namespace"
+```sh title:"Kubernetes Discover Deployments in Namespace"
 kubectl get deployments -n "$namespace"
 ```
 <!-- cheat
@@ -115,9 +115,9 @@ var namespace
 
 ### Describe resource
 
-Show details and events for a named resource in a namespace.
+Discover describe resource with Kubernetes.
 
-```sh title:"Describe resource in namespace"
+```sh title:"Kubernetes Discover Describe Resource"
 kubectl describe "$resource/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -130,9 +130,9 @@ var namespace
 
 ### Follow pod logs
 
-Follow logs from a pod in a namespace.
+Run follow pod logs with Kubernetes.
 
-```sh title:"Follow pod logs"
+```sh title:"Kubernetes Run Follow Pod Logs"
 kubectl logs -f "pod/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -142,9 +142,9 @@ var namespace
 
 ### Previous pod logs
 
-Print logs from the previous container instance after a restart.
+Start previous pod logs with Kubernetes.
 
-```sh title:"Print previous pod logs after restart"
+```sh title:"Kubernetes Start Previous Pod Logs"
 kubectl logs "pod/$name" -n "$namespace" --previous
 ```
 <!-- cheat
@@ -156,9 +156,9 @@ var namespace
 
 ### Edit deployment
 
-Open a deployment in your configured editor.
+Run edit deployment with Kubernetes.
 
-```sh title:"Edit deployment in namespace"
+```sh title:"Kubernetes Run Edit Deployment"
 kubectl edit "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -168,9 +168,9 @@ var namespace
 
 ### Restart deployment
 
-Trigger a rolling restart of a deployment.
+Start restart deployment with Kubernetes.
 
-```sh title:"Rollout restart deployment"
+```sh title:"Kubernetes Start Restart Deployment"
 kubectl rollout restart "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -180,9 +180,9 @@ var namespace
 
 ### Rollout status
 
-Watch deployment rollout status until it completes or fails.
+Show rollout status with Kubernetes.
 
-```sh title:"Watch deployment rollout status"
+```sh title:"Kubernetes Show Rollout Status"
 kubectl rollout status "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -194,9 +194,9 @@ var namespace
 
 ### Cordon node
 
-Mark a node as unschedulable.
+Run cordon node with Kubernetes.
 
-```sh title:"Mark node unschedulable"
+```sh title:"Kubernetes Run Cordon Node"
 kubectl cordon "$node_name"
 ```
 <!-- cheat
@@ -205,9 +205,9 @@ var node_name
 
 ### Drain node
 
-Drain a node for maintenance. This evicts workloads and may disrupt service if replicas are not healthy.
+Run drain node with Kubernetes.
 
-```sh title:"Drain node for maintenance"
+```sh title:"Kubernetes Run Drain Node"
 kubectl drain "$node_name" --ignore-daemonsets --delete-emptydir-data
 ```
 <!-- cheat
@@ -216,9 +216,9 @@ var node_name
 
 ### Uncordon node
 
-Mark a node as schedulable again.
+Run uncordon node with Kubernetes.
 
-```sh title:"Mark node schedulable"
+```sh title:"Kubernetes Run Uncordon Node"
 kubectl uncordon "$node_name"
 ```
 <!-- cheat
@@ -229,18 +229,18 @@ var node_name
 
 ### Top nodes
 
-Show node CPU and memory usage. Requires metrics-server.
+Show top nodes with Kubernetes.
 
-```sh title:"Show node CPU and memory usage"
+```sh title:"Kubernetes Show Top Nodes"
 kubectl top nodes
 ```
 <!-- cheat -->
 
 ### Top pods
 
-Show pod CPU and memory usage in a namespace. Requires metrics-server.
+Show top pods with Kubernetes.
 
-```sh title:"Show pod CPU and memory usage"
+```sh title:"Kubernetes Show Top Pods"
 kubectl top pods -n "$namespace"
 ```
 <!-- cheat

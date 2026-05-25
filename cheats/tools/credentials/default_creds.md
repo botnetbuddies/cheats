@@ -4,9 +4,9 @@
 
 ### Default creds lookup
 
-Search a local default-creds database for known vendor/application logins. Optionally export the matches for use with hydra or another spraying tool.
+Find default creds lookup with Default_creds.
 
-```sh title:"Search default creds DB by app, optional export"
+```sh title:"Default Creds Find Default Creds Lookup"
 creds search $app $template
 ```
 <!-- cheat

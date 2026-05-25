@@ -4,9 +4,9 @@
 
 ### Create volume
 
-Create a normal VeraCrypt volume with ext4, AES, and SHA512.
+Create volume with VeraCrypt.
 
-```sh title:"Create VeraCrypt ext4 volume"
+```sh title:"VeraCrypt Create Volume"
 veracrypt -t --create "$volume_file" --hash sha512 --encryption AES --filesystem ext4 --volume-type normal -k "" --pim 0 --size "$size"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var size
 
 ### Mount volume
 
-Mount a VeraCrypt volume at a mount point.
+Mount volume with VeraCrypt.
 
-```sh title:"Mount VeraCrypt volume"
+```sh title:"VeraCrypt Mount Volume"
 veracrypt "$volume_file" "$mount_point"
 ```
 <!-- cheat
@@ -28,9 +28,9 @@ var mount_point
 
 ### Dismount volume
 
-Dismount one VeraCrypt volume.
+Mount dismount volume with VeraCrypt.
 
-```sh title:"Dismount VeraCrypt volume"
+```sh title:"VeraCrypt Mount Dismount Volume"
 veracrypt -d "$volume_file"
 ```
 <!-- cheat
@@ -39,9 +39,9 @@ var volume_file
 
 ### Dismount all
 
-Dismount all mounted VeraCrypt volumes.
+Mount dismount all with VeraCrypt.
 
-```sh title:"Dismount all VeraCrypt volumes"
+```sh title:"VeraCrypt Mount Dismount All"
 veracrypt -d
 ```
 <!-- cheat -->

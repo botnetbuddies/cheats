@@ -4,9 +4,9 @@
 
 ### Hex
 
-Generate a hex wordlist.
+List hex with Crunch.
 
-```sh title:"Generate hex wordlist"
+```sh title:"Crunch List Hex"
 crunch "$min_length" "$max_length" 0123456789ABCDEF -o "$output_file"
 ```
 <!-- cheat
@@ -17,9 +17,9 @@ var output_file
 
 ### Charset
 
-Generate a wordlist from a Crunch charset.
+List charset with Crunch.
 
-```sh title:"Generate wordlist from Crunch charset"
+```sh title:"Crunch List Charset"
 crunch "$min_length" "$max_length" -f /usr/share/crunch/charset.lst "$charset" -o "$output_file"
 ```
 <!-- cheat
@@ -31,9 +31,9 @@ var output_file
 
 ### Pattern
 
-Generate a wordlist from a pattern. `@` is lowercase, `,` is uppercase, `%` is digit, and `^` is symbol.
+List pattern with Crunch.
 
-```sh title:"Generate wordlist from Crunch pattern"
+```sh title:"Crunch List Pattern"
 crunch "$min_length" "$max_length" -t "$pattern" -o "$output_file"
 ```
 <!-- cheat
@@ -45,9 +45,9 @@ var output_file
 
 ### Password pattern
 
-Generate `password` plus two digits and one symbol.
+Dump password pattern with Crunch.
 
-```sh title:"Generate password%%^ pattern wordlist"
+```sh title:"Crunch Dump Password Pattern"
 crunch 10 10 -t 'password%%^' -o "$output_file"
 ```
 <!-- cheat

@@ -4,9 +4,9 @@
 
 ### Install with Homebrew
 
-Install CloudFox on macOS with Homebrew.
+Install CloudFox with homebrew.
 
-```sh title:"Install CloudFox with Homebrew"
+```sh title:"CloudFox Install with Homebrew"
 brew install cloudfox
 ```
 <!-- cheat -->
@@ -14,45 +14,45 @@ brew install cloudfox
 
 ### Install with Go
 
-Install CloudFox on Linux or any Go-supported platform. Ensure `$HOME/go/bin` is on your `PATH`.
+Install CloudFox with go.
 
-```sh title:"Install CloudFox with Go"
+```sh title:"CloudFox Install with Go"
 go install github.com/BishopFox/cloudfox@latest
 ```
 <!-- cheat -->
 
 ### Install release binary
 
-Download the latest CloudFox release binary for the current platform.
+Install release binary with CloudFox.
 
-```sh title:"Open CloudFox releases"
+```sh title:"CloudFox Install Release Binary"
 open https://github.com/BishopFox/cloudfox/releases/latest
 ```
 <!-- cheat -->
 
 ### Build from source
 
-Build CloudFox from a local clone.
+Build CloudFox from source.
 
-```sh title:"Build CloudFox from source"
+```sh title:"CloudFox Build from Source"
 git clone https://github.com/BishopFox/cloudfox.git && cd cloudfox && go build .
 ```
 <!-- cheat -->
 
 ### AWS help
 
-List CloudFox AWS commands and global flags.
+List AWS help with CloudFox.
 
-```sh title:"List CloudFox AWS commands"
+```sh title:"CloudFox List AWS Help"
 cloudfox aws -h
 ```
 <!-- cheat -->
 
 ### AWS command help
 
-Show help for one CloudFox AWS command.
+Show AWS command help with CloudFox.
 
-```sh title:"Show CloudFox AWS command help"
+```sh title:"CloudFox Show AWS Command Help"
 cloudfox aws "$command_name" -h
 ```
 <!-- cheat
@@ -61,18 +61,18 @@ var command_name := all-checks
 
 ### GCP help
 
-List CloudFox GCP commands and global flags.
+List GCP help with CloudFox.
 
-```sh title:"List CloudFox GCP commands"
+```sh title:"CloudFox List GCP Help"
 cloudfox gcp -h
 ```
 <!-- cheat -->
 
 ### Azure help
 
-List CloudFox Azure commands and global flags.
+List azure help with CloudFox.
 
-```sh title:"List CloudFox Azure commands"
+```sh title:"CloudFox List Azure Help"
 cloudfox azure -h
 ```
 <!-- cheat -->
@@ -81,9 +81,9 @@ cloudfox azure -h
 
 ### All checks profile
 
-Run most AWS checks against one profile and write table, CSV, JSON, and loot output locally.
+Check all checks profile with CloudFox.
 
-```sh title:"Run CloudFox AWS all-checks for one profile"
+```sh title:"CloudFox Check All Checks Profile"
 cloudfox aws --profile "$aws_profile" all-checks
 ```
 <!-- cheat
@@ -92,9 +92,9 @@ var aws_profile
 
 ### All checks verbose
 
-Run all checks with verbose output so errors and follow-up files are easier to triage live.
+Check all checks verbose with CloudFox.
 
-```sh title:"Run verbose CloudFox AWS all-checks"
+```sh title:"CloudFox Check All Checks Verbose"
 cloudfox aws --profile "$aws_profile" -v2 all-checks
 ```
 <!-- cheat
@@ -103,18 +103,18 @@ var aws_profile
 
 ### All profiles
 
-Run all checks against every configured AWS profile.
+Check all profiles with CloudFox.
 
-```sh title:"Run CloudFox AWS all-checks for all profiles"
+```sh title:"CloudFox Check All Profiles"
 cloudfox aws -a all-checks
 ```
 <!-- cheat -->
 
 ### Profile list
 
-Run all checks against profiles listed one per line in a file.
+List profile list with CloudFox.
 
-```sh title:"Run CloudFox AWS all-checks from profile list"
+```sh title:"CloudFox List Profile List"
 cloudfox aws -l "$aws_profile_file" all-checks
 ```
 <!-- cheat
@@ -123,9 +123,9 @@ var aws_profile_file
 
 ### Output folder
 
-Run all checks and write output under an engagement-specific directory.
+Check output folder with CloudFox.
 
-```sh title:"Run CloudFox AWS all-checks to output folder"
+```sh title:"CloudFox Check Output Folder"
 cloudfox aws --profile "$aws_profile" --outdir "$output_dir" all-checks
 ```
 <!-- cheat
@@ -135,9 +135,9 @@ var output_dir := cloudfox-output
 
 ### Inventory first pass
 
-Find which supported services and regions appear active before deeper enumeration.
+Run inventory first pass with CloudFox.
 
-```sh title:"Inventory active AWS services with CloudFox"
+```sh title:"CloudFox Run Inventory First Pass"
 cloudfox aws --profile "$aws_profile" inventory
 ```
 <!-- cheat
@@ -146,9 +146,9 @@ var aws_profile
 
 ### Tags first pass
 
-Use tags as service-owner, environment, and application hints during scoping and target selection.
+Enumerate tags first pass with CloudFox.
 
-```sh title:"Enumerate AWS tags with CloudFox"
+```sh title:"CloudFox Enumerate Tags First Pass"
 cloudfox aws --profile "$aws_profile" tags
 ```
 <!-- cheat
@@ -157,9 +157,9 @@ var aws_profile
 
 ### Output triage
 
-List CloudFox result and loot files for a profile after a run.
+List output triage with CloudFox.
 
-```sh title:"List CloudFox AWS output files"
+```sh title:"CloudFox List Output Triage"
 find "cloudfox-output/aws/$aws_profile" -maxdepth 3 -type f | sort
 ```
 <!-- cheat
@@ -168,9 +168,9 @@ var aws_profile
 
 ### Error log
 
-Review CloudFox API or permission errors from the latest runs.
+Run error log with CloudFox.
 
-```sh title:"Tail CloudFox error log"
+```sh title:"CloudFox Run Error Log"
 tail -n 100 "$HOME/.cloudfox/cloudfox-error.log"
 ```
 <!-- cheat -->
@@ -179,9 +179,9 @@ tail -n 100 "$HOME/.cloudfox/cloudfox-error.log"
 
 ### Principals
 
-List IAM users and roles for target selection and role-chaining analysis.
+List principals with CloudFox.
 
-```sh title:"List AWS IAM principals with CloudFox"
+```sh title:"CloudFox List Principals"
 cloudfox aws --profile "$aws_profile" principals
 ```
 <!-- cheat
@@ -190,9 +190,9 @@ var aws_profile
 
 ### Permissions
 
-Enumerate unique IAM permissions for users and roles.
+Enumerate permissions with CloudFox.
 
-```sh title:"Enumerate AWS IAM permissions with CloudFox"
+```sh title:"CloudFox Enumerate Permissions"
 cloudfox aws --profile "$aws_profile" permissions
 ```
 <!-- cheat
@@ -201,9 +201,9 @@ var aws_profile
 
 ### Access keys
 
-Map active IAM access key IDs to users; use as seed material for repo, Slack, drive, and secret-store searches.
+Run access keys with CloudFox.
 
-```sh title:"Map AWS access keys with CloudFox"
+```sh title:"CloudFox Run Access Keys"
 cloudfox aws --profile "$aws_profile" access-keys
 ```
 <!-- cheat
@@ -212,9 +212,9 @@ var aws_profile
 
 ### Find one access key
 
-Identify whether a discovered AWS access key ID belongs to the in-scope account.
+Find one access key with CloudFox.
 
-```sh title:"Look up one AWS access key ID"
+```sh title:"CloudFox Find One Access Key"
 cloudfox aws --profile "$aws_profile" access-keys --filter "$aws_access_key_id"
 ```
 <!-- cheat
@@ -224,9 +224,9 @@ var aws_access_key_id
 
 ### Role trusts
 
-Enumerate roles that trust principals, services, or federated identities; review `IsAdmin?` and `CanPrivEscToAdmin?` columns.
+Enumerate role trusts with CloudFox.
 
-```sh title:"Enumerate AWS role trusts with CloudFox"
+```sh title:"CloudFox Enumerate Role Trusts"
 cloudfox aws --profile "$aws_profile" role-trusts
 ```
 <!-- cheat
@@ -235,9 +235,9 @@ var aws_profile
 
 ### Resource trusts
 
-Enumerate resource policies for services CloudFox prioritizes offensively, including S3, SNS, SQS, Lambda, ECR, EFS, Glue, CodeBuild, and Secrets Manager.
+Enumerate resource trusts with CloudFox.
 
-```sh title:"Enumerate AWS resource trusts with CloudFox"
+```sh title:"CloudFox Enumerate Resource Trusts"
 cloudfox aws --profile "$aws_profile" resource-trusts
 ```
 <!-- cheat
@@ -246,9 +246,9 @@ var aws_profile
 
 ### Resource trusts with KMS
 
-Include KMS key policies in resource trust enumeration when key access is in scope.
+Enumerate resource trusts with KMS with CloudFox.
 
-```sh title:"Enumerate AWS resource trusts including KMS"
+```sh title:"CloudFox Enumerate Resource Trusts with KMS"
 cloudfox aws --profile "$aws_profile" resource-trusts --include-kms
 ```
 <!-- cheat
@@ -257,9 +257,9 @@ var aws_profile
 
 ### IAM simulator
 
-Run CloudFox IAM simulator checks for high-value actions; can be slow, but produces pmapper follow-up commands.
+Execute IAM simulator with CloudFox.
 
-```sh title:"Run CloudFox IAM simulator"
+```sh title:"CloudFox Execute IAM Simulator"
 cloudfox aws --profile "$aws_profile" iam-simulator --action "$aws_iam_action"
 ```
 <!-- cheat
@@ -269,9 +269,9 @@ var aws_iam_action := s3:GetObject
 
 ### Pmapper summary
 
-Use local pmapper graph data to identify principals with admin or paths to admin.
+Run pmapper summary with CloudFox.
 
-```sh title:"Summarize pmapper paths with CloudFox"
+```sh title:"CloudFox Run Pmapper Summary"
 cloudfox aws --profile "$aws_profile" pmapper
 ```
 <!-- cheat
@@ -280,9 +280,9 @@ var aws_profile
 
 ### Build pmapper graph
 
-Create pmapper graph data CloudFox can reuse for role-trusts, workloads, instances, lambdas, ECS, and CAPE analysis.
+Build pmapper graph with CloudFox.
 
-```sh title:"Build pmapper graph for one AWS profile"
+```sh title:"CloudFox Build Pmapper Graph"
 pmapper --profile "$aws_profile" graph create
 ```
 <!-- cheat
@@ -293,9 +293,9 @@ var aws_profile
 
 ### Endpoints
 
-Enumerate internet-facing and internal endpoints from App Runner, API Gateway, CloudFront, EKS, ELB, Lambda, MQ, OpenSearch, Redshift, RDS, and related services.
+Enumerate endpoints with CloudFox.
 
-```sh title:"Enumerate AWS endpoints with CloudFox"
+```sh title:"CloudFox Enumerate Endpoints"
 cloudfox aws --profile "$aws_profile" endpoints
 ```
 <!-- cheat
@@ -304,9 +304,9 @@ var aws_profile
 
 ### API gateways
 
-Enumerate API Gateway routes and generate cURL commands for follow-up testing.
+Enumerate API gateways with CloudFox.
 
-```sh title:"Enumerate AWS API Gateway routes with CloudFox"
+```sh title:"CloudFox Enumerate API Gateways"
 cloudfox aws --profile "$aws_profile" api-gws
 ```
 <!-- cheat
@@ -315,9 +315,9 @@ var aws_profile
 
 ### Route53
 
-Enumerate public and private hosted zones and write A-record loot files for application discovery.
+Enumerate route53 with CloudFox.
 
-```sh title:"Enumerate Route53 records with CloudFox"
+```sh title:"CloudFox Enumerate Route53"
 cloudfox aws --profile "$aws_profile" route53
 ```
 <!-- cheat
@@ -326,9 +326,9 @@ var aws_profile
 
 ### Network ports
 
-Enumerate security-group-exposed ports and produce target lists for service testing.
+Enumerate network ports with CloudFox.
 
-```sh title:"Enumerate exposed AWS network ports with CloudFox"
+```sh title:"CloudFox Enumerate Network Ports"
 cloudfox aws --profile "$aws_profile" network-ports
 ```
 <!-- cheat
@@ -337,9 +337,9 @@ var aws_profile
 
 ### EC2 instances
 
-List EC2 instances, IPs, roles, and generated public/private IP loot files.
+Enumerate EC2 instances with CloudFox.
 
-```sh title:"Enumerate AWS EC2 instances with CloudFox"
+```sh title:"CloudFox Enumerate EC2 Instances"
 cloudfox aws --profile "$aws_profile" instances
 ```
 <!-- cheat
@@ -348,9 +348,9 @@ var aws_profile
 
 ### Elastic network interfaces
 
-List ENIs and IPs for broader network mapping.
+Enumerate elastic network interfaces with CloudFox.
 
-```sh title:"Enumerate AWS ENIs with CloudFox"
+```sh title:"CloudFox Enumerate Elastic Network Interfaces"
 cloudfox aws --profile "$aws_profile" elastic-network-interfaces
 ```
 <!-- cheat
@@ -359,9 +359,9 @@ var aws_profile
 
 ### Workloads with powerful roles
 
-Find EC2, ECS, Lambda, and App Runner workloads with admin roles or paths to admin.
+Find workloads with powerful roles with CloudFox.
 
-```sh title:"Find AWS workloads with admin paths"
+```sh title:"CloudFox Find Workloads with Powerful Roles"
 cloudfox aws --profile "$aws_profile" workloads
 ```
 <!-- cheat
@@ -372,9 +372,9 @@ var aws_profile
 
 ### Environment variables
 
-Collect environment variables from App Runner, ECS, Lambda, Lightsail Containers, and SageMaker for secret hunting.
+Run environment variables with CloudFox.
 
-```sh title:"Collect AWS workload environment variables with CloudFox"
+```sh title:"CloudFox Run Environment Variables"
 cloudfox aws --profile "$aws_profile" env-vars
 ```
 <!-- cheat
@@ -383,9 +383,9 @@ var aws_profile
 
 ### Lambda
 
-List Lambda functions and generate get-function commands for code retrieval.
+Enumerate lambda with CloudFox.
 
-```sh title:"Enumerate AWS Lambda functions with CloudFox"
+```sh title:"CloudFox Enumerate Lambda"
 cloudfox aws --profile "$aws_profile" lambda
 ```
 <!-- cheat
@@ -394,9 +394,9 @@ var aws_profile
 
 ### ECS tasks
 
-List ECS task definitions, roles, IPs, and useful ECS loot files.
+Enumerate ECS tasks with CloudFox.
 
-```sh title:"Enumerate AWS ECS tasks with CloudFox"
+```sh title:"CloudFox Enumerate ECS Tasks"
 cloudfox aws --profile "$aws_profile" ecs-tasks
 ```
 <!-- cheat
@@ -405,9 +405,9 @@ var aws_profile
 
 ### EKS clusters
 
-Enumerate EKS clusters and generate kubeconfig update commands.
+Enumerate EKS clusters with CloudFox.
 
-```sh title:"Enumerate AWS EKS clusters with CloudFox"
+```sh title:"CloudFox Enumerate EKS Clusters"
 cloudfox aws --profile "$aws_profile" eks
 ```
 <!-- cheat
@@ -416,9 +416,9 @@ var aws_profile
 
 ### ECR repositories
 
-Enumerate ECR repos and generate docker pull/login commands.
+Enumerate ECR repositories with CloudFox.
 
-```sh title:"Enumerate AWS ECR repositories with CloudFox"
+```sh title:"CloudFox Enumerate ECR Repositories"
 cloudfox aws --profile "$aws_profile" ecr
 ```
 <!-- cheat
@@ -427,9 +427,9 @@ var aws_profile
 
 ### CodeBuild
 
-Enumerate CodeBuild projects/builds and review environment variables, service roles, and generated loot.
+Enumerate CodeBuild with CloudFox.
 
-```sh title:"Enumerate AWS CodeBuild with CloudFox"
+```sh title:"CloudFox Enumerate CodeBuild"
 cloudfox aws --profile "$aws_profile" codebuild
 ```
 <!-- cheat
@@ -438,9 +438,9 @@ var aws_profile
 
 ### CloudFormation
 
-List stacks and loot stack templates, parameters, and outputs; search for secrets and privileged roles.
+Enumerate CloudFormation with CloudFox.
 
-```sh title:"Enumerate CloudFormation stacks with CloudFox"
+```sh title:"CloudFox Enumerate CloudFormation"
 cloudfox aws --profile "$aws_profile" cloudformation
 ```
 <!-- cheat
@@ -451,9 +451,9 @@ var aws_profile
 
 ### Buckets
 
-List S3 buckets and generate commands for selective listing or download with whichever profile later has object access.
+Dump buckets with CloudFox.
 
-```sh title:"Enumerate AWS S3 buckets with CloudFox"
+```sh title:"CloudFox Dump Buckets"
 cloudfox aws --profile "$aws_profile" buckets
 ```
 <!-- cheat
@@ -462,9 +462,9 @@ var aws_profile
 
 ### Bucket loot commands
 
-Open the generated S3 follow-up command file after running `buckets`.
+Dump bucket loot commands with CloudFox.
 
-```sh title:"Show CloudFox bucket loot commands"
+```sh title:"CloudFox Dump Bucket Loot Commands"
 sed -n '1,220p' "cloudfox-output/aws/$aws_profile/loot/bucket-commands.txt"
 ```
 <!-- cheat
@@ -473,9 +473,9 @@ var aws_profile
 
 ### Secrets
 
-List Secrets Manager and SSM Parameter Store secrets and generate pull commands for later use with stronger credentials.
+Dump secrets with CloudFox.
 
-```sh title:"List AWS secrets with CloudFox"
+```sh title:"CloudFox Dump Secrets"
 cloudfox aws --profile "$aws_profile" secrets
 ```
 <!-- cheat
@@ -484,9 +484,9 @@ var aws_profile
 
 ### Secret loot commands
 
-Open the generated commands to pull specific secrets.
+Download secret loot commands with CloudFox.
 
-```sh title:"Show CloudFox secret pull commands"
+```sh title:"CloudFox Download Secret Loot Commands"
 sed -n '1,220p' "cloudfox-output/aws/$aws_profile/loot/pull-secrets-commands.txt"
 ```
 <!-- cheat
@@ -495,9 +495,9 @@ var aws_profile
 
 ### Databases
 
-Enumerate AWS database services for data target selection.
+Dump databases with CloudFox.
 
-```sh title:"Enumerate AWS databases with CloudFox"
+```sh title:"CloudFox Dump Databases"
 cloudfox aws --profile "$aws_profile" databases
 ```
 <!-- cheat
@@ -506,9 +506,9 @@ var aws_profile
 
 ### File systems
 
-Enumerate EFS and FSx and generate mount commands for accessible file systems.
+Dump file systems with CloudFox.
 
-```sh title:"Enumerate AWS file systems with CloudFox"
+```sh title:"CloudFox Dump File Systems"
 cloudfox aws --profile "$aws_profile" filesystems
 ```
 <!-- cheat
@@ -517,9 +517,9 @@ var aws_profile
 
 ### RAM shared resources
 
-Find inbound and outbound AWS RAM resource shares that can create cross-account attack paths.
+Dump RAM shared resources with CloudFox.
 
-```sh title:"Enumerate AWS RAM shares with CloudFox"
+```sh title:"CloudFox Dump RAM Shared Resources"
 cloudfox aws --profile "$aws_profile" ram
 ```
 <!-- cheat
@@ -528,9 +528,9 @@ var aws_profile
 
 ### SNS topics
 
-Enumerate SNS topics, summarize policies, and generate subscribe/publish commands where permitted.
+Dump SNS topics with CloudFox.
 
-```sh title:"Enumerate AWS SNS topics with CloudFox"
+```sh title:"CloudFox Dump SNS Topics"
 cloudfox aws --profile "$aws_profile" sns
 ```
 <!-- cheat
@@ -539,9 +539,9 @@ var aws_profile
 
 ### SQS queues
 
-Enumerate SQS queues, summarize policies, and generate receive/send commands where permitted.
+Dump SQS queues with CloudFox.
 
-```sh title:"Enumerate AWS SQS queues with CloudFox"
+```sh title:"CloudFox Dump SQS Queues"
 cloudfox aws --profile "$aws_profile" sqs
 ```
 <!-- cheat
@@ -552,9 +552,9 @@ var aws_profile
 
 ### Organizations
 
-Enumerate AWS Organizations accounts, management account context, OUs, and service control policy clues.
+Enumerate organizations with CloudFox.
 
-```sh title:"Enumerate AWS Organizations with CloudFox"
+```sh title:"CloudFox Enumerate Organizations"
 cloudfox aws --profile "$aws_profile" orgs
 ```
 <!-- cheat
@@ -563,9 +563,9 @@ var aws_profile
 
 ### Outbound assumed roles
 
-Look for roles in other accounts that this account's principals can assume. This is intentionally excluded from all-checks because it is slow.
+Enumerate outbound assumed roles with CloudFox.
 
-```sh title:"Enumerate outbound assumed roles with CloudFox"
+```sh title:"CloudFox Enumerate Outbound Assumed Roles"
 cloudfox aws --profile "$aws_profile" outbound-assumed-roles
 ```
 <!-- cheat
@@ -574,9 +574,9 @@ var aws_profile
 
 ### CAPE pmapper prep
 
-Build pmapper graphs for every in-scope profile before CAPE.
+List CAPE pmapper prep with CloudFox.
 
-```sh title:"Build pmapper graphs from profile list"
+```sh title:"CloudFox List CAPE Pmapper Prep"
 xargs -I{} pmapper --profile "{}" graph create < "$aws_profile_file"
 ```
 <!-- cheat
@@ -585,9 +585,9 @@ var aws_profile_file
 
 ### CAPE admin paths
 
-Find cross-account privilege escalation paths that lead to admin across a profile list.
+Find CAPE admin paths with CloudFox.
 
-```sh title:"Find cross-account admin paths with CloudFox CAPE"
+```sh title:"CloudFox Find CAPE Admin Paths"
 cloudfox aws -l "$aws_profile_file" cape --admin-only
 ```
 <!-- cheat
@@ -596,9 +596,9 @@ var aws_profile_file
 
 ### CAPE all paths
 
-Find cross-account privilege escalation paths without filtering to admin-only results. This can take hours.
+Find CAPE all paths with CloudFox.
 
-```sh title:"Find all cross-account paths with CloudFox CAPE"
+```sh title:"CloudFox Find CAPE All Paths"
 cloudfox aws -l "$aws_profile_file" cape
 ```
 <!-- cheat
@@ -607,9 +607,9 @@ var aws_profile_file
 
 ### CAPE TUI
 
-Open the CloudFox terminal UI for CAPE results.
+Run CAPE TUI with CloudFox.
 
-```sh title:"Open CloudFox CAPE TUI"
+```sh title:"CloudFox Run CAPE TUI"
 cloudfox aws -l "$aws_profile_file" cape tui --admin-only
 ```
 <!-- cheat
@@ -620,9 +620,9 @@ var aws_profile_file
 
 ### Interesting CSV grep
 
-Search CSV output for admin, public, interesting, secret, token, and password indicators.
+Find interesting CSV grep with CloudFox.
 
-```sh title:"Search CloudFox CSV output for red-team leads"
+```sh title:"CloudFox Find Interesting CSV Grep"
 grep -RniE 'admin|CanPrivEscToAdmin|public|interesting|secret|token|password|key' "cloudfox-output/aws/$aws_profile/csv" "cloudfox-output/aws/$aws_profile/loot"
 ```
 <!-- cheat
@@ -631,9 +631,9 @@ var aws_profile
 
 ### Loot files
 
-List generated loot files, which often contain next-step AWS CLI, curl, kubectl, docker, mount, and pull commands.
+List loot files with CloudFox.
 
-```sh title:"List CloudFox loot files"
+```sh title:"CloudFox List Loot Files"
 find "cloudfox-output/aws/$aws_profile/loot" -type f | sort
 ```
 <!-- cheat
@@ -642,9 +642,9 @@ var aws_profile
 
 ### Public endpoints
 
-Print URL-only endpoint loot after running `endpoints`.
+Show public endpoints with CloudFox.
 
-```sh title:"Show CloudFox endpoint URL loot"
+```sh title:"CloudFox Show Public Endpoints"
 cat "cloudfox-output/aws/$aws_profile/loot/endpoints-UrlsOnly.txt"
 ```
 <!-- cheat
@@ -653,9 +653,9 @@ var aws_profile
 
 ### IP target lists
 
-Print generated EC2 public IPs after running `instances`.
+Show IP target lists with CloudFox.
 
-```sh title:"Show CloudFox EC2 public IP loot"
+```sh title:"CloudFox Show IP Target Lists"
 cat "cloudfox-output/aws/$aws_profile/loot/instances-ec2PublicIPs.txt"
 ```
 <!-- cheat
@@ -666,9 +666,9 @@ var aws_profile
 
 ### Azure VMs
 
-Run the Azure VM command against a subscription.
+Enumerate azure VMs with CloudFox.
 
-```sh title:"Enumerate Azure VMs with CloudFox"
+```sh title:"CloudFox Enumerate Azure VMs"
 cloudfox azure --subscription "$subscription_id" vms
 ```
 <!-- cheat
@@ -677,9 +677,9 @@ var subscription_id
 
 ### Azure command help
 
-Show help for one Azure command.
+Show azure command help with CloudFox.
 
-```sh title:"Show CloudFox Azure command help"
+```sh title:"CloudFox Show Azure Command Help"
 cloudfox azure "$command_name" -h
 ```
 <!-- cheat
@@ -690,9 +690,9 @@ var command_name := vms
 
 ### GCP project all checks
 
-Run all GCP checks against one project.
+Check GCP project all checks with CloudFox.
 
-```sh title:"Run CloudFox GCP all-checks for one project"
+```sh title:"CloudFox Check GCP Project All Checks"
 cloudfox gcp --project "$project_id" all-checks
 ```
 <!-- cheat
@@ -701,9 +701,9 @@ var project_id
 
 ### GCP project list all checks
 
-Run all GCP checks against project IDs listed one per line in a file.
+List GCP project list all checks with CloudFox.
 
-```sh title:"Run CloudFox GCP all-checks from project list"
+```sh title:"CloudFox List GCP Project List All Checks"
 cloudfox gcp -l "$project_file" all-checks
 ```
 <!-- cheat
@@ -712,9 +712,9 @@ var project_file
 
 ### GCP organization whoami
 
-Identify current access across a GCP organization.
+Enumerate GCP organization whoami with CloudFox.
 
-```sh title:"Run CloudFox GCP whoami for organization"
+```sh title:"CloudFox Enumerate GCP Organization Whoami"
 cloudfox gcp --organization "$organization_id" whoami
 ```
 <!-- cheat
@@ -723,9 +723,9 @@ var organization_id
 
 ### GCP attack paths
 
-Include CloudFox GCP attack-path columns when supported by the command.
+Execute GCP attack paths with CloudFox.
 
-```sh title:"Run CloudFox GCP with attack paths"
+```sh title:"CloudFox Execute GCP Attack Paths"
 cloudfox gcp --project "$project_id" --attack-paths iam
 ```
 <!-- cheat
@@ -734,9 +734,9 @@ var project_id
 
 ### GCP flat output
 
-Use flat output instead of hierarchical org/folder/project output.
+Execute GCP flat output with CloudFox.
 
-```sh title:"Run CloudFox GCP flat output"
+```sh title:"CloudFox Execute GCP Flat Output"
 cloudfox gcp --project "$project_id" --flat instances
 ```
 <!-- cheat

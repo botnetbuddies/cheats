@@ -10,9 +10,9 @@ var archive_file = sh -c 'printf "%s\n" ""; find "$PWD/" -maxdepth 1 -type f ! -
 
 ### fcrackzip
 
-Crack a ZIP file with fcrackzip.
+Crack fcrackzip with Crack Files.
 
-```sh title:"Crack ZIP with fcrackzip"
+```sh title:"Crack Files Crack Fcrackzip"
 fcrackzip -u -D -p "$wordlists" "$zip_file"
 ```
 <!-- cheat
@@ -22,9 +22,9 @@ var zip_file
 
 ### zip2john
 
-Extract a ZIP hash and crack it with John.
+Crack zip2john with Crack Files.
 
-```sh title:"Extract ZIP hash and crack with John"
+```sh title:"Crack Files Crack Zip2john"
 zip2john "$zip_file" > zip.john; john --wordlist "$wordlists" zip.john
 ```
 <!-- cheat
@@ -36,9 +36,9 @@ var zip_file
 
 ### 7z2john
 
-Extract a 7z hash and crack it with John.
+Crack 7z2john with Crack Files.
 
-```sh title:"Extract 7z hash and crack with John"
+```sh title:"Crack Files Crack 7z2john"
 7z2john "$archive_file" > 7z.john; john --wordlist "$wordlists" 7z.john
 ```
 <!-- cheat
@@ -49,9 +49,9 @@ import crackfiles
 
 ### pdfcrack
 
-Crack a PDF password with pdfcrack.
+Crack pdfcrack with Crack Files.
 
-```sh title:"Crack PDF with pdfcrack"
+```sh title:"Crack Files Crack Pdfcrack"
 pdfcrack "$pdf_file" -w "$wordlists"
 ```
 <!-- cheat
@@ -61,9 +61,9 @@ var pdf_file
 
 ### qpdf decrypt
 
-Decrypt a PDF with a known password.
+Dump qpdf decrypt with Crack Files.
 
-```sh title:"Decrypt PDF with known password"
+```sh title:"Crack Files Dump Qpdf Decrypt"
 qpdf --password="$pass" --decrypt "$encrypted_pdf" "$plaintext_pdf"
 ```
 <!-- cheat
@@ -76,9 +76,9 @@ var plaintext_pdf
 
 ### office2john
 
-Extract an Office document hash and crack it with John.
+Crack office2john with Crack Files.
 
-```sh title:"Extract Office hash and crack with John"
+```sh title:"Crack Files Crack Office2john"
 office2john "$office_file" > office.hash; john --wordlist "$wordlists" office.hash
 ```
 <!-- cheat
@@ -90,9 +90,9 @@ var office_file
 
 ### keepass2john
 
-Extract a KeePass database hash and crack it with John.
+Crack keepass2john with Crack Files.
 
-```sh title:"Extract KeePass hash and crack with John"
+```sh title:"Crack Files Crack Keepass2john"
 keepass2john "$kdbx_file" > keepass.hash; john --wordlist "$wordlists" keepass.hash
 ```
 <!-- cheat

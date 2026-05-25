@@ -17,9 +17,9 @@ Nuclei runs template-based checks for exposed panels, misconfigurations, known v
 
 #sh #nuclei #web
 
-Run nuclei against one target.
+Scan single target with Nuclei.
 
-```sh title:"Run nuclei against target"
+```sh title:"Nuclei Scan Single Target"
 nuclei -u "$url"
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ var url
 
 #sh #nuclei #web
 
-Run nuclei against a list of targets.
+List target list with Nuclei.
 
-```sh title:"Run nuclei against target list"
+```sh title:"Nuclei List Target List"
 nuclei -l "$targets_file"
 ```
 <!-- cheat
@@ -43,9 +43,9 @@ var targets_file
 
 #sh #nuclei #web
 
-Run nuclei with a specific template directory.
+Scan template directory with Nuclei.
 
-```sh title:"Run nuclei template directory"
+```sh title:"Nuclei Scan Template Directory"
 nuclei -u "$url" -t "$template_dir"
 ```
 <!-- cheat
@@ -57,9 +57,9 @@ var template_dir
 
 #sh #nuclei #web
 
-Run nuclei with a severity filter.
+Scan severity filter with Nuclei.
 
-```sh title:"Run nuclei with severity filter"
+```sh title:"Nuclei Scan Severity Filter"
 nuclei -l "$targets_file" -severity "$severity"
 ```
 <!-- cheat

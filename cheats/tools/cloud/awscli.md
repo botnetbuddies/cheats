@@ -4,18 +4,18 @@
 
 ### List IAM roles
 
-List IAM roles available from the EC2 metadata service.
+List IAM roles with AWS.
 
-```sh title:"List EC2 metadata IAM roles"
+```sh title:"AWS List IAM Roles"
 curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
 ```
 <!-- cheat -->
 
 ### Dump IAM role
 
-Dump temporary credentials for an IAM role from the EC2 metadata service.
+Dump IAM role with AWS.
 
-```sh title:"Dump EC2 metadata IAM role credentials"
+```sh title:"AWS Dump IAM Role"
 curl "http://169.254.169.254/latest/meta-data/iam/security-credentials/$aws_role_name"
 ```
 <!-- cheat

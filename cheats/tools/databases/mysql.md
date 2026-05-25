@@ -4,9 +4,9 @@
 
 ### Show databases
 
-List every MySQL database visible to the authenticated user. First triage step before picking a target DB.
+Show databases with Mysql.
 
-```sh title:"List MySQL databases visible to authed user"
+```sh title:"Mysql Show Databases"
 mysql -u $user -p$pass -h localhost -e "show databases;"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var pass
 
 ### Show tables
 
-List tables in a specific database.
+Show tables with Mysql.
 
-```sh title:"List tables in named MySQL database"
+```sh title:"Mysql Show Tables"
 mysql -u $user -p$pass -h localhost -D $database -e "show tables;"
 ```
 <!-- cheat
@@ -29,9 +29,9 @@ var database
 
 ### Dump table
 
-Read every row from a table. Watch for size before running on large tables.
+Dump table with Mysql.
 
-```sh title:"SELECT * dump of named table, watch size"
+```sh title:"Mysql Dump Table"
 mysql -u $user -p$pass -h localhost -D $database -e "select * from $table;"
 ```
 <!-- cheat
@@ -43,9 +43,9 @@ var table
 
 ### Interactive shell
 
-Drop into the interactive `mysql>` shell against the chosen database.
+Spawn interactive shell with Mysql.
 
-```sh title:"Interactive mysql> shell against chosen database"
+```sh title:"Mysql Spawn Interactive Shell"
 mysql -u $user -h localhost -D $database -p
 ```
 <!-- cheat
@@ -57,9 +57,9 @@ var database
 
 ### Remote connect
 
-Connect to a remote MySQL server and database.
+Run remote connect with Mysql.
 
-```sh title:"Connect to remote MySQL database"
+```sh title:"Mysql Run Remote Connect"
 mysql -u "$user" -p"$pass" -h "$rhost_ip" "$database"
 ```
 <!-- cheat
@@ -71,9 +71,9 @@ var database
 
 ### Remote show databases
 
-List databases visible to the authenticated remote user.
+Show remote show databases with Mysql.
 
-```sh title:"List remote MySQL databases"
+```sh title:"Mysql Show Remote Show Databases"
 mysql -u "$user" -p"$pass" -h "$rhost_ip" -e "show databases;"
 ```
 <!-- cheat
@@ -84,9 +84,9 @@ var rhost_ip
 
 ### Remote show tables
 
-List tables in a remote database.
+Show remote show tables with Mysql.
 
-```sh title:"List remote MySQL tables"
+```sh title:"Mysql Show Remote Show Tables"
 mysql -u "$user" -p"$pass" -h "$rhost_ip" -D "$database" -e "show tables;"
 ```
 <!-- cheat
@@ -98,9 +98,9 @@ var database
 
 ### Create database
 
-Create a UTF8MB4 database.
+Create database with Mysql.
 
-```sh title:"Create UTF8MB4 MySQL database"
+```sh title:"Mysql Create Database"
 mysql -u "$user" -p -e "CREATE DATABASE $database CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;"
 ```
 <!-- cheat
@@ -110,9 +110,9 @@ var database
 
 ### Export database
 
-Dump a database to a SQL file.
+Dump export database with Mysql.
 
-```sh title:"Dump MySQL database to file"
+```sh title:"Mysql Dump Export Database"
 mysqldump -u "$user" -p "$database" > "$dump_file"
 ```
 <!-- cheat
@@ -123,9 +123,9 @@ var dump_file
 
 ### Import database
 
-Import a SQL dump into a database.
+Dump import database with Mysql.
 
-```sh title:"Import SQL dump into MySQL database"
+```sh title:"Mysql Dump Import Database"
 mysql -u "$user" -p "$database" < "$dump_file"
 ```
 <!-- cheat
@@ -138,9 +138,9 @@ var dump_file
 
 ### Nmap enum
 
-Run MySQL-focused nmap scripts.
+Enumerate nmap enum with Mysql.
 
-```sh title:"Run MySQL nmap enumeration scripts"
+```sh title:"Mysql Enumerate Nmap Enum"
 nmap -sV -p 3306 --script mysql-audit,mysql-databases,mysql-dump-hashes,mysql-empty-password,mysql-enum,mysql-info,mysql-query,mysql-users,mysql-variables,mysql-vuln-cve2012-2122 "$rhost_ip"
 ```
 <!-- cheat

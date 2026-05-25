@@ -4,9 +4,9 @@
 
 ### Compress file
 
-Compress a file in place and append `.gz`.
+Run compress file with Gzip.
 
-```sh title:"Compress file in place"
+```sh title:"Gzip Run Compress File"
 gzip "$path"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var path
 
 ### Decompress file
 
-Decompress a gzip file in place.
+Run decompress file with Gzip.
 
-```sh title:"Decompress gzip file in place"
+```sh title:"Gzip Run Decompress File"
 gzip -d "$gz_file"
 ```
 <!-- cheat
@@ -26,9 +26,9 @@ var gz_file
 
 ### Keep original
 
-Compress a file and keep the original.
+Run keep original with Gzip.
 
-```sh title:"Compress file and keep original"
+```sh title:"Gzip Run Keep Original"
 gzip -k "$path"
 ```
 <!-- cheat

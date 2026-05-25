@@ -4,18 +4,18 @@
 
 ### List services
 
-List SysV-style services and their status.
+List services with Service.
 
-```sh title:"List SysV services"
+```sh title:"Service List Services"
 service --status-all
 ```
 <!-- cheat -->
 
 ### Service status
 
-Show status for a SysV-style service.
+Show status with Service.
 
-```sh title:"Show SysV service status"
+```sh title:"Service Show Status"
 service "$service_name" status
 ```
 <!-- cheat
@@ -24,9 +24,9 @@ var service_name
 
 ### Start service
 
-Start a SysV-style service.
+Start service with Service.
 
-```sh title:"Start SysV service"
+```sh title:"Service Start Service"
 service "$service_name" start
 ```
 <!-- cheat
@@ -35,9 +35,9 @@ var service_name
 
 ### Stop service
 
-Stop a SysV-style service.
+Run stop service with Service.
 
-```sh title:"Stop SysV service"
+```sh title:"Service Run Stop Service"
 service "$service_name" stop
 ```
 <!-- cheat
@@ -46,9 +46,9 @@ var service_name
 
 ### Restart service
 
-Restart a SysV-style service.
+Start restart service with Service.
 
-```sh title:"Restart SysV service"
+```sh title:"Service Start Restart Service"
 service "$service_name" restart
 ```
 <!-- cheat

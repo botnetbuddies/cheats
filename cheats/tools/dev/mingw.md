@@ -4,9 +4,9 @@
 
 ### Windows PE 32-bit
 
-Compile a Windows 32-bit PE executable from C source on Linux.
+Run windows PE 32 bit with MinGW.
 
-```sh title:"Compile Windows 32-bit PE from C source"
+```sh title:"MinGW Run Windows PE 32 Bit"
 i686-w64-mingw32-gcc "$source_c" -lws2_32 -o "$output_exe"
 ```
 <!-- cheat

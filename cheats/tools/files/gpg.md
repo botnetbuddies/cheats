@@ -4,36 +4,36 @@
 
 ### Version
 
-Print the installed GPG version and supported algorithms.
+Show version with GPG.
 
-```sh title:"Print GPG version and algorithms"
+```sh title:"GPG Show Version"
 gpg --version
 ```
 <!-- cheat -->
 
 ### Generate key
 
-Start the interactive key generation wizard.
+Generate key with GPG.
 
-```sh title:"Generate a new GPG key"
+```sh title:"GPG Generate Key"
 gpg --gen-key
 ```
 <!-- cheat -->
 
 ### List keys
 
-List public keys in the local keyring.
+List keys with GPG.
 
-```sh title:"List public keys"
+```sh title:"GPG List Keys"
 gpg --list-keys
 ```
 <!-- cheat -->
 
 ### Send public key
 
-Upload a public key to a keyserver.
+Start send public key with GPG.
 
-```sh title:"Upload public key to keyserver"
+```sh title:"GPG Start Send Public Key"
 gpg --keyserver "$key_server" --send-keys "$public_key"
 ```
 <!-- cheat
@@ -43,9 +43,9 @@ var public_key
 
 ### Export public key
 
-Export a public key to a file.
+Run export public key with GPG.
 
-```sh title:"Export public key to file"
+```sh title:"GPG Run Export Public Key"
 gpg --output "$output_file" --export "$key_name"
 ```
 <!-- cheat
@@ -55,9 +55,9 @@ var key_name
 
 ### Import public key
 
-Import a public key file into the local keyring.
+Run import public key with GPG.
 
-```sh title:"Import public key file"
+```sh title:"GPG Run Import Public Key"
 gpg --import "$input_file"
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var input_file
 
 ### Encrypt file
 
-Encrypt a file for a recipient key.
+Run encrypt file with GPG.
 
-```sh title:"Encrypt file for recipient key"
+```sh title:"GPG Run Encrypt File"
 gpg --output "$output_file" --encrypt --recipient "$public_key" "$input_file"
 ```
 <!-- cheat
@@ -81,9 +81,9 @@ var input_file
 
 ### Decrypt file
 
-Decrypt a GPG-encrypted file to an output path.
+Run decrypt file with GPG.
 
-```sh title:"Decrypt file to output path"
+```sh title:"GPG Run Decrypt File"
 gpg --output "$output_file" --decrypt "$input_file"
 ```
 <!-- cheat
@@ -95,9 +95,9 @@ var input_file
 
 ### Sign file
 
-Create a signed GPG message containing the file data.
+Create sign file with GPG.
 
-```sh title:"Create signed GPG file"
+```sh title:"GPG Create Sign File"
 gpg --output "$signature_file" --sign "$input_file"
 ```
 <!-- cheat
@@ -107,9 +107,9 @@ var input_file
 
 ### Verify signed file
 
-Verify and decrypt a signed GPG message.
+Run verify signed file with GPG.
 
-```sh title:"Verify signed GPG file"
+```sh title:"GPG Run Verify Signed File"
 gpg --output "$output_file" --decrypt "$signature_file"
 ```
 <!-- cheat
@@ -119,9 +119,9 @@ var signature_file
 
 ### Clearsign file
 
-Create a cleartext signed file.
+Create clearsign file with GPG.
 
-```sh title:"Create cleartext signature"
+```sh title:"GPG Create Clearsign File"
 gpg --clearsign "$input_file"
 ```
 <!-- cheat
@@ -130,9 +130,9 @@ var input_file
 
 ### Detached signature
 
-Create a detached signature for a file.
+Create detached signature with GPG.
 
-```sh title:"Create detached signature"
+```sh title:"GPG Create Detached Signature"
 gpg --output "$signature_file" --detach-sig "$input_file"
 ```
 <!-- cheat
@@ -142,9 +142,9 @@ var input_file
 
 ### Verify detached signature
 
-Verify a detached signature against its original file.
+Run verify detached signature with GPG.
 
-```sh title:"Verify detached signature"
+```sh title:"GPG Run Verify Detached Signature"
 gpg --verify "$signature_file" "$input_file"
 ```
 <!-- cheat

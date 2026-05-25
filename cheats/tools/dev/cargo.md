@@ -4,9 +4,9 @@
 
 ### rusthound
 
-Install the rusthound-ce BloodHound collector via cargo. Builds from source, dramatically faster than bloodhound-python on large domains.
+Run rusthound with Cargo.
 
-```sh title:"Install rusthound-ce via cargo from source"
+```sh title:"Cargo Run Rusthound"
 cargo install rusthound-ce
 ```
 <!-- cheat -->

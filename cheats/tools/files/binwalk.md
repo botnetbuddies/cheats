@@ -4,9 +4,9 @@
 
 ### Extract recursively
 
-Recursively extract files from firmware.
+Extract recursively with Binwalk.
 
-```sh title:"Recursively extract firmware files"
+```sh title:"Binwalk Extract Recursively"
 binwalk -Me "$firmware_file"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var firmware_file
 
 ### Entropy
 
-Compute entropy for a firmware file.
+Run entropy with Binwalk.
 
-```sh title:"Compute firmware entropy"
+```sh title:"Binwalk Run Entropy"
 binwalk -E "$firmware_file"
 ```
 <!-- cheat
@@ -26,9 +26,9 @@ var firmware_file
 
 ### Signatures
 
-Scan a firmware file for known signatures.
+Scan signatures with Binwalk.
 
-```sh title:"Scan firmware for signatures"
+```sh title:"Binwalk Scan Signatures"
 binwalk "$firmware_file"
 ```
 <!-- cheat

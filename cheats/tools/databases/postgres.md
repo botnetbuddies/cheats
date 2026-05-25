@@ -4,9 +4,9 @@
 
 ### Connect
 
-Connect to a PostgreSQL server and prompt for a password.
+Run connect with Postgres.
 
-```sh title:"Connect to PostgreSQL"
+```sh title:"Postgres Run Connect"
 psql -h "$rhost_ip" -U "$user"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var user
 
 ### Connect database
 
-Connect to a specific PostgreSQL database.
+Run connect database with Postgres.
 
-```sh title:"Connect to PostgreSQL database"
+```sh title:"Postgres Run Connect Database"
 psql -h "$rhost_ip" -U "$user" -d "$database"
 ```
 <!-- cheat
@@ -29,9 +29,9 @@ var database
 
 ### Full options
 
-Connect to PostgreSQL with host, port, user, password, and database.
+Run full options with Postgres.
 
-```sh title:"Connect to PostgreSQL with full options"
+```sh title:"Postgres Run Full Options"
 PGPASSWORD="$pass" psql -h "$rhost_ip" -p "$rport" -U "$user" -d "$database"
 ```
 <!-- cheat
@@ -46,9 +46,9 @@ var database
 
 ### Nmap enum
 
-Run PostgreSQL nmap scripts.
+Enumerate nmap enum with Postgres.
 
-```sh title:"Run PostgreSQL nmap scripts"
+```sh title:"Postgres Enumerate Nmap Enum"
 nmap -sV -p "$rport" --script pgsql-brute,pgsql-databases,pgsql-empty-password "$rhost_ip"
 ```
 <!-- cheat

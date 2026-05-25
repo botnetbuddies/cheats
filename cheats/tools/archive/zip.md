@@ -4,9 +4,9 @@
 
 ### Create zip
 
-Create a zip archive from one or more files.
+Create zip with Zip.
 
-```sh title:"Create zip archive from files"
+```sh title:"Zip Create Zip"
 zip "$archive_name.zip" $files
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var files
 
 ### Zip current directory
 
-Create a zip archive containing files in the current directory.
+Create current directory with Zip.
 
-```sh title:"Zip files in current directory"
+```sh title:"Zip Create Current Directory"
 zip "$archive_name.zip" *
 ```
 <!-- cheat
@@ -27,9 +27,9 @@ var archive_name
 
 ### Zip folder
 
-Recursively zip a folder.
+Create folder with Zip.
 
-```sh title:"Recursively zip folder"
+```sh title:"Zip Create Folder"
 zip -r "$archive_name.zip" "$folder"
 ```
 <!-- cheat
@@ -39,9 +39,9 @@ var folder
 
 ### Add file
 
-Add or update a file inside an existing zip archive.
+Add file with Zip.
 
-```sh title:"Add or update file in zip archive"
+```sh title:"Zip Add File"
 zip -u "$archive_name.zip" "$file_to_add"
 ```
 <!-- cheat
@@ -51,9 +51,9 @@ var file_to_add
 
 ### Zip symlink
 
-Store a symlink as a symlink instead of following it.
+Create symlink with Zip.
 
-```sh title:"Zip symlink without following it"
+```sh title:"Zip Create Symlink"
 zip --symlinks "$archive_name.zip" "$symlink_file"
 ```
 <!-- cheat
@@ -65,9 +65,9 @@ var symlink_file
 
 ### Zip info
 
-Show zip archive contents and metadata.
+Show info with Zip.
 
-```sh title:"Show zip archive info"
+```sh title:"Zip Show Info"
 zipinfo "$archive_file"
 ```
 <!-- cheat
@@ -76,9 +76,9 @@ var archive_file
 
 ### Detailed listing
 
-List detailed zip archive contents.
+List detailed listing with Zip.
 
-```sh title:"List detailed zip archive contents"
+```sh title:"Zip List Detailed Listing"
 unzip -Z "$archive_file"
 ```
 <!-- cheat
@@ -89,9 +89,9 @@ var archive_file
 
 ### Unzip
 
-Extract a zip archive into the current directory.
+Extract unzip with Zip.
 
-```sh title:"Extract zip archive"
+```sh title:"Zip Extract Unzip"
 unzip "$archive_file"
 ```
 <!-- cheat
@@ -100,9 +100,9 @@ var archive_file
 
 ### Unzip to directory
 
-Extract a zip archive into a destination directory.
+Extract unzip to directory with Zip.
 
-```sh title:"Extract zip archive to directory"
+```sh title:"Zip Extract Unzip to Directory"
 unzip "$archive_file" -d "$destination_folder"
 ```
 <!-- cheat

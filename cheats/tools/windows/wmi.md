@@ -4,63 +4,63 @@
 
 ### Hotfix list
 
-List installed hotfixes (patch level + KB ID + install date). Compare against public exploit DBs to find missing patches.
+List hotfix list with Wmi.
 
-```sh title:"List installed hotfixes, compare against exploit DBs"
+```sh title:"Wmi List Hotfix List"
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ```
 <!-- cheat -->
 
 ### Computer system info
 
-Hostname, domain, manufacturer, model, current user, roles. Quick host fingerprint.
+Show computer system info with Wmi.
 
-```sh title:"Hostname, domain, model, current user, roles"
+```sh title:"Wmi Show Computer System Info"
 wmic computersystem get Name,Domain,Manufacturer,Model,Username,Roles /format:List
 ```
 <!-- cheat -->
 
 ### Process list
 
-List every running process. Spot security tools, AV agents, EDR drivers.
+List process list with Wmi.
 
-```sh title:"List running processes (spot AV/EDR drivers)"
+```sh title:"Wmi List Process List"
 wmic process list /format:list
 ```
 <!-- cheat -->
 
 ### Domain info
 
-Display the domain and DC info from the host's perspective.
+Show domain info with Wmi.
 
-```sh title:"Domain and DC info from host perspective"
+```sh title:"Wmi Show Domain Info"
 wmic ntdomain list /format:list
 ```
 <!-- cheat -->
 
 ### User accounts
 
-List local user accounts plus any domain accounts that have logged in to this host.
+Run user accounts with Wmi.
 
-```sh title:"Local + cached domain users that touched this host"
+```sh title:"Wmi Run User Accounts"
 wmic useraccount list /format:list
 ```
 <!-- cheat -->
 
 ### Local groups
 
-List every local group on the host.
+List local groups with Wmi.
 
-```sh title:"List every local group on the host"
+```sh title:"Wmi List Local Groups"
 wmic group list /format:list
 ```
 <!-- cheat -->
 
 ### System accounts
 
-List system / service accounts. Useful for spotting privileged service accounts.
+Run system accounts with Wmi.
 
-```sh title:"System / service accounts (spot privileged services)"
+```sh title:"Wmi Run System Accounts"
 wmic sysaccount list /format:list
 ```
 <!-- cheat -->

@@ -17,9 +17,9 @@ Katana crawls web applications and extracts routes, JavaScript links, forms, and
 
 #sh #katana #web
 
-Crawl a target URL.
+Run crawl URL with Katana.
 
-```sh title:"Crawl URL with Katana"
+```sh title:"Katana Run Crawl URL"
 katana -u "$url"
 ```
 <!-- cheat
@@ -30,9 +30,9 @@ var url
 
 #sh #katana #web
 
-Crawl URLs from a file.
+List crawl list with Katana.
 
-```sh title:"Crawl URL list with Katana"
+```sh title:"Katana List Crawl List"
 katana -list "$urls_file"
 ```
 <!-- cheat
@@ -43,9 +43,9 @@ var urls_file
 
 #sh #katana #web
 
-Crawl with headless browser support.
+Run headless crawl with Katana.
 
-```sh title:"Crawl with Katana headless mode"
+```sh title:"Katana Run Headless Crawl"
 katana -u "$url" -headless
 ```
 <!-- cheat

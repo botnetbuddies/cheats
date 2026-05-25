@@ -4,9 +4,9 @@
 
 ### Extract firmware
 
-Extract files from firmware.
+Extract firmware with Unblob.
 
-```sh title:"Extract firmware files"
+```sh title:"Unblob Extract Firmware"
 unblob "$firmware_file"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var firmware_file
 
 ### Dependencies
 
-Show external extractor dependencies.
+Show dependencies with Unblob.
 
-```sh title:"Show external dependencies"
+```sh title:"Unblob Show Dependencies"
 unblob --show-external-dependencies
 ```
 <!-- cheat -->

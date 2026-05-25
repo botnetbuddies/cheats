@@ -4,36 +4,36 @@
 
 ### Init
 
-Start an interactive package setup.
+Run init with NPM.
 
-```sh title:"Initialize npm package interactively"
+```sh title:"NPM Run Init"
 npm init
 ```
 <!-- cheat -->
 
 ### Init yes
 
-Create a package with defaults.
+Run init yes with NPM.
 
-```sh title:"Initialize npm package with defaults"
+```sh title:"NPM Run Init Yes"
 npm init -y
 ```
 <!-- cheat -->
 
 ### Install dependencies
 
-Install dependencies from `package.json`.
+Install dependencies with NPM.
 
-```sh title:"Install npm dependencies"
+```sh title:"NPM Install Dependencies"
 npm install
 ```
 <!-- cheat -->
 
 ### Install package
 
-Install a package.
+Install package with NPM.
 
-```sh title:"Install npm package"
+```sh title:"NPM Install Package"
 npm install "$package_name"
 ```
 <!-- cheat
@@ -42,9 +42,9 @@ var package_name
 
 ### Install dev package
 
-Install a package as a dev dependency.
+Install dev package with NPM.
 
-```sh title:"Install npm dev dependency"
+```sh title:"NPM Install Dev Package"
 npm install "$package_name" --save-dev
 ```
 <!-- cheat
@@ -53,9 +53,9 @@ var package_name
 
 ### Install global
 
-Install a package globally.
+Install global with NPM.
 
-```sh title:"Install npm package globally"
+```sh title:"NPM Install Global"
 npm install "$package_name" -g
 ```
 <!-- cheat
@@ -66,9 +66,9 @@ var package_name
 
 ### Install node
 
-Install a Node.js version with nvm.
+Install node with NPM.
 
-```sh title:"Install Node.js version with nvm"
+```sh title:"NPM Install Node"
 nvm install "$version"
 ```
 <!-- cheat
@@ -77,18 +77,18 @@ var version
 
 ### List remote
 
-List available Node.js versions.
+List remote with NPM.
 
-```sh title:"List available Node.js versions"
+```sh title:"NPM List Remote"
 nvm ls-remote
 ```
 <!-- cheat -->
 
 ### Use version
 
-Use an installed Node.js version.
+Run use version with NPM.
 
-```sh title:"Use Node.js version"
+```sh title:"NPM Run Use Version"
 nvm use "$version"
 ```
 <!-- cheat
@@ -97,9 +97,9 @@ var version
 
 ### Default version
 
-Set the default Node.js version.
+Set default version with NPM.
 
-```sh title:"Set default Node.js version"
+```sh title:"NPM Set Default Version"
 nvm alias default "$version"
 ```
 <!-- cheat

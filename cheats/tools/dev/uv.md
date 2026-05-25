@@ -6,7 +6,9 @@
 
 Installs the `uv` Python package manager from Astral. Fast drop-in replacement for pip/pipx/venv, written in Rust. Required before any of the `uv tool install` commands below will work.
 
-```sh title:"Install uv via astral shell script"
+Install uv with Uv.
+
+```sh title:"uv Install uv"
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 <!-- cheat -->
@@ -17,7 +19,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 Collection of Python classes for working with network protocols (SMB, MSRPC, Kerberos). Provides classic offensive tools like `secretsdump.py`, `psexec.py`, `wmiexec.py`, `GetNPUsers.py`, and `GetUserSPNs.py`. Fortra fork is the actively maintained one.
 
-```sh title:"Install impacket suite (secretsdump, psexec, etc) from fortra fork"
+Dump impacket with Uv.
+
+```sh title:"uv Dump Impacket"
 uv tool install git+https://github.com/fortra/impacket.git
 ```
 <!-- cheat -->
@@ -26,7 +30,9 @@ uv tool install git+https://github.com/fortra/impacket.git
 
 Successor to CrackMapExec. Swiss-army knife for pentesting networks - sprays credentials, enumerates SMB/LDAP/WinRM/MSSQL/RDP/SSH/FTP, dumps secrets, and runs modules across hosts in parallel. Invoked as `nxc`.
 
-```sh title:"Install NetExec (nxc), network pentesting swiss army knife"
+Execute netexec with Uv.
+
+```sh title:"uv Execute Netexec"
 uv tool install git+https://github.com/Pennyw0rth/NetExec
 ```
 <!-- cheat -->
@@ -35,7 +41,9 @@ uv tool install git+https://github.com/Pennyw0rth/NetExec
 
 Python-based BloodHound ingestor. The `bloodhound-ce` branch targets BloodHound Community Edition (the newer Specter Ops rewrite) - use this instead of the legacy branch if your BloodHound server is CE.
 
-```sh title:"Install BloodHound.py collector for BloodHound Community Edition"
+Run bloodhound ce python with Uv.
+
+```sh title:"uv Run Bloodhound Ce Python"
 uv tool install git+https://github.com/dirkjanm/BloodHound.py.git@bloodhound-ce
 ```
 <!-- cheat -->
@@ -44,7 +52,9 @@ uv tool install git+https://github.com/dirkjanm/BloodHound.py.git@bloodhound-ce
 
 Active Directory privilege escalation framework that talks directly to LDAP/SAMR over the wire - no need to drop binaries on the target. Great for manipulating ACLs, changing passwords, and abusing delegation without touching Windows.
 
-```sh title:"Install bloodyAD, Active Directory privesc framework (LDAP/SAMR)"
+Run bloodyAD with Uv.
+
+```sh title:"uv Run BloodyAD"
 uv tool install git+https://github.com/CravateRouge/bloodyAD.git
 ```
 <!-- cheat -->
@@ -53,7 +63,9 @@ uv tool install git+https://github.com/CravateRouge/bloodyAD.git
 
 Reconstructs a full git repository from an exposed `.git/` directory on a webserver. Common web recon finding - run this against any site where `/.git/HEAD` returns 200 to pull source code, secrets, and history.
 
-```sh title:"Install git-dumper, extracts .git directories from exposed web servers"
+Extract git dumper with Uv.
+
+```sh title:"uv Extract Git Dumper"
 uv tool install git+https://github.com/arthaud/git-dumper.git
 ```
 <!-- cheat -->
@@ -62,7 +74,9 @@ uv tool install git+https://github.com/arthaud/git-dumper.git
 
 AD Certificate Services (ADCS) enumeration and abuse. Finds vulnerable certificate templates (ESC1–ESC15), requests certs, performs Shadow Credentials attacks, and handles Pass-the-Cert authentication. Essential for any AD engagement with ADCS in scope.
 
-```sh title:"Install Certipy, AD Certificate Services (ADCS) enum and abuse"
+Read certipy with Uv.
+
+```sh title:"uv Read Certipy"
 uv tool install git+https://github.com/ly4k/Certipy.git
 ```
 <!-- cheat -->
@@ -71,7 +85,9 @@ uv tool install git+https://github.com/ly4k/Certipy.git
 
 Shell handler that upgrades dumb reverse shells to fully interactive PTYs automatically. Handles tab completion, job control, and file transfer. A nicer alternative to `nc -lvnp` + manual `stty` dance.
 
-```sh title:"Install Penelope shell handler, auto upgrades reverse shells to PTY"
+Start penelope with Uv.
+
+```sh title:"uv Start Penelope"
 uv tool install git+https://github.com/brightio/penelope.git
 ```
 <!-- cheat -->
@@ -80,7 +96,9 @@ uv tool install git+https://github.com/brightio/penelope.git
 
 LLMNR, NBT-NS, and MDNS poisoner. Sits on a network segment and answers broadcast name-resolution requests to trick hosts into authenticating to you - captures NetNTLMv1/v2 hashes for offline cracking or relay.
 
-```sh title:"Install Responder, LLMNR/NBT-NS/MDNS poisoner for hash capture"
+Dump responder with Uv.
+
+```sh title:"uv Dump Responder"
 uv tool install git+https://github.com/lgandx/Responder.git
 ```
 <!-- cheat -->
@@ -89,7 +107,9 @@ uv tool install git+https://github.com/lgandx/Responder.git
 
 Python port of PowerSploit's PowerView. Interactive shell for Active Directory enumeration and abuse over LDAP/LDAPS/GC/ADWS - Kerberoasting, ASREPRoasting, ACL recon, RBCD/shadow-credentials staging, DNS edits, GPO inspection, and remote SMB/RPC operations without dropping anything on Windows.
 
-```sh title:"Install powerview.py, interactive AD enumeration/abuse over LDAP"
+Enumerate powerview.py with Uv.
+
+```sh title:"uv Enumerate Powerview.py"
 uv tool install git+https://github.com/aniqfakhrul/powerview.py
 ```
 <!-- cheat -->

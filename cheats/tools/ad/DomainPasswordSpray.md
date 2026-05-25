@@ -4,9 +4,9 @@
 
 ### Password spray
 
-Spray a single password across every domain user from a domain-joined Windows host. Pulls the user list and lockout policy automatically; results saved to `spray_success`.
+Dump password spray with DomainPasswordSpray.
 
-```sh title:"Spray single password across all domain users"
+```sh title:"DomainPasswordSpray Dump Password Spray"
 Invoke-DomainPasswordSpray -Password $pass -OutFile spray_success -ErrorAction SilentlyContinue
 ```
 <!-- cheat

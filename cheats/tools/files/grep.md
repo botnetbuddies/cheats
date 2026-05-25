@@ -4,9 +4,9 @@
 
 ### Basic search
 
-Search for text in a file.
+Find basic search with Grep.
 
-```sh title:"Search for text in file"
+```sh title:"Grep Find Basic Search"
 grep "$pattern" "$file"
 ```
 <!-- cheat
@@ -16,9 +16,9 @@ var file
 
 ### Case insensitive
 
-Search for text without matching case.
+Find case insensitive with Grep.
 
-```sh title:"Case-insensitive search in file"
+```sh title:"Grep Find Case Insensitive"
 grep -i "$pattern" "$file"
 ```
 <!-- cheat
@@ -28,9 +28,9 @@ var file
 
 ### Show filename
 
-Search and always print the filename for each match.
+Show filename with Grep.
 
-```sh title:"Search and print matching filename"
+```sh title:"Grep Show Filename"
 grep -H "$pattern" "$file"
 ```
 <!-- cheat
@@ -40,9 +40,9 @@ var file
 
 ### Recursive extension
 
-Recursively search only files with a chosen extension.
+Find recursive extension with Grep.
 
-```sh title:"Recursive search by file extension"
+```sh title:"Grep Find Recursive Extension"
 grep -rn --include "*.$extension" "$pattern" .
 ```
 <!-- cheat
@@ -52,9 +52,9 @@ var pattern
 
 ### Either pattern
 
-Search for either of two patterns.
+Find either pattern with Grep.
 
-```sh title:"Search for either of two patterns"
+```sh title:"Grep Find Either Pattern"
 grep -E "$pattern_a|$pattern_b" "$file"
 ```
 <!-- cheat
@@ -67,126 +67,126 @@ var file
 
 ### MD5
 
-Extract 32-character hex hashes from text files.
+Extract MD5 with Grep.
 
-```sh title:"Extract MD5-like hashes from txt files"
+```sh title:"Grep Extract MD5"
 grep -hEo '(^|[^a-fA-F0-9])[a-fA-F0-9]{32}([^a-fA-F0-9]|$)' *.txt | grep -Eo '[a-fA-F0-9]{32}' > md5-hashes.txt
 ```
 <!-- cheat -->
 
 ### SHA1
 
-Extract 40-character hex hashes from text files.
+Extract SHA1 with Grep.
 
-```sh title:"Extract SHA1-like hashes from txt files"
+```sh title:"Grep Extract SHA1"
 grep -hEo '(^|[^a-fA-F0-9])[a-fA-F0-9]{40}([^a-fA-F0-9]|$)' *.txt | grep -Eo '[a-fA-F0-9]{40}' > sha1-hashes.txt
 ```
 <!-- cheat -->
 
 ### SHA256
 
-Extract 64-character hex hashes from text files.
+Extract SHA256 with Grep.
 
-```sh title:"Extract SHA256-like hashes from txt files"
+```sh title:"Grep Extract SHA256"
 grep -hEo '(^|[^a-fA-F0-9])[a-fA-F0-9]{64}([^a-fA-F0-9]|$)' *.txt | grep -Eo '[a-fA-F0-9]{64}' > sha256-hashes.txt
 ```
 <!-- cheat -->
 
 ### SHA512
 
-Extract 128-character hex hashes from text files.
+Extract SHA512 with Grep.
 
-```sh title:"Extract SHA512-like hashes from txt files"
+```sh title:"Grep Extract SHA512"
 grep -hEo '(^|[^a-fA-F0-9])[a-fA-F0-9]{128}([^a-fA-F0-9]|$)' *.txt | grep -Eo '[a-fA-F0-9]{128}' > sha512-hashes.txt
 ```
 <!-- cheat -->
 
 ### MySQL old
 
-Extract old MySQL password hashes from text files.
+Extract MySQL old with Grep.
 
-```sh title:"Extract old MySQL hashes from txt files"
+```sh title:"Grep Extract MySQL Old"
 grep -hEo '[0-7][0-9a-f]{7}[0-7][0-9a-f]{7}' *.txt > mysql-old-hashes.txt
 ```
 <!-- cheat -->
 
 ### Blowfish
 
-Extract bcrypt or Blowfish-style hashes from text files.
+Extract blowfish with Grep.
 
-```sh title:"Extract bcrypt/Blowfish hashes from txt files"
+```sh title:"Grep Extract Blowfish"
 grep -hEo '\$2[aby]\$[0-9]{2}\$[./A-Za-z0-9]{53}' *.txt > blowfish-hashes.txt
 ```
 <!-- cheat -->
 
 ### Joomla
 
-Extract Joomla-style MD5 hash and salt pairs from text files.
+Extract joomla with Grep.
 
-```sh title:"Extract Joomla hash:salt pairs from txt files"
+```sh title:"Grep Extract Joomla"
 grep -hEo '[0-9A-Za-z]{32}:[0-9A-Za-z]{16,32}' *.txt > joomla-hashes.txt
 ```
 <!-- cheat -->
 
 ### vBulletin
 
-Extract vBulletin-style MD5 hash and salt pairs from text files.
+Extract vBulletin with Grep.
 
-```sh title:"Extract vBulletin hash:salt pairs from txt files"
+```sh title:"Grep Extract VBulletin"
 grep -hEo '[0-9A-Za-z]{32}:.{3,32}' *.txt > vbulletin-hashes.txt
 ```
 <!-- cheat -->
 
 ### phpBB3
 
-Extract phpBB3 MD5 hashes from text files.
+Extract phpBB3 with Grep.
 
-```sh title:"Extract phpBB3 MD5 hashes from txt files"
+```sh title:"Grep Extract PhpBB3"
 grep -hEo '\$H\$[./A-Za-z0-9]{31}' *.txt > phpbb3-md5.txt
 ```
 <!-- cheat -->
 
 ### WordPress
 
-Extract WordPress MD5 hashes from text files.
+Extract WordPress with Grep.
 
-```sh title:"Extract WordPress MD5 hashes from txt files"
+```sh title:"Grep Extract WordPress"
 grep -hEo '\$P\$[./A-Za-z0-9]{31}' *.txt > wordpress-md5.txt
 ```
 <!-- cheat -->
 
 ### Drupal 7
 
-Extract Drupal 7 hashes from text files.
+Extract drupal 7 with Grep.
 
-```sh title:"Extract Drupal 7 hashes from txt files"
+```sh title:"Grep Extract Drupal 7"
 grep -hEo '\$S\$[./A-Za-z0-9]{52}' *.txt > drupal-7.txt
 ```
 <!-- cheat -->
 
 ### Unix MD5
 
-Extract old Unix MD5 crypt hashes from text files.
+Extract unix MD5 with Grep.
 
-```sh title:"Extract Unix MD5 crypt hashes from txt files"
+```sh title:"Grep Extract Unix MD5"
 grep -hEo '\$1\$[./A-Za-z0-9]{8}\$[./A-Za-z0-9]{22}' *.txt > md5-unix-old.txt
 ```
 <!-- cheat -->
 
 ### Apache apr1
 
-Extract Apache apr1 MD5 hashes from text files.
+Extract apache apr1 with Grep.
 
-```sh title:"Extract Apache apr1 MD5 hashes from txt files"
+```sh title:"Grep Extract Apache Apr1"
 grep -hEo '\$apr1\$[./A-Za-z0-9]{8}\$[./A-Za-z0-9]{22}' *.txt > md5-apr1.txt
 ```
 <!-- cheat -->
 
 ### sha512crypt
 
-Extract Unix SHA512 crypt hashes from text files.
+Extract sha512crypt with Grep.
 
-```sh title:"Extract Unix SHA512 crypt hashes from txt files"
+```sh title:"Grep Extract Sha512crypt"
 grep -hEo '\$6\$[./A-Za-z0-9]{1,16}\$[./A-Za-z0-9]{86}' *.txt > sha512crypt.txt
 ```
 <!-- cheat -->
@@ -195,9 +195,9 @@ grep -hEo '\$6\$[./A-Za-z0-9]{1,16}\$[./A-Za-z0-9]{86}' *.txt > sha512crypt.txt
 
 ### Emails
 
-Extract email addresses from a file.
+Extract emails with Grep.
 
-```sh title:"Extract email addresses from file"
+```sh title:"Grep Extract Emails"
 grep -Eo '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' "$file"
 ```
 <!-- cheat
@@ -206,9 +206,9 @@ var file
 
 ### IPv4 addresses
 
-Extract valid IPv4 addresses from a file.
+Extract IPv4 addresses with Grep.
 
-```sh title:"Extract IPv4 addresses from file"
+```sh title:"Grep Extract IPv4 Addresses"
 grep -Eo '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}' "$file"
 ```
 <!-- cheat
@@ -217,9 +217,9 @@ var file
 
 ### Password words
 
-Search for common password-related words.
+Extract password words with Grep.
 
-```sh title:"Search password-related terms"
+```sh title:"Grep Extract Password Words"
 grep -iE 'pwd|passw|password|passwd' "$file"
 ```
 <!-- cheat
@@ -228,9 +228,9 @@ var file
 
 ### Login words
 
-Search for common user and login-related words.
+Extract login words with Grep.
 
-```sh title:"Search user/login-related terms"
+```sh title:"Grep Extract Login Words"
 grep -iE 'user|invalid|authentication|login' "$file"
 ```
 <!-- cheat
@@ -239,9 +239,9 @@ var file
 
 ### HTTP URLs
 
-Extract HTTP and HTTPS URLs from a file.
+Extract HTTP URLs with Grep.
 
-```sh title:"Extract HTTP URLs from file"
+```sh title:"Grep Extract HTTP URLs"
 grep -Eo 'https?://[^" >]+' "$file" > http-urls.txt
 ```
 <!-- cheat

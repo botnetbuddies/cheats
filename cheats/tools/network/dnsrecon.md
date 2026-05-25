@@ -4,9 +4,9 @@
 
 ### Standard enum
 
-Run standard dnsrecon enumeration.
+Enumerate standard enum with dnsrecon.
 
-```sh title:"Run dnsrecon standard enum"
+```sh title:"Dnsrecon Enumerate Standard Enum"
 dnsrecon -d "$domain"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ import domain_ip
 
 ### Zone transfer
 
-Attempt zone transfers with dnsrecon.
+Enumerate zone transfer with dnsrecon.
 
-```sh title:"Attempt zone transfer with dnsrecon"
+```sh title:"Dnsrecon Enumerate Zone Transfer"
 dnsrecon -d "$domain" -t axfr
 ```
 <!-- cheat
@@ -26,9 +26,9 @@ import domain_ip
 
 ### Reverse range
 
-Reverse lookup an explicit IP range.
+Enumerate reverse range with dnsrecon.
 
-```sh title:"Reverse lookup IP range with dnsrecon"
+```sh title:"Dnsrecon Enumerate Reverse Range"
 dnsrecon -r "$start_ip-$end_ip" -n "$rhost_ip"
 ```
 <!-- cheat
@@ -39,9 +39,9 @@ import domain_ip
 
 ### Reverse CIDR
 
-Reverse lookup a CIDR range.
+Enumerate reverse CIDR with dnsrecon.
 
-```sh title:"Reverse lookup CIDR with dnsrecon"
+```sh title:"Dnsrecon Enumerate Reverse CIDR"
 dnsrecon -r "$cidr" -n "$rhost_ip"
 ```
 <!-- cheat

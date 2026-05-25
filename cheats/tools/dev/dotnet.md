@@ -4,9 +4,9 @@
 
 ### DotNetToJScript
 
-Convert a .NET assembly DLL to a JScript runner.
+Execute DotNetToJScript with DotNet.
 
-```cmd title:"Convert .NET DLL to JScript runner"
+```cmd title:"DotNet Execute DotNetToJScript"
 DotNetToJScript.exe "$dll_file" --lang=Jscript --ver=v4 -o "$jscript_file"
 ```
 <!-- cheat

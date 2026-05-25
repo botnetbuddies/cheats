@@ -12,9 +12,9 @@ var outfile = printf '%s\n' gobuster.txt "gobuster-$(date +%Y%m%d-%H%M%S).txt" -
 
 ### Basic
 
-Run basic directory fuzzing.
+Run basic with Gobuster.
 
-```sh title:"Basic gobuster directory fuzz"
+```sh title:"Gobuster Run Basic"
 gobuster dir -u "$url" -w "$wordlist_dir" -o "$outfile"
 ```
 <!-- cheat
@@ -24,9 +24,9 @@ var url
 
 ### Common extensions
 
-Run directory fuzzing with common web extensions.
+Run common extensions with Gobuster.
 
-```sh title:"Gobuster directory fuzz with common extensions"
+```sh title:"Gobuster Run Common Extensions"
 gobuster dir -u "$url" -w "$wordlist_file" -x json,html,php,txt,xml,md -o "$outfile"
 ```
 <!-- cheat
@@ -36,9 +36,9 @@ var url
 
 ### Higher threads
 
-Run directory fuzzing with 30 threads.
+Read higher threads with Gobuster.
 
-```sh title:"Gobuster directory fuzz with 30 threads"
+```sh title:"Gobuster Read Higher Threads"
 gobuster dir -u "$url" -w "$wordlist_dir" -t 30 -o "$outfile"
 ```
 <!-- cheat
@@ -50,9 +50,9 @@ var url
 
 ### Vhost discovery
 
-Run virtual host discovery with the selected host wordlist.
+Discover vhost discovery with Gobuster.
 
-```sh title:"Gobuster vhost discovery with selected host wordlist"
+```sh title:"Gobuster Discover Vhost Discovery"
 gobuster vhost -u "$url" -w "$wordlist_host" -o "$outfile"
 ```
 <!-- cheat

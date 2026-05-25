@@ -4,18 +4,18 @@ AD Recycle Bin lets you restore tombstoned objects with their original SID and g
 
 ### Confirm Recycle Bin enabled
 
-Check that the AD Recycle Bin optional feature is enabled. If not, you can't restore tombstoned objects.
+Check confirm recycle bin enabled with Recycle Bin Restore.
 
-```powershell title:"Check AD Recycle Bin optional feature is enabled"
+```powershell title:"Recycle Bin Restore Check Confirm Recycle Bin Enabled"
 Get-ADOptionalFeature 'Recycle Bin Feature'
 ```
 <!-- cheat -->
 
 ### List deleted users
 
-Search the Deleted Objects container for tombstoned user accounts.
+List deleted users with Recycle Bin Restore.
 
-```powershell title:"List tombstoned user objects in Deleted Objects container"
+```powershell title:"Recycle Bin Restore List Deleted Users"
 Get-ADObject -SearchBase "CN=Deleted Objects,$base_dn" -LDAPFilter "(objectClass=user)" -IncludeDeletedObjects -Properties objectSid,samAccountName,lastKnownParent,whenChanged
 ```
 <!-- cheat
@@ -24,9 +24,9 @@ var base_dn
 
 ### Find by samAccountName
 
-Locate a specific tombstoned account by its old samAccountName.
+Find Recycle Bin Restore by samAccountName.
 
-```powershell title:"Find tombstoned object by samAccountName"
+```powershell title:"Recycle Bin Restore Find by SamAccountName"
 Get-ADObject -SearchBase "CN=Deleted Objects,$base_dn" -IncludeDeletedObjects -LDAPFilter "(samAccountName=$target_user)"
 ```
 <!-- cheat
@@ -36,9 +36,9 @@ var target_user
 
 ### Restore object
 
-Restore the tombstoned object by GUID. Object comes back with original SID and group memberships, but the password is unset.
+Run restore object with Recycle Bin Restore.
 
-```powershell title:"Restore tombstoned object (SID + group memberships intact)"
+```powershell title:"Recycle Bin Restore Run Restore Object"
 Restore-ADObject -Identity $guid
 ```
 <!-- cheat
@@ -47,9 +47,9 @@ var guid
 
 ### Reset password
 
-After restore, set a new password so you can authenticate as the resurrected account.
+Dump reset password with Recycle Bin Restore.
 
-```powershell title:"Set new password on restored account"
+```powershell title:"Recycle Bin Restore Dump Reset Password"
 Set-ADAccountPassword -Identity $target_user -Reset -NewPassword (ConvertTo-SecureString '$target_pass' -AsPlainText -Force)
 ```
 <!-- cheat
@@ -59,9 +59,9 @@ var target_pass
 
 ### Enable account
 
-The restored account starts disabled - enable it before auth.
+Enable account with Recycle Bin Restore.
 
-```powershell title:"Enable the restored account"
+```powershell title:"Recycle Bin Restore Enable Account"
 Enable-ADAccount -Identity $target_user
 ```
 <!-- cheat
@@ -70,9 +70,9 @@ var target_user
 
 ### bloodyAD restore (Linux)
 
-Same restore from Linux via bloodyAD. Kerberos auth is more reliable than NTLM for this operation.
+Run bloodyAD restore (Linux) with Recycle Bin Restore.
 
-```sh title:"Restore tombstoned object via bloodyAD (prefer Kerberos)"
+```sh title:"Recycle Bin Restore Run BloodyAD Restore (Linux)"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags set restore $target_user
 ```
 <!-- cheat

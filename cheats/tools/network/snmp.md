@@ -4,9 +4,9 @@
 
 ### Nmap scan
 
-Run UDP SNMP service detection and default scripts.
+Scan nmap scan with SNMP.
 
-```sh title:"Run SNMP UDP service detection"
+```sh title:"SNMP Scan Nmap Scan"
 nmap -sU --open -p 161 -sC -sV "$rhost_ip"
 ```
 <!-- cheat
@@ -15,9 +15,9 @@ var rhost_ip
 
 ### snmpwalk
 
-Walk the SNMP tree with a community string.
+Enumerate snmpwalk with SNMP.
 
-```sh title:"Walk SNMP tree"
+```sh title:"SNMP Enumerate Snmpwalk"
 snmpwalk -c "$community" -v "$snmp_version" "$rhost_ip"
 ```
 <!-- cheat
@@ -28,9 +28,9 @@ var rhost_ip
 
 ### Processes
 
-List running processes over SNMP.
+List processes with SNMP.
 
-```sh title:"List running processes over SNMP"
+```sh title:"SNMP List Processes"
 snmpwalk -c "$community" -v "$snmp_version" "$rhost_ip" 1.3.6.1.2.1.25.4.2.1.2
 ```
 <!-- cheat
@@ -41,9 +41,9 @@ var rhost_ip
 
 ### snmp-check
 
-Run snmp-check against a target and port.
+Check snmp check with SNMP.
 
-```sh title:"Run snmp-check"
+```sh title:"SNMP Check Snmp Check"
 snmp-check -t "$rhost_ip" -c "$community" -p "$rport"
 ```
 <!-- cheat
@@ -56,9 +56,9 @@ var rport := 161
 
 ### Nmap communities
 
-Brute force SNMP community strings with nmap.
+Run nmap communities with SNMP.
 
-```sh title:"Brute force SNMP communities with nmap"
+```sh title:"SNMP Run Nmap Communities"
 nmap -sU --open -p 161 --script snmp-brute --script-args "snmp-brute.communitiesdb=$community_file" "$rhost_ip"
 ```
 <!-- cheat
@@ -68,9 +68,9 @@ var community_file
 
 ### onesixtyone defaults
 
-Check `public`, `private`, and `manager` communities against hosts in an input file.
+Check onesixtyone defaults with SNMP.
 
-```sh title:"Check common SNMP communities with onesixtyone"
+```sh title:"SNMP Check Onesixtyone Defaults"
 printf 'public\nprivate\nmanager\n' > community.txt; onesixtyone -c community.txt -i "$hosts_file"; rm -f community.txt
 ```
 <!-- cheat

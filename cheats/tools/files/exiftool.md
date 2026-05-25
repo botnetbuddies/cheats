@@ -4,9 +4,9 @@
 
 ### Payload inside image
 
-Embed a payload string into the EXIF Comment field. Common stager trick for image-upload endpoints that don't strip metadata before processing.
+Run payload inside image with Exiftool.
 
-```sh title:"Embed payload in EXIF Comment of an image"
+```sh title:"Exiftool Run Payload Inside Image"
 exiftool -Comment='$payloads' $file
 ```
 <!-- cheat

@@ -4,9 +4,9 @@
 
 ### Nmap XML
 
-Run EyeWitness in Docker against an nmap XML file.
+Run nmap XML with EyeWitness.
 
-```sh title:"Screenshot web services from nmap XML with EyeWitness"
+```sh title:"EyeWitness Run Nmap XML"
 docker run --rm -it -v "$(pwd):/tmp/EyeWitness" eyewitness --web -x "/tmp/EyeWitness/$nmap_file" --prepend-https
 ```
 <!-- cheat
