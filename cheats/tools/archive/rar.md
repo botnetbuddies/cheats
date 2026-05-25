@@ -4,11 +4,9 @@
 
 ### Create rar
 
-Create rar with RAR.
-
 Create a RAR archive from a directory.
 
-```sh title:"RAR Create Rar"
+```sh title:"Create RAR archive from directory"
 rar a "$archive_name.rar" "$directory"
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var directory
 
 ### Extract rar
 
-Extract rar with RAR.
-
 Extract a RAR archive with full paths.
 
-```sh title:"RAR Extract Rar"
+```sh title:"Extract RAR archive with full paths"
 unrar x "$archive_file"
 ```
 <!-- cheat

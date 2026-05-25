@@ -4,11 +4,9 @@
 
 ### gitdumper
 
-Dump gitdumper with GitDumper.
-
 Dump an exposed `.git` directory with `gitdumper`.
 
-```sh title:"GitDumper Dump Gitdumper"
+```sh title:"Dump exposed .git directory with gitdumper"
 gitdumper "$url/.git/" "$destination_dir"
 ```
 <!-- cheat
@@ -18,11 +16,9 @@ var destination_dir
 
 ### git-dumper
 
-Dump git dumper with GitDumper.
-
 Dump an exposed `.git` directory with the pip `git-dumper` tool.
 
-```sh title:"GitDumper Dump Git Dumper"
+```sh title:"GitDumper Dump exposed .git directory with git-dumper"
 git-dumper "$url/.git/" "$destination_dir"
 ```
 <!-- cheat

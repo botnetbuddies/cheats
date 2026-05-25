@@ -10,11 +10,9 @@ var wp_pass_attack_template = printf '%s\n' 'wp-login' 'xmlrpc' 'xmlrpc-multical
 
 ### WordPress enumeration
 
-Scan WordPress enumeration with Wpscan.
-
 Run wpscan with default enumeration (themes, plugins, users, vulnerabilities).
 
-```sh title:"Wpscan Scan WordPress Enumeration"
+```sh title:"Default wpscan enum: themes/plugins/users/vulns"
 wpscan --url $scheme://$domain --enumerate
 ```
 <!-- cheat
@@ -25,11 +23,9 @@ import wpscan
 
 ### WordPress Docker through Burp
 
-Scan WordPress docker through burp with Wpscan.
-
 Run wpscan in Docker through Burp with an API token.
 
-```sh title:"Wpscan Scan WordPress Docker Through Burp"
+```sh title:"Run wpscan Docker through Burp proxy"
 sudo docker run -it --network host --rm wpscanteam/wpscan --proxy http://127.0.0.1:8080 --url "$url" --disable-tls-checks -e ap,tt,cb,dbe,u1-20,m --api-token "$wpscan_api_token"
 ```
 <!-- cheat
@@ -41,11 +37,9 @@ var wpscan_api_token
 
 ### Password attack
 
-Dump password attack with Wpscan.
-
 Brute users against the chosen attack vector (wp-login form, xmlrpc, xmlrpc-multicall). Multicall is fastest because each request can hold many guesses.
 
-```sh title:"Wpscan Dump Password Attack"
+```sh title:"Wpscan Brute users via wp-login / xmlrpc / xmlrpc-multicall"
 wpscan --url $scheme://$domain -U $user -P $wordlists --password-attack $wp_pass_attack_template
 ```
 <!-- cheat

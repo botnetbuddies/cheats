@@ -20,11 +20,9 @@ fi
 
 ### Null session shell
 
-Enumerate null session shell with Rpcclient.
-
 Drop into rpcclient with no creds. Test target tolerance for null sessions before scripting.
 
-```sh title:"Rpcclient Enumerate Null Session Shell"
+```sh title:"Null-session rpcclient shell for manual enumeration"
 rpcclient -U "" -N $rhost_ip
 ```
 <!-- cheat
@@ -33,11 +31,9 @@ import domain_ip
 
 ### Authenticated shell
 
-Read authenticated shell with Rpcclient.
-
 Drop into an interactive rpcclient with valid creds. Use this for ad-hoc poking; the entries below are one-shot equivalents.
 
-```sh title:"Rpcclient Read Authenticated Shell"
+```sh title:"Authenticated rpcclient interactive shell"
 rpcclient $rhost_ip $auth_flags
 ```
 <!-- cheat
@@ -50,11 +46,9 @@ import rpcclient_auth
 
 ### srvinfo
 
-Show srvinfo with Rpcclient.
-
 Show the target's basic server info (OS, server type flags, comment).
 
-```sh title:"Rpcclient Show Srvinfo"
+```sh title:"Rpcclient Show target OS and server type via srvinfo"
 rpcclient $rhost_ip $auth_flags -c "srvinfo;quit"
 ```
 <!-- cheat
@@ -65,11 +59,9 @@ import rpcclient_auth
 
 ### querydominfo
 
-Download querydominfo with Rpcclient.
-
 Pull domain info (name, server count, role).
 
-```sh title:"Rpcclient Download Querydominfo"
+```sh title:"Rpcclient Pull domain info (name, server count, role)"
 rpcclient $rhost_ip $auth_flags -c "querydominfo;quit"
 ```
 <!-- cheat
@@ -80,11 +72,9 @@ import rpcclient_auth
 
 ### getdompwinfo
 
-Download getdompwinfo with Rpcclient.
-
 Pull the domain password policy - run before spraying so you don't lock accounts.
 
-```sh title:"Rpcclient Download Getdompwinfo"
+```sh title:"Rpcclient Pull domain password policy before spraying"
 rpcclient $rhost_ip $auth_flags -c "getdompwinfo;quit"
 ```
 <!-- cheat
@@ -95,11 +85,9 @@ import rpcclient_auth
 
 ### netshareenum
 
-Show netshareenum with Rpcclient.
-
 List shares on the target via MS-SRVS.
 
-```sh title:"Rpcclient Show Netshareenum"
+```sh title:"Rpcclient List shares via MS-SRVS"
 rpcclient $rhost_ip $auth_flags -c "netshareenum;quit"
 ```
 <!-- cheat
@@ -112,11 +100,9 @@ import rpcclient_auth
 
 ### enumdomusers
 
-Enumerate enumdomusers with Rpcclient.
-
 Enumerate all domain users with their RIDs.
 
-```sh title:"Rpcclient Enumerate Enumdomusers"
+```sh title:"Rpcclient Enumerate domain users with RIDs"
 rpcclient $rhost_ip $auth_flags -c "enumdomusers;quit"
 ```
 <!-- cheat
@@ -127,11 +113,9 @@ import rpcclient_auth
 
 ### enumdomgroups
 
-Enumerate enumdomgroups with Rpcclient.
-
 Enumerate domain groups with their RIDs.
 
-```sh title:"Rpcclient Enumerate Enumdomgroups"
+```sh title:"Rpcclient Enumerate domain groups with RIDs"
 rpcclient $rhost_ip $auth_flags -c "enumdomgroups;quit"
 ```
 <!-- cheat
@@ -142,11 +126,9 @@ import rpcclient_auth
 
 ### querygroup
 
-Show querygroup with Rpcclient.
-
 Show group info (name, description) for a specific RID.
 
-```sh title:"Rpcclient Show Querygroup"
+```sh title:"Rpcclient Show group info for a specific RID"
 rpcclient $rhost_ip $auth_flags -c "querygroup $rid;quit"
 ```
 <!-- cheat
@@ -158,11 +140,9 @@ var rid
 
 ### querygroupmem
 
-List querygroupmem with Rpcclient.
-
 List members of a group by RID.
 
-```sh title:"Rpcclient List Querygroupmem"
+```sh title:"Rpcclient List members of a group by RID"
 rpcclient $rhost_ip $auth_flags -c "querygroupmem $rid;quit"
 ```
 <!-- cheat
@@ -174,11 +154,9 @@ var rid
 
 ### queryuser
 
-Show queryuser with Rpcclient.
-
 Show detailed user info by RID (last logon, bad password count, UAC flags).
 
-```sh title:"Rpcclient Show Queryuser"
+```sh title:"Rpcclient Show detailed user info by RID"
 rpcclient $rhost_ip $auth_flags -c "queryuser $rid;quit"
 ```
 <!-- cheat
@@ -190,11 +168,9 @@ var rid
 
 ### getusrdompwinfo
 
-Dump getusrdompwinfo with Rpcclient.
-
 Per-user password policy (PSO-aware - returns the policy that actually applies to this account).
 
-```sh title:"Rpcclient Dump Getusrdompwinfo"
+```sh title:"Rpcclient Per-user password policy via PSO lookup"
 rpcclient $rhost_ip $auth_flags -c "getusrdompwinfo $rid;quit"
 ```
 <!-- cheat
@@ -208,11 +184,9 @@ var rid
 
 ### lsaenumsid
 
-Enumerate lsaenumsid with Rpcclient.
-
 Enumerate every SID known to the local LSA - reveals well-known principals and SID-history values.
 
-```sh title:"Rpcclient Enumerate Lsaenumsid"
+```sh title:"Rpcclient Enumerate SIDs known to local LSA"
 rpcclient $rhost_ip $auth_flags -c "lsaenumsid;quit"
 ```
 <!-- cheat
@@ -223,11 +197,9 @@ import rpcclient_auth
 
 ### lookupsid
 
-Run lookupsid with Rpcclient.
-
 Translate a single SID to its principal name.
 
-```sh title:"Rpcclient Run Lookupsid"
+```sh title:"Rpcclient Translate SID to principal name"
 rpcclient $rhost_ip $auth_flags -c "lookupsid $sid;quit"
 ```
 <!-- cheat
@@ -239,11 +211,9 @@ var sid
 
 ### lookupnames
 
-Run lookupnames with Rpcclient.
-
 Translate a principal name to its SID.
 
-```sh title:"Rpcclient Run Lookupnames"
+```sh title:"Rpcclient Translate principal name to SID"
 rpcclient $rhost_ip $auth_flags -c "lookupnames $name;quit"
 ```
 <!-- cheat
@@ -257,11 +227,9 @@ var name
 
 ### Reset user password (setuserinfo2)
 
-Dump reset user password (setuserinfo2) with Rpcclient.
-
 Set a target user's password via MS-SAMR. Requires `User-Force-Change-Password` extended right (or higher) on the target.
 
-```sh title:"Rpcclient Dump Reset User Password (setuserinfo2)"
+```sh title:"Rpcclient Reset user password via setuserinfo2 (needs Force-Change-Password)"
 rpcclient $rhost_ip $auth_flags -c "setuserinfo2 $target_user 23 '$new_pass';quit"
 ```
 <!-- cheat
@@ -274,11 +242,9 @@ var new_pass
 
 ### Username=password spray
 
-Dump username=password spray with Rpcclient.
-
 Spray a userlist trying each username as its own password. Fast first check on most engagements.
 
-```sh title:"Rpcclient Dump Username=password Spray"
+```sh title:"Rpcclient Spray userlist: username == password"
 for u in $(cat $users_file); do echo -n "user: $u "; rpcclient -U "$u%$u" -c "getusername;quit" $rhost_ip; done
 ```
 <!-- cheat

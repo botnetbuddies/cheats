@@ -17,13 +17,9 @@ httpx probes HTTP services at scale and collects status, title, technologies, TL
 
 #sh #httpx #web
 
-Probe hosts with httpx.
-
-#sh #httpx #web
-
 Probe hosts from a file.
 
-```sh title:"Httpx Probe Hosts"
+```sh title:"Probe hosts with httpx"
 httpx -l "$hosts_file"
 ```
 <!-- cheat
@@ -34,13 +30,9 @@ var hosts_file
 
 #sh #httpx #web
 
-Probe metadata with httpx.
-
-#sh #httpx #web
-
 Collect status, title, technologies, and web server metadata.
 
-```sh title:"Httpx Probe Metadata"
+```sh title:"Collect HTTP metadata with httpx"
 httpx -l "$hosts_file" -status-code -title -tech-detect -web-server
 ```
 <!-- cheat
@@ -51,13 +43,9 @@ var hosts_file
 
 #sh #httpx #web
 
-Probe screenshot probe with httpx.
-
-#sh #httpx #web
-
 Probe hosts and capture screenshots.
 
-```sh title:"Httpx Probe Screenshot Probe"
+```sh title:"Capture screenshots with httpx"
 httpx -l "$hosts_file" -screenshot
 ```
 <!-- cheat

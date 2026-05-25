@@ -4,11 +4,9 @@
 
 ### nbtscan range
 
-Scan nbtscan range with NetBIOS.
-
 Scan a range for NetBIOS names.
 
-```sh title:"NetBIOS Scan Nbtscan Range"
+```sh title:"Scan range for NetBIOS names"
 nbtscan -r "$ip_range"
 ```
 <!-- cheat

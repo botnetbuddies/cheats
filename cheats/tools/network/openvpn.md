@@ -9,11 +9,9 @@ var vpn = sh -c 'printf "%s\n" "$VPN_FOLDER/competitive.ovpn"; find "$VPN_FOLDER
 
 ### Start OpenVPN
 
-Start OpenVPN with Openvpn.
-
 Start the chosen `.ovpn` profile detached and silent. `sudo -l` first to refresh the timestamp so it doesn't prompt mid-tunnel.
 
-```sh title:"Openvpn Start OpenVPN"
+```sh title:"Openvpn Start chosen .ovpn detached and silent"
 sudo -l && sudo openvpn --config "$vpn" >/dev/null 2>&1 &
 ```
 <!-- cheat
@@ -22,11 +20,9 @@ import vpn
 
 ### Kill OpenVPN
 
-Execute kill OpenVPN with Openvpn.
-
 Stop every running openvpn process (no graceful shutdown).
 
-```sh title:"Openvpn Execute Kill OpenVPN"
+```sh title:"Kill every running openvpn process"
 sudo pkill openvpn
 ```
 <!-- cheat -->

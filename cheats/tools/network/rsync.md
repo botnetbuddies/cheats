@@ -4,11 +4,9 @@
 
 ### List modules
 
-List modules with Rsync.
-
 List modules exposed by an rsync daemon.
 
-```sh title:"Rsync List Modules"
+```sh title:"List rsync modules"
 rsync "$rhost_ip::"
 ```
 <!-- cheat
@@ -17,11 +15,9 @@ var rhost_ip
 
 ### List module contents
 
-List module contents with Rsync.
-
 List files exposed by an rsync module.
 
-```sh title:"Rsync List Module Contents"
+```sh title:"List rsync module contents"
 rsync "$rhost_ip::$module_name"
 ```
 <!-- cheat
@@ -31,11 +27,9 @@ var module_name
 
 ### Recursive listing
 
-List recursive listing with Rsync.
-
 Recursively list a module.
 
-```sh title:"Rsync List Recursive Listing"
+```sh title:"Recursively list rsync module"
 rsync -av "$rhost_ip::$module_name"
 ```
 <!-- cheat
@@ -47,11 +41,9 @@ var module_name
 
 ### Download module
 
-Download module with Rsync.
-
 Download a module to a local directory.
 
-```sh title:"Rsync Download Module"
+```sh title:"Download rsync module"
 rsync -av "$rhost_ip::$module_name" "$local_dir"
 ```
 <!-- cheat
@@ -62,11 +54,9 @@ var local_dir
 
 ### Download module path
 
-Download module path with Rsync.
-
 Download a path from an rsync module.
 
-```sh title:"Rsync Download Module Path"
+```sh title:"Download rsync module path"
 rsync -av "$rhost_ip::$module_name/$remote_path" "$local_path"
 ```
 <!-- cheat
@@ -78,11 +68,9 @@ var local_path
 
 ### Upload module path
 
-Upload module path with Rsync.
-
 Upload a file or directory to a writable rsync module path.
 
-```sh title:"Rsync Upload Module Path"
+```sh title:"Upload rsync module path"
 rsync -av "$local_path" "$rhost_ip::$module_name/$remote_path"
 ```
 <!-- cheat
@@ -94,11 +82,9 @@ var remote_path
 
 ### SSH upload
 
-Upload SSH upload with Rsync.
-
 Upload a file or directory through rsync over SSH.
 
-```sh title:"Rsync Upload SSH Upload"
+```sh title:"Upload with rsync over SSH"
 rsync -av -e ssh "$local_path" "$user@$rhost_ip:$remote_path"
 ```
 <!-- cheat

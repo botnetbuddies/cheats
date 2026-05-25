@@ -10,11 +10,9 @@ var archive_file = sh -c 'printf "%s\n" ""; find "$PWD/" -maxdepth 1 -type f ! -
 
 ### fcrackzip
 
-Crack fcrackzip with Crack Files.
-
 Crack a ZIP file with fcrackzip.
 
-```sh title:"Crack Files Crack Fcrackzip"
+```sh title:"Crack Files Crack ZIP with fcrackzip"
 fcrackzip -u -D -p "$wordlists" "$zip_file"
 ```
 <!-- cheat
@@ -24,11 +22,9 @@ var zip_file
 
 ### zip2john
 
-Crack zip2john with Crack Files.
-
 Extract a ZIP hash and crack it with John.
 
-```sh title:"Crack Files Crack Zip2john"
+```sh title:"Crack Files Extract ZIP hash and crack with John"
 zip2john "$zip_file" > zip.john; john --wordlist "$wordlists" zip.john
 ```
 <!-- cheat
@@ -40,11 +36,9 @@ var zip_file
 
 ### 7z2john
 
-Crack 7z2john with Crack Files.
-
 Extract a 7z hash and crack it with John.
 
-```sh title:"Crack Files Crack 7z2john"
+```sh title:"Crack Files Extract 7z hash and crack with John"
 7z2john "$archive_file" > 7z.john; john --wordlist "$wordlists" 7z.john
 ```
 <!-- cheat
@@ -55,11 +49,9 @@ import crackfiles
 
 ### pdfcrack
 
-Crack pdfcrack with Crack Files.
-
 Crack a PDF password with pdfcrack.
 
-```sh title:"Crack Files Crack Pdfcrack"
+```sh title:"Crack Files Crack PDF with pdfcrack"
 pdfcrack "$pdf_file" -w "$wordlists"
 ```
 <!-- cheat
@@ -69,11 +61,9 @@ var pdf_file
 
 ### qpdf decrypt
 
-Dump qpdf decrypt with Crack Files.
-
 Decrypt a PDF with a known password.
 
-```sh title:"Crack Files Dump Qpdf Decrypt"
+```sh title:"Crack Files Decrypt PDF with known password"
 qpdf --password="$pass" --decrypt "$encrypted_pdf" "$plaintext_pdf"
 ```
 <!-- cheat
@@ -86,11 +76,9 @@ var plaintext_pdf
 
 ### office2john
 
-Crack office2john with Crack Files.
-
 Extract an Office document hash and crack it with John.
 
-```sh title:"Crack Files Crack Office2john"
+```sh title:"Crack Files Extract Office hash and crack with John"
 office2john "$office_file" > office.hash; john --wordlist "$wordlists" office.hash
 ```
 <!-- cheat
@@ -102,11 +90,9 @@ var office_file
 
 ### keepass2john
 
-Crack keepass2john with Crack Files.
-
 Extract a KeePass database hash and crack it with John.
 
-```sh title:"Crack Files Crack Keepass2john"
+```sh title:"Crack Files Extract KeePass hash and crack with John"
 keepass2john "$kdbx_file" > keepass.hash; john --wordlist "$wordlists" keepass.hash
 ```
 <!-- cheat

@@ -4,11 +4,9 @@
 
 ### All modules
 
-Execute all modules with LaZagne.
-
 Run all LaZagne modules. Noisy and commonly flagged by AV.
 
-```cmd title:"LaZagne Execute All Modules"
+```cmd title:"Run all LaZagne modules"
 lazagne.exe all
 ```
 <!-- cheat -->
@@ -17,33 +15,27 @@ lazagne.exe all
 
 ### All modules 2
 
-Execute all modules 2 with LaZagne.
-
 Run all LaZagne modules on Linux.
 
-```sh title:"LaZagne Execute All Modules 2"
+```sh title:"Run all Linux LaZagne modules"
 python3 laZagne.py all
 ```
 <!-- cheat -->
 
 ### Browser modules
 
-Execute browser modules with LaZagne.
-
 Run LaZagne browser credential modules on Linux.
 
-```sh title:"LaZagne Execute Browser Modules"
+```sh title:"Run Linux LaZagne browser modules"
 python3 laZagne.py browsers
 ```
 <!-- cheat -->
 
 ### SSH module
 
-Execute SSH module with LaZagne.
-
 Run LaZagne sysadmin modules, including SSH-related credential checks.
 
-```sh title:"LaZagne Execute SSH Module"
+```sh title:"Run Linux LaZagne sysadmin modules"
 python3 laZagne.py sysadmin
 ```
 <!-- cheat -->

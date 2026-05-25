@@ -4,11 +4,9 @@
 
 ### All
 
-Enumerate all with Enum4linux.
-
 Run broad enum4linux enumeration.
 
-```sh title:"Enum4linux Enumerate All"
+```sh title:"Run broad enum4linux enumeration"
 enum4linux -a "$rhost_ip"
 ```
 <!-- cheat
@@ -17,11 +15,9 @@ var rhost_ip
 
 ### Verbose
 
-Enumerate verbose with Enum4linux.
-
 Run verbose enum4linux enumeration.
 
-```sh title:"Enum4linux Enumerate Verbose"
+```sh title:"Run verbose enum4linux enumeration"
 enum4linux -v "$rhost_ip"
 ```
 <!-- cheat
@@ -30,11 +26,9 @@ var rhost_ip
 
 ### Null access
 
-Dump null access with Enum4linux.
-
 Run enum4linux with null credentials.
 
-```sh title:"Enum4linux Dump Null Access"
+```sh title:"Run enum4linux with null credentials"
 enum4linux -u "" -p "" "$rhost_ip"
 ```
 <!-- cheat
@@ -43,11 +37,9 @@ var rhost_ip
 
 ### Guest access
 
-Enumerate guest access with Enum4linux.
-
 Run enum4linux as guest.
 
-```sh title:"Enum4linux Enumerate Guest Access"
+```sh title:"Run enum4linux as guest"
 enum4linux -u "guest" -p "" "$rhost_ip"
 ```
 <!-- cheat
@@ -56,11 +48,9 @@ var rhost_ip
 
 ### Password
 
-Dump password with Enum4linux.
-
 Run enum4linux with username and password.
 
-```sh title:"Enum4linux Dump Password"
+```sh title:"Run enum4linux with password"
 enum4linux -u "$user" -p "$pass" "$rhost_ip"
 ```
 <!-- cheat
@@ -71,11 +61,9 @@ var rhost_ip
 
 ### Users
 
-List users with Enum4linux.
-
 List users with enum4linux.
 
-```sh title:"Enum4linux List Users"
+```sh title:"List users with enum4linux"
 enum4linux -U "$rhost_ip" | grep 'user:'
 ```
 <!-- cheat

@@ -14,13 +14,9 @@ winPEAS automates Windows privilege escalation enumeration across services, regi
 
 #cmd #winpeas
 
-Scan full scan with winPEAS.
-
-#cmd #winpeas
-
 Run the standard winPEAS scan.
 
-```cmd title:"WinPEAS Scan Full Scan"
+```cmd title:"Run winPEAS scan"
 winPEASx64.exe
 ```
 <!-- cheat -->
@@ -29,13 +25,9 @@ winPEASx64.exe
 
 #cmd #winpeas
 
-Scan quiet scan with winPEAS.
-
-#cmd #winpeas
-
 Run winPEAS with reduced banner and noise.
 
-```cmd title:"WinPEAS Scan Quiet Scan"
+```cmd title:"Run winPEAS quiet scan"
 winPEASx64.exe quiet
 ```
 <!-- cheat -->
@@ -44,13 +36,9 @@ winPEASx64.exe quiet
 
 #cmd #winpeas
 
-Execute log output with winPEAS.
-
-#cmd #winpeas
-
 Write winPEAS output to a file.
 
-```cmd title:"WinPEAS Execute Log Output"
+```cmd title:"Run winPEAS and write output"
 winPEASx64.exe log="$output_file"
 ```
 <!-- cheat

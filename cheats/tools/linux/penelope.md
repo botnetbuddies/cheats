@@ -9,11 +9,9 @@ var tool = sh -c 'printf "%s\n" "$linux_tools/pspy"; find "$linux_tools/" -maxde
 
 ### Quick file upload
 
-Upload quick file upload with Penelope.
-
 Upload a tool from your `$linux_tools` collection straight into the penelope session.
 
-```sh title:"Penelope Upload Quick File Upload"
+```sh title:"Push tool from $linux_tools into penelope session"
 upload $tool
 ```
 <!-- cheat
@@ -23,22 +21,18 @@ var tool
 
 ### Run peass-ng
 
-Run peass ng with Penelope.
-
 Run linpeas inside the penelope session (auto recon for Linux privesc).
 
-```sh title:"Penelope Run Peass Ng"
+```sh title:"Penelope Auto Linux privesc recon via linpeas inside session"
 run peass_ng
 ```
 <!-- cheat -->
 
 ### Run lse
 
-Run lse with Penelope.
-
 Run lse (Linux Smart Enumeration) inside the penelope session.
 
-```sh title:"Penelope Run Lse"
+```sh title:"Penelope Linux Smart Enumeration inside the session"
 run lse
 ```
 <!-- cheat -->

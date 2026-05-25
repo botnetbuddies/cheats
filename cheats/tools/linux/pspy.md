@@ -14,13 +14,9 @@ pspy monitors process execution without root and is useful for cron, systemd, ba
 
 #sh #pspy #processes
 
-Start default monitor with pspy.
-
-#sh #pspy #processes
-
 Monitor process starts with default settings.
 
-```sh title:"Pspy Start Default Monitor"
+```sh title:"Monitor process starts with pspy"
 ./pspy64
 ```
 <!-- cheat -->
@@ -29,13 +25,9 @@ Monitor process starts with default settings.
 
 #sh #pspy #filesystem
 
-Run file system events with pspy.
-
-#sh #pspy #filesystem
-
 Monitor process starts and file-system events.
 
-```sh title:"Pspy Run File System Events"
+```sh title:"Monitor processes and file events with pspy"
 ./pspy64 -f
 ```
 <!-- cheat -->
@@ -44,13 +36,9 @@ Monitor process starts and file-system events.
 
 #sh #pspy #processes
 
-Run poll interval with pspy.
-
-#sh #pspy #processes
-
 Monitor process starts with a custom polling interval.
 
-```sh title:"Pspy Run Poll Interval"
+```sh title:"Monitor pspy with custom interval"
 ./pspy64 -i "$interval_ms"
 ```
 <!-- cheat
@@ -61,13 +49,9 @@ var interval_ms
 
 #sh #pspy #processes
 
-Show commands only with pspy.
-
-#sh #pspy #processes
-
 Run pspy with process monitoring and no file events.
 
-```sh title:"Pspy Show Commands Only"
+```sh title:"Monitor pspy process events only"
 ./pspy64 -p
 ```
 <!-- cheat -->

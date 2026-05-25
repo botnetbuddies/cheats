@@ -17,13 +17,9 @@ tags: containers kubernetes crictl runtime tools
 
 #sh #crictl #runtime
 
-Show runtime info with crictl.
-
-#sh #crictl #runtime
-
 Print CRI runtime information.
 
-```sh title:"Crictl Show Runtime Info"
+```sh title:"crictl Print CRI runtime info"
 crictl info
 ```
 <!-- cheat -->
@@ -32,13 +28,9 @@ crictl info
 
 #sh #crictl #kubernetes
 
-List pods with crictl.
-
-#sh #crictl #kubernetes
-
 List pods known to the runtime.
 
-```sh title:"Crictl List Pods"
+```sh title:"crictl List CRI pods"
 crictl pods
 ```
 <!-- cheat -->
@@ -47,13 +39,9 @@ crictl pods
 
 #sh #crictl #containers
 
-List containers with crictl.
-
-#sh #crictl #containers
-
 List containers known to the runtime.
 
-```sh title:"Crictl List Containers"
+```sh title:"crictl List CRI containers"
 crictl ps -a
 ```
 <!-- cheat -->
@@ -62,13 +50,9 @@ crictl ps -a
 
 #sh #crictl #images
 
-List images with crictl.
-
-#sh #crictl #images
-
 List images known to the runtime.
 
-```sh title:"Crictl List Images"
+```sh title:"crictl List CRI images"
 crictl images
 ```
 <!-- cheat -->
@@ -77,13 +61,9 @@ crictl images
 
 #sh #crictl #containers
 
-Run container inspect with crictl.
-
-#sh #crictl #containers
-
 Inspect a container by ID.
 
-```sh title:"Crictl Run Container Inspect"
+```sh title:"crictl Inspect CRI container"
 crictl inspect "$container_id"
 ```
 <!-- cheat
@@ -94,13 +74,9 @@ var container_id
 
 #sh #crictl #containers
 
-Spawn container shell with crictl.
-
-#sh #crictl #containers
-
 Open a shell in a running container through the runtime.
 
-```sh title:"Crictl Spawn Container Shell"
+```sh title:"Open shell through crictl"
 crictl exec -it "$container_id" /bin/sh
 ```
 <!-- cheat

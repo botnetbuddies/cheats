@@ -4,11 +4,9 @@
 
 ### Local forward
 
-Run local forward with Ssh.
-
 SSH local port forward: bind a local port on your box that tunnels through the SSH host to the named target/port.
 
-```sh title:"Ssh Run Local Forward"
+```sh title:"Local forward, tunnel local port through SSH host"
 ssh -L $lport:$domain:$rport $user@$domain
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var rport
 
 ### Reverse forward
 
-Start reverse forward with Ssh.
-
 SSH reverse forward: open a port on the SSH host that tunnels back to a local port. Used to expose your listener to the target's network.
 
-```sh title:"Ssh Start Reverse Forward"
+```sh title:"Reverse forward, expose local port on SSH host"
 ssh -R $rport:localhost:$lport $user@$domain
 ```
 <!-- cheat
@@ -36,11 +32,9 @@ var lport
 
 ### Dynamic SOCKS proxy
 
-Start dynamic SOCKS proxy with Ssh.
-
 Start a dynamic SOCKS proxy through SSH.
 
-```sh title:"Ssh Start Dynamic SOCKS Proxy"
+```sh title:"Start dynamic SOCKS proxy through SSH"
 ssh -D "$socks_port" "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -51,11 +45,9 @@ var rhost_ip
 
 ### Local forward explicit host
 
-Run local forward explicit host with Ssh.
-
 Bind a local port that forwards through SSH to a chosen remote host and port.
 
-```sh title:"Ssh Run Local Forward Explicit Host"
+```sh title:"Ssh Local forward to explicit remote host"
 ssh -L "$lport:$remote_host:$rport" "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -68,11 +60,9 @@ var rhost_ip
 
 ### Remote forward explicit bind
 
-Start remote forward explicit bind with Ssh.
-
 Open a remote bind address and port that forwards back to a local host and port. Requires `GatewayPorts yes` for non-loopback remote binds.
 
-```sh title:"Ssh Start Remote Forward Explicit Bind"
+```sh title:"Ssh Remote forward with explicit bind address"
 ssh -R "$remote_bind:$rport:$local_host:$lport" "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -88,22 +78,18 @@ var rhost_ip
 
 ### Start agent
 
-Start agent with Ssh.
-
 Start ssh-agent and add your default key.
 
-```sh title:"Ssh Start Agent"
+```sh title:"Start ssh-agent and add default key"
 eval "$(ssh-agent -s)"; ssh-add
 ```
 <!-- cheat -->
 
 ### Keyscan
 
-Scan keyscan with Ssh.
-
 Fetch a server public SSH host key.
 
-```sh title:"Ssh Scan Keyscan"
+```sh title:"Fetch SSH host public key"
 ssh-keyscan -t rsa -p "$rport" "$rhost_ip"
 ```
 <!-- cheat
@@ -115,11 +101,9 @@ var rport := 22
 
 ### Old key exchange
 
-Set old key exchange with Ssh.
-
 Connect to a legacy SSH server that only supports group1 SHA1 key exchange.
 
-```sh title:"Ssh Set Old Key Exchange"
+```sh title:"Ssh Connect with legacy DH group1 SHA1 KEX"
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -131,11 +115,9 @@ var rhost_ip
 
 ### Enum users
 
-Enumerate enum users with Ssh.
-
 Enumerate SSH usernames with Metasploit.
 
-```sh title:"Ssh Enumerate Enum Users"
+```sh title:"Enumerate SSH usernames with Metasploit"
 msfconsole -x "use scanner/ssh/ssh_enumusers; set RHOSTS $rhost_ip; set USER_FILE $wordlists_users; set CHECK_FALSE true; run; exit"
 ```
 <!-- cheat

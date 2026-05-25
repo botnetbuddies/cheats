@@ -4,11 +4,9 @@
 
 ### IP info
 
-Show IP info with Network.
-
 Query ipinfo.io for an IP address.
 
-```sh title:"Network Show IP Info"
+```sh title:"Network Query ipinfo.io for IP details"
 curl "https://ipinfo.io/$rhost_ip"
 ```
 <!-- cheat
@@ -17,22 +15,18 @@ var rhost_ip
 
 ### Current public IP
 
-Show current public IP with Network.
-
 Show your current public IP details.
 
-```sh title:"Network Show Current Public IP"
+```sh title:"Network Show current public IP details"
 curl https://ipinfo.io/
 ```
 <!-- cheat -->
 
 ### Current public IP plaintext
 
-Show current public IP plaintext with Network.
-
 Show only your current public IP.
 
-```sh title:"Network Show Current Public IP Plaintext"
+```sh title:"Network Show current public IP"
 curl https://ipecho.net/plain/
 ```
 <!-- cheat -->
@@ -41,11 +35,9 @@ curl https://ipecho.net/plain/
 
 ### Curl port check
 
-Check curl port check with Network.
-
 Test outbound connectivity to a port with portquiz.
 
-```sh title:"Network Check Curl Port Check"
+```sh title:"Network Test outbound port with curl"
 curl "portquiz.net:$rport"
 ```
 <!-- cheat
@@ -54,11 +46,9 @@ var rport
 
 ### Netcat port check
 
-Check netcat port check with Network.
-
 Test outbound connectivity to a port with netcat.
 
-```sh title:"Network Check Netcat Port Check"
+```sh title:"Network Test outbound port with netcat"
 nc -v portquiz.net "$rport"
 ```
 <!-- cheat

@@ -17,13 +17,9 @@ Nikto checks web servers for risky files, old software, dangerous methods, and c
 
 #sh #nikto #web
 
-Scan basic scan with Nikto.
-
-#sh #nikto #web
-
 Run a basic Nikto scan.
 
-```sh title:"Nikto Scan Basic Scan"
+```sh title:"Run Nikto scan"
 nikto -h "$url"
 ```
 <!-- cheat
@@ -34,13 +30,9 @@ var url
 
 #sh #nikto #web
 
-Scan SSL scan with Nikto.
-
-#sh #nikto #web
-
 Run Nikto with SSL enabled.
 
-```sh title:"Nikto Scan SSL Scan"
+```sh title:"Run Nikto SSL scan"
 nikto -h "$host" -ssl
 ```
 <!-- cheat
@@ -51,13 +43,9 @@ var host
 
 #sh #nikto #web
 
-Execute custom port with Nikto.
-
-#sh #nikto #web
-
 Run Nikto against a custom port.
 
-```sh title:"Nikto Execute Custom Port"
+```sh title:"Run Nikto on custom port"
 nikto -h "$host" -p "$port"
 ```
 <!-- cheat

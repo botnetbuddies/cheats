@@ -14,13 +14,9 @@ AccessChk enumerates effective permissions across services, files, directories, 
 
 #cmd #accesschk #services
 
-Find writable services with AccessChk.
-
-#cmd #accesschk #services
-
 Find services writable by the current user.
 
-```cmd title:"AccessChk Find Writable Services"
+```cmd title:"AccessChk Find writable services"
 accesschk.exe -uwcqv %USERNAME% * /accepteula
 ```
 <!-- cheat -->
@@ -29,13 +25,9 @@ accesschk.exe -uwcqv %USERNAME% * /accepteula
 
 #cmd #accesschk #services
 
-Check service permissions with AccessChk.
-
-#cmd #accesschk #services
-
 Check permissions on a specific service.
 
-```cmd title:"AccessChk Check Service Permissions"
+```cmd title:"AccessChk Check service permissions"
 accesschk.exe -ucqv "$service_name"
 ```
 <!-- cheat
@@ -46,13 +38,9 @@ var service_name
 
 #cmd #accesschk #filesystem
 
-Find writable directories with AccessChk.
-
-#cmd #accesschk #filesystem
-
 Find writable directories under a target path.
 
-```cmd title:"AccessChk Find Writable Directories"
+```cmd title:"Find writable directories with AccessChk"
 accesschk.exe -uwdqs "$target_dir" /accepteula
 ```
 <!-- cheat
@@ -63,13 +51,9 @@ var target_dir
 
 #cmd #accesschk #registry
 
-Check registry key permissions with AccessChk.
-
-#cmd #accesschk #registry
-
 Check permissions on a registry key.
 
-```cmd title:"AccessChk Check Registry Key Permissions"
+```cmd title:"AccessChk Check registry key permissions"
 accesschk.exe -k "$registry_key"
 ```
 <!-- cheat

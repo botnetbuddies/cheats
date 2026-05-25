@@ -14,13 +14,9 @@ SharpUp checks common Windows privilege escalation misconfigurations from a low-
 
 #cmd #sharpup
 
-Check audit checks with SharpUp.
-
-#cmd #sharpup
-
 Run SharpUp audit checks.
 
-```cmd title:"SharpUp Check Audit Checks"
+```cmd title:"Run SharpUp audit"
 SharpUp.exe audit
 ```
 <!-- cheat -->
@@ -29,13 +25,9 @@ SharpUp.exe audit
 
 #cmd #sharpup
 
-Check service checks with SharpUp.
-
-#cmd #sharpup
-
 Run SharpUp service misconfiguration checks.
 
-```cmd title:"SharpUp Check Service Checks"
+```cmd title:"Run SharpUp service checks"
 SharpUp.exe audit Services
 ```
 <!-- cheat -->
@@ -44,13 +36,9 @@ SharpUp.exe audit Services
 
 #cmd #sharpup
 
-Check modifiable paths with SharpUp.
-
-#cmd #sharpup
-
 Run SharpUp checks for modifiable paths.
 
-```cmd title:"SharpUp Check Modifiable Paths"
+```cmd title:"Run SharpUp modifiable path checks"
 SharpUp.exe audit ModifiablePaths
 ```
 <!-- cheat -->

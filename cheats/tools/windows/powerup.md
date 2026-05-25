@@ -4,33 +4,27 @@
 
 ### All checks
 
-Check all checks with PowerUp.
-
 Run all PowerUp privilege escalation checks.
 
-```powershell title:"PowerUp Check All Checks"
+```powershell title:"Run PowerUp checks"
 Invoke-AllChecks
 ```
 <!-- cheat -->
 
 ### Service abuse checks
 
-Find service abuse checks with PowerUp.
-
 Find service abuse opportunities with PowerUp.
 
-```powershell title:"PowerUp Find Service Abuse Checks"
+```powershell title:"PowerUp Find service abuse paths"
 Get-ModifiableServiceFile
 ```
 <!-- cheat -->
 
 ### Unquoted services
 
-Find unquoted services with PowerUp.
-
 Find unquoted service path issues.
 
-```powershell title:"PowerUp Find Unquoted Services"
+```powershell title:"Find unquoted services with PowerUp"
 Get-ServiceUnquoted
 ```
 <!-- cheat -->

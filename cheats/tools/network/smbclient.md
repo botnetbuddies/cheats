@@ -4,11 +4,9 @@
 
 ### Password
 
-Dump password with Smbclient.
-
 Connect to an SMB share with username and password.
 
-```sh title:"Smbclient Dump Password"
+```sh title:"Smbclient Connect to SMB share with password"
 smbclient "\\\\$rhost_ip\\$share" -U "$user%$pass"
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var pass
 
 ### No password
 
-Dump no password with Smbclient.
-
 Connect to an SMB share with a username and no password.
 
-```sh title:"Smbclient Dump No Password"
+```sh title:"Smbclient Connect to SMB share with username and no password"
 smbclient "\\\\$rhost_ip\\$share" -U "$user%"
 ```
 <!-- cheat
@@ -35,11 +31,9 @@ var user
 
 ### Null session
 
-Run null session with Smbclient.
-
 Connect to an SMB share with a null session.
 
-```sh title:"Smbclient Run Null Session"
+```sh title:"Smbclient Connect to SMB share with null session"
 smbclient "\\\\$rhost_ip\\$share" -U "%"
 ```
 <!-- cheat
@@ -51,11 +45,9 @@ var share
 
 ### SMB signing
 
-Check SMB signing with Smbclient.
-
 Check SMB signing with nmap.
 
-```sh title:"Smbclient Check SMB Signing"
+```sh title:"Smbclient Check SMB signing with nmap"
 nmap -Pn -sS -T4 --open --script smb-security-mode -p 445 "$rhost_ip"
 ```
 <!-- cheat
@@ -66,11 +58,9 @@ var rhost_ip
 
 ### Mount C$
 
-Mount c$ with Smbclient.
-
 Mount the administrative `C$` share over CIFS.
 
-```sh title:"Smbclient Mount C$"
+```sh title:"Smbclient Mount administrative C$ share over CIFS"
 sudo mount -t cifs "//$rhost_ip/C\$" "$mount_point" -o "username=$user,password=$pass,domain=$domain"
 ```
 <!-- cheat

@@ -4,33 +4,27 @@
 
 ### List running containers
 
-List running containers with Docker.
-
 Show running containers.
 
-```sh title:"Docker List Running Containers"
+```sh title:"Docker List running containers"
 docker ps
 ```
 <!-- cheat -->
 
 ### List all containers
 
-List all containers with Docker.
-
 Show running and stopped containers.
 
-```sh title:"Docker List All Containers"
+```sh title:"Docker List all containers"
 docker ps -a
 ```
 <!-- cheat -->
 
 ### Stop container
 
-Run stop container with Docker.
-
 Stop a running container with SIGTERM.
 
-```sh title:"Docker Run Stop Container"
+```sh title:"Docker Stop container with SIGTERM"
 docker stop "$container_id"
 ```
 <!-- cheat
@@ -39,11 +33,9 @@ var container_id
 
 ### Kill container
 
-Run kill container with Docker.
-
 Stop a running container with SIGKILL.
 
-```sh title:"Docker Run Kill Container"
+```sh title:"Docker Kill container with SIGKILL"
 docker kill "$container_id"
 ```
 <!-- cheat
@@ -52,11 +44,9 @@ var container_id
 
 ### Remove all containers
 
-Remove all containers with Docker.
-
 Remove all running and stopped containers. Requires typing `YES` before it runs.
 
-```sh title:"Docker Remove All Containers"
+```sh title:"Docker Confirm, then remove all containers"
 read -r -p "Remove all Docker containers? Type YES: " confirm; [ "$confirm" = "YES" ] && docker rm -f $(docker ps -aq)
 ```
 <!-- cheat
@@ -65,11 +55,9 @@ var confirm
 
 ### Exec bash
 
-Execute exec bash with Docker.
-
 Open an interactive bash shell inside a container.
 
-```sh title:"Docker Execute Exec Bash"
+```sh title:"Docker Open bash in container"
 docker exec -it "$container_id" bash
 ```
 <!-- cheat
@@ -78,11 +66,9 @@ var container_id
 
 ### Exec sh
 
-Execute exec sh with Docker.
-
 Open an interactive POSIX shell inside a container.
 
-```sh title:"Docker Execute Exec Sh"
+```sh title:"Docker Open sh in container"
 docker exec -it "$container_id" /bin/sh
 ```
 <!-- cheat
@@ -91,11 +77,9 @@ var container_id
 
 ### Inspect container
 
-Run inspect container with Docker.
-
 Inspect a container.
 
-```sh title:"Docker Run Inspect Container"
+```sh title:"Inspect Docker container"
 docker inspect "$container_id"
 ```
 <!-- cheat
@@ -104,11 +88,9 @@ var container_id
 
 ### Tail logs
 
-Run tail logs with Docker.
-
 Print the last 100 lines from a container.
 
-```sh title:"Docker Run Tail Logs"
+```sh title:"Docker Tail last 100 container log lines"
 docker logs --tail 100 "$container_id"
 ```
 <!-- cheat
@@ -117,11 +99,9 @@ var container_id
 
 ### Follow logs
 
-Run follow logs with Docker.
-
 Follow container logs from the last 100 lines.
 
-```sh title:"Docker Run Follow Logs"
+```sh title:"Docker Follow container logs"
 docker logs --tail 100 -f "$container_id"
 ```
 <!-- cheat
@@ -132,22 +112,18 @@ var container_id
 
 ### List networks
 
-List networks with Docker.
-
 List Docker networks.
 
-```sh title:"Docker List Networks"
+```sh title:"List Docker networks"
 docker network ls
 ```
 <!-- cheat -->
 
 ### Create network
 
-Create network with Docker.
-
 Create a Docker network.
 
-```sh title:"Docker Create Network"
+```sh title:"Create Docker network"
 docker network create "$network_name"
 ```
 <!-- cheat
@@ -158,33 +134,27 @@ var network_name
 
 ### Compose up
 
-Start compose up with Docker.
-
 Build, create, start, and attach to all Compose services.
 
-```sh title:"Docker Start Compose Up"
+```sh title:"Docker Start Compose services in foreground"
 docker compose up
 ```
 <!-- cheat -->
 
 ### Compose up detached
 
-Start compose up detached with Docker.
-
 Build, create, start, and detach from all Compose services.
 
-```sh title:"Docker Start Compose Up Detached"
+```sh title:"Docker Start Compose services in background"
 docker compose up -d
 ```
 <!-- cheat -->
 
 ### Compose service up detached
 
-Start compose service up detached with Docker.
-
 Build, create, start, and detach from one Compose service.
 
-```sh title:"Docker Start Compose Service Up Detached"
+```sh title:"Docker Start one Compose service in background"
 docker compose up -d "$service_name"
 ```
 <!-- cheat
@@ -193,11 +163,9 @@ var service_name
 
 ### Compose service logs
 
-Run compose service logs with Docker.
-
 Print the last 100 lines from a Compose service.
 
-```sh title:"Docker Run Compose Service Logs"
+```sh title:"Docker Tail last 100 Compose service log lines"
 docker compose logs --tail 100 "$service_name"
 ```
 <!-- cheat
@@ -206,11 +174,9 @@ var service_name
 
 ### Compose service follow logs
 
-Run compose service follow logs with Docker.
-
 Follow Compose service logs from the last 100 lines.
 
-```sh title:"Docker Run Compose Service Follow Logs"
+```sh title:"Docker Follow Compose service logs"
 docker compose logs -f --tail 100 "$service_name"
 ```
 <!-- cheat
@@ -219,11 +185,9 @@ var service_name
 
 ### Compose down
 
-Create compose down with Docker.
-
 Stop and remove containers and networks created by `docker compose up`.
 
-```sh title:"Docker Create Compose Down"
+```sh title:"Docker Stop Compose stack and remove created containers/networks"
 docker compose down
 ```
 <!-- cheat -->
@@ -232,22 +196,18 @@ docker compose down
 
 ### List images
 
-List images with Docker.
-
 Show local Docker images.
 
-```sh title:"Docker List Images"
+```sh title:"List Docker images"
 docker images
 ```
 <!-- cheat -->
 
 ### Run MySQL
 
-Run MySQL with Docker.
-
 Run a temporary MySQL container with an empty root password.
 
-```sh title:"Docker Run MySQL"
+```sh title:"Docker Run MySQL container with empty root password"
 docker run --rm --name "$container_name" -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d "mysql/mysql-server:$image_tag"
 ```
 <!-- cheat
@@ -257,11 +217,9 @@ var image_tag := latest
 
 ### MySQL shell
 
-Spawn MySQL shell with Docker.
-
 Open a MySQL shell in a running MySQL container.
 
-```sh title:"Docker Spawn MySQL Shell"
+```sh title:"Docker Open MySQL shell in container"
 docker exec -ti "$container_name" mysql
 ```
 <!-- cheat

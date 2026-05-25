@@ -4,11 +4,9 @@
 
 ### Password
 
-Dump password with Rdesktop.
-
 Connect to RDP with rdesktop.
 
-```sh title:"Rdesktop Dump Password"
+```sh title:"Connect to RDP with rdesktop"
 rdesktop -g 90% "$rhost_ip" -u "$user" -p "$pass" -d "$domain"
 ```
 <!-- cheat
@@ -20,11 +18,9 @@ var domain
 
 ### Share
 
-Run share with Rdesktop.
-
 Connect to RDP with rdesktop and mount a local share.
 
-```sh title:"Rdesktop Run Share"
+```sh title:"Connect to RDP with rdesktop and local share"
 rdesktop -g 90% "$rhost_ip" -u "$user" -p "$pass" -d "$domain" -r "disk:share=$share"
 ```
 <!-- cheat

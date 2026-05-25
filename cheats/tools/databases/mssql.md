@@ -4,11 +4,9 @@
 
 ### sqsh
 
-Run sqsh with MSSQL.
-
 Connect to MSSQL with sqsh.
 
-```sh title:"MSSQL Run Sqsh"
+```sh title:"Connect to MSSQL with sqsh"
 sqsh -S "$rhost_ip:$rport" -U "$user" -P "$pass"
 ```
 <!-- cheat
@@ -22,11 +20,9 @@ var pass
 
 ### Nmap enum
 
-Enumerate nmap enum with MSSQL.
-
 Run MSSQL nmap enumeration scripts with optional SQL credentials.
 
-```sh title:"MSSQL Enumerate Nmap Enum"
+```sh title:"Run MSSQL nmap enumeration scripts"
 nmap --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args "mssql.instance-port=$rport,mssql.username=$user,mssql.password=$pass,mssql.instance-name=$instance_name" -sV -p "$rport" "$rhost_ip"
 ```
 <!-- cheat
@@ -39,11 +35,9 @@ var instance_name := MSSQLSERVER
 
 ### Metasploit enum
 
-Enumerate metasploit enum with MSSQL.
-
 Enumerate MSSQL configuration with Metasploit.
 
-```sh title:"MSSQL Enumerate Metasploit Enum"
+```sh title:"Enumerate MSSQL configuration with Metasploit"
 msfconsole -x "use auxiliary/admin/mssql/mssql_enum; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; set PASSWORD $pass; run; exit"
 ```
 <!-- cheat
@@ -57,11 +51,9 @@ var pass
 
 ### SQL logins
 
-Enumerate SQL logins with MSSQL.
-
 Enumerate MSSQL logins with Metasploit and wordlists.
 
-```sh title:"MSSQL Enumerate SQL Logins"
+```sh title:"Enumerate MSSQL logins with Metasploit"
 msfconsole -x "use admin/mssql/mssql_enum_sql_logins; set RHOSTS $rhost_ip; set RPORT $rport; set USER_FILE $user_file; set PASS_FILE $pass_file; run; exit"
 ```
 <!-- cheat
@@ -75,11 +67,9 @@ var pass_file
 
 ### Link crawler
 
-Start link crawler with MSSQL.
-
 Run Metasploit MSSQL link crawler.
 
-```sh title:"MSSQL Start Link Crawler"
+```sh title:"Run MSSQL link crawler"
 msfconsole -x "use exploit/windows/mssql/mssql_linkcrawler; set RHOSTS $rhost_ip; set RPORT $rport; set USERNAME $user; set PASSWORD $pass; run; exit"
 ```
 <!-- cheat
@@ -93,11 +83,9 @@ var pass
 
 ### Impacket Windows auth
 
-Spawn impacket windows auth with MSSQL.
-
 Open an interactive MSSQL shell with Windows authentication.
 
-```sh title:"MSSQL Spawn Impacket Windows Auth"
+```sh title:"Open MSSQL shell with Impacket mssqlclient"
 mssqlclient.py -windows-auth "$auth_target" $auth_flags
 ```
 <!-- cheat

@@ -17,13 +17,9 @@ Trivy scans container images, filesystems, repositories, and Kubernetes resource
 
 #sh #trivy #images
 
-Scan image vulnerabilities with Trivy.
-
-#sh #trivy #images
-
 Scan an image for vulnerabilities.
 
-```sh title:"Trivy Scan Image Vulnerabilities"
+```sh title:"Trivy Scan image for vulnerabilities"
 trivy image "$image_name"
 ```
 <!-- cheat
@@ -34,13 +30,9 @@ var image_name
 
 #sh #trivy #secrets
 
-Dump image secrets with Trivy.
-
-#sh #trivy #secrets
-
 Scan an image for secrets.
 
-```sh title:"Trivy Dump Image Secrets"
+```sh title:"Trivy Scan image for secrets"
 trivy image --scanners secret "$image_name"
 ```
 <!-- cheat
@@ -51,13 +43,9 @@ var image_name
 
 #sh #trivy #filesystem
 
-Scan filesystem scan with Trivy.
-
-#sh #trivy #filesystem
-
 Scan a filesystem path.
 
-```sh title:"Trivy Scan Filesystem Scan"
+```sh title:"Trivy Scan filesystem path"
 trivy fs "$target_path"
 ```
 <!-- cheat
@@ -68,13 +56,9 @@ var target_path
 
 #sh #trivy #kubernetes
 
-Scan kubernetes scan with Trivy.
-
-#sh #trivy #kubernetes
-
 Scan visible Kubernetes resources.
 
-```sh title:"Trivy Scan Kubernetes Scan"
+```sh title:"Trivy Scan Kubernetes cluster"
 trivy k8s --report summary cluster
 ```
 <!-- cheat -->

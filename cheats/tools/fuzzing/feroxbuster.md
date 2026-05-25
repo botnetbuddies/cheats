@@ -12,11 +12,9 @@ var outfile = printf '%s\n' ferox.json "ferox-$(date +%Y%m%d-%H%M%S).json" --- -
 
 ### Default
 
-Scan default with Feroxbuster.
-
 Run a default feroxbuster scan.
 
-```sh title:"Feroxbuster Scan Default"
+```sh title:"Run default feroxbuster scan"
 feroxbuster --url "$url" -w "$wordlist_dir"
 ```
 <!-- cheat
@@ -26,11 +24,9 @@ var url
 
 ### Wordlist
 
-Scan wordlist with Feroxbuster.
-
 Run feroxbuster with an explicit wordlist.
 
-```sh title:"Feroxbuster Scan Wordlist"
+```sh title:"Run feroxbuster with wordlist"
 feroxbuster --url "$url" -w "$wordlist"
 ```
 <!-- cheat
@@ -41,11 +37,9 @@ var wordlist
 
 ### Directory common
 
-Scan directory common with Feroxbuster.
-
 Run feroxbuster with the selected directory wordlist.
 
-```sh title:"Feroxbuster Scan Directory Common"
+```sh title:"Run feroxbuster with selected directory wordlist"
 feroxbuster --url "$url" -w "$wordlist_dir" --json -o "$outfile"
 ```
 <!-- cheat
@@ -55,11 +49,9 @@ var url
 
 ### File wordlist
 
-Scan file wordlist with Feroxbuster.
-
 Run feroxbuster with the selected file wordlist.
 
-```sh title:"Feroxbuster Scan File Wordlist"
+```sh title:"Run feroxbuster with selected file wordlist"
 feroxbuster --url "$url" -w "$wordlist_file" --json -o "$outfile"
 ```
 <!-- cheat
@@ -69,11 +61,9 @@ var url
 
 ### Header
 
-Scan header with Feroxbuster.
-
 Run feroxbuster with a custom header.
 
-```sh title:"Feroxbuster Scan Header"
+```sh title:"Run feroxbuster with custom header"
 feroxbuster -u "$url" -H "$header"
 ```
 <!-- cheat
@@ -84,11 +74,9 @@ var header
 
 ### IPv6 no recursion
 
-Scan IPv6 no recursion with Feroxbuster.
-
 Run a non-recursive IPv6 scan.
 
-```sh title:"Feroxbuster Scan IPv6 No Recursion"
+```sh title:"Run non-recursive IPv6 feroxbuster scan"
 feroxbuster -u "$scheme://[$ipv6]" --no-recursion -vv
 ```
 <!-- cheat
@@ -99,11 +87,9 @@ var ipv6
 
 ### Auto bail
 
-Scan auto bail with Feroxbuster.
-
 Abort or reduce speed when too many errors occur.
 
-```sh title:"Feroxbuster Scan Auto Bail"
+```sh title:"Run feroxbuster with auto-bail"
 feroxbuster -u "$url" --auto-bail
 ```
 <!-- cheat

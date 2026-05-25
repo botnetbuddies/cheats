@@ -4,22 +4,18 @@
 
 ### Kill conflicting processes
 
-Run kill conflicting processes with Wifi.
-
 Kill processes that interfere with monitor mode.
 
-```sh title:"Wifi Run Kill Conflicting Processes"
+```sh title:"Wifi Kill monitor-mode conflicting processes"
 airmon-ng check kill
 ```
 <!-- cheat -->
 
 ### Start monitor mode
 
-Start monitor mode with Wifi.
-
 Start monitor mode on a wireless interface.
 
-```sh title:"Wifi Start Monitor Mode"
+```sh title:"Wifi Start monitor mode"
 airmon-ng start "$wlan_interface"
 ```
 <!-- cheat
@@ -28,11 +24,9 @@ var wlan_interface := wlan0
 
 ### Stop monitor mode
 
-Run stop monitor mode with Wifi.
-
 Stop monitor mode on a monitor interface.
 
-```sh title:"Wifi Run Stop Monitor Mode"
+```sh title:"Wifi Stop monitor mode"
 airmon-ng stop "$wlanmon_interface"
 ```
 <!-- cheat
@@ -41,22 +35,18 @@ var wlanmon_interface := wlan0mon
 
 ### Restart NetworkManager
 
-Start restart NetworkManager with Wifi.
-
 Restart NetworkManager after monitor-mode work.
 
-```sh title:"Wifi Start Restart NetworkManager"
+```sh title:"Wifi Restart NetworkManager"
 systemctl restart NetworkManager
 ```
 <!-- cheat -->
 
 ### Managed mode
 
-Set managed mode with Wifi.
-
 Set a wireless interface back to managed mode.
 
-```sh title:"Wifi Set Managed Mode"
+```sh title:"Set WiFi interface to managed mode"
 nmcli device set "$wlan_interface" managed true
 ```
 <!-- cheat
@@ -67,11 +57,9 @@ var wlan_interface := wlan0
 
 ### Monitor all
 
-Run monitor all with Wifi.
-
 Monitor nearby wireless networks.
 
-```sh title:"Wifi Run Monitor All"
+```sh title:"Monitor nearby WiFi networks"
 airodump-ng "$wlanmon_interface"
 ```
 <!-- cheat
@@ -80,11 +68,9 @@ var wlanmon_interface := wlan0mon
 
 ### Monitor BSSID
 
-Run monitor BSSID with Wifi.
-
 Capture traffic for one BSSID on a channel.
 
-```sh title:"Wifi Run Monitor BSSID"
+```sh title:"Wifi Capture traffic for one BSSID"
 airodump-ng --bssid "$bssid" -c "$channel" -w "$output_file" "$wlanmon_interface"
 ```
 <!-- cheat
@@ -96,11 +82,9 @@ var wlanmon_interface := wlan0mon
 
 ### PMKID capture
 
-Dump PMKID capture with Wifi.
-
 Capture WPA PMKID material with hcxdumptool.
 
-```sh title:"Wifi Dump PMKID Capture"
+```sh title:"Wifi Capture WPA PMKID with hcxdumptool"
 hcxdumptool -i "$wlanmon_interface" -o "$capture_file" --enable_status=1 -c "$channel"
 ```
 <!-- cheat
@@ -111,11 +95,9 @@ var channel
 
 ### Convert hcx capture
 
-Convert hcx capture with Wifi.
-
 Convert a pcapng capture to hashcat 22000 format.
 
-```sh title:"Wifi Convert Hcx Capture"
+```sh title:"Wifi Convert hcx capture to hashcat 22000"
 hcxpcapngtool -o "$hash_file" "$capture_file"
 ```
 <!-- cheat
@@ -127,11 +109,9 @@ var capture_file := capture.pcapng
 
 ### Deauth client
 
-Run deauth client with Wifi.
-
 Send deauthentication frames to a client.
 
-```sh title:"Wifi Run Deauth Client"
+```sh title:"Deauth WiFi client"
 aireplay-ng --deauth "$deauth_count" -c "$client_mac" -a "$bssid" "$wlanmon_interface"
 ```
 <!-- cheat
@@ -143,11 +123,9 @@ var wlanmon_interface := wlan0mon
 
 ### Crack PSK
 
-Crack PSK with Wifi.
-
 Crack a captured handshake with a wordlist.
 
-```sh title:"Wifi Crack PSK"
+```sh title:"Crack WiFi handshake with aircrack-ng"
 aircrack-ng -w "$wordlist" "$capture_file"
 ```
 <!-- cheat
@@ -157,11 +135,9 @@ var capture_file
 
 ### WPS pixiedust
 
-Execute WPS pixiedust with Wifi.
-
 Run Reaver Pixie Dust attack.
 
-```sh title:"Wifi Execute WPS Pixiedust"
+```sh title:"Wifi Run Reaver WPS Pixie Dust attack"
 reaver -i "$wlanmon_interface" -b "$bssid" -c "$channel" -Z
 ```
 <!-- cheat
@@ -172,11 +148,9 @@ var channel
 
 ### Fake AP
 
-Start fake AP with Wifi.
-
 Launch hostapd-wpe with a config.
 
-```sh title:"Wifi Start Fake AP"
+```sh title:"Wifi Launch hostapd-wpe"
 hostapd-wpe "$hostapd_conf"
 ```
 <!-- cheat
@@ -187,11 +161,9 @@ var hostapd_conf := /etc/hostapd-wpe/hostapd-wpe.conf
 
 ### Kismet
 
-Run kismet with Wifi.
-
 Monitor WiFi with Kismet.
 
-```sh title:"Wifi Run Kismet"
+```sh title:"Monitor WiFi with Kismet"
 kismet -c "$wlan_interface"
 ```
 <!-- cheat

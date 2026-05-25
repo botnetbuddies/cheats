@@ -4,11 +4,9 @@
 
 ### Name servers
 
-Enumerate name servers with DNS.
-
 Query name servers for a domain.
 
-```sh title:"DNS Enumerate Name Servers"
+```sh title:"DNS Query domain name servers"
 host -t ns "$domain"
 ```
 <!-- cheat
@@ -17,11 +15,9 @@ var domain
 
 ### Mail servers
 
-Enumerate mail servers with DNS.
-
 Query mail exchangers for a domain.
 
-```sh title:"DNS Enumerate Mail Servers"
+```sh title:"DNS Query domain mail servers"
 host -t mx "$domain"
 ```
 <!-- cheat
@@ -32,11 +28,9 @@ var domain
 
 ### Lookup
 
-Start lookup with DNS.
-
 Resolve a name with a specific DNS server.
 
-```sh title:"DNS Start Lookup"
+```sh title:"Resolve name with DNS server"
 dig "$domain" @"$dns_server"
 ```
 <!-- cheat
@@ -46,11 +40,9 @@ var dns_server := 1.1.1.1
 
 ### Any records
 
-Run any records with DNS.
-
 Request ANY records from a DNS server.
 
-```sh title:"DNS Run Any Records"
+```sh title:"DNS Request ANY records"
 dig ANY "$domain" @"$dns_server"
 ```
 <!-- cheat
@@ -60,11 +52,9 @@ var dns_server
 
 ### Reverse lookup
 
-Start reverse lookup with DNS.
-
 Perform a reverse DNS lookup.
 
-```sh title:"DNS Start Reverse Lookup"
+```sh title:"Reverse DNS lookup"
 dig -x "$rhost_ip" @"$dns_server"
 ```
 <!-- cheat
@@ -74,11 +64,9 @@ var dns_server
 
 ### Zone transfer
 
-Run zone transfer with DNS.
-
 Attempt a DNS zone transfer.
 
-```sh title:"DNS Run Zone Transfer"
+```sh title:"Attempt DNS zone transfer"
 dig axfr "$domain" @"$name_server"
 ```
 <!-- cheat
@@ -88,22 +76,18 @@ var name_server
 
 ### Public IP
 
-Find public IP with DNS.
-
 Find your external public IP via OpenDNS.
 
-```sh title:"DNS Find Public IP"
+```sh title:"DNS Find external public IP"
 dig +short myip.opendns.com @resolver1.opendns.com
 ```
 <!-- cheat -->
 
 ### Batch A records
 
-Run batch a records with DNS.
-
 Resolve domains from a file and print answers.
 
-```sh title:"DNS Run Batch a Records"
+```sh title:"DNS Resolve domains from file"
 dig -f "$domains_file" +noall +answer
 ```
 <!-- cheat
@@ -112,11 +96,9 @@ var domains_file
 
 ### Batch MX records
 
-Run batch MX records with DNS.
-
 Resolve MX records for domains from a file.
 
-```sh title:"DNS Run Batch MX Records"
+```sh title:"DNS Resolve MX records from file"
 dig -f "$domains_file" MX +noall +answer
 ```
 <!-- cheat
@@ -127,11 +109,9 @@ var domains_file
 
 ### dnsenum
 
-Enumerate dnsenum with DNS.
-
 Run dnsenum against a domain.
 
-```sh title:"DNS Enumerate Dnsenum"
+```sh title:"Run dnsenum against domain"
 dnsenum "$domain"
 ```
 <!-- cheat
@@ -140,11 +120,9 @@ var domain
 
 ### Sublist3r
 
-List sublist3r with DNS.
-
 Enumerate subdomains with Sublist3r.
 
-```sh title:"DNS List Sublist3r"
+```sh title:"DNS Enumerate subdomains with Sublist3r"
 sublist3r -d "$domain" -v
 ```
 <!-- cheat
@@ -153,11 +131,9 @@ var domain
 
 ### Sublist3r brute force
 
-List sublist3r brute force with DNS.
-
 Run Sublist3r with brute force enabled.
 
-```sh title:"DNS List Sublist3r Brute Force"
+```sh title:"DNS Enumerate subdomains with Sublist3r brute force"
 sublist3r -b -d "$domain"
 ```
 <!-- cheat
@@ -168,11 +144,9 @@ var domain
 
 ### NSID
 
-Run NSID with DNS.
-
 Fingerprint DNS with NSID.
 
-```sh title:"DNS Run NSID"
+```sh title:"Fingerprint DNS with NSID"
 nmap -sV -p 53 --script dns-nsid "$rhost_ip"
 ```
 <!-- cheat
@@ -181,11 +155,9 @@ var rhost_ip
 
 ### TCP scripts
 
-Execute TCP scripts with DNS.
-
 Run safe DNS NSE scripts over TCP.
 
-```sh title:"DNS Execute TCP Scripts"
+```sh title:"Run safe DNS NSE scripts over TCP"
 nmap -n -sV --script "(*dns* and (default or (discovery and safe))) or dns-random-txid or dns-random-srcport" -p 53 "$rhost_ip"
 ```
 <!-- cheat
@@ -194,11 +166,9 @@ var rhost_ip
 
 ### UDP scripts
 
-Execute UDP scripts with DNS.
-
 Run safe DNS NSE scripts over UDP.
 
-```sh title:"DNS Execute UDP Scripts"
+```sh title:"Run safe DNS NSE scripts over UDP"
 nmap -n -sV -sU --script "(*dns* and (default or (discovery and safe))) or dns-random-txid or dns-random-srcport" -p 53 "$rhost_ip"
 ```
 <!-- cheat
@@ -207,11 +177,9 @@ var rhost_ip
 
 ### AD SRV enum
 
-Enumerate AD SRV enum with DNS.
-
 Enumerate Active Directory DNS SRV records.
 
-```sh title:"DNS Enumerate AD SRV Enum"
+```sh title:"Enumerate AD DNS SRV records"
 nmap --script dns-srv-enum --script-args "dns-srv-enum.domain=$domain" "$dns_server"
 ```
 <!-- cheat
@@ -221,11 +189,9 @@ var dns_server
 
 ### DNSSEC NSEC enum
 
-Enumerate DNSSEC NSEC enum with DNS.
-
 Enumerate DNSSEC NSEC records.
 
-```sh title:"DNS Enumerate DNSSEC NSEC Enum"
+```sh title:"Enumerate DNSSEC NSEC records"
 nmap -sSU -p 53 --script dns-nsec-enum --script-args "dns-nsec-enum.domains=$domain" "$rhost_ip"
 ```
 <!-- cheat
@@ -237,11 +203,9 @@ var rhost_ip
 
 ### Enum DNS
 
-Enumerate enum DNS with DNS.
-
 Run Metasploit DNS enumeration.
 
-```sh title:"DNS Enumerate Enum DNS"
+```sh title:"Run Metasploit DNS enum"
 msfconsole -x "use auxiliary/gather/enum_dns; set DOMAIN $domain; set NS $dns_server; run; exit"
 ```
 <!-- cheat

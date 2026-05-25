@@ -17,13 +17,9 @@ Helm manages Kubernetes charts and releases. It is useful for finding deployed a
 
 #sh #helm
 
-Show version with Helm.
-
-#sh #helm
-
 Print Helm version.
 
-```sh title:"Helm Show Version"
+```sh title:"Print Helm version"
 helm version
 ```
 <!-- cheat -->
@@ -32,13 +28,9 @@ helm version
 
 #sh #helm
 
-List repositories with Helm.
-
-#sh #helm
-
 List configured chart repositories.
 
-```sh title:"Helm List Repositories"
+```sh title:"List Helm repositories"
 helm repo list
 ```
 <!-- cheat -->
@@ -47,13 +39,9 @@ helm repo list
 
 #sh #helm #kubernetes
 
-List releases with Helm.
-
-#sh #helm #kubernetes
-
 List releases across namespaces.
 
-```sh title:"Helm List Releases"
+```sh title:"List Helm releases"
 helm list --all-namespaces
 ```
 <!-- cheat -->
@@ -62,13 +50,9 @@ helm list --all-namespaces
 
 #sh #helm #kubernetes
 
-Read release values with Helm.
-
-#sh #helm #kubernetes
-
 Read values for a release.
 
-```sh title:"Helm Read Release Values"
+```sh title:"Read Helm release values"
 helm get values "$release_name" -n "$namespace" --all
 ```
 <!-- cheat
@@ -80,13 +64,9 @@ var namespace
 
 #sh #helm #kubernetes
 
-Read release manifest with Helm.
-
-#sh #helm #kubernetes
-
 Read the rendered manifest for a release.
 
-```sh title:"Helm Read Release Manifest"
+```sh title:"Read Helm release manifest"
 helm get manifest "$release_name" -n "$namespace"
 ```
 <!-- cheat
@@ -98,13 +78,9 @@ var namespace
 
 #sh #helm #kubernetes
 
-Read release history with Helm.
-
-#sh #helm #kubernetes
-
 Read release revision history.
 
-```sh title:"Helm Read Release History"
+```sh title:"Read Helm release history"
 helm history "$release_name" -n "$namespace"
 ```
 <!-- cheat

