@@ -82,6 +82,21 @@ A minimal, repo-local collection of [CheatMD](https://github.com/Gubarz/cheatmd)
 | `$kube_cluster_name` | Kubernetes cluster name. |
 | `$kube_results_json` | Kubernetes result export JSON file. |
 
+
+## Validation
+
+Raw strict lint is currently inherited baseline debt: `cheatmd --lint --strict cheats` reports the same warning count on this branch and on `origin/main`. Until the repo-wide cleanup is done, use the baseline-delta gate to prevent regressions without rewriting copied cheat commands:
+
+```sh
+scripts/cheatmd-strict-lint-delta.sh
+```
+
+The script compares current strict-lint findings with `origin/main` and fails only when the current branch adds findings. Optional overrides:
+
+```sh
+BASE_REF=origin/main CHEATS_PATH=cheats CHEATMD_BIN=cheatmd scripts/cheatmd-strict-lint-delta.sh
+```
+
 ## Style Guide
 
 * Use lowercase variable names: `$user`, `$rhost_ip`.

