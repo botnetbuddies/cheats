@@ -931,7 +931,7 @@ var method_name := CreateNewPolicyVersion
 
 Scan for IAM privilege escalation paths without executing found paths.
 
-```sh title:"Scan IAM privilege escalation paths without exploiting"
+```sh title:"Pacu Scan IAM privilege escalation paths without exploiting"
 run iam__privesc_scan --scan-only
 ```
 <!-- cheat -->

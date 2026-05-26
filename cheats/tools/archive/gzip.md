@@ -6,7 +6,7 @@
 
 Compress a file in place and append `.gz`.
 
-```sh title:"Compress file in place"
+```sh title:"Gzip Compress file in place"
 gzip "$path"
 ```
 <!-- cheat
@@ -28,7 +28,7 @@ var gz_file
 
 Compress a file and keep the original.
 
-```sh title:"Compress file and keep original"
+```sh title:"Gzip Compress file and keep original"
 gzip -k "$path"
 ```
 <!-- cheat

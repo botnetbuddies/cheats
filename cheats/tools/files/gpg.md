@@ -24,7 +24,7 @@ gpg --gen-key
 
 List public keys in the local keyring.
 
-```sh title:"List public keys"
+```sh title:"GPG List public keys"
 gpg --list-keys
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ gpg --list-keys
 
 Upload a public key to a keyserver.
 
-```sh title:"Upload public key to keyserver"
+```sh title:"GPG Upload public key to keyserver"
 gpg --keyserver "$key_server" --send-keys "$public_key"
 ```
 <!-- cheat
@@ -45,7 +45,7 @@ var public_key
 
 Export a public key to a file.
 
-```sh title:"Export public key to file"
+```sh title:"GPG Export public key to file"
 gpg --output "$output_file" --export "$key_name"
 ```
 <!-- cheat
@@ -57,7 +57,7 @@ var key_name
 
 Import a public key file into the local keyring.
 
-```sh title:"Import public key file"
+```sh title:"GPG Import public key file"
 gpg --import "$input_file"
 ```
 <!-- cheat
@@ -70,7 +70,7 @@ var input_file
 
 Encrypt a file for a recipient key.
 
-```sh title:"Encrypt file for recipient key"
+```sh title:"GPG Encrypt file for recipient key"
 gpg --output "$output_file" --encrypt --recipient "$public_key" "$input_file"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var input_file
 
 Decrypt a GPG-encrypted file to an output path.
 
-```sh title:"Decrypt file to output path"
+```sh title:"GPG Decrypt file to output path"
 gpg --output "$output_file" --decrypt "$input_file"
 ```
 <!-- cheat
@@ -121,7 +121,7 @@ var signature_file
 
 Create a cleartext signed file.
 
-```sh title:"Create cleartext signature"
+```sh title:"GPG Create cleartext signature"
 gpg --clearsign "$input_file"
 ```
 <!-- cheat
@@ -132,7 +132,7 @@ var input_file
 
 Create a detached signature for a file.
 
-```sh title:"Create detached signature"
+```sh title:"GPG Create detached signature"
 gpg --output "$signature_file" --detach-sig "$input_file"
 ```
 <!-- cheat
@@ -144,7 +144,7 @@ var input_file
 
 Verify a detached signature against its original file.
 
-```sh title:"Verify detached signature"
+```sh title:"GPG Verify detached signature"
 gpg --verify "$signature_file" "$input_file"
 ```
 <!-- cheat

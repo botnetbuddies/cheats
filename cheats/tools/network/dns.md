@@ -6,7 +6,7 @@
 
 Query name servers for a domain.
 
-```sh title:"Query domain name servers"
+```sh title:"DNS Query domain name servers"
 host -t ns "$domain"
 ```
 <!-- cheat
@@ -17,7 +17,7 @@ var domain
 
 Query mail exchangers for a domain.
 
-```sh title:"Query domain mail servers"
+```sh title:"DNS Query domain mail servers"
 host -t mx "$domain"
 ```
 <!-- cheat
@@ -42,7 +42,7 @@ var dns_server := 1.1.1.1
 
 Request ANY records from a DNS server.
 
-```sh title:"Request ANY records"
+```sh title:"DNS Request ANY records"
 dig ANY "$domain" @"$dns_server"
 ```
 <!-- cheat
@@ -78,7 +78,7 @@ var name_server
 
 Find your external public IP via OpenDNS.
 
-```sh title:"Find external public IP"
+```sh title:"DNS Find external public IP"
 dig +short myip.opendns.com @resolver1.opendns.com
 ```
 <!-- cheat -->
@@ -87,7 +87,7 @@ dig +short myip.opendns.com @resolver1.opendns.com
 
 Resolve domains from a file and print answers.
 
-```sh title:"Resolve domains from file"
+```sh title:"DNS Resolve domains from file"
 dig -f "$domains_file" +noall +answer
 ```
 <!-- cheat
@@ -98,7 +98,7 @@ var domains_file
 
 Resolve MX records for domains from a file.
 
-```sh title:"Resolve MX records from file"
+```sh title:"DNS Resolve MX records from file"
 dig -f "$domains_file" MX +noall +answer
 ```
 <!-- cheat
@@ -122,7 +122,7 @@ var domain
 
 Enumerate subdomains with Sublist3r.
 
-```sh title:"Enumerate subdomains with Sublist3r"
+```sh title:"DNS Enumerate subdomains with Sublist3r"
 sublist3r -d "$domain" -v
 ```
 <!-- cheat
@@ -133,7 +133,7 @@ var domain
 
 Run Sublist3r with brute force enabled.
 
-```sh title:"Enumerate subdomains with Sublist3r brute force"
+```sh title:"DNS Enumerate subdomains with Sublist3r brute force"
 sublist3r -b -d "$domain"
 ```
 <!-- cheat

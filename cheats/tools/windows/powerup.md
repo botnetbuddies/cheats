@@ -15,7 +15,7 @@ Invoke-AllChecks
 
 Find service abuse opportunities with PowerUp.
 
-```powershell title:"Find service abuse paths"
+```powershell title:"PowerUp Find service abuse paths"
 Get-ModifiableServiceFile
 ```
 <!-- cheat -->

@@ -71,7 +71,7 @@ s3scanner -version
 
 Generate common bucket-name candidates from in-scope domains and root names.
 
-```sh title:"Generate S3 bucket candidates from domains"
+```sh title:"S3Scanner Generate S3 bucket candidates from domains"
 sed 's/^www\.//' "$domain_file" | awk '{print; print $0"-assets"; print $0"-backup"; print $0"-backups"; print $0"-dev"; print $0"-prod"; print $0"-staging"; print $0"-static"; print $0"-uploads"}' | sort -u > "$s3_bucket_file"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var s3_bucket_file := buckets.txt
 
 Generate quick mutations for one company or product root string.
 
-```sh title:"Generate S3 bucket candidates from root name"
+```sh title:"S3Scanner Generate S3 bucket candidates from root name"
 printf '%s\n' "$company_root" "$company_root-assets" "$company_root-backup" "$company_root-backups" "$company_root-dev" "$company_root-prod" "$company_root-public" "$company_root-stage" "$company_root-staging" "$company_root-static" "$company_root-uploads" | sort -u > "$s3_bucket_file"
 ```
 <!-- cheat
@@ -95,7 +95,7 @@ var s3_bucket_file := buckets.txt
 
 Lowercase, deduplicate, and remove blank lines before scanning.
 
-```sh title:"Normalize S3 bucket candidate list"
+```sh title:"S3Scanner Normalize S3 bucket candidate list"
 tr '[:upper:]' '[:lower:]' < "$raw_s3_bucket_file" | sed '/^$/d' | sort -u > "$s3_bucket_file"
 ```
 <!-- cheat
@@ -119,7 +119,7 @@ var s3_bucket_file := buckets.txt
 
 Count unique bucket candidates before running a large scan.
 
-```sh title:"Count unique S3 bucket targets"
+```sh title:"S3Scanner Count unique S3 bucket targets"
 sort -u "$s3_bucket_file" | wc -l
 ```
 <!-- cheat
@@ -132,7 +132,7 @@ var s3_bucket_file := buckets.txt
 
 Check permissions for one AWS bucket name.
 
-```sh title:"Scan one AWS S3 bucket"
+```sh title:"S3Scanner Scan one AWS S3 bucket"
 s3scanner -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -143,7 +143,7 @@ var s3_bucket
 
 Scan one bucket and emit JSON lines for evidence capture and parsing.
 
-```sh title:"Scan one AWS S3 bucket as JSON"
+```sh title:"S3Scanner Scan one AWS S3 bucket as JSON"
 s3scanner -bucket "$s3_bucket" -json
 ```
 <!-- cheat
@@ -154,7 +154,7 @@ var s3_bucket
 
 Check permissions for bucket names listed one per line. Duplicate names are scanned once.
 
-```sh title:"Scan AWS S3 buckets from file"
+```sh title:"S3Scanner Scan AWS S3 buckets from file"
 s3scanner -bucket-file "$s3_bucket_file"
 ```
 <!-- cheat
@@ -165,7 +165,7 @@ var s3_bucket_file := buckets.txt
 
 Scan a bucket list and save machine-readable JSON lines for reporting.
 
-```sh title:"Scan AWS S3 buckets from file as JSON"
+```sh title:"S3Scanner Scan AWS S3 buckets from file as JSON"
 s3scanner -bucket-file "$s3_bucket_file" -json | tee "$json_file"
 ```
 <!-- cheat
@@ -189,7 +189,7 @@ var threads := 16
 
 Use low concurrency for sensitive production windows or noisy providers.
 
-```sh title:"Scan bucket file with conservative threading"
+```sh title:"S3Scanner Scan bucket file with conservative threading"
 s3scanner -bucket-file "$s3_bucket_file" -threads 2
 ```
 <!-- cheat
@@ -213,7 +213,7 @@ var s3_bucket
 
 Check permissions and enumerate object names if listing is allowed. Large buckets can take a long time.
 
-```sh title:"Scan and enumerate one S3 bucket"
+```sh title:"S3Scanner Scan and enumerate one S3 bucket"
 s3scanner -bucket "$s3_bucket" -enumerate
 ```
 <!-- cheat
@@ -224,7 +224,7 @@ var s3_bucket
 
 Enumerate one bucket and preserve object evidence as JSON lines.
 
-```sh title:"Enumerate one S3 bucket as JSON"
+```sh title:"S3Scanner Enumerate one S3 bucket as JSON"
 s3scanner -bucket "$s3_bucket" -enumerate -json | tee "$json_file"
 ```
 <!-- cheat
@@ -236,7 +236,7 @@ var json_file := s3scanner-enum.jsonl
 
 Scan bucket names from a file and enumerate accessible objects.
 
-```sh title:"Scan and enumerate S3 buckets from file"
+```sh title:"S3Scanner Scan and enumerate S3 buckets from file"
 s3scanner -bucket-file "$s3_bucket_file" -enumerate
 ```
 <!-- cheat
@@ -247,7 +247,7 @@ var s3_bucket_file := buckets.txt
 
 Enumerate accessible objects across a bucket list and save JSON lines.
 
-```sh title:"Scan and enumerate S3 bucket file as JSON"
+```sh title:"S3Scanner Scan and enumerate S3 bucket file as JSON"
 s3scanner -bucket-file "$s3_bucket_file" -enumerate -json | tee "$json_file"
 ```
 <!-- cheat
@@ -259,7 +259,7 @@ var json_file := s3scanner-enum.jsonl
 
 Object enumeration is single-threaded per bucket; control total bucket concurrency with `-threads`.
 
-```sh title:"Enumerate S3 buckets with controlled threading"
+```sh title:"S3Scanner Enumerate S3 buckets with controlled threading"
 s3scanner -bucket-file "$s3_bucket_file" -enumerate -threads "$threads"
 ```
 <!-- cheat
@@ -341,7 +341,7 @@ var json_file := s3scanner-enum.jsonl
 
 Manually verify anonymous list access for one bucket.
 
-```sh title:"Manually list S3 bucket anonymously"
+```sh title:"S3Scanner Manually list S3 bucket anonymously"
 aws s3 ls "s3://$s3_bucket" --no-sign-request
 ```
 <!-- cheat
@@ -352,7 +352,7 @@ var s3_bucket
 
 Manually verify recursive anonymous object listing with size summary.
 
-```sh title:"Recursively list S3 bucket anonymously"
+```sh title:"S3Scanner Recursively list S3 bucket anonymously"
 aws s3 ls "s3://$s3_bucket" --recursive --human-readable --summarize --no-sign-request
 ```
 <!-- cheat
@@ -363,7 +363,7 @@ var s3_bucket
 
 Manually verify anonymous object metadata access.
 
-```sh title:"Head S3 object anonymously"
+```sh title:"S3Scanner Head S3 object anonymously"
 aws s3api head-object --bucket "$s3_bucket" --key "$s3_object_key" --no-sign-request
 ```
 <!-- cheat
@@ -375,7 +375,7 @@ var s3_object_key
 
 Download one approved sample object anonymously for proof. Avoid bulk download unless authorized.
 
-```sh title:"Download one S3 object anonymously"
+```sh title:"S3Scanner Download one S3 object anonymously"
 aws s3 cp "s3://$s3_bucket/$s3_object_key" "$output_file" --no-sign-request
 ```
 <!-- cheat
@@ -388,7 +388,7 @@ var output_file
 
 Verify access using a specific AWS profile when testing compromised or assumed-role credentials.
 
-```sh title:"List S3 bucket with AWS profile"
+```sh title:"S3Scanner List S3 bucket with AWS profile"
 aws --profile "$aws_profile" s3 ls "s3://$s3_bucket" --recursive --human-readable --summarize
 ```
 <!-- cheat
@@ -400,7 +400,7 @@ var s3_bucket
 
 If explicitly authorized, upload a harmless proof file to validate write access, then remove it.
 
-```sh title:"Safely probe S3 write access"
+```sh title:"S3Scanner Safely probe S3 write access"
 printf 'authorized security test\n' > "$proof_file" && aws s3 cp "$proof_file" "s3://$s3_bucket/$proof_key" --no-sign-request && aws s3 rm "s3://$s3_bucket/$proof_key" --no-sign-request
 ```
 <!-- cheat
@@ -413,7 +413,7 @@ var proof_key := s3scanner-proof.txt
 
 If explicitly authorized, validate write access with a specific AWS profile and remove the proof object.
 
-```sh title:"Safely probe authenticated S3 write access"
+```sh title:"S3Scanner Safely probe authenticated S3 write access"
 printf 'authorized security test\n' > "$proof_file" && aws --profile "$aws_profile" s3 cp "$proof_file" "s3://$s3_bucket/$proof_key" && aws --profile "$aws_profile" s3 rm "s3://$s3_bucket/$proof_key"
 ```
 <!-- cheat
@@ -440,7 +440,7 @@ var s3_bucket
 
 Scan a GCP bucket, enumerate objects, and save results to the configured Postgres database.
 
-```sh title:"Scan GCP bucket, enumerate, and save to DB"
+```sh title:"S3Scanner Scan GCP bucket, enumerate, and save to DB"
 s3scanner -provider gcp -db -bucket "$s3_bucket" -enumerate
 ```
 <!-- cheat
@@ -451,7 +451,7 @@ var s3_bucket
 
 Scan a DigitalOcean Spaces bucket.
 
-```sh title:"Scan DigitalOcean Spaces bucket"
+```sh title:"S3Scanner Scan DigitalOcean Spaces bucket"
 s3scanner -provider digitalocean -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -462,7 +462,7 @@ var s3_bucket
 
 Scan a Linode object storage bucket.
 
-```sh title:"Scan Linode object storage bucket"
+```sh title:"S3Scanner Scan Linode object storage bucket"
 s3scanner -provider linode -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -473,7 +473,7 @@ var s3_bucket
 
 Scan a Scaleway object storage bucket.
 
-```sh title:"Scan Scaleway object storage bucket"
+```sh title:"S3Scanner Scan Scaleway object storage bucket"
 s3scanner -provider scaleway -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -484,7 +484,7 @@ var s3_bucket
 
 Scan a DreamHost object storage bucket.
 
-```sh title:"Scan DreamHost object storage bucket"
+```sh title:"S3Scanner Scan DreamHost object storage bucket"
 s3scanner -provider dreamhost -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -495,7 +495,7 @@ var s3_bucket
 
 Scan an S3-compatible custom provider using `config.yml` from `.`, `/etc/s3scanner/`, or `$HOME/.s3scanner/`.
 
-```sh title:"Scan custom S3-compatible provider"
+```sh title:"S3Scanner Scan custom S3-compatible provider"
 s3scanner -provider custom -bucket "$s3_bucket"
 ```
 <!-- cheat
@@ -532,7 +532,7 @@ var REGION
 
 Save scan results to Postgres. Use a dedicated schema because S3Scanner runs Gorm automigration.
 
-```sh title:"Scan bucket file and save results to database"
+```sh title:"S3Scanner Scan bucket file and save results to database"
 s3scanner -bucket-file "$s3_bucket_file" -db
 ```
 <!-- cheat
@@ -543,7 +543,7 @@ var s3_bucket_file := buckets.txt
 
 Save results to the configured database and keep a JSON-lines evidence file.
 
-```sh title:"Scan bucket file to DB and JSON"
+```sh title:"S3Scanner Scan bucket file to DB and JSON"
 s3scanner -bucket-file "$s3_bucket_file" -db -json | tee "$json_file"
 ```
 <!-- cheat

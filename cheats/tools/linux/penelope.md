@@ -23,7 +23,7 @@ var tool
 
 Run linpeas inside the penelope session (auto recon for Linux privesc).
 
-```sh title:"Auto Linux privesc recon via linpeas inside session"
+```sh title:"Penelope Auto Linux privesc recon via linpeas inside session"
 run peass_ng
 ```
 <!-- cheat -->
@@ -32,7 +32,7 @@ run peass_ng
 
 Run lse (Linux Smart Enumeration) inside the penelope session.
 
-```sh title:"Linux Smart Enumeration inside the session"
+```sh title:"Penelope Linux Smart Enumeration inside the session"
 run lse
 ```
 <!-- cheat -->

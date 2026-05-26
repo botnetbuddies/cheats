@@ -6,7 +6,7 @@
 
 List installed hotfixes (patch level + KB ID + install date). Compare against public exploit DBs to find missing patches.
 
-```sh title:"List installed hotfixes, compare against exploit DBs"
+```sh title:"Wmi List installed hotfixes, compare against exploit DBs"
 wmic qfe get Caption,Description,HotFixID,InstalledOn
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ wmic qfe get Caption,Description,HotFixID,InstalledOn
 
 Hostname, domain, manufacturer, model, current user, roles. Quick host fingerprint.
 
-```sh title:"Hostname, domain, model, current user, roles"
+```sh title:"Wmi Hostname, domain, model, current user, roles"
 wmic computersystem get Name,Domain,Manufacturer,Model,Username,Roles /format:List
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ wmic computersystem get Name,Domain,Manufacturer,Model,Username,Roles /format:Li
 
 List every running process. Spot security tools, AV agents, EDR drivers.
 
-```sh title:"List running processes (spot AV/EDR drivers)"
+```sh title:"Wmi List running processes (spot AV/EDR drivers)"
 wmic process list /format:list
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ wmic process list /format:list
 
 Display the domain and DC info from the host's perspective.
 
-```sh title:"Domain and DC info from host perspective"
+```sh title:"Wmi Domain and DC info from host perspective"
 wmic ntdomain list /format:list
 ```
 <!-- cheat -->
@@ -42,7 +42,7 @@ wmic ntdomain list /format:list
 
 List local user accounts plus any domain accounts that have logged in to this host.
 
-```sh title:"Local + cached domain users that touched this host"
+```sh title:"Wmi Local + cached domain users that touched this host"
 wmic useraccount list /format:list
 ```
 <!-- cheat -->
@@ -51,7 +51,7 @@ wmic useraccount list /format:list
 
 List every local group on the host.
 
-```sh title:"List every local group on the host"
+```sh title:"Wmi List every local group on the host"
 wmic group list /format:list
 ```
 <!-- cheat -->
@@ -60,7 +60,7 @@ wmic group list /format:list
 
 List system / service accounts. Useful for spotting privileged service accounts.
 
-```sh title:"System / service accounts (spot privileged services)"
+```sh title:"Wmi System / service accounts (spot privileged services)"
 wmic sysaccount list /format:list
 ```
 <!-- cheat -->

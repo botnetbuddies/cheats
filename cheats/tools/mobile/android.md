@@ -15,7 +15,7 @@ adb devices
 
 Open an adb shell.
 
-```sh title:"Open adb shell"
+```sh title:"Android Open adb shell"
 adb shell
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ adb shell
 
 Install an APK on the connected device.
 
-```sh title:"Install APK with adb"
+```sh title:"Android Install APK with adb"
 adb install "$apk_file"
 ```
 <!-- cheat
@@ -61,7 +61,7 @@ var remote_path
 
 Decode APK resources and smali with apktool.
 
-```sh title:"Decode APK with apktool"
+```sh title:"Android Decode APK with apktool"
 apktool d "$apk_file" -o "$output_dir"
 ```
 <!-- cheat
@@ -73,7 +73,7 @@ var output_dir
 
 Rebuild a decoded APK project.
 
-```sh title:"Rebuild APK with apktool"
+```sh title:"Android Rebuild APK with apktool"
 apktool b "$project_dir" -o "$apk_file"
 ```
 <!-- cheat
@@ -87,7 +87,7 @@ var apk_file
 
 Open an APK in jadx-gui.
 
-```sh title:"Open APK in jadx-gui"
+```sh title:"Android Open APK in jadx-gui"
 jadx-gui "$apk_file"
 ```
 <!-- cheat
@@ -98,7 +98,7 @@ var apk_file
 
 Decompile an APK to Java source.
 
-```sh title:"Decompile APK with jadx"
+```sh title:"Android Decompile APK with jadx"
 jadx -d "$output_dir" "$apk_file"
 ```
 <!-- cheat

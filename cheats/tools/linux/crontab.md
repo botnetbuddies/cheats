@@ -6,7 +6,7 @@
 
 List the current user's cron jobs.
 
-```sh title:"List current user's cron jobs"
+```sh title:"Crontab List current user's cron jobs"
 crontab -l
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ crontab -e
 
 List another user's cron jobs. Requires sufficient privileges.
 
-```sh title:"List another user's cron jobs"
+```sh title:"Crontab List another user's cron jobs"
 crontab -u "$target_user" -l
 ```
 <!-- cheat
@@ -46,7 +46,7 @@ cat /etc/crontab
 
 List common system cron directories.
 
-```sh title:"List system cron directories"
+```sh title:"Crontab List system cron directories"
 ls -la /etc/cron.d /etc/cron.daily /etc/cron.hourly /etc/cron.monthly /etc/cron.weekly
 ```
 <!-- cheat -->

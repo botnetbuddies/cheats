@@ -6,7 +6,7 @@
 
 RDP into the target with cwd mapped as a drive (`tsclient`), dynamic resolution, and self-signed cert ignore. Drag-drop file transfer through the share.
 
-```sh title:"RDP with cwd shared, dynamic resolution, ignore cert"
+```sh title:"Xfreerdp RDP with cwd shared, dynamic resolution, ignore cert"
 xfreerdp3 /drive:./ /dynamic-resolution /cert:ignore /v:$rhost_ip /u:"$user" /p:'$pass'
 ```
 <!-- cheat
@@ -19,7 +19,7 @@ var rhost_ip
 
 RDP into the target with domain credentials.
 
-```sh title:"RDP with domain credentials"
+```sh title:"Xfreerdp RDP with domain credentials"
 xfreerdp3 /dynamic-resolution /cert:ignore /u:"$user" /p:'$pass' /d:"$domain" /v:"$rhost_ip"
 ```
 <!-- cheat

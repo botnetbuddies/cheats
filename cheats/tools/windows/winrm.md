@@ -6,7 +6,7 @@
 
 Enable PowerShell remoting on the local host.
 
-```powershell title:"Enable PowerShell remoting locally"
+```powershell title:"WinRM Enable PowerShell remoting locally"
 Enable-PSRemoting -Force
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ Set-Item WSMan:\localhost\Client\TrustedHosts * -Force
 
 Enable PowerShell remoting remotely through WMIC.
 
-```cmd title:"Enable PowerShell remoting over WMIC"
+```cmd title:"WinRM Enable PowerShell remoting over WMIC"
 wmic /node:"$rhost_name" process call create "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command Enable-PSRemoting -Force"
 ```
 <!-- cheat
@@ -35,7 +35,7 @@ var rhost_name
 
 Enable PowerShell remoting remotely through PsExec.
 
-```cmd title:"Enable PowerShell remoting over PsExec"
+```cmd title:"WinRM Enable PowerShell remoting over PsExec"
 PsExec.exe "\\$rhost_name" -u "$domain\$user" -p "$pass" -h -d powershell.exe "Enable-PSRemoting -Force"
 ```
 <!-- cheat

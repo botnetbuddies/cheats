@@ -6,7 +6,7 @@
 
 Query ipinfo.io for an IP address.
 
-```sh title:"Query ipinfo.io for IP details"
+```sh title:"Network Query ipinfo.io for IP details"
 curl "https://ipinfo.io/$rhost_ip"
 ```
 <!-- cheat
@@ -17,7 +17,7 @@ var rhost_ip
 
 Show your current public IP details.
 
-```sh title:"Show current public IP details"
+```sh title:"Network Show current public IP details"
 curl https://ipinfo.io/
 ```
 <!-- cheat -->
@@ -26,7 +26,7 @@ curl https://ipinfo.io/
 
 Show only your current public IP.
 
-```sh title:"Show current public IP"
+```sh title:"Network Show current public IP"
 curl https://ipecho.net/plain/
 ```
 <!-- cheat -->
@@ -37,7 +37,7 @@ curl https://ipecho.net/plain/
 
 Test outbound connectivity to a port with portquiz.
 
-```sh title:"Test outbound port with curl"
+```sh title:"Network Test outbound port with curl"
 curl "portquiz.net:$rport"
 ```
 <!-- cheat
@@ -48,7 +48,7 @@ var rport
 
 Test outbound connectivity to a port with netcat.
 
-```sh title:"Test outbound port with netcat"
+```sh title:"Network Test outbound port with netcat"
 nc -v portquiz.net "$rport"
 ```
 <!-- cheat

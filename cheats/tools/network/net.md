@@ -6,7 +6,7 @@
 
 Show local password requirements (min length, age, lockout) for the current host.
 
-```sh title:"Show local password / lockout policy"
+```sh title:"Net Show local password / lockout policy"
 net accounts
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ net accounts
 
 Show domain-wide password and lockout policy. Read this before spraying so you don't trip lockout.
 
-```sh title:"Show domain password / lockout policy before spraying"
+```sh title:"Net Show domain password / lockout policy before spraying"
 net accounts /domain
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ net accounts /domain
 
 List every domain group from a domain-joined host.
 
-```sh title:"List every domain group from a domain-joined host"
+```sh title:"Net List every domain group from a domain-joined host"
 net group /domain
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ net group /domain
 
 Members of the Domain Admins group. Top of the privilege chain.
 
-```sh title:"Members of Domain Admins (top privilege)"
+```sh title:"Net Members of Domain Admins (top privilege)"
 net group "Domain Admins" /domain
 ```
 <!-- cheat -->
@@ -42,7 +42,7 @@ net group "Domain Admins" /domain
 
 Every machine account joined to the domain.
 
-```sh title:"Every machine account joined to the domain"
+```sh title:"Net Every machine account joined to the domain"
 net group "Domain Computers" /domain
 ```
 <!-- cheat -->
@@ -51,7 +51,7 @@ net group "Domain Computers" /domain
 
 DC machine accounts.
 
-```sh title:"DC machine accounts"
+```sh title:"Net DC machine accounts"
 net group "Domain Controllers" /domain
 ```
 <!-- cheat -->
@@ -60,7 +60,7 @@ net group "Domain Controllers" /domain
 
 Members of an arbitrary domain group.
 
-```sh title:"Members of an arbitrary domain group by name"
+```sh title:"Net Members of an arbitrary domain group by name"
 net group $domain_group_name /domain
 ```
 <!-- cheat
@@ -71,7 +71,7 @@ var domain_group_name
 
 Alternate spelling that returns the full group list.
 
-```sh title:"Alternate spelling that returns full group list"
+```sh title:"Net Alternate spelling that returns full group list"
 net groups /domain
 ```
 <!-- cheat -->
@@ -80,7 +80,7 @@ net groups /domain
 
 Local groups on the current host (including custom ones).
 
-```sh title:"Local groups on current host (incl. custom)"
+```sh title:"Net Local groups on current host (incl. custom)"
 net localgroup
 ```
 <!-- cheat -->
@@ -89,7 +89,7 @@ net localgroup
 
 Members of the local Administrators group queried from the domain. Often returns the cross-domain admin list.
 
-```sh title:"local Administrators queried at domain scope"
+```sh title:"Net local Administrators queried at domain scope"
 net localgroup administrators /domain
 ```
 <!-- cheat -->
@@ -98,7 +98,7 @@ net localgroup administrators /domain
 
 Members of the local Administrators group on this host.
 
-```sh title:"Members of local Administrators group on this host"
+```sh title:"Net Members of local Administrators group on this host"
 net localgroup Administrators
 ```
 <!-- cheat -->
@@ -107,7 +107,7 @@ net localgroup Administrators
 
 Promote a user to local Administrators. Requires existing admin.
 
-```sh title:"Promote user to local Administrators (needs admin)"
+```sh title:"Net Promote user to local Administrators (needs admin)"
 net localgroup administrators $user /add
 ```
 <!-- cheat
@@ -118,7 +118,7 @@ var user
 
 List shares published by the current host.
 
-```sh title:"List shares published by current host"
+```sh title:"Net List shares published by current host"
 net share
 ```
 <!-- cheat -->
@@ -127,7 +127,7 @@ net share
 
 Detail page for a single domain user (group membership, last logon, password changes).
 
-```sh title:"Detail page for one domain user"
+```sh title:"Net Detail page for one domain user"
 net user $ACCOUNT_NAME /domain
 ```
 <!-- cheat
@@ -138,7 +138,7 @@ var ACCOUNT_NAME
 
 List every domain user (no detail).
 
-```sh title:"List every domain user (names only)"
+```sh title:"Net List every domain user (names only)"
 net user /domain
 ```
 <!-- cheat -->
@@ -147,7 +147,7 @@ net user /domain
 
 Local detail page for the user whose context we are currently in.
 
-```sh title:"Detail page for current logged-on user"
+```sh title:"Net Detail page for current logged-on user"
 net user %username%
 ```
 <!-- cheat -->
@@ -156,7 +156,7 @@ net user %username%
 
 Mount a remote SMB share to drive `x:` with explicit credentials.
 
-```sh title:"Mount remote SMB share to drive x: with credentials"
+```sh title:"Net Mount remote SMB share to drive x: with credentials"
 net use x: \\$rhost_name\$share /user:$user $pass
 ```
 <!-- cheat
@@ -179,7 +179,7 @@ net view
 
 Browse domain-wide for shares (includes hidden shares with `/all`).
 
-```sh title:"Domain-wide share browse including hidden shares"
+```sh title:"Net Domain-wide share browse including hidden shares"
 net view /all /domain
 ```
 <!-- cheat -->
@@ -188,7 +188,7 @@ net view /all /domain
 
 Shares published by a specific host, including admin/hidden ($) shares.
 
-```sh title:"Shares on a host including admin/hidden ($) shares"
+```sh title:"Net Shares on a host including admin/hidden ($) shares"
 net view \\$rhost_name /ALL
 ```
 <!-- cheat
@@ -199,7 +199,7 @@ var rhost_name
 
 Computers in the domain via the legacy browser service.
 
-```sh title:"Domain computers via legacy browser service"
+```sh title:"Net Domain computers via legacy browser service"
 net view /domain
 ```
 <!-- cheat -->

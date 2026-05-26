@@ -6,7 +6,7 @@
 
 Show all kubeconfig contexts and highlight the current one.
 
-```sh title:"List kubeconfig contexts"
+```sh title:"Kubernetes List kubeconfig contexts"
 kubectl config get-contexts
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ kubectl config get-contexts
 
 Print the active kubeconfig context.
 
-```sh title:"Print current kubeconfig context"
+```sh title:"Kubernetes Print current kubeconfig context"
 kubectl config current-context
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ kubectl config current-context
 
 Set the active kubeconfig context.
 
-```sh title:"Switch kubeconfig context"
+```sh title:"Kubernetes Switch kubeconfig context"
 kubectl config use-context "$context"
 ```
 <!-- cheat
@@ -48,7 +48,7 @@ var resource
 
 List cluster nodes.
 
-```sh title:"List nodes"
+```sh title:"Kubernetes List nodes"
 kubectl get nodes
 ```
 <!-- cheat -->
@@ -57,7 +57,7 @@ kubectl get nodes
 
 List cluster nodes with IPs, OS, kernel, runtime, and other useful detail.
 
-```sh title:"List nodes with details"
+```sh title:"Kubernetes List nodes with details"
 kubectl get nodes -o wide
 ```
 <!-- cheat -->
@@ -66,7 +66,7 @@ kubectl get nodes -o wide
 
 List namespaces.
 
-```sh title:"List namespaces"
+```sh title:"Kubernetes List namespaces"
 kubectl get namespaces
 ```
 <!-- cheat -->
@@ -75,7 +75,7 @@ kubectl get namespaces
 
 List pods in a namespace.
 
-```sh title:"List pods in namespace"
+```sh title:"Kubernetes List pods in namespace"
 kubectl get pods -n "$namespace"
 ```
 <!-- cheat
@@ -86,7 +86,7 @@ var namespace
 
 List pods across all namespaces.
 
-```sh title:"List pods in all namespaces"
+```sh title:"Kubernetes List pods in all namespaces"
 kubectl get pods --all-namespaces
 ```
 <!-- cheat -->
@@ -95,7 +95,7 @@ kubectl get pods --all-namespaces
 
 List services in a namespace.
 
-```sh title:"List services in namespace"
+```sh title:"Kubernetes List services in namespace"
 kubectl get services -n "$namespace"
 ```
 <!-- cheat
@@ -106,7 +106,7 @@ var namespace
 
 List deployments in a namespace.
 
-```sh title:"List deployments in namespace"
+```sh title:"Kubernetes List deployments in namespace"
 kubectl get deployments -n "$namespace"
 ```
 <!-- cheat
@@ -117,7 +117,7 @@ var namespace
 
 Show details and events for a named resource in a namespace.
 
-```sh title:"Describe resource in namespace"
+```sh title:"Kubernetes Describe resource in namespace"
 kubectl describe "$resource/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -132,7 +132,7 @@ var namespace
 
 Follow logs from a pod in a namespace.
 
-```sh title:"Follow pod logs"
+```sh title:"Kubernetes Follow pod logs"
 kubectl logs -f "pod/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -144,7 +144,7 @@ var namespace
 
 Print logs from the previous container instance after a restart.
 
-```sh title:"Print previous pod logs after restart"
+```sh title:"Kubernetes Print previous pod logs after restart"
 kubectl logs "pod/$name" -n "$namespace" --previous
 ```
 <!-- cheat
@@ -158,7 +158,7 @@ var namespace
 
 Open a deployment in your configured editor.
 
-```sh title:"Edit deployment in namespace"
+```sh title:"Kubernetes Edit deployment in namespace"
 kubectl edit "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -170,7 +170,7 @@ var namespace
 
 Trigger a rolling restart of a deployment.
 
-```sh title:"Rollout restart deployment"
+```sh title:"Kubernetes Rollout restart deployment"
 kubectl rollout restart "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -182,7 +182,7 @@ var namespace
 
 Watch deployment rollout status until it completes or fails.
 
-```sh title:"Watch deployment rollout status"
+```sh title:"Kubernetes Watch deployment rollout status"
 kubectl rollout status "deployment/$name" -n "$namespace"
 ```
 <!-- cheat
@@ -196,7 +196,7 @@ var namespace
 
 Mark a node as unschedulable.
 
-```sh title:"Mark node unschedulable"
+```sh title:"Kubernetes Mark node unschedulable"
 kubectl cordon "$node_name"
 ```
 <!-- cheat
@@ -207,7 +207,7 @@ var node_name
 
 Drain a node for maintenance. This evicts workloads and may disrupt service if replicas are not healthy.
 
-```sh title:"Drain node for maintenance"
+```sh title:"Kubernetes Drain node for maintenance"
 kubectl drain "$node_name" --ignore-daemonsets --delete-emptydir-data
 ```
 <!-- cheat
@@ -218,7 +218,7 @@ var node_name
 
 Mark a node as schedulable again.
 
-```sh title:"Mark node schedulable"
+```sh title:"Kubernetes Mark node schedulable"
 kubectl uncordon "$node_name"
 ```
 <!-- cheat
@@ -231,7 +231,7 @@ var node_name
 
 Show node CPU and memory usage. Requires metrics-server.
 
-```sh title:"Show node CPU and memory usage"
+```sh title:"Kubernetes Show node CPU and memory usage"
 kubectl top nodes
 ```
 <!-- cheat -->
@@ -240,7 +240,7 @@ kubectl top nodes
 
 Show pod CPU and memory usage in a namespace. Requires metrics-server.
 
-```sh title:"Show pod CPU and memory usage"
+```sh title:"Kubernetes Show pod CPU and memory usage"
 kubectl top pods -n "$namespace"
 ```
 <!-- cheat

