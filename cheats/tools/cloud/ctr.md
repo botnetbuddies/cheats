@@ -30,7 +30,7 @@ ctr version
 
 List containerd images.
 
-```sh title:"List containerd images"
+```sh title:"ctr List containerd images"
 ctr images list
 ```
 <!-- cheat -->
@@ -41,7 +41,7 @@ ctr images list
 
 List containerd containers.
 
-```sh title:"List containerd containers"
+```sh title:"ctr List containerd containers"
 ctr containers list
 ```
 <!-- cheat -->
@@ -52,7 +52,7 @@ ctr containers list
 
 List running containerd tasks.
 
-```sh title:"List containerd tasks"
+```sh title:"ctr List containerd tasks"
 ctr tasks list
 ```
 <!-- cheat -->
@@ -63,7 +63,7 @@ ctr tasks list
 
 List images in the Kubernetes containerd namespace.
 
-```sh title:"List Kubernetes namespace images"
+```sh title:"ctr List Kubernetes namespace images"
 ctr --namespace k8s.io images list
 ```
 <!-- cheat -->
@@ -74,7 +74,7 @@ ctr --namespace k8s.io images list
 
 Run an image with the host filesystem bind-mounted.
 
-```sh title:"Run containerd task with host mount"
+```sh title:"ctr Run containerd task with host mount"
 ctr run --mount type=bind,src=/,dst=/host,options=rbind:rw -t "$image_name" "$container_name" /bin/sh
 ```
 <!-- cheat

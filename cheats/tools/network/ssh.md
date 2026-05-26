@@ -47,7 +47,7 @@ var rhost_ip
 
 Bind a local port that forwards through SSH to a chosen remote host and port.
 
-```sh title:"Local forward to explicit remote host"
+```sh title:"Ssh Local forward to explicit remote host"
 ssh -L "$lport:$remote_host:$rport" "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -62,7 +62,7 @@ var rhost_ip
 
 Open a remote bind address and port that forwards back to a local host and port. Requires `GatewayPorts yes` for non-loopback remote binds.
 
-```sh title:"Remote forward with explicit bind address"
+```sh title:"Ssh Remote forward with explicit bind address"
 ssh -R "$remote_bind:$rport:$local_host:$lport" "$user@$rhost_ip"
 ```
 <!-- cheat
@@ -103,7 +103,7 @@ var rport := 22
 
 Connect to a legacy SSH server that only supports group1 SHA1 key exchange.
 
-```sh title:"Connect with legacy DH group1 SHA1 KEX"
+```sh title:"Ssh Connect with legacy DH group1 SHA1 KEX"
 ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 "$user@$rhost_ip"
 ```
 <!-- cheat

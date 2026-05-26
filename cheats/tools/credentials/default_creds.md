@@ -6,7 +6,7 @@
 
 Search a local default-creds database for known vendor/application logins. Optionally export the matches for use with hydra or another spraying tool.
 
-```sh title:"Search default creds DB by app, optional export"
+```sh title:"Default_creds Search default creds DB by app, optional export"
 creds search $app $template
 ```
 <!-- cheat

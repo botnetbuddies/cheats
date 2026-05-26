@@ -6,7 +6,7 @@
 
 Kill processes that interfere with monitor mode.
 
-```sh title:"Kill monitor-mode conflicting processes"
+```sh title:"Wifi Kill monitor-mode conflicting processes"
 airmon-ng check kill
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ airmon-ng check kill
 
 Start monitor mode on a wireless interface.
 
-```sh title:"Start monitor mode"
+```sh title:"Wifi Start monitor mode"
 airmon-ng start "$wlan_interface"
 ```
 <!-- cheat
@@ -26,7 +26,7 @@ var wlan_interface := wlan0
 
 Stop monitor mode on a monitor interface.
 
-```sh title:"Stop monitor mode"
+```sh title:"Wifi Stop monitor mode"
 airmon-ng stop "$wlanmon_interface"
 ```
 <!-- cheat
@@ -37,7 +37,7 @@ var wlanmon_interface := wlan0mon
 
 Restart NetworkManager after monitor-mode work.
 
-```sh title:"Restart NetworkManager"
+```sh title:"Wifi Restart NetworkManager"
 systemctl restart NetworkManager
 ```
 <!-- cheat -->
@@ -70,7 +70,7 @@ var wlanmon_interface := wlan0mon
 
 Capture traffic for one BSSID on a channel.
 
-```sh title:"Capture traffic for one BSSID"
+```sh title:"Wifi Capture traffic for one BSSID"
 airodump-ng --bssid "$bssid" -c "$channel" -w "$output_file" "$wlanmon_interface"
 ```
 <!-- cheat
@@ -84,7 +84,7 @@ var wlanmon_interface := wlan0mon
 
 Capture WPA PMKID material with hcxdumptool.
 
-```sh title:"Capture WPA PMKID with hcxdumptool"
+```sh title:"Wifi Capture WPA PMKID with hcxdumptool"
 hcxdumptool -i "$wlanmon_interface" -o "$capture_file" --enable_status=1 -c "$channel"
 ```
 <!-- cheat
@@ -97,7 +97,7 @@ var channel
 
 Convert a pcapng capture to hashcat 22000 format.
 
-```sh title:"Convert hcx capture to hashcat 22000"
+```sh title:"Wifi Convert hcx capture to hashcat 22000"
 hcxpcapngtool -o "$hash_file" "$capture_file"
 ```
 <!-- cheat
@@ -137,7 +137,7 @@ var capture_file
 
 Run Reaver Pixie Dust attack.
 
-```sh title:"Run Reaver WPS Pixie Dust attack"
+```sh title:"Wifi Run Reaver WPS Pixie Dust attack"
 reaver -i "$wlanmon_interface" -b "$bssid" -c "$channel" -Z
 ```
 <!-- cheat
@@ -150,7 +150,7 @@ var channel
 
 Launch hostapd-wpe with a config.
 
-```sh title:"Launch hostapd-wpe"
+```sh title:"Wifi Launch hostapd-wpe"
 hostapd-wpe "$hostapd_conf"
 ```
 <!-- cheat

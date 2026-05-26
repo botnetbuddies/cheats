@@ -6,7 +6,7 @@
 
 Build a custom wordlist by scraping words from a website.
 
-```sh title:"Build wordlist by scraping website"
+```sh title:"CeWL Build wordlist by scraping website"
 cewl -w "$output_file" -d "$depth" -m "$min_word_size" "$url"
 ```
 <!-- cheat

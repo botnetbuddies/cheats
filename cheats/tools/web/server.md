@@ -6,7 +6,7 @@
 
 Serve the current directory over HTTP. Standard staging server for payload delivery and file pulls.
 
-```sh title:"Serve cwd over HTTP for payload delivery"
+```sh title:"Server Serve cwd over HTTP for payload delivery"
 python3 -m http.server $lport $template
 ```
 <!-- cheat
@@ -21,7 +21,7 @@ var template
 
 Serve the current directory over HTTP with Python 2.
 
-```sh title:"Serve cwd over HTTP with Python 2"
+```sh title:"Server Serve cwd over HTTP with Python 2"
 python -m SimpleHTTPServer $lport
 ```
 <!-- cheat
@@ -32,7 +32,7 @@ import lports
 
 Authenticated writable FTP server via pyftpdlib. Use when you need a place to receive files from a target.
 
-```sh title:"Authenticated writable FTP via pyftpdlib"
+```sh title:"Server Authenticated writable FTP via pyftpdlib"
 python3 -m pyftpdlib -w -p $lport -u $user -P $pass
 ```
 <!-- cheat
@@ -46,7 +46,7 @@ import lports
 
 Anonymous writable FTP server. Quick exfil drop point when egress filtering is loose.
 
-```sh title:"Anonymous writable FTP, quick exfil drop"
+```sh title:"Server Anonymous writable FTP, quick exfil drop"
 python -m pyftpdlib -w -p $lport $template
 ```
 <!-- cheat

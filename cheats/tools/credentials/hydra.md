@@ -13,7 +13,7 @@ import wordlists_users
 
 Brute one user with a password list against the chosen service (FTP, SSH, IMAP, MSSQL, RDP, VNC, SMTP, MySQL, etc.).
 
-```sh title:"Single user, password list against chosen service"
+```sh title:"Hydra Single user, password list against chosen service"
 hydra -l $user -P $wordlists $scheme_hydra_protocol://$domain
 ```
 <!-- cheat
@@ -26,7 +26,7 @@ import domain_ip
 
 Brute a chosen service with user and password lists.
 
-```sh title:"User list and password list against chosen service"
+```sh title:"Hydra User list and password list against chosen service"
 hydra -L "$wordlists_users" -P "$wordlists" "$rhost_ip" "$scheme_hydra_protocol"
 ```
 <!-- cheat
@@ -38,7 +38,7 @@ var rhost_ip
 
 Try one username and one password against SSH.
 
-```sh title:"Single SSH username and password"
+```sh title:"Hydra Single SSH username and password"
 hydra -l "$user" -p "$pass" "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -51,7 +51,7 @@ var rhost_ip
 
 Try each username as its own password against SSH.
 
-```sh title:"Try username as password against SSH"
+```sh title:"Hydra Try username as password against SSH"
 hydra -L "$wordlists_users" -e s "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -63,7 +63,7 @@ var rhost_ip
 
 Try a null password against SSH for one username.
 
-```sh title:"Try null password against SSH"
+```sh title:"Hydra Try null password against SSH"
 hydra -l "$user" -e n "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -75,7 +75,7 @@ var rhost_ip
 
 Use a `user:pass` combo file against SSH on a custom port.
 
-```sh title:"Use user:pass combo file against SSH"
+```sh title:"Hydra Use user:pass combo file against SSH"
 hydra -t 4 -s "$rport" -C "$combo_file" "$rhost_ip" ssh
 ```
 <!-- cheat
@@ -88,7 +88,7 @@ var rhost_ip
 
 Brute HTTP Basic auth on the document root. Quick win against router admin pages and old internal apps.
 
-```sh title:"Brute HTTP Basic auth at document root"
+```sh title:"Hydra Brute HTTP Basic auth at document root"
 hydra -l $user -P $wordlists $domain http-get
 ```
 <!-- cheat
@@ -101,7 +101,7 @@ import domain_ip
 
 Brute a form-based login over HTTP POST. Edit the path, parameter names, and the failure-string (`F=incorrect`) to match the target app.
 
-```sh title:"Brute form login, edit path/params/failure marker"
+```sh title:"Hydra Brute form login, edit path/params/failure marker"
 hydra -l $user -P $wordlists $domain http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"
 ```
 <!-- cheat

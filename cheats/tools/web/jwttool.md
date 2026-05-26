@@ -11,7 +11,7 @@ import wordlist_passwords
 
 Run jwt_tool all tests against a target URL.
 
-```sh title:"Run jwt_tool all tests against target"
+```sh title:"JwtTool Run jwt_tool all tests against target"
 python3 jwt_tool.py -M at -t "$url" -rh "Authorization: Bearer $jwt_token" -rh "$header" -rc "$cookies"
 ```
 <!-- cheat
@@ -25,7 +25,7 @@ var cookies
 
 Reuse a jwt_tool query ID.
 
-```sh title:"Reuse jwt_tool query ID"
+```sh title:"JwtTool Reuse jwt_tool query ID"
 python3 jwt_tool.py -Q "$jwttool_id"
 ```
 <!-- cheat
@@ -36,7 +36,7 @@ var jwttool_id
 
 Brute force a JWT signing key with a wordlist.
 
-```sh title:"Brute force JWT signing key"
+```sh title:"JwtTool Brute force JWT signing key"
 python3 jwt_tool.py -d "$wordlists" "$jwt_token"
 ```
 <!-- cheat

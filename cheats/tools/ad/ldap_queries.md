@@ -6,7 +6,7 @@
 
 Dump every group object's name. Quick first pass when triaging an unfamiliar domain.
 
-```sh title:"List every group object name"
+```sh title:"Ldap_queries List every group object name"
 Get-ADObject -LDAPFilter '(objectClass=group)' | select name
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ Get-ADObject -LDAPFilter '(objectClass=group)' | select name
 
 Find disabled users via the LDAP_MATCHING_RULE_BIT_AND on userAccountControl. The `=2` bit is ACCOUNTDISABLE.
 
-```sh title:"Find disabled users via UAC bitfield (ACCOUNTDISABLE=2)"
+```sh title:"Ldap_queries Find disabled users via UAC bitfield (ACCOUNTDISABLE=2)"
 Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2))' -Properties * | select samaccountname,useraccountcontrol
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccoun
 
 Same disabled-user list using the cmdlet's `Enabled` property instead of the LDAP filter.
 
-```sh title:"Find disabled users via cmdlet Enabled property"
+```sh title:"Ldap_queries Find disabled users via cmdlet Enabled property"
 Get-ADUser -Filter 'Enabled -eq $false'
 ```
 <!-- cheat -->
@@ -33,7 +33,7 @@ Get-ADUser -Filter 'Enabled -eq $false'
 
 Total user object count. Sanity check before sprays so you know how loud the operation will be.
 
-```sh title:"Total domain user count, sizing for spray operations"
+```sh title:"Ldap_queries Total domain user count, sizing for spray operations"
 (Get-ADUser -Filter *).Count
 ```
 <!-- cheat -->
@@ -42,7 +42,7 @@ Total user object count. Sanity check before sprays so you know how loud the ope
 
 Total computer object count. Includes DCs and stale machine accounts.
 
-```sh title:"Total domain computer count, includes stale accounts"
+```sh title:"Ldap_queries Total domain computer count, includes stale accounts"
 (Get-ADComputer -Filter *).Count
 ```
 <!-- cheat -->
@@ -51,7 +51,7 @@ Total computer object count. Includes DCs and stale machine accounts.
 
 Total group object count.
 
-```sh title:"Total domain group count"
+```sh title:"Ldap_queries Total domain group count"
 (Get-ADGroup -Filter *).Count
 ```
 <!-- cheat -->
@@ -60,7 +60,7 @@ Total group object count.
 
 Groups with `adminCount=1` are protected by AdminSDHolder, i.e. high-value privileged groups.
 
-```sh title:"AdminSDHolder-protected groups (high value targets)"
+```sh title:"Ldap_queries AdminSDHolder-protected groups (high value targets)"
 Get-ADGroup -Filter "adminCount -eq 1" | select Name
 ```
 <!-- cheat -->
@@ -69,7 +69,7 @@ Get-ADGroup -Filter "adminCount -eq 1" | select Name
 
 Users that are both privileged (adminCount=1) and ASREPRoastable (DoesNotRequirePreAuth). Top-tier finding when present.
 
-```sh title:"Privileged users that are also ASREPRoastable"
+```sh title:"Ldap_queries Privileged users that are also ASREPRoastable"
 Get-ADUser -Filter {adminCount -eq '1' -and DoesNotRequirePreAuth -eq 'True'}
 ```
 <!-- cheat -->
@@ -78,7 +78,7 @@ Get-ADUser -Filter {adminCount -eq '1' -and DoesNotRequirePreAuth -eq 'True'}
 
 Privileged users carrying an SPN. Common when service accounts were dropped into Domain Admins; trivial Kerberoast win.
 
-```sh title:"Privileged users carrying SPN, trivial Kerberoast win"
+```sh title:"Ldap_queries Privileged users carrying SPN, trivial Kerberoast win"
 Get-ADUser -Filter "adminCount -eq '1'" -Properties * | where servicePrincipalName -ne $null | select SamAccountName,MemberOf,ServicePrincipalName | fl
 ```
 <!-- cheat -->
@@ -87,7 +87,7 @@ Get-ADUser -Filter "adminCount -eq '1'" -Properties * | where servicePrincipalNa
 
 All accounts with `DoesNotRequirePreAuth` set. Their AS-REP can be requested without creds and cracked offline.
 
-```sh title:"DoesNotRequirePreAuth set, ASREPRoast candidates"
+```sh title:"Ldap_queries DoesNotRequirePreAuth set, ASREPRoast candidates"
 Get-ADUser -Filter * -Properties DoesNotRequirePreAuth | Where-Object { $_.DoesNotRequirePreAuth -eq $true } | select Name,SamAccountName,DoesNotRequirePreAuth | fl
 ```
 <!-- cheat -->
@@ -96,7 +96,7 @@ Get-ADUser -Filter * -Properties DoesNotRequirePreAuth | Where-Object { $_.DoesN
 
 Resolve a computer object's SID. Needed for ESC ticketer flows and SID-history attacks.
 
-```sh title:"Resolve computer SID for ticketer / SID-history flows"
+```sh title:"Ldap_queries Resolve computer SID for ticketer / SID-history flows"
 (Get-ADComputer -Identity "$host").SID
 ```
 <!-- cheat
@@ -107,7 +107,7 @@ var host
 
 Find SPN-holding users who are also in Protected Users. They can't be Kerberoasted (RC4 disabled), so flag them out of the target list early.
 
-```sh title:"SPN holders inside Protected Users (skip from roast list)"
+```sh title:"Ldap_queries SPN holders inside Protected Users (skip from roast list)"
 $protectedGroup = Get-ADGroup -Identity "Protected Users"
 $protectedMembers = Get-ADGroupMember -Identity $protectedGroup -Recursive
 $protectedMembers | Where-Object {
@@ -120,7 +120,7 @@ $protectedMembers | Where-Object {
 
 Disabled users via raw LDAP filter, returning name only.
 
-```sh title:"Disabled users via raw LDAP filter, name only"
+```sh title:"Ldap_queries Disabled users via raw LDAP filter, name only"
 Get-ADUser -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803:=2)' | select name
 ```
 <!-- cheat -->
@@ -129,7 +129,7 @@ Get-ADUser -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803:=2)' | select
 
 LDAP_MATCHING_RULE_IN_CHAIN (1941) recursively walks group nesting and returns every group a user is in transitively.
 
-```sh title:"Recursive group memberships via LDAP_MATCHING_RULE_IN_CHAIN"
+```sh title:"Ldap_queries Recursive group memberships via LDAP_MATCHING_RULE_IN_CHAIN"
 Get-ADGroup -LDAPFilter "(member:1.2.840.113556.1.4.1941:=$((Get-ADUser -Identity '$user').DistinguishedName))" | Select-Object Name
 ```
 <!-- cheat
@@ -140,7 +140,7 @@ var user
 
 Lazy admins occasionally stash passwords in the description field. Worth grepping the output for likely creds.
 
-```sh title:"Users with description set, sometimes contains creds"
+```sh title:"Ldap_queries Users with description set, sometimes contains creds"
 Get-ADUser -Properties * -LDAPFilter '(&(objectCategory=user)(description=*))' | select samaccountname,description
 ```
 <!-- cheat -->
@@ -149,7 +149,7 @@ Get-ADUser -Properties * -LDAPFilter '(&(objectCategory=user)(description=*))' |
 
 Users with `TRUSTED_FOR_DELEGATION` (UAC bit 524288). Compromise often equals domain compromise.
 
-```sh title:"TRUSTED_FOR_DELEGATION users (high value targets)"
+```sh title:"Ldap_queries TRUSTED_FOR_DELEGATION users (high value targets)"
 Get-ADUser -Properties * -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803:=524288)' | select Name,memberof, servicePrincipalName,TrustedForDelegation | fl
 ```
 <!-- cheat -->
@@ -158,7 +158,7 @@ Get-ADUser -Properties * -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803
 
 Same flag on computer objects. Coerce the computer to auth to your relay and you can impersonate any user that has touched it.
 
-```sh title:"TRUSTED_FOR_DELEGATION computers, coercion + relay path"
+```sh title:"Ldap_queries TRUSTED_FOR_DELEGATION computers, coercion + relay path"
 Get-ADComputer -Properties * -LDAPFilter '(userAccountControl:1.2.840.113556.1.4.803:=524288)' | select DistinguishedName,servicePrincipalName,TrustedForDelegation | fl
 ```
 <!-- cheat -->
@@ -167,7 +167,7 @@ Get-ADComputer -Properties * -LDAPFilter '(userAccountControl:1.2.840.113556.1.4
 
 Privileged users with PASSWD_NOTREQD set. If they also have an empty password, instant takeover.
 
-```sh title:"Privileged + PASSWD_NOTREQD, instant takeover if empty"
+```sh title:"Ldap_queries Privileged + PASSWD_NOTREQD, instant takeover if empty"
 Get-AdUser -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=32))(adminCount=1)' -Properties * | select name,memberof | fl
 ```
 <!-- cheat -->
@@ -176,7 +176,7 @@ Get-AdUser -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccountC
 
 Direct membership of the Security Operations group. Replace with whichever ops/admin group your client uses.
 
-```sh title:"Direct members of Security Operations group"
+```sh title:"Ldap_queries Direct members of Security Operations group"
 Get-ADGroupMember -Identity "Security Operations"
 ```
 <!-- cheat -->
@@ -185,7 +185,7 @@ Get-ADGroupMember -Identity "Security Operations"
 
 Quick `memberOf` dump for a single account.
 
-```sh title:"Dump memberOf for a single account"
+```sh title:"Ldap_queries Dump memberOf for a single account"
 Get-ADUser -Identity $user -Properties * | select memberof | ft -Wrap
 ```
 <!-- cheat
@@ -196,7 +196,7 @@ var user
 
 Same recursive group walk using `-Filter -RecursiveMatch` instead of the OID.
 
-```sh title:"Recursive group walk via -Filter -RecursiveMatch"
+```sh title:"Ldap_queries Recursive group walk via -Filter -RecursiveMatch"
 Get-ADGroup -Filter "member -RecursiveMatch '$((Get-ADUser -Identity '$user').DistinguishedName)'" | Select-Object Name
 ```
 <!-- cheat
@@ -207,7 +207,7 @@ var user
 
 Total users below an OU including nested OUs.
 
-```sh title:"Count users below OU including nested OUs"
+```sh title:"Ldap_queries Count users below OU including nested OUs"
 $ou = "OU=O,DC=domain,DC=com"
 (Get-ADUser -SearchBase $ou -SearchScope Subtree -Filter *).Count
 ```
@@ -217,7 +217,7 @@ $ou = "OU=O,DC=domain,DC=com"
 
 Only the users at the OU itself, no recursion.
 
-```sh title:"Users directly at OU, no recursion"
+```sh title:"Ldap_queries Users directly at OU, no recursion"
 $ou = "OU=O,DC=domain,DC=com"
 Get-ADUser -SearchBase $ou -SearchScope Base -Filter *
 ```
@@ -227,7 +227,7 @@ Get-ADUser -SearchBase $ou -SearchScope Base -Filter *
 
 Any object at the OU base, regardless of class.
 
-```sh title:"Any object directly at OU base, no recursion"
+```sh title:"Ldap_queries Any object directly at OU base, no recursion"
 $ou = "OU=O,DC=domain,DC=com"
 Get-ADObject -SearchBase $ou -SearchScope Base -Filter *
 ```
@@ -237,7 +237,7 @@ Get-ADObject -SearchBase $ou -SearchScope Base -Filter *
 
 Users in the OU plus its immediate children, but not deeper.
 
-```sh title:"Users in OU and immediate children, depth 1"
+```sh title:"Ldap_queries Users in OU and immediate children, depth 1"
 $ou = "OU=O,DC=domain,DC=com"
 Get-ADUser -SearchBase $ou -SearchScope OneLevel -Filter *
 ```
@@ -247,7 +247,7 @@ Get-ADUser -SearchBase $ou -SearchScope OneLevel -Filter *
 
 Same as above but with the numeric SearchScope value.
 
-```sh title:"Same OneLevel scope expressed numerically (1)"
+```sh title:"Ldap_queries Same OneLevel scope expressed numerically (1)"
 $ou = "OU=O,DC=domain,DC=com"
 Get-ADUser -SearchBase $ou -SearchScope 1 -Filter *
 ```
@@ -257,7 +257,7 @@ Get-ADUser -SearchBase $ou -SearchScope 1 -Filter *
 
 Recursive subtree count using numeric scope (2 = Subtree).
 
-```sh title:"Recursive count via numeric Subtree scope (2)"
+```sh title:"Ldap_queries Recursive count via numeric Subtree scope (2)"
 $ou = "OU=O,DC=domain,DC=com"
 (Get-ADUser -SearchBase $ou -SearchScope 2 -Filter *).Count
 ```
@@ -267,7 +267,7 @@ $ou = "OU=O,DC=domain,DC=com"
 
 Distinguished names of groups the user is a direct member of.
 
-```sh title:"DNs of groups user is a direct member of"
+```sh title:"Ldap_queries DNs of groups user is a direct member of"
 (Get-ADUser -Identity '$user' -Properties MemberOf).MemberOf
 ```
 <!-- cheat
@@ -278,7 +278,7 @@ var user
 
 Same TRUSTED_FOR_DELEGATION list using cmdlet syntax.
 
-```sh title:"TRUSTED_FOR_DELEGATION users via cmdlet syntax"
+```sh title:"Ldap_queries TRUSTED_FOR_DELEGATION users via cmdlet syntax"
 Get-ADUser -Filter {TrustedForDelegation -eq $true}
 ```
 <!-- cheat -->
@@ -287,7 +287,7 @@ Get-ADUser -Filter {TrustedForDelegation -eq $true}
 
 Concrete example of the OU subtree count, scoped to HR.
 
-```sh title:"Concrete subtree count example for HR OU"
+```sh title:"Ldap_queries Concrete subtree count example for HR OU"
 $ou = "OU=HR,DC=domain,DC=com"
 (Get-ADUser -SearchBase $ou -SearchScope Subtree -Filter *).Count
 ```
@@ -297,7 +297,7 @@ $ou = "OU=HR,DC=domain,DC=com"
 
 Users with any nonzero adminCount. Catches users currently or formerly in privileged groups (AdminSDHolder leaves the bit set).
 
-```sh title:"adminCount > 0, catches former privileged users too"
+```sh title:"Ldap_queries adminCount > 0, catches former privileged users too"
 Get-ADUser -Filter {adminCount -gt 0} -Properties admincount,useraccountcontrol | select Name,useraccountcontrol
 ```
 <!-- cheat -->
@@ -306,7 +306,7 @@ Get-ADUser -Filter {adminCount -gt 0} -Properties admincount,useraccountcontrol 
 
 All users under the HR OU.
 
-```sh title:"All users under HR OU"
+```sh title:"Ldap_queries All users under HR OU"
 $ou = "OU=HR,DC=domain,DC=com"
 Get-ADUser -Filter * -SearchBase $ou
 ```
@@ -316,7 +316,7 @@ Get-ADUser -Filter * -SearchBase $ou
 
 UAC literal 262656 = NORMAL_ACCOUNT (512) + SMARTCARD_REQUIRED (262144). Smartcard users are interesting for PKINIT abuse.
 
-```sh title:"NORMAL_ACCOUNT + SMARTCARD_REQUIRED, PKINIT candidates"
+```sh title:"Ldap_queries NORMAL_ACCOUNT + SMARTCARD_REQUIRED, PKINIT candidates"
 Get-ADUser -LDAPFilter "(userAccountControl=262656)" | Select-Object SamAccountName
 ```
 <!-- cheat -->
@@ -325,7 +325,7 @@ Get-ADUser -LDAPFilter "(userAccountControl=262656)" | Select-Object SamAccountN
 
 UAC bit 32 = PASSWD_NOTREQD. Account may have an empty or trivially short password.
 
-```sh title:"PASSWD_NOTREQD users, may have empty password"
+```sh title:"Ldap_queries PASSWD_NOTREQD users, may have empty password"
 Get-ADUser -LDAPFilter "(userAccountControl:1.2.840.113556.1.4.803:=32)" | Select-Object SamAccountName
 ```
 <!-- cheat -->
@@ -334,7 +334,7 @@ Get-ADUser -LDAPFilter "(userAccountControl:1.2.840.113556.1.4.803:=32)" | Selec
 
 Same OID 1941 trick but starting from a group, returns every nested group inside it.
 
-```sh title:"All nested groups inside a parent group via OID 1941"
+```sh title:"Ldap_queries All nested groups inside a parent group via OID 1941"
 Get-ADGroup -LDAPFilter "(member:1.2.840.113556.1.4.1941:=$((Get-ADGroup -Identity '$group').DistinguishedName))" | Select-Object Name
 ```
 <!-- cheat
@@ -345,7 +345,7 @@ var group
 
 Recursive members of a group (users + nested groups expanded).
 
-```sh title:"Recursive group members, nested groups expanded"
+```sh title:"Ldap_queries Recursive group members, nested groups expanded"
 Get-ADGroupMember -Identity '$group' -Recursive | Select-Object Name,SamAccountName,ObjectClass
 ```
 <!-- cheat
@@ -356,7 +356,7 @@ var group
 
 Subtree count using a pre-set `$ou` variable.
 
-```sh title:"Subtree user count using preset $ou variable"
+```sh title:"Ldap_queries Subtree user count using preset $ou variable"
 (Get-ADUser -SearchBase $ou -SearchScope Subtree -Filter *).Count
 ```
 <!-- cheat
@@ -367,7 +367,7 @@ var ou
 
 Total count of AdminSDHolder-protected groups.
 
-```sh title:"Count of AdminSDHolder-protected groups"
+```sh title:"Ldap_queries Count of AdminSDHolder-protected groups"
 (Get-ADGroup -LDAPFilter "(adminCount=1)").Count
 ```
 <!-- cheat -->
@@ -376,7 +376,7 @@ Total count of AdminSDHolder-protected groups.
 
 ASREPRoast candidates excluding Protected Users members (whose RC4 is disabled and can't be cracked).
 
-```sh title:"ASREPRoast candidates, excluding Protected Users"
+```sh title:"Ldap_queries ASREPRoast candidates, excluding Protected Users"
 Get-ADUser -Filter * -Properties DoesNotRequirePreAuth | Where-Object { $_.DoesNotRequirePreAuth -eq $true -and $_.SamAccountName -notin $protected } | Select-Object SamAccountName
 ```
 <!-- cheat
@@ -387,7 +387,7 @@ var protected
 
 Every user that has any SPN. Full Kerberoast target list.
 
-```sh title:"Every SPN-holding user (full Kerberoast list)"
+```sh title:"Ldap_queries Every SPN-holding user (full Kerberoast list)"
 Get-ADUser -Filter {ServicePrincipalName -like "*"} -Properties ServicePrincipalName | Select-Object SamAccountName,ServicePrincipalName
 ```
 <!-- cheat -->
@@ -396,7 +396,7 @@ Get-ADUser -Filter {ServicePrincipalName -like "*"} -Properties ServicePrincipal
 
 Resolve memberOf DNs back to group names for one user. Useful for spotting non-default privilege.
 
-```sh title:"Resolve memberOf DNs to group names for one user"
+```sh title:"Ldap_queries Resolve memberOf DNs to group names for one user"
 Get-ADUser -Identity '$user' -Properties MemberOf | ForEach-Object { $_.MemberOf } | Get-ADGroup | Select-Object Name
 ```
 <!-- cheat
@@ -409,7 +409,7 @@ var user
 
 Every computer object in the domain.
 
-```sh title:"All computer objects in the domain"
+```sh title:"Ldap_queries All computer objects in the domain"
 Get-ADObject -LDAPFilter '(objectCategory=computer)'
 ```
 <!-- cheat -->
@@ -418,7 +418,7 @@ Get-ADObject -LDAPFilter '(objectCategory=computer)'
 
 DCs identified via the SERVER_TRUST_ACCOUNT UAC bit (8192).
 
-```sh title:"DCs via SERVER_TRUST_ACCOUNT UAC bit (8192)"
+```sh title:"Ldap_queries DCs via SERVER_TRUST_ACCOUNT UAC bit (8192)"
 Get-ADObject -LDAPFilter '(&(objectCategory=Computer)(userAccountControl:1.2.840.113556.1.4.803:=8192))'
 ```
 <!-- cheat -->
@@ -427,7 +427,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=Computer)(userAccountControl:1.2.840
 
 GCs flagged in the configuration partition (NTDSDSA options bit 1).
 
-```sh title:"GCs flagged in configuration partition (NTDSDSA bit 1)"
+```sh title:"Ldap_queries GCs flagged in configuration partition (NTDSDSA bit 1)"
 Get-ADObject -LDAPFilter '(&(objectCategory=nTDSDSA)(options:1.2.840.113556.1.4.803:=1))'
 ```
 <!-- cheat -->
@@ -436,7 +436,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=nTDSDSA)(options:1.2.840.113556.1.4.
 
 Anything except DCs (filter on primaryGroupID 516 = Domain Controllers).
 
-```sh title:"Everything except DCs (primaryGroupID != 516)"
+```sh title:"Ldap_queries Everything except DCs (primaryGroupID != 516)"
 Get-ADObject -LDAPFilter '(!(primaryGroupID=516))'
 ```
 <!-- cheat -->
@@ -445,7 +445,7 @@ Get-ADObject -LDAPFilter '(!(primaryGroupID=516))'
 
 Filter out SCOM/OpsMgr management servers and gateways.
 
-```sh title:"Filter out SCOM/OpsMgr management servers and gateways"
+```sh title:"Ldap_queries Filter out SCOM/OpsMgr management servers and gateways"
 Get-ADObject -LDAPFilter '(!(servicePrincipalName=MSOMHSvc/*))'
 ```
 <!-- cheat -->
@@ -454,7 +454,7 @@ Get-ADObject -LDAPFilter '(!(servicePrincipalName=MSOMHSvc/*))'
 
 Servers whose NetBIOS name ends in an odd digit. Useful when the org uses an odd/even numbering convention.
 
-```sh title:"Hostnames ending in an odd digit (numbering convention)"
+```sh title:"Ldap_queries Hostnames ending in an odd digit (numbering convention)"
 Get-ADObject -LDAPFilter '(|(name=*1)(name=*3)(name=*5)(name=*7)(name=*9))'
 ```
 <!-- cheat -->
@@ -463,7 +463,7 @@ Get-ADObject -LDAPFilter '(|(name=*1)(name=*3)(name=*5)(name=*7)(name=*9))'
 
 Computer accounts with the ACCOUNTDISABLE UAC bit set.
 
-```sh title:"Computer accounts disabled via UAC bit 2"
+```sh title:"Ldap_queries Computer accounts disabled via UAC bit 2"
 Get-ADObject -LDAPFilter '(&(objectClass=computer)(userAccountControl:1.2.840.113556.1.4.803:=2))'
 ```
 <!-- cheat -->
@@ -472,7 +472,7 @@ Get-ADObject -LDAPFilter '(&(objectClass=computer)(userAccountControl:1.2.840.11
 
 End-of-life servers, almost always missing patches and full of legacy auth.
 
-```sh title:"EOL Server 2003 non-DCs, likely unpatched targets"
+```sh title:"Ldap_queries EOL Server 2003 non-DCs, likely unpatched targets"
 Get-ADObject -LDAPFilter '(&(&(&(samAccountType=805306369)(!(primaryGroupId=516)))(objectCategory=computer)(operatingSystem=Windows Server 2003*)))'
 ```
 <!-- cheat -->
@@ -481,7 +481,7 @@ Get-ADObject -LDAPFilter '(&(&(&(samAccountType=805306369)(!(primaryGroupId=516)
 
 EOL DCs are a giant red flag and a near-guaranteed compromise path.
 
-```sh title:"EOL Server 2003 DCs, near-guaranteed compromise"
+```sh title:"Ldap_queries EOL Server 2003 DCs, near-guaranteed compromise"
 Get-ADObject -LDAPFilter '(&(&(&(samAccountType=805306369)(primaryGroupID=516)(objectCategory=computer)(operatingSystem=Windows Server 2003*))))'
 ```
 <!-- cheat -->
@@ -490,7 +490,7 @@ Get-ADObject -LDAPFilter '(&(&(&(samAccountType=805306369)(primaryGroupID=516)(o
 
 Server 2008 / R2 are also out of support.
 
-```sh title:"Out-of-support Server 2008 / R2 servers"
+```sh title:"Ldap_queries Out-of-support Server 2008 / R2 servers"
 Get-ADObject -LDAPFilter '(&(&(&(&(samAccountType=805306369)(!(primaryGroupId=516)))(objectCategory=computer)(operatingSystem=Windows Server 2008*))))'
 ```
 <!-- cheat -->
@@ -499,7 +499,7 @@ Get-ADObject -LDAPFilter '(&(&(&(&(samAccountType=805306369)(!(primaryGroupId=51
 
 Windows 2000 SP4 endpoints. Trivial to compromise if any are still online.
 
-```sh title:"Windows 2000 SP4 endpoints, trivial compromise"
+```sh title:"Ldap_queries Windows 2000 SP4 endpoints, trivial compromise"
 Get-ADObject -LDAPFilter '(&(&(&(objectCategory=Computer)(operatingSystem=Windows 2000 Professional)(operatingSystemServicePack=Service Pack 4))))'
 ```
 <!-- cheat -->
@@ -508,7 +508,7 @@ Get-ADObject -LDAPFilter '(&(&(&(objectCategory=Computer)(operatingSystem=Window
 
 Windows XP SP2 endpoints. Free MS17-010 candidates.
 
-```sh title:"Windows XP SP2 endpoints, MS17-010 candidates"
+```sh title:"Ldap_queries Windows XP SP2 endpoints, MS17-010 candidates"
 Get-ADObject -LDAPFilter '(&(&(&(&(&(&(&(objectCategory=Computer)(operatingSystem=Windows XP Professional)(operatingSystemServicePack=Service Pack 2))))))))'
 ```
 <!-- cheat -->
@@ -517,7 +517,7 @@ Get-ADObject -LDAPFilter '(&(&(&(&(&(&(&(objectCategory=Computer)(operatingSyste
 
 Windows XP SP3 endpoints. Same story as SP2.
 
-```sh title:"Windows XP SP3 endpoints, same legacy attack surface"
+```sh title:"Ldap_queries Windows XP SP3 endpoints, same legacy attack surface"
 Get-ADObject -LDAPFilter '(&(&(&(&(&(&(&(objectCategory=Computer)(operatingSystem=Windows XP Professional)(operatingSystemServicePack=Service Pack 3))))))))'
 ```
 <!-- cheat -->
@@ -526,7 +526,7 @@ Get-ADObject -LDAPFilter '(&(&(&(&(&(&(&(objectCategory=Computer)(operatingSyste
 
 Vista SP1 endpoints. Rare in 2026 but still appear in OT/lab subnets.
 
-```sh title:"Vista SP1 endpoints, occasional in OT/lab networks"
+```sh title:"Ldap_queries Vista SP1 endpoints, occasional in OT/lab networks"
 Get-ADObject -LDAPFilter '(&(&(&(&(sAMAccountType=805306369)(objectCategory=computer)(operatingSystem=Windows Vista*)(operatingSystemServicePack=Service Pack 1)))))'
 ```
 <!-- cheat -->
@@ -537,7 +537,7 @@ Get-ADObject -LDAPFilter '(&(&(&(&(sAMAccountType=805306369)(objectCategory=comp
 
 Standard user-account class via samAccountType filter.
 
-```sh title:"All real user accounts via samAccountType filter"
+```sh title:"Ldap_queries All real user accounts via samAccountType filter"
 Get-ADObject -LDAPFilter '(sAMAccountType=805306368)'
 ```
 <!-- cheat -->
@@ -546,7 +546,7 @@ Get-ADObject -LDAPFilter '(sAMAccountType=805306368)'
 
 Mail contacts (no AD logon).
 
-```sh title:"All mail contact objects (no AD logon)"
+```sh title:"Ldap_queries All mail contact objects (no AD logon)"
 Get-ADObject -LDAPFilter '(objectClass=contact)'
 ```
 <!-- cheat -->
@@ -555,7 +555,7 @@ Get-ADObject -LDAPFilter '(objectClass=contact)'
 
 `objectClass=user` returns both real users and Exchange contacts.
 
-```sh title:"Users plus Exchange contacts (objectClass=user)"
+```sh title:"Ldap_queries Users plus Exchange contacts (objectClass=user)"
 Get-ADObject -LDAPFilter '(objectClass=user)'
 ```
 <!-- cheat -->
@@ -564,7 +564,7 @@ Get-ADObject -LDAPFilter '(objectClass=user)'
 
 Users that logged in after the given timestamp. Filters out stale accounts so spraying focuses on live ones.
 
-```sh title:"Users active after the given lastLogonTimestamp"
+```sh title:"Ldap_queries Users active after the given lastLogonTimestamp"
 Get-ADObject -LDAPFilter '(&(&(objectCategory=person)(objectClass=user))(lastLogonTimestamp<=128752108510000000))'
 ```
 <!-- cheat -->
@@ -573,7 +573,7 @@ Get-ADObject -LDAPFilter '(&(&(objectCategory=person)(objectClass=user))(lastLog
 
 UAC bit 65536. Passwords set once, never rotated; great spray candidates.
 
-```sh title:"Passwords never expire, prime spray candidates"
+```sh title:"Ldap_queries Passwords never expire, prime spray candidates"
 Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=65536))'
 ```
 <!-- cheat -->
@@ -582,7 +582,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccoun
 
 Same disabled-user filter from the Get-ADObject angle.
 
-```sh title:"Disabled users, Get-ADObject form"
+```sh title:"Ldap_queries Disabled users, Get-ADObject form"
 Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccountControl:1.2.840.113556.1.4.803:=2))'
 ```
 <!-- cheat -->
@@ -591,7 +591,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(userAccoun
 
 Accounts whose accountExpires is set and not the never-expires sentinel value.
 
-```sh title:"accountExpires set and not the never-expires sentinel"
+```sh title:"Ldap_queries accountExpires set and not the never-expires sentinel"
 Get-ADObject -LDAPFilter '(&(objectCategory=Person)(objectClass=User)(!accountExpires=0)(!accountExpires=9223372036854775807)) '
 ```
 <!-- cheat -->
@@ -600,7 +600,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=Person)(objectClass=User)(!accountEx
 
 Get-ADObject form of the PASSWD_NOTREQD search.
 
-```sh title:"PASSWD_NOTREQD users, Get-ADObject form"
+```sh title:"Ldap_queries PASSWD_NOTREQD users, Get-ADObject form"
 Get-ADObject -LDAPFilter '(&(objectCategory=Person)(objectClass=User)(userAccountControl:1.2.840.113556.1.4.803:=32))'
 ```
 <!-- cheat -->
@@ -609,7 +609,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=Person)(objectClass=User)(userAccoun
 
 Walk every group (including nested) the named user belongs to via OID 1941.
 
-```sh title:"Walk every nested group for the named user via OID 1941"
+```sh title:"Ldap_queries Walk every nested group for the named user via OID 1941"
 Get-ADObject -LDAPFilter '(member:1.2.840.113556.1.4.1941:=(CN=UserName,CN=Users,DC=YOURDOMAIN,DC=NET))'
 ```
 <!-- cheat -->
@@ -618,7 +618,7 @@ Get-ADObject -LDAPFilter '(member:1.2.840.113556.1.4.1941:=(CN=UserName,CN=Users
 
 Users that have direct reports but no manager set. Often points to abandoned org-tree leaves and stale privileged accounts.
 
-```sh title:"directReports set but manager null, often stale accounts"
+```sh title:"Ldap_queries directReports set but manager null, often stale accounts"
 Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(directReports=*)(!(manager=*)))'
 ```
 <!-- cheat -->
@@ -629,7 +629,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=person)(objectClass=user)(directRepo
 
 Recipients hidden from address lists. Sometimes admin/service mailboxes.
 
-```sh title:"Mail recipients hidden from address lists"
+```sh title:"Ldap_queries Mail recipients hidden from address lists"
 Get-ADObject -LDAPFilter '(msExchHideFromAddressLists=TRUE)'
 ```
 <!-- cheat -->
@@ -638,7 +638,7 @@ Get-ADObject -LDAPFilter '(msExchHideFromAddressLists=TRUE)'
 
 Hidden recipients minus public folder objects (cleaner list).
 
-```sh title:"Hidden recipients minus public folder objects"
+```sh title:"Ldap_queries Hidden recipients minus public folder objects"
 Get-ADObject -LDAPFilter '(&(msExchHideFromAddressLists=TRUE)(!objectClass=publicFolder))'
 ```
 <!-- cheat -->
@@ -647,7 +647,7 @@ Get-ADObject -LDAPFilter '(&(msExchHideFromAddressLists=TRUE)(!objectClass=publi
 
 Mail recipients with a FAX proxy address.
 
-```sh title:"Mail recipients with FAX proxy address"
+```sh title:"Ldap_queries Mail recipients with FAX proxy address"
 Get-ADObject -LDAPFilter '(proxyAddresses=FAX:*)'
 ```
 <!-- cheat -->
@@ -656,7 +656,7 @@ Get-ADObject -LDAPFilter '(proxyAddresses=FAX:*)'
 
 Mailboxes hosted on the named Exchange server. Adapt the legacy DN to your org.
 
-```sh title:"Mailboxes hosted on the named Exchange server"
+```sh title:"Ldap_queries Mailboxes hosted on the named Exchange server"
 Get-ADObject -LDAPFilter '(msExchangeHomeserverName=/o=MAILOrg/ou=First Administrative Group/cn=Configuration/cn=Servers/cn=KUNGUR)'
 ```
 <!-- cheat -->
@@ -665,7 +665,7 @@ Get-ADObject -LDAPFilter '(msExchangeHomeserverName=/o=MAILOrg/ou=First Administ
 
 Recursive `manager` walk under a named manager. Maps the org subtree, useful for phishing recon.
 
-```sh title:"Recursive manager walk under named manager (org subtree)"
+```sh title:"Ldap_queries Recursive manager walk under named manager (org subtree)"
 Get-ADObject -LDAPFilter '(manager:1.2.840.113556.1.4.1941:=CN=Jim,OU=Managed,OU=Accounts,DC=willeke,DC=com)'
 ```
 <!-- cheat -->
@@ -676,7 +676,7 @@ Get-ADObject -LDAPFilter '(manager:1.2.840.113556.1.4.1941:=CN=Jim,OU=Managed,OU
 
 Every group object.
 
-```sh title:"Every group object in the directory"
+```sh title:"Ldap_queries Every group object in the directory"
 Get-ADObject -LDAPFilter '(objectClass=group)'
 ```
 <!-- cheat -->
@@ -685,7 +685,7 @@ Get-ADObject -LDAPFilter '(objectClass=group)'
 
 Direct (non-recursive) members of a single security group by DN.
 
-```sh title:"Direct members of named group, no nesting"
+```sh title:"Ldap_queries Direct members of named group, no nesting"
 Get-ADObject -LDAPFilter '(memberOf=CN=Admin,OU=Security,DC=DOM,DC=NT)'
 ```
 <!-- cheat -->
@@ -694,7 +694,7 @@ Get-ADObject -LDAPFilter '(memberOf=CN=Admin,OU=Security,DC=DOM,DC=NT)'
 
 All members of a security group including those gained via nested groups (OID 1941).
 
-```sh title:"All members including nested-group inheritance via OID 1941"
+```sh title:"Ldap_queries All members including nested-group inheritance via OID 1941"
 Get-ADObject -LDAPFilter '(memberOf:1.2.840.113556.1.4.1941:=CN=GroupOne,OU=Security Groups,OU=Groups,DC=YOURDOMAIN,DC=NET)'
 ```
 <!-- cheat -->
@@ -703,7 +703,7 @@ Get-ADObject -LDAPFilter '(memberOf:1.2.840.113556.1.4.1941:=CN=GroupOne,OU=Secu
 
 Same recursive walk but filtered to user objects only.
 
-```sh title:"Recursive members filtered to user objects only"
+```sh title:"Ldap_queries Recursive members filtered to user objects only"
 Get-ADObject -LDAPFilter '(&(objectClass=user)(memberof:1.2.840.113556.1.4.1941:=CN=GroupOne,OU=Security Groups,OU=Groups,DC=YOURDOMAIN,DC=NET))'
 ```
 <!-- cheat -->
@@ -712,7 +712,7 @@ Get-ADObject -LDAPFilter '(&(objectClass=user)(memberof:1.2.840.113556.1.4.1941:
 
 Every security group regardless of scope (groupType high bit).
 
-```sh title:"Every security group regardless of scope"
+```sh title:"Ldap_queries Every security group regardless of scope"
 Get-ADObject -LDAPFilter '(groupType:1.2.840.113556.1.4.803:=2147483648)'
 ```
 <!-- cheat -->
@@ -721,7 +721,7 @@ Get-ADObject -LDAPFilter '(groupType:1.2.840.113556.1.4.803:=2147483648)'
 
 Groups with no members. Cleanup candidates and occasionally writable.
 
-```sh title:"Groups with no members (cleanup / write candidates)"
+```sh title:"Ldap_queries Groups with no members (cleanup / write candidates)"
 Get-ADObject -LDAPFilter '(&(objectClass=group)(!member=*))'
 ```
 <!-- cheat -->
@@ -730,7 +730,7 @@ Get-ADObject -LDAPFilter '(&(objectClass=group)(!member=*))'
 
 Security groups with Global scope.
 
-```sh title:"Security groups with Global scope"
+```sh title:"Ldap_queries Security groups with Global scope"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=2147483650))'
 ```
 <!-- cheat -->
@@ -739,7 +739,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Security groups with Domain Local scope.
 
-```sh title:"Security groups with Domain Local scope"
+```sh title:"Ldap_queries Security groups with Domain Local scope"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=2147483652))'
 ```
 <!-- cheat -->
@@ -748,7 +748,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Security groups with Universal scope (forest-wide membership).
 
-```sh title:"Security groups with Universal scope (forest-wide)"
+```sh title:"Ldap_queries Security groups with Universal scope (forest-wide)"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=2147483656))'
 ```
 <!-- cheat -->
@@ -759,7 +759,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Every group whose security bit is unset (i.e. distribution only, no ACL impact).
 
-```sh title:"Distribution-only groups (security bit unset)"
+```sh title:"Ldap_queries Distribution-only groups (security bit unset)"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(!(groupType:1.2.840.113556.1.4.803:=2147483648)))'
 ```
 <!-- cheat -->
@@ -768,7 +768,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(!(groupType:1.2.840.113556.1.
 
 Distribution groups with Global scope.
 
-```sh title:"Distribution groups with Global scope"
+```sh title:"Ldap_queries Distribution groups with Global scope"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=2)(!(groupType:1.2.840.113556.1.4.803:=2147483648))) '
 ```
 <!-- cheat -->
@@ -777,7 +777,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Distribution groups with Domain Local scope.
 
-```sh title:"Distribution groups with Domain Local scope"
+```sh title:"Ldap_queries Distribution groups with Domain Local scope"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=4)(!(groupType:1.2.840.113556.1.4.803:=2147483648))) '
 ```
 <!-- cheat -->
@@ -786,7 +786,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Distribution groups with Universal scope.
 
-```sh title:"Distribution groups with Universal scope"
+```sh title:"Ldap_queries Distribution groups with Universal scope"
 Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.803:=8)(!(groupType:1.2.840.113556.1.4.803:=2147483648))) '
 ```
 <!-- cheat -->
@@ -795,7 +795,7 @@ Get-ADObject -LDAPFilter '(&(objectCategory=group)(groupType:1.2.840.113556.1.4.
 
 Groups modified after the given timestamp. Useful for spotting fresh privilege changes.
 
-```sh title:"Groups whenChanged after timestamp, spot fresh privesc"
+```sh title:"Ldap_queries Groups whenChanged after timestamp, spot fresh privesc"
 Get-ADObject -LDAPFilter '(&(objectClass=group)(whenChanged>=20081231000000.0Z))'
 ```
 <!-- cheat -->

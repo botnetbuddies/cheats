@@ -12,7 +12,7 @@ var archive_file = sh -c 'printf "%s\n" ""; find "$PWD/" -maxdepth 1 -type f ! -
 
 Crack a ZIP file with fcrackzip.
 
-```sh title:"Crack ZIP with fcrackzip"
+```sh title:"Crack Files Crack ZIP with fcrackzip"
 fcrackzip -u -D -p "$wordlists" "$zip_file"
 ```
 <!-- cheat
@@ -24,7 +24,7 @@ var zip_file
 
 Extract a ZIP hash and crack it with John.
 
-```sh title:"Extract ZIP hash and crack with John"
+```sh title:"Crack Files Extract ZIP hash and crack with John"
 zip2john "$zip_file" > zip.john; john --wordlist "$wordlists" zip.john
 ```
 <!-- cheat
@@ -38,7 +38,7 @@ var zip_file
 
 Extract a 7z hash and crack it with John.
 
-```sh title:"Extract 7z hash and crack with John"
+```sh title:"Crack Files Extract 7z hash and crack with John"
 7z2john "$archive_file" > 7z.john; john --wordlist "$wordlists" 7z.john
 ```
 <!-- cheat
@@ -51,7 +51,7 @@ import crackfiles
 
 Crack a PDF password with pdfcrack.
 
-```sh title:"Crack PDF with pdfcrack"
+```sh title:"Crack Files Crack PDF with pdfcrack"
 pdfcrack "$pdf_file" -w "$wordlists"
 ```
 <!-- cheat
@@ -63,7 +63,7 @@ var pdf_file
 
 Decrypt a PDF with a known password.
 
-```sh title:"Decrypt PDF with known password"
+```sh title:"Crack Files Decrypt PDF with known password"
 qpdf --password="$pass" --decrypt "$encrypted_pdf" "$plaintext_pdf"
 ```
 <!-- cheat
@@ -78,7 +78,7 @@ var plaintext_pdf
 
 Extract an Office document hash and crack it with John.
 
-```sh title:"Extract Office hash and crack with John"
+```sh title:"Crack Files Extract Office hash and crack with John"
 office2john "$office_file" > office.hash; john --wordlist "$wordlists" office.hash
 ```
 <!-- cheat
@@ -92,7 +92,7 @@ var office_file
 
 Extract a KeePass database hash and crack it with John.
 
-```sh title:"Extract KeePass hash and crack with John"
+```sh title:"Crack Files Extract KeePass hash and crack with John"
 keepass2john "$kdbx_file" > keepass.hash; john --wordlist "$wordlists" keepass.hash
 ```
 <!-- cheat

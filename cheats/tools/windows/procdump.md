@@ -6,7 +6,7 @@
 
 Create a full dump for a process ID.
 
-```cmd title:"Dump process by PID"
+```cmd title:"ProcDump Dump process by PID"
 procdump.exe -accepteula -ma "$pid" "$dump_file"
 ```
 <!-- cheat
@@ -18,7 +18,7 @@ var dump_file
 
 Create a full dump for a named process.
 
-```cmd title:"Dump process by name"
+```cmd title:"ProcDump Dump process by name"
 procdump.exe -accepteula -ma "$process_name" "$dump_file"
 ```
 <!-- cheat

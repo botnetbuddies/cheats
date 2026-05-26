@@ -11,7 +11,7 @@ var vpn = sh -c 'printf "%s\n" "$VPN_FOLDER/competitive.ovpn"; find "$VPN_FOLDER
 
 Start the chosen `.ovpn` profile detached and silent. `sudo -l` first to refresh the timestamp so it doesn't prompt mid-tunnel.
 
-```sh title:"Start chosen .ovpn detached and silent"
+```sh title:"Openvpn Start chosen .ovpn detached and silent"
 sudo -l && sudo openvpn --config "$vpn" >/dev/null 2>&1 &
 ```
 <!-- cheat

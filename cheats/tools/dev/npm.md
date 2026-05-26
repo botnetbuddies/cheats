@@ -68,7 +68,7 @@ var package_name
 
 Install a Node.js version with nvm.
 
-```sh title:"Install Node.js version with nvm"
+```sh title:"NPM Install Node.js version with nvm"
 nvm install "$version"
 ```
 <!-- cheat
@@ -79,7 +79,7 @@ var version
 
 List available Node.js versions.
 
-```sh title:"List available Node.js versions"
+```sh title:"NPM List available Node.js versions"
 nvm ls-remote
 ```
 <!-- cheat -->
@@ -88,7 +88,7 @@ nvm ls-remote
 
 Use an installed Node.js version.
 
-```sh title:"Use Node.js version"
+```sh title:"NPM Use Node.js version"
 nvm use "$version"
 ```
 <!-- cheat
@@ -99,7 +99,7 @@ var version
 
 Set the default Node.js version.
 
-```sh title:"Set default Node.js version"
+```sh title:"NPM Set default Node.js version"
 nvm alias default "$version"
 ```
 <!-- cheat

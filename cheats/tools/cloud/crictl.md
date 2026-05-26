@@ -19,7 +19,7 @@ tags: containers kubernetes crictl runtime tools
 
 Print CRI runtime information.
 
-```sh title:"Print CRI runtime info"
+```sh title:"crictl Print CRI runtime info"
 crictl info
 ```
 <!-- cheat -->
@@ -30,7 +30,7 @@ crictl info
 
 List pods known to the runtime.
 
-```sh title:"List CRI pods"
+```sh title:"crictl List CRI pods"
 crictl pods
 ```
 <!-- cheat -->
@@ -41,7 +41,7 @@ crictl pods
 
 List containers known to the runtime.
 
-```sh title:"List CRI containers"
+```sh title:"crictl List CRI containers"
 crictl ps -a
 ```
 <!-- cheat -->
@@ -52,7 +52,7 @@ crictl ps -a
 
 List images known to the runtime.
 
-```sh title:"List CRI images"
+```sh title:"crictl List CRI images"
 crictl images
 ```
 <!-- cheat -->
@@ -63,7 +63,7 @@ crictl images
 
 Inspect a container by ID.
 
-```sh title:"Inspect CRI container"
+```sh title:"crictl Inspect CRI container"
 crictl inspect "$container_id"
 ```
 <!-- cheat

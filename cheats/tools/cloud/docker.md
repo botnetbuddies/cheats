@@ -6,7 +6,7 @@
 
 Show running containers.
 
-```sh title:"List running containers"
+```sh title:"Docker List running containers"
 docker ps
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ docker ps
 
 Show running and stopped containers.
 
-```sh title:"List all containers"
+```sh title:"Docker List all containers"
 docker ps -a
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ docker ps -a
 
 Stop a running container with SIGTERM.
 
-```sh title:"Stop container with SIGTERM"
+```sh title:"Docker Stop container with SIGTERM"
 docker stop "$container_id"
 ```
 <!-- cheat
@@ -35,7 +35,7 @@ var container_id
 
 Stop a running container with SIGKILL.
 
-```sh title:"Kill container with SIGKILL"
+```sh title:"Docker Kill container with SIGKILL"
 docker kill "$container_id"
 ```
 <!-- cheat
@@ -46,7 +46,7 @@ var container_id
 
 Remove all running and stopped containers. Requires typing `YES` before it runs.
 
-```sh title:"Confirm, then remove all containers"
+```sh title:"Docker Confirm, then remove all containers"
 read -r -p "Remove all Docker containers? Type YES: " confirm; [ "$confirm" = "YES" ] && docker rm -f $(docker ps -aq)
 ```
 <!-- cheat
@@ -57,7 +57,7 @@ var confirm
 
 Open an interactive bash shell inside a container.
 
-```sh title:"Open bash in container"
+```sh title:"Docker Open bash in container"
 docker exec -it "$container_id" bash
 ```
 <!-- cheat
@@ -68,7 +68,7 @@ var container_id
 
 Open an interactive POSIX shell inside a container.
 
-```sh title:"Open sh in container"
+```sh title:"Docker Open sh in container"
 docker exec -it "$container_id" /bin/sh
 ```
 <!-- cheat
@@ -90,7 +90,7 @@ var container_id
 
 Print the last 100 lines from a container.
 
-```sh title:"Tail last 100 container log lines"
+```sh title:"Docker Tail last 100 container log lines"
 docker logs --tail 100 "$container_id"
 ```
 <!-- cheat
@@ -101,7 +101,7 @@ var container_id
 
 Follow container logs from the last 100 lines.
 
-```sh title:"Follow container logs"
+```sh title:"Docker Follow container logs"
 docker logs --tail 100 -f "$container_id"
 ```
 <!-- cheat
@@ -136,7 +136,7 @@ var network_name
 
 Build, create, start, and attach to all Compose services.
 
-```sh title:"Start Compose services in foreground"
+```sh title:"Docker Start Compose services in foreground"
 docker compose up
 ```
 <!-- cheat -->
@@ -145,7 +145,7 @@ docker compose up
 
 Build, create, start, and detach from all Compose services.
 
-```sh title:"Start Compose services in background"
+```sh title:"Docker Start Compose services in background"
 docker compose up -d
 ```
 <!-- cheat -->
@@ -154,7 +154,7 @@ docker compose up -d
 
 Build, create, start, and detach from one Compose service.
 
-```sh title:"Start one Compose service in background"
+```sh title:"Docker Start one Compose service in background"
 docker compose up -d "$service_name"
 ```
 <!-- cheat
@@ -165,7 +165,7 @@ var service_name
 
 Print the last 100 lines from a Compose service.
 
-```sh title:"Tail last 100 Compose service log lines"
+```sh title:"Docker Tail last 100 Compose service log lines"
 docker compose logs --tail 100 "$service_name"
 ```
 <!-- cheat
@@ -176,7 +176,7 @@ var service_name
 
 Follow Compose service logs from the last 100 lines.
 
-```sh title:"Follow Compose service logs"
+```sh title:"Docker Follow Compose service logs"
 docker compose logs -f --tail 100 "$service_name"
 ```
 <!-- cheat
@@ -187,7 +187,7 @@ var service_name
 
 Stop and remove containers and networks created by `docker compose up`.
 
-```sh title:"Stop Compose stack and remove created containers/networks"
+```sh title:"Docker Stop Compose stack and remove created containers/networks"
 docker compose down
 ```
 <!-- cheat -->
@@ -207,7 +207,7 @@ docker images
 
 Run a temporary MySQL container with an empty root password.
 
-```sh title:"Run MySQL container with empty root password"
+```sh title:"Docker Run MySQL container with empty root password"
 docker run --rm --name "$container_name" -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d "mysql/mysql-server:$image_tag"
 ```
 <!-- cheat
@@ -219,7 +219,7 @@ var image_tag := latest
 
 Open a MySQL shell in a running MySQL container.
 
-```sh title:"Open MySQL shell in container"
+```sh title:"Docker Open MySQL shell in container"
 docker exec -ti "$container_name" mysql
 ```
 <!-- cheat

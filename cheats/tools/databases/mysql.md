@@ -31,7 +31,7 @@ var database
 
 Read every row from a table. Watch for size before running on large tables.
 
-```sh title:"SELECT * dump of named table, watch size"
+```sh title:"Mysql SELECT * dump of named table, watch size"
 mysql -u $user -p$pass -h localhost -D $database -e "select * from $table;"
 ```
 <!-- cheat

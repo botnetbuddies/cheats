@@ -214,7 +214,7 @@ var aws_profile
 
 Identify whether a discovered AWS access key ID belongs to the in-scope account.
 
-```sh title:"Look up one AWS access key ID"
+```sh title:"CloudFox Look up one AWS access key ID"
 cloudfox aws --profile "$aws_profile" access-keys --filter "$aws_access_key_id"
 ```
 <!-- cheat
@@ -248,7 +248,7 @@ var aws_profile
 
 Include KMS key policies in resource trust enumeration when key access is in scope.
 
-```sh title:"Enumerate AWS resource trusts including KMS"
+```sh title:"CloudFox Enumerate AWS resource trusts including KMS"
 cloudfox aws --profile "$aws_profile" resource-trusts --include-kms
 ```
 <!-- cheat
@@ -282,7 +282,7 @@ var aws_profile
 
 Create pmapper graph data CloudFox can reuse for role-trusts, workloads, instances, lambdas, ECS, and CAPE analysis.
 
-```sh title:"Build pmapper graph for one AWS profile"
+```sh title:"CloudFox Build pmapper graph for one AWS profile"
 pmapper --profile "$aws_profile" graph create
 ```
 <!-- cheat
@@ -361,7 +361,7 @@ var aws_profile
 
 Find EC2, ECS, Lambda, and App Runner workloads with admin roles or paths to admin.
 
-```sh title:"Find AWS workloads with admin paths"
+```sh title:"CloudFox Find AWS workloads with admin paths"
 cloudfox aws --profile "$aws_profile" workloads
 ```
 <!-- cheat
@@ -576,7 +576,7 @@ var aws_profile
 
 Build pmapper graphs for every in-scope profile before CAPE.
 
-```sh title:"Build pmapper graphs from profile list"
+```sh title:"CloudFox Build pmapper graphs from profile list"
 xargs -I{} pmapper --profile "{}" graph create < "$aws_profile_file"
 ```
 <!-- cheat

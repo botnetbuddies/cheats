@@ -18,7 +18,7 @@ var destination_dir
 
 Dump an exposed `.git` directory with the pip `git-dumper` tool.
 
-```sh title:"Dump exposed .git directory with git-dumper"
+```sh title:"GitDumper Dump exposed .git directory with git-dumper"
 git-dumper "$url/.git/" "$destination_dir"
 ```
 <!-- cheat

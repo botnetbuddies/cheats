@@ -34,7 +34,7 @@ var client_side_port
 
 Expose a server-side listener to the client side.
 
-```sh title:"Forward server listener to client side"
+```sh title:"Chisel Forward server listener to client side"
 ./chisel client -v "$server_ip:$server_port" "$client_side_host:$client_side_port:$server_side_host:$server_side_port"
 ```
 <!-- cheat
@@ -50,7 +50,7 @@ var server_side_port
 
 Create a reverse SOCKS proxy on the Chisel server.
 
-```sh title:"Create reverse SOCKS proxy"
+```sh title:"Chisel Create reverse SOCKS proxy"
 ./chisel client "$server_ip:$server_port" R:socks
 ```
 <!-- cheat

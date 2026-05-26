@@ -6,7 +6,7 @@
 
 Generate a Java keystore and RSA keypair.
 
-```sh title:"Generate Java keystore and RSA keypair"
+```sh title:"Keytool Generate Java keystore and RSA keypair"
 keytool -genkey -alias "$alias" -keyalg RSA -keystore "$jks_file" -keysize "$rsa_bits"
 ```
 <!-- cheat
@@ -19,7 +19,7 @@ var rsa_bits := 2048
 
 Generate a self-signed certificate in a keystore.
 
-```sh title:"Generate self-signed cert in Java keystore"
+```sh title:"Keytool Generate self-signed cert in Java keystore"
 keytool -genkey -keyalg RSA -alias "$alias" -keystore "$jks_file" -storepass "$store_pass" -validity "$days" -keysize "$rsa_bits"
 ```
 <!-- cheat
@@ -34,7 +34,7 @@ var rsa_bits := 2048
 
 Generate a CSR from an existing keystore entry.
 
-```sh title:"Generate CSR from Java keystore"
+```sh title:"Keytool Generate CSR from Java keystore"
 keytool -certreq -alias "$alias" -keystore "$jks_file" -file "$csr_file"
 ```
 <!-- cheat
@@ -47,7 +47,7 @@ var csr_file
 
 Import a root or intermediate CA certificate.
 
-```sh title:"Import CA certificate into Java keystore"
+```sh title:"Keytool Import CA certificate into Java keystore"
 keytool -import -trustcacerts -alias root -file "$cert_file" -keystore "$jks_file"
 ```
 <!-- cheat
@@ -59,7 +59,7 @@ var jks_file
 
 Import a signed primary certificate.
 
-```sh title:"Import signed certificate into Java keystore"
+```sh title:"Keytool Import signed certificate into Java keystore"
 keytool -import -trustcacerts -alias "$alias" -file "$cert_file" -keystore "$jks_file"
 ```
 <!-- cheat
@@ -72,7 +72,7 @@ var jks_file
 
 List certificates in a keystore.
 
-```sh title:"List Java keystore entries"
+```sh title:"Keytool List Java keystore entries"
 keytool -list -v -keystore "$jks_file"
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var jks_file
 
 List one keystore entry by alias.
 
-```sh title:"List Java keystore alias"
+```sh title:"Keytool List Java keystore alias"
 keytool -list -v -keystore "$jks_file" -alias "$alias"
 ```
 <!-- cheat
@@ -95,7 +95,7 @@ var alias
 
 Delete an entry from a keystore.
 
-```sh title:"Delete Java keystore alias"
+```sh title:"Keytool Delete Java keystore alias"
 keytool -delete -alias "$alias" -keystore "$jks_file"
 ```
 <!-- cheat
@@ -107,7 +107,7 @@ var jks_file
 
 Change a keystore password.
 
-```sh title:"Change Java keystore password"
+```sh title:"Keytool Change Java keystore password"
 keytool -storepasswd -keystore "$jks_file" -new "$new_pass"
 ```
 <!-- cheat
@@ -119,7 +119,7 @@ var new_pass
 
 Export a certificate from a keystore.
 
-```sh title:"Export certificate from Java keystore"
+```sh title:"Keytool Export certificate from Java keystore"
 keytool -export -alias "$alias" -file "$cert_file" -keystore "$jks_file"
 ```
 <!-- cheat
@@ -145,7 +145,7 @@ var cert_file
 
 List the trusted CAs in Java's default truststore.
 
-```sh title:"List Java default trusted CAs"
+```sh title:"Keytool List Java default trusted CAs"
 keytool -list -v -keystore "$java_home/jre/lib/security/cacerts"
 ```
 <!-- cheat
@@ -156,7 +156,7 @@ var java_home
 
 Import a CA into Java's default truststore.
 
-```sh title:"Import CA into Java default truststore"
+```sh title:"Keytool Import CA into Java default truststore"
 keytool -import -trustcacerts -file "$pem_file" -alias "$alias" -keystore "$java_home/jre/lib/security/cacerts"
 ```
 <!-- cheat

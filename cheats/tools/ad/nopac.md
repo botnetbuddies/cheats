@@ -6,7 +6,7 @@
 
 Check whether the DC is vulnerable to CVE-2021-42278 / 42287 (sAMAccountName spoofing). Read-only scan.
 
-```sh title:"Read-only check for sAMAccount spoofing CVEs"
+```sh title:"Nopac Read-only check for sAMAccount spoofing CVEs"
 python3 scanner.py $domain/$user:$pass -dc-ip $rhost_ip -use-ldap
 ```
 <!-- cheat

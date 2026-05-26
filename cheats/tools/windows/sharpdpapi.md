@@ -6,7 +6,7 @@
 
 Triage current user DPAPI vaults.
 
-```cmd title:"Triage user DPAPI vaults"
+```cmd title:"SharpDPAPI Triage user DPAPI vaults"
 SharpDPAPI.exe triage
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ SharpDPAPI.exe triage
 
 Triage machine-level DPAPI credentials.
 
-```cmd title:"Triage machine DPAPI credentials"
+```cmd title:"SharpDPAPI Triage machine DPAPI credentials"
 SharpDPAPI.exe machinetriage
 ```
 <!-- cheat -->
@@ -24,7 +24,7 @@ SharpDPAPI.exe machinetriage
 
 Decrypt a DPAPI blob with a known masterkey.
 
-```cmd title:"Decrypt DPAPI blob with masterkey"
+```cmd title:"SharpDPAPI Decrypt DPAPI blob with masterkey"
 SharpDPAPI.exe blob /target:"$blob_file" /mkfile:"$masterkey_file"
 ```
 <!-- cheat

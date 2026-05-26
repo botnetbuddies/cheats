@@ -6,7 +6,7 @@
 
 Anonymous LDAP bind that pulls the domain password policy (lockout threshold, complexity, history). Works on misconfigured DCs that allow anonymous reads.
 
-```sh title:"Anonymous bind, fetch password policy attributes"
+```sh title:"Ldapsearch Anonymous bind, fetch password policy attributes"
 ldapsearch -H $target -x -b "$base_dn" -s sub "*" | grep -m 1 -B 10 pwdHistoryLength
 ```
 <!-- cheat
@@ -18,7 +18,7 @@ var base_dn
 
 Anonymous LDAP bind to enumerate sAMAccountNames. Free userlist if the DC accepts unauthenticated reads.
 
-```sh title:"Anonymous bind, dump sAMAccountName values for spraying"
+```sh title:"Ldapsearch Anonymous bind, dump sAMAccountName values for spraying"
 ldapsearch -H $target -x -b "$base_dn" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
 ```
 <!-- cheat
@@ -30,7 +30,7 @@ var base_dn
 
 Query the LDAP root DSE.
 
-```sh title:"Query LDAP root DSE"
+```sh title:"Ldapsearch Query LDAP root DSE"
 ldapsearch -x -H "ldap://$rhost_name" -s base
 ```
 <!-- cheat
@@ -41,7 +41,7 @@ var rhost_name
 
 Run an anonymous LDAP search from a base DN.
 
-```sh title:"Anonymous LDAP search from base DN"
+```sh title:"Ldapsearch Anonymous LDAP search from base DN"
 ldapsearch -x -H "ldap://$rhost_name" -b "$base_dn"
 ```
 <!-- cheat
@@ -53,7 +53,7 @@ var base_dn
 
 Run LDAP nmap scripts except brute force scripts.
 
-```sh title:"Run LDAP nmap enum scripts"
+```sh title:"Ldapsearch Run LDAP nmap enum scripts"
 nmap -n -sV --script "ldap* and not brute" -p 389 "$rhost_ip"
 ```
 <!-- cheat
@@ -64,7 +64,7 @@ var rhost_ip
 
 Search for service principal names using GSSAPI.
 
-```sh title:"Search LDAP SPNs with GSSAPI"
+```sh title:"Ldapsearch Search LDAP SPNs with GSSAPI"
 ldapsearch -Y GSSAPI -H "ldap://$rhost_name" -D "$user" -W -b "$base_dn" "servicePrincipalName=*" servicePrincipalName
 ```
 <!-- cheat
@@ -77,7 +77,7 @@ var base_dn
 
 List domain users with simple bind credentials.
 
-```sh title:"List LDAP users with simple bind"
+```sh title:"Ldapsearch List LDAP users with simple bind"
 ldapsearch -x -H "ldap://$rhost_name" -D "$domain\\$user" -w "$pass" -b "$base_dn" '(&(objectCategory=person)(objectClass=user))'
 ```
 <!-- cheat
@@ -92,7 +92,7 @@ var base_dn
 
 List users protected by `adminCount=1`.
 
-```sh title:"List LDAP users with adminCount=1"
+```sh title:"Ldapsearch List LDAP users with adminCount=1"
 ldapsearch -x -H "ldap://$rhost_name" -D "$domain\\$user" -w "$pass" -b "$base_dn" '(&(objectCategory=user)(adminCount=1))'
 ```
 <!-- cheat
@@ -107,7 +107,7 @@ var base_dn
 
 Search user descriptions for password-related strings.
 
-```sh title:"Search LDAP user descriptions for password words"
+```sh title:"Ldapsearch Search LDAP user descriptions for password words"
 ldapsearch -x -H "ldap://$rhost_name" -D "$domain\\$user" -w "$pass" -b "$base_dn" '(&(objectCategory=user)(|(description=*pass*)(description=*password*)(description=*identifiant*)(description=*pwd*)))'
 ```
 <!-- cheat
@@ -122,7 +122,7 @@ var base_dn
 
 Query LAPS attributes and return `ms-Mcs-AdmPwd` if readable.
 
-```sh title:"Query readable LAPS password attributes"
+```sh title:"Ldapsearch Query readable LAPS password attributes"
 ldapsearch -x -H "ldap://$rhost_name" -D "$domain\\$user" -w "$pass" -b "$base_dn" '(ms-Mcs-AdmPwdExpirationtime=*)' ms-Mcs-AdmPwd
 ```
 <!-- cheat
@@ -137,7 +137,7 @@ var base_dn
 
 Dump LDAP domain data with simple bind credentials.
 
-```sh title:"Dump LDAP domain data with ldapdomaindump"
+```sh title:"Ldapsearch Dump LDAP domain data with ldapdomaindump"
 ldapdomaindump --no-json --no-grep --authtype SIMPLE -o ldap_dump -r "$rhost_ip" -u "$domain\\$user" -p "$pass"
 ```
 <!-- cheat
@@ -165,7 +165,7 @@ var pass
 
 Show fine-grained password policy applied to a group.
 
-```sh title:"Show FGPP applied to group"
+```sh title:"Ldapsearch Show FGPP applied to group"
 ldapsearch-ad.py --server "$rhost_name" -d "$domain" -u "$user" -p "$pass" -t search -s "(samaccountname=$group)" cn msDS-PSOApplied
 ```
 <!-- cheat
@@ -180,7 +180,7 @@ var group
 
 Show fine-grained password policy applied to a user.
 
-```sh title:"Show FGPP applied to user"
+```sh title:"Ldapsearch Show FGPP applied to user"
 ldapsearch-ad.py --server "$rhost_name" -d "$domain" -u "$user" -p "$pass" --type show-user -s "(samaccountname=$target_user)"
 ```
 <!-- cheat

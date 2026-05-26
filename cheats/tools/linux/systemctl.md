@@ -6,7 +6,7 @@
 
 Show systemd unit status.
 
-```sh title:"Show systemd service status"
+```sh title:"Systemctl Show systemd service status"
 systemctl status "$service_name"
 ```
 <!-- cheat
@@ -17,7 +17,7 @@ var service_name
 
 Start a systemd service.
 
-```sh title:"Start systemd service"
+```sh title:"Systemctl Start systemd service"
 systemctl start "$service_name"
 ```
 <!-- cheat
@@ -28,7 +28,7 @@ var service_name
 
 Stop a systemd service.
 
-```sh title:"Stop systemd service"
+```sh title:"Systemctl Stop systemd service"
 systemctl stop "$service_name"
 ```
 <!-- cheat
@@ -39,7 +39,7 @@ var service_name
 
 Restart a systemd service.
 
-```sh title:"Restart systemd service"
+```sh title:"Systemctl Restart systemd service"
 systemctl restart "$service_name"
 ```
 <!-- cheat
@@ -50,7 +50,7 @@ var service_name
 
 Reload a systemd service without a full restart.
 
-```sh title:"Reload systemd service"
+```sh title:"Systemctl Reload systemd service"
 systemctl reload "$service_name"
 ```
 <!-- cheat
@@ -63,7 +63,7 @@ var service_name
 
 Enable a systemd service at boot.
 
-```sh title:"Enable systemd service at boot"
+```sh title:"Systemctl Enable systemd service at boot"
 systemctl enable "$service_name"
 ```
 <!-- cheat
@@ -74,7 +74,7 @@ var service_name
 
 Disable a systemd service at boot.
 
-```sh title:"Disable systemd service at boot"
+```sh title:"Systemctl Disable systemd service at boot"
 systemctl disable "$service_name"
 ```
 <!-- cheat
@@ -87,7 +87,7 @@ var service_name
 
 List running systemd services.
 
-```sh title:"List running systemd services"
+```sh title:"Systemctl List running systemd services"
 systemctl list-units --type=service --state=running
 ```
 <!-- cheat -->
@@ -96,7 +96,7 @@ systemctl list-units --type=service --state=running
 
 List services enabled at boot.
 
-```sh title:"List enabled systemd services"
+```sh title:"Systemctl List enabled systemd services"
 systemctl list-unit-files --type=service --state=enabled
 ```
 <!-- cheat -->
@@ -105,7 +105,7 @@ systemctl list-unit-files --type=service --state=enabled
 
 List disabled systemd services.
 
-```sh title:"List disabled systemd services"
+```sh title:"Systemctl List disabled systemd services"
 systemctl list-unit-files --type=service --state=disabled
 ```
 <!-- cheat -->
@@ -114,7 +114,7 @@ systemctl list-unit-files --type=service --state=disabled
 
 List all loaded systemd services.
 
-```sh title:"List all loaded systemd services"
+```sh title:"Systemctl List all loaded systemd services"
 systemctl list-units --type=service --all
 ```
 <!-- cheat -->

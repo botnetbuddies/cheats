@@ -39,7 +39,7 @@ var wpscan_api_token
 
 Brute users against the chosen attack vector (wp-login form, xmlrpc, xmlrpc-multicall). Multicall is fastest because each request can hold many guesses.
 
-```sh title:"Brute users via wp-login / xmlrpc / xmlrpc-multicall"
+```sh title:"Wpscan Brute users via wp-login / xmlrpc / xmlrpc-multicall"
 wpscan --url $scheme://$domain -U $user -P $wordlists --password-attack $wp_pass_attack_template
 ```
 <!-- cheat
