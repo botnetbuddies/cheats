@@ -40,9 +40,8 @@ ffuf -t 400 -w $wordlist_host -u $scheme://$rhost_ip -H "Host: FUZZ.$domain" -ac
 ```
 <!-- cheat
 import ffuf
-import rhost_ip
 import scheme
-import domain
+import domain_ip
 -->
 
 ### host with url
@@ -68,7 +67,7 @@ ffuf -t 400 -w $wordlist_file -u $scheme://$domain/FUZZ -ac -o ffuf-file-ac-$(da
 <!-- cheat
 import ffuf
 import scheme
-import domain
+import domain_ip
 -->
 
 ### dir
@@ -81,7 +80,7 @@ ffuf -t 400 -w $wordlist_dir -u $scheme://$domain/FUZZ -recursion -recursion-dep
 <!-- cheat
 import ffuf
 import scheme
-import domain
+import domain_ip
 -->
 
 ### dir common
@@ -120,6 +119,8 @@ import ffuf
 var url
 -->
 
+### GET baseline auto-calibration
+
 ```sh title:"Ffuf GET parameter-name fuzz with auto-calibration"
 ffuf -w "$wordlist_http_params" -u "$url?FUZZ=test" -ac -o ffuf-get-param-names-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -141,6 +142,8 @@ var url
 var param_value
 -->
 
+### GET query value with HTTP values
+
 ```sh title:"Ffuf Fuzz GET parameter value with HTTP value wordlist"
 ffuf -w "$wordlist_http_values" -u "$url?$param=FUZZ" -o ffuf-get-param-http-values-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -149,6 +152,8 @@ import ffuf
 var url
 var param
 -->
+
+### GET query value with cookie
 
 ```sh title:"Ffuf Fuzz authenticated GET parameter value with cookie"
 ffuf -w "$wordlist_fuzz_special_chars" -u "$url?$param=FUZZ" -H "Cookie: session=$session_token" -o ffuf-get-param-cookie-special-chars-$(date +%Y%m%d-%H%M%S).json
@@ -173,6 +178,8 @@ var url
 var param
 -->
 
+### GET filters response size
+
 ```sh title:"Ffuf Fuzz GET parameter and filter response size"
 ffuf -w "$wordlist_http_values" -u "$url?$param=FUZZ" -fs "$response_size" -o ffuf-get-param-http-values-fs-$response_size-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -182,6 +189,8 @@ var url
 var param
 var response_size
 -->
+
+### GET filters status plus size
 
 ```sh title:"Ffuf Fuzz GET parameter and filter status plus size"
 ffuf -w "$wordlist_http_values" -u "$url?$param=FUZZ" -fc 400,404 -fs "$response_size" -o ffuf-get-param-http-values-fc-fs-$(date +%Y%m%d-%H%M%S).json
@@ -218,6 +227,8 @@ import ffuf
 var url
 -->
 
+### POST baseline auto-calibration
+
 ```sh title:"Ffuf Form POST parameter-name fuzz with auto-calibration"
 ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "FUZZ=test&password=password123" -ac -o ffuf-post-param-names-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -239,6 +250,8 @@ var url
 var param_value
 -->
 
+### POST form data usernames
+
 ```sh title:"Ffuf Fuzz form POST value with SecLists usernames"
 ffuf -w "$wordlist_usernames" -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "username=FUZZ&password=test" -o ffuf-post-form-user-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -246,6 +259,8 @@ ffuf -w "$wordlist_usernames" -u "$url" -X POST -H "Content-Type: application/x-
 import ffuf
 var url
 -->
+
+### POST form data HTTP values
 
 ```sh title:"Ffuf Fuzz form POST value with HTTP value wordlist"
 ffuf -w "$wordlist_http_values" -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "$param=FUZZ&password=test" -o ffuf-post-form-http-values-$(date +%Y%m%d-%H%M%S).json
@@ -255,6 +270,8 @@ import ffuf
 var url
 var param
 -->
+
+### POST form data special chars with cookie
 
 ```sh title:"Ffuf Fuzz authenticated form POST value with cookie"
 ffuf -w "$wordlist_fuzz_special_chars" -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cookie: session=$session_token" -d "email=FUZZ@example.com&role=user" -o ffuf-post-form-cookie-special-chars-$(date +%Y%m%d-%H%M%S).json
@@ -277,6 +294,8 @@ import ffuf
 var url
 -->
 
+### POST JSON body values
+
 ```sh title:"Ffuf Fuzz JSON POST value"
 ffuf -w "$wordlist_http_values" -u "$url" -X POST -H "Content-Type: application/json" -d '{"query":"FUZZ"}' -o ffuf-post-json-http-values-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -284,6 +303,8 @@ ffuf -w "$wordlist_http_values" -u "$url" -X POST -H "Content-Type: application/
 import ffuf
 var url
 -->
+
+### POST JSON body bearer auth
 
 ```sh title:"Ffuf Fuzz authenticated JSON POST value with bearer token"
 ffuf -w "$wordlist_fuzz_special_chars" -u "$url" -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $access_token" -d '{"displayName":"FUZZ","bio":"test"}' -o ffuf-post-json-bearer-special-chars-$(date +%Y%m%d-%H%M%S).json
@@ -306,6 +327,8 @@ import ffuf
 var url
 -->
 
+### POST filters JSON response size
+
 ```sh title:"Ffuf Fuzz JSON POST and filter response size"
 ffuf -w "$wordlist_http_values" -u "$url" -X POST -H "Content-Type: application/json" -d '{"query":"FUZZ"}' -fs "$response_size" -o ffuf-post-json-http-values-fs-$response_size-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -314,6 +337,8 @@ import ffuf
 var url
 var response_size
 -->
+
+### POST filters JSON status plus size
 
 ```sh title:"Ffuf Fuzz JSON POST and filter status plus size"
 ffuf -w "$wordlist_http_values" -u "$url" -X POST -H "Content-Type: application/json" -d '{"query":"FUZZ"}' -fc 400,404 -fs "$response_size" -o ffuf-post-json-http-values-fc-fs-$(date +%Y%m%d-%H%M%S).json
@@ -349,6 +374,8 @@ var url
 var param_value
 -->
 
+### Advanced form POST parameter names
+
 ```sh title:"Ffuf form POST parameter names only with baseline value"
 ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "FUZZ=$param_value" -o ffuf-post-form-param-names-only-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -358,6 +385,8 @@ var url
 var param_value
 -->
 
+### Advanced JSON key names
+
 ```sh title:"Ffuf JSON object key names only with baseline value"
 ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/json" -d '{"FUZZ":"test"}' -o ffuf-json-key-names-only-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -365,6 +394,8 @@ ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/
 import ffuf
 var url
 -->
+
+### Advanced clusterbomb GET parameters
 
 ```sh title:"Ffuf Clusterbomb GET parameter names and values"
 ffuf -w "$wordlist_http_params":PNAME -w "$wordlist_http_values":PVALUE -mode clusterbomb -u "$url?PNAME=PVALUE" -ac -o ffuf-get-param-name-value-clusterbomb-ac-$(date +%Y%m%d-%H%M%S).json
@@ -374,6 +405,8 @@ import ffuf
 var url
 -->
 
+### Advanced pitchfork GET parameters
+
 ```sh title:"Ffuf Pitchfork GET parameter names and values"
 ffuf -w "$wordlist_http_params":PNAME -w "$wordlist_http_values":PVALUE -mode pitchfork -u "$url?PNAME=PVALUE" -ac -o ffuf-get-param-name-value-pitchfork-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -381,6 +414,8 @@ ffuf -w "$wordlist_http_params":PNAME -w "$wordlist_http_values":PVALUE -mode pi
 import ffuf
 var url
 -->
+
+### Advanced clusterbomb form POST parameters
 
 ```sh title:"Ffuf Clusterbomb form POST parameter names and values"
 ffuf -w "$wordlist_http_params":PNAME -w "$wordlist_http_values":PVALUE -mode clusterbomb -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "PNAME=PVALUE&submit=1" -ac -o ffuf-post-form-name-value-clusterbomb-ac-$(date +%Y%m%d-%H%M%S).json
@@ -390,6 +425,8 @@ import ffuf
 var url
 -->
 
+### Advanced JSON key fuzz
+
 ```sh title:"Ffuf JSON key fuzz with static value"
 ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/json" -d '{"FUZZ":"test"}' -ac -o ffuf-post-json-key-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -397,6 +434,8 @@ ffuf -w "$wordlist_http_params" -u "$url" -X POST -H "Content-Type: application/
 import ffuf
 var url
 -->
+
+### Advanced clusterbomb JSON key and value
 
 ```sh title:"Ffuf JSON key and value fuzz with clusterbomb"
 ffuf -w "$wordlist_http_params":JKEY -w "$wordlist_http_values":JVALUE -mode clusterbomb -u "$url" -X POST -H "Content-Type: application/json" -d '{"JKEY":"JVALUE"}' -ac -o ffuf-post-json-key-value-clusterbomb-ac-$(date +%Y%m%d-%H%M%S).json
@@ -406,6 +445,8 @@ import ffuf
 var url
 -->
 
+### Advanced header name fuzz
+
 ```sh title:"Ffuf Header-name fuzz with static header value"
 ffuf -w "$wordlist_http_params" -u "$url" -H "FUZZ: test" -ac -o ffuf-header-name-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -413,6 +454,8 @@ ffuf -w "$wordlist_http_params" -u "$url" -H "FUZZ: test" -ac -o ffuf-header-nam
 import ffuf
 var url
 -->
+
+### Advanced header value fuzz
 
 ```sh title:"Ffuf Header value fuzz with optional header name placeholder"
 ffuf -w "$wordlist_http_values" -u "$url" -H "$header_name: FUZZ" -ac -o ffuf-header-value-ac-$(date +%Y%m%d-%H%M%S).json
@@ -423,6 +466,8 @@ var url
 var header_name
 -->
 
+### Advanced cookie name fuzz
+
 ```sh title:"Ffuf Cookie-name fuzz with static cookie value"
 ffuf -w "$wordlist_http_params" -u "$url" -H "Cookie: FUZZ=test" -ac -o ffuf-cookie-name-ac-$(date +%Y%m%d-%H%M%S).json
 ```
@@ -430,6 +475,8 @@ ffuf -w "$wordlist_http_params" -u "$url" -H "Cookie: FUZZ=test" -ac -o ffuf-coo
 import ffuf
 var url
 -->
+
+### Advanced cookie value fuzz
 
 ```sh title:"Ffuf Cookie value fuzz with optional cookie name placeholder"
 ffuf -w "$wordlist_http_values" -u "$url" -H "Cookie: $cookie_name=FUZZ" -ac -o ffuf-cookie-value-ac-$(date +%Y%m%d-%H%M%S).json
@@ -439,6 +486,8 @@ import ffuf
 var url
 var cookie_name
 -->
+
+### Advanced authenticated form fuzz
 
 ```sh title:"Ffuf Authenticated form parameter fuzz with cookie and bearer token"
 ffuf -w "$wordlist_http_params":PNAME -w "$wordlist_http_values":PVALUE -mode clusterbomb -u "$url" -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Cookie: session=$session_token" -H "Authorization: Bearer $access_token" -d "PNAME=PVALUE" -ac -rate "$rate" -timeout "$timeout" -o ffuf-post-form-auth-name-value-ac-$(date +%Y%m%d-%H%M%S).json
