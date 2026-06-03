@@ -50,10 +50,45 @@ var wordlist_dir = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Conte
 -->
 
 <!-- cheat
-export wordlists-credentials
+export wordlist_dir_common
+var wordlist_dir_common = printf '%s\n' '/usr/share/wordlists/dirb/common.txt' '/usr/share/seclists/Discovery/Web-Content/common.txt' --- --header 'Directory wordlist'
+-->
+
+<!-- cheat
+export wordlist_dir_medium
+var wordlist_dir_medium = printf '%s\n' '/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt' '/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt' --- --header 'Directory wordlist'
+-->
+
+<!-- cheat
+export wordlists_credentials
 var wordlist_passwords_common = sh -c 'printf "%s\n" "/usr/share/wordlists/rockyou.txt"; find "/usr/share/wordlists/seclists/Passwords/Common-Credentials/" -maxdepth 1 -type f ! -name ".*" -printf "%p\n" | sort' --- --header 'Wordlists Seclists(Common Passwords)'
 var wordlist_passwords_leaked = sh -c 'printf "%s\n" "/usr/share/wordlists/rockyou.txt"; find "/usr/share/wordlists/seclists/Passwords/Leaked-Databases/" -maxdepth 1 -type f ! -name ".*" -printf "%p\n" | sort' --- --header 'Wordlists Seclists(Common Passwords)'
 var wordlist_users = sh -c 'printf "%s\n" "/usr/share/wordlists/seclists/Usernames/xato-net-10-million-usernames.txt"; find "/usr/share/wordlists/seclists/Usernames/" -maxdepth 1 -type f ! -name ".*" -printf "%p\n" | sort' --- --header 'Wordlists Seclists(Usernames)'
+-->
+
+<!-- cheat
+export wordlist_http_params
+var wordlist_http_params = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt"; find "/usr/share/seclists/Discovery/Web-Content" -maxdepth 1 -type f \( -name "*parameter*.txt" -o -name "*params*.txt" \) -print | grep -v "/burp-parameter-names.txt$" | sort' --- --header 'HTTP parameter wordlist'
+-->
+
+<!-- cheat
+export wordlist_usernames
+var wordlist_usernames = sh -c 'printf "%s\n" "/usr/share/seclists/Usernames/top-usernames-shortlist.txt" "/usr/share/wordlists/seclists/Usernames/top-usernames-shortlist.txt"; find "/usr/share/seclists/Usernames" "/usr/share/wordlists/seclists/Usernames" -maxdepth 1 -type f ! -name ".*" -print 2>/dev/null | grep -v "/top-usernames-shortlist.txt$" | sort -u' --- --header 'Username wordlist'
+-->
+
+<!-- cheat
+export wordlist_fuzz_special_chars
+var wordlist_fuzz_special_chars = printf '%s\n' '/usr/share/seclists/Fuzzing/special-chars.txt' '/usr/share/wordlists/seclists/Fuzzing/special-chars.txt' --- --header 'Fuzzing wordlist'
+-->
+
+<!-- cheat
+export wordlist_http_values
+var wordlist_http_values = sh -c 'printf "%s\n" "/usr/share/seclists/Fuzzing/special-chars.txt" "/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt"; find "/usr/share/seclists/Fuzzing" "/usr/share/wordlists/seclists/Fuzzing" -maxdepth 1 -type f -name "*.txt" -print 2>/dev/null | grep -Ev "/(special-chars|raft-small-words)\.txt$" | sort -u' --- --header 'HTTP value wordlist'
+-->
+
+<!-- cheat
+export wordlist_web_words
+var wordlist_web_words = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt"; find "/usr/share/seclists/Discovery/Web-Content" -maxdepth 1 -type f -name "*words*.txt" -print | grep -v "/raft-small-words.txt$" | sort' --- --header 'Web content words wordlist'
 -->
 
 <!-- cheat
@@ -100,4 +135,3 @@ export passwords
 var pass = printf "%s\n" 'BotnetBuddies1337!' '' --- --header 'Passwords'
 var new_password = printf "%s\n" 'BotnetBuddies1337!' '' --- --header 'Passwords'
 -->
-
