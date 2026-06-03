@@ -41,6 +41,7 @@ ffuf -t 400 -w $wordlist_host -u $scheme://$rhost_ip -H "Host: FUZZ.$domain" -ac
 <!-- cheat
 import ffuf
 import rhost_ip
+import scheme
 import domain
 -->
 
