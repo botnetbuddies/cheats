@@ -15,6 +15,7 @@ Use it after you already have a list of candidate hosts or URLs. This page stays
 
 <!-- cheat
 export httpx
+import url_list
 var output_file = printf '%s\n' httpx.txt httpx.jsonl "httpx-$(date +%Y%m%d-%H%M%S).txt" --- --header 'httpx output file'
 var output_dir = printf '%s\n' httpx-responses httpx-screenshots "httpx-output-$(date +%Y%m%d-%H%M%S)" --- --header 'httpx output directory'
 var httpx_probe_templates = printf '%s\n' '-silent -status-code -title -tech-detect # conservative triage' '-silent -status-code -title -tech-detect -json -follow-redirects # JSONL metadata' '-silent -status-code -title -tech-detect -server -cdn -asn -ip # infra metadata' --- --header 'httpx probe profile'

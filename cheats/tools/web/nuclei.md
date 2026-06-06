@@ -13,6 +13,7 @@ Nuclei runs template-based checks for exposed panels, misconfigurations, known v
 
 <!-- cheat
 export nuclei
+import url_list
 var output_file = printf '%s\n' nuclei.jsonl nuclei.txt "nuclei-$(date +%Y%m%d-%H%M%S).jsonl" --- --header 'Nuclei output file'
 var evidence_dir = printf '%s\n' nuclei-evidence nuclei-responses "nuclei-evidence-$(date +%Y%m%d-%H%M%S)" --- --header 'Nuclei evidence directory'
 var nuclei_rate_templates = printf '%s\n' '-rl 25 -c 10 -bs 10 # conservative' '-rl 150 -c 25 -bs 25 # moderate authorized' '-rl 500 -c 50 -bs 50 # aggressive authorized' --- --header 'Nuclei rate profile'

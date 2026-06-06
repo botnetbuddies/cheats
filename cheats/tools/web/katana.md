@@ -15,6 +15,7 @@ Validated against Katana `v1.6.1`.
 
 <!-- cheat
 export katana
+import url_list
 var output_file = printf '%s\n' katana.jsonl katana-urls.txt "katana-$(date +%Y%m%d-%H%M%S).jsonl" --- --header 'Katana output file'
 var output_dir = printf '%s\n' katana-responses katana-output "katana-output-$(date +%Y%m%d-%H%M%S)" --- --header 'Katana output directory'
 var katana_scope_templates = printf '%s\n' '-depth 2 -fs fqdn -rate-limit 25 -concurrency 5 # safe same-host crawl' '-depth 3 -fs rdn -rate-limit 50 -concurrency 10 # registered-domain crawl' '-depth 3 -cs "$scope_regex" -cos "$out_scope_regex" # explicit regex scope' --- --header 'Katana scope profile'
