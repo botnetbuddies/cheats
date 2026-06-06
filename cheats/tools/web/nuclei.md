@@ -106,7 +106,7 @@ Run Nuclei against a list of URLs.
 nuclei -l "$url_list"
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Template directory
@@ -133,7 +133,7 @@ Run Nuclei with a severity filter.
 nuclei -l "$url_list" -severity "$severity"
 ```
 <!-- cheat
-var url_list
+import url_list
 var severity
 -->
 
@@ -147,7 +147,7 @@ Probe live HTTP services with httpx before scanning.
 httpx -l "$url_list" -silent | nuclei -l - -severity critical,high
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ## Template Selection
@@ -198,7 +198,7 @@ Run known-exploited vulnerability templates against scoped targets.
 nuclei -l "$url_list" -tags kev,vkev -severity critical,high
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Run CVE templates
@@ -211,7 +211,7 @@ Run critical and high CVE templates against scoped targets.
 nuclei -l "$url_list" -tags cve -severity critical,high
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Run exposures and misconfig templates
@@ -224,7 +224,7 @@ Find exposed files, configuration leaks, and common misconfigurations.
 nuclei -l "$url_list" -tags exposure,config,misconfig
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Run panels and login templates
@@ -237,7 +237,7 @@ Find exposed admin panels, login portals, and management surfaces.
 nuclei -l "$url_list" -tags panel,login,admin
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Automatic scan by technology
@@ -250,7 +250,7 @@ Let Nuclei select relevant templates from detected technologies.
 nuclei -l "$url_list" -as
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Exclude noisy or unsafe tags
@@ -263,7 +263,7 @@ Exclude tags that are too noisy for a quick external pass.
 nuclei -l "$url_list" -severity critical,high,medium -exclude-tags fuzz,dos,intrusive
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Template condition filter
@@ -276,7 +276,7 @@ Filter templates with a template condition expression.
 nuclei -l "$url_list" -tc "$template_condition"
 ```
 <!-- cheat
-var url_list
+import url_list
 var template_condition
 -->
 
@@ -292,7 +292,7 @@ Run a conservative external triage for likely high-impact findings.
 nuclei -l "$url_list" -severity critical,high -rl 25 -c 10 -bs 10 -timeout 8 -retries 0
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Deep authorized web scan
@@ -305,7 +305,7 @@ Run a broader authorized scan and write evidence-friendly JSONL output.
 nuclei -l "$url_list" -severity critical,high,medium -jsonl -o "$output_file" -sresp -srd "$evidence_dir"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 var evidence_dir
 -->
@@ -320,7 +320,7 @@ Run WordPress plugin, theme, and core templates.
 nuclei -l "$url_list" -tags wordpress,wp-plugin,wp-theme
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### API/OpenAPI scan
@@ -346,7 +346,7 @@ Run cloud-focused templates against scoped cloud assets.
 nuclei -l "$url_list" -tags cloud
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### SSL/TLS templates
@@ -359,7 +359,7 @@ Run SSL/TLS templates against HTTPS endpoints.
 nuclei -l "$url_list" -type ssl
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Network service templates
@@ -372,7 +372,7 @@ Run TCP network service templates against scoped host and port targets.
 nuclei -l "$url_list" -t network/ -type tcp
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Newly released templates only
@@ -385,7 +385,7 @@ Run templates added or updated recently after refreshing templates.
 nuclei -l "$url_list" -nt
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ## Authenticated Scans
@@ -428,7 +428,7 @@ Use a Nuclei secrets file so credentials are scoped outside the command line.
 nuclei -l "$url_list" -sf "$secrets_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var secrets_file
 -->
 
@@ -511,7 +511,7 @@ Run active fuzzing against scoped URLs only when explicitly authorized.
 nuclei -l "$url_list" -dast -fa low -cs "$scope_regex"
 ```
 <!-- cheat
-var url_list
+import url_list
 var scope_regex
 -->
 
@@ -528,7 +528,7 @@ nuclei -l "$url_list" -severity critical,high $nuclei_rate_templates -timeout 8 
 ```
 <!-- cheat
 import nuclei
-var url_list
+import url_list
 -->
 
 ### Faster authorized scan
@@ -541,7 +541,7 @@ Use a faster profile only for explicitly authorized infrastructure.
 nuclei -l "$url_list" -severity critical,high,medium -rl 500 -c 50 -bs 50
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Host-spray strategy
@@ -554,7 +554,7 @@ Spread requests across hosts for focused templates on large target sets.
 nuclei -l "$url_list" -ss host-spray -c 10 -bs 10
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Resume scan
@@ -580,7 +580,7 @@ Enable a project cache to avoid repeating requests across recurring scans.
 nuclei -l "$url_list" -project -project-path "$project_dir"
 ```
 <!-- cheat
-var url_list
+import url_list
 var project_dir
 -->
 
@@ -596,7 +596,7 @@ Write machine-readable JSONL findings.
 nuclei -l "$url_list" -jsonl -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -611,7 +611,7 @@ nuclei -l "$url_list" $nuclei_output_templates
 ```
 <!-- cheat
 import nuclei
-var url_list
+import url_list
 -->
 
 ### Markdown report
@@ -624,7 +624,7 @@ Write a Markdown report directory without raw request and response bodies.
 nuclei -l "$url_list" -me "$report_dir" -omit-raw
 ```
 <!-- cheat
-var url_list
+import url_list
 var report_dir
 -->
 
@@ -638,7 +638,7 @@ Export findings as SARIF for security tooling ingestion.
 nuclei -l "$url_list" -se "$sarif_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var sarif_file
 -->
 
@@ -652,7 +652,7 @@ Store matched request and response evidence for later review.
 nuclei -l "$url_list" -sresp -srd "$evidence_dir"
 ```
 <!-- cheat
-var url_list
+import url_list
 var evidence_dir
 -->
 
@@ -666,7 +666,7 @@ Redact common sensitive keys from output before storing or sharing results.
 nuclei -l "$url_list" -jsonl -rd token -rd password -rd authorization
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Report DB for recurring scans
@@ -679,7 +679,7 @@ Store findings in a report database for recurring scan comparison.
 nuclei -l "$url_list" -rdb "$report_db"
 ```
 <!-- cheat
-var url_list
+import url_list
 var report_db
 -->
 
@@ -798,7 +798,7 @@ Run only signed templates when template integrity matters.
 nuclei -l "$url_list" -dut
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ## Pipelines
@@ -813,7 +813,7 @@ Probe live HTTP services with httpx and scan only responsive URLs.
 httpx -l "$url_list" -silent | nuclei -l - -severity critical,high
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### httpx metadata-filtered nuclei pipeline
@@ -826,6 +826,6 @@ Save httpx metadata, then scan the first-column URLs with focused templates.
 httpx -l "$url_list" -silent -status-code -title -tech-detect | tee "$httpx_output_file" && awk '{print $1}' "$httpx_output_file" | nuclei -l - -tags exposure,cve -severity critical,high
 ```
 <!-- cheat
-var url_list
+import url_list
 var httpx_output_file
 -->

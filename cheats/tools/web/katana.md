@@ -53,7 +53,7 @@ katana -list "$url_list" \
   -output "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -673,7 +673,7 @@ katana -list "$url_list" \
   -output "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 

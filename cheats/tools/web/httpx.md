@@ -33,7 +33,7 @@ Assume the input file contains one host or URL per line. Hosts without a scheme 
 httpx -l "$url_list"
 ```
 <!-- cheat
-var url_list
+import url_list
 -->
 
 ### Probe one target
@@ -64,7 +64,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -83,7 +83,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -99,7 +99,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -117,7 +117,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -144,7 +144,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -163,7 +163,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -179,7 +179,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -196,7 +196,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -213,7 +213,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -230,7 +230,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var content_lengths
 var output_file
 -->
@@ -248,7 +248,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var noise_lengths
 var output_file
 -->
@@ -266,7 +266,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -284,7 +284,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -301,7 +301,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -318,7 +318,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -334,7 +334,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -360,7 +360,7 @@ httpx -l "$url_list" \
   -json -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -387,7 +387,7 @@ httpx -l "$url_list" \
   -json -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -406,7 +406,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_dir
 var output_file
 -->
@@ -424,7 +424,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_dir
 var output_file
 -->
@@ -441,7 +441,7 @@ httpx -l "$url_list" \
   -json -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -460,7 +460,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -478,7 +478,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
@@ -495,7 +495,7 @@ httpx -l "$url_list" \
   -o "$output_file"
 ```
 <!-- cheat
-var url_list
+import url_list
 var output_file
 -->
 
