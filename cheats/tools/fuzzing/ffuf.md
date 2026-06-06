@@ -11,18 +11,17 @@ tags: web fuzzing ffuf content-discovery tools
 
 <!-- cheat
 export ffuf
-var scheme = printf '%s\n' http https --- --header 'Scheme'
-var domain = printf '%s\n' "$(sed -E 's/#.*$//' /etc/hosts | grep -v '^[[:space:]]*$' | sed -E 's/^[[:space:]]+//; s/[[:space:]]+/ /g' | cut -d' ' -f2- | tr ' ' '\n' | grep -Ev '^(localhost|broadcasthost|ip6-allnodes|ip6-allrouters|ip6-localhost|ip6-loopback)?$' | sort -u)" --- --header 'Domains'
-var rhost_ip = printf '%s' "$(sed -E 's/#.*$//' /etc/hosts | grep -w -- "$domain" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+/ /g' | cut -d' ' -f1 | head -n1)"
-var wordlist_host = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/DNS/combined_subdomains.txt"; find /usr/share/seclists/Discovery/DNS -maxdepth 1 -type f -name "*.txt" -print | grep -v "/combined_subdomains.txt$" | sort' --- --header 'Wordlist'
-var wordlist_file = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Content/raft-medium-files-lowercase.txt"; find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f -name "*.txt" -print | grep -v "/raft-medium-files-lowercase.txt$" | sort' --- --header 'Wordlist'
-var wordlist_dir = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Content/raft-medium-directories-lowercase.txt"; find /usr/share/seclists/Discovery/Web-Content -maxdepth 1 -type f -name "*.txt" -print | grep -v "/raft-medium-directories-lowercase.txt$" | sort' --- --header 'Wordlist'
-var wordlist_dir_common = printf '%s\n' '/usr/share/wordlists/dirb/common.txt' '/usr/share/seclists/Discovery/Web-Content/common.txt' --- --header 'Directory wordlist'
-var wordlist_dir_medium = printf '%s\n' '/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt' '/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt' --- --header 'Directory wordlist'
-var wordlist_http_params = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/Web-Content/burp-parameter-names.txt"; find "/usr/share/seclists/Discovery/Web-Content" -maxdepth 1 -type f \( -name "*parameter*.txt" -o -name "*params*.txt" \) -print | grep -v "/burp-parameter-names.txt$" | sort' --- --header 'HTTP parameter wordlist'
-var wordlist_usernames = sh -c 'printf "%s\n" "/usr/share/seclists/Usernames/top-usernames-shortlist.txt" "/usr/share/wordlists/seclists/Usernames/top-usernames-shortlist.txt"; find "/usr/share/seclists/Usernames" "/usr/share/wordlists/seclists/Usernames" -maxdepth 1 -type f ! -name ".*" -print 2>/dev/null | grep -v "/top-usernames-shortlist.txt$" | sort -u' --- --header 'Username wordlist'
-var wordlist_fuzz_special_chars = printf '%s\n' '/usr/share/seclists/Fuzzing/special-chars.txt' '/usr/share/wordlists/seclists/Fuzzing/special-chars.txt' --- --header 'Fuzzing wordlist'
-var wordlist_http_values = sh -c 'printf "%s\n" "/usr/share/seclists/Fuzzing/special-chars.txt" "/usr/share/seclists/Discovery/Web-Content/raft-small-words.txt"; find "/usr/share/seclists/Fuzzing" "/usr/share/wordlists/seclists/Fuzzing" -maxdepth 1 -type f -name "*.txt" -print 2>/dev/null | grep -Ev "/(special-chars|raft-small-words)\.txt$" | sort -u' --- --header 'HTTP value wordlist'
+import scheme
+import domain_ip
+import wordlist_host
+import wordlist_file
+import wordlist_dir
+import wordlist_dir_common
+import wordlist_dir_medium
+import wordlist_http_params
+import wordlist_usernames
+import wordlist_fuzz_special_chars
+import wordlist_http_values
 var outfile = printf '%s\n' ffuf.json "ffuf-$(date +%Y%m%d-%H%M%S).json" --- --header 'Output file'
 -->
 
