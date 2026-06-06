@@ -35,6 +35,11 @@ var scheme = printf '%s\n' http https --- --header 'Scheme'
 -->
 
 <!-- cheat
+export url_list
+var url_list = printf '%s\n' urls.txt hosts.txt targets.txt live-urls.txt scoped-urls.txt --- --header 'URL or host list'
+-->
+
+<!-- cheat
 export wordlist_host
 var wordlist_host = sh -c 'printf "%s\n" "/usr/share/seclists/Discovery/DNS/combined_subdomains.txt"; find /usr/share/seclists/Discovery/DNS -maxdepth 1 -type f -name "*.txt" -print | grep -v "/combined_subdomains.txt$" | sort' --- --header 'Wordlist'
 -->
